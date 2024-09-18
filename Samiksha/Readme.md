@@ -1,4 +1,4 @@
-# Week 3
+# Tasks for Week 3
 
 1. Create 2 conda environment: 
 * One for running Rosen's PFN repo
