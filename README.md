@@ -7,7 +7,7 @@ So that we know what are found, and what have we yet found
 
 
 ## Problems with code:
-| Problem Name | Objective | Type |
+| Problem Name | Objective | Problem Type |
 | ------------- | ------------- | ------------- |
 | Content Cell  | Content Cell  | Content Cell  |
 | Content Cell  | Content Cell  | Content Cell  |
