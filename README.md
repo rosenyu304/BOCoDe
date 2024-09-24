@@ -17,7 +17,7 @@ So that we know what are found, and what have we yet found
 | Content Cell  | Content Cell  | Content Cell  |
 | Content Cell  | Content Cell  | Content Cell  |
 
-## ToDos (What have we found but not yet coded):
+## ToDos (What have we found but not yet coded. Please add to the list):
 1. BoTorch library
 2. Pymoo library
 3. Neorl: https://neorl.readthedocs.io/en/latest/
