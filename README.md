@@ -19,11 +19,32 @@ So that we know what is found and what we have yet found.
 | Problem Name | num of Objectives | dim of Objectives |  num of Constraints | Problem Type |
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | Ackley  (botorch) | 1  | N  | 2  | Single Objective, Constrained, Continuous  |
-| Branin  (botorch) | 1  | 2  | 0  | Single Objective (is there a discrete or constrained form?)  |
+| Branin  (botorch) | 1  | 2  | 0  | Single Objective (is there a mix-variable or constrained form?)  |
 | Bukin  (botorch) | 1  | 2  | 0  | Single Objective (is there a more variance?)  |
 | Cantilever Step Beam  (engineering) | 1  | 10  | 11  | Single Objective, Constrained (is there a discrete form? and I think we can expand to N steps (right now it's five steps))  |
+| Car crashed simplified  (engineering) | 1  | 11  | 10  | Single Objective, Constrained (is there a mix-variable or multi-obj form?)  |
+| Compression Spring  (engineering) | 1  | 8  | 6  | Single Objective, Constrained (is there a mix-variable or multi-obj form?)  |
+| Dixon Price  (botorch) | 1  | N  | 0  | Single Objective, Continuous (is there a constrained form?)  |
+| GKXWC1  (synthetic) | 1  | 2  | 1  | Single Objective, Constrained, Continuous  |
+| GKXWC2  (synthetic) | 1  | 2  | 1  | Single Objective, Constrained, Continuous  |
+| Griewank  (botorch) | 1  | N  | 0  | Single Objective, Continuous (is there a constrained form?)  |
+| Hartmann 6D (botorch) | 1  | 6  | 0  | Single Objective, Continuous (is there a constrained form?)  |
+| JLH1 (synthetic) | 1  | 2  | 1  | Single Objective, Constrained, Continuous  |
+| JLH2 (synthetic) | 1  | 2  | 1  | Single Objective, Constrained, Continuous  |
+| Keane Bump (synthetic) | 1  | N  | 2  | Single Objective, Constrained, Continuous  |
+| Levy (botorch) | 1  | N  | 0  | Single Objective, Continuous (is there a constrained form?)   |
+| Mazda (engineering) | m | 222  | 54  | Single/Multi Objective, Constrained, Continuous (is there a mix-variable form?) (I haven't upload the executables)  |
+| Michalewicz (botorch) | 1 | N  | 0  | Single Objective, Continuous (is there a constrained form?) |
+| MOPTA08_Car (engineering) | 1 | 124  | 68  | Single Objective, Constrained, Continuous (is there a mix-variable form?) (I haven't upload the executables)   |
+| PressureVessel (engineering) | 1 | 4  | 4  | Single Objective, Constrained, Continuous (is there a mix-variable or multi-obj form?)   |
+| ReinforcedConcreteBeam (engineering) | 1 | 3  | 9  | Single Objective, Constrained, Continuous (We should implement the mix-variable form)   |
+| Rosenbrock (botorch) | 1 | N  | 0  | Single Objective, Continuous (is there a constrained form?)   |
+| Speed Reducer (engineering) | 1 | 7  | 9  | Single Objective, Constrained, Continuous (is there a mix-variable or multi-obj form?)   |
+| Three-bar Truss (engineering) | 1 | 2  | 3  | Single Objective, Constrained, Continuous  |
+| WeldedBeam (engineering) | 1 | 4  | 5  | Single Objective, Constrained, Continuous (is there a mix-variable or multi-obj form?)  |
 
-## ToDos (What have we found but not yet coded. Please add to the list):
+
+## ToDos (What have we found but not yet coded. Please add to the list. Check the existed set before adding new ones):
 1. BoTorch library (always check if a problem already exist here)
 2. Pymoo library (always check if a problem already exist here)
 3. Optimization Test Problems: https://www.sfu.ca/~ssurjano/optimization.html (always check if a problem already exist here)
@@ -41,7 +62,8 @@ So that we know what is found and what we have yet found.
 15. Uber's benchmark: https://github.com/uber/bayesmark/tree/master
 
 ## What Rosen think would be great:
-* Make all the synthetic (numerical) function scalable
+* Make all the synthetic (numerical) function scalable 
+* To my knowledge, a lot of my engineering problems have a multi-objective form (plz see the CEC 2017 pdf link)
 * Each problem can have more than one variance among these six types: Single/Multi objective, With/Without constraint, Continuous/Mix-variable
 
 
