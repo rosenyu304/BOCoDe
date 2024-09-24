@@ -3,7 +3,7 @@ So that we know what is found and what we have yet found.
 --Rosen
 
 
-## Literature, Reference, and URL:
+## Literature, Reference, and URL for the current set of problems:
 * Optimization Test Problems: https://www.sfu.ca/~ssurjano/optimization.html
 * Computational Optimization, Methods and Algorithms, Chapter 12 Benchmark Problems in Structural Optimization (Amir Hossein Gandomi and Xin-She Yang)
 * Bat algorithm for constrained optimization tasks (Amir H Gandomi, Xin-She Yang, Amir H. Alavi, Siamak Talatahari)
