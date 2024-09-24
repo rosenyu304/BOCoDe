@@ -15,7 +15,7 @@ So that we know what is found and what we have yet found.
 
 
 
-## Problems with code:
+## Problems that are coded in our set:
 | Problem Name | num of Objectives | dim of Objectives |  num of Constraints | Problem Type |
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | Ackley  (botorch) | 1  | N  | 2  | Single Objective, Constrained, Continuous  |
