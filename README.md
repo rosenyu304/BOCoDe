@@ -10,6 +10,8 @@ So that we know what is found and what we have yet found.
 * Mixed variable structural optimization using Firefly Algorithm, https://www.sciencedirect.com/science/article/pii/S0045794911002185
 * Constraining the Feasible Design Space in Bayesian Optimization With User Feedback, Christopher Hoyle, https://asmedigitalcollection.asme.org/mechanicaldesign/article/146/4/041703/1169762/Constraining-the-Feasible-Design-Space-in-Bayesian
 * slientruss3d : Python for stable truss analysis and deep learning research, https://github.com/leo27945875/Python_Stable_3D_Truss_Analysis
+* Mopta08 Executables: https://leonard.papenmeier.io/2023/02/09/mopta08-executables.html
+* Mazda car benchmark: https://ladse.eng.isas.jaxa.jp/benchmark/jpn/index.html
 
 
 
