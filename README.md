@@ -1,5 +1,6 @@
 # Benchmark Problem Dictionary
-So that we know what are found, and what have we yet found -- Rosen.
+So that we know what is found and what we have yet found.
+--Rosen
 
 
 ## Literature, Reference, and URL:
