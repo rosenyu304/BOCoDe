@@ -19,7 +19,7 @@ So that we know what is found and what we have yet found.
 | Problem Name | num of Objectives | dim of Objectives |  num of Constraints | Problem Type |
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | Ackley  (botorch) | 1  | N  | 2  | Single Objective, Constrained, Continuous  |
-| Branin  (botorch) | 1  | 2  | Single Objective (is there a discrete form?)  |
+| Branin  (botorch) | 1  | 2  | 0  | Single Objective (is there a discrete or constrained form?)  |
 | Bukin  (botorch) | 1  | 2  | 0  | Single Objective (is there a more variance?)  |
 | Cantilever Step Beam  (engineering) | 1  | 10  | 11  | Single Objective, Constrained (is there a discrete form? and I think we can expand to N steps (right now it's five steps))  |
 
