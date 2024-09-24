@@ -1,6 +1,8 @@
+
+from TrussSolvers import *
 import torch
 import numpy as np
-from .. import TrussSolvers
+
 
 
 
@@ -17,7 +19,7 @@ def Truss10D(individuals):
     gx = torch.zeros(n,14)
 
     for ii in range(n):
-        displace, stress, _, _, weights = Truss10bar(A)
+        displace, stress, _, _, weights = Truss10bar(individuals[ii,:])
         fx[ii,0] = weights
 
         for ss in range(10):
