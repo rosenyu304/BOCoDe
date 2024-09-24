@@ -30,7 +30,11 @@ So that we know what are found, and what have we yet found
 10. BOUNCE: https://arxiv.org/pdf/2307.00618 and https://neurips.cc/virtual/2023/poster/71554
 11. HEBO: https://neurips.cc/virtual/2023/poster/73451 and https://github.com/huawei-noah/HEBO/tree/master/MCBO
 12. Bayesian optimization for mixed-variable, multi-objective problems: https://link.springer.com/article/10.1007/s00158-022-03382-y
-13. 
+
+## What Rosen think would be great:
+* Make all the synthetic (numerical) function scalable
+* Each problem can have more than one variance among these six types: Single/Multi objective, With/Without constraint, Continuous/Mix-variable
+
 
 **Reminder to Rosen: read these papers**
 * Comparison of High-Dimensional Bayesian Optimization Algorithms on BBOB: https://arxiv.org/pdf/2303.00890
