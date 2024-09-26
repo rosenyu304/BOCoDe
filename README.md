@@ -3,6 +3,50 @@ So that we know what is found and what we have yet found.
 --Rosen
 
 
+## Problems that are coded in our set:
+
+### Botorch:
+| Problem Name | num of Objectives | dim of Objectives |  num of Constraints | Problem Type |
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| Ackley  (botorch) | 1  | N  | 2  | Single Objective, Constrained, Continuous  |
+| Branin  (botorch) | 1  | 2  | 0  | Single Objective (is there a mix-variable or constrained form?)  |
+| Bukin  (botorch) | 1  | 2  | 0  | Single Objective (is there a more variance?)  |
+| Dixon Price  (botorch) | 1  | N  | 0  | Single Objective, Continuous (is there a constrained form?)  |
+| Griewank  (botorch) | 1  | N  | 0  | Single Objective, Continuous (is there a constrained form?)  |
+| Hartmann 6D (botorch) | 1  | 6  | 0  | Single Objective, Continuous (is there a constrained form?)  |
+| Levy (botorch) | 1  | N  | 0  | Single Objective, Continuous (is there a constrained form?)   |
+| Michalewicz (botorch) | 1 | N  | 0  | Single Objective, Continuous (is there a constrained form?) |
+
+### Pymoo:
+| Problem Name | num of Objectives | dim of Objectives |  num of Constraints | Problem Type |
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+
+### CEC:
+| Problem Name | num of Objectives | dim of Objectives |  num of Constraints | Problem Type |
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+
+### Others:
+
+| Problem Name | num of Objectives | dim of Objectives |  num of Constraints | Problem Type |
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| Cantilever Step Beam  (engineering) | 1  | 10  | 11  | Single Objective, Constrained (is there a discrete form? and I think we can expand to N steps (right now it's five steps))  |
+| Car crashed simplified  (engineering) | 1  | 11  | 10  | Single Objective, Constrained (is there a mix-variable or multi-obj form?)  |
+| Compression Spring  (engineering) | 1  | 8  | 6  | Single Objective, Constrained (is there a mix-variable or multi-obj form?)  |
+| GKXWC1  (synthetic) | 1  | 2  | 1  | Single Objective, Constrained, Continuous  |
+| GKXWC2  (synthetic) | 1  | 2  | 1  | Single Objective, Constrained, Continuous  |
+| JLH1 (synthetic) | 1  | 2  | 1  | Single Objective, Constrained, Continuous  |
+| JLH2 (synthetic) | 1  | 2  | 1  | Single Objective, Constrained, Continuous  |
+| Keane Bump (synthetic) | 1  | N  | 2  | Single Objective, Constrained, Continuous  |
+| Mazda (engineering) | m | 222  | 54  | Single/Multi Objective, Constrained, Continuous (is there a mix-variable form?) (I haven't upload the executables)  |
+| MOPTA08_Car (engineering) | 1 | 124  | 68  | Single Objective, Constrained, Continuous (is there a mix-variable form?) (I haven't upload the executables)   |
+| PressureVessel (engineering) | 1 | 4  | 4  | Single Objective, Constrained, Continuous (is there a mix-variable or multi-obj form?)   |
+| ReinforcedConcreteBeam (engineering) | 1 | 3  | 9  | Single Objective, Constrained, Continuous (We should implement the mix-variable form)   |
+| Rosenbrock (botorch) | 1 | N  | 0  | Single Objective, Continuous (is there a constrained form?)   |
+| Speed Reducer (engineering) | 1 | 7  | 9  | Single Objective, Constrained, Continuous (is there a mix-variable or multi-obj form?)   |
+| Three-bar Truss (engineering) | 1 | 2  | 3  | Single Objective, Constrained, Continuous  |
+| TrussSolvers (engineering, slientruss3d) | 1 | 10, 25, 72, 120  | depends  | Single Objective, Continuous (is there a mix-variable or multi-obj form?) |
+| WeldedBeam (engineering) | 1 | 4  | 5  | Single Objective, Constrained, Continuous (is there a mix-variable or multi-obj form?)  |
+
 ## Literature, Reference, and URL for the current set of problems:
 * Optimization Test Problems: https://www.sfu.ca/~ssurjano/optimization.html
 * Computational Optimization, Methods and Algorithms, Chapter 12 Benchmark Problems in Structural Optimization (Amir Hossein Gandomi and Xin-She Yang)
@@ -13,36 +57,6 @@ So that we know what is found and what we have yet found.
 * Mopta08 Executables: https://leonard.papenmeier.io/2023/02/09/mopta08-executables.html
 * Mazda car benchmark: https://ladse.eng.isas.jaxa.jp/benchmark/jpn/index.html
 
-
-
-## Problems that are coded in our set:
-| Problem Name | num of Objectives | dim of Objectives |  num of Constraints | Problem Type |
-| ------------- | ------------- | ------------- | ------------- | ------------- |
-| Ackley  (botorch) | 1  | N  | 2  | Single Objective, Constrained, Continuous  |
-| Branin  (botorch) | 1  | 2  | 0  | Single Objective (is there a mix-variable or constrained form?)  |
-| Bukin  (botorch) | 1  | 2  | 0  | Single Objective (is there a more variance?)  |
-| Cantilever Step Beam  (engineering) | 1  | 10  | 11  | Single Objective, Constrained (is there a discrete form? and I think we can expand to N steps (right now it's five steps))  |
-| Car crashed simplified  (engineering) | 1  | 11  | 10  | Single Objective, Constrained (is there a mix-variable or multi-obj form?)  |
-| Compression Spring  (engineering) | 1  | 8  | 6  | Single Objective, Constrained (is there a mix-variable or multi-obj form?)  |
-| Dixon Price  (botorch) | 1  | N  | 0  | Single Objective, Continuous (is there a constrained form?)  |
-| GKXWC1  (synthetic) | 1  | 2  | 1  | Single Objective, Constrained, Continuous  |
-| GKXWC2  (synthetic) | 1  | 2  | 1  | Single Objective, Constrained, Continuous  |
-| Griewank  (botorch) | 1  | N  | 0  | Single Objective, Continuous (is there a constrained form?)  |
-| Hartmann 6D (botorch) | 1  | 6  | 0  | Single Objective, Continuous (is there a constrained form?)  |
-| JLH1 (synthetic) | 1  | 2  | 1  | Single Objective, Constrained, Continuous  |
-| JLH2 (synthetic) | 1  | 2  | 1  | Single Objective, Constrained, Continuous  |
-| Keane Bump (synthetic) | 1  | N  | 2  | Single Objective, Constrained, Continuous  |
-| Levy (botorch) | 1  | N  | 0  | Single Objective, Continuous (is there a constrained form?)   |
-| Mazda (engineering) | m | 222  | 54  | Single/Multi Objective, Constrained, Continuous (is there a mix-variable form?) (I haven't upload the executables)  |
-| Michalewicz (botorch) | 1 | N  | 0  | Single Objective, Continuous (is there a constrained form?) |
-| MOPTA08_Car (engineering) | 1 | 124  | 68  | Single Objective, Constrained, Continuous (is there a mix-variable form?) (I haven't upload the executables)   |
-| PressureVessel (engineering) | 1 | 4  | 4  | Single Objective, Constrained, Continuous (is there a mix-variable or multi-obj form?)   |
-| ReinforcedConcreteBeam (engineering) | 1 | 3  | 9  | Single Objective, Constrained, Continuous (We should implement the mix-variable form)   |
-| Rosenbrock (botorch) | 1 | N  | 0  | Single Objective, Continuous (is there a constrained form?)   |
-| Speed Reducer (engineering) | 1 | 7  | 9  | Single Objective, Constrained, Continuous (is there a mix-variable or multi-obj form?)   |
-| Three-bar Truss (engineering) | 1 | 2  | 3  | Single Objective, Constrained, Continuous  |
-| TrussSolvers (engineering, slientruss3d) | 1 | 10, 25, 72, 120  | depends  | Single Objective, Continuous (is there a mix-variable or multi-obj form?) |
-| WeldedBeam (engineering) | 1 | 4  | 5  | Single Objective, Constrained, Continuous (is there a mix-variable or multi-obj form?)  |
 
 
 ## ToDos (What have we found but not yet coded. Please add to the list. Check the existed set before adding new ones):
