@@ -6,7 +6,7 @@ So that we know what is found and what we have yet found.
 # Problems that are coded in our set:
 
 ## Botorch:
-| Problem Name | num of Objectives | dim of Objectives |  num of Constraints | Problem Type |
+| Problem Name | num of Objectives | dim of X |  num of Constraints | Problem Type |
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | Ackley | 1  | N  | 2  | Single Objective, Constrained, Continuous  |
 | Branin | 1  | 2  | 0  | Single Objective (is there a mix-variable or constrained form?)  |
@@ -16,6 +16,36 @@ So that we know what is found and what we have yet found.
 | Hartmann 6D | 1  | 6  | 0  | Single Objective, Continuous (is there a constrained form?)  |
 | Levy | 1  | N  | 0  | Single Objective, Continuous (is there a constrained form?)   |
 | Michalewicz | 1 | N  | 0  | Single Objective, Continuous (is there a constrained form?) |
+| Michalewicz | 1 | N  | 0  | Single Objective, Continuous (is there a constrained form?) |
+| BraninCurrin | 2 | 2  | 0  | Multi Objective |
+| DH1 | 2 | N (min_dim = 2)  | 0  | Multi Objective |
+| DH2 | 2 | N  | 0  | Multi Objective |
+| DH3 | 2 | N (min_dim = 3)  | 0  | Multi Objective |
+| DH4 | 2 | N  | 0  | Multi Objective |
+| DTLZ1 | 2 | N  | 0  | Multi Objective |
+| DTLZ2 | 2 | N  | 0  | Multi Objective |
+| DTLZ3 | 2 | N  | 0  | Multi Objective |
+| DTLZ4 | 2 | N  | 0  | Multi Objective |
+| DTLZ5 | 2 | N  | 0  | Multi Objective |
+| DTLZ7 | 2 | N  | 0  | Multi Objective |
+| GMM | 2 | 2  | 0  | Multi Objective |
+| Penicillin | 3 | 7  | 0  | Multi Objective |
+| ToyRobust | 2 | 1  | 0  | Multi Objective |
+| VehicleSafety | 3 | 5  | 0  | Multi Objective |
+| ZDT1 | 2 | 2 or more  | 0  | Multi Objective |
+| ZDT2 | 2 | 2 or more  | 0  | Multi Objective |
+| ZDT3 | 2 | 2 or more  | 0  | Multi Objective |
+| CarSideImpact | 4 | 7  | 0  | Multi Objective |
+| BNH | 2 | 2  | 2  | Multi Objective |
+| CONSTR | 2 | 2  | 2  | Multi Objective |
+| ConstrainedBraninCurrin | 2 | 2  | 1  | Multi Objective |
+| C2DTLZ2 | 2 | 2 or more  | 1  | Multi Objective |
+| DiscBrake | 2 | 4 | 4  | Multi Objective |
+| MW7 | 2 | 1 or more | 2 | Multi Objective |
+| OSY | 2 | 6 | 6 | Multi Objective |
+| SRN | 2 | 2 | 2 | Multi Objective |
+| WeldedBeam | 2 | 4 | 4 | Multi Objective |
+
 
 ## Pymoo:
 | Problem Name | num of Objectives | dim of Objectives |  num of Constraints | Problem Type |
