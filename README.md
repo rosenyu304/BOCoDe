@@ -3,29 +3,29 @@ So that we know what is found and what we have yet found.
 --Rosen
 
 
-## Problems that are coded in our set:
+# Problems that are coded in our set:
 
-### Botorch:
+## Botorch:
 | Problem Name | num of Objectives | dim of Objectives |  num of Constraints | Problem Type |
 | ------------- | ------------- | ------------- | ------------- | ------------- |
-| Ackley  (botorch) | 1  | N  | 2  | Single Objective, Constrained, Continuous  |
-| Branin  (botorch) | 1  | 2  | 0  | Single Objective (is there a mix-variable or constrained form?)  |
-| Bukin  (botorch) | 1  | 2  | 0  | Single Objective (is there a more variance?)  |
-| Dixon Price  (botorch) | 1  | N  | 0  | Single Objective, Continuous (is there a constrained form?)  |
-| Griewank  (botorch) | 1  | N  | 0  | Single Objective, Continuous (is there a constrained form?)  |
-| Hartmann 6D (botorch) | 1  | 6  | 0  | Single Objective, Continuous (is there a constrained form?)  |
-| Levy (botorch) | 1  | N  | 0  | Single Objective, Continuous (is there a constrained form?)   |
-| Michalewicz (botorch) | 1 | N  | 0  | Single Objective, Continuous (is there a constrained form?) |
+| Ackley | 1  | N  | 2  | Single Objective, Constrained, Continuous  |
+| Branin | 1  | 2  | 0  | Single Objective (is there a mix-variable or constrained form?)  |
+| Bukin | 1  | 2  | 0  | Single Objective (is there a more variance?)  |
+| Dixon Price | 1  | N  | 0  | Single Objective, Continuous (is there a constrained form?)  |
+| Griewank | 1  | N  | 0  | Single Objective, Continuous (is there a constrained form?)  |
+| Hartmann 6D | 1  | 6  | 0  | Single Objective, Continuous (is there a constrained form?)  |
+| Levy | 1  | N  | 0  | Single Objective, Continuous (is there a constrained form?)   |
+| Michalewicz | 1 | N  | 0  | Single Objective, Continuous (is there a constrained form?) |
 
-### Pymoo:
-| Problem Name | num of Objectives | dim of Objectives |  num of Constraints | Problem Type |
-| ------------- | ------------- | ------------- | ------------- | ------------- |
-
-### CEC:
+## Pymoo:
 | Problem Name | num of Objectives | dim of Objectives |  num of Constraints | Problem Type |
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 
-### Others:
+## CEC:
+| Problem Name | num of Objectives | dim of Objectives |  num of Constraints | Problem Type |
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+
+## Others:
 
 | Problem Name | num of Objectives | dim of Objectives |  num of Constraints | Problem Type |
 | ------------- | ------------- | ------------- | ------------- | ------------- |
@@ -47,7 +47,7 @@ So that we know what is found and what we have yet found.
 | TrussSolvers (engineering, slientruss3d) | 1 | 10, 25, 72, 120  | depends  | Single Objective, Continuous (is there a mix-variable or multi-obj form?) |
 | WeldedBeam (engineering) | 1 | 4  | 5  | Single Objective, Constrained, Continuous (is there a mix-variable or multi-obj form?)  |
 
-## Literature, Reference, and URL for the current set of problems:
+# Literature, Reference, and URL for the current set of problems:
 * Optimization Test Problems: https://www.sfu.ca/~ssurjano/optimization.html
 * Computational Optimization, Methods and Algorithms, Chapter 12 Benchmark Problems in Structural Optimization (Amir Hossein Gandomi and Xin-She Yang)
 * Bat algorithm for constrained optimization tasks (Amir H Gandomi, Xin-She Yang, Amir H. Alavi, Siamak Talatahari)
@@ -59,26 +59,30 @@ So that we know what is found and what we have yet found.
 
 
 
-## ToDos (What have we found but not yet coded. Please add to the list. Check the existed set before adding new ones):
-1. BoTorch library (always check if a problem already exist here)
-2. Pymoo library (always check if a problem already exist here)
-3. Optimization Test Problems: https://www.sfu.ca/~ssurjano/optimization.html (always check if a problem already exist here)
+# ToDos (What have we found but not yet coded. Please add to the list. Check the existed set before adding new ones):
+
+## Step 0: Always check if a problem already exist here before next step
+1. BoTorch library
+2. Pymoo library
+3. Optimization Test Problems: https://www.sfu.ca/~ssurjano/optimization.html 
 4. **Honestly just go look at the CEC problems each year:**
 5. CEC 2017 , https://www.researchgate.net/publication/317228117_Problem_Definitions_and_Evaluation_Criteria_for_the_CEC_2017_Competition_and_Special_Session_on_Constrained_Single_Objective_Real-Parameter_Optimization?enrichId=rgreq-b8f8213db02831458225d2c8ba3fe09d-XXX&enrichSource=Y292ZXJQYWdlOzMxNzIyODExNztBUzo1MjMxNjg4MDI1MDA2MDhAMTUwMTc0NDU3MDUwMQ%3D%3D&el=1_x_3&_esc=publicationCoverPdf
 6. CEC 2014, https://github.com/P-N-Suganthan/CEC2014/tree/master
-7. Openmdao: https://openmdao.org/newdocs/versions/latest/examples/examples.html
-8. Neorl: https://neorl.readthedocs.io/en/latest/
-9. Multi-objective Bayesian Optimization Supported by an Expected Pareto Distance Change (Homero Valladares and Andres Tovar): https://github.com/edrl-purdue/jmd-epdc
-10. MDO: https://mdolab.engin.umich.edu/software
-11. Re-Examining Linear Embeddings for High-Dimensional Bayesian Optimization (can we find the robot problem?): https://proceedings.neurips.cc/paper_files/paper/2020/file/10fb6cfa4c990d2bad5ddef4f70e8ba2-Paper.pdf
-12. Standard Gaussian Process Can Be Excellent for High-Dimensional Bayesian Optimization (we have some, but not all): https://arxiv.org/pdf/2402.02746
-13. Comparison of High-Dimensional Bayesian Optimization Algorithms on BBOB (Can we steal any of these: https)://github.com/MariaLauraSantoni/IOH-Profiler-HDBO-Comparison
-14. BOUNCE: https://arxiv.org/pdf/2307.00618 and https://neurips.cc/virtual/2023/poster/71554
-15. HEBO: https://neurips.cc/virtual/2023/poster/73451 and https://github.com/huawei-noah/HEBO/tree/master/MCBO
-16. Bayesian optimization for mixed-variable, multi-objective problems: https://link.springer.com/article/10.1007/s00158-022-03382-y
-17. Uber's benchmark: https://github.com/uber/bayesmark/tree/master
 
-## What Rosen think would be great:
+## Next Steps:
+1. Openmdao: https://openmdao.org/newdocs/versions/latest/examples/examples.html
+2. Neorl: https://neorl.readthedocs.io/en/latest/
+3. Multi-objective Bayesian Optimization Supported by an Expected Pareto Distance Change (Homero Valladares and Andres Tovar): https://github.com/edrl-purdue/jmd-epdc
+4. MDO: https://mdolab.engin.umich.edu/software
+5. Re-Examining Linear Embeddings for High-Dimensional Bayesian Optimization (can we find the robot problem?): https://proceedings.neurips.cc/paper_files/paper/2020/file/10fb6cfa4c990d2bad5ddef4f70e8ba2-Paper.pdf
+6. Standard Gaussian Process Can Be Excellent for High-Dimensional Bayesian Optimization (we have some, but not all): https://arxiv.org/pdf/2402.02746
+7. Comparison of High-Dimensional Bayesian Optimization Algorithms on BBOB (Can we steal any of these: https)://github.com/MariaLauraSantoni/IOH-Profiler-HDBO-Comparison
+8. BOUNCE: https://arxiv.org/pdf/2307.00618 and https://neurips.cc/virtual/2023/poster/71554
+9. HEBO: https://neurips.cc/virtual/2023/poster/73451 and https://github.com/huawei-noah/HEBO/tree/master/MCBO
+10. Bayesian optimization for mixed-variable, multi-objective problems: https://link.springer.com/article/10.1007/s00158-022-03382-y
+11. Uber's benchmark: https://github.com/uber/bayesmark/tree/master
+
+# What Rosen think would be great:
 * Make all the synthetic (numerical) function scalable 
 * To my knowledge, a lot of my engineering problems have a multi-objective form (plz see the CEC 2017 pdf link)
 * Each problem can have more than one variance among these six types: Single/Multi objective, With/Without constraint, Continuous/Mix-variable
