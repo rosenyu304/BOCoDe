@@ -120,7 +120,7 @@ So that we know what is found and what we have yet found.
 17. Bayesian optimization with known experimental and design constraints for chemistry applications (discrete/continuous, some overlap) https://pubs.rsc.org/en/content/articlehtml/2022/dd/d2dd00028h
 18. Bayesian Optimization for Materials Design with Mixed Quantitative and Qualitative Variables (mixed-variable): https://www.nature.com/articles/s41598-020-60652-9
 19. Gaussian Process Assisted Particle Swarm Optimization (Rastrigin, Schwefel, some overlap): https://link.springer.com/chapter/10.1007/978-3-642-13800-3_11
-* More Possibilities
+* (More Possibilities)
 20. A Benchmark-Suite of real-World constrained multi-objective optimization problems and some baseline results: https://www.sciencedirect.com/science/article/abs/pii/S2210650221001231
 21. Bayesian optimization with known experimental and design constraints for chemistry applications (uses 8 benchmarks but might not actually be able to find ourselves
 ): https://pubs.rsc.org/en/content/articlehtml/2022/dd/d2dd00028h
