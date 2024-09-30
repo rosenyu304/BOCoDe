@@ -36,15 +36,15 @@ So that we know what is found and what we have yet found.
 | ZDT2 | 2 | 2 or more  | 0  | Multi Objective |
 | ZDT3 | 2 | 2 or more  | 0  | Multi Objective |
 | CarSideImpact | 4 | 7  | 0  | Multi Objective |
-| BNH | 2 | 2  | 2  | Multi Objective |
+| BNH | 2 | 2  | 2  | Multi Objective, Constrained |
 | CONSTR | 2 | 2  | 2  | Multi Objective |
-| ConstrainedBraninCurrin | 2 | 2  | 1  | Multi Objective |
-| C2DTLZ2 | 2 | 2 or more  | 1  | Multi Objective |
-| DiscBrake | 2 | 4 | 4  | Multi Objective |
-| MW7 | 2 | 1 or more | 2 | Multi Objective |
-| OSY | 2 | 6 | 6 | Multi Objective |
-| SRN | 2 | 2 | 2 | Multi Objective |
-| WeldedBeam | 2 | 4 | 4 | Multi Objective |
+| ConstrainedBraninCurrin | 2 | 2  | 1  | Multi Objective, Constrained |
+| C2DTLZ2 | 2 | 2 or more  | 1  | Multi Objective, Constrained |
+| DiscBrake | 2 | 4 | 4  | Multi Objective, Constrained |
+| MW7 | 2 | 1 or more | 2 | Multi Objective, Constrained |
+| OSY | 2 | 6 | 6 | Multi Objective, Constrained |
+| SRN | 2 | 2 | 2 | Multi Objective, Constrained |
+| WeldedBeam | 2 | 4 | 4 | Multi Objective, Constrained |
 
 
 ## Pymoo:
