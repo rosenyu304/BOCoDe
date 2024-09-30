@@ -114,6 +114,12 @@ So that we know what is found and what we have yet found.
 12. HEBO: https://neurips.cc/virtual/2023/poster/73451 and https://github.com/huawei-noah/HEBO/tree/master/MCBO
 13. Bayesian optimization for mixed-variable, multi-objective problems: https://link.springer.com/article/10.1007/s00158-022-03382-y
 14. Uber's benchmark: https://github.com/uber/bayesmark/tree/master
+Kailey
+15. Bayesian optimization for robust design of steel frames with joint and individual probabilistic constraints (multi-objective): https://www.sciencedirect.com/science/article/abs/pii/S0141029621010099
+16. Genetic evolution vs. function approximation: Benchmarking algorithms for architectural design optimization (discrete/continuous): https://academic.oup.com/jcde/article/6/3/414/5732355
+17. Bayesian optimization with known experimental and design constraints for chemistry applications (discrete/continuous, some overlap) https://pubs.rsc.org/en/content/articlehtml/2022/dd/d2dd00028h
+18. Bayesian Optimization for Materials Design with Mixed Quantitative and Qualitative Variables (mixed-variable): https://www.nature.com/articles/s41598-020-60652-9
+19. Gaussian Process Assisted Particle Swarm Optimization (Rastrigin, Schwefel, some overlap): https://link.springer.com/chapter/10.1007/978-3-642-13800-3_11
 
 # What Rosen think would be great:
 * Make all the synthetic (numerical) function scalable 
