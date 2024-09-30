@@ -118,23 +118,22 @@ So that we know what is found and what we have yet found.
 15. Bayesian optimization for robust design of steel frames with joint and individual probabilistic constraints (multi-objective): https://www.sciencedirect.com/science/article/abs/pii/S0141029621010099
 16. Genetic evolution vs. function approximation: Benchmarking algorithms for architectural design optimization (discrete/continuous): https://academic.oup.com/jcde/article/6/3/414/5732355
 17. Bayesian optimization with known experimental and design constraints for chemistry applications (discrete/continuous, some overlap) https://pubs.rsc.org/en/content/articlehtml/2022/dd/d2dd00028h
-18. Bayesian Optimization for Materials Design with Mixed Quantitative and Qualitative Variables (mixed-variable): https://www.nature.com/articles/s41598-020-60652-9
-19. Gaussian Process Assisted Particle Swarm Optimization (Rastrigin, Schwefel, some overlap): https://link.springer.com/chapter/10.1007/978-3-642-13800-3_11
+8. Gaussian Process Assisted Particle Swarm Optimization (Rastrigin, Schwefel, some overlap): https://link.springer.com/chapter/10.1007/978-3-642-13800-3_11
 * (More Possibilities)
-20. A Benchmark-Suite of real-World constrained multi-objective optimization problems and some baseline results: https://www.sciencedirect.com/science/article/abs/pii/S2210650221001231
-21. Bayesian optimization with known experimental and design constraints for chemistry applications (uses 8 benchmarks but might not actually be able to find ourselves
+19. A Benchmark-Suite of real-World constrained multi-objective optimization problems and some baseline results: https://www.sciencedirect.com/science/article/abs/pii/S2210650221001231
+20. Bayesian optimization with known experimental and design constraints for chemistry applications (uses 8 benchmarks but might not actually be able to find ourselves
 ): https://pubs.rsc.org/en/content/articlehtml/2022/dd/d2dd00028h
-22. Bayesian optimization of pump operations in water distribution systems: https://link.springer.com/article/10.1007/s10898-018-0641-2 
-23. Archimedes screw turbines: https://www.sciencedirect.com/science/article/pii/S0306261916313861
-24. Framework and Benchmarks for Combinatorial and Mixed-variable Bayesian Optimization: https://proceedings.neurips.cc/paper_files/paper/2023/file/dbc4b67c6430c22460623186c3d3fdc2-Paper-Datasets_and_Benchmarks.pdf
-25. Aircraft design: https://hal.science/hal-03346341/
-26. Design point: https://www.sciencedirect.com/science/article/abs/pii/S0951832023005276
-27. Multi-objective Bayesian optimization of chemical reactor design using computational fluid dynamics: https://www.sciencedirect.com/science/article/pii/S0098135418301236 
-28. Water resources management: https://link.springer.com/article/10.1007/s11269-013-0350-z
-29. Bayesian Optimization for Materials Science - https://link.springer.com/content/pdf/10.1007/978-981-10-6781-5.pdf
-30. Revolutionizing Membrane Design Using Machine Learning-Bayesian Optimization: https://pubs.acs.org/doi/full/10.1021/acs.est.1c04373 
-31. Bayesian optimization with hidden constraints for aircraft design: https://link.springer.com/article/10.1007/s00158-024-03833-8 
-32. Genetic evolution vs. function approximation: Benchmarking algorithms for architectural design optimization: https://academic.oup.com/jcde/article/6/3/414/5732355 
+21. Bayesian optimization of pump operations in water distribution systems: https://link.springer.com/article/10.1007/s10898-018-0641-2 
+22. Archimedes screw turbines: https://www.sciencedirect.com/science/article/pii/S0306261916313861
+23. Framework and Benchmarks for Combinatorial and Mixed-variable Bayesian Optimization: https://proceedings.neurips.cc/paper_files/paper/2023/file/dbc4b67c6430c22460623186c3d3fdc2-Paper-Datasets_and_Benchmarks.pdf
+24. Aircraft design: https://hal.science/hal-03346341/
+25. Design point: https://www.sciencedirect.com/science/article/abs/pii/S0951832023005276
+26. Multi-objective Bayesian optimization of chemical reactor design using computational fluid dynamics: https://www.sciencedirect.com/science/article/pii/S0098135418301236 
+27. Water resources management: https://link.springer.com/article/10.1007/s11269-013-0350-z
+28. Bayesian Optimization for Materials Science - https://link.springer.com/content/pdf/10.1007/978-981-10-6781-5.pdf
+29. Revolutionizing Membrane Design Using Machine Learning-Bayesian Optimization: https://pubs.acs.org/doi/full/10.1021/acs.est.1c04373 
+30. Bayesian optimization with hidden constraints for aircraft design: https://link.springer.com/article/10.1007/s00158-024-03833-8 
+31. Genetic evolution vs. function approximation: Benchmarking algorithms for architectural design optimization: https://academic.oup.com/jcde/article/6/3/414/5732355 
 
 # What Rosen think would be great:
 * Make all the synthetic (numerical) function scalable 
