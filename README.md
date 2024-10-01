@@ -97,8 +97,9 @@ So that we know what is found and what we have yet found.
 3. Optimization Test Problems: https://www.sfu.ca/~ssurjano/optimization.html
 4. Blackbox optimization benchmarking (BBOB) on COCO(COmparing Continuous Optimizer): http://numbbo.github.io/coco/testsuites/bbob
 5. **Honestly just go look at the CEC problems each year:**
-6. CEC 2017 , https://www.researchgate.net/publication/317228117_Problem_Definitions_and_Evaluation_Criteria_for_the_CEC_2017_Competition_and_Special_Session_on_Constrained_Single_Objective_Real-Parameter_Optimization?enrichId=rgreq-b8f8213db02831458225d2c8ba3fe09d-XXX&enrichSource=Y292ZXJQYWdlOzMxNzIyODExNztBUzo1MjMxNjg4MDI1MDA2MDhAMTUwMTc0NDU3MDUwMQ%3D%3D&el=1_x_3&_esc=publicationCoverPdf
-7. CEC 2014, https://github.com/P-N-Suganthan/CEC2014/tree/master
+6. PlatEMO's Github: https://github.com/BIMK/PlatEMO/tree/master/PlatEMO/Problems
+7. CEC 2017 , https://www.researchgate.net/publication/317228117_Problem_Definitions_and_Evaluation_Criteria_for_the_CEC_2017_Competition_and_Special_Session_on_Constrained_Single_Objective_Real-Parameter_Optimization?enrichId=rgreq-b8f8213db02831458225d2c8ba3fe09d-XXX&enrichSource=Y292ZXJQYWdlOzMxNzIyODExNztBUzo1MjMxNjg4MDI1MDA2MDhAMTUwMTc0NDU3MDUwMQ%3D%3D&el=1_x_3&_esc=publicationCoverPdf
+8. CEC 2014, https://github.com/P-N-Suganthan/CEC2014/tree/master
 
 ## Step 1+:
 1. Openmdao: https://openmdao.org/newdocs/versions/latest/examples/examples.html
