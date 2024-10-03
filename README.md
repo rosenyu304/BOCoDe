@@ -105,17 +105,18 @@ So that we know what is found and what we have yet found.
 1. Openmdao: https://openmdao.org/newdocs/versions/latest/examples/examples.html
 2. Electric motors: https://www.pyleecan.org/index.html
 3. Parameterized Quantum Circuits and Bayesian Optimization: https://github.com/w00zie/pqc_chsh/tree/main
-4. ICML2018 paper "Batch Bayesian Optimization via Multi-objective Acquisition Ensemble for Automated Analog Circuit Design": https://github.com/Alaya-in-Matrix/pyMACE/tree/master 
-5. Neorl: https://neorl.readthedocs.io/en/latest/
-6. Multi-objective Bayesian Optimization Supported by an Expected Pareto Distance Change (Homero Valladares and Andres Tovar): https://github.com/edrl-purdue/jmd-epdc
-7. MDO: https://mdolab.engin.umich.edu/software
-8. Re-Examining Linear Embeddings for High-Dimensional Bayesian Optimization (can we find the robot problem?): https://proceedings.neurips.cc/paper_files/paper/2020/file/10fb6cfa4c990d2bad5ddef4f70e8ba2-Paper.pdf
-9. Standard Gaussian Process Can Be Excellent for High-Dimensional Bayesian Optimization (we have some, but not all): https://arxiv.org/pdf/2402.02746
-10. Comparison of High-Dimensional Bayesian Optimization Algorithms on BBOB (Can we steal any of these: https)://github.com/MariaLauraSantoni/IOH-Profiler-HDBO-Comparison
-11. BOUNCE: https://arxiv.org/pdf/2307.00618 and https://neurips.cc/virtual/2023/poster/71554
-12. HEBO: https://neurips.cc/virtual/2023/poster/73451 and https://github.com/huawei-noah/HEBO/tree/master/MCBO
-13. Bayesian optimization for mixed-variable, multi-objective problems: https://link.springer.com/article/10.1007/s00158-022-03382-y
-14. Uber's benchmark: https://github.com/uber/bayesmark/tree/master
+4. ICML2018 paper "Batch Bayesian Optimization via Multi-objective Acquisition Ensemble for Automated Analog Circuit Design": https://github.com/Alaya-in-Matrix/pyMACE/tree/master
+5. 2 Engineering FEA problems: https://github.com/TsaiYK/BayesianCHT/tree/main
+6. Neorl: https://neorl.readthedocs.io/en/latest/
+7. Multi-objective Bayesian Optimization Supported by an Expected Pareto Distance Change (Homero Valladares and Andres Tovar): https://github.com/edrl-purdue/jmd-epdc
+8. MDO: https://mdolab.engin.umich.edu/software
+9. Re-Examining Linear Embeddings for High-Dimensional Bayesian Optimization (can we find the robot problem?): https://proceedings.neurips.cc/paper_files/paper/2020/file/10fb6cfa4c990d2bad5ddef4f70e8ba2-Paper.pdf
+10. Standard Gaussian Process Can Be Excellent for High-Dimensional Bayesian Optimization (we have some, but not all): https://arxiv.org/pdf/2402.02746
+11. Comparison of High-Dimensional Bayesian Optimization Algorithms on BBOB (Can we steal any of these: https)://github.com/MariaLauraSantoni/IOH-Profiler-HDBO-Comparison
+12. BOUNCE: https://arxiv.org/pdf/2307.00618 and https://neurips.cc/virtual/2023/poster/71554
+13. HEBO: https://neurips.cc/virtual/2023/poster/73451 and https://github.com/huawei-noah/HEBO/tree/master/MCBO
+14. Bayesian optimization for mixed-variable, multi-objective problems: https://link.springer.com/article/10.1007/s00158-022-03382-y
+15. Uber's benchmark: https://github.com/uber/bayesmark/tree/master
 * Kailey
 15. Bayesian optimization for robust design of steel frames with joint and individual probabilistic constraints (multi-objective): https://www.sciencedirect.com/science/article/abs/pii/S0141029621010099
 16. Genetic evolution vs. function approximation: Benchmarking algorithms for architectural design optimization (discrete/continuous): https://academic.oup.com/jcde/article/6/3/414/5732355
