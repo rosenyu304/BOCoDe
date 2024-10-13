@@ -54,6 +54,9 @@ So that we know what is found and what we have yet found.
 ## CEC:
 | Problem Name | num of Objectives | dim of Objectives |  num of Constraints | Problem Type |
 | ------------- | ------------- | ------------- | ------------- | ------------- |
+| HappyCat | 1 | D | 0 | Single Objective, Continuous |
+| Discus | 1 | D | 0 | Single Objective, Continuous |
+| HGBat | 1 | D | 0 | Single Objective, Continuous |
 
 ## Others:
 
@@ -76,6 +79,9 @@ So that we know what is found and what we have yet found.
 | Three-bar Truss (engineering) | 1 | 2  | 3  | Single Objective, Constrained, Continuous  |
 | TrussSolvers (engineering, slientruss3d) | 1 | 10, 25, 72, 120  | depends  | Single Objective, Continuous (is there a mix-variable or multi-obj form?) |
 | WeldedBeam (engineering) | 1 | 4  | 5  | Single Objective, Constrained, Continuous (is there a mix-variable or multi-obj form?)  |
+| Sharp Ride | 1 | D | 0 | Single Objective, Continuous |
+| Different Powers | 1 | D | 0 | Single Objective, Continuous |
+
 
 # Literature, Reference, and URL for the current set of problems:
 * Optimization Test Problems: https://www.sfu.ca/~ssurjano/optimization.html
