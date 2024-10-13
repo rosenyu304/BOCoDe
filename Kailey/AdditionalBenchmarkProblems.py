@@ -1,8 +1,5 @@
 import numpy as np
 
-r''' "Ye Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform for evolutionary
-multi-objective optimization [educational forum], IEEE Computational Intelligence Magazine, 2017, 12(4): 73-87" '''
-
 def happycat(X):
 
     r''' https://github.com/P-N-Suganthan/CEC2014/blob/master/Definitions%20of%20%20CEC2014%20benchmark%20suite%20Part%20A.pdf
@@ -12,7 +9,7 @@ def happycat(X):
 
     # range of x = [-100, 100]^D
 
-    X = 0.05 * X  # Scale the input
+    X = 0.05 * X
     fx = np.abs(np.sum(X**2, axis=1) - X.shape[1])**0.25 + \
                (0.5 * np.sum(X**2, axis=1) + np.sum(X, axis=1)) / X.shape[1] + 0.5
     gx = 0
@@ -45,6 +42,34 @@ def hgbat(X):
     X = 0.05 * X - 1  # Scale and shift the input
     fx = np.sqrt(np.abs(np.sum(X**2, axis=1)**2 - np.sum(X, axis=1)**2)) + \
                 (0.5 * np.sum(X**2, axis=1) + np.sum(X, axis=1)) / X.shape[1] + 0.5
+    gx = 0
+    return gx, fx
+
+def rastrigin(X):
+
+    r''' https://github.com/P-N-Suganthan/CEC2014/blob/master/Definitions%20of%20%20CEC2014%20benchmark%20suite%20Part%20A.pdf
+
+    "Ye Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform for evolutionary
+    multi-objective optimization [educational forum], IEEE Computational Intelligence Magazine, 2017, 12(4): 73-87" '''
+
+    # range of x = [-100, 100]^D
+
+    X = 0.0512*X
+    fx = np.sum(X**2 - 10 * np.cos(2 * np.pi * X) + 10, axis=1)
+    gx = 0
+    return gx, fx
+
+def schaffer(X):
+    r''' https://github.com/P-N-Suganthan/CEC2014/blob/master/Definitions%20of%20%20CEC2014%20benchmark%20suite%20Part%20A.pdf
+
+    "Ye Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform for evolutionary
+    multi-objective optimization [educational forum], IEEE Computational Intelligence Magazine, 2017, 12(4): 73-87" '''
+
+    # range of x = [-100, 100]^D
+
+    X = X**2
+    fx = np.sum(0.5 + (np.sin(np.sqrt(X + np.roll(X, -1, axis=1)))**2 - 0.5) /
+                      (1 + 0.001 * (X + np.roll(X, -1, axis=1)))**2, axis=1)
     gx = 0
     return gx, fx
 
