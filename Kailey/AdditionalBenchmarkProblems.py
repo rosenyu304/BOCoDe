@@ -10,6 +10,8 @@ def happycat(X):
     "Ye Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform for evolutionary
     multi-objective optimization [educational forum], IEEE Computational Intelligence Magazine, 2017, 12(4): 73-87" '''
 
+    # range of x = [-100, 100]^D
+
     X = 0.05 * X  # Scale the input
     fx = np.abs(np.sum(X**2, axis=1) - X.shape[1])**0.25 + \
                (0.5 * np.sum(X**2, axis=1) + np.sum(X, axis=1)) / X.shape[1] + 0.5
@@ -24,6 +26,8 @@ def discus(X):
     "Ye Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform for evolutionary
     multi-objective optimization [educational forum], IEEE Computational Intelligence Magazine, 2017, 12(4): 73-87" '''
 
+    # range of x = [-100, 100]^D
+
     fx = 1e6 * X[:, 0]**2 + np.sum(X[:, 1:]**2, axis=1)
     gx = 0
     return gx, fx
@@ -36,6 +40,8 @@ def hgbat(X):
     "Ye Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform for evolutionary
     multi-objective optimization [educational forum], IEEE Computational Intelligence Magazine, 2017, 12(4): 73-87" '''
 
+    # range of x = [-100, 100]^D
+
     X = 0.05 * X - 1  # Scale and shift the input
     fx = np.sqrt(np.abs(np.sum(X**2, axis=1)**2 - np.sum(X, axis=1)**2)) + \
                 (0.5 * np.sum(X**2, axis=1) + np.sum(X, axis=1)) / X.shape[1] + 0.5
@@ -46,13 +52,17 @@ def sharp_ridge(X):
 
     r''' https://numbbo.github.io/gforge/downloads/download16.00/bbobdocfunctions.pdf#page=70 '''
 
+    # range of x = [-5, 5]^D
+
     fx = X^2 + 100*np.sqrt(np.sum(X**2, axis = 1))
     gx = 0
     return gx, fx
 
-def diff_powers(X):
+def different_powers(X):
 
     r''' https://numbbo.github.io/gforge/downloads/download16.00/bbobdocfunctions.pdf#page=60 '''
+
+    # range of x = [-5, 5]^D
 
     nx = len(X)
     fx = 0.0
