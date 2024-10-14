@@ -45,19 +45,6 @@ def hgbat(X):
     gx = 0
     return gx, fx
 
-def rastrigin(X):
-
-    r''' https://github.com/P-N-Suganthan/CEC2014/blob/master/Definitions%20of%20%20CEC2014%20benchmark%20suite%20Part%20A.pdf
-
-    "Ye Tian, Ran Cheng, Xingyi Zhang, and Yaochu Jin, PlatEMO: A MATLAB platform for evolutionary
-    multi-objective optimization [educational forum], IEEE Computational Intelligence Magazine, 2017, 12(4): 73-87" '''
-
-    # range of x = [-100, 100]^D
-
-    X = 0.0512*X
-    fx = np.sum(X**2 - 10 * np.cos(2 * np.pi * X) + 10, axis=1)
-    gx = 0
-    return gx, fx
 
 def schaffer(X):
     r''' https://github.com/P-N-Suganthan/CEC2014/blob/master/Definitions%20of%20%20CEC2014%20benchmark%20suite%20Part%20A.pdf
