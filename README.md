@@ -57,7 +57,6 @@ So that we know what is found and what we have yet found.
 | HappyCat | 1 | D | 0 | Single Objective, Continuous |
 | Discus | 1 | D | 0 | Single Objective, Continuous |
 | HGBat | 1 | D | 0 | Single Objective, Continuous |
-| Rastringin | 1 | D | 0 | Single Objective, Continuous |
 | Schaffer | 1 | D | 0 | Single Objective, Continuous |
 
 ## Others:
