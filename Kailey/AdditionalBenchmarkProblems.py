@@ -60,7 +60,7 @@ def schaffer(X):
 
 
 def sharp_ridge(X):
-    r''' https://numbbo.github.io/gforge/downloads/download16.00/bbobdocfunctions.pdf#page=70 '''
+    r''' https://numbbo.github.io/gforge/downloads/download16.00/bbobdocfunctions.pdf#page=65 '''
 
     # range of x = [-5, 5]
 
