@@ -108,6 +108,9 @@ So that we know what is found and what we have yet found.
 7. CEC 2017 , https://www.researchgate.net/publication/317228117_Problem_Definitions_and_Evaluation_Criteria_for_the_CEC_2017_Competition_and_Special_Session_on_Constrained_Single_Objective_Real-Parameter_Optimization?enrichId=rgreq-b8f8213db02831458225d2c8ba3fe09d-XXX&enrichSource=Y292ZXJQYWdlOzMxNzIyODExNztBUzo1MjMxNjg4MDI1MDA2MDhAMTUwMTc0NDU3MDUwMQ%3D%3D&el=1_x_3&_esc=publicationCoverPdf
 8. CEC 2014, https://github.com/P-N-Suganthan/CEC2014/tree/master
 
+## Step 0.5: 
+1. Cyril's ultimate multi-objective constrained problem! : https://github.com/epfl-lamd/modact
+
 ## Step 1+:
 1. Openmdao: https://openmdao.org/newdocs/versions/latest/examples/examples.html
 2. Electric motors: https://www.pyleecan.org/index.html
