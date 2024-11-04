@@ -116,13 +116,13 @@ So that we know what is found and what we have yet found.
 2. Electric motors: https://www.pyleecan.org/index.html
 3. Parameterized Quantum Circuits and Bayesian Optimization: https://github.com/w00zie/pqc_chsh/tree/main
   - Error: long paths - after running 1st cell (lines below)
-    !pip install --quiet cirq
-    !pip install --quiet bayesian-optimization
+    *!pip install --quiet cirq
+    *!pip install --quiet bayesian-optimization
   - ERROR: Could not install packages due to an OSError: [Errno 2] No such file or directory: 'C:\\Users\\Kailey\\AppData\\Local\\Temp\\pip-install-_fvt_r3l\\quil_93ed7715ce9a448daea5b1628551a0fd\\quil-rs\\src\\waveform\\snapshots\\quil_rs__waveform__templates__tests__DragGaussian__duration_0_0001_fwhm_1e-5_t0_0_0_anh_1000000_0_alpha_1_0_sample_rate_1000000_0_scale_1_0_phase_0_0_detuning_0_0___data.snap'
 HINT: This error might have occurred since this system does not have Windows Long Path support enabled. You can find information on how to enable this at https://pip.pypa.io/warnings/enable-long-paths
 4. ICML2018 paper "Batch Bayesian Optimization via Multi-objective Acquisition Ensemble for Automated Analog Circuit Design": https://github.com/Alaya-in-Matrix/pyMACE/tree/master
   - Error: importing MACE - after running line below 
-    from   MACE import MACE
+    *from   MACE import MACE
   - ImportError: cannot import name 'MACE' from partially initialized module 'MACE' (most likely due to a circular import)
 5. 2 Engineering FEA problems: https://github.com/TsaiYK/BayesianCHT/tree/main
 6. Neorl: https://neorl.readthedocs.io/en/latest/
