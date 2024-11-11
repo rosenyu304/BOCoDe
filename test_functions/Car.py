@@ -1,6 +1,8 @@
 import torch
 import numpy as np
 
+from .cont_to_disc import cont_to_disc
+
 
 #
 #
@@ -131,6 +133,24 @@ def Car_Scaling(X):
 
 
 
+
+def Car_MixedScaling(X):
+
+    assert torch.is_tensor(X) and X.size(1) == 11, "Input must be an n-by-11 PyTorch tensor."
+    
+    x1  = (X[:,0] * (1.5-0.5) + 0.5).reshape(X.shape[0],1)
+    x2  = (X[:,1] * (1.35-0.45) + 0.45).reshape(X.shape[0],1)
+    x3  = (X[:,2] * (1.5-0.5) + 0.5).reshape(X.shape[0],1)
+    x4 = (X[:,3] * (1.5-0.5) + 0.5).reshape(X.shape[0],1)
+    x5 = (X[:,4] * (1.5-0.5) + 0.5).reshape(X.shape[0],1)
+    x6 = (X[:,5] * (1.5-0.5) + 0.5).reshape(X.shape[0],1)
+    x7 = (X[:,6] * (1.5-0.5) + 0.5).reshape(X.shape[0],1)
+    x8_to_x9 = cont_to_disc(X[:,7:9], torch.tensor([0.192, 0.345]))
+    x10 = (X[:,9] * (-20)).reshape(X.shape[0],1)
+    x11 = (X[:,10] * (-20)).reshape(X.shape[0],1)
+    
+    X_scaled = torch.cat((x1, x2, x3, x4, x5, x6, x7, x8_to_x9, x10, x11), dim=1)
+    return X_scaled
 
 
 

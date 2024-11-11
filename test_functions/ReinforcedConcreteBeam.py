@@ -1,6 +1,8 @@
 import torch
 import numpy as np
 
+from .cont_to_disc import cont_to_disc
+
 #
 #
 #   ReinforcedConcreteBeam: 3D objective, 9 constraints
@@ -76,7 +78,23 @@ def ReinforcedConcreteBeam_Scaling(X):
     
     X_scaled = torch.cat((As, b, h), dim=1)
     return X_scaled    
+
+
+
+
+def ReinforcedConcreteBeam_MixedScaling(X):
+    # x0 (As): [0.2, 15]
+    # x1 (b): {28, 29, ..., 40}
+    # x2 (h): [5, 10]
+
+    assert torch.is_tensor(X) and X.size(1) == 3, "Input must be an n-by-3 PyTorch tensor."
     
+    As = X[:,0] * (15-0.2) + 0.2
+    b  = cont_to_disc(X[:,1], torch.arange(28, 41))
+    h  = X[:,2] * 5 + 5
+    
+    X_scaled = torch.stack((As, b, h), dim=1)
+    return X_scaled  
     
     
     

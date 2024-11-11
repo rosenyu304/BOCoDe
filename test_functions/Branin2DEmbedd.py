@@ -1,8 +1,8 @@
 import torch
 import numpy as np
 from botorch.test_functions.synthetic import Branin
-device = torch.device("cpu")
-dtype = torch.double
+
+from .cont_to_disc import cont_to_disc
 
 
 def Branin2DEmbedd(X_input):
@@ -36,3 +36,16 @@ def Branin2DEmbedd_Scaling(X):
 
 
 
+def BraninMixed(X):
+    # Optimal (disc): (-2.6, 10) -> -2.79118
+    # LVGP paper: https://www.nature.com/articles/s41598-020-60652-9
+    return -Branin()(X).view(-1, 1)
+
+
+def BraninMixed_Scaling(X):
+    # x0: [-5, 10]
+    # x1: {0, 5, 10, 15}
+    X_scaled = X.clone()
+    X_scaled[:, 0] = X[:, 0] * 15 - 5
+    X_scaled[:, 1] = cont_to_disc(X[:, 1], torch.tensor([0, 5, 10, 15]))
+    return X_scaled

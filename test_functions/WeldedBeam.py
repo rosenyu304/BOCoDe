@@ -1,6 +1,8 @@
 import torch
 import numpy as np
 
+from .cont_to_disc import cont_to_disc
+
 #
 #
 #   WeldedBeam: 4D objective, 5 constraints
@@ -87,7 +89,21 @@ def WeldedBeam_Scaling(X):
 
 
 
+def WeldedBeam_MixedScaling(X):
+    # x0 (h): {0.125, 0.125+0.0065, ... 5}
+    # x1 (l): {0.1, 0.1+0.0065, ... 10}
+    # x2 (t): [0.1, 10]
+    # x3 (b): [0.1, 5]
 
+    assert torch.is_tensor(X) and X.size(1) == 4, "Input must be an n-by-4 PyTorch tensor."
+    
+    h = cont_to_disc(X[:, 0], torch.arange(0.125, 5, 0.0065))
+    l = cont_to_disc(X[:, 1], torch.arange(0.1, 10, 0.0065))
+    t = X[:,2] * (10 - 0.1) + 0.1
+    b = X[:,3] * (5 - 0.1) + 0.1
+
+    X_scaled = torch.stack((h, l, t, b), dim=1)
+    return X_scaled
 
 
 

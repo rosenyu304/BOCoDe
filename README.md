@@ -9,14 +9,15 @@ So that we know what is found and what we have yet found.
 | Problem Name | num of Objectives | dim of X |  num of Constraints | Problem Type |
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | Ackley | 1  | N  | 2  | Single Objective, Constrained, Continuous  |
-| Branin | 1  | 2  | 0  | Single Objective (is there a mix-variable or constrained form?)  |
+| Branin | 1  | 2  | 0  | Single Objective, Continuous, Mixed (is there a constrained form?)  |
 | Bukin | 1  | 2  | 0  | Single Objective (is there a more variance?)  |
 | Dixon Price | 1  | N  | 0  | Single Objective, Continuous (is there a constrained form?)  |
 | Griewank | 1  | N  | 0  | Single Objective, Continuous (is there a constrained form?)  |
-| Hartmann 6D | 1  | 6  | 0  | Single Objective, Continuous (is there a constrained form?)  |
+| Hartmann 6D | 1  | 6  | 0  | Single Objective, Continuous, Mixed (is there a constrained form?)  |
 | Levy | 1  | N  | 0  | Single Objective, Continuous (is there a constrained form?)   |
 | Michalewicz | 1 | N  | 0  | Single Objective, Continuous (is there a constrained form?) |
 | Michalewicz | 1 | N  | 0  | Single Objective, Continuous (is there a constrained form?) |
+| Styblinski-Tang | 1 | 10  | 0  | Single Objective, Continuous, Mixed |
 | BraninCurrin | 2 | 2  | 0  | Multi Objective |
 | DH1 | 2 | N (min_dim = 2)  | 0  | Multi Objective |
 | DH2 | 2 | N  | 0  | Multi Objective |
@@ -64,22 +65,25 @@ So that we know what is found and what we have yet found.
 | Problem Name | num of Objectives | dim of Objectives |  num of Constraints | Problem Type |
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | Cantilever Step Beam  (engineering) | 1  | 10  | 11  | Single Objective, Constrained (is there a discrete form? and I think we can expand to N steps (right now it's five steps))  |
-| Car crashed simplified  (engineering) | 1  | 11  | 10  | Single Objective, Constrained (is there a mix-variable or multi-obj form?)  |
-| Compression Spring  (engineering) | 1  | 8  | 6  | Single Objective, Constrained (is there a mix-variable or multi-obj form?)  |
+| Car crashed simplified  (engineering) | 1  | 11  | 10  | Single Objective, Constrained, Mixed  |
+| Compression Spring  (engineering) | 1  | 8  | 6  | Single Objective, Constrained, Mixed  |
+| GearTrain  (engineering) | 1  | 4  | 0  | Single Objective, Mixed |
 | GKXWC1  (synthetic) | 1  | 2  | 1  | Single Objective, Constrained, Continuous  |
 | GKXWC2  (synthetic) | 1  | 2  | 1  | Single Objective, Constrained, Continuous  |
+| Goldstein  (synthetic) | 1  | 2  | 0  | Single Objective, Continuous, Mixed |
+| Euler Bernoulli Beam Bending  (engineering) | 1  | 3  | 0  | Single Objective, Mixed |
 | JLH1 (synthetic) | 1  | 2  | 1  | Single Objective, Constrained, Continuous  |
 | JLH2 (synthetic) | 1  | 2  | 1  | Single Objective, Constrained, Continuous  |
 | Keane Bump (synthetic) | 1  | N  | 2  | Single Objective, Constrained, Continuous  |
 | Mazda (engineering) | m | 222  | 54  | Single/Multi Objective, Constrained, Continuous (is there a mix-variable form?) (I haven't upload the executables)  |
 | MOPTA08_Car (engineering) | 1 | 124  | 68  | Single Objective, Constrained, Continuous (is there a mix-variable form?) (I haven't upload the executables)   |
-| PressureVessel (engineering) | 1 | 4  | 4  | Single Objective, Constrained, Continuous (is there a mix-variable or multi-obj form?)   |
-| ReinforcedConcreteBeam (engineering) | 1 | 3  | 9  | Single Objective, Constrained, Continuous (We should implement the mix-variable form)   |
+| PressureVessel (engineering) | 1 | 4  | 4  | Single Objective, Constrained, Continuous, Mixed   |
+| ReinforcedConcreteBeam (engineering) | 1 | 3  | 9  | Single Objective, Constrained, Continuous, Mixed   |
 | Rosenbrock (botorch) | 1 | N  | 0  | Single Objective, Continuous (is there a constrained form?)   |
-| Speed Reducer (engineering) | 1 | 7  | 9  | Single Objective, Constrained, Continuous (is there a mix-variable or multi-obj form?)   |
+| Speed Reducer (engineering) | 1 | 7  | 9  | Single Objective, Constrained, Continuous, Mixed (is there a multi-obj form?)   |
 | Three-bar Truss (engineering) | 1 | 2  | 3  | Single Objective, Constrained, Continuous  |
 | TrussSolvers (engineering, slientruss3d) | 1 | 10, 25, 72, 120  | depends  | Single Objective, Continuous (is there a mix-variable or multi-obj form?) |
-| WeldedBeam (engineering) | 1 | 4  | 5  | Single Objective, Constrained, Continuous (is there a mix-variable or multi-obj form?)  |
+| WeldedBeam (engineering) | 1 | 4  | 5  | Single Objective, Constrained, Continuous, Mixed  |
 | Sharp Ride | 1 | D | 0 | Single Objective, Continuous |
 | Different Powers | 1 | D | 0 | Single Objective, Continuous |
 

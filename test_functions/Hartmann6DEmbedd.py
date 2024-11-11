@@ -1,8 +1,8 @@
 import torch
-import numpy as np
+import numpy as 
 from botorch.test_functions.synthetic import Hartmann
-device = torch.device("cpu")
-dtype = torch.double
+
+from .cont_to_disc import cont_to_disc
 
 
 def Hartmann6DEmbedd(X_input):
@@ -30,6 +30,21 @@ def Hartmann6DEmbedd_Scaling(X):
     X_scaled = X.clone()
     return X_scaled
 
+
+
+
+def HartmannMixed(X):
+    # BO comparison paper: https://amses-journal.springeropen.com/articles/10.1186/s40323-022-00218-8
+    return -Hartmann(dim=6)(X).view(-1, 1)
+
+
+def HartmannMixed_Scaling(X):
+    # x4: {0.35, 0.257, 0.477, 0.312, 0.657}
+    # x5: {0.150, 0.657, 0.512, 0.741}
+    X_scaled = X.clone()
+    X_scaled[:, 4] = cont_to_disc(X[:, 4], torch.tensor([0.35, 0.257, 0.477, 0.312, 0.657]))
+    X_scaled[:, 5] = cont_to_disc(X[:, 5], torch.tensor([0.150, 0.657, 0.512, 0.741]))
+    return X_scaled
 
 
 

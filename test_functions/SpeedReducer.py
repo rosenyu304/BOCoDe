@@ -1,6 +1,8 @@
 import torch
 import numpy as np
 
+from .cont_to_disc import cont_to_disc
+
 #
 #
 #   SpeedReducer: 7D objective, 9 constraints
@@ -129,6 +131,22 @@ def SpeedReducer_Scaling(X):
     b  = (X[:,0] * ( 3.6 - 2.6 ) + 2.6).reshape(X.shape[0],1)
     m  = (X[:,1] * ( 0.8 - 0.7 ) + 0.7).reshape(X.shape[0],1)
     z  = (X[:,2] * ( 28 - 17 ) + 17).reshape(X.shape[0],1)
+    L1 = (X[:,3] * ( 8.3 - 7.3 ) + 7.3).reshape(X.shape[0],1)
+    L2 = (X[:,4] * ( 8.3 - 7.3 ) + 7.3).reshape(X.shape[0],1)
+    d1 = (X[:,5] * ( 3.9 - 2.9 ) + 2.9).reshape(X.shape[0],1)
+    d2 = (X[:,6] * ( 5.5 - 5 ) + 5).reshape(X.shape[0],1)
+    
+    X_scaled = torch.cat((b, m, z, L1, L2, d1, d2), dim=1)
+    return X_scaled
+
+
+def SpeedReducer_MixedScaling(X):
+
+    assert torch.is_tensor(X) and X.size(1) == 7, "Input must be an n-by-7 PyTorch tensor."
+
+    b  = (X[:,0] * ( 3.6 - 2.6 ) + 2.6).reshape(X.shape[0],1)
+    m  = (X[:,1] * ( 0.8 - 0.7 ) + 0.7).reshape(X.shape[0],1)
+    z  = cont_to_disc(X[:,2], torch.range(17, 29)).reshape(X.shape[0],1)
     L1 = (X[:,3] * ( 8.3 - 7.3 ) + 7.3).reshape(X.shape[0],1)
     L2 = (X[:,4] * ( 8.3 - 7.3 ) + 7.3).reshape(X.shape[0],1)
     d1 = (X[:,5] * ( 3.9 - 2.9 ) + 2.9).reshape(X.shape[0],1)

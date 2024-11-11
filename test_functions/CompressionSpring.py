@@ -1,6 +1,8 @@
 import torch
 import numpy as np
 
+from .cont_to_disc import cont_to_disc
+
 
 #
 #
@@ -93,6 +95,27 @@ def CompressionSpring_Scaling(X):
 
 
 
+
+def CompressionSpring_MixedScaling(X): 
+    # x0 (d): 42 disc values
+    # x1 (D): [0.25, 1.3]
+    # x2 (N): {2, 3, ..., 15}
+
+    assert torch.is_tensor(X) and X.size(1) == 3, "Input must be an n-by-3 PyTorch tensor."
+    
+    d = cont_to_disc(
+        X[:, 0], 
+        torch.tensor([0.009, 0.0095, 0.0104, 0.0118, 0.0128, 0.0132, 0.014, 0.015, 0.0162, 
+            0.0173, 0.018, 0.020, 0.023, 0.025, 0.028, 0.032, 0.035, 0.041, 0.047, 0.054, 
+            0.063, 0.072, 0.080, 0.092, 0.105, 0.120, 0.135, 0.148, 0.162, 0.177, 0.192, 0.207, 
+            0.225, 0.244, 0.263, 0.283, 0.307, 0.331, 0.362, 0.394, 0.4375, 0.500]
+            )
+        )
+    D = X[:, 1] * (1.3 - 0.25) + 0.25
+    N = cont_to_disc(X[:, 2], torch.range(2, 16))
+    X_scaled = torch.stack((d, D, N), dim=1)
+
+    return X_scaled
 
 
 

@@ -1,6 +1,8 @@
 import torch
 import numpy as np
 
+from .cont_to_disc import cont_to_disc
+
 #
 #
 #   PressureVessel: 4D objective, 4 constraints
@@ -92,11 +94,30 @@ def PressureVessel_Scaling(X):
     Ts  = (X[:,0] * (98*0.0625) + 0.0625).reshape(X.shape[0],1)
     Th  = (X[:,1] * (98*0.0625) + 0.0625).reshape(X.shape[0],1)
     R   = (X[:,2] * (200-10) + 10).reshape(X.shape[0],1)
-    L   = (X[:,3] * (200-10) ).reshape(X.shape[0],1)
+    L   = (X[:,3] * (200-10) + 10).reshape(X.shape[0],1)
     
     
     X_scaled = torch.cat((Ts, Th, R, L), dim=1)
     
+    return X_scaled
+
+
+
+
+def PressureVessel_MixedScaling(X):
+    # x0 (Ts): {0.0625, 0.125, ... 99*0.0625}
+    # x1 (Th): {0.0625, 0.125, ... 99*0.0625}
+    # x2 (R): [10, 200]
+    # x3 (L): [10, 200]
+
+    assert torch.is_tensor(X) and X.size(1) == 4, "Input must be an n-by-4 PyTorch tensor."
+
+    Ts = cont_to_disc(X[:, 0], 0.0625*torch.arange(0, 100))
+    Th = cont_to_disc(X[:, 1], 0.0625*torch.arange(0, 100))
+    R  = X[:,2] * (200-10) + 10
+    L  = X[:,3] * (200-10) + 10
+
+    X_scaled = torch.stack((Ts, Th, R, L), dim=1)
     return X_scaled
 
 
