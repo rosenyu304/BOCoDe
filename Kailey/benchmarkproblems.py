@@ -652,6 +652,3 @@ def find_benchmark_problems(tags = None, extra_imports = False):
                     return_probs.add(prob)
 
     return return_probs
-
-
-# print(find_benchmark_problems([["single_objective", "3D"]]))
