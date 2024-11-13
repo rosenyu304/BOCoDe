@@ -1,6 +1,12 @@
 import torch
 import numpy as np
 
+class RangeException(Exception):
+    pass
+
+class DimensionException(Exception):
+    pass
+
 class BenchmarkProblem():
 
     """
@@ -19,6 +25,7 @@ class BenchmarkProblem():
         self.out_type = out_type
         self.tags = tags
 
+
     def scale(self, X, to_verify):
         """
         (Optionally) verifies that X is in the correct range [0, 1] and has the correct dimensions.
@@ -36,8 +43,10 @@ class BenchmarkProblem():
             X = torch.tensor(X)
 
         if to_verify:
-            assert torch.max(X) <= 1 and torch.min(X) >= 0, "Incorrect X range (must be [0, 1])."
-            assert X.size(1) == self.dim, "Incorrect dimensions."
+            if X.size(1) != self.dim:
+                raise DimensionException("Incorrect X dimensions.")
+            if torch.max(X) >= 1 or torch.min(X) <= 0:
+                raise RangeException("Incorrect X range: must be [0, 1].")
 
         if not torch.is_tensor(self.bounds):
             self.bounds = torch.tensor(self.bounds)
