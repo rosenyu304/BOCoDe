@@ -389,6 +389,7 @@ class PressureVessel(BenchmarkProblem):
         return gx, fx
 
 
+
 class HeatExchanger(BenchmarkProblem):
 
     r'''
@@ -564,6 +565,7 @@ class WeldedBeam(BenchmarkProblem):
         return gx, fx
 
 
+
 class KeaneBump(BenchmarkProblem):
 
     r'''
@@ -613,8 +615,71 @@ class KeaneBump(BenchmarkProblem):
         return gx, fx
 
 
+from botorch.test_functions import Ackley
+class Ackley10D(BenchmarkProblem):
 
-problem_database = {CantileverBeam: CantileverBeam.tags,
+    r'''
+    Eriksson D, Poloczek M (2021) Scalable constrained bayesian optimization.
+    In: International Conference on Artificial Intelligence and Statistics, PMLR, pp 730–738
+    '''
+
+    # 10D objective, 2 constraints, X = n-by-10
+
+    tags = {"single_objective", "constrained", "continuous", "10D", "extra_imports"}
+
+    def __init__(self):
+        super().__init__(dim = 10, num_obj = 1, num_cons = 2, bounds = [[-5, 10] * 10])
+
+    def evaluate(self, X, to_verify = True):
+        X = super().scale(X, to_verify)
+
+        dimm = 10
+
+        fun = Ackley(dim=dimm, negate=True)
+        fun.bounds[0, :].fill_(-5)
+        fun.bounds[1, :].fill_(10)
+        dim = fun.dim
+        lb, ub = fun.bounds
+
+        n = X.size(0)
+
+        fx = fun(X)
+        fx = fx.reshape((n, 1))
+
+        gx1 = torch.sum(X,1)  # sigma(x) <= 0
+        gx1 = gx1.reshape((n, 1))
+
+        gx2 = torch.norm(X, p=2, dim=1)-5  # norm_2(x) -3 <= 0
+        gx2 = gx2.reshape((n, 1))
+
+        gx = torch.cat((gx1, gx2), 1)
+
+        return gx, fx
+
+
+
+from botorch.test_functions import Ackley
+class Ackley2D(BenchmarkProblem):
+
+    r'''
+    Eriksson D, Poloczek M (2021) Scalable constrained bayesian optimization.
+    In: International Conference on Artificial Intelligence and Statistics, PMLR, pp 730–738
+    '''
+
+    # 10D objective, 2 constraints, X = n-by-10
+
+    tags = {"single_objective", "constrained", "continuous", "10D", "extra_imports"}
+
+    def __init__(self):
+        super().__init__(dim = 10, num_obj = 1, num_cons = 2, bounds = [[-5, 10] * 10])
+
+    def evaluate(self, X, to_verify = True):
+        X = super().scale(X, to_verify)
+
+
+
+problem_database = {Ackley10D: Ackley10D.tags,
+                    CantileverBeam: CantileverBeam.tags,
                     Car: Car.tags,
                     CompressionSpring: CompressionSpring.tags,
                     HeatExchanger: HeatExchanger.tags,
@@ -643,7 +708,7 @@ def find_benchmark_problems(tags = None, extra_imports = False):
 
     for set_of_tags in tags:
         for prob in problem_database:
-            if not (extra_imports == False and "extra imports" in problem_database[prob]):
+            if not (extra_imports == False and "extra_imports" in problem_database[prob]):
                 to_add = True
                 for tag in set_of_tags:
                     if to_add and tag not in problem_database[prob]:
