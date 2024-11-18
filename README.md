@@ -82,7 +82,7 @@ So that we know what is found and what we have yet found.
 | Rosenbrock (botorch) | 1 | N  | 0  | Single Objective, Continuous (is there a constrained form?)   |
 | Speed Reducer (engineering) | 1 | 7  | 9  | Single Objective, Constrained, Continuous, Mixed (is there a multi-obj form?)   |
 | Three-bar Truss (engineering) | 1 | 2  | 3  | Single Objective, Constrained, Continuous  |
-| TrussSolvers (engineering, slientruss3d) | 1 | 10, 25, 72, 120  | depends  | Single Objective, Continuous (is there a mix-variable or multi-obj form?) |
+| TrussSolvers (engineering, slientruss3d) | 1 | 10, 25, 72, 120, 200  | depends  | Single Objective, Continuous, Mixed (is there a multi-obj form?) |
 | WeldedBeam (engineering) | 1 | 4  | 5  | Single Objective, Constrained, Continuous, Mixed  |
 | Sharp Ride | 1 | D | 0 | Single Objective, Continuous |
 | Different Powers | 1 | D | 0 | Single Objective, Continuous |
