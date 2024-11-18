@@ -112,7 +112,7 @@ def CompressionSpring_MixedScaling(X):
             )
         )
     D = X[:, 1] * (1.3 - 0.25) + 0.25
-    N = cont_to_disc(X[:, 2], torch.range(2, 16))
+    N = cont_to_disc(X[:, 2], torch.arange(2, 16))
     X_scaled = torch.stack((d, D, N), dim=1)
 
     return X_scaled

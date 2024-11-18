@@ -146,7 +146,7 @@ def SpeedReducer_MixedScaling(X):
 
     b  = (X[:,0] * ( 3.6 - 2.6 ) + 2.6).reshape(X.shape[0],1)
     m  = (X[:,1] * ( 0.8 - 0.7 ) + 0.7).reshape(X.shape[0],1)
-    z  = cont_to_disc(X[:,2], torch.range(17, 29)).reshape(X.shape[0],1)
+    z  = cont_to_disc(X[:,2], torch.arange(17, 29)).reshape(X.shape[0],1)
     L1 = (X[:,3] * ( 8.3 - 7.3 ) + 7.3).reshape(X.shape[0],1)
     L2 = (X[:,4] * ( 8.3 - 7.3 ) + 7.3).reshape(X.shape[0],1)
     d1 = (X[:,5] * ( 3.9 - 2.9 ) + 2.9).reshape(X.shape[0],1)
