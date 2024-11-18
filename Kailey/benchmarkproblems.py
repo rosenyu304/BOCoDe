@@ -573,12 +573,12 @@ class KeaneBump(BenchmarkProblem):
     on adaptive computing in engineering design and control, pp 14–27
     '''
 
-    # N-D objective (can take data of different dimention; we use 18), 2 constraints, X = n-by-18
+    # N-D objective, 2 constraints, X = n-by-dim
 
-    tags = {"single_objective", "constrained", "continuous", "18D"}
+    tags = {"single_objective", "constrained", "continuous", "ND"}
 
-    def __init__(self):
-        super().__init__(dim = 18, num_obj = 1, num_cons = 2, bounds = [[0, 10] * 18])
+    def __init__(self, dim=18):
+        super().__init__(dim, num_obj = 1, num_cons = 2, bounds = [[0, 10] * dim])
 
     def evaluate(self, X, to_verify = True):
         X = super().scale(X, to_verify)
@@ -615,31 +615,31 @@ class KeaneBump(BenchmarkProblem):
         return gx, fx
 
 
-from botorch.test_functions import Ackley
-class Ackley10D(BenchmarkProblem):
+
+class Ackley(BenchmarkProblem):
 
     r'''
     Eriksson D, Poloczek M (2021) Scalable constrained bayesian optimization.
     In: International Conference on Artificial Intelligence and Statistics, PMLR, pp 730–738
     '''
 
-    # 10D objective, 2 constraints, X = n-by-10
+    # N-D objective, 2 constraints, X = n-by-dim
 
-    tags = {"single_objective", "constrained", "continuous", "10D", "extra_imports"}
+    tags = {"single_objective", "constrained", "continuous", "ND", "extra_imports"}
 
-    def __init__(self):
-        super().__init__(dim = 10, num_obj = 1, num_cons = 2, bounds = [[-5, 10] * 10])
+    def __init__(self, dim=2):
+        super().__init__(dim, num_obj = 1, num_cons = 2, bounds = [[-5, 10]])
 
     def evaluate(self, X, to_verify = True):
+        from botorch.test_functions import Ackley as Ackley_imported
+        device = torch.device("cpu")
+        dtype = torch.double
+
         X = super().scale(X, to_verify)
 
-        dimm = 10
-
-        fun = Ackley(dim=dimm, negate=True)
+        fun = Ackley_imported(dim=self.dim, negate=True).to(dtype=dtype, device=device)
         fun.bounds[0, :].fill_(-5)
         fun.bounds[1, :].fill_(10)
-        dim = fun.dim
-        lb, ub = fun.bounds
 
         n = X.size(0)
 
@@ -658,35 +658,518 @@ class Ackley10D(BenchmarkProblem):
 
 
 
-from botorch.test_functions import Ackley
-class Ackley2D(BenchmarkProblem):
+class Bukin(BenchmarkProblem):
 
     r'''
-    Eriksson D, Poloczek M (2021) Scalable constrained bayesian optimization.
-    In: International Conference on Artificial Intelligence and Statistics, PMLR, pp 730–738
+
     '''
 
-    # 10D objective, 2 constraints, X = n-by-10
+    # 2D objective, 0 constraints, X = n-by-2
 
-    tags = {"single_objective", "constrained", "continuous", "10D", "extra_imports"}
+    tags = {"single_objective", "unconstrained", "continuous", "2D"}
 
     def __init__(self):
-        super().__init__(dim = 10, num_obj = 1, num_cons = 2, bounds = [[-5, 10] * 10])
+        super().__init__(dim = 2, num_obj = 1, num_cons = 0, bounds = [[-15.0, -5.0], [-3.0, 3.0]])
 
     def evaluate(self, X, to_verify = True):
         X = super().scale(X, to_verify)
 
+        part1 = 100.0 * torch.sqrt(torch.abs(X[..., 1] - 0.01 * X[..., 0] ** 2))
+        part2 = 0.01 * torch.abs(X[..., 0] + 10.0)
+        fx = part1 + part2
+
+        return 0, fx
 
 
-problem_database = {Ackley10D: Ackley10D.tags,
+
+class Goldstein(BenchmarkProblem):
+
+    r'''
+    LVGP paper: https://www.nature.com/articles/s41598-020-60652-9
+    '''
+
+    # 2D objective, 0 constraints, X = n-by-2
+    # optimal: (0, -1) -> -3
+
+    tags = {"single_objective", "unconstrained", "continuous", "mixed", "2D"}
+
+    def __init__(self):
+        super().__init__(dim = 4, num_obj = 1, num_cons = 0, bounds = [[-2, 2], [0, 1]])
+
+    def evaluate(self, X, to_verify = True):
+
+        def cont_to_disc(x, disc_values):
+            # Convert continuous value to discrete value
+            # Input:
+            #   x: continuous value in [0, 1]
+            #   disc_values: discrete values
+            # Output: discrete value
+            idx = torch.floor(x * len(disc_values)).long()
+            return disc_values[torch.clamp(idx, 0, len(disc_values)-1)]
+
+        # x0: [-2, 2]
+        # x1: {-2, -1, 0, 1, 2}
+        X = super().scale(X, to_verify)
+        X[:,1] = cont_to_disc(X[:,1], torch.tensor([-2, -1, 0, 1, 2]))
+
+        fx = ((1 + (X[:,0] + X[:,1] +1)**2
+            * (19 - 14*X[:,0] + 3*X[:,0]**2 -14*X[:,1]
+                +6*X[:,0]*X[:,1] + 3*X[:,1]**2
+                )
+            ) *
+            (
+                30 + (2*X[:,0] - 3*X[:,1])**2
+                * (18- 32*X[:,0] + 12*X[:,0]**2 + 48*X[:,1]
+                    -36*X[:,0]*X[:,1] + 27*X[:,1]**2
+                )
+            ))
+        return 0, -fx.reshape(-1, 1)
+
+
+
+class Rosenbrock(BenchmarkProblem):
+
+    r'''
+
+    '''
+
+    # ND objective, 0 constraints, X = n-by-dim
+
+    tags = {"single_objective", "unconstrained", "continuous", "ND", "extra_imports"}
+
+    def __init__(self, dim=2):
+        super().__init__(dim, num_obj = 1, num_cons = 0, bounds = [[-5, 10]])
+
+    def evaluate(self, X, to_verify = True):
+        X = super().scale(X, to_verify)
+
+        from botorch.test_functions.synthetic import Rosenbrock as Rosenbrock_imported
+
+        fun = Rosenbrock_imported(dim=self.dim, negate=True)
+
+        n = X.size(0)
+
+        fx = fun(X)
+        fx = fx.reshape((n, 1))
+
+        return 0, fx
+
+
+
+class Griewank(BenchmarkProblem):
+
+    r'''
+
+    '''
+
+    # ND objective, 0 constraints, X = n-by-dim
+
+    tags = {"single_objective", "unconstrained", "continuous", "ND", "extra_imports"}
+
+    def __init__(self, dim=2):
+        super().__init__(dim, num_obj = 1, num_cons = 0, bounds = [[-600, 600]])
+
+    def evaluate(self, X, to_verify = True):
+        X = super().scale(X, to_verify)
+
+        from botorch.test_functions.synthetic import Griewank as Griewank_imported
+
+        fun = Griewank_imported(dim=self.dim, negate=True)
+
+        n = X.size(0)
+
+        fx = fun(X)
+        fx = fx.reshape((n, 1))
+
+        return 0, fx
+
+
+
+class Levy(BenchmarkProblem):
+
+    r'''
+
+    '''
+
+    # ND objective, 0 constraints, X = n-by-dim
+
+    tags = {"single_objective", "unconstrained", "continuous", "ND", "extra_imports"}
+
+    def __init__(self, dim=2):
+        super().__init__(dim, num_obj = 1, num_cons = 0, bounds = [[-10, 10]])
+
+    def evaluate(self, X, to_verify = True):
+        X = super().scale(X, to_verify)
+
+        from botorch.test_functions.synthetic import Levy as Levy_imported
+
+        fun = Levy_imported(dim=self.dim, negate=True)
+
+        n = X.size(0)
+
+        fx = fun(X)
+        fx = fx.reshape((n, 1))
+
+        return 0, fx
+
+
+
+class DixonPrice(BenchmarkProblem):
+
+    r'''
+
+    '''
+
+    # ND objective, 0 constraints, X = n-by-dim
+
+    tags = {"single_objective", "unconstrained", "continuous", "ND", "extra_imports"}
+
+    def __init__(self, dim=2):
+        super().__init__(dim, num_obj = 1, num_cons = 0, bounds = [[-10, 10]])
+
+    def evaluate(self, X, to_verify = True):
+        X = super().scale(X, to_verify)
+
+        from botorch.test_functions.synthetic import DixonPrice as DixonPrice_imported
+
+        fun = DixonPrice_imported(dim=self.dim, negate=True)
+
+        n = X.size(0)
+
+        fx = fun(X)
+        fx = fx.reshape((n, 1))
+
+        return 0, fx
+
+
+
+class GearTrain(BenchmarkProblem):
+
+    r'''
+    Sandgren, E. (1990). Nonlinear Integer and Discrete Programming in Mechanical Design Optimization."
+    ASME. J. Mech. Des. June 1990; 112(2): 223–229.
+    '''
+
+    # 4D objective, 0 constraints, X = n-by-4
+
+    tags = {"single_objective", "unconstrained", "mixed", "4D"}
+
+    def __init__(self):
+        super().__init__(dim = 4, num_obj = 1, num_cons = 0, bounds = [[0, 1]])
+
+    def evaluate(self, X, to_verify = True):
+        X = super().scale(X, to_verify)
+
+        def cont_to_disc(x, disc_values):
+            # Convert continuous value to discrete value
+            # Input:
+            #   x: continuous value in [0, 1]
+            #   disc_values: discrete values
+            # Output: discrete value
+            idx = torch.floor(x * len(disc_values)).long()
+            return disc_values[torch.clamp(idx, 0, len(disc_values)-1)]
+
+        X = cont_to_disc(X, torch.tensor(range(12, 61))) # x0, x1, x2, x3: {12, 13, ..., 60}
+
+        fx = (1/6.931 - (X[:,0]*X[:,1])/(X[:,2]*X[:,3])).reshape(-1, 1)
+
+        return 0, fx
+
+
+
+class EulerBernoulliBeamBending(BenchmarkProblem):
+
+    r'''
+
+    '''
+
+    # ND objective, 0 constraints, X = n-by-dim
+    # optimal: (0.0, 0.43, 0.380) -> -1.287*10^3
+
+    tags = {"single_objective", "unconstrained", "mixed", "3D"}
+
+    def __init__(self, dim=2):
+        super().__init__(dim, num_obj = 1, num_cons = 0, bounds = [[0, 1]])
+
+    def evaluate(self, X, to_verify = True):
+        X = super().scale(X, to_verify)
+
+        def cont_to_disc(x, disc_values):
+            # Convert continuous value to discrete value
+            # Input:
+            #   x: continuous value in [0, 1]
+            #   disc_values: discrete values
+            # Output: discrete value
+            idx = torch.floor(x * len(disc_values)).long()
+            return disc_values[torch.clamp(idx, 0, len(disc_values)-1)]
+
+        # x0: [0, 1]
+        # x1: [0, 1]
+        # x2: {0.083, 0.139, 0.380, 0.080, 0.133, 0.363, 0.086, 0.136, 0.360, 0.092, 0.138, 0.369}
+        X[:,2] = cont_to_disc(X[:,2], torch.tensor([0.083, 0.139, 0.380, 0.080, 0.133, 0.363, 0.086, 0.136, 0.360, 0.092, 0.138, 0.369]))
+
+        # BO comparison paper: https://amses-journal.springeropen.com/articles/10.1186/s40323-022-00218-8
+        E = 600
+        P = 600
+        alpha = 60
+
+        x1, x2, x3 = X[:, 0], X[:, 1], X[:, 2]
+
+        L = 10 + 10 * x1
+        S = 1 + x2
+        I = x3
+
+        D = P * L ** 3 / (3 * E * S**2 * I)
+        y = D + alpha * L * S
+        return 0, -y.reshape(-1, 1)
+
+
+
+class JLH1(BenchmarkProblem):
+
+    r'''
+    Jetton C, Li C, Hoyle C (2023) Constrained bayesian optimization methods using regression
+    and classification gaussian processes as constraints. In: International Design Engineering
+    Technical Conferences and Computers and Information in Engineering Conference, American
+    Society of Mechanical Engineers, pV03BT03A033
+    '''
+
+    # 2D objective, 1 constraint, X = n-by-2
+
+    tags = {"single_objective", "constrained", "continuous", "2D"}
+
+    def __init__(self):
+        super().__init__(dim = 2, num_obj = 1, num_cons = 1, bounds = [[0, 1]])
+
+    def evaluate(self, X, to_verify = True):
+        X = super().scale(X, to_verify)
+
+        fx = []
+        gx = []
+
+        for x in X:
+            test_function = (- (x[0]-0.5)**2 - (x[1]-0.5)**2 )
+            fx.append(test_function)
+            gx.append( x[0] + x[1] - 0.75 )
+
+        fx = torch.reshape(torch.tensor(fx), (len(fx),1))
+        gx = torch.reshape(torch.tensor(gx), (len(gx),1))
+
+        return gx, fx
+
+
+
+class JLH2(BenchmarkProblem):
+
+    r'''
+    Jetton C, Li C, Hoyle C (2023) Constrained bayesian optimization methods using regression
+    and classification gaussian processes as constraints. In: International Design Engineering
+    Technical Conferences and Computers and Information in Engineering Conference, American
+    Society of Mechanical Engineers, pV03BT03A033
+    '''
+
+    # 2D objective, 1 constraint, X = n-by-2
+
+    tags = {"single_objective", "constrained", "continuous", "2D"}
+
+    def __init__(self):
+        super().__init__(dim = 2, num_obj = 1, num_cons = 1, bounds = [[-5, 0], [-5, 5]])
+
+    def evaluate(self, X, to_verify = True):
+        X = super().scale(X, to_verify)
+
+        fx = []
+        gx = []
+
+        for x in X:
+
+            ## Negative sign to make it a maximization problem
+            test_function = - ( np.cos(2*x[0])*np.cos(x[1]) +  np.sin(x[0]) )
+
+            fx.append(test_function)
+            gx.append( ((x[0]+5)**2)/4 + (x[1]**2)/100 -2.5 )
+
+        fx = torch.reshape(torch.tensor(fx), (len(fx),1))
+        gx = torch.reshape(torch.tensor(gx), (len(gx),1))
+
+        return gx, fx
+
+
+
+class GKXWC1(BenchmarkProblem):
+
+    r'''
+    Gardner JR, Kusner MJ, Xu ZE, et al (2014) Bayesian optimization with inequality constraints.
+    In: ICML, pp 937–945
+    '''
+
+    # 2D objective, 1 constraint, X = n-by-2
+
+    tags = {"single_objective", "constrained", "continuous", "2D"}
+
+    def __init__(self):
+        super().__init__(dim = 2, num_obj = 1, num_cons = 1, bounds = [[0, 6]])
+
+    def evaluate(self, X, to_verify = True):
+        X = super().scale(X, to_verify)
+
+        fx = []
+        gx = []
+        for x in X:
+            g = np.cos(x[0])*np.cos(x[1]) -  np.sin(x[0])*np.sin(x[1]) -0.5
+            fx.append( - np.cos(2*x[0])*np.cos(x[1]) -  np.sin(x[0])  )
+            gx.append( g )
+
+        fx = torch.reshape(torch.tensor(fx), (len(fx),1))
+        gx = torch.reshape(torch.tensor(gx), (len(gx),1))
+        return gx, fx
+
+
+
+class GKXWC2(BenchmarkProblem):
+
+    r'''
+    Gardner JR, Kusner MJ, Xu ZE, et al (2014) Bayesian optimization with inequality constraints.
+    In: ICML, pp 937–945
+    '''
+
+    # 2D objective, 1 constraint, X = n-by-2
+
+    tags = {"single_objective", "constrained", "continuous", "2D"}
+
+    def __init__(self):
+        super().__init__(dim = 2, num_obj = 1, num_cons = 1, bounds = [[0, 6]])
+
+    def evaluate(self, X, to_verify = True):
+        X = super().scale(X, to_verify)
+
+        fx = []
+        gx = []
+
+        for x in X:
+            g = np.sin(x[0])*np.sin(x[1]) + 0.95
+            fx.append( - np.sin(x[0]) - x[1]  ) # maximize -(x1^2 +x 2^2)
+            gx.append( g )
+
+        fx = torch.reshape(torch.tensor(fx), (len(fx),1))
+        gx = torch.reshape(torch.tensor(gx), (len(gx),1))
+
+        return gx, fx
+
+
+
+class Michalewicz(BenchmarkProblem):
+
+    r'''
+
+    '''
+
+    # ND objective, 0 constraints, X = n-by-dim
+
+    tags = {"single_objective", "unconstrained", "continuous", "ND", "extra_imports"}
+
+    def __init__(self, dim=2):
+        import math
+        super().__init__(dim, num_obj = 1, num_cons = 0, bounds = [[0, math.pi]])
+
+    def evaluate(self, X, to_verify = True):
+        X = super().scale(X, to_verify)
+
+        from botorch.test_functions.synthetic import Michalewicz as Michalewicz_imported
+
+        fun = Michalewicz_imported(dim=self.dim, negate=True)
+
+        n = X.size(0)
+
+        fx = fun(X)
+        fx = fx.reshape((n, 1))
+
+        return 0, fx
+
+
+
+class StyblinskiTang_Continuous(BenchmarkProblem):
+
+    r'''
+
+    '''
+
+    # 10D objective, 0 constraints, X = n-by-10
+    # optimal: [-2.903534]^dim -> -39.16599 * dim
+
+    tags = {"single_objective", "unconstrained", "continuous", "10D"}
+
+    def __init__(self):
+        super().__init__(dim = 10, num_obj = 1, num_cons = 0, bounds = [[-5, 5]])
+
+    def evaluate(self, X, to_verify = True):
+        X = super().scale(X, to_verify)
+
+        from botorch.test_functions.synthetic import StyblinskiTang as StyblinskiTang_imported
+
+        return 0, -StyblinskiTang_imported(X).view(-1, 1)
+
+
+
+class StyblinskiTang_Mixed(BenchmarkProblem):
+
+    r'''
+
+    '''
+
+    # 10D objective, 0 constraints, X = n-by-10
+
+    tags = {"single_objective", "unconstrained", "mixed", "10D"}
+
+    def __init__(self):
+        super().__init__(dim = 10, num_obj = 1, num_cons = 0, bounds = [[0, 1]])
+
+    def evaluate(self, X, to_verify = True):
+        X = super().scale(X, to_verify)
+
+        def cont_to_disc(x, disc_values):
+            # Convert continuous value to discrete value
+            # Input:
+            #   x: continuous value in [0, 1]
+            #   disc_values: discrete values
+            # Output: discrete value
+            idx = torch.floor(x * len(disc_values)).long()
+            return disc_values[torch.clamp(idx, 0, len(disc_values)-1)]
+
+        # X: {-5, -2.5, 0, 2.5, 5}^dim
+        X = cont_to_disc(X, torch.tensor([-5, -2.5, 0, 2.5, 5]))
+
+        from botorch.test_functions.synthetic import StyblinskiTang as StyblinskiTang_imported
+
+        return 0, -StyblinskiTang_imported(X).view(-1, 1)
+
+
+
+
+problem_database = {Ackley: Ackley.tags,
+                    Bukin: Bukin.tags,
                     CantileverBeam: CantileverBeam.tags,
                     Car: Car.tags,
                     CompressionSpring: CompressionSpring.tags,
+                    DixonPrice: DixonPrice.tags,
+                    EulerBernoulliBeamBending: EulerBernoulliBeamBending.tags,
+                    GearTrain: GearTrain.tags,
+                    GKXWC1: GKXWC1.tags,
+                    GKXWC2: GKXWC2.tags,
+                    Goldstein: Goldstein.tags,
+                    Griewank: Griewank.tags,
                     HeatExchanger: HeatExchanger.tags,
+                    JLH1: JLH1.tags,
+                    JLH2: JLH2.tags,
                     KeaneBump: KeaneBump.tags,
+                    Levy: Levy.tags,
+                    Michalewicz: Michalewicz.tags,
                     PressureVessel: PressureVessel.tags,
                     ReinforcedConcreteBeam: ReinforcedConcreteBeam.tags,
+                    Rosenbrock: Rosenbrock.tags,
                     SpeedReducer: SpeedReducer.tags,
+                    StyblinskiTang_Continuous: StyblinskiTang_Continuous.tags,
+                    StyblinskiTang_Mixed: StyblinskiTang_Mixed.tags,
                     ThreeTruss: ThreeTruss.tags,
                     WeldedBeam: WeldedBeam.tags}
 
@@ -698,8 +1181,8 @@ def find_benchmark_problems(tags = None, extra_imports = False):
 
     Parameters:
         tags (2D list): a list of specified tags
-            - tag options: "single_objective", "constrained",
-              "continuous", "xD" (x = 2, 3, 4, 7, 8)
+            - tag options: "single_objective", "constrained", "unconstrained",
+              "continuous", "mixed", "xD" (x = positive int or N for any)
 
     Returns:
         return_probs (set): satisfactory Benchmark Problems
