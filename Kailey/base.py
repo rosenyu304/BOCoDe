@@ -13,13 +13,13 @@ class BenchmarkProblem():
     Base class for Bayesian Optimization benchmark problems.
     """
 
-    def __init__(self, dim = 1, num_obj = 1, num_cons = 0, bounds = None, optimizers = [0], opt_value = 0, ref_point = None, to_verify = True, out_type = torch, tags = []):
+    def __init__(self, dim = 1, num_obj = 1, num_cons = 0, bounds = None, optimizers = [[]], optimum = [], ref_point = None, to_verify = True, out_type = torch, tags = []):
         self.dim = dim
         self.num_obj = num_obj
         self.num_cons = num_cons
         self.bounds = bounds
         self.optimizers = optimizers
-        self.opt_value = opt_value
+        self.optimum = optimum
         self.ref_point = ref_point
         self.to_verify = to_verify
         self.out_type = out_type
@@ -45,7 +45,7 @@ class BenchmarkProblem():
         if to_verify:
             if X.size(1) != self.dim:
                 raise DimensionException("Incorrect X dimensions.")
-            if torch.max(X) >= 1 or torch.min(X) <= 0:
+            if torch.max(X) > 1 or torch.min(X) < 0:
                 raise RangeException("Incorrect X range: must be [0, 1].")
 
         if not torch.is_tensor(self.bounds):
