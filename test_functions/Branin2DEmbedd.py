@@ -42,7 +42,7 @@ def BraninMixed(X):
     return -Branin()(X).view(-1, 1)
 
 
-def BraninMixed_Scaling(X):
+def Branin_MixedScaling(X):
     # x0: [-5, 10]
     # x1: {0, 5, 10, 15}
     X_scaled = X.clone()

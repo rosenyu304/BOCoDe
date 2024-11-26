@@ -25,10 +25,10 @@ def Goldstein_Scaling(X):
     return X_scaled
 
 
-def Goldstein_Scaling(X):
+def Goldstein_MixedScaling(X):
     # x0: [-2, 2]
     # x1: {-2, -1, 0, 1, 2}
-    X_scaled = torch.zeros(X.shape, dtype=dtype, device=device)
+    X_scaled = X.clone()
     X_scaled[:,0] = X[:,0] * 4 - 2
     X_scaled[:,1] = cont_to_disc(X[:,1], torch.tensor([-2, -1, 0, 1, 2]))
     return X_scaled
