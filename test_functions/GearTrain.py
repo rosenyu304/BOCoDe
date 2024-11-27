@@ -22,7 +22,7 @@ def GearTrain(X):
 
 
 
-def GearTrain_Scaling(X):
+def GearTrain_MixedScaling(X):
     # x0, x1, x2, x3: {12, 13, ..., 60}
-    X_scaled = cont_to_disc(X, torch.tensor(range(12, 61)))
+    X_scaled = cont_to_disc(X, torch.arange(12, 61))
     return X_scaled

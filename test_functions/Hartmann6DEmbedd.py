@@ -1,5 +1,4 @@
 import torch
-import numpy as 
 from botorch.test_functions.synthetic import Hartmann
 
 from .cont_to_disc import cont_to_disc
@@ -38,7 +37,7 @@ def HartmannMixed(X):
     return -Hartmann(dim=6)(X).view(-1, 1)
 
 
-def HartmannMixed_Scaling(X):
+def Hartmann_MixedScaling(X):
     # x4: {0.35, 0.257, 0.477, 0.312, 0.657}
     # x5: {0.150, 0.657, 0.512, 0.741}
     X_scaled = X.clone()

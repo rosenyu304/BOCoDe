@@ -34,11 +34,11 @@ def EulerBernoulliBeamBending(X):
 
 
 
-def EulerBernoulliBeamBending_Scaling(X):
+def EulerBernoulliBeamBending_MixedScaling(X):
     # x0: [0, 1]
     # x1: [0, 1]
     # x2: {0.083, 0.139, 0.380, 0.080, 0.133, 0.363, 0.086, 0.136, 0.360, 0.092, 0.138, 0.369}
-    X_scaled = torch.zeros(X.shape)
+    X_scaled = X.clone()
     X_scaled[:,0] = X[:,0]
     X_scaled[:,1] = X[:,1]
     X_scaled[:,2] = cont_to_disc(X[:,2], torch.tensor([0.083, 0.139, 0.380, 0.080, 0.133, 0.363, 0.086, 0.136, 0.360, 0.092, 0.138, 0.369]))
