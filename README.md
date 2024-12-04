@@ -6,7 +6,7 @@ So that we know what is found and what we have yet found.
 # Problems that are coded in our set:
 
 ## Botorch:
-| Problem Name | num of Objectives | dim of X |  num of Constraints | Problem Type |
+| Problem Name | num of Objectives | Variables |  num of Constraints | Problem Type |
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | Ackley | 1  | N  | 2  | Single Objective, Constrained, Continuous  |
 | Branin | 1  | 2  | 0  | Single Objective, Continuous, Mixed (is there a constrained form?)  |
@@ -86,6 +86,10 @@ So that we know what is found and what we have yet found.
 | WeldedBeam (engineering) | 1 | 4  | 5  | Single Objective, Constrained, Continuous, Mixed  |
 | Sharp Ride | 1 | D | 0 | Single Objective, Continuous |
 | Different Powers | 1 | D | 0 | Single Objective, Continuous |
+
+# Prioritize this:
+I'd appreciate if all of us can look into converting the code from here to python and verify:
+https://github.com/P-N-Suganthan/2020-RW-Constrained-Optimisation/blob/master/Problem-Definitions.pdf
 
 
 # Literature, Reference, and URL for the current set of problems:
