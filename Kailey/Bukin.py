@@ -4,7 +4,7 @@ from base import BenchmarkProblem
 class Bukin(BenchmarkProblem):
 
     r'''
-
+    https://www.sfu.ca/~ssurjano/bukin6.html
     '''
 
     # 2D objective, 0 constraints, X = n-by-2
