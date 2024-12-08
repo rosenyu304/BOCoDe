@@ -18,8 +18,8 @@ import Levy
 # import Mazda
 # import Mazda_softpen
 import Michalewicz
-import MOPTA08Car
-import MOPTA08Car_softpen
+# import MOPTA08Car
+# import MOPTA08Car_softpen
 import PressureVessel
 import ReinforcedConcreteBeam
 import Rosenbrock
@@ -55,8 +55,8 @@ problem_database = {Ackley.Ackley: Ackley.Ackley.tags,
                     # Mazda.Mazda: Mazda.Mazdatags,
                     # Mazda_softpen.Mazda_softpen: Mazda_softpen.Mazda_softpen.tags,
                     Michalewicz.Michalewicz: Michalewicz.Michalewicz.tags,
-                    MOPTA08Car.MOPTA08Car: MOPTA08Car.MOPTA08Car.tags,
-                    MOPTA08Car_softpen.MOPTA08Car_softpen: MOPTA08Car_softpen.MOPTA08Car_softpen.tags,
+                    # MOPTA08Car.MOPTA08Car: MOPTA08Car.MOPTA08Car.tags,
+                    # MOPTA08Car_softpen.MOPTA08Car_softpen: MOPTA08Car_softpen.MOPTA08Car_softpen.tags,
                     PressureVessel.PressureVessel: PressureVessel.PressureVessel.tags,
                     ReinforcedConcreteBeam.ReinforcedConcreteBeam: ReinforcedConcreteBeam.ReinforcedConcreteBeam.tags,
                     Rosenbrock.Rosenbrock: Rosenbrock.Rosenbrock.tags,
@@ -98,12 +98,3 @@ def find_benchmark_problems(tags = None, extra_imports = False):
                     return_probs.add(prob)
 
     return list(return_probs)
-
-
-# l = find_benchmark_problems([["ND"]], extra_imports = True)
-# print(l)
-
-# a = l[2](dim=6)
-# X = ([[0.1, 0.2, 0.3, 0.4, 0.5, 0.6], [0.3, 0.4, 0.5, 0.6, 0.7, 0.8], [0.1, 0.2, 0.3, 0.4, 0.6, 0.8]])
-# gx, fx = a.evaluate(X, to_verify = True)
-# print(gx, fx)
