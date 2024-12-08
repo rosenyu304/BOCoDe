@@ -13,7 +13,7 @@ class BenchmarkProblem():
     Base class for Bayesian Optimization benchmark problems.
     """
 
-    def __init__(self, dim = 1, num_obj = 1, num_cons = 0, bounds = None, optimizers = [[]], optimum = [], ref_point = None, to_verify = True, out_type = torch, tags = []):
+    def __init__(self, dim = 1, num_obj = 1, num_cons = 0, bounds = None, optimizers = [[]], optimum = [[]], ref_point = None, to_verify = True, out_type = torch, tags = []):
         self.dim = dim
         self.num_obj = num_obj
         self.num_cons = num_cons
