@@ -4,7 +4,7 @@ from base import BenchmarkProblem
 class Levy(BenchmarkProblem):
 
     r'''
-
+    https://www.sfu.ca/~ssurjano/levy.html
     '''
 
     # ND objective, 0 constraints, X = n-by-dim
