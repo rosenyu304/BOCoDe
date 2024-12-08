@@ -29,6 +29,6 @@ class GearTrain(BenchmarkProblem):
 
         X = cont_to_disc(X, torch.tensor(range(12, 61))) # x0, x1, x2, x3: {12, 13, ..., 60}
 
-        fx = (1/6.931 - (X[:,0]*X[:,1])/(X[:,2]*X[:,3])).reshape(-1, 1)
+        fx = -((1/6.931 - (X[:,0]*X[:,1])/(X[:,2]*X[:,3]))**2).reshape(-1, 1)
 
         return None, fx
