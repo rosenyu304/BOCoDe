@@ -4,7 +4,7 @@ from base import BenchmarkProblem
 class DixonPrice(BenchmarkProblem):
 
     r'''
-
+    https://www.sfu.ca/~ssurjano/dixonpr.html
     '''
 
     # ND objective, 0 constraints, X = n-by-dim
