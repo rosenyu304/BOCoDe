@@ -4,12 +4,12 @@ from base import BenchmarkProblem
 class StyblinskiTang_continuous(BenchmarkProblem):
 
     r'''
-
+    https://www.sfu.ca/~ssurjano/stybtang.html
     '''
 
     # 10D objective, 0 constraints, X = n-by-10
 
-    tags = {"single_objective", "unconstrained", "continuous", "10D"}
+    tags = {"single_objective", "unconstrained", "continuous", "10D", "extra_imports"}
 
     def __init__(self):
         dim_ = 10
@@ -20,9 +20,11 @@ class StyblinskiTang_continuous(BenchmarkProblem):
 
         from botorch.test_functions.synthetic import StyblinskiTang as StyblinskiTang_imported
 
-        return None, -StyblinskiTang_imported(X).view(-1, 1)
+        fun = StyblinskiTang_imported(dim=self.dim, negate=True)
 
-stm = StyblinskiTang_continuous()
-X = ([[0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0], [1.0, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1]])
-gx, fx = stm.evaluate(X, to_verify = False)
-print(gx, fx)
+        n = X.size(0)
+
+        fx = fun(X)
+        fx = fx.reshape((n, 1))
+
+        return None, fx
