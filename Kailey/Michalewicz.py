@@ -4,7 +4,7 @@ from base import BenchmarkProblem
 class Michalewicz(BenchmarkProblem):
 
     r'''
-
+    https://www.sfu.ca/~ssurjano/michal.html
     '''
 
     # ND objective, 0 constraints, X = n-by-dim
