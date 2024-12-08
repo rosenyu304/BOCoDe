@@ -4,7 +4,7 @@ from base import BenchmarkProblem
 class Rosenbrock(BenchmarkProblem):
 
     r'''
-
+    https://www.sfu.ca/~ssurjano/rosen.html
     '''
 
     # ND objective, 0 constraints, X = n-by-dim
