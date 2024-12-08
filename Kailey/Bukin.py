@@ -21,4 +21,4 @@ class Bukin(BenchmarkProblem):
         part2 = 0.01 * torch.abs(X[..., 0] + 10.0)
         fx = part1 + part2
 
-        return None, fx
+        return None, -fx
