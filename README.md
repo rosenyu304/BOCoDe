@@ -66,7 +66,7 @@ So that we know what is found and what we have yet found.
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | Cantilever Step Beam  (engineering) | 1  | 10  | 11  | Single Objective, Constrained (is there a discrete form? and I think we can expand to N steps (right now it's five steps))  |
 | Car crashed simplified  (engineering) | 1  | 11  | 10  | Single Objective, Constrained, Mixed  |
-| Compression Spring  (engineering) | 1  | 8  | 6  | Single Objective, Constrained, Mixed  |
+| Compression Spring  (engineering) | 1  | 8  | 4  | Single Objective, Constrained, Mixed  |
 | GearTrain  (engineering) | 1  | 4  | 0  | Single Objective, Mixed |
 | GKXWC1  (synthetic) | 1  | 2  | 1  | Single Objective, Constrained, Continuous  |
 | GKXWC2  (synthetic) | 1  | 2  | 1  | Single Objective, Constrained, Continuous  |
@@ -78,7 +78,7 @@ So that we know what is found and what we have yet found.
 | Mazda (engineering) | m | 222  | 54  | Single/Multi Objective, Constrained, Continuous (is there a mix-variable form?) (I haven't upload the executables)  |
 | MOPTA08_Car (engineering) | 1 | 124  | 68  | Single Objective, Constrained, Continuous (is there a mix-variable form?) (I haven't upload the executables)   |
 | PressureVessel (engineering) | 1 | 4  | 4  | Single Objective, Constrained, Continuous, Mixed   |
-| ReinforcedConcreteBeam (engineering) | 1 | 3  | 9  | Single Objective, Constrained, Continuous, Mixed   |
+| ReinforcedConcreteBeam (engineering) | 1 | 3  | 2  | Single Objective, Constrained, Continuous, Mixed   |
 | Rosenbrock (botorch) | 1 | N  | 0  | Single Objective, Continuous (is there a constrained form?)   |
 | Speed Reducer (engineering) | 1 | 7  | 9  | Single Objective, Constrained, Continuous, Mixed (is there a multi-obj form?)   |
 | Three-bar Truss (engineering) | 1 | 2  | 3  | Single Objective, Constrained, Continuous  |
