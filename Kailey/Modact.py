@@ -33,6 +33,3 @@ class MODAct(BenchmarkProblem):
             GX[ii,:] = torch.from_numpy(g)
 
         return GX, FX
-
-m = MODAct("CS1")
-m.evaluate([[0.1, 0.2, 0.3], [0.4, 0.5, 0.6]])
