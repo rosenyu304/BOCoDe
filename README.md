@@ -121,8 +121,9 @@ https://github.com/P-N-Suganthan/2020-RW-Constrained-Optimisation/blob/master/Pr
 
 ## Step 1+:
 1. Openmdao: https://openmdao.org/newdocs/versions/latest/examples/examples.html
-2. Electric motors: https://www.pyleecan.org/index.html
-3. Parameterized Quantum Circuits and Bayesian Optimization: https://github.com/w00zie/pqc_chsh/tree/main
+2. Prof Tonio's benchmarks (mixed integer)  https://github.com/PV-Lab/Benchmarking/tree/main
+3. Electric motors: https://www.pyleecan.org/index.html
+4. Parameterized Quantum Circuits and Bayesian Optimization: https://github.com/w00zie/pqc_chsh/tree/main
   - Error: long paths - after running 1st cell (lines below)
     - !pip install --quiet cirq
     - !pip install --quiet bayesian-optimization
