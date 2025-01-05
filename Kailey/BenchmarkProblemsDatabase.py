@@ -33,6 +33,7 @@ import Truss72D
 import Truss120D
 import Truss200D
 import WeldedBeam
+import MODAct
 
 
 problem_database = {Ackley.Ackley: Ackley.Ackley.tags,
@@ -55,6 +56,7 @@ problem_database = {Ackley.Ackley: Ackley.Ackley.tags,
                     # Mazda.Mazda: Mazda.Mazdatags,
                     # Mazda_softpen.Mazda_softpen: Mazda_softpen.Mazda_softpen.tags,
                     Michalewicz.Michalewicz: Michalewicz.Michalewicz.tags,
+                    MODAct.MODAct: MODAct.MODAct.tags,
                     # MOPTA08Car.MOPTA08Car: MOPTA08Car.MOPTA08Car.tags,
                     # MOPTA08Car_softpen.MOPTA08Car_softpen: MOPTA08Car_softpen.MOPTA08Car_softpen.tags,
                     PressureVessel.PressureVessel: PressureVessel.PressureVessel.tags,
