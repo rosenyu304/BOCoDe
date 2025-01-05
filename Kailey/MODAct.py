@@ -28,8 +28,6 @@ class MODAct(BenchmarkProblem):
             f, g = self.prob(X[ii,:].numpy())
 
             # Pymoo: f = np.array(f)*-1*cs1.weights
-            # print(self.prob.weights)
-            # print(self.prob.c_weights)
             f = np.array(f)*self.prob.weights # BO is maximizing
             g = np.array(g)*self.prob.c_weights
             FX[ii,0] = torch.tensor(f[0])
