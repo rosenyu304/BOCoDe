@@ -10,12 +10,13 @@ class MODAct(BenchmarkProblem):
     Evolutionary Computation, pp. 1–1, 2020, doi: 10.1109/TEVC.2020.3020046.
     '''
 
-    tags = {"constrained", "continuous", "extra_imports", "20D"}
+    tags = {"single_objective", "multi_objective", "constrained", "continuous", "extra_imports", "20D"}
 
-    def __init__(self, problem_name):
+    def __init__(self, problem_name, multi_objective = False):
         import modact.modact.problems as pb
         self.prob = pb.get_problem(problem_name)
         xl, xu = self.prob.bounds()
+        self.multi_objective = multi_objective
         super().__init__(dim = len(xl), num_obj = len(self.prob.weights), num_cons = len(self.prob.c_weights), bounds = [[xl[i], xu[i]] for i in range(len(xl))])
 
     def evaluate(self, X, to_verify = True):
@@ -30,7 +31,10 @@ class MODAct(BenchmarkProblem):
             # Pymoo: f = np.array(f)*-1*cs1.weights
             f = np.array(f)*self.prob.weights # BO is maximizing
             g = np.array(g)*self.prob.c_weights
-            FX[ii,0] = torch.tensor(f[0])
+            if self.multi_objective:
+                FX[ii, :] = torch.tensor(f)
+            else:
+                FX[ii,0] = torch.tensor(f[0])
             GX[ii,:] = torch.from_numpy(g)
 
         return GX, FX
