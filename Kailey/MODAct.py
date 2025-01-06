@@ -12,12 +12,16 @@ class MODAct(BenchmarkProblem):
 
     tags = {"single_objective", "multi_objective", "constrained", "continuous", "extra_imports", "20D"}
 
-    def __init__(self, problem_name, multi_objective = False):
+    def __init__(self, problem_name, single_objective = True):
         import modact.modact.problems as pb
         self.prob = pb.get_problem(problem_name)
         xl, xu = self.prob.bounds()
-        self.multi_objective = multi_objective
-        super().__init__(dim = len(xl), num_obj = len(self.prob.weights), num_cons = len(self.prob.c_weights), bounds = [[xl[i], xu[i]] for i in range(len(xl))])
+        num_obj = None
+        if not single_objective:
+            num_obj = len(self.prob.weights)
+        else:
+            num_obj = 1
+        super().__init__(dim = len(xl), num_obj = num_obj, num_cons = len(self.prob.c_weights), bounds = [[xl[i], xu[i]] for i in range(len(xl))])
 
     def evaluate(self, X, to_verify = True):
         X = super().scale(X, to_verify)
@@ -31,7 +35,7 @@ class MODAct(BenchmarkProblem):
             # Pymoo: f = np.array(f)*-1*cs1.weights
             f = np.array(f)*self.prob.weights # BO is maximizing
             g = np.array(g)*self.prob.c_weights
-            if self.multi_objective:
+            if self.num_obj > 1:
                 FX[ii, :] = torch.tensor(f)
             else:
                 FX[ii,0] = torch.tensor(f[0])
