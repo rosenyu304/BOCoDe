@@ -1,0 +1,39 @@
+import torch
+from ..base import *
+
+
+
+class Bukin(BenchmarkProblem):
+
+    r'''
+    https://www.sfu.ca/~ssurjano/bukin6.html
+    '''
+
+    def __init__(self):
+        
+        tags = ["Bukin",
+                "-----------------------------",
+                "OBJECTIVES: Single Objective (1)", 
+                "CONSTRAINTS: N/A", 
+                "SPACE: Continuous", 
+                "SCALABLE: 2D", 
+                "IMPORTS: ",
+               ]
+        
+        super().__init__(dim = 2, 
+                         num_obj = 1, 
+                         num_cons = 0, 
+                         bounds = [[-15.0, -5.0], [-3.0, 3.0]],
+                         tags = tags
+                        )
+
+    def _evaluate_implementation(self, X):
+        
+
+        part1 = 100.0 * torch.sqrt(torch.abs(X[..., 1] - 0.01 * X[..., 0] ** 2))
+        part2 = 0.01 * torch.abs(X[..., 0] + 10.0)
+        fx = -(part1 + part2)
+
+        return None, fx
+
+
