@@ -41,12 +41,27 @@ Therefore, when testing each function:
   - The problem definition .pdf have the problem formulation
 - Add MOPTA and MAZDA car problems
 - Make sure that the implementation for these libraries are completed:
-  - LassoBench
-  - Read "Scalable Global Optimization via Local Bayesian Optimization" and implement
-    - Rover (I have the source code in the old version. Wrap it with the new format.
+  - Read "Scalable Global Optimization via Local Bayesian Optimization" by David Eriksson et al. and implement
+    - Rover (I have the source code in the old version. Wrap it with the new format)
+    - Robot pushing
+    - Cosmological constant learning
+    - And other problems that look like engineering
+    - Sources:
+      - https://github.com/uber-research/TuRBO
+      - https://github.com/zi-w/Ensemble-Bayesian-Optimization/tree/4e6f9ed04833cc2e21b5906b1181bc067298f914
+        - so you can also read this paper: https://arxiv.org/pdf/1706.01445
+  - LassoBench (I implement like 3 of them??)
+  - Make sure all bbob suite work perfect:
+    - https://coco-platform.org/
+    - https://numbbo.github.io/coco/testsuites/bbob 
 
-## 2. Make a sphinx website for the library
-- Rosen need to upload the sphinx docs
+## 2. Make a sphinx website for the library (work in parallel with 1.)
+- Rosen need to upload the sphinx docs. The website for now is just a template. Need to be polish more.
 - Official guilde: https://www.sphinx-doc.org/en/master/
 - What we ultimately want to have is something like openmdao: https://openmdao.org/newdocs/versions/latest/main.html
+- Please update this every week up to date as you implement each function
+- Does not have to be long, just provide a 1 or 2 line sentence summary of what each problem is about and give an example how to use each problem's code (aka what configs) in their page
+  - If they are coming from some source, put the original source link and cite it
+  - If not, write the formulation of the problem in latex
  
+# Let's try to finish this by the end of this month!!
