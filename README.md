@@ -17,15 +17,6 @@ Look at these files to see how the general problem setup works & see examples:
 The main change is the .evaluate() function
 ```
 def evaluate(self, X):
-        """
-        Wrapper method that handles input/output processing for all benchmark problems.
-
-        Input Args:
-            X: A design variable of N-by-dim
-        Returns: 
-            gx: Constraints in a shape of N-by-#_of_constraints. None for unconstrained problems or where constraints are not needed.
-            fx: Objectives in a shape of N-by-#_of_objectives.
-        """
         # Process input
         X = self.INPUT_TYPE_CONVERT(X)
         
