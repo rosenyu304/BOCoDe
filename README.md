@@ -106,4 +106,11 @@ Therefore, when testing each function:
   - If they are coming from some source, put the original source link and cite it
   - If not, write the formulation of the problem in latex
  
-# Let's try to finish this by the end of this month!!
+# Notes:
+- Let's try to finish this by the end of this month!!
+- Let me know if you have any suggestion to the base.py's basic framework. Much thanks.
+
+
+
+
+
