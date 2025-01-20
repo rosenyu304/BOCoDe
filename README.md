@@ -14,11 +14,48 @@ Look at these files to see how the general problem setup works & see examples:
   - BraninCurrin in BoTorch folder
   - BBOB
 
+The main change is the .evaluate() function
 ```
-code
+def evaluate(self, X):
+        """
+        Wrapper method that handles input/output processing for all benchmark problems.
+
+        Input Args:
+            X: A design variable of N-by-dim
+        Returns: 
+            gx: Constraints in a shape of N-by-#_of_constraints. None for unconstrained problems or where constraints are not needed.
+            fx: Objectives in a shape of N-by-#_of_objectives.
+        """
+        # Process input
+        X = self.INPUT_TYPE_CONVERT(X)
+        
+        if self.MIXED.is_mixed:
+            X = self.mixed_int_scale(X)
+        else:
+            X = self.scale(X)
+        
+        # Call the actual evaluation implementation
+        gx, fx = self._evaluate_implementation(X)
+
+        # Process Constraints
+        gx, fx = self.constraint_processing(gx, fx)
+
+        # Process if MultiObjective
+        fx = self.multiobj_processing(fx)
+        
+        # Process output type
+        fx = self.OUTPUT_TYPE_CONVERT(fx)
+        if gx != None:
+            gx = self.OUTPUT_TYPE_CONVERT(gx)
+
+        # Negate for minimization setting
+        if not self.MAXIMIZATION:
+            fx = -fx
+        
+        return gx, fx
 ```
 
-Essentially, when you implement each function now, you no longer have to scale it at the very bottom level.
+Essentially, what we are implement is the `_evaluate_implementation` function. When you implement each function now, you no longer have to scale it at the very bottom level.
 The only thing you'll have to consider is:
 - Set up the correct configs for constraints, multiobjective, or mix-integer problems!
 - Passing in the correct bounds
@@ -50,6 +87,7 @@ Therefore, when testing each function:
       - https://github.com/uber-research/TuRBO
       - https://github.com/zi-w/Ensemble-Bayesian-Optimization/tree/4e6f9ed04833cc2e21b5906b1181bc067298f914
         - so you can also read this paper: https://arxiv.org/pdf/1706.01445
+  - (After everything is done until this bullet point, I think we are good to publish the library)
   - Real-World Problems in "GECCO 2023 Tutorial on Benchmarking Multiobjective Optimizers 2.0"
     - https://dl.acm.org/doi/abs/10.1145/3583133.3595060?casa_token=jYey2h3Kcn0AAAAA:Ko_vDbjT-9aEGxCLvsAy8XZcbDQP05sUKwvoO0PVVm61nWb3LK6AKMFGzMX17wgUlQDpiyNdRbrC5w
   - LassoBench (I implement like 3 of them??)
