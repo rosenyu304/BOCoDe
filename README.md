@@ -59,7 +59,8 @@ Therefore, when testing each function:
 - (At this stage, we should maybe(?) consider if writing test cases / test files are needed)
 
 ## 1. Add these functions
-- Write all your previous functions in this framework format
+- Go through all functions I put in `Synthetics`, `Engineering`, `LassoBench`, `BoTorch`, and `BBOB` that they work in this format (since I think put some of the old version there)
+- Put all the previous functions in your folder in this framework format
   - For **engineering** problems: Put them under the engineering folder. The default config for engineering constraints are CONSTRANTS (return GX)
   For **Trusses**, ensure I can select which "versions." I have noticed that some Trusses functions in your previous implementation do not support different instances (let's use instances instead of versions). Double-check that the evaluation is returning the same values as listed in the paper.
   - For **MODACT**: implement all 20 (?) function Cyril has in his library. Be careful that most functions are multiobjective so implement as they are as the original setting
@@ -86,12 +87,14 @@ Therefore, when testing each function:
       - https://github.com/zi-w/Ensemble-Bayesian-Optimization/tree/4e6f9ed04833cc2e21b5906b1181bc067298f914
         - so you can also read this paper: https://arxiv.org/pdf/1706.01445
   - (After everything is done until this bullet point, I think we are good to publish the library)
-  - All Real-World Problems in "GECCO 2023 Tutorial on Benchmarking Multiobjective Optimizers 2.0"
-    - https://dl.acm.org/doi/abs/10.1145/3583133.3595060?casa_token=jYey2h3Kcn0AAAAA:Ko_vDbjT-9aEGxCLvsAy8XZcbDQP05sUKwvoO0PVVm61nWb3LK6AKMFGzMX17wgUlQDpiyNdRbrC5w
   - LassoBench (I implement like 3 of them??)
   - Make sure all bbob suite work perfect:
     - https://coco-platform.org/
-    - https://numbbo.github.io/coco/testsuites/bbob 
+    - https://numbbo.github.io/coco/testsuites/bbob
+  - All Botorch functions in the botorch/test_functions
+  - All engineering problems in pymoo
+  - All Real-World Problems in "GECCO 2023 Tutorial on Benchmarking Multiobjective Optimizers 2.0"
+    - https://dl.acm.org/doi/abs/10.1145/3583133.3595060?casa_token=jYey2h3Kcn0AAAAA:Ko_vDbjT-9aEGxCLvsAy8XZcbDQP05sUKwvoO0PVVm61nWb3LK6AKMFGzMX17wgUlQDpiyNdRbrC5w
 
 ## 2. Make a sphinx website for the library (work in parallel with 1.)
 - The current website is in "OptBench_docs" folder
