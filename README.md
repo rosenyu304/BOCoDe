@@ -50,6 +50,8 @@ Therefore, when testing each function:
       - https://github.com/uber-research/TuRBO
       - https://github.com/zi-w/Ensemble-Bayesian-Optimization/tree/4e6f9ed04833cc2e21b5906b1181bc067298f914
         - so you can also read this paper: https://arxiv.org/pdf/1706.01445
+  - Real-World Problems in "GECCO 2023 Tutorial on Benchmarking Multiobjective Optimizers 2.0"
+    - https://dl.acm.org/doi/abs/10.1145/3583133.3595060?casa_token=jYey2h3Kcn0AAAAA:Ko_vDbjT-9aEGxCLvsAy8XZcbDQP05sUKwvoO0PVVm61nWb3LK6AKMFGzMX17wgUlQDpiyNdRbrC5w
   - LassoBench (I implement like 3 of them??)
   - Make sure all bbob suite work perfect:
     - https://coco-platform.org/
