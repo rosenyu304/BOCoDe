@@ -8,7 +8,7 @@ Look at these files to see how the general problem setup work & see examples:
 - OptBenchmarksLibrary/Library_Test.ipynb
 - OptBenchmarksLibrary/base.py
 - OptBenchmarksLibrary/config.py
-- Functions that are done:
+- Functions that are done (other functions I think still use the old version of set up):
   - Ackley and others in the Synthetic folder
   - Example functions in LassoBench
   - BraninCurrin in BoTorch folder
@@ -18,6 +18,7 @@ Therefore, when testing each function:
 - For every function: make sure the function value are the EXACT SAME as the paper/library
 - For constrained problems: test if the 3 different configs ALL works well
 - For multiobjective problems: test if 4 different configs ALL works well
+- (At this stage we should consider if writing test cases / test files are needed)
 
 ## 1. Add these functions
 - Write all your functions in this frameworks format
