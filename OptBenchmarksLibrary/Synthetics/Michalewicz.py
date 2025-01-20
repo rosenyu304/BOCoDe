@@ -18,7 +18,7 @@ class Michalewicz(BenchmarkProblem):
                ]
         
         import math
-        super().__init__(dim, num_obj = 1, num_cons = 0, bounds = [[0, math.pi]])
+        super().__init__(dim, num_obj = 1, num_cons = 0, bounds = [[0, math.pi]], tags = tags)
 
     def _evaluate_implementation(self, X):
 
