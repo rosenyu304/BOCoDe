@@ -64,13 +64,13 @@ Therefore, when testing each function:
   For **Trusses**, ensure I can select which "versions." I have noticed that some Trusses functions in your previous implementation do not support different instances (let's use instances instead of versions). Double-check that the evaluation is returning the same values as listed in the paper.
   - For **MODACT**: implement all 20 (?) function Cyril has in his library. Be careful that most functions are multiobjective so implement as they are as the original setting
   - For **other** previously written functions: do not implement the embedding ones and ignore finders
-- Translate all the CEC2020 code
+- Translate all the CEC2020 code 
   - Look at the .m files, they are the matlab source code
   - The problem definition .pdf have the problem formulation
-- Add MOPTA and MAZDA car problems
+- Add MOPTA and MAZDA car problems (put them under engineering)
   - Sources of my original code for MOPTA and MAZDA (see or download this first):
-    - https://www.dropbox.com/scl/fo/2mdmipyasdt9bgqcnagc6/ANzv5eRr5o4b5ZPwOsUDGMc?rlkey=4gsukfu7tz0znhsze6878l3h7&st=8il4r2o0&dl=0
-    - https://www.dropbox.com/scl/fo/flpvnpkkiid7nojrdmuo3/ANi_64jVXO3FLmU8vtxbdNI?rlkey=jch7dupoi4bsari1ggdus23uq&st=hisdyh6l&dl=0
+    - Mazda: https://www.dropbox.com/scl/fo/2mdmipyasdt9bgqcnagc6/ANzv5eRr5o4b5ZPwOsUDGMc?rlkey=4gsukfu7tz0znhsze6878l3h7&st=8il4r2o0&dl=0
+    - Test functions for all: https://www.dropbox.com/scl/fo/flpvnpkkiid7nojrdmuo3/ANi_64jVXO3FLmU8vtxbdNI?rlkey=jch7dupoi4bsari1ggdus23uq&st=hisdyh6l&dl=0
   - For MOPTA source:
     - https://leonard.papenmeier.io/2023/02/09/mopta08-executables.html
   - For MAZDA:
@@ -86,7 +86,7 @@ Therefore, when testing each function:
       - https://github.com/zi-w/Ensemble-Bayesian-Optimization/tree/4e6f9ed04833cc2e21b5906b1181bc067298f914
         - so you can also read this paper: https://arxiv.org/pdf/1706.01445
   - (After everything is done until this bullet point, I think we are good to publish the library)
-  - Real-World Problems in "GECCO 2023 Tutorial on Benchmarking Multiobjective Optimizers 2.0"
+  - All Real-World Problems in "GECCO 2023 Tutorial on Benchmarking Multiobjective Optimizers 2.0"
     - https://dl.acm.org/doi/abs/10.1145/3583133.3595060?casa_token=jYey2h3Kcn0AAAAA:Ko_vDbjT-9aEGxCLvsAy8XZcbDQP05sUKwvoO0PVVm61nWb3LK6AKMFGzMX17wgUlQDpiyNdRbrC5w
   - LassoBench (I implement like 3 of them??)
   - Make sure all bbob suite work perfect:
