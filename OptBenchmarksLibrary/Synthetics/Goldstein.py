@@ -28,6 +28,7 @@ class Goldstein(BenchmarkProblem):
                          bounds = [[-2, 2], [0, 1]],
                          is_mixed = is_mixed,
                          debug = debug,
+                         tags = tags
                         )
 
     def _evaluate_implementation(self, X ):
