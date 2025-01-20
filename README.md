@@ -56,7 +56,7 @@ Therefore, when testing each function:
 - For every function: make sure the function value are the EXACT SAME as the paper/library
 - For constrained problems: test if the 3 different configs ALL works well
 - For multiobjective problems: test if 4 different configs ALL works well
-- (At this stage we should consider if writing test cases / test files are needed)
+- (At this stage we should maybe(?) consider if writing test cases / test files are needed)
 
 ## 1. Add these functions
 - Write all your previous functions in this framework format
