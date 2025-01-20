@@ -68,6 +68,13 @@ Therefore, when testing each function:
   - Look at the .m files, they are the matlab source code
   - The problem definition .pdf have the problem formulation
 - Add MOPTA and MAZDA car problems
+  - Sources of my original code for MOPTA and MAZDA (see or download this first):
+    - https://www.dropbox.com/scl/fo/2mdmipyasdt9bgqcnagc6/ANzv5eRr5o4b5ZPwOsUDGMc?rlkey=4gsukfu7tz0znhsze6878l3h7&st=8il4r2o0&dl=0
+    - https://www.dropbox.com/scl/fo/flpvnpkkiid7nojrdmuo3/ANi_64jVXO3FLmU8vtxbdNI?rlkey=jch7dupoi4bsari1ggdus23uq&st=hisdyh6l&dl=0
+  - For MOPTA source:
+    - https://leonard.papenmeier.io/2023/02/09/mopta08-executables.html
+  - For MAZDA:
+    - https://ladse.eng.isas.jaxa.jp/benchmark/
 - Make sure that the implementation for these libraries are completed:
   - Read "Scalable Global Optimization via Local Bayesian Optimization" by David Eriksson et al. and implement
     - Rover (I have the source code in the old version. Wrap it with the new format)
