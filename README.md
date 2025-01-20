@@ -46,17 +46,17 @@ def evaluate(self, X):
         return gx, fx
 ```
 
-Essentially, what we are implement is the `_evaluate_implementation` function. When you implement each function now, you no longer have to scale it at the very bottom level.
+Essentially, what we are implementing is the `_evaluate_implementation` function. When you implement each function now, you no longer have to scale it at the very bottom level.
 The only thing you'll have to consider is:
 - Set up the correct configs for constraints, multiobjective, or mix-integer problems!
 - Passing in the correct bounds
 - Return GX and FX (GX is None only for unconstrained functions)
  
 Therefore, when testing each function:
-- For every function: make sure the function value are the EXACT SAME as the paper/library
+- For every function: make sure the function values are the EXACT SAME as the paper/library
 - For constrained problems: test if the 3 different configs ALL works well
 - For multiobjective problems: test if 4 different configs ALL works well
-- (At this stage we should maybe(?) consider if writing test cases / test files are needed)
+- (At this stage, we should maybe(?) consider if writing test cases / test files are needed)
 
 ## 1. Add these functions
 - Write all your previous functions in this framework format
@@ -96,7 +96,7 @@ Therefore, when testing each function:
 ## 2. Make a sphinx website for the library (work in parallel with 1.)
 - The current website is in "OptBench_docs" folder
   - You'll need to install sphinx and rebuild the file (try `make html` or start from building: https://www.sphinx-doc.org/en/master/tutorial/getting-started.html)
-- Official guilde: https://www.sphinx-doc.org/en/master/
+- Official guide for using sphinx: https://www.sphinx-doc.org/en/master/
 - What we ultimately want to have is something like openmdao: https://openmdao.org/newdocs/versions/latest/main.html
 - Please update this every week up to date as you implement each function
 - Does not have to be long, just provide a 1 or 2 line sentence summary of what each problem is about and give an example how to use each problem's code (aka what configs) in their page
