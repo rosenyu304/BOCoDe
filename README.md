@@ -94,7 +94,8 @@ Therefore, when testing each function:
     - https://numbbo.github.io/coco/testsuites/bbob 
 
 ## 2. Make a sphinx website for the library (work in parallel with 1.)
-- Rosen need to upload the sphinx docs. The website for now is just a template. Need to be polish more.
+- The current website is in "OptBench_docs" folder
+  - You'll need to install sphinx and rebuild the file (try `make html` or start from building: https://www.sphinx-doc.org/en/master/tutorial/getting-started.html)
 - Official guilde: https://www.sphinx-doc.org/en/master/
 - What we ultimately want to have is something like openmdao: https://openmdao.org/newdocs/versions/latest/main.html
 - Please update this every week up to date as you implement each function
