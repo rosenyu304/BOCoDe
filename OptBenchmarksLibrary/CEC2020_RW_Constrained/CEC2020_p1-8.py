@@ -2,6 +2,10 @@ import torch
 import numpy as np
 from .base import BenchmarkProblem
 
+[ps,D]=size(X);
+global initial_flag
+persistent G B P Q L
+
 class CEC2020_p1(BenchmarkProblem):
     
     r'''
@@ -411,6 +415,51 @@ class CEC2020_p7(BenchmarkProblem):
         h[:, 36] = 1/3 * x[:, 2] + x[:, 6] * x[:, 41] + x[:, 10] * x[:, 22] + x[:, 15] * x[:, 21] + x[:, 18] * x[:, 46] - 50
         h[:, 37] = 1/3 * x[:, 2] + x[:, 6] * x[:, 42] + x[:, 10] * x[:, 43] + x[:, 15] * x[:, 47] + x[:, 18] * x[:, 29] - 30
 
+
+        if self.is_constrained:
+            return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+        else:
+            return None, None, -torch.from_numpy(f).unsqueeze(-1)
+
+
+
+class CEC2020_p8(BenchmarkProblem):
+    
+    r'''
+    CEC2020 Problem 8
+    ''
+
+    def __init__(self, is_constrained=True, flag=''):
+        super().__init__(dim=2, 
+                         num_obj=1, 
+                         num_cons=0, 
+                         optimizers=[[0] * 2], 
+                         optimum=[[0]], 
+                         bounds=[[0, 1.6], [-0.51, 1.49]],
+                         is_constrained=is_constrained,
+                         flag=flag
+                        )
+
+    def evaluate(self, X, to_verify=True):
+        import numpy as np
+
+        X = super().scale(X, to_verify)
+        X = X.numpy()
+        
+        n_samples = X.shape[0]
+
+        x[:, 1] = np.round(x[:, 1]) 
+        
+        # Objective function
+        f = 2 * x[:, 0] + x[:, 1]
+        
+        # Inequality constraints
+        g = np.zeros((x.shape[0], 2))
+        g[:, 0] = 1.25 - x[:, 0]**2 - x[:, 1]
+        g[:, 1] = x[:, 0] + x[:, 1] - 1.6
+        
+        # Equality constraints
+        h = np.zeros((ps,))
 
         if self.is_constrained:
             return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
