@@ -3,6 +3,7 @@ import numpy as np
 from .base import BenchmarkProblem
 
 class CEC2020_p1(BenchmarkProblem):
+    
     r'''
     CEC2020 Problem 1
     ''
