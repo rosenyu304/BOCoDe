@@ -48,3 +48,52 @@ class CEC2020_p1(BenchmarkProblem):
             return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
         else:
             return None, None, -torch.from_numpy(f).unsqueeze(-1)
+
+
+class CEC2020_p2(BenchmarkProblem):
+    
+    r'''
+    CEC2020 Problem 2
+    ''
+
+    def __init__(self, is_constrained=True, flag=''):
+        super().__init__(dim=11, 
+                         num_obj=1, 
+                         num_cons=9, 
+                         optimizers=[[0] * 9], 
+                         optimum=[[0]], 
+                         bounds=[[1e4, 0.819e6], [1e4, 1.131e6], [1e4, 2.05e6], [0, 0.05074], [0, 0.05074], [0, 0.05074], [100, 200], [100, 300], [100, 300], [100, 300], [100, 400]],
+                         is_constrained=is_constrained,
+                         flag=flag
+                        )
+
+    def evaluate(self, X, to_verify=True):
+        import numpy as np
+
+        X = super().scale(X, to_verify)
+        X = X.numpy()
+        
+        n_samples = X.shape[0]
+
+        # Objective function
+        f = (X[:, 0] / (120 * X[:, 3]))**0.6 + (X[:, 1] / (80 * X[:, 4]))**0.6 + (X[:, 2] / (40 * X[:, 5]))**0.6
+
+        # Constraints
+        h = np.zeros((n_samples, 9))
+        h[:, 0] = X[:, 0] - 1e4 * (X[:, 6] - 100)
+        h[:, 1] = X[:, 1] - 1e4 * (X[:, 7] - X[:, 6])
+        h[:, 2] = X[:, 2] - 1e4 * (500 - X[:, 7])
+        h[:, 3] = X[:, 0] - 1e4 * (300 - X[:, 8])
+        h[:, 4] = X[:, 1] - 1e4 * (400 - X[:, 9])
+        h[:, 5] = X[:, 2] - 1e4 * (600 - X[:, 10])
+        h[:, 6] = X[:, 3] * np.log(np.abs(X[:, 8] - 100) + 1e-8) - X[:, 3] * np.log(300 - X[:, 6] + 1e-8) - X[:, 8] - X[:, 6] + 400
+        h[:, 7] = X[:, 4] * np.log(np.abs(X[:, 9] - X[:, 6]) + 1e-8) - X[:, 4] * np.log(np.abs(400 - X[:, 7]) + 1e-8) - X[:, 9] + X[:, 6] - X[:, 7] + 400
+        h[:, 8] = X[:, 5] * np.log(np.abs(X[:, 10] - X[:, 7]) + 1e-8) - X[:, 5] * np.log(100) - X[:, 10] + X[:, 7] + 100
+
+        # No inequality constraints
+        g = np.zeros((n_samples, 0))
+
+        if self.is_constrained:
+            return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+        else:
+            return None, None, -torch.from_numpy(f).unsqueeze(-1)
