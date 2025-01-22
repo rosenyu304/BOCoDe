@@ -2,10 +2,6 @@ import torch
 import numpy as np
 from .base import BenchmarkProblem
 
-[ps,D]=size(X);
-global initial_flag
-persistent G B P Q L
-
 class CEC2020_p1(BenchmarkProblem):
     
     r'''
