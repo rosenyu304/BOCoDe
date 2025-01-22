@@ -8,8 +8,6 @@ class CEC2020_p35(BenchmarkProblem):
     CEC2020_35 problem 35
     '''
 
-    # N-D objective, 2 constraints, X = n-by-dim
-
     def __init__(self, is_constrained = True, flag = ''):
         super().__init__(dim = 153, 
                          num_obj = 1, 
