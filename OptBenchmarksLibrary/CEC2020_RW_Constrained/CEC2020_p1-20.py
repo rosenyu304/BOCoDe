@@ -858,7 +858,7 @@ class CEC2020_p16(BenchmarkProblem):
                          num_cons=0, 
                          optimizers=[[0] * 14], 
                          optimum=[[0]], 
-                         bounds=bounds = [[0.001, 5]],
+                         bounds=[[0.001, 5]],
                          is_constrained=is_constrained,
                          flag=flag
                         )
@@ -937,7 +937,7 @@ class CEC2020_p17(BenchmarkProblem):
                          num_cons=0, 
                          optimizers=[[0] * 3], 
                          optimum=[[0]], 
-                         bounds=bounds = [[0.05, 2], [0.25, 1.3], [2.00, 15.0]],
+                         bounds=[[0.05, 2], [0.25, 1.3], [2.00, 15.0]],
                          is_constrained=is_constrained,
                          flag=flag
                         )
@@ -985,7 +985,7 @@ class CEC2020_p18(BenchmarkProblem):
                          num_cons=0, 
                          optimizers=[[0] * 4], 
                          optimum=[[0]], 
-                         bounds=bounds = [[0.51, 99.49], [0.51, 99.49], [10, 200], [10, 200]],
+                         bounds=[[0.51, 99.49], [0.51, 99.49], [10, 200], [10, 200]],
                          is_constrained=is_constrained,
                          flag=flag
                         )
@@ -1038,7 +1038,7 @@ class CEC2020_p19(BenchmarkProblem):
                          num_cons=0, 
                          optimizers=[[0] * 4], 
                          optimum=[[0]], 
-                         bounds=bounds = [[0.125, 2], [0.1, 10], [0.1, 10], [0.1, 2]],
+                         bounds=[[0.125, 2], [0.1, 10], [0.1, 10], [0.1, 2]],
                          is_constrained=is_constrained,
                          flag=flag
                         )
@@ -1108,7 +1108,7 @@ class CEC2020_p20(BenchmarkProblem):
                          num_cons=0, 
                          optimizers=[[0] * 2], 
                          optimum=[[0]], 
-                         bounds=bounds = [[0, 1]],
+                         bounds=[[0, 1]],
                          is_constrained=is_constrained,
                          flag=flag
                         )
