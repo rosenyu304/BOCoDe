@@ -44,10 +44,8 @@ class CEC2020_p1(BenchmarkProblem):
         # Inequality constraints
         g = np.zeros((n_samples, 0))
 
-        if self.is_constrained:
-            return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
-        else:
-            return None, None, -torch.from_numpy(f).unsqueeze(-1)
+        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+    
 
 
 class CEC2020_p2(BenchmarkProblem):
@@ -93,10 +91,8 @@ class CEC2020_p2(BenchmarkProblem):
         # No inequality constraints
         g = np.zeros((n_samples, 0))
 
-        if self.is_constrained:
-            return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
-        else:
-            return None, None, -torch.from_numpy(f).unsqueeze(-1)
+        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+
 
 
 class CEC2020_p3(BenchmarkProblem):
@@ -147,10 +143,8 @@ class CEC2020_p3(BenchmarkProblem):
         g[:, 12] = 6.25 * X[:, 0] * X[:, 5] + 6.25 * X[:, 0] - 7.625 * X[:, 2] - 100000.0
         g[:, 13] = 1.22 * X[:, 2] - X[:, 5] * X[:, 0] - X[:, 0] + 1.0
 
-        if self.is_constrained:
-            return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
-        else:
-            return None, None, -torch.from_numpy(f).unsqueeze(-1)
+        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+
 
 
 class CEC2020_p4(BenchmarkProblem):
@@ -198,10 +192,8 @@ class CEC2020_p4(BenchmarkProblem):
         g = np.zeros((n_samples, 1))
         g[:, 0] = np.sqrt(X[:, 4]) + np.sqrt(X[:, 5]) - 4
 
-        if self.is_constrained:
-            return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
-        else:
-            return None, None, -torch.from_numpy(f).unsqueeze(-1)
+        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+
 
 
 
@@ -245,10 +237,8 @@ class CEC2020_p5(BenchmarkProblem):
         h[:, 2] = x[:, 1] - x[:, 7] - x[:, 5]
         h[:, 3] = x[:, 8] * x[:, 6] + x[:, 8] * x[:, 7] - 3 * x[:, 2] - x[:, 3]
 
-        if self.is_constrained:
-            return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
-        else:
-            return None, None, -torch.from_numpy(f).unsqueeze(-1)
+        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+
 
 
 
@@ -318,10 +308,8 @@ class CEC2020_p6(BenchmarkProblem):
         h[:, 30] = x[:, 31]
         h[:, 31] = x[:, 34]
 
-        if self.is_constrained:
-            return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
-        else:
-            return None, None, -torch.from_numpy(f).unsqueeze(-1)
+        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+
 
 
 
@@ -411,10 +399,8 @@ class CEC2020_p7(BenchmarkProblem):
         h[:, 36] = 1/3 * x[:, 2] + x[:, 6] * x[:, 41] + x[:, 10] * x[:, 22] + x[:, 15] * x[:, 21] + x[:, 18] * x[:, 46] - 50
         h[:, 37] = 1/3 * x[:, 2] + x[:, 6] * x[:, 42] + x[:, 10] * x[:, 43] + x[:, 15] * x[:, 47] + x[:, 18] * x[:, 29] - 30
 
-        if self.is_constrained:
-            return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
-        else:
-            return None, None, -torch.from_numpy(f).unsqueeze(-1)
+        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+
 
 
 
@@ -456,10 +442,8 @@ class CEC2020_p8(BenchmarkProblem):
         # No equality constraints
         h = np.zeros((n_samples, 0))
 
-        if self.is_constrained:
-            return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
-        else:
-            return None, None, -torch.from_numpy(f).unsqueeze(-1)
+        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+
 
 
 
@@ -497,10 +481,8 @@ class CEC2020_p9(BenchmarkProblem):
         # Inequality constraints
         g = -x[:, 0] + x[:, 1] + x[:, 2]
 
-        if self.is_constrained:
-            return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
-        else:
-            return None, None, -torch.from_numpy(f).unsqueeze(-1)
+        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+
 
 
 
@@ -543,10 +525,8 @@ class CEC2020_p10(BenchmarkProblem):
         # No equality constraints
         h = np.zeros((n_samples, 0))
 
-        if self.is_constrained:
-            return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
-        else:
-            return None, None, -torch.from_numpy(f).unsqueeze(-1)
+        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+
 
 
 
@@ -603,10 +583,8 @@ class CEC2020_p11(BenchmarkProblem):
         g[:, 2] = x1 - 20 * y1
         g[:, 3] = x2 - 20 * y2
 
-        if self.is_constrained:
-            return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
-        else:
-            return None, None, -torch.from_numpy(f).unsqueeze(-1)
+        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+
 
 
 
@@ -661,10 +639,8 @@ class CEC2020_p12(BenchmarkProblem):
         # No equality constraints
         h = np.zeros((n_samples, 0))
 
-        if self.is_constrained:
-            return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
-        else:
-            return None, None, -torch.from_numpy(f).unsqueeze(-1)
+        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+
 
 
 
@@ -715,10 +691,8 @@ class CEC2020_p13(BenchmarkProblem):
         # No equality constraints
         h = np.zeros((n_samples, 0))
 
-        if self.is_constrained:
-            return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
-        else:
-            return None, None, -torch.from_numpy(f).unsqueeze(-1)
+        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+
 
 
 
@@ -787,10 +761,8 @@ class CEC2020_p14(BenchmarkProblem):
         # No equality constraints
         h = np.zeros((n_samples, 0))
 
-        if self.is_constrained:
-            return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
-        else:
-            return None, None, -torch.from_numpy(f).unsqueeze(-1)
+        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+
 
 
 
@@ -839,10 +811,8 @@ class CEC2020_p15(BenchmarkProblem):
         g[:, 9] = 1.5 * x[:, 5] - x[:, 3] + 1.9
         g[:, 10] = 1.1 * x[:, 6] - x[:, 4] + 1.9
 
-        if self.is_constrained:
-            return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
-        else:
-            return None, None, -torch.from_numpy(f).unsqueeze(-1)
+        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+
 
 
 
@@ -918,10 +888,8 @@ class CEC2020_p16(BenchmarkProblem):
         g[:, 13] = 2 / x[:, 9] - 1
         g[:, 14] = x[:, 11] / x[:, 10] - 1
 
-        if self.is_constrained:
-            return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
-        else:
-            return None, None, -torch.from_numpy(f).unsqueeze(-1)
+        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+
 
 
 
@@ -966,10 +934,8 @@ class CEC2020_p17(BenchmarkProblem):
         g[:, 2] = 1 - 140.45 * x[:, 0] / (x[:, 1]**2 * x[:, 2])
         g[:, 3] = (x[:, 0] + x[:, 1]) / 1.5 - 1
 
-        if self.is_constrained:
-            return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
-        else:
-            return None, None, -torch.from_numpy(f).unsqueeze(-1)
+        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+
 
 
 
@@ -1019,10 +985,8 @@ class CEC2020_p18(BenchmarkProblem):
         g[:, 2] = -np.pi * x[:, 2]**2 * x[:, 3] - (4 / 3) * np.pi * x[:, 2]**3 + 1296000
         g[:, 3] = x[:, 3] - 240
 
-        if self.is_constrained:
-            return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
-        else:
-            return None, None, -torch.from_numpy(f).unsqueeze(-1)
+        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+
 
 
 
@@ -1089,10 +1053,8 @@ class CEC2020_p19(BenchmarkProblem):
         g[:, 3] = delta - delta_max
         g[:, 4] = P - Pc
 
-        if self.is_constrained:
-            return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
-        else:
-            return None, None, -torch.from_numpy(f).unsqueeze(-1)
+        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+
 
 
 
@@ -1136,8 +1098,4 @@ class CEC2020_p20(BenchmarkProblem):
         g[:, 1] = x[:, 1] / (np.sqrt(2) * x[:, 0]**2 + 2 * x[:, 0] * x[:, 1]) * 2 - 2
         g[:, 2] = 1 / (np.sqrt(2) * x[:, 1] + x[:, 0]) * 2 - 2
 
-        if self.is_constrained:
-            return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
-        else:
-            return None, None, -torch.from_numpy(f).unsqueeze(-1)
-
+        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
