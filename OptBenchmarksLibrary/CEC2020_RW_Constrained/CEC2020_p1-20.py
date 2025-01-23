@@ -30,7 +30,7 @@ class CEC2020_p1(BenchmarkProblem):
         # Objective function
         f = 35 * X[:, 0]**0.6 + 35 * X[:, 1]**0.6
 
-        # Constraints
+        # Equality constraints
         h = np.zeros((n_samples, 8))
         h[:, 0] = 200 * X[:, 0] * X[:, 3] - X[:, 2]
         h[:, 1] = 200 * X[:, 1] * X[:, 5] - X[:, 4]
@@ -784,10 +784,360 @@ class CEC2020_p14(BenchmarkProblem):
         g[:, 8] = t[1, 1] - N2 * TL2
         g[:, 9] = t[1, 2] - N3 * TL2
         
-        # Equality constraints
+        # No equality constraints
         h = np.zeros((n_samples, 0))
 
         if self.is_constrained:
             return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
         else:
             return None, None, -torch.from_numpy(f).unsqueeze(-1)
+
+
+
+class CEC2020_p15(BenchmarkProblem):
+    
+    r'''
+    CEC2020 Problem 15
+    ''
+
+    def __init__(self, is_constrained=True, flag=''):
+        super().__init__(dim=7, 
+                         num_obj=1, 
+                         num_cons=0, 
+                         optimizers=[[0] * 7], 
+                         optimum=[[0]], 
+                         bounds=[[2.6, 3.6], [0.7, 0.8], [17, 28], [7.3, 8.3], [7.3, 8.3], [2.9, 3.9], [5, 5.5]],
+                         is_constrained=is_constrained,
+                         flag=flag
+                        )
+
+    def evaluate(self, X, to_verify=True):
+        import numpy as np
+
+        X = super().scale(X, to_verify)
+        X = X.numpy()
+        
+        n_samples = X.shape[0]
+
+        # Objective function
+        f = (0.7854 * x[:, 0] * x[:, 1]**2 * (3.3333 * x[:, 2]**2 + 14.9334 * x[:, 2] - 43.0934)- 1.508 * x[:, 0] * (x[:, 5]**2 + x[:, 6]**2) + 7.477 * (x[:, 5]**3 + x[:, 6]**3) + 0.7854 * (x[:, 3] * x[:, 5]**2 + x[:, 4] * x[:, 6]**2))
+
+        # No equality constraints
+        h = np.zeros((n_samples, 0))
+
+        # Inequality constraints
+        g = np.zeros((n_samples, 11))
+        g[:, 0] = -x[:, 0] * x[:, 1]**2 * x[:, 2] + 27
+        g[:, 1] = -x[:, 0] * x[:, 1]**2 * x[:, 2]**2 + 397.5
+        g[:, 2] = -x[:, 1] * x[:, 5]**4 * x[:, 2] / x[:, 3]**3 + 1.93
+        g[:, 3] = -x[:, 1] * x[:, 6]**4 * x[:, 2] / x[:, 4]**3 + 1.93
+        g[:, 4] = (10 * x[:, 5]**-3 * np.sqrt(16.91e6 + (745 * x[:, 3] / (x[:, 1] * x[:, 2]))**2) - 1100)
+        g[:, 5] = (10 * x[:, 6]**-3 * np.sqrt(157.5e6 + (745 * x[:, 4] / (x[:, 1] * x[:, 2]))**2) - 850)
+        g[:, 6] = x[:, 1] * x[:, 2] - 40
+        g[:, 7] = -x[:, 0] / x[:, 1] + 5
+        g[:, 8] = x[:, 0] / x[:, 1] - 12
+        g[:, 9] = 1.5 * x[:, 5] - x[:, 3] + 1.9
+        g[:, 10] = 1.1 * x[:, 6] - x[:, 4] + 1.9
+
+        if self.is_constrained:
+            return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+        else:
+            return None, None, -torch.from_numpy(f).unsqueeze(-1)
+
+
+
+class CEC2020_p16(BenchmarkProblem):
+    
+    r'''
+    CEC2020 Problem 16
+    ''
+
+    def __init__(self, is_constrained=True, flag=''):
+        super().__init__(dim=14, 
+                         num_obj=1, 
+                         num_cons=0, 
+                         optimizers=[[0] * 14], 
+                         optimum=[[0]], 
+                         bounds=bounds = [[0.001, 5]],
+                         is_constrained=is_constrained,
+                         flag=flag
+                        )
+
+    def evaluate(self, X, to_verify=True):
+        import numpy as np
+
+        X = super().scale(X, to_verify)
+        X = X.numpy()
+        
+        n_samples = X.shape[0]
+
+        # Objective function
+        f = (
+            63098.88 * x[:, 1] * x[:, 3] * x[:, 11]
+            + 5441.5 * x[:, 1]**2 * x[:, 11]
+            + 115055.5 * x[:, 1]**1.664 * x[:, 5]
+            + 6172.27 * x[:, 1]**2 * x[:, 5]
+            + 63098.88 * x[:, 0] * x[:, 2] * x[:, 10]
+            + 5441.5 * x[:, 0]**2 * x[:, 10]
+            + 115055.5 * x[:, 0]**1.664 * x[:, 4]
+            + 6172.27 * x[:, 0]**2 * x[:, 4]
+            + 140.53 * x[:, 0] * x[:, 10]
+            + 281.29 * x[:, 2] * x[:, 10]
+            + 70.26 * x[:, 0]**2
+            + 281.29 * x[:, 0] * x[:, 2]
+            + 281.29 * x[:, 2]**2
+            + 14437 * x[:, 7]**1.8812 * x[:, 11]**0.3424 * x[:, 9] * x[:, 13]**-1 * x[:, 0]**2 * x[:, 6] * x[:, 8]**-1
+            + 20470.2 * x[:, 6]**2.893 * x[:, 10]**0.316 * x[:, 0]**2
+        )
+        
+        # No equality constraints
+        h = np.zeros((n_samples, 0))
+
+        # Inequality constraints
+        g = np.zeros((n_samples, 15))
+        g[:, 0] = 1.524 * x[:, 6]**-1 - 1
+        g[:, 1] = 1.524 * x[:, 7]**-1 - 1
+        g[:, 2] = 0.07789 * x[:, 0] - 2 * x[:, 6]**-1 * x[:, 8] - 1
+        g[:, 3] = (
+            7.05305 * x[:, 8]**-1 * x[:, 0]**2 * x[:, 9] * x[:, 7]**-1 * x[:, 1]**-1 * x[:, 13]**-1 - 1
+        )
+        g[:, 4] = 0.0833 / x[:, 12] * x[:, 13] - 1
+        g[:, 5] = 0.04771 * x[:, 9] * x[:, 7]**1.8812 * x[:, 11]**0.3424 - 1
+        g[:, 6] = 0.0488 * x[:, 8] * x[:, 6]**1.893 * x[:, 10]**0.316 - 1
+        g[:, 7] = 0.0099 * x[:, 0] / x[:, 2] - 1
+        g[:, 8] = 0.0193 * x[:, 1] / x[:, 3] - 1
+        g[:, 9] = 0.0298 * x[:, 0] / x[:, 4] - 1
+        g[:, 10] = (
+            47.136 * x[:, 1]**0.333 / (x[:, 9] * x[:, 11])
+            - 1.333 * x[:, 7] * x[:, 12]**2.1195
+            + 62.08 * x[:, 12]**2.1195 * x[:, 7]**0.2 / (x[:, 11] * x[:, 9])
+            - 1
+        )
+        g[:, 11] = 0.056 * x[:, 1] / x[:, 5] - 1
+        g[:, 12] = 2 / x[:, 8] - 1
+        g[:, 13] = 2 / x[:, 9] - 1
+        g[:, 14] = x[:, 11] / x[:, 10] - 1
+
+        if self.is_constrained:
+            return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+        else:
+            return None, None, -torch.from_numpy(f).unsqueeze(-1)
+
+
+
+class CEC2020_p17(BenchmarkProblem):
+    
+    r'''
+    CEC2020 Problem 17
+    ''
+
+    def __init__(self, is_constrained=True, flag=''):
+        super().__init__(dim=3, 
+                         num_obj=1, 
+                         num_cons=0, 
+                         optimizers=[[0] * 3], 
+                         optimum=[[0]], 
+                         bounds=bounds = [[0.05, 2], [0.25, 1.3], [2.00, 15.0]],
+                         is_constrained=is_constrained,
+                         flag=flag
+                        )
+
+    def evaluate(self, X, to_verify=True):
+        import numpy as np
+
+        X = super().scale(X, to_verify)
+        X = X.numpy()
+        
+        n_samples = X.shape[0]
+
+        # Objective function
+        f = x[:, 0]**2 * x[:, 1] * (x[:, 2] + 2)
+        
+        # No equality constraints
+        h = np.zeros((n_samples, 0))
+
+        # Inequality constraints
+        g = np.zeros((n_samples, 4))
+        g[:, 0] = 1 - (x[:, 1]**3 * x[:, 2]) / (71785 * x[:, 0]**4)
+        g[:, 1] = (
+            (4 * x[:, 1]**2 - x[:, 0] * x[:, 1]) / (12566 * (x[:, 1] * x[:, 0]**3 - x[:, 0]**4))
+            + 1 / (5108 * x[:, 0]**2) - 1
+        )
+        g[:, 2] = 1 - 140.45 * x[:, 0] / (x[:, 1]**2 * x[:, 2])
+        g[:, 3] = (x[:, 0] + x[:, 1]) / 1.5 - 1
+
+        if self.is_constrained:
+            return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+        else:
+            return None, None, -torch.from_numpy(f).unsqueeze(-1)
+
+
+
+class CEC2020_p18(BenchmarkProblem):
+    
+    r'''
+    CEC2020 Problem 18
+    ''
+
+    def __init__(self, is_constrained=True, flag=''):
+        super().__init__(dim=4, 
+                         num_obj=1, 
+                         num_cons=0, 
+                         optimizers=[[0] * 4], 
+                         optimum=[[0]], 
+                         bounds=bounds = [[0.51, 99.49], [0.51, 99.49], [10, 200], [10, 200]],
+                         is_constrained=is_constrained,
+                         flag=flag
+                        )
+
+    def evaluate(self, X, to_verify=True):
+        import numpy as np
+
+        X = super().scale(X, to_verify)
+        X = X.numpy()
+        
+        n_samples = X.shape[0]
+
+        x[:, 0] = 0.0625 * np.round(x[:, 0])
+        x[:, 1] = 0.0625 * np.round(x[:, 1])
+        
+        # Objective function
+        f = (
+            0.6224 * x[:, 0] * x[:, 2] * x[:, 3]
+            + 1.7781 * x[:, 1] * x[:, 2]**2
+            + 3.1661 * x[:, 0]**2 * x[:, 3]
+            + 19.84 * x[:, 0]**2 * x[:, 2]
+        )
+        
+        # No equality constraints
+        h = np.zeros((n_samples, 0))
+
+        # Inequality constraints
+        g = np.zeros((n_samples, 4))
+        g[:, 0] = -x[:, 0] + 0.0193 * x[:, 2]
+        g[:, 1] = -x[:, 1] + 0.00954 * x[:, 2]
+        g[:, 2] = -np.pi * x[:, 2]**2 * x[:, 3] - (4 / 3) * np.pi * x[:, 2]**3 + 1296000
+        g[:, 3] = x[:, 3] - 240
+
+        if self.is_constrained:
+            return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+        else:
+            return None, None, -torch.from_numpy(f).unsqueeze(-1)
+
+
+
+class CEC2020_p19(BenchmarkProblem):
+    
+    r'''
+    CEC2020 Problem 19
+    ''
+
+    def __init__(self, is_constrained=True, flag=''):
+        super().__init__(dim=4, 
+                         num_obj=1, 
+                         num_cons=0, 
+                         optimizers=[[0] * 4], 
+                         optimum=[[0]], 
+                         bounds=bounds = [[0.125, 2], [0.1, 10], [0.1, 10], [0.1, 2]],
+                         is_constrained=is_constrained,
+                         flag=flag
+                        )
+
+    def evaluate(self, X, to_verify=True):
+        import numpy as np
+
+        X = super().scale(X, to_verify)
+        X = X.numpy()
+        
+        n_samples = X.shape[0]
+
+        x[:, 0] = 0.0625 * np.round(x[:, 0])
+        x[:, 1] = 0.0625 * np.round(x[:, 1])
+        
+        # Objective function
+        f = 1.10471 * x[:, 0]**2 * x[:, 1] + 0.04811 * x[:, 2] * x[:, 3] * (14 + x[:, 1])
+
+        # No equality constraints
+        h = np.zeros((n_samples, 0))
+        
+        P = 6000
+        L = 14
+        delta_max = 0.25
+        E = 30 * 1e6
+        G = 12 * 1e6
+        T_max = 13600
+        sigma_max = 30000
+        
+        Pc = (
+            4.013 * E * np.sqrt(x[:, 2]**2 * x[:, 3]**6 / 30)
+            / L**2 * (1 - x[:, 2] / (2 * L) * np.sqrt(E / (4 * G)))
+        )
+        sigma = 6 * P * L / (x[:, 3] * x[:, 2]**2)
+        delta = 6 * P * L**3 / (E * x[:, 2]**2 * x[:, 3])
+        J = 2 * (np.sqrt(2) * x[:, 0] * x[:, 1] * (x[:, 1]**2 / 4 + (x[:, 0] + x[:, 2])**2 / 4))
+        R = np.sqrt(x[:, 1]**2 / 4 + (x[:, 0] + x[:, 2])**2 / 4)
+        M = P * (L + x[:, 1] / 2)
+        ttt = M * R / J
+        tt = P / (np.sqrt(2) * x[:, 0] * x[:, 1])
+        t = np.sqrt(tt**2 + 2 * tt * ttt * x[:, 1] / (2 * R) + ttt**2)
+        
+        # Inequality constraints
+        g = np.zeros((n_samples, 5))
+        g[:, 0] = t - T_max
+        g[:, 1] = sigma - sigma_max
+        g[:, 2] = x[:, 0] - x[:, 3]
+        g[:, 3] = delta - delta_max
+        g[:, 4] = P - Pc
+
+        if self.is_constrained:
+            return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+        else:
+            return None, None, -torch.from_numpy(f).unsqueeze(-1)
+
+
+
+class CEC2020_p20(BenchmarkProblem):
+    
+    r'''
+    CEC2020 Problem 20
+    ''
+
+    def __init__(self, is_constrained=True, flag=''):
+        super().__init__(dim=2, 
+                         num_obj=1, 
+                         num_cons=0, 
+                         optimizers=[[0] * 2], 
+                         optimum=[[0]], 
+                         bounds=bounds = [[0, 1]],
+                         is_constrained=is_constrained,
+                         flag=flag
+                        )
+
+    def evaluate(self, X, to_verify=True):
+        import numpy as np
+
+        X = super().scale(X, to_verify)
+        X = X.numpy()
+        
+        n_samples = X.shape[0]
+
+        x[:, 0] = 0.0625 * np.round(x[:, 0])
+        x[:, 1] = 0.0625 * np.round(x[:, 1])
+        
+        # Objective function
+        f = (2 * np.sqrt(2) * x[:, 0] + x[:, 1]) * 100
+
+        # No equality constraints
+        h = np.zeros((n_samples, 0))
+        
+        # Inequality constraints
+        g = np.zeros((n_samples, 3))
+        g[:, 0] = (np.sqrt(2) * x[:, 0] + x[:, 1]) / (np.sqrt(2) * x[:, 0]**2 + 2 * x[:, 0] * x[:, 1]) * 2 - 2
+        g[:, 1] = x[:, 1] / (np.sqrt(2) * x[:, 0]**2 + 2 * x[:, 0] * x[:, 1]) * 2 - 2
+        g[:, 2] = 1 / (np.sqrt(2) * x[:, 1] + x[:, 0]) * 2 - 2
+
+        if self.is_constrained:
+            return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+        else:
+            return None, None, -torch.from_numpy(f).unsqueeze(-1)
+
