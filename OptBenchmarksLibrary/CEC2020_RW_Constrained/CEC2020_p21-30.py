@@ -66,10 +66,8 @@ class CEC2020_p21(BenchmarkProblem):
         # No equality constraints
         h = np.zeros((n_samples, 0))
 
-        if self.is_constrained:
-            return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
-        else:
-            return None, None, -torch.from_numpy(f).unsqueeze(-1)
+        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+
 
 
 
@@ -151,10 +149,8 @@ class CEC2020_p22(BenchmarkProblem):
         # Equality constraints
         h = np.rem(N6 - N4, p)
 
-        if self.is_constrained:
-            return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
-        else:
-            return None, None, -torch.from_numpy(f).unsqueeze(-1)
+        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+
 
 
 
@@ -235,10 +231,8 @@ class CEC2020_p23(BenchmarkProblem):
         h[:, 1] = C1 - C3
         h[:, 2] = C1 - C4
 
-        if self.is_constrained:
-            return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
-        else:
-            return None, None, -torch.from_numpy(f).unsqueeze(-1)
+        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+
 
 
 
@@ -311,10 +305,8 @@ class CEC2020_p24(BenchmarkProblem):
         tt = np.imag(g) != 0
         g[tt] = 1e4
 
-        if self.is_constrained:
-            return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
-        else:
-            return None, None, -torch.from_numpy(f).unsqueeze(-1)
+        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+
 
 
 
@@ -383,10 +375,8 @@ class CEC2020_p25(BenchmarkProblem):
         # No equality constraints
         h = np.zeros((n_samples, 0))
 
-        if self.is_constrained:
-            return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
-        else:
-            return None, None, -torch.from_numpy(f).unsqueeze(-1)
+        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+
 
 
 
@@ -559,10 +549,8 @@ class CEC2020_p26(BenchmarkProblem):
         # No equality constraints
         h = np.zeros((n_samples, 0))
       
-        if self.is_constrained:
-            return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
-        else:
-            return None, None, -torch.from_numpy(f).unsqueeze(-1)
+        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+
 
 
 
@@ -605,10 +593,8 @@ class CEC2020_p27(BenchmarkProblem):
         # No equality constraints
         h = np.zeros((n_samples, 0))
       
-        if self.is_constrained:
-            return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
-        else:
-            return None, None, -torch.from_numpy(f).unsqueeze(-1)
+        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+
 
 
 
@@ -681,10 +667,8 @@ class CEC2020_p28(BenchmarkProblem):
         # No equality constraints
         h = np.zeros((n_samples, 0))
       
-        if self.is_constrained:
-            return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
-        else:
-            return None, None, -torch.from_numpy(f).unsqueeze(-1)
+        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+
 
 
 
@@ -725,10 +709,8 @@ class CEC2020_p29(BenchmarkProblem):
         # No equality constraints
         h = np.zeros((n_samples, 0))
       
-        if self.is_constrained:
-            return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
-        else:
-            return None, None, -torch.from_numpy(f).unsqueeze(-1)
+        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+
 
 
 
@@ -790,7 +772,4 @@ class CEC2020_p29(BenchmarkProblem):
         # No equality constraints
         h = np.zeros((n_samples, 0))
       
-        if self.is_constrained:
-            return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
-        else:
-            return None, None, -torch.from_numpy(f).unsqueeze(-1)
+        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
