@@ -2,6 +2,8 @@ import torch
 import numpy as np
 from .base import BenchmarkProblem
 
+global initial_flag
+
 class CEC2020_p40(BenchmarkProblem):
     
     r'''
@@ -27,19 +29,45 @@ class CEC2020_p40(BenchmarkProblem):
         
         n_samples = X.shape[0]
 
-        # Objective function
-        f = 35 * X[:, 0]**0.6 + 35 * X[:, 1]**0.6
-
-        # Equality constraints
-        h = np.zeros((n_samples, 8))
-        h[:, 0] = 200 * X[:, 0] * X[:, 3] - X[:, 2]
-        h[:, 1] = 200 * X[:, 1] * X[:, 5] - X[:, 4]
-        h[:, 2] = X[:, 2] - 10000 * (X[:, 6] - 100)
-        h[:, 3] = X[:, 4] - 10000 * (300 - X[:, 6])
-        h[:, 4] = X[:, 2] - 10000 * (600 - X[:, 7])
-        h[:, 5] = X[:, 4] - 10000 * (900 - X[:, 8])
-        h[:, 6] = X[:, 3] * np.log(np.abs(X[:, 7] - 100) + 1e-8) - X[:, 3] * np.log(600 - X[:, 6] + 1e-8) - X[:, 7] + X[:, 6] + 500
-        h[:, 7] = X[:, 5] * np.log(np.abs(X[:, 8] - X[:, 6]) + 1e-8) - X[:, 5] * np.log(600) - X[:, 8] + X[:, 6] + 600
+        if initial_flag == 0:
+            P = np.loadtxt('input data/FunctionPS2_P.txt')
+            Q = np.loadtxt('input data/FunctionPS2_Q.txt')
+            L = np.loadtxt('input data/FunctionPS14_linedata.txt')
+            initial_flag = 1
+        
+        # Voltage initialization
+        V = np.zeros(38, dtype=complex)
+        V[0] = 1
+        Pc = np.zeros(38)
+        Qc = np.zeros(38)
+        
+        for i in range(n_samples):
+            V[1:38] = X[i, 0:37] + 1j * X[i, 37:74]
+            Pc[[33, 34, 35, 36, 37]] = 1 / np.array([5.102e-03, 1.502e-03, 4.506e-03, 2.253e-03, 2.253e-03])
+            Qc[[33, 34, 35, 36, 37]] = 1 / np.array([0.05, 0.03, 0.05, 0.01, 0.1])
+            w = X[i, 74]
+            V[0] = X[i, 75] + 1e-5
+        
+            # Current calculation
+            Y = ybus(L, w)
+            I = Y @ V
+            Ir = np.real(I)
+            Im = np.imag(I)
+            Vr = np.real(V)
+            Vm = np.imag(V)
+            Psp = Pc * (1 - w) - P[:, 0] * (np.abs(V) / P[:, 4])**P[:, 5]
+            Qsp = Qc * (1 - np.sqrt(Vr**2 + Vm**2)) - Q[:, 0] * (np.abs(V) / Q[:, 4])**Q[:, 5]
+            spI = np.conj((Psp + 1j * Qsp) / V)
+            spIr = np.real(spI)
+            spIm = np.imag(spI)
+            delIr = Ir - spIr
+            delIm = Im - spIm
+            delP2 = Psp - (Vr * Ir + Vm * Im)
+            delQ2 = Qsp - (Vm * Ir - Vr * Im)
+        
+            # Objective calculation
+            f[i, 0] = np.sum(delP2[0:38]**2) + np.sum(delQ2[0:38]**2)
+            h[i, :] = np.concatenate((delIr[0:38], delIm[0:38]))
 
         # No inequality constraints
         g = np.zeros((n_samples, 0))
