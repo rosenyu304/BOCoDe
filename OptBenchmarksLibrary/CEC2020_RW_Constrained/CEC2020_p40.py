@@ -41,7 +41,7 @@ class CEC2020_p40(BenchmarkProblem):
         h[:, 6] = X[:, 3] * np.log(np.abs(X[:, 7] - 100) + 1e-8) - X[:, 3] * np.log(600 - X[:, 6] + 1e-8) - X[:, 7] + X[:, 6] + 500
         h[:, 7] = X[:, 5] * np.log(np.abs(X[:, 8] - X[:, 6]) + 1e-8) - X[:, 5] * np.log(600) - X[:, 8] + X[:, 6] + 600
 
-        # Inequality constraints
+        # No inequality constraints
         g = np.zeros((n_samples, 0))
 
         return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
