@@ -721,6 +721,7 @@ class CEC2020_p14(BenchmarkProblem):
         
         n_samples = X.shape[0]
 
+        # Constant
         S = np.array([[2, 3, 4],
                       [4, 6, 3]])
         t = np.array([[8, 20, 8],
@@ -730,7 +731,8 @@ class CEC2020_p14(BenchmarkProblem):
         beta = 0.6
         Q1 = 40000
         Q2 = 20000
-        
+
+        # Decision variable
         N1 = np.round(x[:, 0])
         N2 = np.round(x[:, 1])
         N3 = np.round(x[:, 2])
