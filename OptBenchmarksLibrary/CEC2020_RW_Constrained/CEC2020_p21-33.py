@@ -27,6 +27,7 @@ class CEC2020_p21(BenchmarkProblem):
         
         n_samples = X.shape[0]
 
+        # Parameters
         Mf = 3
         Ms = 40
         Iz = 55
@@ -96,6 +97,7 @@ class CEC2020_p22(BenchmarkProblem):
         
         n_samples = X.shape[0]
 
+        # Parameter initialization
         X = np.round(np.abs(X))
         Pind = np.array([3, 4, 5])
         mind = np.array([1.75, 2, 2.25, 2.5, 2.75, 3.0])
@@ -179,6 +181,7 @@ class CEC2020_p23(BenchmarkProblem):
         
         n_samples = X.shape[0]
 
+        # Parameter initialization
         d1 = X[:, 0] * 1e-3
         d2 = X[:, 1] * 1e-3
         d3 = X[:, 2] * 1e-3
@@ -405,6 +408,7 @@ class CEC2020_p26(BenchmarkProblem):
         
         n_samples = X.shape[0]
 
+        # Parameter initialized
         X = np.round(X)
 
         Np1, Ng1, Np2, Ng2, Np3, Ng3, Np4, Ng4 = X[:, 0], X[:, 1], X[:, 2], X[:, 3], X[:, 4], X[:, 5], X[:, 6], X[:, 7]
@@ -426,7 +430,8 @@ class CEC2020_p26(BenchmarkProblem):
         yg2 = XYvalue[X[:, 19].astype(int)].T
         yg3 = XYvalue[X[:, 20].astype(int)].T
         yg4 = XYvalue[X[:, 21].astype(int)].T
-        
+
+        # Value initialized
         c1 = np.sqrt((xg1 - xp1) ** 2 + (yg1 - yp1) ** 2)
         c2 = np.sqrt((xg2 - xp1) ** 2 + (yg2 - yp1) ** 2)
         c3 = np.sqrt((xg3 - xp1) ** 2 + (yg3 - yp1) ** 2)
@@ -772,4 +777,165 @@ class CEC2020_p29(BenchmarkProblem):
         # No equality constraints
         h = np.zeros((n_samples, 0))
       
+        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+
+
+
+class CEC2020_p31(BenchmarkProblem):
+    
+    r'''
+    CEC2020 Problem 31
+    ''
+
+    def __init__(self, is_constrained=True, flag=''):
+        super().__init__(dim=4, 
+                         num_obj=1, 
+                         num_cons=1, 
+                         optimizers=[[0] * 4], 
+                         optimum=[[0]], 
+                         bounds=[[12, 60]],
+                         is_constrained=is_constrained,
+                         flag=flag
+                        )
+
+    def evaluate(self, X, to_verify=True):
+        import numpy as np
+
+        X = super().scale(X, to_verify)
+        X = X.numpy()
+        
+        n_samples = X.shape[0]
+
+        x1 = X[:, 0]
+        x2 = X[:, 1]
+        x3 = X[:, 2]
+        x4 = X[:, 3]
+        
+        # Objective function
+        f = (1 / 6.931 - (x1 * x2) / (x3 * x4)) ** 2
+
+        # No inequality constraints
+        g = np.zeros((n_samples, 0))
+
+        # No equality constraints
+        h = np.zeros((n_samples, 0))
+
+        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+
+
+
+class CEC2020_p32(BenchmarkProblem):
+    
+    r'''
+    CEC2020 Problem 32
+    ''
+
+    def __init__(self, is_constrained=True, flag=''):
+        super().__init__(dim=5, 
+                         num_obj=1, 
+                         num_cons=0, 
+                         optimizers=[[0] * 5], 
+                         optimum=[[0]], 
+                         bounds=[[78, 102], [33, 45], [27, 45], [27, 45], [27, 45]],
+                         is_constrained=is_constrained,
+                         flag=flag
+                        )
+
+    def evaluate(self, X, to_verify=True):
+        import numpy as np
+
+        X = super().scale(X, to_verify)
+        X = X.numpy()
+        
+        n_samples = X.shape[0]
+
+        x1 = X[:, 0]
+        x2 = X[:, 1]
+        x3 = X[:, 2]
+        x4 = X[:, 3]
+        x5 = X[:, 4]
+        
+        # Objective function
+        f = 5.3578547 * x3**2 + 0.8356891 * x1 * x5 + 37.293239 * x1 - 40792.141
+
+        # Parameters
+        G1 = 85.334407 + 0.0056858 * x2 * x5 + 0.0006262 * x1 * x4 - 0.0022053 * x3 * x5
+        G2 = 80.51249 + 0.0071317 * x2 * x5 + 0.0029955 * x1 * x2 + 0.0021813 * x3**2
+        G3 = 9.300961 + 0.0047026 * x3 * x5 + 0.0012547 * x1 * x3 + 0.0019085 * x3 * x4
+        
+        # Inequality constraints
+        g = np.zeros((X.shape[0], 6))
+        g[:, 0] = G1 - 92
+        g[:, 1] = -G1
+        g[:, 2] = G2 - 110
+        g[:, 3] = -G2 + 90
+        g[:, 4] = G3 - 25
+        g[:, 5] = -G3 + 20
+
+        # No equality constraints
+        h = np.zeros((n_samples, 0))
+
+        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+
+
+
+
+class CEC2020_p33(BenchmarkProblem):
+    
+    r'''
+    CEC2020 Problem 33
+    ''
+
+    def __init__(self, is_constrained=True, flag=''):
+        super().__init__(dim=30, 
+                         num_obj=1, 
+                         num_cons=0, 
+                         optimizers=[[0] * 30], 
+                         optimum=[[0]], 
+                         bounds=[[78, 102], [33, 45], [27, 45], [27, 45], [27, 45]],
+                         is_constrained=is_constrained,
+                         flag=flag
+                        )
+
+    def evaluate(self, X, to_verify=True):
+        import numpy as np
+
+        X = super().scale(X, to_verify)
+        X = X.numpy()
+        
+        n_samples = X.shape[0]
+
+        nely = 10
+        nelx = 3
+        penal = 3
+        f = np.zeros((ps, 1))  # Objective function values
+        g = np.zeros((ps, nely * nelx))  # Gradient values (flattened)
+        
+        for i in range(ps):
+            X = np.array([X[i, 0:10], X[i, 10:20], X[i, 20:30]]).T
+        
+            # FE-analysis
+            U = FE(3, 10, X, 3)
+        
+            # Objective function and sensitivity analysis
+            KE = lk()
+            c = 0.0
+            dc = np.zeros_like(X)
+        
+            for ely in range(nely):
+                for elx in range(nelx):
+                    n1 = (nely + 1) * (elx - 1) + ely
+                    n2 = (nely + 1) * elx + ely
+                    Ue = U[[2 * n1 - 1, 2 * n1, 2 * n2 - 1, 2 * n2, 2 * n2 + 1, 2 * n2 + 2, 2 * n1 + 1, 2 * n1 + 2], 0]
+                    c += X[ely, elx] ** penal * np.dot(Ue.T, np.dot(KE, Ue))
+                    dc[ely, elx] = -penal * X[ely, elx] ** (penal - 1) * np.dot(Ue.T, np.dot(KE, Ue))
+        
+            # Filtering of sensitivities
+            dc = check(3, 10, 1.5, X, dc)
+            f[i, 0] = c
+            g[i, :] = dc.flatten()
+
+        # No equality constraints
+        h = np.zeros((n_samples, 0))
+
         return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
