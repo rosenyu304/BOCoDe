@@ -2,6 +2,8 @@ import torch
 import numpy as np
 from .base import BenchmarkProblem
 
+global initial_flag
+
 class CEC2020_p21(BenchmarkProblem):
     
     r'''
