@@ -892,7 +892,7 @@ class CEC2020_p33(BenchmarkProblem):
                          num_cons=0, 
                          optimizers=[[0] * 30], 
                          optimum=[[0]], 
-                         bounds=[[78, 102], [33, 45], [27, 45], [27, 45], [27, 45]],
+                         bounds=[[0.001, 1]],
                          is_constrained=is_constrained,
                          flag=flag
                         )
