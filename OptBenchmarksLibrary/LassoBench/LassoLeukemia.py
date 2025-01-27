@@ -1,7 +1,7 @@
 import torch
 from ..base import *
 
-class LassoLeu(BenchmarkProblem):
+class LassoLeukemia(BenchmarkProblem):
 
     r'''
     ...
@@ -9,7 +9,7 @@ class LassoLeu(BenchmarkProblem):
 
     def __init__(self):
         
-        tags = ["LassoLeu",
+        tags = ["LassoLeukemia",
                 "-----------------------------",
                 "OBJECTIVES: Single Objective (1)", 
                 "CONSTRAINTS: N/A", 
@@ -28,7 +28,7 @@ class LassoLeu(BenchmarkProblem):
 
         import LassoBench
         fx = torch.zeros(X.shape[0],1)
-        real_bench = LassoBench.RealBenchmark(pick_data='leu')
+        real_bench = LassoBench.RealBenchmark(pick_data='leukemia')
         for i in range(X.shape[0]):
             # loss = real_bench.evaluate(X[i,:].numpy())
             fx[i,0] = -real_bench.evaluate(X[i,:].to(torch.double).numpy())
