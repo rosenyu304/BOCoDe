@@ -8,6 +8,7 @@ class LassoSyntHigh(BenchmarkProblem):
     '''
 
     def __init__(self):
+        
         tags = ["LassoSyntHigh",
                 "-----------------------------",
                 "OBJECTIVES: Single Objective (1)", 
@@ -16,6 +17,7 @@ class LassoSyntHigh(BenchmarkProblem):
                 "SCALABLE: 300-Dim", 
                 "IMPORTS: LassoBench",
                ]
+        
         super().__init__(dim=300, 
                          num_obj = 1, 
                          num_cons = 0, 
