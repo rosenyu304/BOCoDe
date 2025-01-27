@@ -8,15 +8,17 @@ class LassoSyntSimple(BenchmarkProblem):
     '''
 
     def __init__(self):
+        
         tags = ["LassoSyntSimple",
                 "-----------------------------",
                 "OBJECTIVES: Single Objective (1)", 
                 "CONSTRAINTS: N/A", 
                 "SPACE: Continuous", 
-                "SCALABLE: 300-Dim", 
+                "SCALABLE: 60-Dim", 
                 "IMPORTS: LassoBench",
                ]
-        super().__init__(dim=300, 
+        
+        super().__init__(dim=60, 
                          num_obj = 1, 
                          num_cons = 0, 
                          bounds = [[-1, 1]], 
@@ -26,7 +28,7 @@ class LassoSyntSimple(BenchmarkProblem):
 
         import LassoBench
         fx = torch.zeros(X.shape[0],1)
-        synt_bench = LassoBench.SyntheticBenchmark(pick_bench='synt_high')
+        synt_bench = LassoBench.SyntheticBenchmark(pick_bench='synt_simple')
         for i in range(X.shape[0]):
             fx[i,0] = -synt_bench.evaluate(X[i,:].to(torch.double).numpy())
 
