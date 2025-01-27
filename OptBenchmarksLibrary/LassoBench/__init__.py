@@ -2,7 +2,7 @@ from .LassoDNA import *
 from .LassoDiabetes import *
 from .LassoBreastCancer import *
 from .LassoRCV1 import *
-from .LassoLeu import *
+from .LassoLeukemia import *
 from .LassoSyntSimple import *
 from .LassoSyntMedium import *
 from .LassoSyntHigh import *
@@ -13,7 +13,7 @@ __all__ = ['LassoDNA',
            'LassoDiabetes',
            'LassoBreastCancer',
            'LassoRCV1',
-           'LassoLeu',
+           'LassoLeukemia',
            'LassoSyntSimple',
            'LassoSyntMedium',
            'LassoSyntHigh', 
