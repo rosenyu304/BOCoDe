@@ -7,9 +7,8 @@ class LassoRCV1(BenchmarkProblem):
     ...
     '''
 
-    
-
     def __init__(self):
+        
         tags = ["LassoRCV1",
                 "-----------------------------",
                 "OBJECTIVES: Single Objective (1)", 
