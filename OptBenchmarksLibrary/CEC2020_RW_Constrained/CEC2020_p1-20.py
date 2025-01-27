@@ -105,8 +105,8 @@ class CEC2020_p3(BenchmarkProblem):
         super().__init__(dim=7, 
                          num_obj=1, 
                          num_cons=0, 
-                         optimizers=[[0] * 7], 
-                         optimum=[[0]], 
+                         optimizers=[[1698.18, 53.66, 3031.3, 90.11, 95.0, 10.50, 153.53]], 
+                         optimum=[[1772.77]], 
                          bounds=[[1000, 2000], [0, 100], [2000, 4000], [0, 100], [0, 100], [0, 20], [0, 200]],
                          is_constrained=is_constrained,
                          flag=flag
