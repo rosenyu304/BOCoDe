@@ -1,7 +1,7 @@
 import torch
 from ..base import *
 
-class LassoBC(BenchmarkProblem):
+class LassoBreastCancer(BenchmarkProblem):
 
     r'''
     ...
@@ -9,7 +9,7 @@ class LassoBC(BenchmarkProblem):
 
     def __init__(self):
         
-        tags = ["LassoBC",
+        tags = ["LassoBreastCancer",
                 "-----------------------------",
                 "OBJECTIVES: Single Objective (1)", 
                 "CONSTRAINTS: N/A", 
