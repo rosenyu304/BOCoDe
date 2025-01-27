@@ -29,7 +29,7 @@ class LassoRCV1(BenchmarkProblem):
 
         import LassoBench
         fx = torch.zeros(X.shape[0],1)
-        real_bench = LassoBench.RealBenchmark(pick_data='RCV1')
+        real_bench = LassoBench.RealBenchmark(pick_data='rcv1')
         for i in range(X.shape[0]):
             # loss = real_bench.evaluate(X[i,:].numpy())
             fx[i,0] = -real_bench.evaluate(X[i,:].to(torch.double).numpy())
