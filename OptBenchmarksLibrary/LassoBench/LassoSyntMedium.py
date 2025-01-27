@@ -17,6 +17,7 @@ class LassoSyntMedium(BenchmarkProblem):
                 "SCALABLE: 100-Dim", 
                 "IMPORTS: LassoBench",
                ]
+        
         super().__init__(dim=100, 
                          num_obj = 1, 
                          num_cons = 0, 
