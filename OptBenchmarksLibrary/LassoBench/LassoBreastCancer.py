@@ -28,7 +28,7 @@ class LassoBreastCancer(BenchmarkProblem):
 
         import LassoBench
         fx = torch.zeros(X.shape[0],1)
-        real_bench = LassoBench.RealBenchmark(pick_data='bc')
+        real_bench = LassoBench.RealBenchmark(pick_data='breast_cancer')
         for i in range(X.shape[0]):
             # loss = real_bench.evaluate(X[i,:].numpy())
             fx[i,0] = -real_bench.evaluate(X[i,:].to(torch.double).numpy())
