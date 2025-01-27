@@ -8,6 +8,7 @@ class LassoSyntHigh(BenchmarkProblem):
     '''
 
     def __init__(self):
+        
         tags = ["LassoSyntHard",
                 "-----------------------------",
                 "OBJECTIVES: Single Objective (1)", 
