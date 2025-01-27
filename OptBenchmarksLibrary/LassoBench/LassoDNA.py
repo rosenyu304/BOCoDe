@@ -7,8 +7,6 @@ class LassoDNA(BenchmarkProblem):
     ...
     '''
 
-    
-
     def __init__(self):
         
         tags = ["LassoDNA",
