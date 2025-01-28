@@ -33,13 +33,13 @@ class TwoBarTruss(BenchmarkProblem):
 
         fx = torch.zeros((n, self.num_obj))
         # negate for maximization
-        fx[:, 0] = -(2 * rho * h * x2 * torch.sqrt(1 + x1**2))
-        fx[:, 1] = -(P * h * (1 + x1**2)**1.5 * (1 + x1**4)**0.5) / (2 * torch.sqrt(2) * E * x1**2 * x2)
+        fx[:, 0] = -(2 * rho * h * x2 * (1 + x1**2)**0.5)
+        fx[:, 1] = -(P * h * (1 + x1**2)**1.5 * (1 + x1**4)**0.5) / (2 * 2**0.5 * E * x1**2 * x2)
 
         gx = torch.zeros((n, self.num_cons))
-        gx[:, 0] = (P * (1 + x1) * (1 + x1**2)**0.5) / (2 * torch.sqrt(2) * x1 * x2) - sigma_0
-        gx[:, 1] = (P * (x1 - 1) * (1 + x1**2)**0.5) / (2 * torch.sqrt(2) * x1 * x2) - sigma_0
+        gx[:, 0] = (P * (1 + x1) * (1 + x1**2)**0.5) / (2 * 2**0.5 * x1 * x2) - sigma_0
+        gx[:, 1] = (P * (x1 - 1) * (1 + x1**2)**0.5) / (2 * 2**0.5 * x1 * x2) - sigma_0
         gx[:, 2] = x1_lower_bound - x1
         gx[:, 3] = x2_lower_bound - x2
-        
+
         return gx, fx
