@@ -4,12 +4,13 @@ from .base import BenchmarkProblem
 class WaterResources(BenchmarkProblem):
 
     r'''
-    https://github.com/zi-w/Ensemble-Bayesian-Optimization/tree/4e6f9ed04833cc2e21b5906b1181bc067298f914
+    K. Musselman and J. Talavage. A trade-off cut approach to multiple objective optimization. 
+    Operations Research 28(6):1424–1435, 1980    
     '''
 
     # 3D objective, 7 constraints, X = 7-by-dim
 
-    tags = {"multi_objective", "unconstrained", "continuous", "3D", "extra_imports"}
+    tags = {"multi_objective", "unconstrained", "continuous", "3D"}
 
     def __init__(self):
         super().__init__(dim, num_obj = 5, num_cons = 7, bounds = [[0.01, 0.45], [0.01, 0.10], [0.01, 0.10]])
