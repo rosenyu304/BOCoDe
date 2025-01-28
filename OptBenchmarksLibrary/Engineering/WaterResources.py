@@ -10,7 +10,7 @@ class WaterResources(BenchmarkProblem):
 
     # 3D objective, 7 constraints, X = 7-by-dim
 
-    tags = {"multi_objective", "unconstrained", "continuous", "3D"}
+    tags = {"multi_objective", "constrained", "continuous", "3D"}
 
     def __init__(self):
         super().__init__(dim = 3, num_obj = 5, num_cons = 7, bounds = [[0.01, 0.45], [0.01, 0.10], [0.01, 0.10]])
