@@ -12,7 +12,7 @@ class RobotPush(BenchmarkProblem):
     tags = {"single_objective", "unconstrained", "continuous", "14D", "extra_imports"}
 
     def __init__(self):
-        super().__init__(dim = 14, num_obj = 1, num_cons = 0, bounds = [[0,1]])
+        super().__init__(dim = 14, num_obj = 1, num_cons = 0, bounds = [[-5, 5], [-5, 5], [-10, 10], [-10, 10], [2, 30], [0, 2*np.pi], [-5, 5], [-5, 5], [-10, 10], [-10, 10], [2, 30], [0, 2*np.pi], [-5, 5], [-5, 5]])
 
     def evaluate(self, X, to_verify = True):
         f = PushReward()
