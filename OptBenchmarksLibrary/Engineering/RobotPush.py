@@ -23,7 +23,7 @@ class RobotPush(BenchmarkProblem):
         for i in range(X.shape[0]):
             fx[i,0] = f(X[i,:].numpy())
 
-      return None, fx
+        return None, fx
 
 
 ##############################
