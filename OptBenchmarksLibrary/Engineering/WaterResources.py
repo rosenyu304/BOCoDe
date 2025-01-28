@@ -13,7 +13,7 @@ class WaterResources(BenchmarkProblem):
     tags = {"multi_objective", "unconstrained", "continuous", "3D"}
 
     def __init__(self):
-        super().__init__(dim, num_obj = 5, num_cons = 7, bounds = [[0.01, 0.45], [0.01, 0.10], [0.01, 0.10]])
+        super().__init__(dim = 3, num_obj = 5, num_cons = 7, bounds = [[0.01, 0.45], [0.01, 0.10], [0.01, 0.10]])
 
     def evaluate(self, X, to_verify = True):
         X = super().scale(X, to_verify)
