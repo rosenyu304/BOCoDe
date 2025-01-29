@@ -15,7 +15,7 @@ class CarSideImpact(BenchmarkProblem):
     tags = {"multi_objective", "constrained", "continuous", "7D"}
 
     def __init__(self):
-        super().__init__(dim = 7, num_obj = 3, num_cons = 10, bounds = [[0.5, 1.5], [0.45, 1.35], [0.5, 1.5], [0.5, 1.5], [0.875, 2.625, [0.4, 1.2], [0.4, 1.2]])
+        super().__init__(dim = 7, num_obj = 3, num_cons = 10, bounds = [[0.5, 1.5], [0.45, 1.35], [0.5, 1.5], [0.5, 1.5], [0.875, 2.625], [0.4, 1.2], [0.4, 1.2]])
 
     def evaluate(self, X, to_verify = True):
         X = super().scale(X, to_verify)
