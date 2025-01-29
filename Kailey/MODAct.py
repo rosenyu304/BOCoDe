@@ -12,7 +12,7 @@ class MODAct(BenchmarkProblem):
 
     tags = {"single_objective", "multi_objective", "constrained", "continuous", "extra_imports", "20D"}
 
-    def __init__(self, problem_name, single_objective = True):
+    def __init__(self, problem_name, single_objective = False):
         import modact.modact.problems as pb
         self.prob = pb.get_problem(problem_name)
         xl, xu = self.prob.bounds()
