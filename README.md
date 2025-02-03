@@ -3,7 +3,9 @@
 
 # ToDos (The orders of all bullet points are the priority)
 
-## 0. Understand the framework
+
+
+## 0. Understand the framework (ignore this)
 Look at these files to see how the general problem setup works & see examples:
 - OptBenchmarksLibrary/Library_Test.ipynb
 - OptBenchmarksLibrary/base.py
@@ -105,7 +107,10 @@ Therefore, when testing each function:
 - Does not have to be long, just provide a 1 or 2 line sentence summary of what each problem is about and give an example how to use each problem's code (aka what configs) in their page
   - If they are coming from some source, put the original source link and cite it
   - If not, write the formulation of the problem in latex
- 
+
+## 3. License issue
+- Check the copy right of the code we download from github or the equations we taken from papers
+
 # Notes:
 - Let's try to finish this by the end of this month!!
 - Let me know if you have any suggestion to the base.py's basic framework. Much thanks.
