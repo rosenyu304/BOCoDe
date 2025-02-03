@@ -6,59 +6,7 @@
 
 
 ## 0. Understand the framework (ignore this)
-Look at these files to see how the general problem setup works & see examples:
-- OptBenchmarksLibrary/Library_Test.ipynb
-- OptBenchmarksLibrary/base.py
-- OptBenchmarksLibrary/config.py
-- Functions that are done (other functions I think still use the old version of set up):
-  - Ackley and others in the Synthetic folder
-  - Example functions in LassoBench
-  - BraninCurrin in BoTorch folder
-  - BBOB
 
-The main change is the .evaluate() function
-```
-def evaluate(self, X):
-        # Process input
-        X = self.INPUT_TYPE_CONVERT(X)
-        
-        if self.MIXED.is_mixed:
-            X = self.mixed_int_scale(X)
-        else:
-            X = self.scale(X)
-        
-        # Call the actual evaluation implementation
-        gx, fx = self._evaluate_implementation(X)
-
-        # Process Constraints
-        gx, fx = self.constraint_processing(gx, fx)
-
-        # Process if MultiObjective
-        fx = self.multiobj_processing(fx)
-        
-        # Process output type
-        fx = self.OUTPUT_TYPE_CONVERT(fx)
-        if gx != None:
-            gx = self.OUTPUT_TYPE_CONVERT(gx)
-
-        # Negate for minimization setting
-        if not self.MAXIMIZATION:
-            fx = -fx
-        
-        return gx, fx
-```
-
-Essentially, what we are implementing is the `_evaluate_implementation` function. When you implement each function now, you no longer have to scale it at the very bottom level.
-The only thing you'll have to consider is:
-- Set up the correct configs for constraints, multiobjective, or mix-integer problems!
-- Passing in the correct bounds
-- Return GX and FX (GX is None only for unconstrained functions)
- 
-Therefore, when testing each function:
-- For every function: make sure the function values are the EXACT SAME as the paper/library
-- For constrained problems: test if the 3 different configs ALL works well
-- For multiobjective problems: test if 4 different configs ALL works well
-- (At this stage, we should maybe(?) consider if writing test cases / test files are needed)
 
 ## 1. Add these functions
 - Go through all functions I put in `Synthetics`, `Engineering`, `LassoBench`, `BoTorch`, and `BBOB` that they work in this format (since I think put some of the old version there)
