@@ -1,8 +1,6 @@
 import torch
 from ..base import *
 
-
-
 class Bukin(BenchmarkProblem):
 
     r'''
@@ -23,17 +21,17 @@ class Bukin(BenchmarkProblem):
         super().__init__(dim = 2, 
                          num_obj = 1, 
                          num_cons = 0, 
+                         optimum=[[0]],
+                         x_optimum=[[-10,1]],
                          bounds = [[-15.0, -5.0], [-3.0, 3.0]],
                          tags = tags
                         )
 
     def _evaluate_implementation(self, X):
         
-
         part1 = 100.0 * torch.sqrt(torch.abs(X[..., 1] - 0.01 * X[..., 0] ** 2))
         part2 = 0.01 * torch.abs(X[..., 0] + 10.0)
         fx = -(part1 + part2)
 
         return None, fx
-
-
+    

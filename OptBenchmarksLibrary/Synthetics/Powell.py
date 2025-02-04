@@ -43,5 +43,4 @@ class Powell(BenchmarkProblem):
         fx = fx.reshape((n, 1))
 
         return None, fx
-
-
+    

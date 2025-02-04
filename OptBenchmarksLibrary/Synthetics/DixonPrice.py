@@ -1,10 +1,6 @@
 import torch
 from ..base import *
 
-
-
-
-
 class DixonPrice(BenchmarkProblem):
 
     r'''
@@ -41,5 +37,3 @@ class DixonPrice(BenchmarkProblem):
         fx = fx.reshape((n, 1))
 
         return None, fx
-
-

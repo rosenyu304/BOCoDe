@@ -17,6 +17,7 @@ class Griewank(BenchmarkProblem):
                 "SCALABLE: N-Dim", 
                 "IMPORTS: BoTorch",
                ]
+        
         super().__init__(dim, 
                          num_obj = 1, 
                          num_cons = 0, 
@@ -36,6 +37,3 @@ class Griewank(BenchmarkProblem):
         fx = fx.reshape((n, 1))
 
         return None, fx
-
-
-

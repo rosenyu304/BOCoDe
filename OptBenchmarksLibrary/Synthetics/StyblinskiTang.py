@@ -17,6 +17,7 @@ class StyblinskiTang(BenchmarkProblem):
                 "SCALABLE: N-Dim", 
                 "IMPORTS: BoTorch",
                ]
+        
         super().__init__(dim = dim, 
                          num_obj = 1, 
                          num_cons = 0, 

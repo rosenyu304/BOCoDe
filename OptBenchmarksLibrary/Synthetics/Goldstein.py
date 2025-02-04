@@ -8,9 +8,7 @@ class Goldstein(BenchmarkProblem):
     LVGP paper: https://www.nature.com/articles/s41598-020-60652-9
     '''
 
-
     def __init__(self, is_mixed = True, debug = False):
-
 
         tags = ["Goldstein",
                 "-----------------------------",
@@ -31,11 +29,10 @@ class Goldstein(BenchmarkProblem):
                          tags = tags
                         )
 
-    def _evaluate_implementation(self, X ):
+    def _evaluate_implementation(self, X):
 
         # x0: [-2, 2]
         # x1: {-2, -1, 0, 1, 2}
-        
 
         if self.is_mixed:
             X[:,1] = super().cont_to_disc(X[:,1], torch.tensor([-2, -1, 0, 1, 2]))

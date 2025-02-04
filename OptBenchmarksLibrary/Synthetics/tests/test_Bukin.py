@@ -12,7 +12,7 @@ def test_bukin_evaluate():
     X[:, 0] = X[:, 0] * 10 - 15
     X[:, 1] = X[:, 1] * 6 - 3
 
-    gx, fx = problem._evaluate_implementation(X)
+    _, fx = problem._evaluate_implementation(X)
 
     assert fx.shape == (rand_test_points, ), f"Unexpected fx shape: {fx.shape}"
 
@@ -20,4 +20,4 @@ def test_bukin_evaluate():
 
     # TODO: Add test points to ensure that fx is calculated correctly
 
-    print(f"Test passed for dim={2}")
+    print(f"Test passed")

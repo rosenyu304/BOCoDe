@@ -1,8 +1,6 @@
 import torch
 from ..base import *
 
-
-
 class Ackley(BenchmarkProblem):
 
     r'''
@@ -11,8 +9,6 @@ class Ackley(BenchmarkProblem):
     (2) Eriksson D, Poloczek M (2021) Scalable constrained bayesian optimization.
     In: International Conference on Artificial Intelligence and Statistics, PMLR, pp 730–738
     '''
-
-    
 
     def __init__(self, 
                  dim=2, 
@@ -30,7 +26,8 @@ class Ackley(BenchmarkProblem):
         super().__init__(dim, 
                          num_obj = 1, 
                          num_cons = 2, 
-                         optimum = [[0]], 
+                         optimum = [[0]],
+                         x_optimum=[[0]*dim], 
                          bounds = [[-5, 10]],
                          CONSTRAINTS = CONSTRAINTS,
                          tags = tags,
@@ -55,5 +52,4 @@ class Ackley(BenchmarkProblem):
         gx[:, 1] = (torch.norm(X, p=2, dim=1)-5)
 
         return gx, fx
-
-
+    

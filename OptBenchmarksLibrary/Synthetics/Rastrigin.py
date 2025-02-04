@@ -38,6 +38,3 @@ class Rastrigin(BenchmarkProblem):
         fx = fx.reshape((n, 1))
 
         return None, fx
-
-
-

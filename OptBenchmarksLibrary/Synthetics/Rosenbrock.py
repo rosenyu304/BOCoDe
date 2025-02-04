@@ -8,6 +8,7 @@ class Rosenbrock(BenchmarkProblem):
     '''
 
     def __init__(self, dim=2):
+
         tags = ["Rosenbrock",
                 "-----------------------------",
                 "OBJECTIVES: Single Objective (1)", 
@@ -16,6 +17,7 @@ class Rosenbrock(BenchmarkProblem):
                 "SCALABLE: N-Dim", 
                 "IMPORTS: BoTorch",
                ]
+        
         super().__init__(dim, 
                          num_obj = 1, 
                          num_cons = 0, 
@@ -37,5 +39,3 @@ class Rosenbrock(BenchmarkProblem):
         fx = fx.reshape((n, 1))
 
         return None, fx
-
-
