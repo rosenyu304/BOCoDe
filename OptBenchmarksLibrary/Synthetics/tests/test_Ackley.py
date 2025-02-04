@@ -1,0 +1,30 @@
+import torch
+import pytest
+from .. import Ackley
+
+@pytest.mark.parametrize("dim", [2, 5, 10])
+def test_ackley_evaluate(dim):
+    problem = Ackley(dim=dim)
+
+    rand_test_points = 3 # Number of random points to test
+    
+    # Generate random points within constraints
+    X = torch.rand((rand_test_points, dim)) * 15 - 5
+
+    gx, fx = problem._evaluate_implementation(X)
+
+    assert gx.shape == (rand_test_points, problem.num_cons), f"Unexpected gx shape: {gx.shape}"
+    assert fx.shape == (rand_test_points, 1), f"Unexpected fx shape: {fx.shape}"
+
+    assert torch.isfinite(fx).all(), "fx contains NaN or Inf values"
+
+    # Check constraints by repeating calculations
+    sum_constraints = torch.sum(X, dim=1)
+    norm_constraints = torch.norm(X, p=2, dim=1) - 5
+
+    assert torch.allclose(gx[:, 0], sum_constraints, atol=1e-5), "gx[:, 0] does not match expected sum constraint"
+    assert torch.allclose(gx[:, 1], norm_constraints, atol=1e-5), "gx[:, 1] does not match expected norm constraint"
+
+    # TODO: Add test points to ensure that fx is calculated correctly
+
+    print(f"Test passed for dim={dim}")
