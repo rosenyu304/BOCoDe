@@ -7,7 +7,7 @@
 
 ## 0. Understand the framework (ignore this)
 - Look in things in folder "OptBenchmarksLibrary" and "Kailey"
-- "test_funtions" are the ones that are old
+- "test_funtions" are the ones that are old. (ignore it)
 
 ## 1. Add these functions
 - Go through all functions I put in `Synthetics`, `Engineering`, `LassoBench`, `BoTorch`, and `BBOB` that they work in this format (since I think put some of the old version there)
