@@ -5,7 +5,7 @@
 
 
 
-## 0. Understand the framework (ignore this)
+## 0. Understand the framework 
 - Look in things in folder "OptBenchmarksLibrary" and "Kailey"
 - "test_funtions" are the ones that are old. (ignore it)
 
