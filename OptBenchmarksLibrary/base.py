@@ -8,9 +8,9 @@ class BenchmarkProblem:
         bound: Union[Tuple, Set],
         num_objectives: int = 1,
         num_constraints: int = 0,
-        ref_point: Optional[torch.Tensor] = None,
         x_opt: Optional[torch.Tensor] = None,
-        optimum: Optional[torch.Tensor] = None
+        optimum: Optional[torch.Tensor] = None,
+        ref_point: Optional[torch.Tensor] = None
     ) -> None:
         """Initialize the BenchmarkProblem class.
         
@@ -19,17 +19,17 @@ class BenchmarkProblem:
             bound (Union[Tuple, Set]): Bounds of the decision variables.
             num_objectives (int, optional): Number of objective functions. Defaults to 1.
             num_constraints (int, optional): Number of constraint functions. Defaults to 0.
-            ref_point (torch.Tensor, optional): Reference point for calculating hypervolume. Defaults to None.
             x_opt (torch.Tensor, optional): The decision variables that maximize the objective function(s). Defaults to None.
             optimum (torch.Tensor, optional): The optimal objective values corresponding to the x_opt. Defaults to None.
+            ref_point (torch.Tensor, optional): Reference point for calculating hypervolume. Defaults to None.
         """
         self.dim = dim
         self.bound = bound
         self.num_objectives = num_objectives
         self.num_constraints = num_constraints
-        self.ref_point = ref_point
         self.x_opt = x_opt
         self.optimum = optimum
+        self.ref_point = ref_point
 
 
 
