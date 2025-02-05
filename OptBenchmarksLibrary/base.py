@@ -18,6 +18,8 @@ class BenchmarkProblem:
             ref_point (torch.Tensor): Reference point for the multi-objective problem.
         """
         self.dim = dim
+        self.num_objectives = num_objectives
+        self.num_constraints = num_constraints
         self.bound = bound
         self.ref_point = ref_point
 
