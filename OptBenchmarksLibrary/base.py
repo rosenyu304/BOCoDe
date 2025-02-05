@@ -12,8 +12,8 @@ class BenchmarkProblem:
         
         Args:
             dim (int, optional): Dimension of the problem. Defaults to 1.
-            bound (Union[Tuple, Set]): Bounds of the problem space.
-            ref_point (torch.Tensor): Reference point for the problem.
+            bound (Union[Tuple, Set]): Bounds of the problem space. Tuple (lower_bound, upper_bound) for continuous values. Set {discrete values} for discrete values.
+            ref_point (torch.Tensor): Reference point for the multi-objective problem.
         """
         self.dim = dim
         self.bound = bound
