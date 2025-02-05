@@ -5,8 +5,9 @@ from typing import Union, Tuple, Set, Optional
 class BenchmarkProblem:
     def __init__(
         self,
-        bounds: Union[Tuple, Set],
+
         dim: int = 1,
+        bounds: Union[Tuple, Set] = None,
         num_objectives: int = 1,
         num_constraints: int = 0,
         x_opt: Optional[torch.Tensor] = None,
