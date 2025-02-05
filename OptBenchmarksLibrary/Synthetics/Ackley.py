@@ -39,7 +39,7 @@ class Ackley(BenchmarkProblem):
         
         n = X.size(0)
 
-        gx = torch.zeros((n, self.num_cons))
+        gx = torch.zeros((n, self.num_constraints))
 
         fun = Ackley_imported(dim=self.dim, negate=True)
         fun.bounds[0, :].fill_(self.bounds[0][0])

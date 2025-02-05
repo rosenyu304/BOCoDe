@@ -13,7 +13,7 @@ def test_ackley_evaluate(dim):
 
     gx, fx = problem._evaluate_implementation(X)
 
-    assert gx.shape == (rand_test_points, problem.num_cons), f"Unexpected gx shape: {gx.shape}"
+    assert gx.shape == (rand_test_points, problem.num_constraints), f"Unexpected gx shape: {gx.shape}"
     assert fx.shape == (rand_test_points, 1), f"Unexpected fx shape: {fx.shape}"
 
     assert torch.isfinite(fx).all(), "fx contains NaN or Inf values"
