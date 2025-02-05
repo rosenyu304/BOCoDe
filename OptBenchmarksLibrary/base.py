@@ -1,16 +1,18 @@
 import torch
+from .configs import *
 from typing import Union, Tuple, Set, Optional
 
 class BenchmarkProblem:
     def __init__(
         self,
+        bounds: Union[Tuple, Set],
         dim: int = 1,
-        bound: Union[Tuple, Set],
         num_objectives: int = 1,
         num_constraints: int = 0,
         x_opt: Optional[torch.Tensor] = None,
         optimum: Optional[torch.Tensor] = None,
-        ref_point: Optional[torch.Tensor] = None
+        ref_point: Optional[torch.Tensor] = None,
+        **kwargs
     ) -> None:
         """Initialize the BenchmarkProblem class.
         
@@ -24,14 +26,15 @@ class BenchmarkProblem:
             ref_point (torch.Tensor, optional): Reference point for calculating hypervolume. Defaults to None.
         """
         self.dim = dim
-        self.bound = bound
+        self.bounds = bounds
         self.num_objectives = num_objectives
         self.num_constraints = num_constraints
         self.x_opt = x_opt
         self.optimum = optimum
         self.ref_point = ref_point
 
-
+        for key, value in kwargs.items():
+            setattr(self, key, value)
 
 
 # import torch
