@@ -5,6 +5,8 @@ class BenchmarkProblem:
     def __init__(
         self,
         dim: int = 1,
+        num_objectives: int = 1,
+        num_constraints: int = 0,
         bound: Union[Tuple, Set],
         ref_point: torch.Tensor
     ) -> None:
