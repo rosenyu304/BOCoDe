@@ -14,10 +14,13 @@ def test_bukin_evaluate():
 
     _, fx = problem._evaluate_implementation(X)
 
-    assert fx.shape == (rand_test_points, ), f"Unexpected fx shape: {fx.shape}"
+    assert fx.shape == (rand_test_points, 1), f"Unexpected fx shape: {fx.shape}"
+
+    print(fx)
 
     assert torch.isfinite(fx).all(), "fx contains NaN or Inf values"
 
     # TODO: Add test points to ensure that fx is calculated correctly
 
     print(f"Test passed")
+test_bukin_evaluate()
