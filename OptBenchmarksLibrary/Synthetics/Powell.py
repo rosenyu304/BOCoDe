@@ -19,8 +19,8 @@ class Powell(BenchmarkProblem):
                ]
         
         super().__init__(dim, 
-                         num_obj = 1, 
-                         num_cons = 0, 
+                         num_objectives = 1, 
+                         num_constraints = 0, 
                          bounds = [[-4, 5]],
                          tags = tags,
                          debug = debug

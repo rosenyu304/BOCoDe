@@ -20,8 +20,8 @@ class Goldstein(BenchmarkProblem):
                ]
         
         super().__init__(dim = 2, 
-                         num_obj = 1, 
-                         num_cons = 0, 
+                         num_objectives = 1, 
+                         num_constraints = 0, 
                          optimum = [-3],
                          bounds = [[-2, 2], [0, 1]],
                          is_mixed = is_mixed,

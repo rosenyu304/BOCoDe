@@ -24,8 +24,8 @@ class Ackley(BenchmarkProblem):
                ]
         
         super().__init__(dim, 
-                         num_obj = 1, 
-                         num_cons = 2, 
+                         num_objectives = 1, 
+                         num_constraints = 2, 
                          optimum = [[0]],
                          x_optimum=[[0]*dim], 
                          bounds = [[-5, 10]],

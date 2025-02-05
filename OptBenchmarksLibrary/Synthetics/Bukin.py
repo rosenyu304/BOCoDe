@@ -19,8 +19,8 @@ class Bukin(BenchmarkProblem):
                ]
         
         super().__init__(dim = 2, 
-                         num_obj = 1, 
-                         num_cons = 0, 
+                         num_objectives = 1, 
+                         num_constraints = 0, 
                          optimum=[[0]],
                          x_optimum=[[-10,1]],
                          bounds = [[-15.0, -5.0], [-3.0, 3.0]],
