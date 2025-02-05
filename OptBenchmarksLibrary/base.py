@@ -31,6 +31,7 @@ class BenchmarkProblem():
                  MAXIMIZATION: bool = True,
                  debug: bool = False, 
                  flag = '',
+                 **kwargs
                 ):
         '''
         Parameters:
@@ -134,6 +135,9 @@ class BenchmarkProblem():
 
         self.MAXIMIZATION = MAXIMIZATION
         self.flag = flag
+
+        for key, value in kwargs.items():
+            setattr(self, key, value)
 
 
     def INPUT_TYPE_CONVERT(self, X):
