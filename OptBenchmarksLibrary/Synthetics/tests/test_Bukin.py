@@ -23,4 +23,3 @@ def test_bukin_evaluate():
     # TODO: Add test points to ensure that fx is calculated correctly
 
     print(f"Test passed")
-test_bukin_evaluate()

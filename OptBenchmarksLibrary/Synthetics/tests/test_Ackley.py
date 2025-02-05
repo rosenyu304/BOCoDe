@@ -2,7 +2,7 @@ import torch
 import pytest
 from .. import Ackley
 
-@pytest.mark.parametrize("dim", [2, 5, 10])
+@pytest.mark.parametrize("dim", [1, 2, 5, 10])
 def test_ackley_evaluate(dim):
     problem = Ackley(dim=dim)
 
