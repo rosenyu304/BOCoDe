@@ -27,7 +27,7 @@ class Ackley(BenchmarkProblem):
                          num_objectives = 1, 
                          num_constraints = 2, 
                          optimum = [[0]],
-                         x_optimum=[[0]*dim], 
+                         x_opt=[[0]*dim], 
                          bounds = [[-5, 10]]*dim,
                          CONSTRAINTS = CONSTRAINTS,
                          tags = tags,

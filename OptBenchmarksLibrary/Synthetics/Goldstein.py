@@ -19,12 +19,13 @@ class Goldstein(BenchmarkProblem):
                 "IMPORTS: N/A",
                ]
         
+        self.is_mixed = is_mixed
+        
         super().__init__(dim = 2, 
                          num_objectives = 1, 
                          num_constraints = 0, 
                          optimum = [-3],
                          bounds = [[-2, 2], [0, 1]],
-                         is_mixed = is_mixed,
                          debug = debug,
                          tags = tags
                         )

@@ -12,7 +12,10 @@ class BenchmarkProblem:
         num_constraints: int = 0,
         x_opt: Optional[torch.Tensor] = None,
         optimum: Optional[torch.Tensor] = None,
-        ref_point: Optional[torch.Tensor] = None
+        ref_point: Optional[torch.Tensor] = None,
+        CONSTRAINTS: Optional[ConstraintConfig] = None,
+        tags: Optional[List[str]] = None,
+        debug: bool = False,
     ) -> None:
         """Initialize the BenchmarkProblem class.
         
@@ -24,6 +27,9 @@ class BenchmarkProblem:
             x_opt (torch.Tensor, optional): The decision variables that maximize the objective function(s). Defaults to None.
             optimum (torch.Tensor, optional): The optimal objective values corresponding to the x_opt. Defaults to None.
             ref_point (torch.Tensor, optional): Reference point for calculating hypervolume. Defaults to None.
+            constraints (ConstraintConfig, optional): Additional Constraints. Defaults to None.
+            tags (List[str], optional): More information for the benchmark problem. Defaults to None.
+            debug (bool, optional): Debugging flag. Defaults to False.
         """
         self.dim = dim
         self.bounds = bounds
@@ -32,7 +38,9 @@ class BenchmarkProblem:
         self.x_opt = x_opt
         self.optimum = optimum
         self.ref_point = ref_point
-
+        self.CONSTRAINTS = CONSTRAINTS
+        self.tags = tags
+        self.debug = debug
 
 # import torch
 # import numpy as np

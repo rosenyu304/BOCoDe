@@ -22,7 +22,7 @@ class Bukin(BenchmarkProblem):
                          num_objectives = 1, 
                          num_constraints = 0, 
                          optimum=[[0]],
-                         x_optimum=[[-10,1]],
+                         x_opt=[[-10,1]],
                          bounds = [[-15.0, -5.0], [-3.0, 3.0]],
                          tags = tags
                         )
