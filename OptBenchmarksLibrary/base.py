@@ -12,8 +12,7 @@ class BenchmarkProblem:
         num_constraints: int = 0,
         x_opt: Optional[torch.Tensor] = None,
         optimum: Optional[torch.Tensor] = None,
-        ref_point: Optional[torch.Tensor] = None,
-        **kwargs
+        ref_point: Optional[torch.Tensor] = None
     ) -> None:
         """Initialize the BenchmarkProblem class.
         
@@ -33,9 +32,6 @@ class BenchmarkProblem:
         self.x_opt = x_opt
         self.optimum = optimum
         self.ref_point = ref_point
-
-        for key, value in kwargs.items():
-            setattr(self, key, value)
 
 
 # import torch
