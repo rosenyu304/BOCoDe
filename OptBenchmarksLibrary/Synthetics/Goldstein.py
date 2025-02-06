@@ -8,7 +8,7 @@ class Goldstein(BenchmarkProblem):
     LVGP paper: https://www.nature.com/articles/s41598-020-60652-9
     '''
 
-    def __init__(self, is_mixed = True, debug = False):
+    def __init__(self, is_mixed: bool = True, debug: bool = False):
 
         tags = ["Goldstein",
                 "-----------------------------",
@@ -29,7 +29,7 @@ class Goldstein(BenchmarkProblem):
                          tags = tags
                         )
 
-    def _evaluate_implementation(self, X):
+    def _evaluate_implementation(self, X: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
 
         # x0: [-2, 2]
         # x1: {-2, -1, 0, 1, 2}
@@ -41,7 +41,6 @@ class Goldstein(BenchmarkProblem):
             # Output: discrete value
             idx = torch.floor(x * len(disc_values)).long()
             return disc_values[torch.clamp(idx, 0, len(disc_values)-1)]
-
 
         if self.is_mixed:
             X[:,1] = cont_to_disc(X[:,1], torch.tensor([-2, -1, 0, 1, 2]))

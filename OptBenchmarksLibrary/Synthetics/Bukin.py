@@ -27,7 +27,7 @@ class Bukin(BenchmarkProblem):
                          tags = tags
                         )
 
-    def _evaluate_implementation(self, X):
+    def _evaluate_implementation(self, X: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
         
         part1 = 100.0 * torch.sqrt(torch.abs(X[..., 1] - 0.01 * X[..., 0] ** 2))
         part2 = 0.01 * torch.abs(X[..., 0] + 10.0)

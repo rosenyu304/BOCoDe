@@ -7,7 +7,7 @@ class StyblinskiTang(BenchmarkProblem):
     https://www.sfu.ca/~ssurjano/stybtang.html
     '''
 
-    def __init__(self, dim=10):
+    def __init__(self, dim: int = 10):
 
         tags = ["StyblinskiTang",
                 "-----------------------------",
@@ -22,15 +22,18 @@ class StyblinskiTang(BenchmarkProblem):
                          num_objectives = 1, 
                          num_constraints = 0, 
                          optimum = [[-39.16599] * dim], 
-                         bounds = [[-5, 5]],
+                         bounds = [[-5, 5]]*dim,
                          tags=tags,
                         )
 
-    def _evaluate_implementation(self, X):
+    def _evaluate_implementation(self, X: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
 
         from botorch.test_functions.synthetic import StyblinskiTang as StyblinskiTang_imported
 
         fun = StyblinskiTang_imported(dim=self.dim, negate=True)
+
+        fun.bounds[0, :] = torch.tensor([b[0] for b in self.bounds], dtype=torch.float32)
+        fun.bounds[1, :] = torch.tensor([b[1] for b in self.bounds], dtype=torch.float32)
 
         n = X.size(0)
 

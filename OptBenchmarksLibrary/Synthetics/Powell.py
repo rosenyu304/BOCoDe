@@ -7,7 +7,7 @@ class Powell(BenchmarkProblem):
     https://www.sfu.ca/~ssurjano/powell.html
     '''
 
-    def __init__(self, dim=4, debug=False):
+    def __init__(self, dim: int = 4, debug=False):
 
         tags = ["Powell",
                 "-----------------------------",
@@ -21,12 +21,12 @@ class Powell(BenchmarkProblem):
         super().__init__(dim, 
                          num_objectives = 1, 
                          num_constraints = 0, 
-                         bounds = [[-4, 5]],
+                         bounds = [[-4, 5]]*dim,
                          tags = tags,
                          debug = debug
                         )
 
-    def _evaluate_implementation(self, X):
+    def _evaluate_implementation(self, X: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
 
         if self.debug:
             print(f'X_scale = {X[:5,:]}')
@@ -34,8 +34,13 @@ class Powell(BenchmarkProblem):
         from botorch.test_functions.synthetic import Powell as Powell_imported
 
         fun = Powell_imported(dim=self.dim, negate=True)
-        fun.bounds[0, :].fill_(-4)
-        fun.bounds[1, :].fill_(5)
+
+        fun.bounds[0, :] = torch.tensor([b[0] for b in self.bounds], dtype=torch.float32)
+        fun.bounds[1, :] = torch.tensor([b[1] for b in self.bounds], dtype=torch.float32)
+
+        # Previous method of setting bounds:
+        # fun.bounds[0, :].fill_(-4)
+        # fun.bounds[1, :].fill_(5)
 
         n = X.size(0)
 

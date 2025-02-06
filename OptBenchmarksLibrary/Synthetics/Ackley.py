@@ -11,7 +11,7 @@ class Ackley(BenchmarkProblem):
     '''
 
     def __init__(self, 
-                 dim=2, 
+                 dim: int = 2, 
                  CONSTRAINTS = ConstraintConfig(type='CONSTRAINTS')):
         
         tags = ["Ackley",
@@ -28,12 +28,12 @@ class Ackley(BenchmarkProblem):
                          num_constraints = 2, 
                          optimum = [[0]],
                          x_optimum=[[0]*dim], 
-                         bounds = [[-5, 10]],
+                         bounds = [[-5, 10]]*dim,
                          CONSTRAINTS = CONSTRAINTS,
                          tags = tags,
                         )
 
-    def _evaluate_implementation(self, X):
+    def _evaluate_implementation(self, X: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
         
         from botorch.test_functions import Ackley as Ackley_imported
         
@@ -42,8 +42,13 @@ class Ackley(BenchmarkProblem):
         gx = torch.zeros((n, self.num_constraints))
 
         fun = Ackley_imported(dim=self.dim, negate=True)
-        fun.bounds[0, :].fill_(self.bounds[0][0])
-        fun.bounds[1, :].fill_(self.bounds[0][1])
+
+        fun.bounds[0, :] = torch.tensor([b[0] for b in self.bounds], dtype=torch.float32)
+        fun.bounds[1, :] = torch.tensor([b[1] for b in self.bounds], dtype=torch.float32)
+        
+        # Old method of setting bounds (uses only first element of self.bounds):
+        # fun.bounds[0, :].fill_(self.bounds[0][0])
+        # fun.bounds[1, :].fill_(self.bounds[0][1])
 
         fx = fun(X)
         fx = fx.reshape((n, 1))

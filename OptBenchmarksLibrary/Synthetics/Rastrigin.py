@@ -7,7 +7,7 @@ class Rastrigin(BenchmarkProblem):
     https://www.sfu.ca/~ssurjano/stybtang.html
     '''
 
-    def __init__(self, dim=2):
+    def __init__(self, dim: int = 2):
 
         tags = ["Rastrigin",
                 "-----------------------------",
@@ -22,15 +22,18 @@ class Rastrigin(BenchmarkProblem):
                          num_objectives = 1, 
                          num_constraints = 0,  
                          optimum = [[0] * dim], 
-                         bounds = [[-5.12, 5.12]],
+                         bounds = [[-5.12, 5.12]]*dim,
                          tags=tags,
                         )
 
-    def _evaluate_implementation(self, X):
+    def _evaluate_implementation(self, X: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
 
         from botorch.test_functions.synthetic import Rastrigin as Rastrigin_imported
 
         fun = Rastrigin_imported(dim=self.dim, negate=True)
+
+        fun.bounds[0, :] = torch.tensor([b[0] for b in self.bounds], dtype=torch.float32)
+        fun.bounds[1, :] = torch.tensor([b[1] for b in self.bounds], dtype=torch.float32)
 
         n = X.size(0)
 
