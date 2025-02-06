@@ -2,6 +2,7 @@ from .test_Ackley import *
 from .test_Bukin import *
 from .test_DixonPrice import *
 from .test_Goldstein import *
+from .test_Goldstein_Discrete import *
 from .test_Griewank import *
 from .test_Levy import *
 from .test_Michalewicz import *
@@ -15,6 +16,7 @@ __all__ = ['test_Ackley',
            'test_Bukin', 
            'test_DixonPrice', 
            'test_Goldstein',
+           'test_Goldstein_Discrete',
            'test_Griewank',
            'test_Levy',
            'test_Michalewicz',

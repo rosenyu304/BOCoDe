@@ -8,24 +8,23 @@ class Goldstein(BenchmarkProblem):
     LVGP paper: https://www.nature.com/articles/s41598-020-60652-9
     '''
 
-    def __init__(self, is_mixed: bool = True, debug: bool = False):
-
-        tags = ["Goldstein",
-                "-----------------------------",
-                "OBJECTIVES: Single Objective (1)", 
-                "CONSTRAINTS: N/A", 
-                "SPACE: Continuous / Mixed", 
-                "SCALABLE: 2-Dim", 
-                "IMPORTS: N/A",
-               ]
+    def __init__(self, debug: bool = False, bounds = [(-2, 2), (0, 1)], tags = None):
         
-        self.is_mixed = is_mixed
-        
+        if tags is None:
+            tags = ["Goldstein",
+                    "-----------------------------",
+                    "OBJECTIVES: Single Objective (1)", 
+                    "CONSTRAINTS: N/A", 
+                    "SPACE: Continuous / Mixed", 
+                    "SCALABLE: 2-Dim", 
+                    "IMPORTS: N/A",
+                ]
+                
         super().__init__(dim = 2, 
                          num_objectives = 1, 
                          num_constraints = 0, 
                          optimum = [-3],
-                         bounds = [[-2, 2], [0, 1]],
+                         bounds = bounds,
                          debug = debug,
                          tags = tags
                         )
@@ -34,17 +33,6 @@ class Goldstein(BenchmarkProblem):
 
         # x0: [-2, 2]
         # x1: {-2, -1, 0, 1, 2}
-        def cont_to_disc(x, disc_values):
-            # Convert continuous value to discrete value
-            # Input:
-            #   x: continuous value in [0, 1]
-            #   disc_values: discrete values
-            # Output: discrete value
-            idx = torch.floor(x * len(disc_values)).long()
-            return disc_values[torch.clamp(idx, 0, len(disc_values)-1)]
-
-        if self.is_mixed:
-            X[:,1] = cont_to_disc(X[:,1], torch.tensor([-2, -1, 0, 1, 2]))
 
         if self.debug:
             print(f'X: {X}')
