@@ -7,7 +7,7 @@ class BenchmarkProblem:
         self,
 
         dim: int = 1,
-        bounds: Union[Tuple, Set] = None,
+        bounds: Union[List[Union[Tuple, Set]], None] = None,
         num_objectives: int = 1,
         num_constraints: int = 0,
         x_opt: Optional[torch.Tensor] = None,
