@@ -22,7 +22,7 @@ class StyblinskiTang(BenchmarkProblem):
                          num_objectives = 1, 
                          num_constraints = 0, 
                          optimum = [[-39.16599] * dim], 
-                         bounds = [[-5, 5]]*dim,
+                         bounds = [(-5, 5)]*dim,
                          tags=tags,
                         )
 

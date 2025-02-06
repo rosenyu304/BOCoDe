@@ -21,7 +21,7 @@ class Rosenbrock(BenchmarkProblem):
         super().__init__(dim, 
                          num_objectives = 1, 
                          num_constraints = 0, 
-                         bounds = [[-5, 10]]*dim,
+                         bounds = [(-5, 10)]*dim,
                          tags = tags,
                         )
 

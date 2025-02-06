@@ -21,7 +21,7 @@ class Levy(BenchmarkProblem):
         super().__init__(dim, 
                          num_objectives = 1, 
                          num_constraints = 0, 
-                         bounds = [[-10, 10]]*dim,
+                         bounds = [(-10, 10)]*dim,
                          tags = tags
                         )
 

@@ -21,7 +21,7 @@ class Griewank(BenchmarkProblem):
         super().__init__(dim, 
                          num_objectives = 1, 
                          num_constraints = 0, 
-                         bounds = [[-600, 600]]*dim,
+                         bounds = [(-600, 600)]*dim,
                          tags = tags
                         )
 

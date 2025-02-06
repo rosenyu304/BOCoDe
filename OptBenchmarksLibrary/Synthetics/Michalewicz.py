@@ -22,7 +22,7 @@ class Michalewicz(BenchmarkProblem):
         super().__init__(dim, 
                          num_objectives = 1, 
                          num_constraints = 0, 
-                         bounds = [[0, math.pi]]*dim, 
+                         bounds = [(0, math.pi)]*dim, 
                          tags = tags)
 
     def _evaluate_implementation(self, X: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:

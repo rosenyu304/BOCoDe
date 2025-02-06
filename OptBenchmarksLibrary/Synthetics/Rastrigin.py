@@ -22,7 +22,7 @@ class Rastrigin(BenchmarkProblem):
                          num_objectives = 1, 
                          num_constraints = 0,  
                          optimum = [[0] * dim], 
-                         bounds = [[-5.12, 5.12]]*dim,
+                         bounds = [(-5.12, 5.12)]*dim,
                          tags=tags,
                         )
 
