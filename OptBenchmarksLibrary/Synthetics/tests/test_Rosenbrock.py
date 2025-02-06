@@ -16,6 +16,8 @@ def test_rosenbrock_evaluate(dim):
 
     assert fx.shape == (rand_test_points, 1), f"Unexpected fx shape: {fx.shape}"
 
+    assert len(problem.bounds) == dim, "Number of bounds does not match dimension"
+
     assert torch.isfinite(fx).all(), "fx contains NaN or Inf values"
 
     # TODO: Add test points to ensure that fx is calculated correctly

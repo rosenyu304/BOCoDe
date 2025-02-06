@@ -16,6 +16,8 @@ def test_ackley_evaluate(dim):
     assert gx.shape == (rand_test_points, problem.num_constraints), f"Unexpected gx shape: {gx.shape}"
     assert fx.shape == (rand_test_points, 1), f"Unexpected fx shape: {fx.shape}"
 
+    assert len(problem.bounds) == dim, "Number of bounds does not match dimension"
+
     assert torch.isfinite(fx).all(), "fx contains NaN or Inf values"
 
     # Check constraints by repeating calculations

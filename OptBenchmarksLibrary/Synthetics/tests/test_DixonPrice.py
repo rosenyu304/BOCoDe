@@ -5,14 +5,18 @@ from .. import DixonPrice
 def test_dixon_evaluate():
     problem = DixonPrice()
 
+    dim = 2
+
     rand_test_points = 10 # Number of random points to test
     
     # Generate random points within constraints
-    X = torch.rand((rand_test_points, 2)) * 20 - 10
+    X = torch.rand((rand_test_points, dim)) * 20 - 10
 
     _, fx = problem._evaluate_implementation(X)
 
     assert fx.shape == (rand_test_points, 1), f"Unexpected fx shape: {fx.shape}"
+
+    assert len(problem.bounds) == dim, "Number of bounds does not match dimension"
 
     assert torch.isfinite(fx).all(), "fx contains NaN or Inf values"
 
