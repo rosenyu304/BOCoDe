@@ -2,7 +2,6 @@ from .Ackley import *
 from .Bukin import *
 from .DixonPrice import *
 from .Goldstein import *
-from .Goldstein_Discrete import *
 from .Griewank import *
 from .Levy import *
 from .Michalewicz import *
@@ -16,7 +15,6 @@ __all__ = ['Ackley',
            'Bukin', 
            'DixonPrice', 
            'Goldstein',
-           'Goldstein_Discrete',  
            'Griewank',
            'Levy',
            'Michalewicz',
