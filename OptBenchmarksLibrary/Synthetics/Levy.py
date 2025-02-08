@@ -22,6 +22,8 @@ class Levy(BenchmarkProblem):
                          num_objectives = 1, 
                          num_constraints = 0, 
                          bounds = [(-10, 10)]*dim,
+                         optimum = [[0]],
+                         x_opt = [[1]*dim],
                          tags = tags
                         )
 

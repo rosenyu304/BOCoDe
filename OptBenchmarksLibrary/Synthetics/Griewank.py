@@ -22,6 +22,8 @@ class Griewank(BenchmarkProblem):
                          num_objectives = 1, 
                          num_constraints = 0, 
                          bounds = [(-600, 600)]*dim,
+                         optimum = [[0]],
+                         x_opt = [[0]*dim],
                          tags = tags
                         )
 

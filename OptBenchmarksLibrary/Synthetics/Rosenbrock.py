@@ -22,7 +22,9 @@ class Rosenbrock(BenchmarkProblem):
                          num_objectives = 1, 
                          num_constraints = 0, 
                          bounds = [(-5, 10)]*dim,
-                         tags = tags,
+                         optimum = [[0]],
+                         x_opt = [[1]*dim],
+                         tags = tags
                         )
 
     def _evaluate_implementation(self, X: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:

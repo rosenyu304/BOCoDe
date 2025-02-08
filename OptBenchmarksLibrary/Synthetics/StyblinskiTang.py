@@ -21,7 +21,8 @@ class StyblinskiTang(BenchmarkProblem):
         super().__init__(dim = dim, 
                          num_objectives = 1, 
                          num_constraints = 0, 
-                         optimum = [[-39.16599] * dim], 
+                         optimum = [[39.166166 * dim]], 
+                         x_opt = [[-2.903534] * dim],
                          bounds = [(-5, 5)]*dim,
                          tags=tags,
                         )

@@ -7,7 +7,7 @@ class Powell(BenchmarkProblem):
     https://www.sfu.ca/~ssurjano/powell.html
     '''
 
-    def __init__(self, dim: int = 4, debug=False):
+    def __init__(self, dim: int = 4):
 
         tags = ["Powell",
                 "-----------------------------",
@@ -18,18 +18,19 @@ class Powell(BenchmarkProblem):
                 "IMPORTS: BoTorch",
                ]
         
+        if dim < 4:
+            raise ValueError("Powell function is only defined for n >= 4")
+        
         super().__init__(dim, 
                          num_objectives = 1, 
                          num_constraints = 0, 
                          bounds = [(-4, 5)]*dim,
-                         tags = tags,
-                         debug = debug
+                         optimum = [[0]],
+                         x_opt = [[0]*dim],
+                         tags = tags
                         )
 
     def _evaluate_implementation(self, X: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
-
-        if self.debug:
-            print(f'X_scale = {X[:5,:]}')
 
         from botorch.test_functions.synthetic import Powell as Powell_imported
 
