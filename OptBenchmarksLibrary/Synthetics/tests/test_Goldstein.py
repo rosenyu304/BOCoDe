@@ -22,6 +22,10 @@ def test_goldstein_evaluate():
 
     assert torch.isfinite(fx).all(), "fx contains NaN or Inf values"
 
+    if problem.x_opt is not None and problem.optimum is not None:
+        eval_opt = problem._evaluate_implementation(torch.Tensor(problem.x_opt))[1]
+        assert torch.allclose(eval_opt, torch.Tensor(problem.optimum), atol=1e-4), f"X_opt ({problem.x_opt}) evaluation ({eval_opt}) does not match optimum ({problem.optimum})"
+
     # TODO: Add test points to ensure that fx is calculated correctly
 
     print(f"Test passed")
@@ -49,7 +53,7 @@ def test_goldstein_discrete_evaluate():
     if problem.x_opt is not None and problem.optimum is not None:
         eval_opt = problem._evaluate_implementation(torch.Tensor(problem.x_opt))[1]
         assert torch.allclose(eval_opt, torch.Tensor(problem.optimum), atol=1e-4), f"X_opt ({problem.x_opt}) evaluation ({eval_opt}) does not match optimum ({problem.optimum})"
-        
+
     # TODO: Add test points to ensure that fx is calculated correctly
 
     print(f"Test passed")

@@ -8,34 +8,37 @@ class Goldstein(BenchmarkProblem):
     LVGP paper: https://www.nature.com/articles/s41598-020-60652-9
     '''
 
-    def __init__(self, debug: bool = False, bounds = [(-2, 2), (0, 1)], tags = None):
-        
-        if tags is None:
-            tags = ["Goldstein",
-                    "-----------------------------",
-                    "OBJECTIVES: Single Objective (1)", 
-                    "CONSTRAINTS: N/A", 
-                    "SPACE: Continuous / Mixed", 
-                    "SCALABLE: 2-Dim", 
-                    "IMPORTS: N/A",
-                ]
+    def __init__(self):
+            
+        bounds, tags, optimum, x_opt = self._get_defaults()
                 
         super().__init__(dim = 2, 
                          num_objectives = 1, 
                          num_constraints = 0, 
-                         optimum = [-3],
+                         optimum = optimum,
+                         x_opt = x_opt,
                          bounds = bounds,
-                         debug = debug,
                          tags = tags
                         )
+
+    # Returns default values for the generic continuous problem. Can be overridden by subclasses.
+    def _get_defaults(self):
+        
+        tags = ["Goldstein",
+                    "-----------------------------",
+                    "OBJECTIVES: Single Objective (1)", 
+                    "CONSTRAINTS: N/A", 
+                    "SPACE: Continuous", 
+                    "SCALABLE: 2-Dim", 
+                    "IMPORTS: N/A",
+                ]
+        # bounds, tags, optimum, x_opt
+        return ([(-2, 2), (0, 1)], tags, [-3], [[0, -1]])
 
     def _evaluate_implementation(self, X: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
 
         # x0: [-2, 2]
         # x1: {-2, -1, 0, 1, 2}
-
-        if self.debug:
-            print(f'X: {X}')
 
         fx = -((1 + (X[:,0] + X[:,1] +1)**2
                 * (19 - 14*X[:,0] + 3*X[:,0]**2 -14*X[:,1]
@@ -61,7 +64,11 @@ class Goldstein_Discrete(Goldstein):
     LVGP paper: https://www.nature.com/articles/s41598-020-60652-9
     '''
 
-    def __init__(self, debug: bool = False):
+    def __init__(self):
+                
+        super().__init__()
+    
+    def _get_defaults(self):
 
         tags = ["Goldstein Discrete",
                 "-----------------------------",
@@ -71,11 +78,7 @@ class Goldstein_Discrete(Goldstein):
                 "SCALABLE: 2-Dim", 
                 "IMPORTS: N/A",
                ]
-                
-        super().__init__(bounds = [(-2, 2), [-2, -1, 0, 1, 2]],
-                         debug = debug,
-                         tags = tags
-                        )
+        return ([(-2, 2), {-2, -1, 0, 1, 2}], tags, None, None)
 
     def _evaluate_implementation(self, X: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
 
@@ -91,11 +94,10 @@ class Goldstein_Discrete(Goldstein):
             return disc_values[torch.clamp(idx, 0, len(disc_values)-1)]
         
         # Second column is discrete
-        
-        X[:,1] = cont_to_disc(X[:,1], torch.tensor(self.bounds[1]))
+        sorted_disc_values = torch.tensor(list(self.bounds[1]))
+        sorted_disc_values.sort()
 
-        if self.debug:
-            print(f'X: {X}')
+        X[:,1] = cont_to_disc(X[:,1], sorted_disc_values)
 
         fx = -((1 + (X[:,0] + X[:,1] +1)**2
                 * (19 - 14*X[:,0] + 3*X[:,0]**2 -14*X[:,1]
