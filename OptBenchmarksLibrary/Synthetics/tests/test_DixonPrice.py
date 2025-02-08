@@ -2,10 +2,9 @@ import torch
 import pytest
 from .. import DixonPrice
 
-def test_dixon_evaluate():
-    problem = DixonPrice()
-
-    dim = 2
+@pytest.mark.parametrize("dim", [2, 5, 10])
+def test_dixon_evaluate(dim):
+    problem = DixonPrice(dim)
 
     rand_test_points = 10 # Number of random points to test
     
@@ -20,6 +19,14 @@ def test_dixon_evaluate():
 
     assert torch.isfinite(fx).all(), "fx contains NaN or Inf values"
 
+    # print(X)
+    # print(torch.Tensor([problem.x_opt]))
+
+    if problem.x_opt is not None and problem.optimum is not None:
+        eval_opt = problem._evaluate_implementation(torch.Tensor(problem.x_opt))[1]
+        assert torch.allclose(eval_opt, torch.Tensor(problem.optimum), atol=1e-4), f"X_opt ({problem.x_opt}) evaluation ({eval_opt}) does not match optimum ({problem.optimum})"
+        
     # TODO: Add test points to ensure that fx is calculated correctly
 
     print(f"Test passed")
+# test_dixon_evaluate(2)

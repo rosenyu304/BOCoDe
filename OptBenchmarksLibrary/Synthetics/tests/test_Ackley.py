@@ -27,6 +27,10 @@ def test_ackley_evaluate(dim):
     assert torch.allclose(gx[:, 0], sum_constraints, atol=1e-5), "gx[:, 0] does not match expected sum constraint"
     assert torch.allclose(gx[:, 1], norm_constraints, atol=1e-5), "gx[:, 1] does not match expected norm constraint"
 
+    if problem.x_opt is not None and problem.optimum is not None:
+        eval_opt = problem._evaluate_implementation(torch.Tensor(problem.x_opt))[1]
+        assert torch.allclose(eval_opt, torch.Tensor(problem.optimum), atol=1e-4), f"X_opt ({problem.x_opt}) evaluation ({eval_opt}) does not match optimum ({problem.optimum})"
+        
     # TODO: Add test points to ensure that fx is calculated correctly
 
     print(f"Test passed for dim={dim}")
