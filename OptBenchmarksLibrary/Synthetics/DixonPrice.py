@@ -18,13 +18,17 @@ class DixonPrice(BenchmarkProblem):
                 "IMPORTS: BoTorch",
                ]
         
+        x_opt = torch.tensor([[2**(-(2**i - 2) / 2**i) for i in range(1, dim + 1)]], dtype=torch.float32).tolist()
+        
         super().__init__(dim, 
                          num_objectives = 1, 
                          num_constraints = 0, 
                          bounds = [(-10, 10)]*dim,
+                         optimum = [[0]],
+                         x_opt = x_opt,
                          tags = tags
                         )
-
+        
     def _evaluate_implementation(self, X: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
 
         from botorch.test_functions.synthetic import DixonPrice as DixonPrice_imported

@@ -21,7 +21,8 @@ class Rastrigin(BenchmarkProblem):
         super().__init__(dim = dim, 
                          num_objectives = 1, 
                          num_constraints = 0,  
-                         optimum = [[0] * dim], 
+                         optimum = [[0]],
+                         x_opt = [[0]*dim], 
                          bounds = [(-5.12, 5.12)]*dim,
                          tags=tags,
                         )
