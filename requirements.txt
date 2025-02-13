@@ -4,4 +4,4 @@ torch
 jax
 numpy
 cocopp
-cocoex
+coco-experiment
