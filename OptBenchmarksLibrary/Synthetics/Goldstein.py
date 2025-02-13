@@ -110,8 +110,5 @@ class Goldstein_Discrete(Goldstein):
                         -36*X[:,0]*X[:,1] + 27*X[:,1]**2
                     )
                 ))
-        
-        n = X.size(0)
-        fx = fx.reshape((n, 1))
 
-        return None, fx
+        return None, fx.unsqueeze(1)

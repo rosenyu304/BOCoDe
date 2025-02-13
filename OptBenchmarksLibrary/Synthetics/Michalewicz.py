@@ -39,13 +39,7 @@ class Michalewicz(BenchmarkProblem):
         from botorch.test_functions.synthetic import Michalewicz as Michalewicz_imported
 
         fun = Michalewicz_imported(dim=self.dim, negate=True)
+        
+        fun.bounds = torch.tensor(self.bounds, dtype=torch.float32).T
 
-        fun.bounds[0, :] = torch.tensor([b[0] for b in self.bounds], dtype=torch.float32)
-        fun.bounds[1, :] = torch.tensor([b[1] for b in self.bounds], dtype=torch.float32)
-
-        n = X.size(0)
-
-        fx = fun(X)
-        fx = fx.reshape((n, 1))
-
-        return None, fx
+        return None, fun(X).unsqueeze(1)

@@ -35,12 +35,7 @@ class DixonPrice(BenchmarkProblem):
 
         fun = DixonPrice_imported(dim=self.dim, negate=True)
 
-        fun.bounds[0, :] = torch.tensor([b[0] for b in self.bounds], dtype=torch.float32)
-        fun.bounds[1, :] = torch.tensor([b[1] for b in self.bounds], dtype=torch.float32)
+        fun.bounds = torch.tensor(self.bounds, dtype=torch.float32).T
 
-        n = X.size(0)
+        return None, fun(X).unsqueeze(-1)
 
-        fx = fun(X)
-        fx = fx.reshape((n, 1))
-
-        return None, fx

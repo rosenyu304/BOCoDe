@@ -43,18 +43,10 @@ class Ackley(BenchmarkProblem):
 
         fun = Ackley_imported(dim=self.dim, negate=True)
 
-        fun.bounds[0, :] = torch.tensor([b[0] for b in self.bounds], dtype=torch.float32)
-        fun.bounds[1, :] = torch.tensor([b[1] for b in self.bounds], dtype=torch.float32)
+        fun.bounds = torch.tensor(self.bounds, dtype=torch.float32).T
         
-        # Old method of setting bounds (uses only first element of self.bounds):
-        # fun.bounds[0, :].fill_(self.bounds[0][0])
-        # fun.bounds[1, :].fill_(self.bounds[0][1])
-
-        fx = fun(X)
-        fx = fx.reshape((n, 1))
-
         gx[:, 0] = torch.sum(X,1)
         gx[:, 1] = (torch.norm(X, p=2, dim=1)-5)
 
-        return gx, fx
+        return gx, fun(X).unsqueeze(1)
     
