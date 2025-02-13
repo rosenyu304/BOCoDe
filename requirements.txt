@@ -4,3 +4,4 @@ torch
 jax
 numpy
 cocopp
+cocoex
