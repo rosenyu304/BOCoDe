@@ -38,4 +38,3 @@ class DixonPrice(BenchmarkProblem):
         fun.bounds = torch.tensor(self.bounds, dtype=torch.float32).T
 
         return None, fun(X).unsqueeze(-1)
-

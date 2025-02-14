@@ -26,4 +26,3 @@ def test_levy_evaluate(dim):
     # TODO: Add test points to ensure that fx is calculated correctly
 
     print(f"Test passed")
-    

@@ -49,4 +49,3 @@ class Ackley(BenchmarkProblem):
         gx[:, 1] = (torch.norm(X, p=2, dim=1)-5)
 
         return gx, fun(X).unsqueeze(1)
-    

@@ -34,4 +34,3 @@ class Bukin(BenchmarkProblem):
         fx = -(part1 + part2)
 
         return None, fx.unsqueeze(-1)
-    
