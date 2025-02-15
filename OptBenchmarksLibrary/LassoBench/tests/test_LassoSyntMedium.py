@@ -1,11 +1,11 @@
 import torch
 import pytest
-from .. import LassoBreastCancer
+from .. import LassoSyntMedium
 
-def test_breastCancer_evaluate():
-    problem = LassoBreastCancer()
+def test_syntMedium_evaluate():
+    problem = LassoSyntMedium()
 
-    dim = 10
+    dim = 100
 
     rand_test_points = 5 # Number of random points to test
     

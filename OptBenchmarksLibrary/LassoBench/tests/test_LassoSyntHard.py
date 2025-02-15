@@ -1,11 +1,11 @@
 import torch
 import pytest
-from .. import LassoBreastCancer
+from .. import LassoSyntHard
 
-def test_breastCancer_evaluate():
-    problem = LassoBreastCancer()
+def test_syntHard_evaluate():
+    problem = LassoSyntHard()
 
-    dim = 10
+    dim = 1000
 
     rand_test_points = 5 # Number of random points to test
     

@@ -1,11 +1,11 @@
 import torch
 import pytest
-from .. import LassoBreastCancer
+from .. import LassoDiabetes
 
-def test_breastCancer_evaluate():
-    problem = LassoBreastCancer()
+def test_diabetes_evaluate():
+    problem = LassoDiabetes()
 
-    dim = 10
+    dim = 8
 
     rand_test_points = 5 # Number of random points to test
     
