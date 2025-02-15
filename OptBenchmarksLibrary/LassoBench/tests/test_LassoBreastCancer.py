@@ -2,7 +2,7 @@ import torch
 import pytest
 from .. import LassoBreastCancer
 
-def test_ackley_evaluate():
+def test_breastCancer_evaluate():
     problem = LassoBreastCancer()
 
     rand_test_points = 5 # Number of random points to test
