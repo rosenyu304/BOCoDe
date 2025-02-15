@@ -1,0 +1,7 @@
+pytest
+botorch
+torch
+jax
+numpy
+cocopp
+coco-experiment

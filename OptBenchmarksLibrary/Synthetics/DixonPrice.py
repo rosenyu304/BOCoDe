@@ -1,17 +1,13 @@
 import torch
 from ..base import *
 
-
-
-
-
 class DixonPrice(BenchmarkProblem):
 
     r'''
     https://www.sfu.ca/~ssurjano/dixonpr.html
     '''
 
-    def __init__(self, dim=2):
+    def __init__(self, dim: int = 2):
         
         tags = ["DixonPrice",
                 "-----------------------------",
@@ -22,24 +18,23 @@ class DixonPrice(BenchmarkProblem):
                 "IMPORTS: BoTorch",
                ]
         
+        x_opt = torch.tensor([[2**(-(2**i - 2) / 2**i) for i in range(1, dim + 1)]], dtype=torch.float32).tolist()
+        
         super().__init__(dim, 
-                         num_obj = 1, 
-                         num_cons = 0, 
-                         bounds = [[-10, 10]],
+                         num_objectives = 1, 
+                         num_constraints = 0, 
+                         bounds = [(-10, 10)]*dim,
+                         optimum = [[0]],
+                         x_opt = x_opt,
                          tags = tags
                         )
-
-    def _evaluate_implementation(self, X):
+        
+    def _evaluate_implementation(self, X: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
 
         from botorch.test_functions.synthetic import DixonPrice as DixonPrice_imported
 
         fun = DixonPrice_imported(dim=self.dim, negate=True)
 
-        n = X.size(0)
+        fun.bounds = torch.tensor(self.bounds, dtype=torch.float32).T
 
-        fx = fun(X)
-        fx = fx.reshape((n, 1))
-
-        return None, fx
-
-
+        return None, fun(X).unsqueeze(-1)

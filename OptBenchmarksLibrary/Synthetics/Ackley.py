@@ -1,8 +1,6 @@
 import torch
 from ..base import *
 
-
-
 class Ackley(BenchmarkProblem):
 
     r'''
@@ -12,10 +10,8 @@ class Ackley(BenchmarkProblem):
     In: International Conference on Artificial Intelligence and Statistics, PMLR, pp 730–738
     '''
 
-    
-
     def __init__(self, 
-                 dim=2, 
+                 dim: int = 2, 
                  CONSTRAINTS = ConstraintConfig(type='CONSTRAINTS')):
         
         tags = ["Ackley",
@@ -28,32 +24,28 @@ class Ackley(BenchmarkProblem):
                ]
         
         super().__init__(dim, 
-                         num_obj = 1, 
-                         num_cons = 2, 
-                         optimum = [[0]], 
-                         bounds = [[-5, 10]],
+                         num_objectives = 1, 
+                         num_constraints = 2, 
+                         optimum = [[0]],
+                         x_opt=[[0]*dim], 
+                         bounds = [(-5, 10)]*dim,
                          CONSTRAINTS = CONSTRAINTS,
                          tags = tags,
                         )
 
-    def _evaluate_implementation(self, X):
+    def _evaluate_implementation(self, X: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
         
         from botorch.test_functions import Ackley as Ackley_imported
         
         n = X.size(0)
 
-        gx = torch.zeros((n, self.num_cons))
+        gx = torch.zeros((n, self.num_constraints))
 
         fun = Ackley_imported(dim=self.dim, negate=True)
-        fun.bounds[0, :].fill_(self.bounds[0][0])
-        fun.bounds[1, :].fill_(self.bounds[0][1])
 
-        fx = fun(X)
-        fx = fx.reshape((n, 1))
-
+        fun.bounds = torch.tensor(self.bounds, dtype=torch.float32).T
+        
         gx[:, 0] = torch.sum(X,1)
         gx[:, 1] = (torch.norm(X, p=2, dim=1)-5)
 
-        return gx, fx
-
-
+        return gx, fun(X).unsqueeze(1)

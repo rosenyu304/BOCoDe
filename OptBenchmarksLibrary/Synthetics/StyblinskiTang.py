@@ -7,7 +7,7 @@ class StyblinskiTang(BenchmarkProblem):
     https://www.sfu.ca/~ssurjano/stybtang.html
     '''
 
-    def __init__(self, dim=10):
+    def __init__(self, dim: int = 10):
 
         tags = ["StyblinskiTang",
                 "-----------------------------",
@@ -17,23 +17,22 @@ class StyblinskiTang(BenchmarkProblem):
                 "SCALABLE: N-Dim", 
                 "IMPORTS: BoTorch",
                ]
+        
         super().__init__(dim = dim, 
-                         num_obj = 1, 
-                         num_cons = 0, 
-                         optimum = [[-39.16599] * dim], 
-                         bounds = [[-5, 5]],
+                         num_objectives = 1, 
+                         num_constraints = 0, 
+                         optimum = [[39.166166 * dim]], 
+                         x_opt = [[-2.903534] * dim],
+                         bounds = [(-5, 5)]*dim,
                          tags=tags,
                         )
 
-    def _evaluate_implementation(self, X):
+    def _evaluate_implementation(self, X: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
 
         from botorch.test_functions.synthetic import StyblinskiTang as StyblinskiTang_imported
 
         fun = StyblinskiTang_imported(dim=self.dim, negate=True)
 
-        n = X.size(0)
+        fun.bounds = torch.tensor(self.bounds, dtype=torch.float32).T
 
-        fx = fun(X)
-        fx = fx.reshape((n, 1))
-
-        return None, fx
+        return None, fun(X).unsqueeze(1)
