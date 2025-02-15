@@ -1,6 +1,11 @@
 import torch
 from ..base import *
 
+# Prevents SSL certificate validity error when fetching data
+import ssl
+import certifi
+ssl._create_default_https_context = ssl._create_unverified_context
+
 class LassoSyntMedium(BenchmarkProblem):
 
     r'''
@@ -19,9 +24,9 @@ class LassoSyntMedium(BenchmarkProblem):
                ]
         
         super().__init__(dim=100, 
-                         num_obj = 1, 
-                         num_cons = 0, 
-                         bounds = [[-1, 1]], 
+                         num_objectives = 1, 
+                         num_constraints = 0, 
+                         bounds = [[-1, 1]]*100, 
                          tags=tags)
 
     def _evaluate_implementation(self, X):

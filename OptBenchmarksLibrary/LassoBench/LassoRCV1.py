@@ -1,6 +1,11 @@
 import torch
 from ..base import *
 
+# Prevents SSL certificate validity error when fetching data
+import ssl
+import certifi
+ssl._create_default_https_context = ssl._create_unverified_context
+
 class LassoRCV1(BenchmarkProblem):
 
     r'''
@@ -14,14 +19,14 @@ class LassoRCV1(BenchmarkProblem):
                 "OBJECTIVES: Single Objective (1)", 
                 "CONSTRAINTS: N/A", 
                 "SPACE: Continuous", 
-                "SCALABLE: 19959-Dim", 
+                "SCALABLE: 47236-Dim", 
                 "IMPORTS: LassoBench",
                ]
         
-        super().__init__(dim=19959, 
-                         num_obj = 1, 
-                         num_cons = 0, 
-                         bounds = [[-1, 1]], 
+        super().__init__(dim=47236, 
+                         num_objectives = 1, 
+                         num_constraints = 0, 
+                         bounds = [[-1, 1]]*47236, 
                          tags=tags)
 
     def _evaluate_implementation(self, X):
