@@ -1,6 +1,11 @@
 import torch
 from ..base import *
 
+# Prevents SSL certificate validity error when fetching data from https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/binary/breast-cancer_scale
+import ssl
+import certifi
+ssl._create_default_https_context = ssl._create_unverified_context
+
 class LassoBreastCancer(BenchmarkProblem):
 
     r'''
@@ -19,9 +24,9 @@ class LassoBreastCancer(BenchmarkProblem):
                ]
         
         super().__init__(dim=10, 
-                         num_obj = 1, 
-                         num_cons = 0, 
-                         bounds = [[-1, 1]], 
+                         num_objectives = 1, 
+                         num_constraints = 0, 
+                         bounds = [[-1, 1]]*10, 
                          tags=tags)
 
     def _evaluate_implementation(self, X):
