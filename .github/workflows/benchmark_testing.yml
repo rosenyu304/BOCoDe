@@ -26,6 +26,12 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Install LassoBench
+        run: |
+          git clone https://github.com/ksehic/LassoBench.git
+          cd LassoBench
+          pip install -e .
+
       - name: Run Tests
         run: |
           python -m pytest
