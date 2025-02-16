@@ -26,7 +26,7 @@ class LassoRCV1(BenchmarkProblem):
         super().__init__(dim=47236, 
                          num_objectives = 1, 
                          num_constraints = 0, 
-                         bounds = [[-1, 1]]*47236, 
+                         bounds = [(-1, 1)]*47236, 
                          tags=tags)
 
     def _evaluate_implementation(self, X):

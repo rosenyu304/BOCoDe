@@ -26,7 +26,7 @@ class LassoDNA(BenchmarkProblem):
         super().__init__(dim=180, 
                          num_objectives = 1, 
                          num_constraints = 0, 
-                         bounds = [[-1, 1]]*180, 
+                         bounds = [(-1, 1)]*180, 
                          tags=tags)
 
     def _evaluate_implementation(self, X):

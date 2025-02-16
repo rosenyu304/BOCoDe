@@ -26,7 +26,7 @@ class LassoLeukemia(BenchmarkProblem):
         super().__init__(dim=7129, 
                          num_objectives = 1, 
                          num_constraints = 0, 
-                         bounds = [[-1, 1]]*7129, 
+                         bounds = [(-1, 1)]*7129, 
                          tags=tags)
 
     def _evaluate_implementation(self, X):

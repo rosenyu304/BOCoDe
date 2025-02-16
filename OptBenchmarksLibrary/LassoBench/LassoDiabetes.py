@@ -26,7 +26,7 @@ class LassoDiabetes(BenchmarkProblem):
         super().__init__(dim=8, 
                          num_objectives = 1, 
                          num_constraints = 0, 
-                         bounds = [[-1, 1]]*8, 
+                         bounds = [(-1, 1)]*8, 
                          tags=tags)
 
     def _evaluate_implementation(self, X):

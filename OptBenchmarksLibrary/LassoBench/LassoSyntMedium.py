@@ -26,7 +26,7 @@ class LassoSyntMedium(BenchmarkProblem):
         super().__init__(dim=100, 
                          num_objectives = 1, 
                          num_constraints = 0, 
-                         bounds = [[-1, 1]]*100, 
+                         bounds = [(-1, 1)]*100, 
                          tags=tags)
 
     def _evaluate_implementation(self, X):

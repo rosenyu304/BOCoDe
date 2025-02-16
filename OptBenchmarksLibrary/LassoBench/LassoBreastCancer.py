@@ -22,11 +22,11 @@ class LassoBreastCancer(BenchmarkProblem):
                 "SCALABLE: 10-Dim", 
                 "IMPORTS: LassoBench",
                ]
-        
+
         super().__init__(dim=10, 
                          num_objectives = 1, 
                          num_constraints = 0, 
-                         bounds = [[-1, 1]]*10, 
+                         bounds = [(-1, 1)]*10, 
                          tags=tags)
 
     def _evaluate_implementation(self, X):

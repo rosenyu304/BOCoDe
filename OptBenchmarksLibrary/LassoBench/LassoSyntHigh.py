@@ -26,7 +26,7 @@ class LassoSyntHigh(BenchmarkProblem):
         super().__init__(dim=300, 
                          num_objectives = 1, 
                          num_constraints = 0, 
-                         bounds = [[-1, 1]]*300, 
+                         bounds = [(-1, 1)]*300, 
                          tags=tags)
 
     def _evaluate_implementation(self, X):
