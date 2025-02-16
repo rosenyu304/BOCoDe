@@ -27,6 +27,8 @@ class LassoBreastCancer(BenchmarkProblem):
                          num_objectives = 1, 
                          num_constraints = 0, 
                          bounds = [(-1, 1)]*10, 
+                         x_opt=[[1, 1, 0.40279274, 0.23285974, -1, 1, -1, 1, 1, 1]],
+                         optimum=[-6.138225721920359],
                          tags=tags)
 
     def _evaluate_implementation(self, X):

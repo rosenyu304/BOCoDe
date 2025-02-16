@@ -27,6 +27,8 @@ class LassoDiabetes(BenchmarkProblem):
                          num_objectives = 1, 
                          num_constraints = 0, 
                          bounds = [(-1, 1)]*8, 
+                         x_opt=[[1,1,-1,1,1,1,1,1]],
+                         optimum=[-0.9961401840014688],
                          tags=tags)
 
     def _evaluate_implementation(self, X):
