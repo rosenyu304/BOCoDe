@@ -3,7 +3,6 @@ from ..base import *
 
 # Prevents SSL certificate validity error when fetching data
 import ssl
-import certifi
 ssl._create_default_https_context = ssl._create_unverified_context
 
 class LassoDiabetes(BenchmarkProblem):

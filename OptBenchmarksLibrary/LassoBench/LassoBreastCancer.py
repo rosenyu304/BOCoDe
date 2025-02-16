@@ -3,7 +3,6 @@ from ..base import *
 
 # Prevents SSL certificate validity error when fetching data from https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/binary/breast-cancer_scale
 import ssl
-import certifi
 ssl._create_default_https_context = ssl._create_unverified_context
 
 class LassoBreastCancer(BenchmarkProblem):

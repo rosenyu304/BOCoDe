@@ -3,7 +3,6 @@ from ..base import *
 
 # Prevents SSL certificate validity error when fetching data
 import ssl
-import certifi
 ssl._create_default_https_context = ssl._create_unverified_context
 
 class LassoDNA(BenchmarkProblem):
@@ -34,7 +33,7 @@ class LassoDNA(BenchmarkProblem):
         import LassoBench
         fx = torch.zeros(X.shape[0],1)
         real_bench = LassoBench.RealBenchmark(pick_data='DNA')
-        
+
         for i in range(X.shape[0]):
             # loss = real_bench.evaluate(X[i,:].numpy())
             fx[i,0] = -real_bench.evaluate(X[i,:].to(torch.double).numpy())
