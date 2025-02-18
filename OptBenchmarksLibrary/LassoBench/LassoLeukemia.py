@@ -37,6 +37,5 @@ class LassoLeukemia(BenchmarkProblem):
             # loss = real_bench.evaluate(X[i,:].numpy())
             fx[i,0] = -real_bench.evaluate(X[i,:].to(torch.double).numpy())
 
-
         return None, fx
     

@@ -36,5 +36,4 @@ class LassoSyntHard(BenchmarkProblem):
         for i in range(X.shape[0]):
             fx[i,0] = -synt_bench.evaluate(X[i,:].to(torch.double).numpy())
 
-
         return None, fx
