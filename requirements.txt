@@ -6,3 +6,5 @@ jax
 numpy
 cocopp
 coco-experiment
+pygame
+Box2D
