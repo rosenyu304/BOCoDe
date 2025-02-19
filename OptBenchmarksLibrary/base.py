@@ -40,7 +40,32 @@ class BenchmarkProblem:
         self.ref_point = ref_point
         self.CONSTRAINTS = CONSTRAINTS
         self.tags = tags
-        self.debug = debug
+
+    def scale(self, X):
+        """
+        Scales a fully continuous X to the problem's bounds.
+
+        Input Args:
+            X (torch.Tensor): continuous data in range of [0, 1]
+
+        Returns:
+            X (torch.Tensor): continuous data scaled to bounds
+        """
+
+        if not torch.is_tensor(X):
+            raise TypeException("Error: X in scale() is not torch tensor")
+
+        if X.size(1) != self.dim:
+            raise DimensionException("Error: Incorrect X dimensions.")
+        if torch.max(X) > 1 or torch.min(X) < 0:
+            raise RangeException("Error: Incorrect X range: must be [0, 1].")
+
+        if not torch.is_tensor(self.bounds):
+            self.bounds = torch.tensor(self.bounds).cpu()
+
+        X_scaled = torch.add(torch.mul(X, (self.bounds[:, 1] - self.bounds[:, 0])), self.bounds[:, 0])
+
+        return X_scaled
 
 # import torch
 # import numpy as np
@@ -280,42 +305,6 @@ class BenchmarkProblem:
 #             fx = -fx
         
 #         return gx, fx
-
-
-    
-
-    
-#     def scale(self, X):
-#         """
-#         Scales a fully continuous X to the problem's bounds.
-
-#         Input Args:
-#             X (torch.Tensor): continuous data in range of [0, 1]
-
-#         Returns:
-#             X (torch.Tensor): continuous data scaled to bounds
-#         """
-
-#         if not torch.is_tensor(X):
-#             raise TypeException("Error: X in scale() is not torch tensor")
-
-#         if X.size(1) != self.dim:
-#             raise DimensionException("Error: Incorrect X dimensions.")
-#         if torch.max(X) > 1 or torch.min(X) < 0:
-#             raise RangeException("Error: Incorrect X range: must be [0, 1].")
-
-#         if not torch.is_tensor(self.bounds):
-#             self.bounds = torch.tensor(self.bounds).cpu()
-
-            
-#         X_scaled = torch.add(torch.mul(X, (self.bounds[:, 1] - self.bounds[:, 0])), self.bounds[:, 0])
-
-#         if self.debug:
-#             print(f'self.bounds[:, 0]: {self.bounds[:, 0]}')
-#             print(f'self.bounds[:, 1]: {self.bounds[:, 1]}')
-
-            
-#         return X_scaled
 
     
 #     def mixed_int_scale(self, X):
