@@ -1,5 +1,5 @@
 import torch
-from .base import BenchmarkProblem
+from ..base import BenchmarkProblem
 
 class Rover(BenchmarkProblem):
 
@@ -12,9 +12,12 @@ class Rover(BenchmarkProblem):
     tags = {"single_objective", "unconstrained", "continuous", "ND", "extra_imports"}
 
     def __init__(self, dim=100):
-        super().__init__(dim, num_obj = 1, num_cons = 0, bounds = [[0,1]])
+        super().__init__(dim, 
+                         num_objectives = 1, 
+                         num_constraints = 0, 
+                         bounds = [(0,1)]*100)
 
-    def evaluate(self, X, to_verify = True):
+    def _evaluate_implementation(self, X, scaling = True):
         domain = create_large_domain(force_start=False,
                              force_goal=False,
                              start_miss_cost=l2cost,
@@ -30,8 +33,10 @@ class Rover(BenchmarkProblem):
         f = ConstantOffsetFn(domain, f_max)
         f = NormalizedInputFn(f, raw_x_range)
         x_range = f.get_range()
-        
-        X = super().scale(X, to_verify)
+
+
+        if scaling:
+            X = super().scale(X)
         fx = torch.zeros(X.shape[0],1)
         
         for i in range(X.shape[0]):
@@ -312,6 +317,7 @@ class NormalizedInputFn:
 
     def get_range(self):
         return np.array([np.zeros(self.x_range[0].shape[0]), np.ones(self.x_range[0].shape[0])])
+
 # def main():
 #     def l2cost(x, point):
 #         return 10 * np.linalg.norm(x - point, 1)

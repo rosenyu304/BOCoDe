@@ -13,29 +13,26 @@ class EulerBernoulliBeamBending(BenchmarkProblem):
 
     tags = {"single_objective", "unconstrained", "mixed", "3D"}
 
-    def __init__(self, debug = False):
-        super().__init__(dim = 2,
-                         num_obj = 1, 
-                         num_cons = 0, 
-                         # optimizers = [[0.0, 0.43, 0.380]], 
-                         optimum = [-1.287*10^-3], 
-                         bounds = [[0, 1]],
-                         MIXED = MixIntConfig(is_mixed: True,
-                                              discrete_dict = {2: torch.tensor([0.083, 0.139, 0.380, 
-                                                                                0.080, 0.133, 0.363, 
-                                                                                0.086, 0.136, 0.360, 
-                                                                                0.092, 0.138, 0.369]},
-                                              continuous_dict = {0: torch.tensor([0,1]),
-                                                                 1: torch.tensor([0,1]),
-                                                                }
-                                             ),
-                         debug = debug
+    def __init__(self):
+        super().__init__(dim = 3,
+                         num_objectives = 1, 
+                         num_constraints = 0, 
+                         optimum = [-1.287385e3], 
+                         x_opt=[[0.0, 0.43, 0.380]],
+                         bounds = [(0, 1)]*3,
+                        #  MIXED = MixIntConfig(is_mixed: True,
+                        #                       discrete_dict = {2: torch.tensor([0.083, 0.139, 0.380, 
+                        #                                                         0.080, 0.133, 0.363, 
+                        #                                                         0.086, 0.136, 0.360, 
+                        #                                                         0.092, 0.138, 0.369])},
+                        #                       continuous_dict = {0: torch.tensor([0,1]),
+                        #                                          1: torch.tensor([0,1]),
+                        #                                         }
+                        #                      ),
                         )
 
-    def evaluate(self, X, to_verify = True):
+    def _evaluate_implementation(self, X):
         # X = super().scale(X, to_verify)
-
-
 
         # # x0: [0, 1]
         # # x1: [0, 1]
