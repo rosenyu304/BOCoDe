@@ -12,35 +12,43 @@ class Mazda(BenchmarkProblem):
     tags = {"single_objective", "multi_objective", "constrained", "continuous", "222D", "extra_imports"}
 
     def __init__(self):
-        super().__init__(dim = 222, num_objectives = 1, num_constraints = 68, bounds = [(0, 1)])
+        super().__init__(dim = 222, 
+                         num_objectives = 1, 
+                         num_constraints = 68, 
+                         bounds = [(0, 1)]*222)
 
-    def _evaluate_implementation(self, X, to_verify = True):
-        X = super().scale(X, to_verify)
+    def _evaluate_implementation(self, X):
 
         import os
         import subprocess
         import stat
         import pandas as pd
+        from pathlib import Path
 
         ##########################################
         # Scaling
         ##########################################
 
         # Define the path to your Excel file
-        file_path = '/home/turbo/rosenyu/Bank_High_DIM/Mazda_CdMOBP/Mazda_CdMOBP/Info_Mazda_CdMOBP_edited.xlsx'
+        file_path = Path(__file__).parent / "Mazda_Data" / "Info_Mazda_CdMOBP.xlsx"
 
         # Read the Excel file into a DataFrame
         dataframe = pd.read_excel(file_path, sheet_name='Explain_DV_and_Const.')
 
         # Display the DataFrame to ensure it has been read correctly
-        bounds = dataframe.values[1:, 1:3]
+        bounds = dataframe.values[2:, 3:5].astype(float)
+        # print(bounds)
         bounds_tensor = torch.tensor(bounds, dtype=torch.float32)
         # print(bounds_tensor.shape)
 
         range_bounds = bounds_tensor[:,1] - bounds_tensor[:,0]
 
+        # print(range_bounds)
+
         scaled_samples = X * range_bounds + bounds_tensor[:,0]
         # print(scaled_samples)
+
+
 
         # Convert the torch tensor to a numpy array
         data_numpy_back = scaled_samples.numpy()
@@ -49,7 +57,7 @@ class Mazda(BenchmarkProblem):
         dataframe_back = pd.DataFrame(data_numpy_back)
 
         # Write the DataFrame to a text file with space-separated values
-        output_file_path = '/home/turbo/rosenyu/Bank_High_DIM/Mazda_CdMOBP/Mazda_CdMOBP/rosen_sample_t2/pop_vars_eval.txt'
+        output_file_path = Path(__file__).parent / "Mazda_Data" / "pop_vars_eval.txt"
 
         dataframe_back.to_csv(output_file_path, sep='\t', header=False, index=False)
         #####################
@@ -60,29 +68,21 @@ class Mazda(BenchmarkProblem):
         # Run Bash file
         #####################
 
-        # Change the current working directory
-        os.chdir('/home/turbo/rosenyu/Bank_High_DIM/Mazda_CdMOBP/Mazda_CdMOBP/rosen_sample_t2')
+        script_dir = Path(__file__).parent
+        bin_path = script_dir / "Mazda_Data" / "bin" / "mazda_mop"
+        input_file = script_dir / "Mazda_Data" / "pop_vars_eval.txt"
 
-        # Get the current permissions of the file
-        current_permissions = os.stat(os.getcwd()).st_mode
+        if not os.access(bin_path, os.X_OK):
+            print(f"Adding execution permissions to: {bin_path}")
+            os.chmod(bin_path, os.stat(bin_path).st_mode | stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH)
 
-        # Add execute permissions for the owner, group, and others
-        new_permissions = current_permissions | stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH
-
-        # Apply the new permissions
-        os.chmod(os.getcwd(), new_permissions)
-
-        # Script name
-        script_name = 'run.sh'
-
-        # Run the bash script in the background
-        process = subprocess.Popen(['bash', script_name], stdout=subprocess.PIPE, stderr=subprocess.PIPE, start_new_session=True)
-        process.wait()
+        result = subprocess.run([str(bin_path), str(input_file)], stdout=subprocess.PIPE, stderr=subprocess.PIPE, start_new_session=True)
 
         # Optional: capture the output and error messages
-        stdout, stderr = process.communicate()
+        stdout = result.stdout
+        stderr = result.stderr
 
-        os.chdir('/home/turbo/rosenyu/Bank_High_DIM/')
+        # os.chdir('/home/turbo/rosenyu/Bank_High_DIM/')
         # print(os.getcwd())
         #####################
         #####################
