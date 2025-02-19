@@ -1,5 +1,5 @@
 import torch
-from base import BenchmarkProblem
+from ..base import BenchmarkProblem
 
 class MOPTA08Car(BenchmarkProblem):
 
@@ -12,10 +12,12 @@ class MOPTA08Car(BenchmarkProblem):
     tags = {"single_objective", "constrained", "continuous", "124D", "extra_imports"}
 
     def __init__(self):
-        super().__init__(dim = 124, num_obj = 1, num_cons = 68, bounds = [[0, 1]])
+        super().__init__(dim = 124, num_objectives = 1, num_constraints = 68, bounds = [(0, 1)]*124)
 
-    def evaluate(self, X, to_verify = True):
-        X = super().scale(X, to_verify)
+    def _evaluate_implementation(self, X, scaling=True):
+
+        if scaling:
+            X = super().scale(X)
 
         n = X.size(0)
 
@@ -106,7 +108,7 @@ class MOPTA08Car_softpen(BenchmarkProblem):
     tags = {"single_objective", "constrained", "continuous", "124D", "extra_imports"}
 
     def __init__(self):
-        super().__init__(dim = 124, num_obj = 1, num_cons = 68, bounds = [[0, 1]])
+        super().__init__(dim = 124, num_objectives = 1, num_constraints = 68, bounds = [[0, 1]])
 
     def evaluate(self, X, to_verify = True):
         X = super().scale(X, to_verify)

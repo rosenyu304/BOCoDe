@@ -1,5 +1,5 @@
 import torch
-from base import BenchmarkProblem
+from ..base import BenchmarkProblem
 
 class Mazda(BenchmarkProblem):
 
@@ -12,9 +12,9 @@ class Mazda(BenchmarkProblem):
     tags = {"single_objective", "multi_objective", "constrained", "continuous", "222D", "extra_imports"}
 
     def __init__(self):
-        super().__init__(dim = 222, num_obj = 1, num_cons = 68, bounds = [[0, 1]])
+        super().__init__(dim = 222, num_objectives = 1, num_constraints = 68, bounds = [(0, 1)])
 
-    def evaluate(self, X, to_verify = True):
+    def _evaluate_implementation(self, X, to_verify = True):
         X = super().scale(X, to_verify)
 
         import os
@@ -127,9 +127,9 @@ class Mazda_softpen(BenchmarkProblem):
     tags = {"single_objective", "multi_objective", "constrained", "continuous", "222D", "extra_imports"}
 
     def __init__(self):
-        super().__init__(dim = 222, num_obj = 1, num_cons = 68, bounds = [[0, 1]])
+        super().__init__(dim = 222, num_objectives = 1, num_constraints = 68, bounds = [[0, 1]])
 
-    def evaluate(self, X, to_verify = True):
+    def _evaluate_implementation(self, X, to_verify = True):
         X = super().scale(X, to_verify)
 
         import os
