@@ -24,5 +24,5 @@ def test_carSideImpact_evaluate():
     if problem.x_opt is not None and problem.optimum is not None:
         eval_opt = problem._evaluate_implementation(torch.Tensor(problem.x_opt))[1]
         assert torch.allclose(eval_opt, torch.Tensor(problem.optimum), atol=1e-4), f"X_opt ({problem.x_opt}) evaluation ({eval_opt}) does not match optimum ({problem.optimum})"
-        
+
     print(f"Test passed")

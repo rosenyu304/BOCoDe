@@ -37,7 +37,7 @@ class Mazda(BenchmarkProblem):
         dataframe = pd.read_excel(file_path, sheet_name='Explain_DV_and_Const.')
 
         bounds = dataframe.values[2:, 3:5].astype(float)
-
+        
         bounds_tensor = torch.tensor(bounds, dtype=torch.float32)
 
         range_bounds = bounds_tensor[:,1] - bounds_tensor[:,0]
