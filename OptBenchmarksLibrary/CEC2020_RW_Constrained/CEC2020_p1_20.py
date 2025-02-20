@@ -1,28 +1,28 @@
 import torch
 import numpy as np
-from .base import BenchmarkProblem
+from ..base import BenchmarkProblem
+from .helperFuncs import *
 
 class CEC2020_p1(BenchmarkProblem):
     
     r'''
     CEC2020 Problem 1
-    ''
+    '''
 
-    def __init__(self, is_constrained=True, flag=''):
+    def __init__(self):
         super().__init__(dim=9, 
-                         num_obj=1, 
-                         num_cons=8, 
-                         optimizers=[[0] * 9], 
-                         optimum=[[0]], 
-                         bounds=[[0, 10], [0, 200], [0, 100], [0, 200], [1000, 2000000], [0, 600], [100, 600], [100, 600], [100, 900]],
-                         is_constrained=is_constrained,
-                         flag=flag
+                         num_objectives=1, 
+                         num_constraints=8, 
+                        #  x_opt=[[0] * 9], 
+                         optimum=[189.31162966], 
+                         bounds=[(0, 10), (0, 200), (0, 100), (0, 200), (1000, 2000000), (0, 600), (100, 600), (100, 600), (100, 900)],
                         )
 
-    def evaluate(self, X, to_verify=True):
+    def _evaluate_implementation(self, X, scaling = True):
         import numpy as np
 
-        X = super().scale(X, to_verify)
+        if scaling:
+            X = super().scale(X)
         X = X.numpy()
         
         n_samples = X.shape[0]
@@ -52,23 +52,22 @@ class CEC2020_p2(BenchmarkProblem):
     
     r'''
     CEC2020 Problem 2
-    ''
+    '''
 
-    def __init__(self, is_constrained=True, flag=''):
+    def __init__(self):
         super().__init__(dim=11, 
-                         num_obj=1, 
-                         num_cons=9, 
-                         optimizers=[[0] * 11], 
-                         optimum=[[0]], 
-                         bounds=[[1e4, 0.819e6], [1e4, 1.131e6], [1e4, 2.05e6], [0, 0.05074], [0, 0.05074], [0, 0.05074], [100, 200], [100, 300], [100, 300], [100, 300], [100, 400]],
-                         is_constrained=is_constrained,
-                         flag=flag
+                         num_objectives=1, 
+                         num_constraints=9, 
+                        #  x_opt=[[0] * 11], 
+                         optimum=[7049.036954], 
+                         bounds=[(1e4, 0.819e6), (1e4, 1.131e6), (1e4, 2.05e6), (0, 0.05074), (0, 0.05074), (0, 0.05074), (100, 200), (100, 300), (100, 300), (100, 300), (100, 400)],
                         )
 
-    def evaluate(self, X, to_verify=True):
+    def _evaluate_implementation(self, X, scaling = True):
         import numpy as np
-
-        X = super().scale(X, to_verify)
+        
+        if scaling:
+            X = super().scale(X)
         X = X.numpy()
         
         n_samples = X.shape[0]
@@ -99,23 +98,22 @@ class CEC2020_p3(BenchmarkProblem):
     
     r'''
     CEC2020 Problem 3
-    ''
+    '''
 
-    def __init__(self, is_constrained=True, flag=''):
+    def __init__(self):
         super().__init__(dim=7, 
-                         num_obj=1, 
-                         num_cons=0, 
-                         optimizers=[[0] * 7], 
-                         optimum=[[0]], 
+                         num_objectives=1, 
+                         num_constraints=0, 
+                        #  x_opt=[[0] * 7], 
+                         optimum=[-4529.1197395], 
                          bounds=[[1000, 2000], [0, 100], [2000, 4000], [0, 100], [0, 100], [0, 20], [0, 200]],
-                         is_constrained=is_constrained,
-                         flag=flag
                         )
 
-    def evaluate(self, X, to_verify=True):
+    def _evaluate_implementation(self, X, scaling = True):
         import numpy as np
 
-        X = super().scale(X, to_verify)
+        if scaling:
+            X = super().scale(X)
         X = X.numpy()
         
         n_samples = X.shape[0]
@@ -151,23 +149,22 @@ class CEC2020_p4(BenchmarkProblem):
     
     r'''
     CEC2020 Problem 4
-    ''
+    '''
 
-    def __init__(self, is_constrained=True, flag=''):
+    def __init__(self):
         super().__init__(dim=6, 
-                         num_obj=1, 
-                         num_cons=4, 
-                         optimizers=[[0] * 6], 
-                         optimum=[[0]], 
+                         num_objectives=1, 
+                         num_constraints=4, 
+                        #  x_opt=[[0] * 6], 
+                         optimum=[-0.38826043623], 
                          bounds=[[0, 1], [0, 1], [0, 1], [0, 1], [1e-5, 16], [1e-5, 16]],
-                         is_constrained=is_constrained,
-                         flag=flag
                         )
 
-    def evaluate(self, X, to_verify=True):
+    def _evaluate_implementation(self, X, scaling = True):
         import numpy as np
 
-        X = super().scale(X, to_verify)
+        if scaling:
+            X = super().scale(X)
         X = X.numpy()
         
         n_samples = X.shape[0]
@@ -201,23 +198,22 @@ class CEC2020_p5(BenchmarkProblem):
     
     r'''
     CEC2020 Problem 5
-    ''
+    '''
 
-    def __init__(self, is_constrained=True, flag=''):
+    def __init__(self):
         super().__init__(dim=9, 
-                         num_obj=1, 
-                         num_cons=4, 
-                         optimizers=[[0] * 9], 
-                         optimum=[[0]], 
+                         num_objectives=1, 
+                         num_constraints=4, 
+                        #  x_opt=[[0] * 9], 
+                         optimum=[-400.0056], 
                          bounds=[[0, 100], [0, 200], [0, 100], [0, 100], [0, 100], [0, 100], [0, 200], [0, 100], [0, 200]],
-                         is_constrained=is_constrained,
-                         flag=flag
                         )
 
-    def evaluate(self, X, to_verify=True):
+    def _evaluate_implementation(self, X, scaling = True):
         import numpy as np
 
-        X = super().scale(X, to_verify)
+        if scaling:
+            X = super().scale(X)
         X = X.numpy()
         
         n_samples = X.shape[0]
@@ -246,23 +242,22 @@ class CEC2020_p6(BenchmarkProblem):
     
     r'''
     CEC2020 Problem 6
-    ''
+    '''
 
-    def __init__(self, is_constrained=True, flag=''):
+    def __init__(self):
         super().__init__(dim=38, 
-                         num_obj=1, 
-                         num_cons=32, 
-                         optimizers=[[0] * 38], 
-                         optimum=[[0]], 
+                         num_objectives=1, 
+                         num_constraints=32, 
+                        #  x_opt=[[0] * 38], 
+                         optimum=[1.8638304088], 
                          bounds=[[0, 90], [0, 150], [0, 90], [0, 150], [0, 90], [0, 90], [0, 150], [0, 90], [0, 90], [0, 90], [0, 150], [0, 150], [0, 90], [0, 90], [0, 150], [0, 90], [0, 150], [0, 90], [0, 150], [0, 90], [0, 1], [0, 1.2], [0, 1], [0, 1], [0, 1], [0, 0.5], [0, 1], [0, 1], [0, 0.5], [0, 0.5], [0, 0.5], [0, 1.2], [0, 0.5], [0, 1.2], [0, 1.2], [0, 0.5], [0, 1.2], [0, 1.2]],
-                         is_constrained=is_constrained,
-                         flag=flag
                         )
 
-    def evaluate(self, X, to_verify=True):
+    def _evaluate_implementation(self, X, scaling = True):
         import numpy as np
 
-        X = super().scale(X, to_verify)
+        if scaling:
+            X = super().scale(X)
         X = X.numpy()
         
         n_samples = X.shape[0]
@@ -317,23 +312,22 @@ class CEC2020_p7(BenchmarkProblem):
     
     r'''
     CEC2020 Problem 7
-    ''
+    '''
 
-    def __init__(self, is_constrained=True, flag=''):
+    def __init__(self):
         super().__init__(dim=48, 
-                         num_obj=1, 
-                         num_cons=38, 
-                         optimizers=[[0] * 48], 
-                         optimum=[[0]], 
+                         num_objectives=1, 
+                         num_constraints=38, 
+                        #  x_opt=[[0] * 48], 
+                         optimum=[1.5670451], 
                          bounds=[[0.0, 35.0], [0.0, 90.0], [0.0, 90.0], [0.0, 140.0], [0.0, 90.0], [0.0, 35.0], [0.0, 35.0], [0.0, 35.0], [0.0, 35.0], [0.0, 35.0], [0.0, 35.0], [0.0, 35.0], [0.0, 90.0], [0.0, 90.0], [0.0, 90.0], [0.0, 35.0], [0.0, 35.0], [0.0, 35.0], [0.0, 35.0], [0.0, 35.0], [0.0, 1.0], [0.0, 1.0], [0.0, 1.0], [0.849999, 1.0], [0.0, 30.0], [0.849999, 1.0], [0.0, 30.0], [0.849999, 1.0], [0.0, 30.0], [0.0, 1.0], [0.849999, 1.0], [0.0, 30.0], [0.0, 1.0], [0.0, 1.0], [0.0, 30.0], [0.0, 1.0], [0.0, 30.0], [0.0, 1.0], [0.0, 1.0], [0.0, 1.0], [0.0, 1.0], [0.0, 1.0], [0.0, 1.0], [0.0, 1.0], [0.0, 1.0], [0.0, 1.0], [0.0, 1.0], [0.0, 1.0]],
-                         is_constrained=is_constrained,
-                         flag=flag
                         )
 
-    def evaluate(self, X, to_verify=True):
+    def _evaluate_implementation(self, X, scaling = True):
         import numpy as np
 
-        X = super().scale(X, to_verify)
+        if scaling:
+            X = super().scale(X)
         X = X.numpy()
         
         n_samples = X.shape[0]
@@ -408,23 +402,22 @@ class CEC2020_p8(BenchmarkProblem):
     
     r'''
     CEC2020 Problem 8
-    ''
+    '''
 
-    def __init__(self, is_constrained=True, flag=''):
+    def __init__(self):
         super().__init__(dim=2, 
-                         num_obj=1, 
-                         num_cons=0, 
-                         optimizers=[[0] * 2], 
-                         optimum=[[0]], 
+                         num_objectives=1, 
+                         num_constraints=0, 
+                        #  x_opt=[[0] * 2], 
+                         optimum=[2.0], 
                          bounds=[[0, 1.6], [-0.51, 1.49]],
-                         is_constrained=is_constrained,
-                         flag=flag
                         )
 
-    def evaluate(self, X, to_verify=True):
+    def _evaluate_implementation(self, X, scaling = True):
         import numpy as np
 
-        X = super().scale(X, to_verify)
+        if scaling:
+            X = super().scale(X)
         X = X.numpy()
         
         n_samples = X.shape[0]
@@ -451,23 +444,22 @@ class CEC2020_p9(BenchmarkProblem):
     
     r'''
     CEC2020 Problem 9
-    ''
+    '''
 
-    def __init__(self, is_constrained=True, flag=''):
+    def __init__(self):
         super().__init__(dim=3, 
-                         num_obj=1, 
-                         num_cons=1, 
-                         optimizers=[[0] * 3], 
-                         optimum=[[0]], 
+                         num_objectives=1, 
+                         num_constraints=1, 
+                        #  x_opt=[[0] * 3], 
+                         optimum=[2.557654574], 
                          bounds=[[0.5, 1.4], [0.5, 1.4], [-0.51, 1.49]],
-                         is_constrained=is_constrained,
-                         flag=flag
                         )
 
-    def evaluate(self, X, to_verify=True):
+    def _evaluate_implementation(self, X, scaling = True):
         import numpy as np
 
-        X = super().scale(X, to_verify)
+        if scaling:
+            X = super().scale(X)
         X = X.numpy()
         
         X[:, 2] = np.round(X[:, 2])
@@ -481,7 +473,7 @@ class CEC2020_p9(BenchmarkProblem):
         # Inequality constraints
         g = -X[:, 0] + X[:, 1] + X[:, 2]
 
-        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+        return torch.from_numpy(np.abs(h) - 1e-4).unsqueeze(-1), torch.from_numpy(g).unsqueeze(-1), -torch.from_numpy(f).unsqueeze(-1)
 
 
 
@@ -490,23 +482,22 @@ class CEC2020_p10(BenchmarkProblem):
     
     r'''
     CEC2020 Problem 10
-    ''
+    '''
 
-    def __init__(self, is_constrained=True, flag=''):
+    def __init__(self):
         super().__init__(dim=3, 
-                         num_obj=1, 
-                         num_cons=0, 
-                         optimizers=[[0] * 3], 
-                         optimum=[[0]], 
+                         num_objectives=1, 
+                         num_constraints=0, 
+                        #  x_opt=[[0] * 3], 
+                         optimum=[1.0765430833], 
                          bounds=[[0.2, 1], [-2.22554, -1], [-0.51, 1.49]],
-                         is_constrained=is_constrained,
-                         flag=flag
                         )
 
-    def evaluate(self, X, to_verify=True):
+    def _evaluate_implementation(self, X, scaling = True):
         import numpy as np
 
-        X = super().scale(X, to_verify)
+        if scaling:
+            X = super().scale(X)
         X = X.numpy()
         
         n_samples = X.shape[0]
@@ -534,23 +525,22 @@ class CEC2020_p11(BenchmarkProblem):
     
     r'''
     CEC2020 Problem 11
-    ''
+    '''
 
-    def __init__(self, is_constrained=True, flag=''):
+    def __init__(self):
         super().__init__(dim=7, 
-                         num_obj=1, 
-                         num_cons=4, 
-                         optimizers=[[0] * 7], 
-                         optimum=[[0]], 
+                         num_objectives=1, 
+                         num_constraints=4, 
+                        #  x_opt=[[0] * 7], 
+                         optimum=[99.238463653], 
                          bounds=[[0, 20], [0, 20], [0, 10], [0, 10], [-0.51, 1.49], [-0.51, 1.49], [0, 40]],
-                         is_constrained=is_constrained,
-                         flag=flag
                         )
 
-    def evaluate(self, X, to_verify=True):
+    def _evaluate_implementation(self, X, scaling = True):
         import numpy as np
 
-        X = super().scale(X, to_verify)
+        if scaling:
+            X = super().scale(X)
         X = X.numpy()
         
         n_samples = X.shape[0]
@@ -592,23 +582,22 @@ class CEC2020_p12(BenchmarkProblem):
     
     r'''
     CEC2020 Problem 12
-    ''
+    '''
 
-    def __init__(self, is_constrained=True, flag=''):
+    def __init__(self):
         super().__init__(dim=7, 
-                         num_obj=1, 
-                         num_cons=0, 
-                         optimizers=[[0] * 7], 
-                         optimum=[[0]], 
+                         num_objectives=1, 
+                         num_constraints=0, 
+                        #  x_opt=[[0] * 7], 
+                         optimum=[2.9248305537], 
                          bounds=[[0, 100], [0, 100], [0, 100], [-0.51, 1.49], [-0.51, 1.49], [-0.51, 1.49], [-0.51, 1.49]],
-                         is_constrained=is_constrained,
-                         flag=flag
                         )
 
-    def evaluate(self, X, to_verify=True):
+    def _evaluate_implementation(self, X, scaling = True):
         import numpy as np
 
-        X = super().scale(X, to_verify)
+        if scaling:
+            X = super().scale(X)
         X = X.numpy()
         
         n_samples = X.shape[0]
@@ -648,23 +637,22 @@ class CEC2020_p13(BenchmarkProblem):
     
     r'''
     CEC2020 Problem 13
-    ''
+    '''
 
-    def __init__(self, is_constrained=True, flag=''):
+    def __init__(self):
         super().__init__(dim=5, 
-                         num_obj=1, 
-                         num_cons=0, 
-                         optimizers=[[0] * 5], 
-                         optimum=[[0]], 
+                         num_objectives=1, 
+                         num_constraints=0, 
+                        #  x_opt=[[0] * 5], 
+                         optimum=[26887.0], 
                          bounds=[[27, 45], [27, 45], [27, 45], [77.51, 102.49], [32.51, 45.49]],
-                         is_constrained=is_constrained,
-                         flag=flag
                         )
 
-    def evaluate(self, X, to_verify=True):
+    def _evaluate_implementation(self, X, scaling = True):
         import numpy as np
 
-        X = super().scale(X, to_verify)
+        if scaling:
+            X = super().scale(X)
         X = X.numpy()
         
         n_samples = X.shape[0]
@@ -700,23 +688,22 @@ class CEC2020_p14(BenchmarkProblem):
     
     r'''
     CEC2020 Problem 14
-    ''
+    '''
 
-    def __init__(self, is_constrained=True, flag=''):
+    def __init__(self):
         super().__init__(dim=10, 
-                         num_obj=1, 
-                         num_cons=0, 
-                         optimizers=[[0] * 5], 
-                         optimum=[[0]], 
+                         num_objectives=1, 
+                         num_constraints=0, 
+                        #  x_opt=[[0] * 10], 
+                         optimum=[53638.942722], 
                          bounds=[[0.51, 3.49], [0.51, 3.49], [0.51, 3.49], [250, 2500], [250, 2500], [250, 2500], [6, 20], [4, 16], [40, 700], [10, 450]],
-                         is_constrained=is_constrained,
-                         flag=flag
                         )
 
-    def evaluate(self, X, to_verify=True):
+    def _evaluate_implementation(self, X, scaling = True):
         import numpy as np
 
-        X = super().scale(X, to_verify)
+        if scaling:
+            X = super().scale(X)
         X = X.numpy()
         
         n_samples = X.shape[0]
@@ -772,23 +759,22 @@ class CEC2020_p15(BenchmarkProblem):
     
     r'''
     CEC2020 Problem 15
-    ''
+    '''
 
-    def __init__(self, is_constrained=True, flag=''):
+    def __init__(self):
         super().__init__(dim=7, 
-                         num_obj=1, 
-                         num_cons=0, 
-                         optimizers=[[0] * 7], 
-                         optimum=[[0]], 
+                         num_objectives=1, 
+                         num_constraints=0, 
+                        #  x_opt=[[0] * 7], 
+                         optimum=[2994.4244658], 
                          bounds=[[2.6, 3.6], [0.7, 0.8], [17, 28], [7.3, 8.3], [7.3, 8.3], [2.9, 3.9], [5, 5.5]],
-                         is_constrained=is_constrained,
-                         flag=flag
                         )
 
-    def evaluate(self, X, to_verify=True):
+    def _evaluate_implementation(self, X, scaling = True):
         import numpy as np
 
-        X = super().scale(X, to_verify)
+        if scaling:
+            X = super().scale(X)
         X = X.numpy()
         
         n_samples = X.shape[0]
@@ -822,23 +808,22 @@ class CEC2020_p16(BenchmarkProblem):
     
     r'''
     CEC2020 Problem 16
-    ''
+    '''
 
-    def __init__(self, is_constrained=True, flag=''):
+    def __init__(self):
         super().__init__(dim=14, 
-                         num_obj=1, 
-                         num_cons=0, 
-                         optimizers=[[0] * 14], 
-                         optimum=[[0]], 
-                         bounds=[[0.001, 5]],
-                         is_constrained=is_constrained,
-                         flag=flag
+                         num_objectives=1, 
+                         num_constraints=0, 
+                        #  x_opt=[[0] * 14], 
+                         optimum=[0.032213000814], 
+                         bounds=[[0.001, 5]]*14,
                         )
 
-    def evaluate(self, X, to_verify=True):
+    def _evaluate_implementation(self, X, scaling = True):
         import numpy as np
 
-        X = super().scale(X, to_verify)
+        if scaling:
+            X = super().scale(X)
         X = X.numpy()
         
         n_samples = X.shape[0]
@@ -899,23 +884,22 @@ class CEC2020_p17(BenchmarkProblem):
     
     r'''
     CEC2020 Problem 17
-    ''
+    '''
 
-    def __init__(self, is_constrained=True, flag=''):
+    def __init__(self):
         super().__init__(dim=3, 
-                         num_obj=1, 
-                         num_cons=0, 
-                         optimizers=[[0] * 3], 
-                         optimum=[[0]], 
+                         num_objectives=1, 
+                         num_constraints=0, 
+                        #  x_opt=[[0] * 3], 
+                         optimum=[0.012665232788], 
                          bounds=[[0.05, 2], [0.25, 1.3], [2.00, 15.0]],
-                         is_constrained=is_constrained,
-                         flag=flag
                         )
 
-    def evaluate(self, X, to_verify=True):
+    def _evaluate_implementation(self, X, scaling = True):
         import numpy as np
 
-        X = super().scale(X, to_verify)
+        if scaling:
+            X = super().scale(X)
         X = X.numpy()
         
         n_samples = X.shape[0]
@@ -945,23 +929,22 @@ class CEC2020_p18(BenchmarkProblem):
     
     r'''
     CEC2020 Problem 18
-    ''
+    '''
 
-    def __init__(self, is_constrained=True, flag=''):
+    def __init__(self):
         super().__init__(dim=4, 
-                         num_obj=1, 
-                         num_cons=0, 
-                         optimizers=[[0] * 4], 
-                         optimum=[[0]], 
+                         num_objectives=1, 
+                         num_constraints=0, 
+                        #  x_opt=[[0] * 4], 
+                         optimum=[5885.3327736], 
                          bounds=[[0.51, 99.49], [0.51, 99.49], [10, 200], [10, 200]],
-                         is_constrained=is_constrained,
-                         flag=flag
                         )
 
-    def evaluate(self, X, to_verify=True):
+    def _evaluate_implementation(self, X, scaling = True):
         import numpy as np
 
-        X = super().scale(X, to_verify)
+        if scaling:
+            X = super().scale(X)
         X = X.numpy()
         
         n_samples = X.shape[0]
@@ -996,23 +979,22 @@ class CEC2020_p19(BenchmarkProblem):
     
     r'''
     CEC2020 Problem 19
-    ''
+    '''
 
-    def __init__(self, is_constrained=True, flag=''):
+    def __init__(self):
         super().__init__(dim=4, 
-                         num_obj=1, 
-                         num_cons=0, 
-                         optimizers=[[0] * 4], 
-                         optimum=[[0]], 
+                         num_objectives=1, 
+                         num_constraints=0, 
+                        #  x_opt=[[0] * 4], 
+                         optimum=[1.6702177263], 
                          bounds=[[0.125, 2], [0.1, 10], [0.1, 10], [0.1, 2]],
-                         is_constrained=is_constrained,
-                         flag=flag
                         )
 
-    def evaluate(self, X, to_verify=True):
+    def _evaluate_implementation(self, X, scaling = True):
         import numpy as np
 
-        X = super().scale(X, to_verify)
+        if scaling:
+            X = super().scale(X)
         X = X.numpy()
         
         n_samples = X.shape[0]
@@ -1064,23 +1046,20 @@ class CEC2020_p20(BenchmarkProblem):
     
     r'''
     CEC2020 Problem 20
-    ''
+    '''
 
-    def __init__(self, is_constrained=True, flag=''):
+    def __init__(self):
         super().__init__(dim=2, 
-                         num_obj=1, 
-                         num_cons=0, 
-                         optimizers=[[0] * 2], 
-                         optimum=[[0]], 
-                         bounds=[[0, 1]],
-                         is_constrained=is_constrained,
-                         flag=flag
+                         num_objectives=1, 
+                         num_constraints=0, 
+                        #  x_opt=[[0] * 2], 
+                         optimum=[263.89584338], 
+                         bounds=[[0, 1]]*2,
                         )
 
-    def evaluate(self, X, to_verify=True):
+    def _evaluate_implementation(self, X):
         import numpy as np
 
-        X = super().scale(X, to_verify)
         X = X.numpy()
         
         n_samples = X.shape[0]

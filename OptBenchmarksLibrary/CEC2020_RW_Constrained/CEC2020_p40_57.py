@@ -1,36 +1,41 @@
 import torch
 import numpy as np
-from .base import BenchmarkProblem
+from ..base import BenchmarkProblem
+from pathlib import Path
+from .helperFuncs import *
 
 class CEC2020_p40(BenchmarkProblem):
     
     r'''
     CEC2020 Problem 40
-    ''
+    '''
 
-    def __init__(self, is_constrained=True, flag=''):
+    def __init__(self):
         super().__init__(dim=76, 
-                         num_obj=1, 
-                         num_cons=76, 
-                         optimizers=[[0] * 76], 
-                         optimum=[[0]], 
+                         num_objectives=1, 
+                         num_constraints=76, 
+                        #  X_opt=[[0] * 76], 
+                         optimum=[0.0], 
                          bounds=[[-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [0, 2], [0, 2]],
-                         is_constrained=is_constrained,
-                         flag=flag
                         )
 
-    def evaluate(self, X, to_verify=True):
+    def _evaluate_implementation(self, X, scaling=True):
         import numpy as np
 
-        X = super().scale(X, to_verify)
+        if scaling:
+            X = super().scale(X)
         X = X.numpy()
         
         n_samples = X.shape[0]
 
-        if initial_flag == 0:
-            P = np.loadtxt('input data/FunctionPS2_P.txt')
-            Q = np.loadtxt('input data/FunctionPS2_Q.txt')
-            L = np.loadtxt('input data/FunctionPS14_linedata.txt')
+        if 'initial_flag' not in locals() or initial_flag == 0:
+            script_dir = Path(__file__).parent
+            path = script_dir / "input_data" / "FunctionPS2_P.txt"
+            P = np.loadtxt(path)  # Load the file
+            path = script_dir / "input_data" / "FunctionPS2_Q.txt"
+            Q = np.loadtxt(path)  # Load the file
+            path = script_dir / "input_data" / "FunctionPS14_linedata.txt"
+            L = np.loadtxt(path)  # Load the file
             initial_flag = 1
         
         # Voltage initialization
@@ -79,32 +84,36 @@ class CEC2020_p41(BenchmarkProblem):
     
     r'''
     CEC2020 Problem 41
-    ''
+    '''
 
-    def __init__(self, is_constrained=True, flag=''):
+    def __init__(self):
         super().__init__(dim=74, 
-                         num_obj=1, 
-                         num_cons=74, 
-                         optimizers=[[0] * 74], 
-                         optimum=[[0]], 
-                         bounds=[[-1, 1]],
-                         is_constrained=is_constrained,
-                         flag=flag
+                         num_objectives=1, 
+                         num_constraints=74, 
+                        #  X_opt=[[0] * 74], 
+                         optimum=[0.0], 
+                         bounds=[[-1, 1]]*74,
                         )
 
-    def evaluate(self, X, to_verify=True):
+    def _evaluate_implementation(self, X, scaling=True):
         import numpy as np
 
-        X = super().scale(X, to_verify)
+        if scaling:
+            X = super().scale(X)
         X = X.numpy()
         
         n_samples = X.shape[0]
 
-        if initial_flag == 0:
-            G = np.loadtxt('input data/FunctionPS2_G.txt')
-            B = np.loadtxt('input data/FunctionPS2_B.txt')
-            P = np.loadtxt('input data/FunctionPS2_P.txt')
-            Q = np.loadtxt('input data/FunctionPS2_Q.txt')
+        if 'initial_flag' not in locals() or initial_flag == 0:
+            script_dir = Path(__file__).parent
+            path = script_dir / "input_data" / "FunctionPS2_G.txt"
+            G = np.loadtxt(path)  # Load the file
+            path = script_dir / "input_data" / "FunctionPS2_B.txt"
+            B = np.loadtxt(path)  # Load the file
+            path = script_dir / "input_data" / "FunctionPS2_P.txt"
+            P = np.loadtxt(path)  # Load the file
+            path = script_dir / "input_data" / "FunctionPS2_Q.txt"
+            Q = np.loadtxt(path)  # Load the file
             initial_flag = 1
         
         Y = G + 1j * B
@@ -151,31 +160,34 @@ class CEC2020_p42(BenchmarkProblem):
     
     r'''
     CEC2020 Problem 42
-    ''
+    '''
 
-    def __init__(self, is_constrained=True, flag=''):
+    def __init__(self):
         super().__init__(dim=86, 
-                         num_obj=1, 
-                         num_cons=76, 
-                         optimizers=[[0] * 86], 
-                         optimum=[[0]], 
+                         num_objectives=1, 
+                         num_constraints=76, 
+                        #  X_opt=[[0] * 86], 
+                         optimum=[0.077027102], 
                          bounds=[[-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [0.0, 2.0], [0.0, 2.0], [0.0, 500.0], [0.0, 500.0], [0.0, 500.0], [0.0, 500.0], [0.0, 500.0], [0.0, 500.0], [0.0, 500.0], [0.0, 500.0], [0.0, 500.0], [0.0, 500.0]],
-                         is_constrained=is_constrained,
-                         flag=flag
                         )
 
-    def evaluate(self, X, to_verify=True):
+    def _evaluate_implementation(self, X, scaling=True):
         import numpy as np
 
-        X = super().scale(X, to_verify)
+        if scaling:
+            X = super().scale(X)
         X = X.numpy()
         
         n_samples = X.shape[0]
         
-        if initial_flag == 0:
-            P = np.loadtxt('input data/FunctionPS2_P.txt')
-            Q = np.loadtxt('input data/FunctionPS2_Q.txt')
-            L = np.loadtxt('input data/FunctionPS14_linedata.txt')
+        if 'initial_flag' not in locals() or initial_flag == 0:
+            script_dir = Path(__file__).parent
+            path = script_dir / "input_data" / "FunctionPS2_P.txt"
+            P = np.loadtxt(path)  # Load the file
+            path = script_dir / "input_data" / "FunctionPS2_Q.txt"
+            Q = np.loadtxt(path)  # Load the file
+            path = script_dir / "input_data" / "FunctionPS14_linedata.txt"
+            L = np.loadtxt(path)  # Load the file
             initial_flag = 1
         
         # Voltage initialization
@@ -221,31 +233,34 @@ class CEC2020_p43(BenchmarkProblem):
     
     r'''
     CEC2020 Problem 43
-    ''
+    '''
 
-    def __init__(self, is_constrained=True, flag=''):
+    def __init__(self):
         super().__init__(dim=86, 
-                         num_obj=1, 
-                         num_cons=76, 
-                         optimizers=[[0] * 86], 
-                         optimum=[[0]], 
+                         num_objectives=1, 
+                         num_constraints=76, 
+                        #  X_opt=[[0] * 86], 
+                         optimum=[0.07983597], 
                          bounds=[[-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [0.0, 2.0], [0.0, 2.0], [0.0, 500.0], [0.0, 500.0], [0.0, 500.0], [0.0, 500.0], [0.0, 500.0], [0.0, 500.0], [0.0, 500.0], [0.0, 500.0], [0.0, 500.0], [0.0, 500.0]],
-                         is_constrained=is_constrained,
-                         flag=flag
                         )
 
-    def evaluate(self, X, to_verify=True):
+    def _evaluate_implementation(self, X, scaling=True):
         import numpy as np
 
-        X = super().scale(X, to_verify)
+        if scaling:
+            X = super().scale(X)
         X = X.numpy()
         
         n_samples = X.shape[0]
         
-        if initial_flag == 0:
-            P = np.loadtxt('input data/FunctionPS2_P.txt')
-            Q = np.loadtxt('input data/FunctionPS2_Q.txt')
-            L = np.loadtxt('input data/FunctionPS14_linedata.txt')
+        if 'initial_flag' not in locals() or initial_flag == 0:
+            script_dir = Path(__file__).parent
+            path = script_dir / "input_data" / "FunctionPS2_P.txt"
+            P = np.loadtxt(path)  # Load the file
+            path = script_dir / "input_data" / "FunctionPS2_Q.txt"
+            Q = np.loadtxt(path)  # Load the file
+            path = script_dir / "input_data" / "FunctionPS14_linedata.txt"
+            L = np.loadtxt(path)  # Load the file
             initial_flag = 1
         
         # Voltage initialization
@@ -291,23 +306,22 @@ class CEC2020_p44(BenchmarkProblem):
     
     r'''
     CEC2020 Problem 44
-    ''
+    '''
 
-    def __init__(self, is_constrained=True, flag=''):
+    def __init__(self):
         super().__init__(dim=30, 
-                         num_obj=1, 
-                         num_cons=0, 
-                         optimizers=[[0] * 30], 
-                         optimum=[[0]], 
-                         bounds = [[40, 1960]],
-                         is_constrained=is_constrained,
-                         flag=flag
+                         num_objectives=1, 
+                         num_constraints=0, 
+                        #  X_opt=[[0] * 30], 
+                         optimum=[-6273.1715], 
+                         bounds = [[40, 1960]]*30,
                         )
 
-    def evaluate(self, X, to_verify=True):
+    def _evaluate_implementation(self, X, scaling=True):
         import numpy as np
 
-        X = super().scale(X, to_verify)
+        if scaling:
+            X = super().scale(X)
         X = X.numpy()
         
         n_samples = X.shape[0]
@@ -363,23 +377,22 @@ class CEC2020_p45(BenchmarkProblem):
     
     r'''
     CEC2020 Problem 45
-    ''
+    '''
 
-    def __init__(self, is_constrained=True, flag=''):
+    def __init__(self):
         super().__init__(dim=25, 
-                         num_obj=1, 
-                         num_cons=1, 
-                         optimizers=[[0] * 25], 
-                         optimum=[[0]], 
-                         bounds = [[0, 90]],
-                         is_constrained=is_constrained,
-                         flag=flag
+                         num_objectives=1, 
+                         num_constraints=1, 
+                        #  X_opt=[[0] * 25], 
+                         optimum=[0.03073936], 
+                         bounds = [[0, 90]]*25,
                         )
 
-    def evaluate(self, X, to_verify=True):
+    def _evaluate_implementation(self, X, scaling=True):
         import numpy as np
 
-        X = super().scale(X, to_verify)
+        if scaling:
+            X = super().scale(X)
         X = X.numpy()
         
         n_samples = X.shape[0]
@@ -416,23 +429,22 @@ class CEC2020_p46(BenchmarkProblem):
     
     r'''
     CEC2020 Problem 46
-    ''
+    '''
 
-    def __init__(self, is_constrained=True, flag=''):
+    def __init__(self):
         super().__init__(dim=25, 
-                         num_obj=1, 
-                         num_cons=1, 
-                         optimizers=[[0] * 25], 
-                         optimum=[[0]], 
-                         bounds = [[0, 90]],
-                         is_constrained=is_constrained,
-                         flag=flag
+                         num_objectives=1, 
+                         num_constraints=1, 
+                        #  X_opt=[[0] * 25], 
+                         optimum=[0.020240335], 
+                         bounds = [[0, 90]]*25,
                         )
 
-    def evaluate(self, X, to_verify=True):
+    def _evaluate_implementation(self, X, scaling=True):
         import numpy as np
 
-        X = super().scale(X, to_verify)
+        if scaling:
+            X = super().scale(X)
         X = X.numpy()
         
         n_samples = X.shape[0]
@@ -467,23 +479,22 @@ class CEC2020_p47(BenchmarkProblem):
     
     r'''
     CEC2020 Problem 47
-    ''
+    '''
 
-    def __init__(self, is_constrained=True, flag=''):
+    def __init__(self):
         super().__init__(dim=25, 
-                         num_obj=1, 
-                         num_cons=1, 
-                         optimizers=[[0] * 25], 
-                         optimum=[[0]], 
-                         bounds = [[0, 90]],
-                         is_constrained=is_constrained,
-                         flag=flag
+                         num_objectives=1, 
+                         num_constraints=1, 
+                        #  X_opt=[[0] * 25], 
+                         optimum=[0.012783068], 
+                         bounds = [[0, 90]]*25,
                         )
 
-    def evaluate(self, X, to_verify=True):
+    def _evaluate_implementation(self, X, scaling=True):
         import numpy as np
 
-        X = super().scale(X, to_verify)
+        if scaling:
+            X = super().scale(X)
         X = X.numpy()
         
         n_samples = X.shape[0]
@@ -519,23 +530,22 @@ class CEC2020_p48(BenchmarkProblem):
     
     r'''
     CEC2020 Problem 48
-    ''
+    '''
 
-    def __init__(self, is_constrained=True, flag=''):
+    def __init__(self):
         super().__init__(dim=30, 
-                         num_obj=1, 
-                         num_cons=1, 
-                         optimizers=[[0] * 30], 
-                         optimum=[[0]], 
-                         bounds = [[0, 90]],
-                         is_constrained=is_constrained,
-                         flag=flag
+                         num_objectives=1, 
+                         num_constraints=1, 
+                        #  X_opt=[[0] * 30], 
+                         optimum=[0.016787535766], 
+                         bounds = [[0, 90]]*30,
                         )
 
-    def evaluate(self, X, to_verify=True):
+    def _evaluate_implementation(self, X, scaling=True):
         import numpy as np
 
-        X = super().scale(X, to_verify)
+        if scaling:
+            X = super().scale(X)
         X = X.numpy()
         
         n_samples = X.shape[0]
@@ -571,23 +581,22 @@ class CEC2020_p49(BenchmarkProblem):
     
     r'''
     CEC2020 Problem 49
-    ''
+    '''
 
-    def __init__(self, is_constrained=True, flag=''):
+    def __init__(self):
         super().__init__(dim=30, 
-                         num_obj=1, 
-                         num_cons=1, 
-                         optimizers=[[0] * 30], 
-                         optimum=[[0]], 
-                         bounds = [[0, 90]],
-                         is_constrained=is_constrained,
-                         flag=flag
+                         num_objectives=1, 
+                         num_constraints=1, 
+                        #  X_opt=[[0] * 30], 
+                         optimum=[0.00931187418], 
+                         bounds = [[0, 90]]*30,
                         )
 
-    def evaluate(self, X, to_verify=True):
+    def _evaluate_implementation(self, X, scaling=True):
         import numpy as np
 
-        X = super().scale(X, to_verify)
+        if scaling:
+            X = super().scale(X)
         X = X.numpy()
         
         n_samples = X.shape[0]
@@ -623,23 +632,22 @@ class CEC2020_p50(BenchmarkProblem):
     
     r'''
     CEC2020 Problem 50
-    ''
+    '''
 
-    def __init__(self, is_constrained=True, flag=''):
+    def __init__(self):
         super().__init__(dim=30, 
-                         num_obj=1, 
-                         num_cons=1, 
-                         optimizers=[[0] * 30], 
-                         optimum=[[0]], 
-                         bounds = [[0, 90]],
-                         is_constrained=is_constrained,
-                         flag=flag
+                         num_objectives=1, 
+                         num_constraints=1, 
+                        #  X_opt=[[0] * 30], 
+                         optimum=[0.01505147], 
+                         bounds = [[0, 90]]*30,
                         )
 
-    def evaluate(self, X, to_verify=True):
+    def _evaluate_implementation(self, X, scaling=True):
         import numpy as np
 
-        X = super().scale(X, to_verify)
+        if scaling:
+            X = super().scale(X)
         X = X.numpy()
         
         n_samples = X.shape[0]
@@ -674,29 +682,30 @@ class CEC2020_p51(BenchmarkProblem):
     
     r'''
     CEC2020 Problem 51
-    ''
+    '''
 
-    def __init__(self, is_constrained=True, flag=''):
+    def __init__(self):
         super().__init__(dim=59, 
-                         num_obj=1, 
-                         num_cons=1, 
-                         optimizers=[[0] * 59], 
-                         optimum=[[0]], 
-                         bounds = [[0, 10]],
-                         is_constrained=is_constrained,
-                         flag=flag
+                         num_objectives=1, 
+                         num_constraints=1, 
+                        #  X_opt=[[0] * 59], 
+                         optimum=[4550.8511497], 
+                         bounds = [[0, 10]]*59,
                         )
 
-    def evaluate(self, X, to_verify=True):
+    def _evaluate_implementation(self, X, scaling=True):
         import numpy as np
 
-        X = super().scale(X, to_verify)
+        if scaling:
+            X = super().scale(X)
         X = X.numpy()
         
         n_samples = X.shape[0]
 
         if 'initial_flag' not in locals() or initial_flag == 0:
-            P = np.loadtxt('input data/FunctionRM_feed.txt')
+            script_dir = Path(__file__).parent
+            path = script_dir / "input_data" / "FunctionRM_feed.txt"
+            P = np.loadtxt(path)  # Load the file
             initial_flag = 1
         
         # Objective function
@@ -712,8 +721,8 @@ class CEC2020_p51(BenchmarkProblem):
         g[:, 5] = np.sum(X * np.tile(P[5, :], (n_samples, 1)), axis=1) - 0.086
         g[:, 6] = -np.sum(X * np.tile(P[6, :], (n_samples, 1)), axis=1) + 0.023
         g[:, 7] = np.sum(X * np.tile(P[6, :], (n_samples, 1)), axis=1) - 0.046
-        g[:, 8] = -np.sum(X[:, :17], axis=1) / np.sum(x, axis=1) + 0.295
-        g[:, 9] = np.sum(X[:, :17], axis=1) / np.sum(x, axis=1) - 0.36
+        g[:, 8] = -np.sum(X[:, :17], axis=1) / np.sum(X, axis=1) + 0.295
+        g[:, 9] = np.sum(X[:, :17], axis=1) / np.sum(X, axis=1) - 0.36
         g[:, 10] = -np.sum(X * np.tile(P[2, :], (n_samples, 1)), axis=1) / np.sum(X, axis=1) + 0.3
         g[:, 11] = np.sum(X * np.tile(P[2, :], (n_samples, 1)), axis=1) / np.sum(X, axis=1) - 0.4712
         g[:, 12] = -np.sum(X[:, 33:59], axis=1) + 9.2
@@ -730,29 +739,30 @@ class CEC2020_p52(BenchmarkProblem):
     
     r'''
     CEC2020 Problem 52
-    ''
+    '''
 
-    def __init__(self, is_constrained=True, flag=''):
+    def __init__(self):
         super().__init__(dim=59, 
-                         num_obj=1, 
-                         num_cons=1, 
-                         optimizers=[[0] * 59], 
-                         optimum=[[0]], 
-                         bounds = [[0, 10]],
-                         is_constrained=is_constrained,
-                         flag=flag
+                         num_objectives=1, 
+                         num_constraints=1, 
+                        #  X_opt=[[0] * 59], 
+                         optimum=[3348.9821493], 
+                         bounds = [[0, 10]]*59,
                         )
 
-    def evaluate(self, X, to_verify=True):
+    def _evaluate_implementation(self, X, scaling=True):
         import numpy as np
 
-        X = super().scale(X, to_verify)
+        if scaling:
+            X = super().scale(X)
         X = X.numpy()
         
         n_samples = X.shape[0]
         
         if 'initial_flag' not in locals() or initial_flag == 0:
-            P = np.loadtxt('input data/FunctionRM_feed.txt')  # Load the file
+            script_dir = Path(__file__).parent
+            path = script_dir / "input_data" / "FunctionRM_feed.txt"
+            P = np.loadtxt(path)  # Load the file
             initial_flag = 1
         
         # Objective function
@@ -778,7 +788,7 @@ class CEC2020_p52(BenchmarkProblem):
         # Equality constraints
         h = np.sum(X * np.tile(P[1, :], (n_samples, 1)), axis=1) - 9.8
 
-        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+        return torch.from_numpy(np.abs(h) - 1e-4).unsqueeze(-1), torch.from_numpy(g).unsqueeze(-1), -torch.from_numpy(f).unsqueeze(-1)
     
 
 
@@ -786,29 +796,30 @@ class CEC2020_p53(BenchmarkProblem):
     
     r'''
     CEC2020 Problem 53
-    ''
+    '''
 
-    def __init__(self, is_constrained=True, flag=''):
+    def __init__(self):
         super().__init__(dim=59, 
-                         num_obj=1, 
-                         num_cons=1, 
-                         optimizers=[[0] * 59], 
-                         optimum=[[0]], 
-                         bounds = [[0, 10]],
-                         is_constrained=is_constrained,
-                         flag=flag
+                         num_objectives=1, 
+                         num_constraints=1, 
+                        #  X_opt=[[0] * 59], 
+                         optimum=[4997.606929], 
+                         bounds = [[0, 10]]*59,
                         )
 
-    def evaluate(self, X, to_verify=True):
+    def _evaluate_implementation(self, X, scaling=True):
         import numpy as np
 
-        X = super().scale(X, to_verify)
+        if scaling:
+            X = super().scale(X)
         X = X.numpy()
         
         n_samples = X.shape[0]
         
         if 'initial_flag' not in locals() or initial_flag == 0:
-            P = np.loadtxt('input data/FunctionRM_feed.txt')  # Load the file
+            script_dir = Path(__file__).parent
+            path = script_dir / "input_data" / "FunctionRM_feed.txt"
+            P = np.loadtxt(path)  # Load the file
             initial_flag = 1
         
         # Objective function
@@ -835,7 +846,7 @@ class CEC2020_p53(BenchmarkProblem):
         # Equality constraints
         h = np.sum(X * np.tile(P[1, :], (n_samples, 1)), axis=1) - 8.7
 
-        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+        return torch.from_numpy(np.abs(h) - 1e-4).unsqueeze(-1), torch.from_numpy(g).unsqueeze(-1), -torch.from_numpy(f).unsqueeze(-1)
     
 
 
@@ -844,29 +855,30 @@ class CEC2020_p54(BenchmarkProblem):
     
     r'''
     CEC2020 Problem 54
-    ''
+    '''
 
-    def __init__(self, is_constrained=True, flag=''):
+    def __init__(self):
         super().__init__(dim=59, 
-                         num_obj=1, 
-                         num_cons=1, 
-                         optimizers=[[0] * 59], 
-                         optimum=[[0]], 
-                         bounds = [[0, 10]],
-                         is_constrained=is_constrained,
-                         flag=flag
+                         num_objectives=1, 
+                         num_constraints=1, 
+                        #  X_opt=[[0] * 59], 
+                         optimum=[4240.5482538], 
+                         bounds = [[0, 10]]*59,
                         )
 
-    def evaluate(self, X, to_verify=True):
+    def _evaluate_implementation(self, X, scaling=True):
         import numpy as np
 
-        X = super().scale(X, to_verify)
+        if scaling:
+            X = super().scale(X)
         X = X.numpy()
         
         n_samples = X.shape[0]
         
         if 'initial_flag' not in locals() or initial_flag == 0:
-            P = np.loadtxt('input data/FunctionRM_feed.txt')  # Load the file
+            script_dir = Path(__file__).parent
+            path = script_dir / "input_data" / "FunctionRM_feed.txt"
+            P = np.loadtxt(path)  # Load the file
             initial_flag = 1
         
         # Objective function
@@ -892,7 +904,7 @@ class CEC2020_p54(BenchmarkProblem):
         # Equality constraints
         h = np.sum(X * np.tile(P[1, :], (n_samples, 1)), axis=1) - 5.6
 
-        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+        return torch.from_numpy(np.abs(h) - 1e-4).unsqueeze(-1), torch.from_numpy(g).unsqueeze(-1), -torch.from_numpy(f).unsqueeze(-1)
 
 
 
@@ -900,29 +912,30 @@ class CEC2020_p55(BenchmarkProblem):
     
     r'''
     CEC2020 Problem 55
-    ''
+    '''
 
-    def __init__(self, is_constrained=True, flag=''):
+    def __init__(self):
         super().__init__(dim=64, 
-                         num_obj=1, 
-                         num_cons=6, 
-                         optimizers=[[0] * 64], 
-                         optimum=[[0]], 
-                         bounds = [[0, 10]],
-                         is_constrained=is_constrained,
-                         flag=flag
+                         num_objectives=1, 
+                         num_constraints=6, 
+                        #  X_opt=[[0] * 64], 
+                         optimum=[6696.4145128], 
+                         bounds = [[0, 10]]*64,
                         )
 
-    def evaluate(self, X, to_verify=True):
+    def _evaluate_implementation(self, X, scaling=True):
         import numpy as np
 
-        X = super().scale(X, to_verify)
+        if scaling:
+            X = super().scale(X)
         X = X.numpy()
         
         n_samples = X.shape[0]
         
         if 'initial_flag' not in locals() or initial_flag == 0:
-            P = np.loadtxt('input data/FunctionRM_dairy.txt')  # Load the file
+            script_dir = Path(__file__).parent
+            path = script_dir / "input_data" / "FunctionRM_dairy.txt"
+            P = np.loadtxt(path)  # Load the file
             initial_flag = 1
         
         # Objective function
@@ -948,29 +961,30 @@ class CEC2020_p56(BenchmarkProblem):
     
     r'''
     CEC2020 Problem 56
-    ''
+    '''
 
-    def __init__(self, is_constrained=True, flag=''):
+    def __init__(self):
         super().__init__(dim=64, 
-                         num_obj=1, 
-                         num_cons=6, 
-                         optimizers=[[0] * 64], 
-                         optimum=[[0]], 
-                         bounds = [[0, 10]],
-                         is_constrained=is_constrained,
-                         flag=flag
+                         num_objectives=1, 
+                         num_constraints=6, 
+                        #  X_opt=[[0] * 64], 
+                         optimum=[14746.58], 
+                         bounds = [[0, 10]]*64,
                         )
 
-    def evaluate(self, X, to_verify=True):
+    def _evaluate_implementation(self, X, scaling=True):
         import numpy as np
 
-        X = super().scale(X, to_verify)
+        if scaling:
+            X = super().scale(X)
         X = X.numpy()
         
         n_samples = X.shape[0]
         
         if 'initial_flag' not in locals() or initial_flag == 0:
-            P = np.loadtxt('input data/FunctionRM_dairy.txt')  # Load the file
+            script_dir = Path(__file__).parent
+            path = script_dir / "input_data" / "FunctionRM_dairy.txt"
+            P = np.loadtxt(path)  # Load the file
             initial_flag = 1
         
         # Objective function
@@ -996,29 +1010,30 @@ class CEC2020_p57(BenchmarkProblem):
     
     r'''
     CEC2020 Problem 57
-    ''
+    '''
 
-    def __init__(self, is_constrained=True, flag=''):
+    def __init__(self):
         super().__init__(dim=64, 
-                         num_obj=1, 
-                         num_cons=6, 
-                         optimizers=[[0] * 64], 
-                         optimum=[[0]], 
-                         bounds = [[0, 10]],
-                         is_constrained=is_constrained,
-                         flag=flag
+                         num_objectives=1, 
+                         num_constraints=6, 
+                        #  X_opt=[[0] * 64], 
+                         optimum=[3213.2917019], 
+                         bounds = [[0, 10]]*64,
                         )
 
-    def evaluate(self, X, to_verify=True):
+    def _evaluate_implementation(self, X, scaling=True):
         import numpy as np
 
-        X = super().scale(X, to_verify)
+        if scaling:
+            X = super().scale(X)
         X = X.numpy()
         
         n_samples = X.shape[0]
         
         if 'initial_flag' not in locals() or initial_flag == 0:
-            P = np.loadtxt('input data/FunctionRM_dairy.txt')  # Load the file
+            script_dir = Path(__file__).parent
+            path = script_dir / "input_data" / "FunctionRM_dairy.txt"
+            P = np.loadtxt(path)  # Load the file
             initial_flag = 1
         
         # Objective function
@@ -1037,3 +1052,9 @@ class CEC2020_p57(BenchmarkProblem):
         g = np.zeros((n_samples, 0))
 
         return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+
+
+def ybus(linedata, f):
+    Y = np.array([])
+    return Y
+
