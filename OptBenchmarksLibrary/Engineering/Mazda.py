@@ -14,8 +14,9 @@ class Mazda(BenchmarkProblem):
     def __init__(self):
         super().__init__(dim = 222, 
                          num_objectives = 1, 
-                         num_constraints = 68, 
-                         bounds = [(0, 1)]*222)
+                         num_constraints = 54, 
+                         bounds = [(0, 1)]*222 # Scaled upon evaluation
+                         )
 
     def _evaluate_implementation(self, X):
 
@@ -35,20 +36,13 @@ class Mazda(BenchmarkProblem):
         # Read the Excel file into a DataFrame
         dataframe = pd.read_excel(file_path, sheet_name='Explain_DV_and_Const.')
 
-        # Display the DataFrame to ensure it has been read correctly
         bounds = dataframe.values[2:, 3:5].astype(float)
-        # print(bounds)
+
         bounds_tensor = torch.tensor(bounds, dtype=torch.float32)
-        # print(bounds_tensor.shape)
 
         range_bounds = bounds_tensor[:,1] - bounds_tensor[:,0]
 
-        # print(range_bounds)
-
         scaled_samples = X * range_bounds + bounds_tensor[:,0]
-        # print(scaled_samples)
-
-
 
         # Convert the torch tensor to a numpy array
         data_numpy_back = scaled_samples.numpy()
@@ -60,9 +54,6 @@ class Mazda(BenchmarkProblem):
         output_file_path = Path(__file__).parent / "Mazda_Data" / "pop_vars_eval.txt"
 
         dataframe_back.to_csv(output_file_path, sep='\t', header=False, index=False)
-        #####################
-        #####################
-
 
         #####################
         # Run Bash file
@@ -70,30 +61,21 @@ class Mazda(BenchmarkProblem):
 
         script_dir = Path(__file__).parent
         bin_path = script_dir / "Mazda_Data" / "bin" / "mazda_mop"
-        input_file = script_dir / "Mazda_Data" / "pop_vars_eval.txt"
+        input_dir = script_dir / "Mazda_Data"
 
         if not os.access(bin_path, os.X_OK):
             print(f"Adding execution permissions to: {bin_path}")
             os.chmod(bin_path, os.stat(bin_path).st_mode | stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH)
 
-        result = subprocess.run([str(bin_path), str(input_file)], stdout=subprocess.PIPE, stderr=subprocess.PIPE, start_new_session=True)
-
-        # Optional: capture the output and error messages
-        stdout = result.stdout
-        stderr = result.stderr
-
-        # os.chdir('/home/turbo/rosenyu/Bank_High_DIM/')
-        # print(os.getcwd())
-        #####################
-        #####################
-
+        # MUST BE ON A LINUX/UNIX MACHINE
+        subprocess.run([str(bin_path), str(input_dir)], stdout=subprocess.PIPE, stderr=subprocess.PIPE, start_new_session=True)
 
         #####################
         # Read in objective and constraints
         #####################
 
         # Read the data from the file into a pandas DataFrame
-        file_path = '/home/turbo/rosenyu/Bank_High_DIM/Mazda_CdMOBP/Mazda_CdMOBP/rosen_sample_t2/pop_objs_eval.txt'
+        file_path = script_dir / "Mazda_Data" / "pop_objs_eval.txt"
         objs_dataframe = pd.read_csv(file_path, delim_whitespace=True, header=None)
 
         # Convert the DataFrame to a numpy array
@@ -104,7 +86,7 @@ class Mazda(BenchmarkProblem):
         objs_data_tensor = objs_data_tensor[:,0].reshape(objs_data_tensor.shape[0],1)
 
         # Read the data from the file into a pandas DataFrame
-        file_path = '/home/turbo/rosenyu/Bank_High_DIM/Mazda_CdMOBP/Mazda_CdMOBP/rosen_sample_t2/pop_cons_eval.txt'
+        file_path = script_dir / "Mazda_Data" / "pop_cons_eval.txt"
         cons_dataframe = pd.read_csv(file_path, delim_whitespace=True, header=None)
 
         # Convert the DataFrame to a numpy array
