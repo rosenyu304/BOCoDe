@@ -28,6 +28,10 @@ class CEC2020_p40(BenchmarkProblem):
         
         n_samples = X.shape[0]
 
+        D = n_samples
+        f = np.zeros((n_samples, 1))
+        h = np.zeros((n_samples, 76))
+
         if 'initial_flag' not in locals() or initial_flag == 0:
             script_dir = Path(__file__).parent
             path = script_dir / "input_data" / "FunctionPS2_P.txt"
@@ -75,7 +79,7 @@ class CEC2020_p40(BenchmarkProblem):
         # No inequality constraints
         g = np.zeros((n_samples, 0))
 
-        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f)
     
 
 
@@ -103,6 +107,10 @@ class CEC2020_p41(BenchmarkProblem):
         X = X.numpy()
         
         n_samples = X.shape[0]
+
+        D = n_samples
+        f = np.zeros((n_samples, 1))
+        h = np.zeros((n_samples, 74))
 
         if 'initial_flag' not in locals() or initial_flag == 0:
             script_dir = Path(__file__).parent
@@ -152,7 +160,7 @@ class CEC2020_p41(BenchmarkProblem):
         # No inequality constraints
         g = np.zeros((n_samples, 0))
 
-        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f)
 
 
 
@@ -179,6 +187,10 @@ class CEC2020_p42(BenchmarkProblem):
         X = X.numpy()
         
         n_samples = X.shape[0]
+
+        D = n_samples
+        f = np.zeros((n_samples, 1))
+        h = np.zeros((n_samples, 76))
         
         if 'initial_flag' not in locals() or initial_flag == 0:
             script_dir = Path(__file__).parent
@@ -225,7 +237,7 @@ class CEC2020_p42(BenchmarkProblem):
         # No inequality constraints
         g = np.zeros((n_samples, 0))
 
-        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f)
 
 
 
@@ -252,6 +264,9 @@ class CEC2020_p43(BenchmarkProblem):
         X = X.numpy()
         
         n_samples = X.shape[0]
+
+        D = n_samples
+        f = np.zeros((n_samples, 1))
         
         if 'initial_flag' not in locals() or initial_flag == 0:
             script_dir = Path(__file__).parent
@@ -268,6 +283,7 @@ class CEC2020_p43(BenchmarkProblem):
         V[0] = 1
         Pc = np.zeros(38)
         Qc = np.zeros(38)
+        h = np.zeros((n_samples, 76))
         
         for i in range(n_samples):
             V[1:38] = X[i, 0:37] + 1j * X[i, 37:74]
@@ -298,7 +314,7 @@ class CEC2020_p43(BenchmarkProblem):
         # No inequality constraints
         g = np.zeros((n_samples, 0))
 
-        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f)
 
 
 
@@ -326,6 +342,9 @@ class CEC2020_p44(BenchmarkProblem):
         
         n_samples = X.shape[0]
 
+        D = n_samples
+        f = np.zeros((n_samples, 1))
+
         interval = 15                        
         interval_num = 360 // interval    
         cut_in_speed = 3.5                  
@@ -338,7 +357,7 @@ class CEC2020_p44(BenchmarkProblem):
         kappa = 0.01                         
         minDistance = 5 * R                  
         N = 15                               
-        X = 2000                             
+        # X = 2000                             
         Y = 2000                             
         k = np.full(interval_num, 2)
         c = [7, 5, 5, 5, 5, 4, 5, 6, 7, 7, 8, 9.5, 10, 8.5, 8.5, 6.5, 4.6, 2.6, 8, 5, 6.4, 5.2, 4.5, 3.9]
@@ -368,7 +387,7 @@ class CEC2020_p44(BenchmarkProblem):
         # No equality constraints
         h = np.zeros((n_samples, 0))
 
-        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f)
 
 
 
@@ -397,6 +416,9 @@ class CEC2020_p45(BenchmarkProblem):
         
         n_samples = X.shape[0]
 
+        D = n_samples
+        f = np.zeros((n_samples, 1))
+
         m = 0.32
         s = (-np.ones(25)) ** np.arange(2, 27)
         k = np.array([5, 7, 11, 13, 17, 19, 23, 25, 29, 31, 35, 37, 41, 43, 47, 49, 53, 55, 59, 61, 65, 67, 71, 73, 77, 79, 83, 85, 91, 95, 97])
@@ -419,7 +441,7 @@ class CEC2020_p45(BenchmarkProblem):
         # Equality onstraints
         h = np.sum(s * np.cos(X * np.pi / 180), axis=1) - m
 
-        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+        return torch.from_numpy(np.abs(h) - 1e-4).unsqueeze(-1), torch.from_numpy(g), -torch.from_numpy(f)
     
 
 
@@ -449,6 +471,9 @@ class CEC2020_p46(BenchmarkProblem):
         
         n_samples = X.shape[0]
 
+        D = n_samples
+        f = np.zeros((n_samples, 1))
+
         m = 0.32
         s = [1, -1, 1, 1, -1, 1, -1, 1, -1, -1, 1, -1, 1, 1, -1, 1, -1, 1, -1, -1, 1, -1, 1, 1, -1]
         k = [5, 7, 11, 13, 17, 19, 23, 25, 29, 31, 35, 37, 41, 43, 47, 49, 53, 55, 59, 61, 65, 67, 71, 73, 77, 79, 83, 85, 91, 95, 97]
@@ -471,7 +496,7 @@ class CEC2020_p46(BenchmarkProblem):
         # Equality constraints
         h = np.sum(np.array(s) * np.cos(X * np.pi / 180), axis=1) - 2 * m
 
-        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+        return torch.from_numpy(np.abs(h) - 1e-4).unsqueeze(-1), torch.from_numpy(g), -torch.from_numpy(f)
     
 
 
@@ -499,6 +524,9 @@ class CEC2020_p47(BenchmarkProblem):
         
         n_samples = X.shape[0]
 
+        D = n_samples
+        f = np.zeros((n_samples, 1))
+
         m = 0.36
         s = [1, -1, 1, 1, 1, -1, -1, -1, 1, 1, -1, -1, 1, 1, 1, -1, -1, -1, 1, 1, -1, -1, 1, 1, 1]
         k = [5, 7, 11, 13, 17, 19, 23, 25, 29, 31, 35, 37, 41, 43, 47, 49, 53, 55, 59, 61, 65, 67, 71, 73, 77, 79, 83, 85, 91, 95, 97]
@@ -521,7 +549,7 @@ class CEC2020_p47(BenchmarkProblem):
         # Equality constraints
         h = np.sum(np.array(s) * np.cos(X * np.pi / 180), axis=1) - 3 * m
 
-        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+        return torch.from_numpy(np.abs(h) - 1e-4).unsqueeze(-1), torch.from_numpy(g), -torch.from_numpy(f)
     
 
 
@@ -550,6 +578,9 @@ class CEC2020_p48(BenchmarkProblem):
         
         n_samples = X.shape[0]
 
+        D = n_samples
+        f = np.zeros((n_samples, 1))
+
         m = 0.32
         s = [1, 1, 1, 1, -1, 1, -1, -1, -1, 1, -1, -1, 1, 1, 1, 1, -1, 1, -1, -1, -1, 1, -1, -1, 1, 1, 1, 1, -1, 1]
         k = [5, 7, 11, 13, 17, 19, 23, 25, 29, 31, 35, 37, 41, 43, 47, 49, 53, 55, 59, 61, 65, 67, 71, 73, 77, 79, 83, 85, 91, 95, 97]
@@ -572,7 +603,7 @@ class CEC2020_p48(BenchmarkProblem):
         # Equality constraints
         h = np.sum(np.array(s) * np.cos(X * np.pi / 180), axis=1) - 4 * m
 
-        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+        return torch.from_numpy(np.abs(h) - 1e-4).unsqueeze(-1), torch.from_numpy(g), -torch.from_numpy(f)
     
 
 
@@ -601,6 +632,9 @@ class CEC2020_p49(BenchmarkProblem):
         
         n_samples = X.shape[0]
 
+        D = n_samples
+        f = np.zeros((n_samples, 1))
+
         m = 0.3333
         s = [1, -1, 1, 1, 1, -1, -1, -1, 1, 1, 1, 1, -1, -1, 1, -1, -1, -1, 1, 1, 1, 1, -1, 1, 1, -1, -1, 1, -1, -1]
         k = [5, 7, 11, 13, 17, 19, 23, 25, 29, 31, 35, 37, 41, 43, 47, 49, 53, 55, 59, 61, 65, 67, 71, 73, 77, 79, 83, 85, 91, 95, 97]
@@ -623,7 +657,7 @@ class CEC2020_p49(BenchmarkProblem):
         # Equality constraints
         h = np.sum(np.array(s) * np.cos(X * np.pi / 180), axis=1) - 5 * m
 
-        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+        return torch.from_numpy(np.abs(h) - 1e-4).unsqueeze(-1), torch.from_numpy(g), -torch.from_numpy(f)
     
 
 
@@ -652,6 +686,9 @@ class CEC2020_p50(BenchmarkProblem):
         
         n_samples = X.shape[0]
 
+        D = n_samples
+        f = np.zeros((n_samples, 1))
+
         m = 0.32
         s = [1, 1, 1, -1, 1, -1, 1, -1, 1, 1, 1, 1, -1, -1, -1, -1, 1, -1, 1, -1, 1, 1, 1, 1, -1, -1, -1, 1, -1, 1]
         k = [5, 7, 11, 13, 17, 19, 23, 25, 29, 31, 35, 37, 41, 43, 47, 49, 53, 55, 59, 61, 65, 67, 71, 73, 77, 79, 83, 85, 91, 95, 97]
@@ -674,7 +711,7 @@ class CEC2020_p50(BenchmarkProblem):
         # Equality constraints
         h = np.sum(np.array(s) * np.cos(X * np.pi / 180), axis=1) - 6 * m
 
-        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+        return torch.from_numpy(np.abs(h) - 1e-4).unsqueeze(-1), torch.from_numpy(g), -torch.from_numpy(f)
     
 
 
@@ -701,6 +738,9 @@ class CEC2020_p51(BenchmarkProblem):
         X = X.numpy()
         
         n_samples = X.shape[0]
+
+        D = n_samples
+        f = np.zeros((n_samples, 1))
 
         if 'initial_flag' not in locals() or initial_flag == 0:
             script_dir = Path(__file__).parent
@@ -731,7 +771,7 @@ class CEC2020_p51(BenchmarkProblem):
         # Equality constraints
         h = np.sum(X * np.tile(P[1, :], (n_samples, 1)), axis=1) - 6.9
 
-        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+        return torch.from_numpy(np.abs(h) - 1e-4).unsqueeze(-1), torch.from_numpy(g).unsqueeze(-1), -torch.from_numpy(f).unsqueeze(-1)
     
 
 
@@ -758,6 +798,9 @@ class CEC2020_p52(BenchmarkProblem):
         X = X.numpy()
         
         n_samples = X.shape[0]
+
+        D = n_samples
+        f = np.zeros((n_samples, 1))
         
         if 'initial_flag' not in locals() or initial_flag == 0:
             script_dir = Path(__file__).parent
@@ -815,6 +858,9 @@ class CEC2020_p53(BenchmarkProblem):
         X = X.numpy()
         
         n_samples = X.shape[0]
+
+        D = n_samples
+        f = np.zeros((n_samples, 1))
         
         if 'initial_flag' not in locals() or initial_flag == 0:
             script_dir = Path(__file__).parent
@@ -874,6 +920,9 @@ class CEC2020_p54(BenchmarkProblem):
         X = X.numpy()
         
         n_samples = X.shape[0]
+
+        D = n_samples
+        f = np.zeros((n_samples, 1))
         
         if 'initial_flag' not in locals() or initial_flag == 0:
             script_dir = Path(__file__).parent
@@ -931,6 +980,9 @@ class CEC2020_p55(BenchmarkProblem):
         X = X.numpy()
         
         n_samples = X.shape[0]
+
+        D = n_samples
+        f = np.zeros((n_samples, 1))
         
         if 'initial_flag' not in locals() or initial_flag == 0:
             script_dir = Path(__file__).parent
@@ -980,6 +1032,9 @@ class CEC2020_p56(BenchmarkProblem):
         X = X.numpy()
         
         n_samples = X.shape[0]
+
+        D = n_samples
+        f = np.zeros((n_samples, 1))
         
         if 'initial_flag' not in locals() or initial_flag == 0:
             script_dir = Path(__file__).parent
@@ -1029,6 +1084,9 @@ class CEC2020_p57(BenchmarkProblem):
         X = X.numpy()
         
         n_samples = X.shape[0]
+
+        D = n_samples
+        f = np.zeros((n_samples, 1))
         
         if 'initial_flag' not in locals() or initial_flag == 0:
             script_dir = Path(__file__).parent
@@ -1052,9 +1110,3 @@ class CEC2020_p57(BenchmarkProblem):
         g = np.zeros((n_samples, 0))
 
         return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
-
-
-def ybus(linedata, f):
-    Y = np.array([])
-    return Y
-

@@ -935,9 +935,9 @@ class CEC2020_p18(BenchmarkProblem):
         super().__init__(dim=4, 
                          num_objectives=1, 
                          num_constraints=0, 
-                        #  x_opt=[[0] * 4], 
-                         optimum=[5885.3327736], 
-                         bounds=[[0.51, 99.49], [0.51, 99.49], [10, 200], [10, 200]],
+                         x_opt=[[0.8125, 0.4375, 42.0984455958549, 176.6365958424394]], 
+                        #  optimum=[6059.714335048436], 
+                         bounds=[[0.0625, 99*0.0625], [0.0625, 99*0.0625], [10, 200], [10, 200]],
                         )
 
     def _evaluate_implementation(self, X, scaling = True):

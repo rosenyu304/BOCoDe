@@ -242,7 +242,7 @@ def check(nelx, nely, rmin, x, dc):
                     summation += fac
                     dcn[j, i] += fac * x[l, k] * dc[l, k]
             dcn[j, i] = dcn[j, i] / (x[j, i] * summation)
-    return 
+    return dcn
 
 
 
@@ -278,6 +278,7 @@ def downstream_wind_turbine_is_affected(coordinate, upstream, downstream, theta,
 
 def eva_func_deficit(interval_dir_num, N, coordinate, theta, a, kappa, R):
     global thetaVeldefijMatrix
+    thetaVeldefijMatrix = np.zeros((N, N, interval_dir_num))
     vel_def = np.zeros(N)
     
     idx = interval_dir_num - 1

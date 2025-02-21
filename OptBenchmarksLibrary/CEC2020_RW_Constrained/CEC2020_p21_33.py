@@ -150,7 +150,7 @@ class CEC2020_p22(BenchmarkProblem):
         # Equality constraints
         h = np.remainder(N6 - N4, p)
 
-        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+        return torch.from_numpy(np.abs(h) - 1e-4).unsqueeze(-1), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
 
 
 
@@ -275,15 +275,36 @@ class CEC2020_p24(BenchmarkProblem):
         Zmax = 99.9999
         P = 100
         
-        alpha_0 = np.arccos((a**2 + l**2 + e**2 - b**2) / (2 * a * np.sqrt(l**2 + e**2))) + np.arctan(e / l)
-        beta_0 = np.arccos((b**2 + l**2 + e**2 - a**2) / (2 * b * np.sqrt(l**2 + e**2))) - np.arctan(e / l)
-        alpha_m = np.arccos((a**2 + (l - Zmax)**2 + e**2 - b**2) / (2 * a * np.sqrt((l - Zmax)**2 + e**2))) + np.arctan(e / (l - Zmax))
-        beta_m = np.arccos((b**2 + (l - Zmax)**2 + e**2 - a**2) / (2 * b * np.sqrt((l - Zmax)**2 + e**2))) - np.arctan(e / (l - Zmax))
+        # Old Calculations;
+        # alpha_0 = np.arccos((a**2 + l**2 + e**2 - b**2) / (2 * a * np.sqrt((Zmax-l)**2 + e**2))) + np.arctan(e / l)
+        # beta_0 = np.arccos((b**2 + l**2 + e**2 - a**2) / (2 * b * np.sqrt(l**2 + e**2))) - np.arctan(e / l)
+
+        # alpha_m = np.arccos((a**2 + (l - Zmax)**2 + e**2 - b**2) / (2 * a * np.sqrt((l - Zmax)**2 + e**2))) + np.arctan(e / (l - Zmax))
+        # beta_m = np.arccos((b**2 + (l - Zmax)**2 + e**2 - a**2) / (2 * b * np.sqrt((l - Zmax)**2 + e**2))) - np.arctan(e / (l - Zmax))
+
+        print((a**2 + ((l - Zmax)**2 + e**2) - b**2) / (2 * a * np.sqrt((l - Zmax)**2 + e**2)))
+
+        # Fixed Calculations:
+        alpha_0 = np.arccos(
+            (a**2 + (l**2 + e**2) - b**2) / (2 * a * np.sqrt(l**2 + e**2))
+        ) + np.arctan(e / l)
+
+        beta_0 = np.arccos(
+            (b**2 + (l**2 + e**2) - a**2) / (2 * b * np.sqrt(l**2 + e**2))
+        ) - np.arctan(e / l)
+
+        alpha_m = np.arccos(
+            (a**2 + ((l - Zmax)**2 + e**2) - b**2) / (2 * a * np.sqrt((l - Zmax)**2 + e**2))
+        ) + np.arctan(e / (l - Zmax))
+
+        beta_m = np.arccos(
+            (b**2 + ((l - Zmax)**2 + e**2) - a**2) / (2 * b * np.sqrt((l - Zmax)**2 + e**2))
+        ) - np.arctan(e / (l - Zmax))
         
         # Objective function
         f = np.zeros(n_samples)
         for i in range(n_samples):
-            f[i] = -OBJ11(X[i], 2) - OBJ11(X[i], 1)
+            f[i] = -OBJ11(X[i, :-1], 2) - OBJ11(X[i, :-1], 1)
         
         # Inequality constraints
         Yxmin = 2 * (e + ff + c * np.sin(beta_m + delta))
@@ -406,25 +427,27 @@ class CEC2020_p26(BenchmarkProblem):
         # Parameter initialized
         X = np.round(X)
 
+        print(X)
+
         Np1, Ng1, Np2, Ng2, Np3, Ng3, Np4, Ng4 = X[:, 0], X[:, 1], X[:, 2], X[:, 3], X[:, 4], X[:, 5], X[:, 6], X[:, 7]
         
         Pvalue = np.array([3.175, 5.715, 8.255, 12.7])
-        b1 = Pvalue[X[:, 8].astype(int)].T
-        b2 = Pvalue[X[:, 9].astype(int)].T
-        b3 = Pvalue[X[:, 10].astype(int)].T
-        b4 = Pvalue[X[:, 11].astype(int)].T
+        b1 = Pvalue[X[:, 8].astype(int)-1].T
+        b2 = Pvalue[X[:, 9].astype(int)-1].T
+        b3 = Pvalue[X[:, 10].astype(int)-1].T
+        b4 = Pvalue[X[:, 11].astype(int)-1].T
         
         XYvalue = np.array([12.7, 25.4, 38.1, 50.8, 63.5, 76.2, 88.9, 101.6, 114.3])
-        xp1 = XYvalue[X[:, 12].astype(int)].T
-        xg1 = XYvalue[X[:, 13].astype(int)].T
-        xg2 = XYvalue[X[:, 14].astype(int)].T
-        xg3 = XYvalue[X[:, 15].astype(int)].T
-        xg4 = XYvalue[X[:, 16].astype(int)].T
-        yp1 = XYvalue[X[:, 17].astype(int)].T
-        yg1 = XYvalue[X[:, 18].astype(int)].T
-        yg2 = XYvalue[X[:, 19].astype(int)].T
-        yg3 = XYvalue[X[:, 20].astype(int)].T
-        yg4 = XYvalue[X[:, 21].astype(int)].T
+        xp1 = XYvalue[X[:, 12].astype(int)-1].T
+        xg1 = XYvalue[X[:, 13].astype(int)-1].T
+        xg2 = XYvalue[X[:, 14].astype(int)-1].T
+        xg3 = XYvalue[X[:, 15].astype(int)-1].T
+        xg4 = XYvalue[X[:, 16].astype(int)-1].T
+        yp1 = XYvalue[X[:, 17].astype(int)-1].T
+        yg1 = XYvalue[X[:, 18].astype(int)-1].T
+        yg2 = XYvalue[X[:, 19].astype(int)-1].T
+        yg3 = XYvalue[X[:, 20].astype(int)-1].T
+        yg4 = XYvalue[X[:, 21].astype(int)-1].T
 
         # Value initialized
         c1 = np.sqrt((xg1 - xp1) ** 2 + (yg1 - yp1) ** 2)
@@ -456,7 +479,7 @@ class CEC2020_p26(BenchmarkProblem):
         )
         
         # Inequality constraints
-        g = np.zeros((n_samples, 86))
+        g = np.zeros((n_samples, 87))
         g[:, 0] = (366000 / (np.pi * w1) + 2 * c1 * Np1 / (Np1 + Ng1)) * (((Np1 + Ng1) ** 2) / (4 * b1 * c1 ** 2 * Np1)) - sigma_N * JR / (0.0167 * W * Ko * Km)
         g[:, 1] = (366000 * Ng1 / (np.pi * w1 * Np1) + 2 * c2 * Np2 / (Np2 + Ng2)) * (((Np2 + Ng2) ** 2) / (4 * b2 * c2 ** 2 * Np2)) - sigma_N * JR / (0.0167 * W * Ko * Km)
         g[:, 2] = (366000 * Ng1 * Ng2 / (np.pi * w1 * Np1 * Np2) + 2 * c3 * Np3 / (Np3 + Ng3)) * (((Np3 + Ng3) ** 2) / (4 * b3 * c3 ** 2 * Np3)) - sigma_N * JR / (0.0167 * W * Ko * Km)
@@ -592,7 +615,7 @@ class CEC2020_p27(BenchmarkProblem):
         # No equality constraints
         h = np.zeros((n_samples, 0))
       
-        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f).unsqueeze(-1)
+        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g), -torch.from_numpy(f)
 
 
 
@@ -781,7 +804,7 @@ class CEC2020_p31(BenchmarkProblem):
     def __init__(self):
         super().__init__(dim=4, 
                          num_objectives=1, 
-                         num_constraints=1, 
+                         num_constraints=0, 
                         #  X_opt=[[0] * 4], 
                          optimum=[0.0], 
                          bounds=[[12, 60]]*4,
@@ -901,31 +924,38 @@ class CEC2020_p33(BenchmarkProblem):
         g = np.zeros((ps, nely * nelx))  # Gradient values (flattened)
         
         for i in range(ps):
-            X = np.array([X[i, 0:10], X[i, 10:20], X[i, 20:30]]).T
+            Xsplice = np.array([X[i, 0:10], X[i, 10:20], X[i, 20:30]]).T
         
             # FE-analysis
-            U = FE(3, 10, X, 3)
+            U = FE(3, 10, Xsplice, 3)
         
             # Objective function and sensitivity analysis
             KE = lk()
             c = 0.0
-            dc = np.zeros_like(X)
+            # Q: Should this be X or Xsplice in np.zeros_like(X)?
+            dc = np.zeros_like(Xsplice)
         
             for ely in range(nely):
                 for elx in range(nelx):
                     n1 = (nely + 1) * (elx - 1) + ely
                     n2 = (nely + 1) * elx + ely
                     Ue = U[[2 * n1 - 1, 2 * n1, 2 * n2 - 1, 2 * n2, 2 * n2 + 1, 2 * n2 + 2, 2 * n1 + 1, 2 * n1 + 2], 0]
-                    c += X[ely, elx] ** penal * np.dot(Ue.T, np.dot(KE, Ue))
-                    dc[ely, elx] = -penal * X[ely, elx] ** (penal - 1) * np.dot(Ue.T, np.dot(KE, Ue))
+                    c += Xsplice[ely, elx] ** penal * np.dot(Ue.T, np.dot(KE, Ue))
+                    dc[ely, elx] = -penal * Xsplice[ely, elx] ** (penal - 1) * np.dot(Ue.T, np.dot(KE, Ue))
         
             # Filtering of sensitivities
-            dc = check(3, 10, 1.5, X, dc)
+            dc = check(3, 10, 1.5, Xsplice, dc)
             f[i, 0] = c
             g[i, :] = dc.flatten()
 
         # No equality constraints
         h = np.zeros((n_samples, 0))
 
-        return torch.from_numpy(np.abs(h) - 1e-4).unsqueeze(-1), torch.from_numpy(g).unsqueeze(-1), -torch.from_numpy(f).unsqueeze(-1)
+        return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g).unsqueeze(-1), -torch.from_numpy(f)
 
+a = CEC2020_p24()
+X = torch.rand((5, 7))
+b, c, d = a._evaluate_implementation(X)
+print(c.shape[0])
+print(c.shape[1])
+print(c.numel())
