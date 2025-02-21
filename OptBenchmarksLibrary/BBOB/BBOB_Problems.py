@@ -1,6 +1,6 @@
 import torch
 from ..base import *
-
+import numpy as np
 
 @dataclass
 class BBOBConfig:
