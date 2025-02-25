@@ -53,7 +53,6 @@ class BBOB_Problems(BenchmarkProblem):
                                    dimension = 2,
                                    instance_number = 1,
                                   ),
-                 debug = False,
                 ):
 
         
@@ -70,17 +69,19 @@ class BBOB_Problems(BenchmarkProblem):
                ]
 
         NUM_OBJ, NUM_CONS, bounds, MIXED, CONSTRAINTS = self.BBOB_preprocess(flag, CONSTRAINTS)
+
+        self.MIXED = MIXED
+        self.CONSTRAINTS = CONSTRAINTS
+        self.flag = flag
         
         super().__init__(dim = flag.dimension, 
-                         num_obj = NUM_OBJ, 
-                         num_cons = NUM_CONS, 
+                         num_objectives = NUM_OBJ, 
+                         num_constraints = NUM_CONS, 
                          optimum = [[]], 
                          bounds = bounds,
-                         MIXED = MIXED,
-                         CONSTRAINTS = CONSTRAINTS,
+                        #  MIXED = MIXED,
+                        #  CONSTRAINTS = CONSTRAINTS,
                          tags = tags,
-                         flag = flag,
-                         debug = debug,
                         )
 
     
