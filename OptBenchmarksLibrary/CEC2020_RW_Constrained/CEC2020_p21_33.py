@@ -766,7 +766,7 @@ class CEC2020_p30(BenchmarkProblem):
                       0.177, 0.192, 0.207, 0.225, 0.244, 0.263, 0.283, 0.307, 0.331, 0.362, 
               0.394, 0.4375, 0.500])
 
-        x3 = d[np.round(X[:, 2]).astype(int)]
+        x3 = d[np.clip(np.round(X[:, 2]).astype(int), 0, len(d) - 1)]
         x3 = x3.reshape(-1)
         
         # Objective function
