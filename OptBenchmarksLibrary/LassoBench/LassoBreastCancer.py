@@ -5,6 +5,12 @@ from ..base import *
 import ssl
 ssl._create_default_https_context = ssl._create_unverified_context
 
+r'''
+    Sources:
+    (1) Šehić Kenan, Gramfort Alexandre, Salmon Joseph and Nardi Luigi, "LassoBench: A High-Dimensional Hyperparameter Optimization Benchmark Suite for Lasso", Proceedings of the 1st International Conference on Automated Machine Learning, 2022.
+    (2) https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/binary/breast-cancer
+'''
+
 class LassoBreastCancer(BenchmarkProblem):
 
     r'''
