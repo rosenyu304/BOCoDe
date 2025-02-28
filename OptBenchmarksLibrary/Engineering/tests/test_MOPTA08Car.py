@@ -2,12 +2,14 @@ import torch
 import pytest
 from .. import MOPTA08Car
 
-def test_mopta_evaluate():
+# Repeat 200 times
+@pytest.mark.parametrize("run", range(5))
+def test_mopta_evaluate(run):
     problem = MOPTA08Car()
 
     dim = 124
 
-    rand_test_points = 5 # Number of random points to test
+    rand_test_points = 100 # Number of random points to test
     
     # Generate random points within constraints
     X = torch.rand((rand_test_points, dim))

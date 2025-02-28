@@ -2,12 +2,14 @@ import torch
 import pytest
 from .. import Mazda
 
-def test_mazda_evaluate():
+# Repeat 200 times
+@pytest.mark.parametrize("run", range(5))
+def test_mazda_evaluate(run):
     problem = Mazda()
 
     dim = 222
 
-    rand_test_points = 5 # Number of random points to test
+    rand_test_points = 100 # Number of random points to test
     
     # Generate random points within constraints
     X = torch.rand((rand_test_points, dim))
