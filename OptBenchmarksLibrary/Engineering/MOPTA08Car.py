@@ -16,7 +16,6 @@ class MOPTA08Car(BenchmarkProblem):
 
     def _evaluate_implementation(self, X):
 
-
         import os
         import subprocess
         import sys
@@ -91,98 +90,3 @@ class MOPTA08Car(BenchmarkProblem):
             gx[i], fx[i] = MOPTA08_Car_single(X[i,:].numpy())
 
         return torch.from_numpy(gx), torch.from_numpy(fx)
-
-class MOPTA08Car_softpen(BenchmarkProblem):
-
-    r'''
-    https://leonard.papenmeier.io/2023/02/09/mopta08-executables.html
-    '''
-
-    # 124D objective, 68 constraints, X = n-by-124
-
-    tags = {"single_objective", "constrained", "continuous", "124D", "extra_imports"}
-
-    def __init__(self):
-        super().__init__(dim = 124, num_objectives = 1, num_constraints = 68, bounds = [[0, 1]])
-
-    def evaluate(self, X, to_verify = True):
-        X = super().scale(X, to_verify)
-
-        import os
-        import subprocess
-        import sys
-        import tempfile
-        from pathlib import Path
-        from platform import machine
-
-        import numpy as np
-        import torch
-        import stat
-
-        def MOPTA08_Car_single(x):
-            # Get the current permissions of the file
-            current_permissions = os.stat(os.getcwd()).st_mode
-
-            # Add execute permissions for the owner, group, and others
-            new_permissions = current_permissions | stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH
-
-            # Apply the new permissions
-            os.chmod(os.getcwd(), new_permissions)
-
-            sysarch = 64 if sys.maxsize > 2 ** 32 else 32
-
-            machine = "x86_64"
-            mopta_exectutable = "mopta08_elf64.bin"
-
-            mopta_full_path = os.path.join(
-                "mopta08", mopta_exectutable
-            )
-
-            directory_file_descriptor = tempfile.TemporaryDirectory()
-            directory_name = Path(__file__).parent
-
-            ##########################################################################################
-            # Input here
-            # if x == None:
-            #     x = np.random.rand(124)
-            #     print(x.shape)
-            ##########################################################################################
-            with open(os.path.join(directory_name, "input.txt"), "w+") as tmp_file:
-                for _x in x:
-                    tmp_file.write(f"{_x}\n")
-            popen = subprocess.Popen(
-                mopta_full_path,
-                stdout=subprocess.PIPE,
-                cwd=directory_name,
-                shell=True,
-            )
-            popen.wait()
-
-            with open(os.path.join(directory_name, "output.txt"), "r") as  tmp_file:
-                output = (
-                    tmp_file
-                    .read()
-                    .split("\n")
-                )
-            output = [x.strip() for x in output]
-            output = np.array([float(x) for x in output if len(x) > 0])
-            value = output[0]
-            constraints = output[1:]
-
-            return constraints, value
-
-
-        GX =  torch.zeros(X.shape[0], 68)
-        FX =  torch.zeros(X.shape[0], 1)
-        for ii in range(X.shape[0]):
-            input_x = X[ii,:].numpy()
-            gx, fx = MOPTA08_Car_single(input_x)
-            GX[ii,:] = torch.from_numpy(gx)
-            FX[ii,:] = fx
-
-        cost = GX
-        cost[cost<0] = 0
-        cost = cost.sum(dim=1).reshape(cost.shape[0], 1)
-        FX = FX + cost
-
-        return GX, -FX
