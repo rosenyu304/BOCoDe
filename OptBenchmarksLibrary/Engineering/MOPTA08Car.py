@@ -12,7 +12,11 @@ class MOPTA08Car(BenchmarkProblem):
     tags = {"single_objective", "constrained", "continuous", "124D", "extra_imports"}
 
     def __init__(self):
-        super().__init__(dim = 124, num_objectives = 1, num_constraints = 68, bounds = [(0, 1)]*124)
+        super().__init__(dim = 124, 
+                         num_objectives = 1, 
+                         num_constraints = 68, 
+                         bounds = [(0, 1)]*124,
+                         optimum = [222.74])
 
     def _evaluate_implementation(self, X):
 
