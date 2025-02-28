@@ -4,6 +4,10 @@ import numpy as np
 
 import cocoex
 
+r'''
+    N. Hansen, A. Auger, R. Ros, O. Mersmann, T. Tušar, D. Brockhoff. COCO: A Platform for Comparing Continuous Optimizers in a Black-Box Setting, Optimization Methods and Software, 36(1), pp. 114-144, 2021.
+'''
+
 class BaseBBOB(BenchmarkProblem):
 
     def __init__(self,
