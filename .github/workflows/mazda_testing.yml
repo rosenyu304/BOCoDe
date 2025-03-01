@@ -1,4 +1,4 @@
-name: Benchmark Testing
+name: Mazda Testing
 
 on: workflow_dispatch
 
