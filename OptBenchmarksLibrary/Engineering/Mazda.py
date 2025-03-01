@@ -1,5 +1,7 @@
 import torch
 from ..base import BenchmarkProblem
+import time
+import numpy as np
 
 class Mazda_SCA(BenchmarkProblem):
 
@@ -13,10 +15,10 @@ class Mazda_SCA(BenchmarkProblem):
     tags = {"single_objective", "multi_objective", "constrained", "continuous", "222D", "extra_imports"}
 
     def __init__(self):
-        super().__init__(dim = 222, 
-                         num_objectives = 5, 
-                         num_constraints = 54, 
-                         bounds = [(0, 1)]*222 # Scaled upon evaluation
+        super().__init__(dim = 148, 
+                         num_objectives = 4, 
+                         num_constraints = 36, 
+                         bounds = [(0, 1)]*148 # Scaled upon evaluation
                          )
 
     def _evaluate_implementation(self, X):
@@ -38,6 +40,8 @@ class Mazda_SCA(BenchmarkProblem):
         dataframe = pd.read_excel(file_path, sheet_name='Explain_DV_and_Const.')
 
         bounds = dataframe.values[2:, 3:5].astype(float)
+
+        bounds = np.vstack((bounds[:74], bounds[-74:]))
         
         bounds_tensor = torch.tensor(bounds, dtype=torch.float32)
 
@@ -77,6 +81,7 @@ class Mazda_SCA(BenchmarkProblem):
 
         # Read the data from the file into a pandas DataFrame
         file_path = script_dir / "Mazda_Data" / "pop_objs_eval.txt"
+        
         objs_dataframe = pd.read_csv(file_path, delim_whitespace=True, header=None)
 
         # Convert the DataFrame to a numpy array
