@@ -1,6 +1,7 @@
 name: Mazda Testing
 
-on: workflow_dispatch
+on: 
+  workflow_dispatch:
 
 jobs:
   build:
