@@ -7,7 +7,7 @@ from .. import Mazda, Mazda_SCA
 def test_mazdaSCA_evaluate(run):
     problem = Mazda_SCA()
 
-    dim = 222
+    dim = 148
 
     rand_test_points = 100 # Number of random points to test
     
