@@ -10,15 +10,6 @@ class Mazda_SCA(BenchmarkProblem):
     # 222D objective, 54 constraints, X = n-by-222
     # 2 Cars Optimization Case
 
-    '''
-    Meanings of each objective:
-    - The first column is total weight of three vehicles.
-    - The second column is number of common gauge parts.
-    - The third column is weight of SUV.
-    - The fourth column is weight of LV.
-    - The fifth column is weight of SV.
-    '''
-
     tags = {"single_objective", "multi_objective", "constrained", "continuous", "222D", "extra_imports"}
 
     def __init__(self):
@@ -115,7 +106,17 @@ class Mazda(BenchmarkProblem):
     https://ladse.eng.isas.jaxa.jp/benchmark/
     '''
 
+    '''
+    Meanings of each objective:
+    - The first column is total weight of three vehicles.
+    - The second column is number of common gauge parts.
+    - The third column is weight of SUV.
+    - The fourth column is weight of LV.
+    - The fifth column is weight of SV.
+    '''
+
     # 222D objective, 54 constraints, X = n-by-222
+    # 3 car optimization case
 
     tags = {"single_objective", "multi_objective", "constrained", "continuous", "222D", "extra_imports"}
 
