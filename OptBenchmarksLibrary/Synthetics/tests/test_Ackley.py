@@ -14,7 +14,7 @@ def test_ackley_evaluate(dim):
     gx, fx = problem._evaluate_implementation(X)
 
     assert gx.shape == (rand_test_points, problem.num_constraints), f"Unexpected gx shape: {gx.shape}"
-    assert fx.shape == (rand_test_points, 1), f"Unexpected fx shape: {fx.shape}"
+    assert fx.shape == (rand_test_points, problem.num_objectives), f"Unexpected fx shape: {fx.shape}"
 
     assert len(problem.bounds) == dim, "Number of bounds does not match dimension"
 

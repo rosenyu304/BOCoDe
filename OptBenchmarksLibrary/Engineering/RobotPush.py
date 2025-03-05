@@ -1,5 +1,5 @@
 import torch
-from .base import BenchmarkProblem
+from ..base import BenchmarkProblem
 
 class RobotPush(BenchmarkProblem):
 
@@ -12,16 +12,32 @@ class RobotPush(BenchmarkProblem):
     tags = {"single_objective", "unconstrained", "continuous", "14D", "extra_imports"}
 
     def __init__(self):
-        super().__init__(dim = 14, num_obj = 1, num_cons = 0, bounds = [[-5, 5], [-5, 5], [-10, 10], [-10, 10], [2, 30], [0, 2*np.pi], [-5, 5], [-5, 5], [-10, 10], [-10, 10], [2, 30], [0, 2*np.pi], [-5, 5], [-5, 5]])
+        super().__init__(dim = 14, 
+                         num_objectives = 1, 
+                         num_constraints = 0, 
+                         bounds = [(-5, 5), (-5, 5), (-10, 10), (-10, 10), (2, 30), (0, 2*np.pi), (-5, 5), (-5, 5), (-10, 10), (-10, 10), (2, 30), (0, 2*np.pi), (-5, 5), (-5, 5)])
 
-    def evaluate(self, X, to_verify = True):
+    def _evaluate_implementation(self, X, scaling = True):
+        from joblib import Parallel, delayed
         f = PushReward()
 
-        X = super().scale(X, to_verify)
-        fx = torch.zeros(X.shape[0],1)
+        if scaling:
+            X = super().scale(X)
+        # fx = torch.zeros(X.shape[0],1)
+
+        # Using numpy instead of torch for parallel processing
+        fx = np.zeros((X.shape[0], 1))
+
+        # Number of simulations to run in parallel
+        n_jobs = 5
+
+        fx[:, 0] = Parallel(n_jobs=n_jobs)(delayed(f)(X[i, :].numpy()) for i in range(X.shape[0]))
         
-        for i in range(X.shape[0]):
-            fx[i,0] = f(X[i,:].numpy())
+        # for i in range(X.shape[0]):
+        #     fx[i,0] = f(X[i,:].numpy())
+
+        # Convert back to torch tensor
+        fx = torch.from_numpy(fx)
 
         return None, fx
 
@@ -153,7 +169,7 @@ class b2WorldInterface:
     def __init__(self, do_gui=True):
         self.world = b2World(gravity=(0.0, 0.0), doSleep=True)
         self.do_gui = do_gui
-        self.TARGET_FPS = 100
+        self.TARGET_FPS = 500
         self.TIME_STEP = 1.0 / self.TARGET_FPS
         self.VEL_ITERS, self.POS_ITERS = 10, 10
         self.bodies = []

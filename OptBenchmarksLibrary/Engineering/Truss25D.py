@@ -24,9 +24,9 @@ class Truss25D(BenchmarkProblem):
                ]
         
         super().__init__(dim = 25, 
-                         num_obj = 1, 
-                         num_cons = 31, 
-                         bounds = [[0.1, 3.4]],
+                         num_objectives = 1, 
+                         num_constraints = 31, 
+                         bounds = [(0.1, 3.4)]*25,
                          CONSTRAINTS = CONSTRAINTS,
                          tags = tags
                         )
@@ -110,7 +110,10 @@ class Truss25D(BenchmarkProblem):
 
     
     
-    def _evaluate_implementation(self, X):
+    def _evaluate_implementation(self, X, scaling=True):
+
+        if scaling:
+            X = super().scale(X)
 
         if X.size(1) == 25:
             A = X

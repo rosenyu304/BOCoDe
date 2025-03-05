@@ -16,7 +16,7 @@ def test_goldstein_evaluate():
 
     _, fx = problem._evaluate_implementation(X)
 
-    assert fx.shape == (rand_test_points, 1), f"Unexpected fx shape: {fx.shape}"
+    assert fx.shape == (rand_test_points, problem.num_objectives), f"Unexpected fx shape: {fx.shape}"
 
     assert len(problem.bounds) == dim, "Number of bounds does not match dimension"
 

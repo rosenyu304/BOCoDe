@@ -1,5 +1,5 @@
 import torch
-from .base import BenchmarkProblem
+from ..base import BenchmarkProblem
 
 class TwoBarTruss(BenchmarkProblem):
 
@@ -13,10 +13,13 @@ class TwoBarTruss(BenchmarkProblem):
     tags = {"multi_objective", "constrained", "continuous", "2D"}
 
     def __init__(self):
-        super().__init__(dim = 2, num_obj = 2, num_cons = 5, bounds = [[0, 1]])
+        super().__init__(dim = 2, 
+                         num_objectives = 2, 
+                         num_constraints = 5, 
+                         bounds = [(0, 1)]*2)
 
-    def evaluate(self, X, to_verify = True):
-        X = super().scale(X, to_verify)
+    def _evaluate_implementation(self, X):
+        X = super().scale(X)
 
         n = X.size(0)
 
@@ -31,12 +34,12 @@ class TwoBarTruss(BenchmarkProblem):
         x1_lower_bound = 0.1
         x2_lower_bound = 1.0
 
-        fx = torch.zeros((n, self.num_obj))
+        fx = torch.zeros((n, self.num_objectives))
         # negate for maximization
         fx[:, 0] = -(2 * rho * h * x2 * (1 + x1**2)**0.5)
         fx[:, 1] = -(P * h * (1 + x1**2)**1.5 * (1 + x1**4)**0.5) / (2 * 2**0.5 * E * x1**2 * x2)
 
-        gx = torch.zeros((n, self.num_cons))
+        gx = torch.zeros((n, self.num_constraints))
         gx[:, 0] = (P * (1 + x1) * (1 + x1**2)**0.5) / (2 * 2**0.5 * x1 * x2) - sigma_0
         gx[:, 1] = (P * (x1 - 1) * (1 + x1**2)**0.5) / (2 * 2**0.5 * x1 * x2) - sigma_0
         gx[:, 2] = x1_lower_bound - x1

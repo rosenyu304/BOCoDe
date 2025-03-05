@@ -1,5 +1,5 @@
 import torch
-from base import BenchmarkProblem
+from ..base import BenchmarkProblem
 
 class MOPTA08Car(BenchmarkProblem):
 
@@ -12,180 +12,85 @@ class MOPTA08Car(BenchmarkProblem):
     tags = {"single_objective", "constrained", "continuous", "124D", "extra_imports"}
 
     def __init__(self):
-        super().__init__(dim = 124, num_obj = 1, num_cons = 68, bounds = [[0, 1]])
+        super().__init__(dim = 124, 
+                         num_objectives = 1, 
+                         num_constraints = 68, 
+                         bounds = [(0, 1)]*124,
+                         optimum = [222.74])
 
-    def evaluate(self, X, to_verify = True):
-        X = super().scale(X, to_verify)
-
-        n = X.size(0)
+    def _evaluate_implementation(self, X):
 
         import os
         import subprocess
         import sys
         import tempfile
         from pathlib import Path
-        from platform import machine
+        import platform
 
         import numpy as np
         import stat
 
         def MOPTA08_Car_single(x):
-            # Get the current permissions of the file
-            current_permissions = os.stat(os.getcwd()).st_mode
+
+            machine = platform.machine().lower()
+            sysarch = 64 if sys.maxsize > 2 ** 32 else 32
+            
+            if machine == "armv7l":
+                assert sysarch == 32, "Not supported"
+                mopta_exectutable = "mopta08_armhf.bin"
+            elif machine == "x86_64":
+                assert sysarch == 64, "Not supported"
+                mopta_exectutable = "mopta08_elf64.bin"
+            elif machine == "i386":
+                assert sysarch == 32, "Not supported"
+                mopta_exectutable = "mopta08_elf32.bin"
+            else:
+                raise RuntimeError("Machine with this architecture is not supported")
 
             # Add execute permissions for the owner, group, and others
-            new_permissions = current_permissions | stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH
+            script_dir = Path(__file__).parent
+            mopta_full_path = script_dir / "Mopta_Data" / mopta_exectutable
+            mopta_full_path = os.path.join(mopta_full_path)
 
-            # Apply the new permissions
-            os.chmod(os.getcwd(), new_permissions)
+            if not os.access(mopta_full_path, os.X_OK):
+                print(f"Adding execution permissions to: {mopta_full_path}")
+                os.chmod(mopta_full_path, os.stat(mopta_full_path).st_mode | stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH)
 
             sysarch = 64 if sys.maxsize > 2 ** 32 else 32
 
-            machine = "x86_64"
-            mopta_exectutable = "mopta08_elf64.bin"
+            directory_name = Path(__file__).parent / "Mopta_Data"
 
-            mopta_full_path = os.path.join(
-                "mopta08", mopta_exectutable
-            )
-
-            directory_file_descriptor = tempfile.TemporaryDirectory()
-            directory_name = Path(__file__).parent
-
-            ##########################################################################################
-            # Input here
-            # if x == None:
-            #     x = np.random.rand(124)
-            #     print(x.shape)
-            ##########################################################################################
             with open(os.path.join(directory_name, "input.txt"), "w+") as tmp_file:
                 for _x in x:
                     tmp_file.write(f"{_x}\n")
-            popen = subprocess.Popen(
+
+            result = subprocess.run(
                 mopta_full_path,
                 stdout=subprocess.PIPE,
                 cwd=directory_name,
                 shell=True,
             )
-            popen.wait()
 
             with open(os.path.join(directory_name, "output.txt"), "r") as  tmp_file:
+                tmp_file.seek(0)
                 output = (
                     tmp_file
                     .read()
                     .split("\n")
                 )
-            output = [x.strip() for x in output]
-            output = np.array([float(x) for x in output if len(x) > 0])
-            output = np.array(x)
+            output = [m.strip() for m in output]
+            output = output[:-1]
+            output = np.array([float(m) for m in output if len(x) > 0])
             value = output[0]
             constraints = output[1:]
 
             return constraints, value
 
+        fx = np.zeros((X.shape[0], 1))
+        gx = np.zeros((X.shape[0], 68))
 
-        # GX =  torch.zeros(n, 68)
-        # FX =  torch.zeros(n, 1)
-        # for ii in range(n):
-        # input_x = X[ii,:].numpy()
-        gx, fx = MOPTA08_Car_single(X)
-            # GX[ii,:] = torch.from_numpy(gx)
-            # FX[ii,:] = -fx
+        for i in range(X.shape[0]):
+            # Get objectives and constraints for each row
+            gx[i], fx[i] = MOPTA08_Car_single(X[i,:].numpy())
+
         return torch.from_numpy(gx), torch.from_numpy(fx)
-        # return GX, FX
-
-
-
-class MOPTA08Car_softpen(BenchmarkProblem):
-
-    r'''
-    https://leonard.papenmeier.io/2023/02/09/mopta08-executables.html
-    '''
-
-    # 124D objective, 68 constraints, X = n-by-124
-
-    tags = {"single_objective", "constrained", "continuous", "124D", "extra_imports"}
-
-    def __init__(self):
-        super().__init__(dim = 124, num_obj = 1, num_cons = 68, bounds = [[0, 1]])
-
-    def evaluate(self, X, to_verify = True):
-        X = super().scale(X, to_verify)
-
-        import os
-        import subprocess
-        import sys
-        import tempfile
-        from pathlib import Path
-        from platform import machine
-
-        import numpy as np
-        import torch
-        import stat
-
-        def MOPTA08_Car_single(x):
-            # Get the current permissions of the file
-            current_permissions = os.stat(os.getcwd()).st_mode
-
-            # Add execute permissions for the owner, group, and others
-            new_permissions = current_permissions | stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH
-
-            # Apply the new permissions
-            os.chmod(os.getcwd(), new_permissions)
-
-            sysarch = 64 if sys.maxsize > 2 ** 32 else 32
-
-            machine = "x86_64"
-            mopta_exectutable = "mopta08_elf64.bin"
-
-            mopta_full_path = os.path.join(
-                "mopta08", mopta_exectutable
-            )
-
-            directory_file_descriptor = tempfile.TemporaryDirectory()
-            directory_name = Path(__file__).parent
-
-            ##########################################################################################
-            # Input here
-            # if x == None:
-            #     x = np.random.rand(124)
-            #     print(x.shape)
-            ##########################################################################################
-            with open(os.path.join(directory_name, "input.txt"), "w+") as tmp_file:
-                for _x in x:
-                    tmp_file.write(f"{_x}\n")
-            popen = subprocess.Popen(
-                mopta_full_path,
-                stdout=subprocess.PIPE,
-                cwd=directory_name,
-                shell=True,
-            )
-            popen.wait()
-
-            with open(os.path.join(directory_name, "output.txt"), "r") as  tmp_file:
-                output = (
-                    tmp_file
-                    .read()
-                    .split("\n")
-                )
-            output = [x.strip() for x in output]
-            output = np.array([float(x) for x in output if len(x) > 0])
-            value = output[0]
-            constraints = output[1:]
-
-            return constraints, value
-
-
-        GX =  torch.zeros(X.shape[0], 68)
-        FX =  torch.zeros(X.shape[0], 1)
-        for ii in range(X.shape[0]):
-            input_x = X[ii,:].numpy()
-            gx, fx = MOPTA08_Car_single(input_x)
-            GX[ii,:] = torch.from_numpy(gx)
-            FX[ii,:] = fx
-
-        cost = GX
-        cost[cost<0] = 0
-        cost = cost.sum(dim=1).reshape(cost.shape[0], 1)
-        FX = FX + cost
-
-        return GX, -FX

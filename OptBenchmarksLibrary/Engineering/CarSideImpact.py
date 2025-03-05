@@ -1,5 +1,5 @@
 import torch
-from .base import BenchmarkProblem
+from ..base import BenchmarkProblem
 
 class CarSideImpact(BenchmarkProblem):
 
@@ -15,10 +15,15 @@ class CarSideImpact(BenchmarkProblem):
     tags = {"multi_objective", "constrained", "continuous", "7D"}
 
     def __init__(self):
-        super().__init__(dim = 7, num_obj = 3, num_cons = 10, bounds = [[0.5, 1.5], [0.45, 1.35], [0.5, 1.5], [0.5, 1.5], [0.875, 2.625], [0.4, 1.2], [0.4, 1.2]])
+        super().__init__(dim = 7, 
+                         num_objectives = 3, 
+                         num_constraints = 10, 
+                         bounds = [(0.5, 1.5), (0.45, 1.35), (0.5, 1.5), (0.5, 1.5), (0.875, 2.625), (0.4, 1.2), (0.4, 1.2)])
 
-    def evaluate(self, X, to_verify = True):
-        X = super().scale(X, to_verify)
+    def _evaluate_implementation(self, X, scaling = True):
+
+        if scaling:
+            X = super().scale(X)
 
         n = X.size(0)
 
@@ -34,13 +39,13 @@ class CarSideImpact(BenchmarkProblem):
         V_MBP = 10.58 - 0.674 * x1 * x2 - 0.67275 * x2
         V_FD = 16.45 - 0.489 * x3 * x7 - 0.843 * x5 * x6
 
-        fx = torch.zeros((n, self.num_obj))
+        fx = torch.zeros((n, self.num_objectives))
         # negate for maximization
         fx[:, 0] = -(1.98 + 4.9 * x1 + 6.67 * x2 + 6.98 * x3 + 4.01 * x4 + 1.78 * x5 + 0.00001 * x6 + 2.73 * x7)
         fx[:, 1] = -F
         fx[:, 2] = -(0.5 * (V_MBP + V_FD))
 
-        gx = torch.zeros((n, self.num_cons))
+        gx = torch.zeros((n, self.num_constraints))
         gx[:, 0] = 1.16 - 0.3717 * x2 * x4 - 0.0092928 * x3 - 1
         gx[:, 1] = 0.261 - 0.0159 * x1 * x2 - 0.06486 * x1 - 0.019 * x2 * x7 + 0.0144 * x3 * x5 + 0.0154464 * x6 - 0.32
         gx[:, 2] = 0.214 + 0.00817 * x5 - 0.045195 * x1 - 0.0135168 * x1 + 0.03099 * x2 * x6 - 0.018 * x2 * x7 + 0.007176 * x3 + 0.023232 * x3 - 0.00364 * x5 * x6 - 0.018 * x2**2 - 0.32
@@ -51,6 +56,5 @@ class CarSideImpact(BenchmarkProblem):
         gx[:, 7] = F - 4
         gx[:, 8] = V_MBP - 9.9
         gx[:, 9] = V_FD - 15.7
-
 
         return gx, fx

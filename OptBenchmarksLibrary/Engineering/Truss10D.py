@@ -1,8 +1,6 @@
 import torch
 from ..base import *
 
-
-
 class Truss10D(BenchmarkProblem):
 
     def __init__(self, 
@@ -18,9 +16,9 @@ class Truss10D(BenchmarkProblem):
                 "IMPORTS: slientruss3d",
                ]
         super().__init__(dim = 10, 
-                         num_obj = 1, 
-                         num_cons = 14, 
-                         bounds = [[0.1, 35]],
+                         num_objectives = 1, 
+                         num_constraints = 14, 
+                         bounds = [(0.1, 35)]*10,
                          CONSTRAINTS = CONSTRAINTS,
                          tags = tags
                         )
@@ -90,7 +88,7 @@ class Truss10D(BenchmarkProblem):
 
 
     
-    def _evaluate_implementation(self, X):
+    def _evaluate_implementation(self, X, scaling=True):
 
         E = 1e7 * torch.ones(10)
         Rho = 0.1 * torch.ones(10)
@@ -101,6 +99,9 @@ class Truss10D(BenchmarkProblem):
 
         # 10 bar stress constraints, 4 displacement constraints
         gx = torch.zeros(n,14)
+
+        if scaling:
+            X = super().scale(X)
 
         for ii in range(n):
 

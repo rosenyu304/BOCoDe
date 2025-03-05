@@ -6,9 +6,7 @@ from ..base import *
 class BraninCurrin(BenchmarkProblem):
 
     def __init__(self, 
-                 dim=2, 
-                 num_objs = 2, 
-                 MULTIOBJ = MultiObjConfig(type='MULTI_OBJ')):
+                 dim=2):
         
         tags = ["BraninCurrin",
                 "-----------------------------",
@@ -20,11 +18,10 @@ class BraninCurrin(BenchmarkProblem):
                ]
         
         super().__init__(dim, 
-                         num_obj = 2, 
-                         num_cons = 0,  
-                         bounds = [[0, 1]],
+                         num_objectives = 2, 
+                         num_constraints = 0,  
+                         bounds = [[0, 1]]*2,
                          ref_point = [18.0, 6.0],
-                         MULTIOBJ = MULTIOBJ,
                          tags = tags,
                         )
         

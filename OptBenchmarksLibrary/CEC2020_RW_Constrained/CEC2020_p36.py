@@ -1,6 +1,12 @@
 import torch
 import numpy as np
-from .base import BenchmarkProblem
+from ..base import BenchmarkProblem
+from .helperFuncs import *
+from pathlib import Path
+
+r'''
+    https://github.com/P-N-Suganthan/2020-RW-Constrained-Optimisation/
+'''
 
 class CEC2020_p36(BenchmarkProblem):
 
@@ -8,30 +14,38 @@ class CEC2020_p36(BenchmarkProblem):
     CEC2020_36 problem 36
     '''
 
-    def __init__(self, is_constrained = True, flag = ''):
+    def __init__(self):
         super().__init__(dim = 158, 
-                         num_obj = 1, 
-                         num_cons = 148, 
-                         optimizers = [[8.9093896456E-02] * 158], 
-                         optimum = [[0]], 
-                         bounds = [[-1,1]],
-                         is_constrained = is_constrained,
-                         flag = flag
+                         num_objectives = 1, 
+                         num_constraints = 148, 
+                        #  X_opt= [[8.9093896456E-02] * 158], 
+                         optimum = [0.047733529], 
+                         bounds = [[-1,1]]*158,
                         )
 
-    def evaluate(self, X, to_verify = True):
+    def _evaluate_implementation(self, X, scaling=True):
 
-        X = super().scale(X, to_verify)
+        if scaling:
+            X = super().scale(X)
         X = X.numpy()
         
         n_samples = X.shape[0]
     
         # Load input data once
-        INPUT_DATA = './PFNBO_Experiments/TestProblems_Utils/CEC2020_powersystems/'
-        G = np.loadtxt(f'{INPUT_DATA}/FunctionPS2_G.txt')
-        B = np.loadtxt(f'{INPUT_DATA}/FunctionPS2_B.txt')
-        P = np.loadtxt(f'{INPUT_DATA}/FunctionPS2_P.txt')
-        Q = np.loadtxt(f'{INPUT_DATA}/FunctionPS2_Q.txt')
+        # INPUT_DATA = './PFNBO_Experiments/TestProblems_Utils/CEC2020_powersystems/'
+        # G = np.loadtxt(f'{INPUT_DATA}/FunctionPS2_G.txt')
+        # B = np.loadtxt(f'{INPUT_DATA}/FunctionPS2_B.txt')
+        # P = np.loadtxt(f'{INPUT_DATA}/FunctionPS2_P.txt')
+        # Q = np.loadtxt(f'{INPUT_DATA}/FunctionPS2_Q.txt')
+        script_dir = Path(__file__).parent
+        path = script_dir / "input_data" / "FunctionPS2_G.txt"
+        G = np.loadtxt(path)
+        path = script_dir / "input_data" / "FunctionPS2_B.txt"
+        B = np.loadtxt(path)
+        path = script_dir / "input_data" / "FunctionPS2_P.txt"
+        P = np.loadtxt(path)
+        path = script_dir / "input_data" / "FunctionPS2_Q.txt"
+        Q = np.loadtxt(path)
         
         # Complex admittance matrix
         Y = G + 1j * B
@@ -104,11 +118,12 @@ class CEC2020_p36(BenchmarkProblem):
 
         
         
-        # X = super().scale(X, to_verify)
+        # if scaling:
+            X = super().scale(X)
 
         # n = X.size(0)
 
-        # gx = torch.zeros((n, self.num_cons))
+        # gx = torch.zeros((n, self.num_constraints))
 
         # fun = Ackley_imported(dim=self.dim, negate=True).to(dtype=dtype, device=device)
         # fun.bounds[0, :].fill_(-5)

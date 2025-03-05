@@ -1,3 +1,4 @@
+git+https://github.com/ksehic/LassoBench.git#egg=LassoBench
 pytest
 botorch
 torch
@@ -5,3 +6,7 @@ jax
 numpy
 cocopp
 coco-experiment
+pygame
+Box2D
+slientruss3d
+openpyxl

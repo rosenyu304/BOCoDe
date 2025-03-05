@@ -1,6 +1,12 @@
 import torch
 import numpy as np
-from .base import BenchmarkProblem
+from ..base import BenchmarkProblem
+from .helperFuncs import *
+from pathlib import Path
+
+r'''
+    https://github.com/P-N-Suganthan/2020-RW-Constrained-Optimisation/
+'''
 
 class CEC2020_p34(BenchmarkProblem):
 
@@ -8,28 +14,37 @@ class CEC2020_p34(BenchmarkProblem):
     CEC2020_34 problem 34
     '''
 
-    def __init__(self, is_constrained = True, flag = ''):
+    def __init__(self):
         super().__init__(dim = 118, 
-                         num_obj = 1, 
-                         num_cons = 108, 
-                         optimizers = [[0] * 118], 
-                         optimum = [[0]], 
-                         bounds = [[-1,1]],
-                         is_constrained = is_constrained,
-                         flag = flag
+                         num_objectives = 1, 
+                         num_constraints = 108, 
+                        #  X_opt= [[0] * 118], 
+                         optimum = [0.0], 
+                         bounds = [[-1,1]]*118,
                         )
 
-    def evaluate(self, X, to_verify = True):
+    def _evaluate_implementation(self, X, scaling=True):
 
-        X = super().scale(X, to_verify)
+        if scaling:
+            X = super().scale(X)
         X = X.numpy()
         
         # Load data for Problem 34
-        INPUT_DATA = './PFNBO_Experiments/TestProblems_Utils/CEC2020_powersystems/'
-        G = np.loadtxt(f'{INPUT_DATA}/FunctionPS1_G.txt')
-        B = np.loadtxt(f'{INPUT_DATA}/FunctionPS1_B.txt')
-        P = np.loadtxt(f'{INPUT_DATA}/FunctionPS1_P.txt')
-        Q = np.loadtxt(f'{INPUT_DATA}/FunctionPS1_Q.txt')
+        # INPUT_DATA = './PFNBO_Experiments/TestProblems_Utils/CEC2020_powersystems/'
+        # G = np.loadtxt(f'{INPUT_DATA}/FunctionPS1_G.txt')
+        # B = np.loadtxt(f'{INPUT_DATA}/FunctionPS1_B.txt')
+        # P = np.loadtxt(f'{INPUT_DATA}/FunctionPS1_P.txt')
+        # Q = np.loadtxt(f'{INPUT_DATA}/FunctionPS1_Q.txt')
+
+        script_dir = Path(__file__).parent
+        path = script_dir / "input_data" / "FunctionPS1_G.txt"
+        G = np.loadtxt(path)
+        path = script_dir / "input_data" / "FunctionPS1_B.txt"
+        B = np.loadtxt(path)
+        path = script_dir / "input_data" / "FunctionPS1_P.txt"
+        P = np.loadtxt(path)
+        path = script_dir / "input_data" / "FunctionPS1_Q.txt"
+        Q = np.loadtxt(path)
 
         Y = G + 1j * B
         n_samples = X.shape[0]
@@ -100,11 +115,12 @@ class CEC2020_p34(BenchmarkProblem):
 
         
         
-        # X = super().scale(X, to_verify)
+        # if scaling:
+            X = super().scale(X)
 
         # n = X.size(0)
 
-        # gx = torch.zeros((n, self.num_cons))
+        # gx = torch.zeros((n, self.num_constraints))
 
         # fun = Ackley_imported(dim=self.dim, negate=True).to(dtype=dtype, device=device)
         # fun.bounds[0, :].fill_(-5)

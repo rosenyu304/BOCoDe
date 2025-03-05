@@ -1,6 +1,15 @@
 import torch
 from ..base import *
 
+# Prevents SSL certificate validity error when fetching data
+import ssl
+ssl._create_default_https_context = ssl._create_unverified_context
+
+r'''
+    Sources:
+    (1) Šehić Kenan, Gramfort Alexandre, Salmon Joseph and Nardi Luigi, "LassoBench: A High-Dimensional Hyperparameter Optimization Benchmark Suite for Lasso", Proceedings of the 1st International Conference on Automated Machine Learning, 2022.
+'''
+
 class LassoLeukemia(BenchmarkProblem):
 
     r'''
@@ -19,9 +28,9 @@ class LassoLeukemia(BenchmarkProblem):
                ]
         
         super().__init__(dim=7129, 
-                         num_obj = 1, 
-                         num_cons = 0, 
-                         bounds = [[-1, 1]], 
+                         num_objectives = 1, 
+                         num_constraints = 0, 
+                         bounds = [(-1, 1)]*7129, 
                          tags=tags)
 
     def _evaluate_implementation(self, X):
@@ -32,7 +41,6 @@ class LassoLeukemia(BenchmarkProblem):
         for i in range(X.shape[0]):
             # loss = real_bench.evaluate(X[i,:].numpy())
             fx[i,0] = -real_bench.evaluate(X[i,:].to(torch.double).numpy())
-
 
         return None, fx
     

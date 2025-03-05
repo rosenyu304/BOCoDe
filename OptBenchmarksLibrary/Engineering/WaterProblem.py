@@ -1,5 +1,5 @@
 import torch
-from .base import BenchmarkProblem
+from ..base import BenchmarkProblem
 
 class WaterProblem(BenchmarkProblem):
 
@@ -15,10 +15,15 @@ class WaterProblem(BenchmarkProblem):
     tags = {"multi_objective", "constrained", "continuous", "3D"}
 
     def __init__(self):
-        super().__init__(dim = 3, num_obj = 5, num_cons = 7, bounds = [[0.01, 0.45], [0.01, 0.10], [0.01, 0.10]])
+        super().__init__(dim = 3, 
+                         num_objectives = 5, 
+                         num_constraints = 7, 
+                         bounds = [(0.01, 0.45), (0.01, 0.10), (0.01, 0.10)])
 
-    def evaluate(self, X, to_verify = True):
-        X = super().scale(X, to_verify)
+    def _evaluate_implementation(self, X, scaling=True):
+
+        if scaling:
+            X = super().scale(X)
 
         n = X.size(0)
 
@@ -26,7 +31,7 @@ class WaterProblem(BenchmarkProblem):
         x2 = X[:, 1]
         x3 = X[:, 2]
 
-        fx = torch.zeros((n, self.num_obj))
+        fx = torch.zeros((n, self.num_objectives))
         # negate for maximization
         fx[:, 0] = -(106780.37 * (x2 + x3) + 61704.67)
         fx[:, 1] = -(3000.0 * x1)
@@ -34,7 +39,7 @@ class WaterProblem(BenchmarkProblem):
         fx[:, 3] = -(250.0 * 2289.0 * torch.e**(-39.75 * x2 + 9.9 * x3 + 2.74))
         fx[:, 4] = -(25.0 * ((1.39 / (x1 * x2)) + 4940.0 * x3 - 80.0))
 
-        gx = torch.zeros((n, self.num_cons))
+        gx = torch.zeros((n, self.num_constraints))
         gx[:, 0] = 0.00139 / (x1 * x2) + 4.94 * x3 - 0.08 - 1
         gx[:, 1] = 0.000306 / (x1 * x2) + 1.082 * x3 - 0.0986 - 1
         gx[:, 2] = 12.307 / (x1 * x2) + 49408.24 * x3 + 4051.02 - 50000
