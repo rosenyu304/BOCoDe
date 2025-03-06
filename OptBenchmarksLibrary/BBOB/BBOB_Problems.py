@@ -147,25 +147,11 @@ class BBOB_MixInt(BaseBBOB):
                  function_number,
                  instance_number=1,
                  ):
-        suite = "bbob-largescale"
+        suite = "bbob-mixint"
         super().__init__(dim,
                          suite,
                          function_number,
                          instance_number)
-
-class BBOB_LargeScale(BaseBBOB):
-
-    def __init__(self, 
-                 dim,
-                 function_number,
-                 instance_number=1,
-                 ):
-        suite = "bbob-largescale"
-        super().__init__(dim,
-                         suite,
-                         function_number,
-                         instance_number)
-
 
 class BBOB_Noisy(BaseBBOB):
 
