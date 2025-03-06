@@ -32,6 +32,7 @@ Example Usage
 .. code-block:: python
 
     import optbench
+    import torch
 
     # Create a BBOB benchmark problem
     problem = optbench.BBOB(dim=5, function_number=2, instance_number=1) # Separable 5-dimensional ellipsoidal function
