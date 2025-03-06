@@ -7,14 +7,14 @@ The Black-Box Optimization Benchmarking (BBOB) collection provides a comprehensi
 
 Available Suites
 -----------------
-- bbob: :code:`optbench.BBOB`
-- bbob-biobj: :code:`optbench.BBOB_Biobj`
+- bbob: :code:`optbench.BBOB_Problems.BBOB`
+- bbob-biobj: :code:`optbench.BBOB_Problems.BBOB_Biobj`
 - bbob-biobj-mixint: :code:`optbench.BBOB_BiobjMixInt`
-- bbob-boxed: :code:`optbench.BBOB_Boxed`
-- bbob-constrained: :code:`optbench.BBOB_Constrained`
-- bbob-largescale: :code:`optbench.BBOB_LargeScale`
-- bbob-mixint: :code:`optbench.BBOB_MixInt`
-- bbob-noisy: :code:`optbench.BBOB_Noisy`
+- bbob-boxed: :code:`optbench.BBOB_Problems.BBOB_Boxed`
+- bbob-constrained: :code:`optbench.BBOB_Problems.BBOB_Constrained`
+- bbob-largescale: :code:`optbench.BBOB_Problems.BBOB_LargeScale`
+- bbob-mixint: :code:`optbench.BBOB_Problems.BBOB_MixInt`
+- bbob-noisy: :code:`optbench.BBOB_Problems.BBOB_Noisy`
 
 Available Functions
 -----------------
@@ -35,7 +35,7 @@ Example Usage
     import torch
 
     # Create a BBOB benchmark problem
-    problem = optbench.BBOB(dim=5, function_number=2, instance_number=1) # Separable 5-dimensional ellipsoidal function
+    problem = optbench.BBOB_Problems.BBOB(dim=5, function_number=2, instance_number=1) # Separable 5-dimensional ellipsoidal function
     
     # Get problem information
     bounds = problem.bounds
