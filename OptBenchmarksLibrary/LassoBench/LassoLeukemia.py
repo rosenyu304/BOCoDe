@@ -16,6 +16,9 @@ class LassoLeukemia(BenchmarkProblem):
     ...
     '''
 
+    available_dimensions = 7129
+    num_objectives = 1
+
     def __init__(self):
         
         tags = ["LassoLeukemia",

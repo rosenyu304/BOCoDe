@@ -8,6 +8,9 @@ class GearTrain(BenchmarkProblem):
     ASME. J. Mech. Des. June 1990; 112(2): 223–229.
     '''
 
+    available_dimensions = 4
+    num_objectives = 1
+
     # 4D objective, 0 constraints, X = n-by-4
 
     tags = {"single_objective", "unconstrained", "mixed", "4D"}

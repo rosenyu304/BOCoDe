@@ -12,6 +12,9 @@ class Truss25D(BenchmarkProblem):
     Computers & Structures, Volume 212.
     '''
 
+    available_dimensions = 25
+    num_objectives = 1
+
     def __init__(self, CONSTRAINTS = ConstraintConfig(type='CONSTRAINTS')):
         
         tags = ["Truss25D",

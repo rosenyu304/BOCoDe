@@ -7,6 +7,9 @@ class Rover(BenchmarkProblem):
     https://github.com/zi-w/Ensemble-Bayesian-Optimization/tree/4e6f9ed04833cc2e21b5906b1181bc067298f914
     '''
 
+    available_dimensions = 100
+    num_objectives = 1
+
     # ND objective, 0 constraints, X = n-by-dim
 
     tags = {"single_objective", "unconstrained", "continuous", "ND", "extra_imports"}

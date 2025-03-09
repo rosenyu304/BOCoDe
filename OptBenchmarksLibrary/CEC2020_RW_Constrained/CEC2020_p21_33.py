@@ -13,6 +13,9 @@ class CEC2020_p21(BenchmarkProblem):
     CEC2020 Problem 21
     '''
 
+    num_objectives = 1
+    available_dimensions = 5
+
     def __init__(self):
         super().__init__(dim=5, 
                          num_objectives=1, 
@@ -81,6 +84,9 @@ class CEC2020_p22(BenchmarkProblem):
     r'''
     CEC2020 Problem 22
     '''
+
+    num_objectives = 1
+    available_dimensions = 9
 
     def __init__(self):
         super().__init__(dim=9, 
@@ -165,6 +171,9 @@ class CEC2020_p23(BenchmarkProblem):
     CEC2020 Problem 23
     '''
 
+    num_objectives = 1
+    available_dimensions = 5
+
     def __init__(self):
         super().__init__(dim=5, 
                          num_objectives=1, 
@@ -246,6 +255,9 @@ class CEC2020_p24(BenchmarkProblem):
     r'''
     CEC2020 Problem 24
     '''
+
+    num_objectives = 1
+    available_dimensions = 7
 
     def __init__(self):
         super().__init__(dim=7, 
@@ -341,6 +353,9 @@ class CEC2020_p25(BenchmarkProblem):
     CEC2020 Problem 25
     '''
 
+    num_objectives = 1
+    available_dimensions = 7
+
     def __init__(self):
         super().__init__(dim=7, 
                          num_objectives=1, 
@@ -409,6 +424,9 @@ class CEC2020_p26(BenchmarkProblem):
     r'''
     CEC2020 Problem 26
     '''
+
+    num_objectives = 1
+    available_dimensions = 22
 
     def __init__(self):
         super().__init__(dim=22, 
@@ -587,6 +605,9 @@ class CEC2020_p27(BenchmarkProblem):
     CEC2020 Problem 27
     '''
 
+    num_objectives = 1
+    available_dimensions = 10
+
     def __init__(self):
         super().__init__(dim=10, 
                          num_objectives=1, 
@@ -629,6 +650,9 @@ class CEC2020_p28(BenchmarkProblem):
     r'''
     CEC2020 Problem 28
     '''
+
+    num_objectives = 1
+    available_dimensions = 10
 
     def __init__(self):
         super().__init__(dim=10, 
@@ -703,6 +727,9 @@ class CEC2020_p29(BenchmarkProblem):
     CEC2020 Problem 29
     '''
 
+    num_objectives = 1
+    available_dimensions = 4
+
     def __init__(self):
         super().__init__(dim=4, 
                          num_objectives=1, 
@@ -743,6 +770,9 @@ class CEC2020_p30(BenchmarkProblem):
     r'''
     CEC2020 Problem 30
     '''
+
+    num_objectives = 1
+    available_dimensions = 3
 
     def __init__(self):
         super().__init__(dim=3, 
@@ -805,6 +835,9 @@ class CEC2020_p31(BenchmarkProblem):
     CEC2020 Problem 31
     '''
 
+    num_objectives = 1
+    available_dimensions = 4
+
     def __init__(self):
         super().__init__(dim=4, 
                          num_objectives=1, 
@@ -846,6 +879,9 @@ class CEC2020_p32(BenchmarkProblem):
     r'''
     CEC2020 Problem 32
     '''
+
+    num_objectives = 1
+    available_dimensions = 5
 
     def __init__(self):
         super().__init__(dim=5, 
@@ -902,6 +938,9 @@ class CEC2020_p33(BenchmarkProblem):
     CEC2020 Problem 33
     '''
 
+    num_objectives = 1
+    available_dimensions = 30
+
     def __init__(self):
         super().__init__(dim=30, 
                          num_objectives=1, 
@@ -956,10 +995,3 @@ class CEC2020_p33(BenchmarkProblem):
         h = np.zeros((n_samples, 0))
 
         return torch.from_numpy(np.abs(h) - 1e-4), torch.from_numpy(g).unsqueeze(-1), -torch.from_numpy(f)
-
-a = CEC2020_p24()
-X = torch.rand((5, 7))
-b, c, d = a._evaluate_implementation(X)
-print(c.shape[0])
-print(c.shape[1])
-print(c.numel())

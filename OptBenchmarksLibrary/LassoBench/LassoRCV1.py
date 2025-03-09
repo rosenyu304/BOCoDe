@@ -16,6 +16,9 @@ class LassoRCV1(BenchmarkProblem):
     ...
     '''
 
+    available_dimensions = 47236
+    num_objectives = 1
+
     def __init__(self):
         
         tags = ["LassoRCV1",

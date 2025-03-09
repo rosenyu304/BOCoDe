@@ -16,6 +16,9 @@ class LassoSyntSimple(BenchmarkProblem):
     ...
     '''
 
+    available_dimensions = 60
+    num_objectives = 1
+
     def __init__(self):
         
         tags = ["LassoSyntSimple",

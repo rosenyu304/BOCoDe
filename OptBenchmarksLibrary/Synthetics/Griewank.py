@@ -7,6 +7,9 @@ class Griewank(BenchmarkProblem):
     https://www.sfu.ca/~ssurjano/griewank.html
     '''
 
+    available_dimensions = (1,None)
+    num_objectives = 1
+
     def __init__(self, dim: int = 2):
 
         tags = ["Griewank",

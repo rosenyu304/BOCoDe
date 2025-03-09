@@ -16,6 +16,9 @@ class LassoSyntHigh(BenchmarkProblem):
     ...
     '''
 
+    available_dimensions = 300
+    num_objectives = 1
+
     def __init__(self):
         
         tags = ["LassoSyntHigh",

@@ -8,6 +8,9 @@ class TwoBarTruss(BenchmarkProblem):
     Computers and Structures 26(1):119–127, 1987  
     '''
 
+    available_dimensions = 2
+    num_objectives = 2
+
     # 2D objective, 5 constraints, X = 2-by-dim
 
     tags = {"multi_objective", "constrained", "continuous", "2D"}
