@@ -10,3 +10,6 @@ OptBench includes benchmark problems from various sources. Each collection has i
 
    botorch
    bbob
+   lasso
+   engineering
+   CEC2020

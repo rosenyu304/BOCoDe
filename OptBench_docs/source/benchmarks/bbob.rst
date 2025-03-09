@@ -4,6 +4,7 @@ BBOB Benchmarks
 ==============
 
 The Black-Box Optimization Benchmarking (BBOB) collection provides a comprehensive set of continuous optimization problems.
+Visit the `COCO platform<https://numbbo.github.io/coco/testsuites/bbob>` for a complete list of functions.
 
 Available Suites
 -----------------
@@ -24,7 +25,7 @@ Available Functions
 * Schwefel Function
 * Griewank Function
 
-Visit https://numbbo.github.io/coco/testsuites/bbob for a complete list of functions.
+
 
 Example Usage
 ------------
@@ -50,4 +51,4 @@ Output:
 
 .. code-block:: console
 
-    Sphere function value at origin: tensor([42420381.6772], dtype=torch.float64)
+    Sphere function value at origin: tensor([42420381.6772])

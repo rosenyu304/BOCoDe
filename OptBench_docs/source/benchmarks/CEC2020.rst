@@ -1,0 +1,94 @@
+.. _cec_benchmarks:
+
+CEC 2020 Benchmarks
+=================
+
+The Engineering benchmark collection contains non-convex constrained optimization problems from the real world and some baseline results.
+More information can be found in the `2020-RW-Constrained-Optimisation GitHub page <https://github.com/P-N-Suganthan/2020-RW-Constrained-Optimisation/>`_.
+
+Available Problems
+----------------
+
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p1`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p2`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p3`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p4`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p5`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p6`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p7`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p8`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p9`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p10`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p11`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p12`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p13`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p14`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p15`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p16`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p17`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p18`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p19`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p20`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p21`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p22`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p23`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p24`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p25`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p26`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p27`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p28`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p29`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p30`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p31`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p32`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p33`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p34`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p35`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p36`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p37`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p38`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p39`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p40`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p41`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p42`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p43`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p44`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p45`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p46`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p47`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p48`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p49`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p50`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p51`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p52`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p53`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p54`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p55`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p56`
+* :code:`optbench.CEC2020_RW_Constrained.CEC2020_p57`
+
+Example Usage
+------------
+
+.. code-block:: python
+
+    import optbench
+    import torch
+
+    # Create a Botorch benchmark problem
+    problem = optbench.CEC2020_RW_Constrained.CEC2020_p1()
+    
+    # Get problem information
+    bounds = problem.bounds
+    
+    # Evaluate at a point
+    x = torch.Tensor([[0.0] * problem.dim])
+    inequality_constraints, equality_constraints, values = problem._evaluate_implementation(x)
+    
+    print(f"Heat exchanger network design function value at origin: {values[0]}")
+
+Output:
+
+.. code-block:: console
+
+    Heat exchanger network design function value at origin: tensor([-0.])
