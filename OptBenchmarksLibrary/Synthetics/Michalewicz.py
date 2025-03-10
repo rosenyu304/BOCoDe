@@ -41,7 +41,7 @@ class Michalewicz(BenchmarkProblem):
 
         from botorch.test_functions.synthetic import Michalewicz as Michalewicz_imported
 
-        fun = Michalewicz_imported(dim=self.dim, negate=True)
+        fun = Michalewicz_imported(dim=self.dim)
         
         fun.bounds = torch.tensor(self.bounds, dtype=torch.float32).T
 
