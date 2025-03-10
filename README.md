@@ -1,11 +1,11 @@
 # March 10 Notes:
 To-Dos:
 1. Add Cyril's MODAct to Engineering: See Kailey/MODAct.py and the original implementation: https://github.com/epfl-lamd/modact. As the original MODAct support PyMOO framework, the objective is set to be minimization. However, here we want maximization, so double-check this logic while implementation:
-`
+```
 # Pymoo: f = np.array(f)*-1*cs1.weights
 f = np.array(f)*self.prob.weights # BO is maximizing
 g = np.array(g)*self.prob.c_weights
-`
+```
 We would like to see the full implementation of all MODAct problems as multi-objective problems. Confirm the implemetation with original paper: https://ieeexplore.ieee.org/document/9179777
 
 2. Add all BoTorch to BoTorch: See https://github.com/pytorch/botorch/tree/main/botorch/test_functions. Think about whether we want to follow their directory structure when categorizing them
