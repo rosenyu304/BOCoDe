@@ -23,7 +23,7 @@ class Michalewicz(BenchmarkProblem):
         
         import math
 
-        opt = {2: [1.8013], 5: [4.687658], 10: [9.66015]}
+        opt = {2: [-1.8013], 5: [-4.687658], 10: [-9.66015]}
         optimum = opt.get(dim)
 
         x_opts = {2: [[2.202905, 1.570796]]}
