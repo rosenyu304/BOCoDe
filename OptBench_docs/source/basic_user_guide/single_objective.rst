@@ -15,23 +15,26 @@ Here's a complete example of using OptBench with a single-objective optimization
 
     import optbench
     import numpy as np
+    import torch
     from scipy.optimize import minimize
 
     # Create a benchmark problem
-    problem = optbench.create_problem("sphere", dim=2)
+    problem = optbench.Synthetics.Michalewicz()
 
     # Get problem bounds
     bounds = problem.bounds
 
     # Define objective function for optimizer
     def objective(x):
-        return problem.evaluate(x)
+        x = torch.Tensor([x])
+        _, fx = problem._evaluate_implementation(x)
+        return fx.numpy()[0][0]
 
-    # Starting point
+    # Starting point 2 dimensional
     x0 = np.zeros(2)
 
     # Optimize using SciPy
-    result = minimize(objective, x0, method='L-BFGS-B', bounds=bounds)
+    result = minimize(objective, x0, method='Powell', bounds=bounds)
 
     print(f"Optimal value found: {result.fun}")
     print(f"Optimal point: {result.x}")
