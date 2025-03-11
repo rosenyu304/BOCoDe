@@ -10,6 +10,9 @@ class WaterProblem(BenchmarkProblem):
     IEEE Transactions on Evolutionary Computation 18(4):602–622, 2014
     '''
 
+    available_dimensions = 3
+    num_objectives = 5
+
     # 3D objective, 7 constraints, X = 3-by-dim
 
     tags = {"multi_objective", "constrained", "continuous", "3D"}

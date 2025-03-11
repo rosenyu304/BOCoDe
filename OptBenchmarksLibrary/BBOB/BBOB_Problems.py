@@ -4,11 +4,11 @@ import numpy as np
 
 import cocoex
 
-r'''
-    N. Hansen, A. Auger, R. Ros, O. Mersmann, T. Tušar, D. Brockhoff. COCO: A Platform for Comparing Continuous Optimizers in a Black-Box Setting, Optimization Methods and Software, 36(1), pp. 114-144, 2021.
-'''
-
 class BaseBBOB(BenchmarkProblem):
+
+    r'''
+    N. Hansen, A. Auger, R. Ros, O. Mersmann, T. Tušar, D. Brockhoff. COCO: A Platform for Comparing Continuous Optimizers in a Black-Box Setting, Optimization Methods and Software, 36(1), pp. 114-144, 2021.
+    '''
 
     def __init__(self,
                  dim,
@@ -63,6 +63,9 @@ class BaseBBOB(BenchmarkProblem):
 
 class BBOB(BaseBBOB):
 
+    available_dimensions = {2, 3, 5, 10, 20, 40}
+    num_objectives = 1
+
     def __init__(self, 
                  dim=2,
                  function_number=1,
@@ -77,6 +80,9 @@ class BBOB(BaseBBOB):
 
 class BBOB_Biobj(BaseBBOB):
 
+    available_dimensions = {2, 3, 5, 10, 20, 40}
+    num_objectives = 2
+
     def __init__(self, 
                  dim=2,
                  function_number=1,
@@ -90,8 +96,11 @@ class BBOB_Biobj(BaseBBOB):
 
 class BBOB_BiobjMixInt(BaseBBOB):
 
+    available_dimensions = {2, 3, 5, 10, 20, 40}
+    num_objectives = 2
+
     def __init__(self, 
-                 dim=2,
+                 dim=5,
                  function_number=1,
                  instance_number=1,
                  ):
@@ -102,6 +111,9 @@ class BBOB_BiobjMixInt(BaseBBOB):
                          instance_number)
 
 class BBOB_Boxed(BaseBBOB):
+
+    available_dimensions = {2, 3, 5, 10, 20, 40}
+    num_objectives = 1
 
     def __init__(self, 
                  dim=2,
@@ -116,9 +128,12 @@ class BBOB_Boxed(BaseBBOB):
 
 class BBOB_Constrained(BaseBBOB):
 
+    available_dimensions = {2, 3, 5, 10, 20, 40}
+    num_objectives = 1
+
     def __init__(self, 
-                 dim,
-                 function_number,
+                 dim=2,
+                 function_number=1,
                  instance_number=1,
                  ):
         suite = "bbob-constrained"
@@ -129,9 +144,12 @@ class BBOB_Constrained(BaseBBOB):
 
 class BBOB_LargeScale(BaseBBOB):
 
+    available_dimensions = {20, 40, 80, 160, 320, 640}
+    num_objectives = 1
+
     def __init__(self, 
-                 dim,
-                 function_number,
+                 dim=20,
+                 function_number=1,
                  instance_number=1,
                  ):
         suite = "bbob-largescale"
@@ -142,36 +160,28 @@ class BBOB_LargeScale(BaseBBOB):
 
 class BBOB_MixInt(BaseBBOB):
 
+    available_dimensions = {2, 3, 5, 10, 20, 40}
+    num_objectives = 1
+
     def __init__(self, 
-                 dim,
-                 function_number,
+                 dim=5,
+                 function_number=1,
                  instance_number=1,
                  ):
-        suite = "bbob-largescale"
+        suite = "bbob-mixint"
         super().__init__(dim,
                          suite,
                          function_number,
                          instance_number)
-
-class BBOB_LargeScale(BaseBBOB):
-
-    def __init__(self, 
-                 dim,
-                 function_number,
-                 instance_number=1,
-                 ):
-        suite = "bbob-largescale"
-        super().__init__(dim,
-                         suite,
-                         function_number,
-                         instance_number)
-
 
 class BBOB_Noisy(BaseBBOB):
 
+    available_dimensions = {2, 3, 5, 10, 20, 40}
+    num_objectives = 1
+
     def __init__(self, 
-                 dim,
-                 function_number,
+                 dim=2,
+                 function_number=101,
                  instance_number=1,
                  ):
         suite = "bbob-noisy"

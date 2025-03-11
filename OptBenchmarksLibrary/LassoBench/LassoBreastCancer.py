@@ -17,6 +17,9 @@ class LassoBreastCancer(BenchmarkProblem):
     ...
     '''
 
+    available_dimensions = 10
+    num_objectives = 1
+
     def __init__(self):
         
         tags = ["LassoBreastCancer",

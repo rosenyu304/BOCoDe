@@ -9,6 +9,9 @@ class Mazda_SCA(BenchmarkProblem):
     https://ladse.eng.isas.jaxa.jp/benchmark/
     '''
 
+    available_dimensions = 148
+    num_objectives = 4
+
     # 222D objective, 54 constraints, X = n-by-222
     # 2 Cars Optimization Case
 
@@ -119,6 +122,9 @@ class Mazda(BenchmarkProblem):
     - The fourth column is weight of LV.
     - The fifth column is weight of SV.
     '''
+
+    available_dimensions = 222
+    num_objectives = 5
 
     # 222D objective, 54 constraints, X = n-by-222
     # 3 car optimization case

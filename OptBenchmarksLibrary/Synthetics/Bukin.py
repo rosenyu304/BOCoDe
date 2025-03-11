@@ -7,6 +7,9 @@ class Bukin(BenchmarkProblem):
     https://www.sfu.ca/~ssurjano/bukin6.html
     '''
 
+    available_dimensions = 2
+    num_objectives = 1
+
     def __init__(self):
         
         tags = ["Bukin",

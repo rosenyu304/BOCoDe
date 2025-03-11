@@ -14,6 +14,9 @@ class CEC2020_p34(BenchmarkProblem):
     CEC2020_34 problem 34
     '''
 
+    num_objectives = 1
+    available_dimensions = 118
+
     def __init__(self):
         super().__init__(dim = 118, 
                          num_objectives = 1, 

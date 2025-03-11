@@ -8,6 +8,9 @@ class Goldstein(BenchmarkProblem):
     LVGP paper: https://www.nature.com/articles/s41598-020-60652-9
     '''
 
+    available_dimensions = 2
+    num_objectives = 1
+
     def __init__(self):
             
         bounds, tags, optimum, x_opt = self._get_defaults()

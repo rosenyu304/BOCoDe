@@ -16,6 +16,9 @@ class LassoDiabetes(BenchmarkProblem):
     ...
     '''
 
+    available_dimensions = 8
+    num_objectives = 1
+
     def __init__(self):
         
         tags = ["LassoDNA",

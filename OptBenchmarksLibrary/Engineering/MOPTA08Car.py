@@ -7,6 +7,9 @@ class MOPTA08Car(BenchmarkProblem):
     https://leonard.papenmeier.io/2023/02/09/mopta08-executables.html
     '''
 
+    available_dimensions = 124
+    num_objectives = 1
+
     # 124D objective, 68 constraints, X = n-by-124
 
     tags = {"single_objective", "constrained", "continuous", "124D", "extra_imports"}

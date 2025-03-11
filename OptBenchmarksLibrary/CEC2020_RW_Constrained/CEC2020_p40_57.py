@@ -14,6 +14,9 @@ class CEC2020_p40(BenchmarkProblem):
     CEC2020 Problem 40
     '''
 
+    num_objectives = 1
+    available_dimensions = 76
+
     def __init__(self):
         super().__init__(dim=76, 
                          num_objectives=1, 
@@ -93,6 +96,9 @@ class CEC2020_p41(BenchmarkProblem):
     r'''
     CEC2020 Problem 41
     '''
+
+    num_objectives = 1
+    available_dimensions = 74
 
     def __init__(self):
         super().__init__(dim=74, 
@@ -174,6 +180,9 @@ class CEC2020_p42(BenchmarkProblem):
     CEC2020 Problem 42
     '''
 
+    num_objectives = 1
+    available_dimensions = 86
+
     def __init__(self):
         super().__init__(dim=86, 
                          num_objectives=1, 
@@ -250,6 +259,9 @@ class CEC2020_p43(BenchmarkProblem):
     r'''
     CEC2020 Problem 43
     '''
+
+    num_objectives = 1
+    available_dimensions = 86
 
     def __init__(self):
         super().__init__(dim=86, 
@@ -328,6 +340,9 @@ class CEC2020_p44(BenchmarkProblem):
     CEC2020 Problem 44
     '''
 
+    num_objectives = 1
+    available_dimensions = 30
+
     def __init__(self):
         super().__init__(dim=30, 
                          num_objectives=1, 
@@ -402,6 +417,9 @@ class CEC2020_p45(BenchmarkProblem):
     CEC2020 Problem 45
     '''
 
+    num_objectives = 1
+    available_dimensions = 25
+
     def __init__(self):
         super().__init__(dim=25, 
                          num_objectives=1, 
@@ -457,6 +475,9 @@ class CEC2020_p46(BenchmarkProblem):
     CEC2020 Problem 46
     '''
 
+    num_objectives = 1
+    available_dimensions = 25
+
     def __init__(self):
         super().__init__(dim=25, 
                          num_objectives=1, 
@@ -509,6 +530,9 @@ class CEC2020_p47(BenchmarkProblem):
     r'''
     CEC2020 Problem 47
     '''
+
+    num_objectives = 1
+    available_dimensions = 25
 
     def __init__(self):
         super().__init__(dim=25, 
@@ -564,6 +588,9 @@ class CEC2020_p48(BenchmarkProblem):
     CEC2020 Problem 48
     '''
 
+    num_objectives = 1
+    available_dimensions = 30
+
     def __init__(self):
         super().__init__(dim=30, 
                          num_objectives=1, 
@@ -617,6 +644,9 @@ class CEC2020_p49(BenchmarkProblem):
     r'''
     CEC2020 Problem 49
     '''
+
+    num_objectives = 1
+    available_dimensions = 30
 
     def __init__(self):
         super().__init__(dim=30, 
@@ -672,6 +702,9 @@ class CEC2020_p50(BenchmarkProblem):
     CEC2020 Problem 50
     '''
 
+    num_objectives = 1
+    available_dimensions = 30
+
     def __init__(self):
         super().__init__(dim=30, 
                          num_objectives=1, 
@@ -724,6 +757,9 @@ class CEC2020_p51(BenchmarkProblem):
     r'''
     CEC2020 Problem 51
     '''
+
+    num_objectives = 1
+    available_dimensions = 59
 
     def __init__(self):
         super().__init__(dim=59, 
@@ -785,6 +821,9 @@ class CEC2020_p52(BenchmarkProblem):
     CEC2020 Problem 52
     '''
 
+    num_objectives = 1
+    available_dimensions = 59
+
     def __init__(self):
         super().__init__(dim=59, 
                          num_objectives=1, 
@@ -844,6 +883,9 @@ class CEC2020_p53(BenchmarkProblem):
     r'''
     CEC2020 Problem 53
     '''
+
+    num_objectives = 1
+    available_dimensions = 59
 
     def __init__(self):
         super().__init__(dim=59, 
@@ -907,6 +949,9 @@ class CEC2020_p54(BenchmarkProblem):
     CEC2020 Problem 54
     '''
 
+    num_objectives = 1
+    available_dimensions = 59
+
     def __init__(self):
         super().__init__(dim=59, 
                          num_objectives=1, 
@@ -967,6 +1012,9 @@ class CEC2020_p55(BenchmarkProblem):
     CEC2020 Problem 55
     '''
 
+    num_objectives = 1
+    available_dimensions = 64
+
     def __init__(self):
         super().__init__(dim=64, 
                          num_objectives=1, 
@@ -1019,6 +1067,9 @@ class CEC2020_p56(BenchmarkProblem):
     CEC2020 Problem 56
     '''
 
+    num_objectives = 1
+    available_dimensions = 64
+
     def __init__(self):
         super().__init__(dim=64, 
                          num_objectives=1, 
@@ -1070,6 +1121,9 @@ class CEC2020_p57(BenchmarkProblem):
     r'''
     CEC2020 Problem 57
     '''
+
+    num_objectives = 1
+    available_dimensions = 64
 
     def __init__(self):
         super().__init__(dim=64, 

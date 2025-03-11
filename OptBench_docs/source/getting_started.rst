@@ -20,19 +20,20 @@ Here's a simple example of how to use OptBench:
 .. code-block:: python
 
     import optbench
+    import torch
 
-    # Create a benchmark problem
-    problem = optbench.create_problem("sphere")
+    # Retrieve all available benchmark problems in optbench by searching with no filters
+    all_problems = optbench.filter_functions()
+    print(all_problems)
 
-    # Get problem information
-    dim = problem.dimension
-    bounds = problem.bounds
+    # Instantiate a Synthetic benchmark problem
+    problem = optbench.Synthetics.Ackley()
     
-    # Evaluate the objective function
-    x = [0.0] * dim
-    value = problem.evaluate(x)
-
-    print(f"Function value at origin: {value}")
+    # Evaluate at a point
+    x = torch.Tensor([[0.0] * problem.dim])
+    constraints, values = problem._evaluate_implementation(x)
+    
+    print(f"Goldstein Discrete function value at origin: {values[0]}")
 
 Basic Concepts
 -------------

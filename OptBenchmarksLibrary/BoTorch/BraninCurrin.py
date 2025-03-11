@@ -5,6 +5,9 @@ from ..base import *
 
 class BraninCurrin(BenchmarkProblem):
 
+    available_dimensions = 2
+    num_objectives = 2
+
     def __init__(self, 
                  dim=2):
         

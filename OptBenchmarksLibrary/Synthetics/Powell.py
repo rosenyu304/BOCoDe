@@ -7,6 +7,9 @@ class Powell(BenchmarkProblem):
     https://www.sfu.ca/~ssurjano/powell.html
     '''
 
+    available_dimensions = (4,None)
+    num_objectives = 1
+
     def __init__(self, dim: int = 4):
 
         tags = ["Powell",
