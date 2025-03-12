@@ -8,6 +8,9 @@ class Beale(BenchmarkProblem):
         https://www.sfu.ca/~ssurjano/beale.html    
     '''
 
+    available_dimensions = 2
+    num_objectives = 1
+
     def __init__(self):
         
         tags = ["Beale",
@@ -43,6 +46,9 @@ class Cosine8(BenchmarkProblem):
     r'''
         https://www.sfu.ca/~ssurjano/beale.html    
     '''
+
+    available_dimensions = 8
+    num_objectives = 1
 
     def __init__(self):
         
@@ -80,6 +86,9 @@ class DropWave(BenchmarkProblem):
         https://www.sfu.ca/~ssurjano/drop.html
     '''
 
+    available_dimensions = 2
+    num_objectives = 1
+
     def __init__(self):
         
         tags = ["DropWave",
@@ -116,6 +125,9 @@ class EggHolder(BenchmarkProblem):
         https://www.sfu.ca/~ssurjano/egg.html
     '''
 
+    available_dimensions = 2
+    num_objectives = 1
+
     def __init__(self):
         
         tags = ["EggHolder",
@@ -151,6 +163,9 @@ class Hartmann3D(BenchmarkProblem):
     r'''
         https://www.sfu.ca/~ssurjano/hart3.html
     '''
+
+    available_dimensions = 3
+    num_objectives = 1
 
     def __init__(self):
         
@@ -219,6 +234,9 @@ class Hartmann6D(BenchmarkProblem):
         https://www.sfu.ca/~ssurjano/hart6.html
     '''
 
+    available_dimensions = 6
+    num_objectives = 1
+
     def __init__(self):
         
         tags = ["Hartmann",
@@ -255,6 +273,9 @@ class HolderTable(BenchmarkProblem):
         https://www.sfu.ca/~ssurjano/holder.html
     '''
 
+    available_dimensions = 2
+    num_objectives = 1
+
     def __init__(self):
         
         tags = ["HolderTable",
@@ -290,6 +311,9 @@ class BaseShekel(BenchmarkProblem):
     r'''
         https://www.sfu.ca/~ssurjano/shekel.html
     '''
+
+    available_dimensions = 4
+    num_objectives = 1
 
     def __init__(self, m: int, optimum):
         
@@ -343,6 +367,9 @@ class SixHumpCamel(BenchmarkProblem):
         https://www.sfu.ca/~ssurjano/camel6.html
     '''
 
+    available_dimensions = 2
+    num_objectives = 1
+
     def __init__(self):
         
         tags = ["SixHumpCamel",
@@ -379,6 +406,9 @@ class ThreeHumpCamel(BenchmarkProblem):
         https://www.sfu.ca/~ssurjano/camel3.html
     '''
 
+    available_dimensions = 2
+    num_objectives = 1
+
     def __init__(self):
         
         tags = ["ThreeHumpCamel",
@@ -414,6 +444,9 @@ class ConstrainedGramacy(BenchmarkProblem):
     r'''
         https://www.sfu.ca/~ssurjano/camel3.html
     '''
+
+    available_dimensions = 2
+    num_objectives = 1
 
     def __init__(self):
         
@@ -453,6 +486,9 @@ class ConstrainedHartmann(BenchmarkProblem):
         https://www.sfu.ca/~ssurjano/hart6.html
     '''
 
+    available_dimensions = 6
+    num_objectives = 1
+
     def __init__(self):
         
         tags = ["ConstrainedHartmann",
@@ -490,6 +526,9 @@ class ConstrainedHartmannSmooth(BenchmarkProblem):
     r'''
         https://www.sfu.ca/~ssurjano/hart6.html
     '''
+
+    available_dimensions = 6
+    num_objectives = 1
 
     def __init__(self):
         
@@ -529,6 +568,9 @@ class PressureVessel(BenchmarkProblem):
         
     '''
 
+    available_dimensions = 4
+    num_objectives = 1
+
     def __init__(self):
         
         tags = ["PressureVessel",
@@ -564,6 +606,9 @@ class WeldedBeamSO(BenchmarkProblem):
     r'''
         
     '''
+
+    available_dimensions = 4
+    num_objectives = 1
 
     def __init__(self):
         
@@ -601,6 +646,9 @@ class TensionCompressionString(BenchmarkProblem):
         
     '''
 
+    available_dimensions = 3
+    num_objectives = 1
+
     def __init__(self):
         
         tags = ["TensionCompressionString",
@@ -636,6 +684,9 @@ class SpeedReducer(BenchmarkProblem):
     r'''
         
     '''
+
+    available_dimensions = 7
+    num_objectives = 1
 
     def __init__(self):
         
