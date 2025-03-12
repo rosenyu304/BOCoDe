@@ -433,7 +433,7 @@ class ThreeHumpCamel(BenchmarkProblem):
 
         from botorch.test_functions.synthetic import ThreeHumpCamel as ThreeHumpCamel_imported
 
-        fun = ThreeHumpCamel_imported(dim=self.dim, )
+        fun = ThreeHumpCamel_imported()
 
         fun.bounds = torch.tensor(self.bounds, dtype=torch.float32).T
 

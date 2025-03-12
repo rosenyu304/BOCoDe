@@ -1,6 +1,6 @@
 import torch
 import pytest
-from ..More_Synthetics import Beale, Cosine8, DropWave, EggHolder, Hartmann3D, Hartmann6D, HolderTable, Shekelm5, Shekelm7, Shekelm10, SixHumpCamel, ConstrainedGramacy, ConstrainedHartmann, ConstrainedHartmannSmooth, PressureVessel, WeldedBeamSO, TensionCompressionString, SpeedReducer
+from ..More_Synthetics import Beale, Cosine8, DropWave, EggHolder, Hartmann3D, Hartmann6D, HolderTable, Shekelm5, Shekelm7, Shekelm10, SixHumpCamel, ThreeHumpCamel, ConstrainedGramacy, ConstrainedHartmann, ConstrainedHartmannSmooth, PressureVessel, WeldedBeamSO, TensionCompressionString, SpeedReducer
 import math
 
 def general_test(func, dim=None):
@@ -63,6 +63,9 @@ def test_shekelm10():
 
 def test_sixhumpcamel():
     general_test(SixHumpCamel)
+
+def test_threehumpcamel():
+    general_test(ThreeHumpCamel)
 
 def test_constrainedgramacy():
     general_test(ConstrainedGramacy)
