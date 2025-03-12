@@ -3,6 +3,9 @@ from ..base import *
 
 class Truss10D(BenchmarkProblem):
 
+    available_dimensions = 10
+    num_objectives = 1
+
     def __init__(self, 
                  CONSTRAINTS = ConstraintConfig(type='CONSTRAINTS')):
 

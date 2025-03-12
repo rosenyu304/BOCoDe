@@ -16,6 +16,7 @@ __all__ = [
            'EulerBernoulliBeamBending',
            'GearTrain',
            'Mazda',
+           'Mazda_SCA',
            'MOPTA08Car',
            'RobotPush',
            'Rover',

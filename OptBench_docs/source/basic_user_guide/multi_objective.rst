@@ -17,18 +17,34 @@ Here's an example of using OptBench with a multi-objective problem:
     import numpy as np
     from pymoo.algorithms.moo.nsga2 import NSGA2
     from pymoo.optimize import minimize
+    from pymoo.core.problem import Problem
+    import torch
 
     # Create a multi-objective benchmark problem
-    problem = optbench.create_problem("zdt1")
+    problem = optbench.Engineering.CarSideImpact()
+
+    # Wrap the problem as a Pymoo Problem
+    class CarSideImpactProblem(Problem):
+        def __init__(self):
+            super().__init__(n_var=problem.dim,
+                                n_obj=problem.num_objectives,
+                                n_constr=problem.num_constraints,
+                                xl=np.array([b[0] for b in problem.bounds], dtype=float),
+                                xu=np.array([b[1] for b in problem.bounds], dtype=float),
+                                )
+        
+        def _evaluate(self, x, out, *args, **kwargs):
+            constraints, values = problem._evaluate_implementation(torch.Tensor(x), scaling = False)
+            out["F"] = values.numpy()
+            out["G"] = constraints.numpy()
 
     # Setup the algorithm
     algorithm = NSGA2(pop_size=100)
 
     # Optimize
-    res = minimize(problem,
-                  algorithm,
-                  ('n_gen', 200),
-                  verbose=True)
+    res = minimize(CarSideImpactProblem(),
+                    algorithm,
+                    verbose=True)
 
     # Get Pareto front
     pareto_front = res.F

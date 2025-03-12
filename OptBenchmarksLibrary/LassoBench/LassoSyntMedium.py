@@ -16,6 +16,9 @@ class LassoSyntMedium(BenchmarkProblem):
     ...
     '''
 
+    available_dimensions = 100
+    num_objectives = 1
+
     def __init__(self):
 
         tags = ["LassoSyntMedium",

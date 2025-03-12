@@ -8,6 +8,9 @@ class WaterResources(BenchmarkProblem):
     Operations Research 28(6):1424–1435, 1980    
     '''
 
+    available_dimensions = 3
+    num_objectives = 5
+
     # 3D objective, 7 constraints, X = 7-by-dim
 
     tags = {"multi_objective", "constrained", "continuous", "3D"}

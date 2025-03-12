@@ -9,6 +9,9 @@ class EulerBernoulliBeamBending(BenchmarkProblem):
     approaches. Adv. Model. and Simul. in Eng. Sci. 9, 6 .
     '''
 
+    available_dimensions = 3
+    num_objectives = 1
+
     # 3D objective, 0 constraints, X = n-by-3
 
     tags = {"single_objective", "unconstrained", "mixed", "3D"}

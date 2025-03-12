@@ -10,6 +10,9 @@ class Ackley(BenchmarkProblem):
     In: International Conference on Artificial Intelligence and Statistics, PMLR, pp 730–738
     '''
 
+    available_dimensions = (1,None)
+    num_objectives = 1
+
     def __init__(self, 
                  dim: int = 2, 
                  CONSTRAINTS = ConstraintConfig(type='CONSTRAINTS')):

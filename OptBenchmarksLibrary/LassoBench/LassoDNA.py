@@ -16,6 +16,9 @@ class LassoDNA(BenchmarkProblem):
     ...
     '''
 
+    available_dimensions = 180
+    num_objectives = 1
+
     def __init__(self):
         
         tags = ["LassoDNA",

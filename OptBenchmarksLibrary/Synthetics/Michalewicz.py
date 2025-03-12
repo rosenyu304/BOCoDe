@@ -7,6 +7,9 @@ class Michalewicz(BenchmarkProblem):
     https://www.sfu.ca/~ssurjano/michal.html
     '''
 
+    available_dimensions = (1,None)
+    num_objectives = 1
+
     def __init__(self, dim: int = 2):
         
         tags = ["Michalewicz",
@@ -20,7 +23,7 @@ class Michalewicz(BenchmarkProblem):
         
         import math
 
-        opt = {2: [1.8013], 5: [4.687658], 10: [9.66015]}
+        opt = {2: [-1.8013], 5: [-4.687658], 10: [-9.66015]}
         optimum = opt.get(dim)
 
         x_opts = {2: [[2.202905, 1.570796]]}
@@ -38,7 +41,7 @@ class Michalewicz(BenchmarkProblem):
 
         from botorch.test_functions.synthetic import Michalewicz as Michalewicz_imported
 
-        fun = Michalewicz_imported(dim=self.dim, negate=True)
+        fun = Michalewicz_imported(dim=self.dim)
         
         fun.bounds = torch.tensor(self.bounds, dtype=torch.float32).T
 

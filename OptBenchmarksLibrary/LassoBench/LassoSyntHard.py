@@ -16,6 +16,9 @@ class LassoSyntHard(BenchmarkProblem):
     ...
     '''
 
+    available_dimensions = 1000
+    num_objectives = 1
+
     def __init__(self):
         
         tags = ["LassoSyntHard",
