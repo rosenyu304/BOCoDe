@@ -9,6 +9,7 @@ from .Powell import *
 from .Rastrigin import *
 from .Rosenbrock import *
 from .StyblinskiTang import *
+from .More_Synthetics import *
 
 # Or if you want to be more explicit about what's being exported:
 __all__ = ['Ackley', 
@@ -22,4 +23,23 @@ __all__ = ['Ackley',
            'Rastrigin',
            'Rosenbrock',
            'StyblinskiTang',
+           'Beale',
+           'Cosine8',
+           'DropWave',
+           'EggHolder',
+           'Hartmann3D',
+           'Hartmann6D',
+           'HolderTable',
+           'Shekelm5',
+           'Shekelm7',
+           'Shekelm10',
+           'Shekel',
+           'SixHumpCamel',
+           'ConstrainedGramacy',
+           'ConstrainedHartmann',
+           'ConstrainedHartmannSmooth',
+           'PressureVessel',
+           'WeldedBeamSO',
+           'TensionCompressionString',
+           'SpeedReducer'
           ]
