@@ -8,7 +8,6 @@ from .BoTorch import *
 from .BBOB import *
 from .CEC2020_RW_Constrained import *
 from .MODAct import *
-
 from .search_benchmarks import *
 
 # from .CEC2020_p34 import *

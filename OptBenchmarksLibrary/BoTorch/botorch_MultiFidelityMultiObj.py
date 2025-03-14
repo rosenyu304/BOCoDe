@@ -1,0 +1,23 @@
+import botorch.test_functions.multi_objective
+import botorch.test_functions.multi_objective_multi_fidelity
+from .BaseBotorch import MultiObjBotorchProblem
+import botorch
+import math
+
+class MOMFBraninCurrin(MultiObjBotorchProblem):
+
+    available_dimensions = 3
+    num_objectives = 2
+    
+    def __init__(self):
+        super().__init__(botorch_problem=botorch.test_functions.multi_objective_multi_fidelity.MOMFBraninCurrin
+                         )
+        
+class MOMFPark1(MultiObjBotorchProblem):
+
+    available_dimensions = 5
+    num_objectives = 2
+    
+    def __init__(self):
+        super().__init__(botorch_problem=botorch.test_functions.multi_objective_multi_fidelity.MOMFPark, 
+                        )

@@ -13,9 +13,9 @@ def general_test(func, dim=None):
     rand_test_points = 10 # Number of random points to test
     
     # Generate random points within constraints
-    X = torch.rand((rand_test_points, dim)) * math.pi
+    X = torch.rand((rand_test_points, dim))
 
-    _, fx = problem._evaluate_implementation(X)
+    _, fx = problem._evaluate_implementation(X, scaling=True)
 
     assert fx.shape == (rand_test_points, problem.num_objectives), f"Unexpected fx shape: {fx.shape}"
 
@@ -24,11 +24,9 @@ def general_test(func, dim=None):
     assert torch.isfinite(fx).all(), "fx contains NaN or Inf values"
 
     if problem.x_opt is not None and problem.optimum is not None:
-        eval_opt = problem._evaluate_implementation(torch.Tensor(problem.x_opt))[1]
+        eval_opt = problem._evaluate_implementation(torch.Tensor(problem.x_opt), scaling=False)[1]
         assert torch.allclose(eval_opt, torch.Tensor(problem.optimum), atol=1e-4), f"X_opt ({problem.x_opt}) evaluation ({eval_opt}) does not match optimum ({problem.optimum})"
         
-    # TODO: Add test points to ensure that fx is calculated correctly
-
     print(f"Test passed")
 
 def test_beale():
