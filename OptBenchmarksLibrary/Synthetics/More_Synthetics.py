@@ -31,7 +31,10 @@ class Beale(BenchmarkProblem):
                          tags = tags
                         )
         
-    def _evaluate_implementation(self, X: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
+    def _evaluate_implementation(self, X: torch.Tensor, scaling=True) -> Tuple[torch.Tensor, torch.Tensor]:
+
+        if scaling:
+            X = super().scale(X)
 
         from botorch.test_functions.synthetic import Beale as Beale_imported
 
@@ -70,7 +73,10 @@ class Cosine8(BenchmarkProblem):
                          tags = tags
                         )
         
-    def _evaluate_implementation(self, X: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
+    def _evaluate_implementation(self, X: torch.Tensor, scaling=True) -> Tuple[torch.Tensor, torch.Tensor]:
+
+        if scaling:
+            X = super().scale(X)
 
         from botorch.test_functions.synthetic import Cosine8 as Cosine8_imported
 
@@ -109,7 +115,10 @@ class DropWave(BenchmarkProblem):
                          tags = tags
                         )
         
-    def _evaluate_implementation(self, X: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
+    def _evaluate_implementation(self, X: torch.Tensor, scaling=True) -> Tuple[torch.Tensor, torch.Tensor]:
+
+        if scaling:
+            X = super().scale(X)
 
         from botorch.test_functions.synthetic import DropWave as DropWave_imported
 
@@ -148,7 +157,10 @@ class EggHolder(BenchmarkProblem):
                          tags = tags
                         )
         
-    def _evaluate_implementation(self, X: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
+    def _evaluate_implementation(self, X: torch.Tensor, scaling=True) -> Tuple[torch.Tensor, torch.Tensor]:
+
+        if scaling:
+            X = super().scale(X)
 
         from botorch.test_functions.synthetic import EggHolder as EggHolder_imported
 
@@ -224,7 +236,10 @@ class Hartmann3D(BenchmarkProblem):
         y = -outer
         return y
 
-    def _evaluate_implementation(self, X: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
+    def _evaluate_implementation(self, X: torch.Tensor, scaling=True) -> Tuple[torch.Tensor, torch.Tensor]:
+
+        if scaling:
+            X = super().scale(X)
         
         return None, torch.tensor(self.hart3(X), dtype=torch.float32).unsqueeze(-1)
 
@@ -257,7 +272,10 @@ class Hartmann6D(BenchmarkProblem):
                          tags = tags
                         )
         
-    def _evaluate_implementation(self, X: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
+    def _evaluate_implementation(self, X: torch.Tensor, scaling=True) -> Tuple[torch.Tensor, torch.Tensor]:
+
+        if scaling:
+            X = super().scale(X)
 
         from botorch.test_functions.synthetic import Hartmann as Hartmann_imported
 
@@ -296,7 +314,10 @@ class HolderTable(BenchmarkProblem):
                          tags = tags
                         )
         
-    def _evaluate_implementation(self, X: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
+    def _evaluate_implementation(self, X: torch.Tensor, scaling=True) -> Tuple[torch.Tensor, torch.Tensor]:
+
+        if scaling:
+            X = super().scale(X)
 
         from botorch.test_functions.synthetic import HolderTable as HolderTable_imported
 
@@ -335,7 +356,10 @@ class BaseShekel(BenchmarkProblem):
                          tags = tags
                         )
         
-    def _evaluate_implementation(self, X: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
+    def _evaluate_implementation(self, X: torch.Tensor, scaling=True) -> Tuple[torch.Tensor, torch.Tensor]:
+
+        if scaling:
+            X = super().scale(X)
 
         from botorch.test_functions.synthetic import Shekel as Shekel_imported
 
@@ -390,7 +414,10 @@ class SixHumpCamel(BenchmarkProblem):
                          tags = tags
                         )
         
-    def _evaluate_implementation(self, X: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
+    def _evaluate_implementation(self, X: torch.Tensor, scaling=True) -> Tuple[torch.Tensor, torch.Tensor]:
+
+        if scaling:
+            X = super().scale(X)
 
         from botorch.test_functions.synthetic import SixHumpCamel as SixHumpCamel_imported
 
@@ -429,7 +456,10 @@ class ThreeHumpCamel(BenchmarkProblem):
                          tags = tags
                         )
         
-    def _evaluate_implementation(self, X: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
+    def _evaluate_implementation(self, X: torch.Tensor, scaling=False) -> Tuple[torch.Tensor, torch.Tensor]:
+
+        if scaling:
+            X = super().scale(X)
 
         from botorch.test_functions.synthetic import ThreeHumpCamel as ThreeHumpCamel_imported
 
@@ -468,7 +498,10 @@ class ConstrainedGramacy(BenchmarkProblem):
                          tags = tags
                         )
         
-    def _evaluate_implementation(self, X: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
+    def _evaluate_implementation(self, X: torch.Tensor, scaling=True) -> Tuple[torch.Tensor, torch.Tensor]:
+
+        if scaling:
+            X = super().scale(X)
 
         from botorch.test_functions.synthetic import ConstrainedGramacy as ConstrainedGramacy_imported
 
@@ -509,7 +542,10 @@ class ConstrainedHartmann(BenchmarkProblem):
                          tags = tags
                         )
         
-    def _evaluate_implementation(self, X: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
+    def _evaluate_implementation(self, X: torch.Tensor, scaling=True) -> Tuple[torch.Tensor, torch.Tensor]:
+
+        if scaling:
+            X = super().scale(X)
 
         from botorch.test_functions.synthetic import ConstrainedHartmann as Hartmann_imported
 
@@ -550,7 +586,10 @@ class ConstrainedHartmannSmooth(BenchmarkProblem):
                          tags = tags
                         )
         
-    def _evaluate_implementation(self, X: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
+    def _evaluate_implementation(self, X: torch.Tensor, scaling=True) -> Tuple[torch.Tensor, torch.Tensor]:
+
+        if scaling:
+            X = super().scale(X)
 
         from botorch.test_functions.synthetic import ConstrainedHartmannSmooth as Hartmann_imported
 
@@ -589,7 +628,10 @@ class PressureVessel(BenchmarkProblem):
                          tags = tags
                         )
         
-    def _evaluate_implementation(self, X: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
+    def _evaluate_implementation(self, X: torch.Tensor, scaling=True) -> Tuple[torch.Tensor, torch.Tensor]:
+
+        if scaling:
+            X = super().scale(X)
 
         from botorch.test_functions.synthetic import PressureVessel as PressureVessel_imported
 
@@ -628,7 +670,10 @@ class WeldedBeamSO(BenchmarkProblem):
                          tags = tags
                         )
         
-    def _evaluate_implementation(self, X: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
+    def _evaluate_implementation(self, X: torch.Tensor, scaling=True) -> Tuple[torch.Tensor, torch.Tensor]:
+
+        if scaling:
+            X = super().scale(X)
 
         from botorch.test_functions.synthetic import WeldedBeamSO as WeldedBeam_imported
 
@@ -667,7 +712,10 @@ class TensionCompressionString(BenchmarkProblem):
                          tags = tags
                         )
         
-    def _evaluate_implementation(self, X: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
+    def _evaluate_implementation(self, X: torch.Tensor, scaling=True) -> Tuple[torch.Tensor, torch.Tensor]:
+
+        if scaling:
+            X = super().scale(X)
 
         from botorch.test_functions.synthetic import TensionCompressionString as TensionCompressionString_imported
 
@@ -706,7 +754,10 @@ class SpeedReducer(BenchmarkProblem):
                          tags = tags
                         )
         
-    def _evaluate_implementation(self, X: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
+    def _evaluate_implementation(self, X: torch.Tensor, scaling=True) -> Tuple[torch.Tensor, torch.Tensor]:
+
+        if scaling:
+            X = super().scale(X)
         
         from botorch.test_functions.synthetic import SpeedReducer as SpeedReducer_imported
 
