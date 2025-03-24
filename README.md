@@ -7,8 +7,8 @@ To-Dos:
 2. Documentation: Update the documentation with all your additional functions and add tutorials for all categories of functions
   
 3. More functions
-   i. Trusses related function:
-   ii. Other source: Make sure our library includes the functions from these sources
+   a. Trusses related function:
+   b. Other source: Make sure our library includes the functions from these sources
    
    
 
