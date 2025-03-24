@@ -9,6 +9,7 @@ from .test_Powell import *
 from .test_Rastrigin import *
 from .test_Rosenbrock import *
 from .test_StyblinskiTang import *
+from .test_other_synthetics import *
 
 # Or if you want to be more explicit about what's being exported:
 __all__ = ['test_Ackley', 

@@ -1,13 +1,16 @@
 import torch
 import pytest
-from .. import BraninCurrin
+from ..cs import CS1, CT1, CTS1, CTSE1, CTSEI1, CS2, CT2, CTS2, CTSE2, CTSEI2, CS3, CT3, CTS3, CTSE3, CTSEI3, CS4, CT4, CTS4, CTSE4, CTSEI4
+import math
 
-def test_braninCurrin_evaluate():
-    problem = BraninCurrin()
+def general_test(func, dim=None):
+    if dim:
+        problem = func(dim)
+    else:
+        problem = func()
+        dim = problem.dim
 
-    dim = problem.dim
-
-    rand_test_points = 5 # Number of random points to test
+    rand_test_points = 10 # Number of random points to test
     
     # Generate random points within constraints
     X = torch.rand((rand_test_points, dim))
@@ -23,5 +26,11 @@ def test_braninCurrin_evaluate():
     if problem.x_opt is not None and problem.optimum is not None:
         eval_opt = problem._evaluate_implementation(torch.Tensor(problem.x_opt))[1]
         assert torch.allclose(eval_opt, torch.Tensor(problem.optimum), atol=1e-4), f"X_opt ({problem.x_opt}) evaluation ({eval_opt}) does not match optimum ({problem.optimum})"
+        
+    # TODO: Add test points to ensure that fx is calculated correctly
 
     print(f"Test passed")
+
+@pytest.mark.parametrize("func", [CS1, CT1, CTS1, CTSE1, CTSEI1, CS2, CT2, CTS2, CTSE2, CTSEI2, CS3, CT3, CTS3, CTSE3, CTSEI3, CS4, CT4, CTS4, CTSE4, CTSEI4])
+def test_cs(func):
+    general_test(func)

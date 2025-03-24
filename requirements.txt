@@ -10,3 +10,12 @@ pygame
 Box2D
 slientruss3d
 openpyxl
+
+# Modact
+attrs
+cached_property >= 1.5.1
+networkx
+python-fcl
+scipy
+trimesh
+git+https://github.com/epfl-lamd/modact
