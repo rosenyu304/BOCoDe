@@ -7,8 +7,12 @@ To-Dos:
 2. Documentation: Update the documentation with all your additional functions and add tutorials for all categories of functions
   
 3. More functions
-   a. Trusses related function:
-   b. Other source: Make sure our library includes the functions from these sources
+  - Trusses related function:
+    - Look into the other folder and find the truss problems. In theory, these files should also include the paper on the truss problems (let me know if you don't have access to the papers). Look at the original problem formulated in the paper and check if the implementation on our side is correct since the python library for this truss problem does not specify the units of anything.
+    - From the software perspective, I think some Truss problems have different variances, think about how to best structure them. Right now we classify them as Truss10D, 25D, ...etc.
+  - Other source: Make sure our library includes all the problems / functions from these sources、
+    - NEORL: https://neorl.readthedocs.io/en/latest/index.html
+    - The real-world problem from this: https://dl.acm.org/doi/10.1145/3583133.3595060 (Let me know if you have access)
    
    
 
