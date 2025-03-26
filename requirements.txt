@@ -8,7 +8,7 @@ cocopp
 coco-experiment
 pygame
 Box2D
-slientruss3d
+# slientruss3d
 openpyxl
 
 # Modact
