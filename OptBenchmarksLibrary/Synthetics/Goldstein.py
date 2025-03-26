@@ -87,20 +87,21 @@ class Goldstein_Discrete(Goldstein):
 
         # x0: [-2, 2]
         # x1: {-2, -1, 0, 1, 2}
-        def cont_to_disc(x, disc_values):
-            # Convert continuous value to discrete value
-            # Input:
-            #   x: continuous value in [0, 1]
-            #   disc_values: discrete values
-            # Output: discrete value
-            idx = torch.floor(x * len(disc_values)).long()
-            return disc_values[torch.clamp(idx, 0, len(disc_values)-1)]
         
-        # Second column is discrete
-        sorted_disc_values = torch.tensor(list(self.bounds[1]))
-        sorted_disc_values.sort()
+        # def cont_to_disc(x, disc_values):
+        #     # Convert continuous value to discrete value
+        #     # Input:
+        #     #   x: continuous value in [0, 1]
+        #     #   disc_values: discrete values
+        #     # Output: discrete value
+        #     idx = torch.floor(x * len(disc_values)).long()
+        #     return disc_values[torch.clamp(idx, 0, len(disc_values)-1)]
+        
+        # # Second column is discrete
+        # sorted_disc_values = torch.tensor(list(self.bounds[1]))
+        # sorted_disc_values.sort()
 
-        X[:,1] = cont_to_disc(X[:,1], sorted_disc_values)
+        # X[:,1] = cont_to_disc(X[:,1], sorted_disc_values)
 
         fx = -((1 + (X[:,0] + X[:,1] +1)**2
                 * (19 - 14*X[:,0] + 3*X[:,0]**2 -14*X[:,1]
