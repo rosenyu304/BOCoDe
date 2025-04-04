@@ -1,6 +1,6 @@
 .. _botorch_benchmarks:
 
-Botorch Benchmarks
+Synthetic Benchmarks
 =================
 
 The Botorch benchmark collection includes synthetic test problems commonly used in Bayesian optimization research.
