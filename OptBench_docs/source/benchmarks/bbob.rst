@@ -4,7 +4,7 @@ BBOB Benchmarks
 ==============
 
 The Black-Box Optimization Benchmarking (BBOB) collection provides a comprehensive set of continuous optimization problems.
-Visit the `COCO platform<https://numbbo.github.io/coco/testsuites/bbob>` for a complete list of functions.
+Visit the `COCO platform <https://numbbo.github.io/coco/testsuites/bbob>`_ for a complete list of functions.
 
 Available Suites
 -----------------
