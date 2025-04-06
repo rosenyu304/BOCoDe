@@ -8,6 +8,7 @@ OptBench includes benchmark problems from various sources. Each collection has i
 .. toctree::
    :maxdepth: 2
 
+   synthetics
    botorch
    bbob
    lasso
