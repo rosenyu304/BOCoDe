@@ -31,7 +31,7 @@ class BaseModactProblem(BenchmarkProblem):
         fx = np.zeros((X.shape[0], self.num_objectives))
         gx = np.zeros((X.shape[0], self.num_constraints))
 
-        for i, w in enumerate(self.problem.weights):
+        for i in range(X.shape[0]):
             fx[i, :], gx[i, :] = self.problem(X[i, :])
 
         for i, w in enumerate(self.problem.weights):

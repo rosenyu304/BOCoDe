@@ -40,11 +40,6 @@ class EulerBernoulliBeamBending(BenchmarkProblem):
         # # x0: [0, 1]
         # # x1: [0, 1]
         # # x2: {0.083, 0.139, 0.380, 0.080, 0.133, 0.363, 0.086, 0.136, 0.360, 0.092, 0.138, 0.369}
-        # if self.is_mixed:
-        #     X[:,2] = cont_to_disc(X[:,2], torch.tensor([0.083, 0.139, 0.380, 
-        #                                                 0.080, 0.133, 0.363, 
-        #                                                 0.086, 0.136, 0.360, 
-        #                                                 0.092, 0.138, 0.369]))
 
         # if self.to_print_Xscaled:
         #     print(f'X: {X}')

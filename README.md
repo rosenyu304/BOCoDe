@@ -1,20 +1,21 @@
-# March 10 Notes:
+# March 24 Notes:
+Hi hope you are doing well! Overall, great job on making good progress on literally everything! 
+
 To-Dos:
-1. Add Cyril's MODAct to Engineering: See Kailey/MODAct.py and the original implementation: https://github.com/epfl-lamd/modact. As the original MODAct support PyMOO framework, the objective is set to be minimization. However, here we want maximization, so double-check this logic while implementation:
-```
-# Pymoo: f = np.array(f)*-1*cs1.weights
-f = np.array(f)*self.prob.weights # BO is maximizing
-g = np.array(g)*self.prob.c_weights
-```
-We would like to see the full implementation of all MODAct problems as multi-objective problems. Confirm the implemetation with original paper: https://ieeexplore.ieee.org/document/9179777
+1. Remove cont_to_disc: I'm unsure if you recognized a function called cont_to_disc in some mixed variable functions. So we want to remove this in every function. This library ONLY takes in raw data. AKA if the function can only take in discrete X values, we should not assume that the users will pass in continuous ones. (As cont_to_disc is technically a design choice in algorithms). Therefore, I want you to double check all the function ONLY assume that the X got passed in is **Correct**, meaning that if a feature is discrete, the user should pass in discrete X, and not continuous. 
 
-2. Add all BoTorch to BoTorch: See https://github.com/pytorch/botorch/tree/main/botorch/test_functions. Think about whether we want to follow their directory structure when categorizing them
+2. Documentation: Update the documentation with all your additional functions and add tutorials for all categories of functions
+  
+3. More functions
+  - Trusses related function:
+    - Look into the other folder and find the truss problems. In theory, these files should also include the paper on the truss problems (let me know if you don't have access to the papers). Look at the original problem formulated in the paper and check if the implementation on our side is correct since the python library for this truss problem does not specify the units of anything.
+    - From the software perspective, I think some Truss problems have different variances, think about how to best structure them. Right now we classify them as Truss10D, 25D, ...etc.
+  - Other source: Make sure our library includes all the problems / functions from these sources、
+    - NEORL: https://neorl.readthedocs.io/en/latest/index.html
+    - The real-world problem from this: https://dl.acm.org/doi/10.1145/3583133.3595060 (Let me know if you have access)
+   
+   
 
-3. Add these paper's functions to Engineering: I think some of it might require ABAQUS or MATLAB. See if you can convert these code to Python using ChatGPT and let us know if you need access to any of these softwares. 
-- "MACHINE LEARNING-GUIDED DESIGN OF NON-RECIPROCAL AND ASYMMETRIC ELASTIC CHIRAL METAMATERIALS": https://arxiv.org/pdf/2404.13215
-- "Surrogate-assisted constraint-handling technique for parametric multi-objective optimization": https://link.springer.com/article/10.1007/s00158-024-03859-y
-
-4. Add "Vectorized BBOB": As you might see BBOB's optimization function is not vectorized as it can only process one x -> f(x) at a time. Write the torch version for the 24 function here (https://coco-platform.org/testsuites/bbob/overview.html) with their first instance. Consider storing them in a separate folder (maybe named BBOB_Vectorized?) 
 
 
 # Feb 5 Notes

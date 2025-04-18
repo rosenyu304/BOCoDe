@@ -5,23 +5,51 @@ Botorch Benchmarks
 
 The Botorch benchmark collection includes synthetic test problems commonly used in Bayesian optimization research.
 
-Available Problems
+Single Objective Problems
 ----------------
 
-* :code:`optbench.Synthetics.Ackley`
-* :code:`optbench.Synthetics.Bukin`
-* :code:`optbench.Synthetics.DixonPrice`
-* :code:`optbench.Synthetics.Goldstein`
-* :code:`optbench.Synthetics.Goldstein_Discrete`
-* :code:`optbench.Synthetics.Griewank`
-* :code:`optbench.Synthetics.Levy`
-* :code:`optbench.Synthetics.Michalewicz`
-* :code:`optbench.Synthetics.Powell`
-* :code:`optbench.Synthetics.Rastrigin`
-* :code:`optbench.Synthetics.Rosenbrock`
-* :code:`optbench.Synthetics.Styblinski-Tang`
+* :code:`optbench.BoTorch.AugmentedBranin`
+* :code:`optbench.BoTorch.AugmentedHartmann`
+* :code:`optbench.BoTorch.AugmentedRosenbrock`
+* :code:`optbench.BoTorch.Ishigami`
+* :code:`optbench.BoTorch.Gsobol`
+* :code:`optbench.BoTorch.Morris`
 
-Example Usage
+Multi Objective Problems
+----------------
+
+* :code:`optbench.BoTorch.MOMFBraninCurrin`
+* :code:`optbench.BoTorch.MOMFPark1`
+* :code:`optbench.BoTorch.BraninCurrin`
+* :code:`optbench.BoTorch.DH1`
+* :code:`optbench.BoTorch.DH2`
+* :code:`optbench.BoTorch.DH3`
+* :code:`optbench.BoTorch.DH4`
+* :code:`optbench.BoTorch.DTLZ1`
+* :code:`optbench.BoTorch.DTLZ2`
+* :code:`optbench.BoTorch.DTLZ3`
+* :code:`optbench.BoTorch.DTLZ4`
+* :code:`optbench.BoTorch.DTLZ5`
+* :code:`optbench.BoTorch.DTLZ7`
+* :code:`optbench.BoTorch.GMM`
+* :code:`optbench.BoTorch.Penicillin`
+* :code:`optbench.BoTorch.ToyRobust`
+* :code:`optbench.BoTorch.VehicleSafety`
+* :code:`optbench.BoTorch.ZDT1`
+* :code:`optbench.BoTorch.ZDT2`
+* :code:`optbench.BoTorch.ZDT3`
+* :code:`optbench.BoTorch.CarSideImpact`
+* :code:`optbench.BoTorch.BNH`
+* :code:`optbench.BoTorch.CONSTR`
+* :code:`optbench.BoTorch.ConstrainedBraninCurrin`
+* :code:`optbench.BoTorch.C2DTLZ2`
+* :code:`optbench.BoTorch.DiscBrake`
+* :code:`optbench.BoTorch.MW7`
+* :code:`optbench.BoTorch.OSY`
+* :code:`optbench.BoTorch.SRN`
+* :code:`optbench.BoTorch.WeldedBeam`
+
+Single Objective Example Usage
 ------------
 
 .. code-block:: python
@@ -30,16 +58,39 @@ Example Usage
     import torch
 
     # Create a Botorch benchmark problem
-    problem = optbench.Synthetics.Goldstein_Discrete()
-    
+    problem = optbench.BoTorch.AugmentedBranin()
+
     # Evaluate at a point
     x = torch.Tensor([[0.0] * problem.dim])
     constraints, values = problem._evaluate_implementation(x)
-    
-    print(f"Goldstein Discrete function value at origin: {values[0]}")
+
+    print(f"AugmentedBranin function value at origin: {values[0]}")
 
 Output:
 
 .. code-block:: console
 
-    Goldstein Discrete function value at origin: tensor([-600.])
+    AugmentedBranin function value at origin: tensor([228.4423])
+
+Multi Objective Example Usage
+------------
+
+.. code-block:: python
+
+    import optbench
+    import torch
+
+    # Create a Botorch benchmark problem
+    problem = optbench.BoTorch.MOMFBraninCurrin()
+
+    # Evaluate at a point
+    x = torch.Tensor([[0.0] * problem.dim])
+    constraints, values = problem._evaluate_implementation(x)
+
+    print(f"MOMFBraninCurrin function value at origin: {values[0]}")
+
+Output:
+
+.. code-block:: console
+
+    MOMFBraninCurrin function value at origin: tensor([11.8986, -0.7333])

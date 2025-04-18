@@ -15,30 +15,24 @@ class GearTrain(BenchmarkProblem):
 
     tags = {"single_objective", "unconstrained", "mixed", "4D"}
 
-    def __init__(self, is_mixed = True):
+    def __init__(self, is_discrete = True):
 
-        self.is_mixed = is_mixed
+        self.is_discrete = is_discrete
+
+        if is_discrete:
+            # bounds is an array of set from 12 to 60
+            bounds = [set(range(12,61))]*4
+        else:
+            bounds = [(0,1)]*4
 
         super().__init__(dim = 4, 
                          num_objectives = 1, 
                          num_constraints = 0, 
-                         bounds = [(0, 1)]*4,
+                         bounds = bounds,
                         )
 
     def _evaluate_implementation(self, X):
         # X = super().scale(X, to_verify)
-
-        def cont_to_disc(x, disc_values):
-            # Convert continuous value to discrete value
-            # Input:
-            #   x: continuous value in [0, 1]
-            #   disc_values: discrete values
-            # Output: discrete value
-            idx = torch.floor(x * len(disc_values)).long()
-            return disc_values[torch.clamp(idx, 0, len(disc_values)-1)]
-
-        if self.is_mixed:
-            X = cont_to_disc(X, torch.tensor(range(12, 61))) # x0, x1, x2, x3: {12, 13, ..., 60}
 
         fx = -((1/6.931 - (X[:,0]*X[:,1])/(X[:,2]*X[:,3]))**2).reshape(-1, 1)
 
