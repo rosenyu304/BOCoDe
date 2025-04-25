@@ -11,6 +11,8 @@ Box2D
 slientruss3d
 openpyxl
 
+neorl
+
 # Modact
 attrs
 cached_property >= 1.5.1
