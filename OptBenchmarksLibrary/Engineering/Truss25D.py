@@ -1,8 +1,6 @@
 import torch
 from ..base import *
 
-
-
 class Truss25D(BenchmarkProblem):
 
     r'''

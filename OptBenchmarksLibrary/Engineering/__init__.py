@@ -12,20 +12,37 @@ from .MOPTA08Car import *
 from .Mazda import *
 from .BayesianCHT import *
 from .CantileverBeam import *
+from .Car import *
+from .CompressionSpring import *
+from .KeaneBump import *
+from .ReinforcedConcreteBeam import *
+from .ThreeTruss import *
+from .Truss72D import *
+from .Truss120D import *
+from .Truss200D import *
 
 __all__ = [
            'CarSideImpact',
            'CantileverBeam',
+           'CompressionSpring',
+           'Car',
            'EulerBernoulliBeamBending',
            'GearTrain',
+           'KeaneBump',
            'Mazda',
            'Mazda_SCA',
            'MOPTA08Car',
+           'ReinforcedConcreteBeam',
            'RobotPush',
            'Rover',
            'Truss10D',
            'Truss25D',
+           'Truss72D_FourForces',
+           'Truss72D_SingleForce',
+           'Truss120D',
+           'Truss200D',
            'TwoBarTruss',
+           'ThreeTruss',
            'WaterProblem',
            'WaterResources',
            'NonLinearConstraintProblemA3',
