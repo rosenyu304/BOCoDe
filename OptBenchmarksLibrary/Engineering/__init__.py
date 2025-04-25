@@ -11,9 +11,11 @@ from .WaterResources import *
 from .MOPTA08Car import *
 from .Mazda import *
 from .BayesianCHT import *
+from .CantileverBeam import *
 
 __all__ = [
            'CarSideImpact',
+           'CantileverBeam',
            'EulerBernoulliBeamBending',
            'GearTrain',
            'Mazda',
