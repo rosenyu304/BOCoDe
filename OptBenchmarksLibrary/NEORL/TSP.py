@@ -1,7 +1,7 @@
 from ..base import BenchmarkProblem
 import torch
 from typing import Tuple
-from neorl.benchmarks import TSP
+# from neorl.benchmarks import TSP
 
 class TSP_51Cities(BenchmarkProblem):
     r'''
