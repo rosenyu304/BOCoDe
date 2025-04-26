@@ -100,38 +100,3 @@ class WFG8(BaseWFG):
 
 class WFG9(BaseWFG):
     WFGProblem = optproblems.wfg.WFG9
-
-
-# class WFG2(BenchmarkProblem):
-
-#     available_dimensions = (2, None)
-#     num_objectives = (2, None)
-
-#     WFGProblem = None
-
-#     def __init__(self, dim: int, num_objectives: int = 2, k: int = None):
-#         """
-#         Optional Parameter k: The number of position related parameters
-#         """
-#         assert num_objectives <= dim, "Number of objectives must be less than or equal to dimension"
-#         if k is None:
-#             if dim <= (4 if num_objectives == 2 else 2*(num_objectives-1)):
-#                 k = 1 if dim%2 == 1 else 2
-#             else:
-#                 k = 4 if num_objectives == 2 else 2*(num_objectives-1)
-#         self.problem = optproblems.wfg.WFG1(num_objectives, dim, k)
-
-#         super().__init__(dim = dim, 
-#                          num_objectives = num_objectives, 
-#                          num_constraints = 0, 
-#                          bounds = [(0.0, 2.0*(i+1)) for i in range(dim)]
-#                          )
-#     def _evaluate_implementation(self, x: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
-
-#         fx = torch.zeros(x.shape[0], self.num_objectives)
-        
-#         for i, el in enumerate(x):
-#             f = self.problem(el)
-#             fx[i, :] = torch.tensor(f)
-
-#         return None, torch.tensor(fx)
