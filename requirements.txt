@@ -10,6 +10,8 @@ pygame
 Box2D
 slientruss3d
 openpyxl
+diversipy # For optproblems
+optproblems
 
 # neorl
 
