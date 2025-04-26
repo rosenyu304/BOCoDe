@@ -9,7 +9,8 @@ from .BBOB import *
 from .CEC2020_RW_Constrained import *
 from .MODAct import *
 from .search_benchmarks import *
-from .NEORL import *
+# from .NEORL import *
+from .CEC2017 import *
 
 # from .CEC2020_p34 import *
 # from .CEC2020_p35 import *

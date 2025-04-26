@@ -12,6 +12,7 @@ CEC2020Funcs = [CEC2020_p1, CEC2020_p2, CEC2020_p3, CEC2020_p4, CEC2020_p5, CEC2
 BBOBFuncs = [BBOB, BBOB_Biobj, BBOB_BiobjMixInt, BBOB_Boxed, BBOB_Constrained, BBOB_LargeScale, BBOB_MixInt, BBOB_Noisy]
 BotorchFuncs = [AugmentedBranin, AugmentedHartmann, AugmentedRosenbrock, BraninCurrin, DH1, DH2, DH3, DH4, DTLZ1, DTLZ2, DTLZ3, DTLZ4, DTLZ5, DTLZ7, GMM, Penicillin, ToyRobust, VehicleSafety, ZDT1, ZDT2, ZDT3, CarSideImpact, BNH, CONSTR, ConstrainedBraninCurrin, C2DTLZ2, DiscBrake, MW7, OSY, SRN, WeldedBeam, MOMFBraninCurrin, MOMFPark1, Ishigami, Gsobol, Morris]
 MODActFuncs = [CS1, CT1, CTS1, CTSE1, CTSEI1, CS2, CT2, CTS2, CTSE2, CTSEI2, CS3, CT3, CTS3, CTSE3, CTSEI3, CS4, CT4, CTS4, CTSE4, CTSEI4]
+CEC2017Funcs = [CEC2017_p1, CEC2017_p2, CEC2017_p3, CEC2017_p4, CEC2017_p5, CEC2017_p6, CEC2017_p7, CEC2017_p8, CEC2017_p9, CEC2017_p10, CEC2017_p11, CEC2017_p12, CEC2017_p13, CEC2017_p14, CEC2017_p15, CEC2017_p16, CEC2017_p17, CEC2017_p18, CEC2017_p19, CEC2017_p20, CEC2017_p21, CEC2017_p22, CEC2017_p23, CEC2017_p24, CEC2017_p25, CEC2017_p26, CEC2017_p27, CEC2017_p28]
 
 categorized_classes = {
     "Synthetics": SyntheticsFuncs,
@@ -20,7 +21,8 @@ categorized_classes = {
     "CEC2020_RW_Constrained": CEC2020Funcs,
     "BBOB": BBOBFuncs,
     "BoTorch": BotorchFuncs,
-    "MODAct": MODActFuncs
+    "MODAct": MODActFuncs,
+    "CEC2017": CEC2017Funcs
 }
 
 def _has_valid_val(val: ValType, constraint = Callable[[int], bool]) -> bool:
