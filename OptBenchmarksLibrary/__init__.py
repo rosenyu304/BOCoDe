@@ -11,6 +11,7 @@ from .MODAct import *
 from .CEC2017 import *
 from .WFG import *
 from .ZDT import *
+from .DTLZ import *
 from .search_benchmarks import *
 
 # from .NEORL import *
