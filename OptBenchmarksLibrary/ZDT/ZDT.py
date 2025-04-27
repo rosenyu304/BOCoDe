@@ -3,8 +3,8 @@ from ..base import *
 import optproblems.zdt
 
 """
-Functions published by the Walking Fish Group (ZDT)
-Huband, S.; Hingston, P.; Barone, L.; While, L. (2006). A review of multiobjective test problems and a scalable test problem toolkit. IEEE Transactions on Evolutionary Computation, vol.10, no.5, pp. 477-506.
+Functions published by the Zitzler, Deb, and Thiele (ZDT)
+Zitzler, E., Deb, K., and Thiele, L. (2000). Comparison of Multiobjective Evolutionary Algorithms: Empirical Results. Evolutionary Computation 8(2).
 """
 
 class FunctionDefinitionAssertionError(Exception):
