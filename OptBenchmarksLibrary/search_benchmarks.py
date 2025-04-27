@@ -14,6 +14,7 @@ BotorchFuncs = [AugmentedBranin, AugmentedHartmann, AugmentedRosenbrock, BraninC
 MODActFuncs = [CS1, CT1, CTS1, CTSE1, CTSEI1, CS2, CT2, CTS2, CTSE2, CTSEI2, CS3, CT3, CTS3, CTSE3, CTSEI3, CS4, CT4, CTS4, CTSE4, CTSEI4]
 CEC2017Funcs = [CEC2017_p1, CEC2017_p2, CEC2017_p3, CEC2017_p4, CEC2017_p5, CEC2017_p6, CEC2017_p7, CEC2017_p8, CEC2017_p9, CEC2017_p10, CEC2017_p11, CEC2017_p12, CEC2017_p13, CEC2017_p14, CEC2017_p15, CEC2017_p16, CEC2017_p17, CEC2017_p18, CEC2017_p19, CEC2017_p20, CEC2017_p21, CEC2017_p22, CEC2017_p23, CEC2017_p24, CEC2017_p25, CEC2017_p26, CEC2017_p27, CEC2017_p28]
 WFGFuncs = [WFG1, WFG2, WFG3, WFG4, WFG5, WFG6, WFG7, WFG8, WFG9]
+ZDTFuncs = [ZDT1, ZDT2, ZDT3, ZDT4, ZDT5, ZDT6]
 
 categorized_classes = {
     "Synthetics": SyntheticsFuncs,
@@ -24,7 +25,8 @@ categorized_classes = {
     "BoTorch": BotorchFuncs,
     "MODAct": MODActFuncs,
     "CEC2017": CEC2017Funcs,
-    "WFG": WFGFuncs
+    "WFG": WFGFuncs,
+    "ZDT": ZDTFuncs
 }
 
 def _has_valid_val(val: ValType, constraint = Callable[[int], bool]) -> bool:
