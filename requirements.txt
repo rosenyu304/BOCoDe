@@ -1,3 +1,6 @@
+Cython # For cec2019comp100digit
+wheel # For cec2019comp100digit
+
 git+https://github.com/ksehic/LassoBench.git#egg=LassoBench
 pytest
 botorch
@@ -12,6 +15,7 @@ slientruss3d
 openpyxl
 diversipy # For optproblems
 optproblems
+git+https://github.com/dmolina/cec2019comp100digit
 
 # neorl
 

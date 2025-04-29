@@ -13,6 +13,7 @@ from .WFG import *
 from .ZDT import *
 from .DTLZ import *
 from .CEC2007 import *
+from .CEC2019 import *
 from .search_benchmarks import *
 
 # from .NEORL import *
