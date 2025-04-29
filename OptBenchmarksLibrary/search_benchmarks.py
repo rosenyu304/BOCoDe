@@ -16,6 +16,7 @@ CEC2017Funcs = [CEC2017_p1, CEC2017_p2, CEC2017_p3, CEC2017_p4, CEC2017_p5, CEC2
 WFGFuncs = [WFG1, WFG2, WFG3, WFG4, WFG5, WFG6, WFG7, WFG8, WFG9]
 ZDTFuncs = [ZDT1, ZDT2, ZDT3, ZDT4, ZDT5, ZDT6]
 DTLZFuncs = [DTLZ1, DTLZ2, DTLZ3, DTLZ4, DTLZ5, DTLZ6, DTLZ7]
+CEC2007Funcs = [CEC2007_OKA2, CEC2007_S_ZDT1, CEC2007_S_ZDT2, CEC2007_S_ZDT4, CEC2007_S_ZDT6, CEC2007_SYMPART, CEC2007_R_ZDT4, CEC2007_S_DTLZ2, CEC2007_S_DTLZ3, CEC2007_R_DTLZ2, CEC2007_WFG1, CEC2007_WFG8, CEC2007_WFG9]
 
 categorized_classes = {
     "Synthetics": SyntheticsFuncs,
@@ -29,6 +30,7 @@ categorized_classes = {
     "WFG": WFGFuncs,
     "ZDT": ZDTFuncs,
     "DTLZ": DTLZFuncs,
+    "CEC2007": CEC2007Funcs,
 }
 
 def _has_valid_val(val: ValType, constraint = Callable[[int], bool]) -> bool:

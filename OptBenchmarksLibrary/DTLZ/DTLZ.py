@@ -30,13 +30,6 @@ class BaseDTLZ(BenchmarkProblem):
         """
         if (num_objectives >= dim):
             raise FunctionDefinitionAssertionError("Number of objectives must be less than dim")
-        # if k is None:
-        #     if dim <= (4 if num_objectives == 2 else 2*(num_objectives-1)):
-        #         k = num_objectives-1
-        #     else:
-        #         k = 4 if num_objectives == 2 else 2*(num_objectives-1)
-
-        # self._specialCheck(dim, num_objectives)
 
         self.problem = self.__class__.DTLZProblem(num_objectives, dim)
 
