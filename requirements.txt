@@ -1,5 +1,5 @@
-Cython # For cec2019comp100digit
 wheel # For cec2019comp100digit
+Cython # For cec2019comp100digit
 
 git+https://github.com/ksehic/LassoBench.git#egg=LassoBench
 pytest
@@ -17,7 +17,7 @@ diversipy # For optproblems
 optproblems
 git+https://github.com/dmolina/cec2019comp100digit
 
-# neorl
+# neorl only works on python 3.7 or lower
 
 # Modact
 attrs

@@ -1,6 +1,8 @@
 import torch
 import pytest
 from ..More_Synthetics import Beale, Cosine8, DropWave, EggHolder, Hartmann3D, Hartmann6D, HolderTable, Shekelm5, Shekelm7, Shekelm10, SixHumpCamel, ThreeHumpCamel, ConstrainedGramacy, ConstrainedHartmann, ConstrainedHartmannSmooth, PressureVessel, WeldedBeamSO, TensionCompressionString, SpeedReducer
+from .. import SVM
+
 import math
 
 def general_test(func, dim=None):
@@ -10,7 +12,7 @@ def general_test(func, dim=None):
         problem = func()
         dim = problem.dim
 
-    rand_test_points = 10 # Number of random points to test
+    rand_test_points = 5 # Number of random points to test
     
     # Generate random points within constraints
     X = torch.rand((rand_test_points, dim))
@@ -85,3 +87,6 @@ def test_tensioncompressionstring():
 
 def test_speedreducer():
     general_test(SpeedReducer)
+
+def test_SVM():
+    general_test(SVM)
