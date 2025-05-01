@@ -15,7 +15,8 @@ slientruss3d
 openpyxl
 diversipy # For optproblems
 optproblems
-git+https://github.com/dmolina/cec2019comp100digit
+cec2019comp100digit
+opfunu
 
 # neorl only works on python 3.7 or lower
 
