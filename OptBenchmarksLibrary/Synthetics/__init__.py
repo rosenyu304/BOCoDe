@@ -44,5 +44,6 @@ __all__ = ['Ackley',
            'PressureVessel',
            'WeldedBeamSO',
            'TensionCompressionString',
-           'SpeedReducer'
+           'SpeedReducer',
+           'SVM',
           ]
