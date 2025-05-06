@@ -4,6 +4,7 @@ from typing import Tuple
 # from neorl.benchmarks import TSP
 
 class TSP_51Cities(BenchmarkProblem):
+
     r'''
     Travelling Salesman Problem (TSP) with 51 cities.
     https://neorl.readthedocs.io/en/latest/examples/ex1.html#problem-description

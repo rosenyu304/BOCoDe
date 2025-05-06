@@ -1,5 +1,5 @@
-wheel # For cec2019comp100digit
-Cython # For cec2019comp100digit
+# wheel # For cec2019comp100digit
+# Cython # For cec2019comp100digit
 
 git+https://github.com/ksehic/LassoBench.git#egg=LassoBench
 pytest
@@ -15,7 +15,7 @@ slientruss3d
 openpyxl
 diversipy # For optproblems
 optproblems
-cec2019comp100digit
+# cec2019comp100digit
 opfunu
 
 # neorl only works on python 3.7 or lower

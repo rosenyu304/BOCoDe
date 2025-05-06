@@ -8,12 +8,13 @@ from .BoTorch import *
 from .BBOB import *
 from .CEC2020_RW_Constrained import *
 from .MODAct import *
-from .CEC2017 import *
+# from .CEC2017_Old import *
 from .WFG import *
 from .ZDT import *
 from .DTLZ import *
 from .CEC2007 import *
-from .CEC2019 import *
+# from .CEC2019_Old import *
+from .CEC import *
 from .search_benchmarks import *
 
 # from .NEORL import *

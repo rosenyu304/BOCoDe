@@ -55,7 +55,7 @@ class ZDT4(BaseZDT):
 
 class ZDT5(BenchmarkProblem):
     available_dimensions = 80
-
+    num_objectives = 2
     ZDTProblem = optproblems.zdt.ZDT5
 
     def __init__(self):

@@ -3,6 +3,10 @@ from .configs import *
 from typing import Union, Tuple, Set, Optional
 
 class BenchmarkProblem:
+
+    available_dimensions = None
+    num_objectives = None
+
     def __init__(
         self,
 
@@ -31,6 +35,10 @@ class BenchmarkProblem:
             tags (List[str], optional): More information for the benchmark problem. Defaults to None.
             debug (bool, optional): Debugging flag. Defaults to False.
         """
+
+        if self.__class__.available_dimensions is None or self.__class__.num_objectives is None:
+            raise NotImplementedError("This benchmark problem is not fully implemented yet.")
+
         self.dim = dim
         self.bounds = bounds
         self.num_objectives = num_objectives

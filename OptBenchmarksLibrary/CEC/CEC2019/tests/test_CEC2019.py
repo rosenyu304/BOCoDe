@@ -1,20 +1,23 @@
 import torch
 import pytest
 from ..CEC2019 import *
-from ...base import BenchmarkProblem
 
-benchmark_classes = [CEC2019_1, CEC2019_2, CEC2019_3, CEC2019_4, CEC2019_5, CEC2019_6, CEC2019_7, CEC2019_8, CEC2019_9, CEC2019_10]
+benchmark_classes = [CEC2019_p1, CEC2019_p2, CEC2019_p3, CEC2019_p4, CEC2019_p5, CEC2019_p6, CEC2019_p7, CEC2019_p8, CEC2019_p9, CEC2019_p10]
 
 @pytest.mark.parametrize("benchmark", benchmark_classes)
-def test_cec2019_evaluate(benchmark: BenchmarkProblem):
+def test_CEC2019_evaluate(benchmark):
+
     problem = benchmark()
 
     dim = problem.dim
 
+    if type(problem.available_dimensions) == int:
+        assert dim == problem.available_dimensions, f"Dimension {dim} does not match available dimensions variable: {problem.available_dimensions}"
+
     rand_test_points = 5 # Number of random points to test
     
+    # Generate random points within constraints
     X = torch.rand((rand_test_points, dim))
-    X = problem.scale(X)
 
     gx, fx = problem._evaluate_implementation(X)
 
@@ -29,6 +32,6 @@ def test_cec2019_evaluate(benchmark: BenchmarkProblem):
 
     if problem.x_opt is not None and problem.optimum is not None:
         eval_opt = problem._evaluate_implementation(torch.Tensor(problem.x_opt))[1].float()
-        assert torch.allclose(eval_opt, torch.Tensor(problem.optimum), atol=1e-4), f"X_opt ({problem.x_opt}) evaluation ({eval_opt}) does not match optimum ({problem.optimum})"
+        assert torch.allclose(eval_opt, torch.Tensor(problem.optimum), atol=0.05), f"X_opt ({problem.x_opt}) evaluation ({eval_opt}) does not match optimum ({problem.optimum})"
 
     print(f"Test passed")

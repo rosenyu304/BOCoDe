@@ -12,6 +12,10 @@ Xu, Z., Wang, H., Phillips, J. M., & Zhe, S. (2025). Standard Gaussian Process i
 """
 
 class SVM(BenchmarkProblem):
+
+    available_dimensions = 388
+    num_objectives = 1
+
     def __init__(self):
         self.dims = 388
         self.lb = np.zeros(388,)
