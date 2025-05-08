@@ -34,7 +34,7 @@ categorized_classes = {
     "ZDT": ZDTFuncs,
     "DTLZ": DTLZFuncs,
     "CEC2007": CEC2007Funcs,
-    # "CEC2019": CEC2019Funcs,
+    "CEC2019": CEC2019Funcs,
 }
 
 def _has_valid_val(val: ValType, constraint = Callable[[int], bool]) -> bool:

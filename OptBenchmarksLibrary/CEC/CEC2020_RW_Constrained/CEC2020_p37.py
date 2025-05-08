@@ -1,6 +1,6 @@
 import torch
 import numpy as np
-from ..base import BenchmarkProblem
+from ...base import BenchmarkProblem
 from .helperFuncs import *
 from pathlib import Path
 
@@ -134,12 +134,12 @@ class CEC2020_p37(BenchmarkProblem):
 
         if self.is_constrained:
             if 'penalty_constrained' in self.flag:
-                return None, -(torch.from_numpy(f) + torch.from_numpy( (np.sum(abs(h), axis=1) - 1e-4) /FACTOR) ).unsqueeze(-1)
+                return None, None, -(torch.from_numpy(f) + torch.from_numpy( (np.sum(abs(h), axis=1) - 1e-4) /FACTOR) ).unsqueeze(-1)
                 
             else:
-                return torch.from_numpy(abs(h) - 1e-4), -torch.from_numpy(f).unsqueeze(-1)
+                return torch.from_numpy(abs(h) - 1e-4), None, -torch.from_numpy(f).unsqueeze(-1)
         else:
-            return None, -torch.from_numpy(f).unsqueeze(-1)
+            return None, None, -torch.from_numpy(f).unsqueeze(-1)
 
 
 

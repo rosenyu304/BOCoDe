@@ -1,6 +1,6 @@
 import torch
 import numpy as np
-from ..base import BenchmarkProblem
+from ...base import BenchmarkProblem
 from .helperFuncs import *
 from pathlib import Path
 
@@ -8,10 +8,10 @@ r'''
     https://github.com/P-N-Suganthan/2020-RW-Constrained-Optimisation/
 '''
 
-class CEC2020_p39(BenchmarkProblem):
+class CEC2020_p38(BenchmarkProblem):
 
     r'''
-    CEC2020_p39
+    CEC2020_p38
     '''
 
     num_objectives = 1
@@ -22,7 +22,7 @@ class CEC2020_p39(BenchmarkProblem):
                          num_objectives = 1, 
                          num_constraints = 116, 
                         #  X_opt= [[0] * 116], 
-                         optimum = [2.7515909], 
+                         optimum = [2.7139366], 
                          bounds = [[-1.0, 1.0]] * 116 + [[0.0, 1.0]] * 10,
                         )
 
@@ -106,18 +106,18 @@ class CEC2020_p39(BenchmarkProblem):
         # FACTOR = 25
 
         # elif '38' in self.flag:  # Minimize fuel cost
-        # Pg_gen = Pg[:, gen_idx]
-        # f = np.sum(a1 + b1 * Pg_gen + c1 * Pg_gen**2, axis=1)
-        # FACTOR = 50
+        Pg_gen = Pg[:, gen_idx]
+        f = np.sum(a1 + b1 * Pg_gen + c1 * Pg_gen**2, axis=1)
+        FACTOR = 50
 
         # elif '39' in self.flag: # Minimize both power loss and fuel cost
-        Pg_gen = Pg[:, gen_idx]
-        fuel_cost = np.sum(a1 + b1 * Pg_gen + c1 * Pg_gen**2, axis=1)
-        power_loss = 0.75 * np.sum(Pg - P, axis=1)
-        if 'penalty_constrained' in self.flag:
-            power_loss = abs(power_loss)
-        f = fuel_cost + power_loss
-        FACTOR = 25
+        #     Pg_gen = Pg[:, gen_idx]
+        #     fuel_cost = np.sum(a1 + b1 * Pg_gen + c1 * Pg_gen**2, axis=1)
+        #     power_loss = 0.75 * np.sum(Pg - P, axis=1)
+        #     if 'penalty_constrained' in self.flag:
+        #         power_loss = abs(power_loss)
+        #     f = fuel_cost + power_loss
+        #     FACTOR = 25
 
         # Equality constraints
         h = np.concatenate([
@@ -132,12 +132,12 @@ class CEC2020_p39(BenchmarkProblem):
 
         if self.is_constrained:
             if 'penalty_constrained' in self.flag:
-                return None, -(torch.from_numpy(f) + torch.from_numpy( (np.sum(abs(h), axis=1) - 1e-4) /FACTOR) ).unsqueeze(-1)
+                return None, None, -(torch.from_numpy(f) + torch.from_numpy( (np.sum(abs(h), axis=1) - 1e-4) /FACTOR) ).unsqueeze(-1)
                 
             else:
-                return torch.from_numpy(abs(h) - 1e-4), -torch.from_numpy(f).unsqueeze(-1)
+                return torch.from_numpy(abs(h) - 1e-4), None, -torch.from_numpy(f).unsqueeze(-1)
         else:
-            return None, -torch.from_numpy(f).unsqueeze(-1)
+            return None, None, -torch.from_numpy(f).unsqueeze(-1)
 
 
 

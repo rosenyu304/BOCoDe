@@ -43,6 +43,7 @@ class BenchmarkProblem:
         self.bounds = bounds
         self.num_objectives = num_objectives
         self.num_constraints = num_constraints
+        self.is_constrained = num_constraints > 0
         self.x_opt = x_opt
         self.optimum = optimum
         self.ref_point = ref_point

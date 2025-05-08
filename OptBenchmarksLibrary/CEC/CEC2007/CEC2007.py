@@ -4,7 +4,7 @@ from typing import Optional, Tuple, Union, List
 import torch
 from torch import Tensor
 
-from ..base import *
+from ...base import *
 
 """
 The CEC2007 benchmark suite.
