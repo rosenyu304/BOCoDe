@@ -20,6 +20,7 @@ ZDTFuncs = [ZDT1, ZDT2, ZDT3, ZDT4, ZDT5, ZDT6]
 DTLZFuncs = [DTLZ1, DTLZ2, DTLZ3, DTLZ4, DTLZ5, DTLZ6, DTLZ7]
 CEC2007Funcs = [CEC2007_OKA2, CEC2007_S_ZDT1, CEC2007_S_ZDT2, CEC2007_S_ZDT4, CEC2007_S_ZDT6, CEC2007_SYMPART, CEC2007_R_ZDT4, CEC2007_S_DTLZ2, CEC2007_S_DTLZ3, CEC2007_R_DTLZ2, CEC2007_WFG1, CEC2007_WFG8, CEC2007_WFG9]
 CEC2019Funcs = [CEC2019_p1, CEC2019_p2, CEC2019_p3, CEC2019_p4, CEC2019_p5, CEC2019_p6, CEC2019_p7, CEC2019_p8, CEC2019_p9, CEC2019_p10]
+NEORLFuncs = [TSP_51Cities, TSP_100Cities, Reactivity8Drums]
 
 categorized_classes = {
     "Synthetics": SyntheticsFuncs,
@@ -35,6 +36,7 @@ categorized_classes = {
     "DTLZ": DTLZFuncs,
     "CEC2007": CEC2007Funcs,
     "CEC2019": CEC2019Funcs,
+    "NEORL": NEORLFuncs,
 }
 
 def _has_valid_val(val: ValType, constraint = Callable[[int], bool]) -> bool:
