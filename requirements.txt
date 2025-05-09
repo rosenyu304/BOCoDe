@@ -19,6 +19,9 @@ optproblems
 opfunu
 
 # neorl only works on python 3.7 or lower
+gym # For neorl
+tensorflow # For neorl
+autograd # For neorl
 
 # Modact
 attrs
