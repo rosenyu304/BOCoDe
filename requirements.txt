@@ -23,6 +23,9 @@ gym # For neorl
 tensorflow # For neorl
 autograd # For neorl
 
+swig # For gymnasium
+gymnasium[MuJoCo]
+
 # Modact
 attrs
 cached_property >= 1.5.1

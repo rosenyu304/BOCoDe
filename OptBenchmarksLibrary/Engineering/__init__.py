@@ -20,6 +20,7 @@ from .ThreeTruss import *
 from .Truss72D import *
 from .Truss120D import *
 from .Truss200D import *
+from .Gym import *
 
 __all__ = [
            'CarSideImpact',
@@ -52,5 +53,16 @@ __all__ = [
            'NonLinearConstraintProblemB3',
            'NonLinearConstraintProblemB4',
            'NonLinearConstraintProblemB7',
-           'NonLinearConstraintProblemB8'
+           'NonLinearConstraintProblemB8',
+           "AntProblem",
+            "HalfCheetahProblem",
+            "HopperProblem",
+            "HumanoidProblem",
+            "HumanoidStandupProblem",
+            "InvertedDoublePendulumProblem",
+            "InvertedPendulumProblem",
+            "PusherProblem",
+            "ReacherProblem",
+            "SwimmerProblem",
+            "Walker2DProblem"
           ]
