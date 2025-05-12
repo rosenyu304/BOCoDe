@@ -28,7 +28,7 @@ class CEC2019_p1(BaseOpfunuCEC):
     """
 
     problem = opfunu.cec_based.cec2019.F12019
-    available_dimensions = problem().dim_supported
+    available_dimensions = 9
 
     def __init__(self, dim=None):
         
