@@ -12,3 +12,4 @@ OptBench includes all CEC benchmark functions from 2007, 2017, 2019, and 2020.
 
    CEC2020
    CEC2007
+   CEC2017

@@ -1,0 +1,137 @@
+.. _cec2017_benchmarks:
+
+CEC 2017 Benchmarks
+=================
+
+The CEC2017 benchmark collection contains all functions from the CEC 2017 Competition.
+More information can be found in the `CEC 2017 GitHub page <https://github.com/P-N-Suganthan/CEC2017-BoundContrained/>`_.
+
+Sources:
+
+- G. Wu, R. Mallipeddi, and P. N. Suganthan. Problem definitions and evaluation criteria for the CEC 2017 competition on constrained real-parameter optimization. National University of Defense Technology, China, 2016.
+
+Available Problems
+----------------
+
+* :code:`optbench.CEC.CEC2017.CEC2017_p1`
+* :code:`optbench.CEC.CEC2017.CEC2017_p2`
+* :code:`optbench.CEC.CEC2017.CEC2017_p3`
+* :code:`optbench.CEC.CEC2017.CEC2017_p4`
+* :code:`optbench.CEC.CEC2017.CEC2017_p5`
+* :code:`optbench.CEC.CEC2017.CEC2017_p6`
+* :code:`optbench.CEC.CEC2017.CEC2017_p7`
+* :code:`optbench.CEC.CEC2017.CEC2017_p8`
+* :code:`optbench.CEC.CEC2017.CEC2017_p9`
+* :code:`optbench.CEC.CEC2017.CEC2017_p10`
+* :code:`optbench.CEC.CEC2017.CEC2017_p11`
+* :code:`optbench.CEC.CEC2017.CEC2017_p12`
+* :code:`optbench.CEC.CEC2017.CEC2017_p13`
+* :code:`optbench.CEC.CEC2017.CEC2017_p14`
+* :code:`optbench.CEC.CEC2017.CEC2017_p15`
+* :code:`optbench.CEC.CEC2017.CEC2017_p16`
+* :code:`optbench.CEC.CEC2017.CEC2017_p17`
+* :code:`optbench.CEC.CEC2017.CEC2017_p18`
+* :code:`optbench.CEC.CEC2017.CEC2017_p19`
+* :code:`optbench.CEC.CEC2017.CEC2017_p20`
+* :code:`optbench.CEC.CEC2017.CEC2017_p21`
+* :code:`optbench.CEC.CEC2017.CEC2017_p22`
+* :code:`optbench.CEC.CEC2017.CEC2017_p23`
+* :code:`optbench.CEC.CEC2017.CEC2017_p24`
+* :code:`optbench.CEC.CEC2017.CEC2017_p25`
+* :code:`optbench.CEC.CEC2017.CEC2017_p26`
+* :code:`optbench.CEC.CEC2017.CEC2017_p27`
+* :code:`optbench.CEC.CEC2017.CEC2017_p28`
+* :code:`optbench.CEC.CEC2017.CEC2017_p29`
+
+
+Problem Details
+----------------
+
++-----+--------------------------------------------------------------+------+------------------+
+| No. | Functions                                                    | D    | Bounds           |
++=====+==============================================================+======+==================+
+|  1  | Shifted and Rotated Bent Cigar Function                      | 100  | [-100, 100]      |
++-----+--------------------------------------------------------------+------+------------------+
+|  2  | Shifted and Rotated Zakharov Function                        | 200  | [-100, 100]      |
++-----+--------------------------------------------------------------+------+------------------+
+|  3  | Shifted and Rotated Rosenbrock’s Function                    | 300  | [-100, 100]      |
++-----+--------------------------------------------------------------+------+------------------+
+|  4  | Shifted and Rotated Rastrigin’s Function                     | 400  | [-100, 100]      |
++-----+--------------------------------------------------------------+------+------------------+
+|  5  | Shifted and Rotated Expanded Scaffer’s F6 Function           | 500  | [-100, 100]      |
++-----+--------------------------------------------------------------+------+------------------+
+|  6  | Shifted and Rotated Lunacek Bi_Rastrigin Function            | 600  | [-100, 100]      |
++-----+--------------------------------------------------------------+------+------------------+
+|  7  | Shifted and Rotated Non-Continuous Rastrigin’s Function      | 700  | [-100, 100]      |
++-----+--------------------------------------------------------------+------+------------------+
+|  8  | Shifted and Rotated Levy Function                            | 800  | [-100, 100]      |
++-----+--------------------------------------------------------------+------+------------------+
+|  9  | Shifted and Rotated Schwefel’s Function                      | 900  | [-100, 100]      |
++-----+--------------------------------------------------------------+------+------------------+
+| 10  | Hybrid Function 1 (N=3)                                      | 1000 | [-100, 100]      |
++-----+--------------------------------------------------------------+------+------------------+
+| 11  | Hybrid Function 2 (N=3)                                      | 1100 | [-100, 100]      |
++-----+--------------------------------------------------------------+------+------------------+
+| 12  | Hybrid Function 3 (N=3)                                      | 1200 | [-100, 100]      |
++-----+--------------------------------------------------------------+------+------------------+
+| 13  | Hybrid Function 4 (N=4)                                      | 1300 | [-100, 100]      |
++-----+--------------------------------------------------------------+------+------------------+
+| 14  | Hybrid Function 5 (N=4)                                      | 1400 | [-100, 100]      |
++-----+--------------------------------------------------------------+------+------------------+
+| 15  | Hybrid Function 6 (N=4)                                      | 1500 | [-100, 100]      |
++-----+--------------------------------------------------------------+------+------------------+
+| 16  | Hybrid Function 6 (N=5)                                      | 1600 | [-100, 100]      |
++-----+--------------------------------------------------------------+------+------------------+
+| 17  | Hybrid Function 6 (N=5)                                      | 1700 | [-100, 100]      |
++-----+--------------------------------------------------------------+------+------------------+
+| 18  | Hybrid Function 6 (N=5)                                      | 1800 | [-100, 100]      |
++-----+--------------------------------------------------------------+------+------------------+
+| 19  | Hybrid Function 6 (N=6)                                      | 1900 | [-100, 100]      |
++-----+--------------------------------------------------------------+------+------------------+
+| 20  | Composition Function 1 (N=3)                                 | 2000 | [-100, 100]      |
++-----+--------------------------------------------------------------+------+------------------+
+| 21  | Composition Function 2 (N=3)                                 | 2100 | [-100, 100]      |
++-----+--------------------------------------------------------------+------+------------------+
+| 22  | Composition Function 3 (N=4)                                 | 2200 | [-100, 100]      |
++-----+--------------------------------------------------------------+------+------------------+
+| 23  | Composition Function 4 (N=4)                                 | 2300 | [-100, 100]      |
++-----+--------------------------------------------------------------+------+------------------+
+| 24  | Composition Function 5 (N=5)                                 | 2400 | [-100, 100]      |
++-----+--------------------------------------------------------------+------+------------------+
+| 25  | Composition Function 6 (N=5)                                 | 2500 | [-100, 100]      |
++-----+--------------------------------------------------------------+------+------------------+
+| 26  | Composition Function 7 (N=6)                                 | 2600 | [-100, 100]      |
++-----+--------------------------------------------------------------+------+------------------+
+| 27  | Composition Function 8 (N=6)                                 | 2700 | [-100, 100]      |
++-----+--------------------------------------------------------------+------+------------------+
+| 28  | Composition Function 9 (N=3)                                 | 2800 | [-100, 100]      |
++-----+--------------------------------------------------------------+------+------------------+
+| 29  | Composition Function 10 (N=3)                                | 2900 | [-100, 100]      |
++-----+--------------------------------------------------------------+------+------------------+
+
+
+Example Usage
+------------
+
+.. code-block:: python
+
+    import optbench
+    import torch
+
+    # Create a Botorch benchmark problem
+    problem = optbench.CEC.CEC2017.CEC2017_p1()
+
+    # Get problem information
+    bounds = problem.bounds
+
+    # Evaluate at a point
+    x = torch.Tensor([[0.0] * problem.dim])
+    constraints, values = problem._evaluate_implementation(x)
+
+    print(f"CEC 2017 Problem 1 (Shifted and Rotated Bent Cigar Function) function value at origin: {values[0]}")
+
+Output:
+
+.. code-block:: console
+
+    CEC 2017 Problem 1 (Shifted and Rotated Bent Cigar Function) function value at origin: tensor([8.4787e+10])
