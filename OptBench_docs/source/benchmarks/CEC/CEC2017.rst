@@ -8,7 +8,7 @@ More information can be found in the `CEC 2017 GitHub page <https://github.com/P
 
 Sources:
 
-- G. Wu, R. Mallipeddi, and P. N. Suganthan. Problem definitions and evaluation criteria for the CEC 2017 competition on constrained real-parameter optimization. National University of Defense Technology, China, 2016.
+ G. Wu, R. Mallipeddi, and P. N. Suganthan. Problem definitions and evaluation criteria for the CEC 2017 competition on constrained real-parameter optimization. National University of Defense Technology, China, 2016.
 
 Available Problems
 ----------------

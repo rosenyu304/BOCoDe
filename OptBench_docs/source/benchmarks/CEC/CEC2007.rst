@@ -8,9 +8,10 @@ More information can be found in the `CEC 2007 GitHub page <https://github.com/P
 
 Sources:
 
-(1) V. L. Huang, A. K. Qin, K. Deb, E. Zitzler, P. N. Suganthan, J. J. Liang, M. Preuss and S. Huband (2007). Problem Definitions for Performance Assessment of Multi-objective Optimization Algorithms. Special Session on Constrained Real-Parameter Optimization, Technical Report, Nanyang Technological University, Singapore, 2007. https://github.com/P-N-Suganthan/CEC2007/blob/master/CEC-07-TR-13-Feb.pdf
+ V. L. Huang, A. K. Qin, K. Deb, E. Zitzler, P. N. Suganthan, J. J. Liang, M. Preuss and S. Huband (2007). Problem Definitions for Performance Assessment of Multi-objective Optimization Algorithms. Special Session on Constrained Real-Parameter Optimization, Technical Report, Nanyang Technological University, Singapore, 2007. https://github.com/P-N-Suganthan/CEC2007/blob/master/CEC-07-TR-13-Feb.pdf
+\
 
-(2) Simon Wessing. Towards Optimal Parameterizations of the S-Metric Selection Evolutionary Multi-Objective Algorithm. Diploma thesis, Algorithm Engineering Report TR09-2-006, Technische Universitaet Dortmund, 2009. https://ls11-www.cs.uni-dortmund.de/_media/techreports/tr09-06.pdf
+ Simon Wessing. Towards Optimal Parameterizations of the S-Metric Selection Evolutionary Multi-Objective Algorithm. Diploma thesis, Algorithm Engineering Report TR09-2-006, Technische Universitaet Dortmund, 2009. https://ls11-www.cs.uni-dortmund.de/_media/techreports/tr09-06.pdf
 
 Available Problems
 ----------------

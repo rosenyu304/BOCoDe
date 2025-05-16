@@ -8,7 +8,7 @@ More information can be found in the `CEC 2019 GitHub page <https://github.com/P
 
 Sources:
 
-- K. V. Price, N. H. Awad, M. Z. Ali, P. N. Suganthan, "Problem Definitions and Evaluation Criteria for the 100-Digit Challenge Special Session and Competition on Single Objective Numerical Optimization," Technical Report, Nanyang Technological University, Singapore, November 2018.
+ K. V. Price, N. H. Awad, M. Z. Ali, P. N. Suganthan, "Problem Definitions and Evaluation Criteria for the 100-Digit Challenge Special Session and Competition on Single Objective Numerical Optimization," Technical Report, Nanyang Technological University, Singapore, November 2018.
 
 Available Problems
 ----------------
