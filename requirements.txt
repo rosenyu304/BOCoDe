@@ -18,6 +18,7 @@ optproblems
 opfunu
 
 swig # For gymnasium
+gym
 gymnasium[MuJoCo]
 
 # Modact
