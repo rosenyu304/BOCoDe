@@ -24,6 +24,7 @@ dependencies = [
     "diversipy",
     "optproblems",
     "opfunu",
+    "gym",
     "gymnasium[MuJoCo]",
     "attrs",
     "cached_property>=1.5.1",
