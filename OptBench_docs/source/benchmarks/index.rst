@@ -17,3 +17,7 @@ OptBench includes benchmark problems from various sources. Each collection has i
    lasso
    engineering
    CEC/index
+   wfg
+   zdt
+   MODAct
+   neorl
