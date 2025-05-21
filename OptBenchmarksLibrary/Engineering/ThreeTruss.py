@@ -18,7 +18,7 @@ class ThreeTruss(BenchmarkProblem):
     def __init__(self):
         super().__init__(dim = 2, num_objectives = 1, num_constraints = 3, bounds = [(0, 1), (0, 1)])
 
-    def _evaluate_implementation(self, X, scaling = True):
+    def _evaluate_implementation(self, X, scaling = False):
 
         if scaling:
             X = super().scale(X)

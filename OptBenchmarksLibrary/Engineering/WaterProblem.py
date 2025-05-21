@@ -23,7 +23,7 @@ class WaterProblem(BenchmarkProblem):
                          num_constraints = 7, 
                          bounds = [(0.01, 0.45), (0.01, 0.10), (0.01, 0.10)])
 
-    def _evaluate_implementation(self, X, scaling=True):
+    def _evaluate_implementation(self, X, scaling = False):
 
         if scaling:
             X = super().scale(X)

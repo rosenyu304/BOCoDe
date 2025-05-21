@@ -18,7 +18,7 @@ class CompressionSpring(BenchmarkProblem):
     def __init__(self):
         super().__init__(dim = 3, num_objectives = 1, num_constraints = 4, bounds = [(0.05, 1), (0.25, 1.3), (2, 15)])
 
-    def _evaluate_implementation(self, X, scaling=True):
+    def _evaluate_implementation(self, X, scaling = False):
         if scaling:
             X = super().scale(X)
 

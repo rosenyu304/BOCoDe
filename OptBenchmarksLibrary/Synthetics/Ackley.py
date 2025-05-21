@@ -44,7 +44,7 @@ class Ackley(BenchmarkProblem):
 
         gx = torch.zeros((n, self.num_constraints))
 
-        fun = Ackley_imported(dim=self.dim, negate=True)
+        fun = Ackley_imported(dim=self.dim, negate=False)
 
         fun.bounds = torch.tensor(self.bounds, dtype=torch.float32).T
         

@@ -20,7 +20,7 @@ class Car(BenchmarkProblem):
                                                                          (0.5, 1.5), (0.5, 1.5), (0.5, 1.5), (0.192, 0.345),
                                                                          (0.192, 0.345), (0, -20), (0, -20)])
 
-    def _evaluate_implementation(self, X, scaling=True):
+    def _evaluate_implementation(self, X, scaling = False):
         if scaling:
             X = super().scale(X)
 

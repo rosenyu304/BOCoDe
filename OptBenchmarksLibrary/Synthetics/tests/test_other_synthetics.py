@@ -17,7 +17,7 @@ def general_test(func, dim=None):
     # Generate random points within constraints
     X = torch.rand((rand_test_points, dim))
 
-    _, fx = problem._evaluate_implementation(X, scaling=True)
+    _, fx = problem._evaluate_implementation(X, scaling = False)
 
     assert fx.shape == (rand_test_points, problem.num_objectives), f"Unexpected fx shape: {fx.shape}"
 

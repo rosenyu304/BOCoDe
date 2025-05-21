@@ -26,7 +26,7 @@ class CEC2020_p36(BenchmarkProblem):
                          bounds = [[-1,1]]*158,
                         )
 
-    def _evaluate_implementation(self, X, scaling=True):
+    def _evaluate_implementation(self, X, scaling = False):
 
         if scaling:
             X = super().scale(X)

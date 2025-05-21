@@ -32,7 +32,7 @@ class BotorchProblem(BenchmarkProblem):
                          x_opt=x_opt, 
                          optimum=optimum)
 
-    def _evaluate_implementation(self, X: torch.Tensor, scaling=True) -> Tuple[torch.Tensor, torch.Tensor]:
+    def _evaluate_implementation(self, X: torch.Tensor, scaling = False) -> Tuple[torch.Tensor, torch.Tensor]:
 
         if scaling:
             X = super().scale(X)
@@ -66,7 +66,7 @@ class MultiObjBotorchProblem(BenchmarkProblem):
                          x_opt=x_opt, 
                          optimum=optimum)
 
-    def _evaluate_implementation(self, X: torch.Tensor, scaling=True) -> Tuple[torch.Tensor, torch.Tensor]:
+    def _evaluate_implementation(self, X: torch.Tensor, scaling = False) -> Tuple[torch.Tensor, torch.Tensor]:
         
         if scaling:
             X = super().scale(X)

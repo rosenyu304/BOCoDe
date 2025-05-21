@@ -23,7 +23,7 @@ class CarSideImpact(BenchmarkProblem):
                          num_constraints = 10, 
                          bounds = [(0.5, 1.5), (0.45, 1.35), (0.5, 1.5), (0.5, 1.5), (0.875, 2.625), (0.4, 1.2), (0.4, 1.2)])
 
-    def _evaluate_implementation(self, X, scaling = True):
+    def _evaluate_implementation(self, X, scaling = False):
 
         if scaling:
             X = super().scale(X)

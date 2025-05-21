@@ -18,7 +18,7 @@ class KeaneBump(BenchmarkProblem):
     def __init__(self, dim=18):
         super().__init__(dim, num_objectives = 1, num_constraints = 2, bounds = [(0, 10)]*dim)
 
-    def _evaluate_implementation(self, X, scaling = True):
+    def _evaluate_implementation(self, X, scaling = False):
 
         if scaling:
             X = super().scale(X)

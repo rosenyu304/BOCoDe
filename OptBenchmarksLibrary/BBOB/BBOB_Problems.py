@@ -40,7 +40,7 @@ class BaseBBOB(BenchmarkProblem):
         self.function_number = function_number
         self.instance_number = instance_number
 
-    def _evaluate_implementation(self, X: torch.Tensor, scaling=True):
+    def _evaluate_implementation(self, X: torch.Tensor, scaling = False):
         
         if scaling:
             X = super().scale(X)

@@ -25,7 +25,7 @@ class CEC2020_p21(BenchmarkProblem):
                          bounds=[[60, 80], [90, 110], [1, 3], [0, 1000], [2, 9]],
                         )
 
-    def _evaluate_implementation(self, X, scaling=True):
+    def _evaluate_implementation(self, X, scaling = False):
         import numpy as np
 
         if scaling:
@@ -97,7 +97,7 @@ class CEC2020_p22(BenchmarkProblem):
                          bounds=[[16.51, 96.49], [13.51, 54.49], [13.51, 51.49], [16.51, 46.49], [13.51, 51.49], [47.51, 124.49], [0.51, 3.49], [0.51, 6.49], [0.51, 6.49]],
                         )
 
-    def _evaluate_implementation(self, X, scaling=True):
+    def _evaluate_implementation(self, X, scaling = False):
         import numpy as np
 
         if scaling:
@@ -183,7 +183,7 @@ class CEC2020_p23(BenchmarkProblem):
                          bounds=[[0, 60], [0, 60], [0, 90], [0, 90], [0, 90]],
                         )
 
-    def _evaluate_implementation(self, X, scaling=True):
+    def _evaluate_implementation(self, X, scaling = False):
         import numpy as np
 
         if scaling:
@@ -268,7 +268,7 @@ class CEC2020_p24(BenchmarkProblem):
                          bounds=[[10, 150], [10, 150], [100, 200], [0, 50], [10, 150], [100, 300], [1, 3.14]],
                         )
 
-    def _evaluate_implementation(self, X, scaling=True):
+    def _evaluate_implementation(self, X, scaling = False):
         import numpy as np
 
         if scaling:
@@ -365,7 +365,7 @@ class CEC2020_p25(BenchmarkProblem):
                          bounds=[[10, 150], [10, 150], [100, 200], [0, 50], [10, 150], [100, 300], [1, 3.14]],
                         )
 
-    def _evaluate_implementation(self, X, scaling=True):
+    def _evaluate_implementation(self, X, scaling = False):
         import numpy as np
 
         if scaling:
@@ -437,7 +437,7 @@ class CEC2020_p26(BenchmarkProblem):
                          bounds=[[6.51, 76.49], [6.51, 76.49], [6.51, 76.49], [6.51, 76.49], [6.51, 76.49], [6.51, 76.49], [6.51, 76.49], [6.51, 76.49], [0.51, 4.49], [0.51, 4.49], [0.51, 4.49], [0.51, 4.49], [0.51, 9.49], [0.51, 9.49], [0.51, 9.49], [0.51, 9.49], [0.51, 9.49], [0.51, 9.49], [0.51, 9.49], [0.51, 9.49], [0.51, 9.49], [0.51, 9.49]],
                         )
 
-    def _evaluate_implementation(self, X, scaling=True):
+    def _evaluate_implementation(self, X, scaling = False):
         import numpy as np
 
         if scaling:
@@ -617,7 +617,7 @@ class CEC2020_p27(BenchmarkProblem):
                          bounds=[[0.645e-4, 50e-4]]*10,
                         )
 
-    def _evaluate_implementation(self, X, scaling=True):
+    def _evaluate_implementation(self, X, scaling = False):
         import numpy as np
 
         if scaling:
@@ -663,7 +663,7 @@ class CEC2020_p28(BenchmarkProblem):
                          bounds=[[125, 150], [10.5, 31.5], [4.51, 50.49], [0.515, 0.6], [0.515, 0.6], [0.4, 0.5], [0.6, 0.7], [0.3, 0.4], [0.02, 0.1], [0.6, 0.85]],
                         )
 
-    def _evaluate_implementation(self, X, scaling=True):
+    def _evaluate_implementation(self, X, scaling = False):
         import numpy as np
 
         if scaling:
@@ -739,7 +739,7 @@ class CEC2020_p29(BenchmarkProblem):
                          bounds=[[20, 50], [1, 10], [20, 50], [0.1, 60]],
                         )
 
-    def _evaluate_implementation(self, X, scaling=True):
+    def _evaluate_implementation(self, X, scaling = False):
         import numpy as np
 
         if scaling:
@@ -783,7 +783,7 @@ class CEC2020_p30(BenchmarkProblem):
                          bounds=[[0.51, 70.49], [0.6, 3], [0.51, 42.49]],
                         )
 
-    def _evaluate_implementation(self, X, scaling=True):
+    def _evaluate_implementation(self, X, scaling = False):
         import numpy as np
 
         if scaling:
@@ -847,7 +847,7 @@ class CEC2020_p31(BenchmarkProblem):
                          bounds=[[12, 60]]*4,
                         )
 
-    def _evaluate_implementation(self, X, scaling=True):
+    def _evaluate_implementation(self, X, scaling = False):
         import numpy as np
 
         if scaling:
@@ -892,7 +892,7 @@ class CEC2020_p32(BenchmarkProblem):
                          bounds=[[78, 102], [33, 45], [27, 45], [27, 45], [27, 45]],
                         )
 
-    def _evaluate_implementation(self, X, scaling=True):
+    def _evaluate_implementation(self, X, scaling = False):
         import numpy as np
 
         if scaling:
@@ -950,7 +950,7 @@ class CEC2020_p33(BenchmarkProblem):
                          bounds=[[0.001, 1]]*30,
                         )
 
-    def _evaluate_implementation(self, X, scaling=True):
+    def _evaluate_implementation(self, X, scaling = False):
         import numpy as np
 
         if scaling:

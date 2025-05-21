@@ -91,7 +91,7 @@ class Truss10D(BenchmarkProblem):
 
 
     
-    def _evaluate_implementation(self, X, scaling=True):
+    def _evaluate_implementation(self, X, scaling = False):
 
         E = 1e7 * torch.ones(10)
         Rho = 0.1 * torch.ones(10)

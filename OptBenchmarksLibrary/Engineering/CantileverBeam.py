@@ -19,7 +19,7 @@ class CantileverBeam(BenchmarkProblem):
         super().__init__(dim = 10, num_objectives = 1, num_constraints = 11, bounds = [[1, 5], [1, 5], [1, 5], [1, 5], [1, 5],
                                                                          [30, 65], [30, 65], [30, 65], [30, 65], [30, 65]])
 
-    def _evaluate_implementation(self, X, scaling=True):
+    def _evaluate_implementation(self, X, scaling = False):
         if scaling:
             X = super().scale(X)
 
