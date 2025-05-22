@@ -17,6 +17,7 @@ diversipy # For optproblems
 optproblems
 opfunu
 
+
 swig # For gymnasium
 gym
 gymnasium[MuJoCo]
@@ -29,6 +30,10 @@ python-fcl
 scipy
 trimesh
 git+https://github.com/epfl-lamd/modact
+
+matplotlib
+plotly
+dash
 
 # neorl only works on python 3.7 or lower
 # gym # For neorl
