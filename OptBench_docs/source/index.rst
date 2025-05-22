@@ -38,9 +38,8 @@ Contents
    :glob:
 
    getting_started
-   benchmarks/index
    basic_user_guide/index
-
+   benchmarks/index
 
 Indices and tables
 ==================
