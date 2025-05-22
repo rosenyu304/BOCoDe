@@ -47,9 +47,6 @@ class BenchmarkProblem:
 
         if self.__class__.available_dimensions is None or self.__class__.num_objectives is None:
             raise NotImplementedError("This benchmark problem is not fully implemented yet.")
-        
-        if len(bounds) != dim:
-            raise ValueError(f"Error: The number of bounds ({len(bounds)}) does not match the dimension ({dim}).")
 
         self.dim = dim
         self.bounds = bounds
@@ -94,6 +91,9 @@ class BenchmarkProblem:
         -----
         sampling_density: sampling density per axis. Number of evaluated points = sampling_density^2
         """
+
+        if self.bounds is None or len(self.bounds) != self.dim:
+            raise ValueError(f"Bounds are not set or do not match the dimension of the problem.")
 
         bounds = self.bounds
 
