@@ -116,6 +116,11 @@ class PushReward:
 
 
 # import numpy as np
+
+# Hides the hello from pygame print
+from os import environ
+environ['PYGAME_HIDE_SUPPORT_PROMPT'] = '1'
+
 import pygame
 from Box2D import *
 from Box2D.b2 import *
