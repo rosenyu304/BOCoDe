@@ -97,7 +97,7 @@ class BenchmarkProblem:
 
         bounds = self.bounds
 
-        if any(isinstance(elem, list) for elem in bounds):
+        if any((isinstance(elem, list) or isinstance(elem, set)) for elem in bounds):
             print("Visualization is not supported for discrete functions.")
             return
 
