@@ -6,8 +6,13 @@ from .Engineering import *
 from .LassoBench import *
 from .BoTorch import *
 from .BBOB import *
-from .CEC2020_RW_Constrained import *
+# from .CEC2020_RW_Constrained import *
 from .MODAct import *
+from .WFG import *
+from .ZDT import *
+from .DTLZ import *
+from .NEORL import *
+from .CEC import *
 from .search_benchmarks import *
 
 # from .CEC2020_p34 import *

@@ -31,7 +31,7 @@ class Beale(BenchmarkProblem):
                          tags = tags
                         )
         
-    def _evaluate_implementation(self, X: torch.Tensor, scaling=True) -> Tuple[torch.Tensor, torch.Tensor]:
+    def _evaluate_implementation(self, X: torch.Tensor, scaling = False) -> Tuple[torch.Tensor, torch.Tensor]:
 
         if scaling:
             X = super().scale(X)
@@ -73,7 +73,7 @@ class Cosine8(BenchmarkProblem):
                          tags = tags
                         )
         
-    def _evaluate_implementation(self, X: torch.Tensor, scaling=True) -> Tuple[torch.Tensor, torch.Tensor]:
+    def _evaluate_implementation(self, X: torch.Tensor, scaling = False) -> Tuple[torch.Tensor, torch.Tensor]:
 
         if scaling:
             X = super().scale(X)
@@ -115,7 +115,7 @@ class DropWave(BenchmarkProblem):
                          tags = tags
                         )
         
-    def _evaluate_implementation(self, X: torch.Tensor, scaling=True) -> Tuple[torch.Tensor, torch.Tensor]:
+    def _evaluate_implementation(self, X: torch.Tensor, scaling = False) -> Tuple[torch.Tensor, torch.Tensor]:
 
         if scaling:
             X = super().scale(X)
@@ -157,7 +157,7 @@ class EggHolder(BenchmarkProblem):
                          tags = tags
                         )
         
-    def _evaluate_implementation(self, X: torch.Tensor, scaling=True) -> Tuple[torch.Tensor, torch.Tensor]:
+    def _evaluate_implementation(self, X: torch.Tensor, scaling = False) -> Tuple[torch.Tensor, torch.Tensor]:
 
         if scaling:
             X = super().scale(X)
@@ -236,7 +236,7 @@ class Hartmann3D(BenchmarkProblem):
         y = -outer
         return y
 
-    def _evaluate_implementation(self, X: torch.Tensor, scaling=True) -> Tuple[torch.Tensor, torch.Tensor]:
+    def _evaluate_implementation(self, X: torch.Tensor, scaling = False) -> Tuple[torch.Tensor, torch.Tensor]:
 
         if scaling:
             X = super().scale(X)
@@ -272,7 +272,7 @@ class Hartmann6D(BenchmarkProblem):
                          tags = tags
                         )
         
-    def _evaluate_implementation(self, X: torch.Tensor, scaling=True) -> Tuple[torch.Tensor, torch.Tensor]:
+    def _evaluate_implementation(self, X: torch.Tensor, scaling = False) -> Tuple[torch.Tensor, torch.Tensor]:
 
         if scaling:
             X = super().scale(X)
@@ -314,7 +314,7 @@ class HolderTable(BenchmarkProblem):
                          tags = tags
                         )
         
-    def _evaluate_implementation(self, X: torch.Tensor, scaling=True) -> Tuple[torch.Tensor, torch.Tensor]:
+    def _evaluate_implementation(self, X: torch.Tensor, scaling = False) -> Tuple[torch.Tensor, torch.Tensor]:
 
         if scaling:
             X = super().scale(X)
@@ -356,7 +356,7 @@ class BaseShekel(BenchmarkProblem):
                          tags = tags
                         )
         
-    def _evaluate_implementation(self, X: torch.Tensor, scaling=True) -> Tuple[torch.Tensor, torch.Tensor]:
+    def _evaluate_implementation(self, X: torch.Tensor, scaling = False) -> Tuple[torch.Tensor, torch.Tensor]:
 
         if scaling:
             X = super().scale(X)
@@ -414,7 +414,7 @@ class SixHumpCamel(BenchmarkProblem):
                          tags = tags
                         )
         
-    def _evaluate_implementation(self, X: torch.Tensor, scaling=True) -> Tuple[torch.Tensor, torch.Tensor]:
+    def _evaluate_implementation(self, X: torch.Tensor, scaling = False) -> Tuple[torch.Tensor, torch.Tensor]:
 
         if scaling:
             X = super().scale(X)
@@ -498,7 +498,7 @@ class ConstrainedGramacy(BenchmarkProblem):
                          tags = tags
                         )
         
-    def _evaluate_implementation(self, X: torch.Tensor, scaling=True) -> Tuple[torch.Tensor, torch.Tensor]:
+    def _evaluate_implementation(self, X: torch.Tensor, scaling = False) -> Tuple[torch.Tensor, torch.Tensor]:
 
         if scaling:
             X = super().scale(X)
@@ -542,7 +542,7 @@ class ConstrainedHartmann(BenchmarkProblem):
                          tags = tags
                         )
         
-    def _evaluate_implementation(self, X: torch.Tensor, scaling=True) -> Tuple[torch.Tensor, torch.Tensor]:
+    def _evaluate_implementation(self, X: torch.Tensor, scaling = False) -> Tuple[torch.Tensor, torch.Tensor]:
 
         if scaling:
             X = super().scale(X)
@@ -586,7 +586,7 @@ class ConstrainedHartmannSmooth(BenchmarkProblem):
                          tags = tags
                         )
         
-    def _evaluate_implementation(self, X: torch.Tensor, scaling=True) -> Tuple[torch.Tensor, torch.Tensor]:
+    def _evaluate_implementation(self, X: torch.Tensor, scaling = False) -> Tuple[torch.Tensor, torch.Tensor]:
 
         if scaling:
             X = super().scale(X)
@@ -624,11 +624,11 @@ class PressureVessel(BenchmarkProblem):
         super().__init__(dim=4, 
                          num_objectives = 1, 
                          num_constraints = 4, 
-                         bounds = [(1,3)]*4,
+                         bounds = [(0, 10), (0,10), (10, 50), (150, 200)],
                          tags = tags
                         )
         
-    def _evaluate_implementation(self, X: torch.Tensor, scaling=True) -> Tuple[torch.Tensor, torch.Tensor]:
+    def _evaluate_implementation(self, X: torch.Tensor, scaling = False) -> Tuple[torch.Tensor, torch.Tensor]:
 
         if scaling:
             X = super().scale(X)
@@ -670,7 +670,7 @@ class WeldedBeamSO(BenchmarkProblem):
                          tags = tags
                         )
         
-    def _evaluate_implementation(self, X: torch.Tensor, scaling=True) -> Tuple[torch.Tensor, torch.Tensor]:
+    def _evaluate_implementation(self, X: torch.Tensor, scaling = False) -> Tuple[torch.Tensor, torch.Tensor]:
 
         if scaling:
             X = super().scale(X)
@@ -708,11 +708,11 @@ class TensionCompressionString(BenchmarkProblem):
         super().__init__(dim=3, 
                          num_objectives = 1, 
                          num_constraints = 2, 
-                         bounds = [(0.1,10)]*3,
+                         bounds = [(0.01, 1), (0.01, 1), (0.01, 20)],
                          tags = tags
                         )
         
-    def _evaluate_implementation(self, X: torch.Tensor, scaling=True) -> Tuple[torch.Tensor, torch.Tensor]:
+    def _evaluate_implementation(self, X: torch.Tensor, scaling = False) -> Tuple[torch.Tensor, torch.Tensor]:
 
         if scaling:
             X = super().scale(X)
@@ -750,11 +750,11 @@ class SpeedReducer(BenchmarkProblem):
         super().__init__(dim=7, 
                          num_objectives = 1, 
                          num_constraints = 11, 
-                         bounds = [(2.6,3.6), (0.7,0.8), (17,28), (7.3,8.3), (7.3,8.3), (2.9,3.9), (5,5.5)],
+                         bounds = [(2.6,3.6), (0.7,0.8), (17,28), (7.3,8.3), (7.8,8.3), (2.9,3.9), (5,5.5)],
                          tags = tags
                         )
         
-    def _evaluate_implementation(self, X: torch.Tensor, scaling=True) -> Tuple[torch.Tensor, torch.Tensor]:
+    def _evaluate_implementation(self, X: torch.Tensor, scaling = False) -> Tuple[torch.Tensor, torch.Tensor]:
 
         if scaling:
             X = super().scale(X)

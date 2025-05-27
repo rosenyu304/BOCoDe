@@ -34,6 +34,6 @@ class Bukin(BenchmarkProblem):
         
         part1 = 100.0 * torch.sqrt(torch.abs(X[..., 1] - 0.01 * X[..., 0] ** 2))
         part2 = 0.01 * torch.abs(X[..., 0] + 10.0)
-        fx = -(part1 + part2)
+        fx = (part1 + part2)
 
         return None, fx.unsqueeze(-1)

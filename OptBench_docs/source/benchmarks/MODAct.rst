@@ -1,9 +1,9 @@
 .. _modact_benchmarks:
 
-MODAct (Multi-Objective Design of electro-mechanical Actuators) Benchmarks
+MODAct Benchmarks
 =================
 
-The `MODAct <https://github.com/epfl-lamd/modact>`_ benchmark collection includes 20 benchmark problems for constrained multi-objective optimization.
+The `MODAct <https://github.com/epfl-lamd/modact>`_ (Multi-Objective Design of electro-mechanical Actuators) benchmark collection includes 20 benchmark problems for constrained multi-objective optimization.
 
 Available Problems
 ----------------

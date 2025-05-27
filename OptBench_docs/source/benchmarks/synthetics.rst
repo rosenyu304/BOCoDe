@@ -40,7 +40,7 @@ Available Problems
 * :code:`optbench.Synthetics.WeldedBeamSO`
 * :code:`optbench.Synthetics.TensionCompressionString`
 * :code:`optbench.Synthetics.SpeedReducer`
-
+* :code:`optbench.Synthetics.SVM`
 
 Example Usage
 ------------

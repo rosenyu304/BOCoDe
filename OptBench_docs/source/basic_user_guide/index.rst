@@ -12,3 +12,4 @@ This guide will help you understand how to use OptBench effectively for both sin
    single_objective
    multi_objective
    filtering
+   visualizing

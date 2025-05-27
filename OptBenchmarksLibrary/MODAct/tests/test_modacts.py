@@ -14,6 +14,7 @@ def general_test(func, dim=None):
     
     # Generate random points within constraints
     X = torch.rand((rand_test_points, dim))
+    X = problem.scale(X)
 
     _, fx = problem._evaluate_implementation(X)
 

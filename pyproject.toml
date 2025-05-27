@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "optbench"
+version = "0.0.1"
+description = "OptBench is a Python library contains optimization benchmark problems."
+authors = [
+    { name = "Temporary", email = "example@example.com" }
+]
+dependencies = [
+    "pytest",
+    "botorch",
+    "torch",
+    "jax",
+    "numpy",
+    "cocopp",
+    "coco-experiment",
+    "pygame",
+    "Box2D",
+    "slientruss3d",
+    "openpyxl",
+    "diversipy",
+    "optproblems",
+    "opfunu",
+    "gym",
+    "gymnasium[MuJoCo]",
+    "attrs",
+    "cached_property>=1.5.1",
+    "networkx",
+    "python-fcl",
+    "scipy",
+    "trimesh",
+    "LassoBench @ git+ssh://https://github.com/ksehic/LassoBench.git",
+    "modact @ git+ssh://https://github.com/epfl-lamd/modact.git"
+]
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["OptBenchmarksLibrary"]
+
+[project.urls]
+Homepage = "https://github.com/rosenyu304/OptBenckmarkLibrary/"
+Repository = "https://github.com/rosenyu304/OptBenckmarkLibrary/"

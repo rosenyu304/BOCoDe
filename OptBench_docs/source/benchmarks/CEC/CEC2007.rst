@@ -1,0 +1,57 @@
+.. _cec2007_benchmarks:
+
+CEC 2007 Benchmarks
+=================
+
+The CEC2007 benchmark collection contains all functions from the CEC 2007 Competition.
+More information can be found in the `CEC 2007 GitHub page <https://github.com/P-N-Suganthan/CEC2007/blob/master/CEC-07-TR-13-Feb.pdf/>`_.
+
+Sources:
+
+ V. L. Huang, A. K. Qin, K. Deb, E. Zitzler, P. N. Suganthan, J. J. Liang, M. Preuss and S. Huband (2007). Problem Definitions for Performance Assessment of Multi-objective Optimization Algorithms. Special Session on Constrained Real-Parameter Optimization, Technical Report, Nanyang Technological University, Singapore, 2007. https://github.com/P-N-Suganthan/CEC2007/blob/master/CEC-07-TR-13-Feb.pdf
+\
+
+ Simon Wessing. Towards Optimal Parameterizations of the S-Metric Selection Evolutionary Multi-Objective Algorithm. Diploma thesis, Algorithm Engineering Report TR09-2-006, Technische Universitaet Dortmund, 2009. https://ls11-www.cs.uni-dortmund.de/_media/techreports/tr09-06.pdf
+
+Available Problems
+----------------
+
+* :code:`optbench.CEC.CEC2007.CEC2007_OKA2`
+* :code:`optbench.CEC.CEC2007.CEC2007_R_DTLZ2`
+* :code:`optbench.CEC.CEC2007.CEC2007_R_ZDT4`
+* :code:`optbench.CEC.CEC2007.CEC2007_SYMPART`
+* :code:`optbench.CEC.CEC2007.CEC2007_S_DTLZ2`
+* :code:`optbench.CEC.CEC2007.CEC2007_S_DTLZ3`
+* :code:`optbench.CEC.CEC2007.CEC2007_S_ZDT1`
+* :code:`optbench.CEC.CEC2007.CEC2007_S_ZDT2`
+* :code:`optbench.CEC.CEC2007.CEC2007_S_ZDT4`
+* :code:`optbench.CEC.CEC2007.CEC2007_S_ZDT6`
+* :code:`optbench.CEC.CEC2007.CEC2007_WFG1`
+* :code:`optbench.CEC.CEC2007.CEC2007_WFG8`
+* :code:`optbench.CEC.CEC2007.CEC2007_WFG9`
+
+Example Usage
+------------
+
+.. code-block:: python
+
+    import optbench
+    import torch
+
+    # Create a Botorch benchmark problem
+    problem = optbench.CEC.CEC2007.CEC2007_OKA2()
+
+    # Get problem information
+    bounds = problem.bounds
+
+    # Evaluate at a point
+    x = torch.Tensor([[0.0] * problem.dim])
+    constraints, values = problem._evaluate_implementation(x)
+
+    print(f"OKA2 function value at origin: {values[0]}")
+
+Output:
+
+.. code-block:: console
+
+    OKA2 function value at origin: tensor([0.0000, 2.4600])

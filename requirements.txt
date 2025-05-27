@@ -1,3 +1,6 @@
+# wheel # For cec2019comp100digit
+# Cython # For cec2019comp100digit
+
 git+https://github.com/ksehic/LassoBench.git#egg=LassoBench
 pytest
 botorch
@@ -10,6 +13,14 @@ pygame
 Box2D
 slientruss3d
 openpyxl
+diversipy # For optproblems
+optproblems
+opfunu
+
+
+swig # For gymnasium
+gym
+gymnasium[MuJoCo]
 
 # Modact
 attrs
@@ -19,3 +30,12 @@ python-fcl
 scipy
 trimesh
 git+https://github.com/epfl-lamd/modact
+
+matplotlib
+plotly
+dash
+
+# neorl only works on python 3.7 or lower
+# gym # For neorl
+# tensorflow # For neorl
+# autograd # For neorl

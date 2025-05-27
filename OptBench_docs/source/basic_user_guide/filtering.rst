@@ -12,7 +12,8 @@ Example Usage
 
     import optbench
 
-    # Available Categories: ["Synthetics", "LassoBench", "Engineering", "CEC2020_RW_Constrained", "BBOB", "BoTorch"]
+    # Retrieve all available categories
+    available_categories = optbench.filter_functions().keys()
 
     # Call the function filter method
     filtered_functions_list = optbench.filter_functions(
@@ -20,7 +21,7 @@ Example Usage
         objectives_filter = lambda x: x==1, # Include only single-objective functions
         category_filter = lambda x: x!="CEC2020_RW_Constrained" # Exclude all CEC2020 functions
         )
-    
+
     print(filtered_functions_list)
 
 Output:
@@ -32,4 +33,5 @@ Output:
     'LassoBench': ['LassoBreastCancer', 'LassoDiabetes', 'LassoDNA', 'LassoLeukemia', 'LassoRCV1', 'LassoSyntHard', 'LassoSyntHigh', 'LassoSyntMedium', 'LassoSyntSimple'], 
     'Engineering': ['MOPTA08Car', 'RobotPush', 'Rover', 'Truss10D', 'Truss25D'], 
     'BBOB': ['BBOB', 'BBOB_Boxed', 'BBOB_Constrained', 'BBOB_LargeScale', 'BBOB_MixInt', 'BBOB_Noisy']
+    ...
     }

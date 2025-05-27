@@ -20,7 +20,7 @@ class Rover(BenchmarkProblem):
                          num_constraints = 0, 
                          bounds = [(0,1)]*100)
 
-    def _evaluate_implementation(self, X, scaling = True):
+    def _evaluate_implementation(self, X, scaling = False):
         domain = create_large_domain(force_start=False,
                              force_goal=False,
                              start_miss_cost=l2cost,

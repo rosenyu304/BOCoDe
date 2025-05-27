@@ -10,6 +10,7 @@ from .Rastrigin import *
 from .Rosenbrock import *
 from .StyblinskiTang import *
 from .More_Synthetics import *
+from .SVM import *
 
 # Or if you want to be more explicit about what's being exported:
 __all__ = ['Ackley', 
@@ -43,5 +44,6 @@ __all__ = ['Ackley',
            'PressureVessel',
            'WeldedBeamSO',
            'TensionCompressionString',
-           'SpeedReducer'
+           'SpeedReducer',
+           'SVM',
           ]

@@ -1,8 +1,6 @@
 import torch
 from ..base import *
 
-
-
 class Truss25D(BenchmarkProblem):
 
     r'''
@@ -113,7 +111,7 @@ class Truss25D(BenchmarkProblem):
 
     
     
-    def _evaluate_implementation(self, X, scaling=True):
+    def _evaluate_implementation(self, X, scaling = False):
 
         if scaling:
             X = super().scale(X)

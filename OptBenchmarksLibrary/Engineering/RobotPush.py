@@ -20,7 +20,7 @@ class RobotPush(BenchmarkProblem):
                          num_constraints = 0, 
                          bounds = [(-5, 5), (-5, 5), (-10, 10), (-10, 10), (2, 30), (0, 2*np.pi), (-5, 5), (-5, 5), (-10, 10), (-10, 10), (2, 30), (0, 2*np.pi), (-5, 5), (-5, 5)])
 
-    def _evaluate_implementation(self, X, scaling = True):
+    def _evaluate_implementation(self, X, scaling = False):
         from joblib import Parallel, delayed
         f = PushReward()
 
@@ -116,6 +116,11 @@ class PushReward:
 
 
 # import numpy as np
+
+# Hides the hello from pygame print
+from os import environ
+environ['PYGAME_HIDE_SUPPORT_PROMPT'] = '1'
+
 import pygame
 from Box2D import *
 from Box2D.b2 import *

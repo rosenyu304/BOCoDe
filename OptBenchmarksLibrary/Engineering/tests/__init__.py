@@ -10,6 +10,7 @@ from .test_WaterResources import *
 from .test_MOPTA08Car import *
 from .test_Mazda import *
 from .test_BayesianCHT import *
+from .test_Mujoco import *
 
 # Or if you want to be more explicit about what's being exported:
 __all__ = [

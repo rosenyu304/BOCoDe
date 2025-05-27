@@ -6,11 +6,18 @@ Benchmarks
 OptBench includes benchmark problems from various sources. Each collection has its own characteristics and use cases.
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
+   :caption: Contents:
+   :glob:
+
 
    synthetics
    botorch
    bbob
    lasso
    engineering
-   CEC2020
+   CEC/index
+   wfg
+   zdt
+   MODAct
+   neorl

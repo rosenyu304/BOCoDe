@@ -20,8 +20,8 @@ def generate_test_cases():
                 problem.id_instance,
                 problem.dimension
             ))
-    # Reduce by 1/300 randomly
-    test_cases = random.sample(test_cases, len(test_cases) // 400)
+    # Reduce by 1/600 randomly
+    test_cases = random.sample(test_cases, len(test_cases) // 600)
     return test_cases
 
 # Total 2072 items

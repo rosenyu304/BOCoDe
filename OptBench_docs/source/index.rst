@@ -33,14 +33,13 @@ Contents
 --------
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :caption: Contents:
    :glob:
 
    getting_started
-   benchmarks/index
    basic_user_guide/index
-
+   benchmarks/index
 
 Indices and tables
 ==================
