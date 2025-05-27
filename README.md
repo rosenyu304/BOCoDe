@@ -1,4 +1,4 @@
-# March 24 Notes:
+# Installation
 Hi hope you are doing well! Overall, great job on making good progress on literally everything! 
 
 To-Dos:
