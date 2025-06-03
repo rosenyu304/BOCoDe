@@ -32,8 +32,8 @@ dependencies = [
     "python-fcl",
     "scipy",
     "trimesh",
-    "LassoBench @ git+https://github.com/ksehic/LassoBench.git",
-    "modact @ git+ssh://https://github.com/epfl-lamd/modact.git"
+    "LassoBench @ git+ssh://git@github.com/ksehic/LassoBench.git",
+    "modact @ git+ssh://git@github.com/epfl-lamd/modact.git"
 ]
 
 [tool.setuptools]
