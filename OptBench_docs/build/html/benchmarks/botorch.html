@@ -3,11 +3,11 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="BBOB Benchmarks" href="bbob.html" /><link rel="prev" title="Benchmarks" href="index.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="BBOB Benchmarks" href="bbob.html" /><link rel="prev" title="Synthetic Benchmarks" href="synthetics.html" />
 
-    <!-- Generated with Sphinx 8.2.3 and Furo 2024.08.06 -->
+    <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
         <title>Botorch Benchmarks - OptBench 0.1.0 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=302659d7" />
     
@@ -201,14 +201,30 @@
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
-<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Benchmarks</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Benchmarks</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Botorch Benchmarks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="bbob.html">BBOB Benchmarks</a></li>
-</ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../basic_user_guide/index.html">Basic User Guide</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Basic User Guide</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../basic_user_guide/index.html">Basic User Guide</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Basic User Guide</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../basic_user_guide/single_objective.html">Single Objective Optimization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basic_user_guide/multi_objective.html">Multi-Objective Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basic_user_guide/filtering.html">Search for functions with custom filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basic_user_guide/visualizing.html">Visualize functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Benchmarks</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Benchmarks</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="synthetics.html">Synthetic Benchmarks</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Botorch Benchmarks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bbob.html">BBOB Benchmarks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lasso.html">Lasso Benchmarks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="engineering.html">Engineering Benchmarks</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="CEC/index.html">CEC Benchmarks</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of CEC Benchmarks</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="CEC/CEC2020.html">CEC 2020 Benchmarks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CEC/CEC2007.html">CEC 2007 Benchmarks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CEC/CEC2017.html">CEC 2017 Benchmarks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CEC/CEC2019.html">CEC 2019 Benchmarks</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="wfg.html">WFG Benchmarks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zdt.html">ZDT Benchmarks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MODAct.html">MODAct Benchmarks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="neorl.html">NEORL Benchmarks</a></li>
 </ul>
 </li>
 </ul>
@@ -254,27 +270,89 @@
           <section id="botorch-benchmarks">
 <span id="id1"></span><h1>Botorch Benchmarks<a class="headerlink" href="#botorch-benchmarks" title="Link to this heading">¶</a></h1>
 <p>The Botorch benchmark collection includes synthetic test problems commonly used in Bayesian optimization research.</p>
-<section id="available-problems">
-<h2>Available Problems<a class="headerlink" href="#available-problems" title="Link to this heading">¶</a></h2>
+<section id="single-objective-problems">
+<h2>Single Objective Problems<a class="headerlink" href="#single-objective-problems" title="Link to this heading">¶</a></h2>
 <ul class="simple">
-<li><p>Ackley Function</p></li>
-<li><p>Levy Function</p></li>
-<li><p>Rosenbrock Function</p></li>
-<li><p>Sphere Function</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">optbench.BoTorch.AugmentedBranin</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">optbench.BoTorch.AugmentedHartmann</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">optbench.BoTorch.AugmentedRosenbrock</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">optbench.BoTorch.Ishigami</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">optbench.BoTorch.Gsobol</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">optbench.BoTorch.Morris</span></code></p></li>
 </ul>
 </section>
-<section id="example-usage">
-<h2>Example Usage<a class="headerlink" href="#example-usage" title="Link to this heading">¶</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">optbench</span>
+<section id="multi-objective-problems">
+<h2>Multi Objective Problems<a class="headerlink" href="#multi-objective-problems" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><code class="code docutils literal notranslate"><span class="pre">optbench.BoTorch.MOMFBraninCurrin</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">optbench.BoTorch.MOMFPark1</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">optbench.BoTorch.BraninCurrin</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">optbench.BoTorch.DH1</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">optbench.BoTorch.DH2</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">optbench.BoTorch.DH3</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">optbench.BoTorch.DH4</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">optbench.BoTorch.DTLZ1</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">optbench.BoTorch.DTLZ2</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">optbench.BoTorch.DTLZ3</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">optbench.BoTorch.DTLZ4</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">optbench.BoTorch.DTLZ5</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">optbench.BoTorch.DTLZ7</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">optbench.BoTorch.GMM</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">optbench.BoTorch.Penicillin</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">optbench.BoTorch.ToyRobust</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">optbench.BoTorch.VehicleSafety</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">optbench.BoTorch.ZDT1</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">optbench.BoTorch.ZDT2</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">optbench.BoTorch.ZDT3</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">optbench.BoTorch.CarSideImpact</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">optbench.BoTorch.BNH</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">optbench.BoTorch.CONSTR</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">optbench.BoTorch.ConstrainedBraninCurrin</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">optbench.BoTorch.C2DTLZ2</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">optbench.BoTorch.DiscBrake</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">optbench.BoTorch.MW7</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">optbench.BoTorch.OSY</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">optbench.BoTorch.SRN</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">optbench.BoTorch.WeldedBeam</span></code></p></li>
+</ul>
+</section>
+<section id="single-objective-example-usage">
+<h2>Single Objective Example Usage<a class="headerlink" href="#single-objective-example-usage" title="Link to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">optbench</span>
+<span class="kn">import</span> <span class="nn">torch</span>
 
 <span class="c1"># Create a Botorch benchmark problem</span>
-<span class="n">problem</span> <span class="o">=</span> <span class="n">optbench</span><span class="o">.</span><span class="n">botorch</span><span class="o">.</span><span class="n">create_problem</span><span class="p">(</span><span class="s2">&quot;ackley&quot;</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">problem</span> <span class="o">=</span> <span class="n">optbench</span><span class="o">.</span><span class="n">BoTorch</span><span class="o">.</span><span class="n">AugmentedBranin</span><span class="p">()</span>
 
 <span class="c1"># Evaluate at a point</span>
-<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]</span>
-<span class="n">value</span> <span class="o">=</span> <span class="n">problem</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">([[</span><span class="mf">0.0</span><span class="p">]</span> <span class="o">*</span> <span class="n">problem</span><span class="o">.</span><span class="n">dim</span><span class="p">])</span>
+<span class="n">constraints</span><span class="p">,</span> <span class="n">values</span> <span class="o">=</span> <span class="n">problem</span><span class="o">.</span><span class="n">_evaluate_implementation</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Ackley function value at origin: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;AugmentedBranin function value at origin: </span><span class="si">{</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">AugmentedBranin function value at origin: tensor([228.4423])</span>
+</pre></div>
+</div>
+</section>
+<section id="multi-objective-example-usage">
+<h2>Multi Objective Example Usage<a class="headerlink" href="#multi-objective-example-usage" title="Link to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">optbench</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="c1"># Create a Botorch benchmark problem</span>
+<span class="n">problem</span> <span class="o">=</span> <span class="n">optbench</span><span class="o">.</span><span class="n">BoTorch</span><span class="o">.</span><span class="n">MOMFBraninCurrin</span><span class="p">()</span>
+
+<span class="c1"># Evaluate at a point</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">([[</span><span class="mf">0.0</span><span class="p">]</span> <span class="o">*</span> <span class="n">problem</span><span class="o">.</span><span class="n">dim</span><span class="p">])</span>
+<span class="n">constraints</span><span class="p">,</span> <span class="n">values</span> <span class="o">=</span> <span class="n">problem</span><span class="o">.</span><span class="n">_evaluate_implementation</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MOMFBraninCurrin function value at origin: </span><span class="si">{</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">MOMFBraninCurrin function value at origin: tensor([11.8986, -0.7333])</span>
 </pre></div>
 </div>
 </section>
@@ -294,14 +372,14 @@
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="index.html">
+          <a class="prev-page" href="synthetics.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Benchmarks</div>
+                <div class="title">Synthetic Benchmarks</div>
                 
               </div>
             </a>
@@ -336,8 +414,10 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Botorch Benchmarks</a><ul>
-<li><a class="reference internal" href="#available-problems">Available Problems</a></li>
-<li><a class="reference internal" href="#example-usage">Example Usage</a></li>
+<li><a class="reference internal" href="#single-objective-problems">Single Objective Problems</a></li>
+<li><a class="reference internal" href="#multi-objective-problems">Multi Objective Problems</a></li>
+<li><a class="reference internal" href="#single-objective-example-usage">Single Objective Example Usage</a></li>
+<li><a class="reference internal" href="#multi-objective-example-usage">Multi Objective Example Usage</a></li>
 </ul>
 </li>
 </ul>
@@ -350,7 +430,7 @@
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=38b66d78"></script>
-    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=5fa4622c"></script>
     </body>

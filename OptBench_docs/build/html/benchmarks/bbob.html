@@ -3,11 +3,11 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Basic User Guide" href="../basic_user_guide/index.html" /><link rel="prev" title="Botorch Benchmarks" href="botorch.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Lasso Benchmarks" href="lasso.html" /><link rel="prev" title="Botorch Benchmarks" href="botorch.html" />
 
-    <!-- Generated with Sphinx 8.2.3 and Furo 2024.08.06 -->
+    <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
         <title>BBOB Benchmarks - OptBench 0.1.0 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=302659d7" />
     
@@ -201,14 +201,30 @@
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
-<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Benchmarks</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Benchmarks</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="botorch.html">Botorch Benchmarks</a></li>
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">BBOB Benchmarks</a></li>
-</ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../basic_user_guide/index.html">Basic User Guide</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Basic User Guide</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../basic_user_guide/index.html">Basic User Guide</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Basic User Guide</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../basic_user_guide/single_objective.html">Single Objective Optimization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basic_user_guide/multi_objective.html">Multi-Objective Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basic_user_guide/filtering.html">Search for functions with custom filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basic_user_guide/visualizing.html">Visualize functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Benchmarks</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Benchmarks</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="synthetics.html">Synthetic Benchmarks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="botorch.html">Botorch Benchmarks</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">BBOB Benchmarks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lasso.html">Lasso Benchmarks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="engineering.html">Engineering Benchmarks</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="CEC/index.html">CEC Benchmarks</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of CEC Benchmarks</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="CEC/CEC2020.html">CEC 2020 Benchmarks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CEC/CEC2007.html">CEC 2007 Benchmarks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CEC/CEC2017.html">CEC 2017 Benchmarks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CEC/CEC2019.html">CEC 2019 Benchmarks</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="wfg.html">WFG Benchmarks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zdt.html">ZDT Benchmarks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MODAct.html">MODAct Benchmarks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="neorl.html">NEORL Benchmarks</a></li>
 </ul>
 </li>
 </ul>
@@ -253,7 +269,21 @@
         <article role="main" id="furo-main-content">
           <section id="bbob-benchmarks">
 <span id="id1"></span><h1>BBOB Benchmarks<a class="headerlink" href="#bbob-benchmarks" title="Link to this heading">¶</a></h1>
-<p>The Black-Box Optimization Benchmarking (BBOB) collection provides a comprehensive set of continuous optimization problems.</p>
+<p>The Black-Box Optimization Benchmarking (BBOB) collection provides a comprehensive set of continuous optimization problems.
+Visit the <a class="reference external" href="https://numbbo.github.io/coco/testsuites/bbob">COCO platform</a> for a complete list of functions.</p>
+<section id="available-suites">
+<h2>Available Suites<a class="headerlink" href="#available-suites" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>bbob: <code class="code docutils literal notranslate"><span class="pre">optbench.BBOB_Problems.BBOB</span></code></p></li>
+<li><p>bbob-biobj: <code class="code docutils literal notranslate"><span class="pre">optbench.BBOB_Problems.BBOB_Biobj</span></code></p></li>
+<li><p>bbob-biobj-mixint: <code class="code docutils literal notranslate"><span class="pre">optbench.BBOB_BiobjMixInt</span></code></p></li>
+<li><p>bbob-boxed: <code class="code docutils literal notranslate"><span class="pre">optbench.BBOB_Problems.BBOB_Boxed</span></code></p></li>
+<li><p>bbob-constrained: <code class="code docutils literal notranslate"><span class="pre">optbench.BBOB_Problems.BBOB_Constrained</span></code></p></li>
+<li><p>bbob-largescale: <code class="code docutils literal notranslate"><span class="pre">optbench.BBOB_Problems.BBOB_LargeScale</span></code></p></li>
+<li><p>bbob-mixint: <code class="code docutils literal notranslate"><span class="pre">optbench.BBOB_Problems.BBOB_MixInt</span></code></p></li>
+<li><p>bbob-noisy: <code class="code docutils literal notranslate"><span class="pre">optbench.BBOB_Problems.BBOB_Noisy</span></code></p></li>
+</ul>
+</section>
 <section id="available-functions">
 <h2>Available Functions<a class="headerlink" href="#available-functions" title="Link to this heading">¶</a></h2>
 <ul class="simple">
@@ -265,19 +295,24 @@
 </section>
 <section id="example-usage">
 <h2>Example Usage<a class="headerlink" href="#example-usage" title="Link to this heading">¶</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">optbench</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">optbench</span>
+<span class="kn">import</span> <span class="nn">torch</span>
 
 <span class="c1"># Create a BBOB benchmark problem</span>
-<span class="n">problem</span> <span class="o">=</span> <span class="n">optbench</span><span class="o">.</span><span class="n">bbob</span><span class="o">.</span><span class="n">create_problem</span><span class="p">(</span><span class="s2">&quot;sphere&quot;</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">problem</span> <span class="o">=</span> <span class="n">optbench</span><span class="o">.</span><span class="n">BBOB_Problems</span><span class="o">.</span><span class="n">BBOB</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">function_number</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">instance_number</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># Separable 5-dimensional ellipsoidal function</span>
 
 <span class="c1"># Get problem information</span>
 <span class="n">bounds</span> <span class="o">=</span> <span class="n">problem</span><span class="o">.</span><span class="n">bounds</span>
 
 <span class="c1"># Evaluate at a point</span>
-<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">5</span>
-<span class="n">value</span> <span class="o">=</span> <span class="n">problem</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">([[</span><span class="mf">0.0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">5</span><span class="p">])</span>
+<span class="n">constraints</span><span class="p">,</span> <span class="n">values</span> <span class="o">=</span> <span class="n">problem</span><span class="o">.</span><span class="n">_evaluate_implementation</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sphere function value at origin: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sphere function value at origin: </span><span class="si">{</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Sphere function value at origin: tensor([42420381.6772])</span>
 </pre></div>
 </div>
 </section>
@@ -288,12 +323,12 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../basic_user_guide/index.html">
+          <a class="next-page" href="lasso.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Basic User Guide</div>
+                <div class="title">Lasso Benchmarks</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -339,6 +374,7 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">BBOB Benchmarks</a><ul>
+<li><a class="reference internal" href="#available-suites">Available Suites</a></li>
 <li><a class="reference internal" href="#available-functions">Available Functions</a></li>
 <li><a class="reference internal" href="#example-usage">Example Usage</a></li>
 </ul>
@@ -353,7 +389,7 @@
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=38b66d78"></script>
-    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=5fa4622c"></script>
     </body>

@@ -3,11 +3,11 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Botorch Benchmarks" href="botorch.html" /><link rel="prev" title="Getting Started" href="../getting_started.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Synthetic Benchmarks" href="synthetics.html" /><link rel="prev" title="Visualize functions" href="../basic_user_guide/visualizing.html" />
 
-    <!-- Generated with Sphinx 8.2.3 and Furo 2024.08.06 -->
+    <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
         <title>Benchmarks - OptBench 0.1.0 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=302659d7" />
     
@@ -201,14 +201,30 @@
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
-<li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">Benchmarks</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Benchmarks</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="botorch.html">Botorch Benchmarks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="bbob.html">BBOB Benchmarks</a></li>
-</ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../basic_user_guide/index.html">Basic User Guide</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Basic User Guide</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../basic_user_guide/index.html">Basic User Guide</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Basic User Guide</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../basic_user_guide/single_objective.html">Single Objective Optimization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../basic_user_guide/multi_objective.html">Multi-Objective Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basic_user_guide/filtering.html">Search for functions with custom filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basic_user_guide/visualizing.html">Visualize functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">Benchmarks</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Benchmarks</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="synthetics.html">Synthetic Benchmarks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="botorch.html">Botorch Benchmarks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bbob.html">BBOB Benchmarks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lasso.html">Lasso Benchmarks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="engineering.html">Engineering Benchmarks</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="CEC/index.html">CEC Benchmarks</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of CEC Benchmarks</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="CEC/CEC2020.html">CEC 2020 Benchmarks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CEC/CEC2007.html">CEC 2007 Benchmarks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CEC/CEC2017.html">CEC 2017 Benchmarks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CEC/CEC2019.html">CEC 2019 Benchmarks</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="wfg.html">WFG Benchmarks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zdt.html">ZDT Benchmarks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MODAct.html">MODAct Benchmarks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="neorl.html">NEORL Benchmarks</a></li>
 </ul>
 </li>
 </ul>
@@ -255,15 +271,80 @@
 <span id="id1"></span><h1>Benchmarks<a class="headerlink" href="#benchmarks" title="Link to this heading">¶</a></h1>
 <p>OptBench includes benchmark problems from various sources. Each collection has its own characteristics and use cases.</p>
 <div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="synthetics.html">Synthetic Benchmarks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="synthetics.html#available-problems">Available Problems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="synthetics.html#example-usage">Example Usage</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="botorch.html">Botorch Benchmarks</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="botorch.html#available-problems">Available Problems</a></li>
-<li class="toctree-l2"><a class="reference internal" href="botorch.html#example-usage">Example Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="botorch.html#single-objective-problems">Single Objective Problems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="botorch.html#multi-objective-problems">Multi Objective Problems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="botorch.html#single-objective-example-usage">Single Objective Example Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="botorch.html#multi-objective-example-usage">Multi Objective Example Usage</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="bbob.html">BBOB Benchmarks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="bbob.html#available-suites">Available Suites</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bbob.html#available-functions">Available Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bbob.html#example-usage">Example Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="lasso.html">Lasso Benchmarks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="lasso.html#available-problems">Available Problems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lasso.html#example-usage">Example Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="engineering.html">Engineering Benchmarks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="engineering.html#available-problems">Available Problems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="engineering.html#example-usage">Example Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CEC/index.html">CEC Benchmarks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="CEC/CEC2020.html">CEC 2020 Benchmarks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="CEC/CEC2020.html#available-problems">Available Problems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CEC/CEC2020.html#example-usage">Example Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="CEC/CEC2007.html">CEC 2007 Benchmarks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="CEC/CEC2007.html#available-problems">Available Problems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CEC/CEC2007.html#example-usage">Example Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="CEC/CEC2017.html">CEC 2017 Benchmarks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="CEC/CEC2017.html#available-problems">Available Problems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CEC/CEC2017.html#problem-details">Problem Details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CEC/CEC2017.html#example-usage">Example Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="CEC/CEC2019.html">CEC 2019 Benchmarks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="CEC/CEC2019.html#available-problems">Available Problems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CEC/CEC2019.html#problem-details">Problem Details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CEC/CEC2019.html#example-usage">Example Usage</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="wfg.html">WFG Benchmarks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="wfg.html#available-problems">Available Problems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wfg.html#example-usage">Example Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="zdt.html">ZDT Benchmarks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="zdt.html#available-problems">Available Problems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zdt.html#example-usage">Example Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zdt.html#example-usage-of-zdt5">Example Usage of ZDT5</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="MODAct.html">MODAct Benchmarks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="MODAct.html#available-problems">Available Problems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MODAct.html#example-usage">Example Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="neorl.html">NEORL Benchmarks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="neorl.html#available-problems">Available Problems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="neorl.html#example-usage">Example Usage</a></li>
 </ul>
 </li>
 </ul>
@@ -275,23 +356,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="botorch.html">
+          <a class="next-page" href="synthetics.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Botorch Benchmarks</div>
+                <div class="title">Synthetic Benchmarks</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../getting_started.html">
+          <a class="prev-page" href="../basic_user_guide/visualizing.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Getting Started</div>
+                <div class="title">Visualize functions</div>
                 
               </div>
             </a>
@@ -320,7 +401,7 @@
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=38b66d78"></script>
-    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=5fa4622c"></script>
     </body>
