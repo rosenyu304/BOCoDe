@@ -1,8 +1,8 @@
 import math
 from typing import Callable, Iterable, List, Union, Dict
 from collections import defaultdict
-import OptBenchmarksLibrary as optbench
-from OptBenchmarksLibrary import *
+import engoptbench as optbench
+from engoptbench import *
 
 ValType = Union[int, tuple, set, list]
 
