@@ -41,7 +41,7 @@ include-package-data = true
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["engoptbench*"]
+include = ["TOPFuns*"]
 
 [project.urls]
 Homepage = "https://github.com/rosenyu304/OptBenckmarkLibrary/"
