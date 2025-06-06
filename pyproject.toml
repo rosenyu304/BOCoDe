@@ -32,6 +32,7 @@ dependencies = [
     "python-fcl",
     "scipy",
     "trimesh",
+    "dash",
     "LassoBench @ git+ssh://git@github.com/ksehic/LassoBench.git",
     "modact @ git+ssh://git@github.com/epfl-lamd/modact.git"
 ]
