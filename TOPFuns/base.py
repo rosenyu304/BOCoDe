@@ -10,6 +10,8 @@ from dash import dcc, html
 from dash.dependencies import Input, Output, State, ALL
 
 import numpy as np
+import warnings
+warnings.filterwarnings("ignore")  # Ignore all warnings
 
 class BenchmarkProblem:
 
@@ -29,7 +31,7 @@ class BenchmarkProblem:
         CONSTRAINTS: Optional[ConstraintConfig] = None,
         tags: Optional[List[str]] = None,
         debug: bool = False,
-        mute: bool = False,
+        show_info: bool = False,
     ) -> None:
         """Initialize the BenchmarkProblem class.
         
@@ -60,7 +62,15 @@ class BenchmarkProblem:
         self.CONSTRAINTS = CONSTRAINTS
         self.tags = tags
         self.debug = debug
-        self.mute = mute
+        self.show_info = show_info
+        
+        if self.show_info:
+            print(f"Function info:\n",
+                f"Number of objectives: {self.num_objectives}\n",
+                f"Number of constraints: {self.num_constraints}\n",
+                f"Number of dimensions: {self.dim} (setable)\n",
+                f"Bounds: {self.bounds}\n",
+                )
 
     def scale(self, X):
         """
