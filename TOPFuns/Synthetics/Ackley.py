@@ -15,7 +15,9 @@ class Ackley(BenchmarkProblem):
 
     def __init__(self, 
                  dim: int = 2, 
-                 CONSTRAINTS = ConstraintConfig(type='CONSTRAINTS')):
+                 CONSTRAINTS = ConstraintConfig(type='CONSTRAINTS'),
+                 mute = False,
+                 ):
         
         tags = ["Ackley",
                 "-----------------------------",
@@ -34,7 +36,16 @@ class Ackley(BenchmarkProblem):
                          bounds = [(-5, 10)]*dim,
                          CONSTRAINTS = CONSTRAINTS,
                          tags = tags,
+                         mute = mute,
                         )
+        
+        if not self.mute:
+            print(f"Function info:\n",
+                f"Number of objectives: {self.num_objectives}\n",
+                f"Number of constraints: {self.num_constraints}\n",
+                f"Number of dimensions: {self.dim} (setable)\n",
+                f"Bounds: {self.bounds}\n",
+                )
 
     def _evaluate_implementation(self, X: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
         
