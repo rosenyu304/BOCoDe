@@ -1,6 +1,6 @@
 # TOPFuns
 
-We present TOPFuns (Torch-based OPtimization Functions for engineering), a Python PyTorch-based library that contains the most comprehensive suite of engineering design problems and interface of popular synthetic optimization problems, with access to 300+ problems for optimization benchmarking. Our goal is to provide not only a python optimization benchmark library, but also allows the PyTorch interface facilitate machine learning optimization algorithms and applications such as surrogate and Bayesian optimization.
+We present TOPFuns (Torch-based OPtimization Functions for engineering), a Python and PyTorch-based library that contains the most comprehensive suite of engineering design problems and an interface to popular synthetic optimization problems, with access to 300+ problems for optimization benchmarking. Our goal is to provide not only a Python optimization benchmark library but also to allow the PyTorch interface for facilitating machine learning optimization algorithms and applications such as surrogate and Bayesian optimization.
 
 # What is in TOPFuns?
 
