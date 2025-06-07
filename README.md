@@ -5,10 +5,16 @@ We present TOPFuns (Torch-based OPtimization Functions for engineering), a Pytho
 # What is in TOPFuns?
 
 ## Engineering design problems
-> need a visual
+We present a diverse collection of engineering design problems including car design, cantilever beam, truss structure optimization, and physics simulation of robotics. 
+
+<img src="docs/Figures/TopFuns_Icon_v1.png" width="300">
+<!-- ![figure_icon](docs/Figures/TopFuns_Icon_v1.png) -->
 
 ## Interface to popular benchmarks
-> need a visual for BBOB, BoTorch, LassoBench, MODact, NEORL, opfunu (CEC suite)
+still working on this
+| Botorch  | BBOB/COCO | LassoBench |
+| :------: | :------:  | :------:   |
+| <img src="docs/Figures/botorch_icon.png" width="50">  | need figure      | need figure       |
 
 
 # Installation
