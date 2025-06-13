@@ -6,8 +6,7 @@ class Truss10D(BenchmarkProblem):
     available_dimensions = 10
     num_objectives = 1
 
-    def __init__(self, 
-                 CONSTRAINTS = ConstraintConfig(type='CONSTRAINTS')):
+    def __init__(self):
 
         
         tags = ["Truss10D",
@@ -22,7 +21,6 @@ class Truss10D(BenchmarkProblem):
                          num_objectives = 1, 
                          num_constraints = 14, 
                          bounds = [(0.1, 35)]*10,
-                         CONSTRAINTS = CONSTRAINTS,
                          tags = tags
                         )
 

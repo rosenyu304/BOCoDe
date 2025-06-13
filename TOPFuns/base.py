@@ -1,6 +1,5 @@
 import torch
-from .configs import *
-from typing import Union, Tuple, Set, Optional
+from typing import Union, Tuple, Set, Optional, List
 
 import matplotlib.pyplot as plt
 import plotly.graph_objects as go
@@ -28,7 +27,6 @@ class BenchmarkProblem:
         x_opt: Optional[torch.Tensor] = None,
         optimum: Optional[torch.Tensor] = None,
         ref_point: Optional[torch.Tensor] = None,
-        CONSTRAINTS: Optional[ConstraintConfig] = None,
         tags: Optional[List[str]] = None,
         debug: bool = False,
         show_info: bool = False,
@@ -59,7 +57,6 @@ class BenchmarkProblem:
         self.x_opt = x_opt
         self.optimum = optimum
         self.ref_point = ref_point
-        self.CONSTRAINTS = CONSTRAINTS
         self.tags = tags
         self.debug = debug
         self.show_info = show_info

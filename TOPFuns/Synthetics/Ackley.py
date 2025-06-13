@@ -15,7 +15,6 @@ class Ackley(BenchmarkProblem):
 
     def __init__(self, 
                  dim: int = 2, 
-                 CONSTRAINTS = ConstraintConfig(type='CONSTRAINTS'),
                  show_info = False,
                  ):
         
@@ -34,7 +33,6 @@ class Ackley(BenchmarkProblem):
                          optimum = [[0]],
                          x_opt=[[0]*dim], 
                          bounds = [(-5, 10)]*dim,
-                         CONSTRAINTS = CONSTRAINTS,
                          tags = tags,
                          show_info = show_info,
                         )

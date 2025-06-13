@@ -13,7 +13,7 @@ class Truss25D(BenchmarkProblem):
     available_dimensions = 25
     num_objectives = 1
 
-    def __init__(self, CONSTRAINTS = ConstraintConfig(type='CONSTRAINTS')):
+    def __init__(self):
         
         tags = ["Truss25D",
                 "-----------------------------",
@@ -28,7 +28,6 @@ class Truss25D(BenchmarkProblem):
                          num_objectives = 1, 
                          num_constraints = 31, 
                          bounds = [(0.1, 3.4)]*25,
-                         CONSTRAINTS = CONSTRAINTS,
                          tags = tags
                         )
         
