@@ -65,6 +65,7 @@ class BBOB(BaseBBOB):
 
     available_dimensions = {2, 3, 5, 10, 20, 40}
     num_objectives = 1
+    num_constraints = 0
 
     def __init__(self, 
                  dim=2,
@@ -119,6 +120,7 @@ class BBOB_Biobj(BaseBBOB):
 
     available_dimensions = {2, 3, 5, 10, 20, 40}
     num_objectives = 2
+    num_constraints = 0
 
     def __init__(self, 
                  dim=2,
@@ -224,6 +226,7 @@ class BBOB_BiobjMixInt(BaseBBOB):
 
     available_dimensions = {2, 3, 5, 10, 20, 40}
     num_objectives = 2
+    num_constraints = 0
 
     def __init__(self, 
                  dim=5,
@@ -240,6 +243,7 @@ class BBOB_Boxed(BaseBBOB):
 
     available_dimensions = {2, 3, 5, 10, 20, 40}
     num_objectives = 1
+    num_constraints = 0
 
     def __init__(self, 
                  dim=2,
@@ -256,6 +260,7 @@ class BBOB_Constrained(BaseBBOB):
 
     available_dimensions = {2, 3, 5, 10, 20, 40}
     num_objectives = 1
+    num_constraints = (1, None)
 
     def __init__(self, 
                  dim=2,
@@ -609,6 +614,7 @@ class BBOB_LargeScale(BaseBBOB):
 
     available_dimensions = {20, 40, 80, 160, 320, 640}
     num_objectives = 1
+    num_constraints = 0
 
     def __init__(self, 
                  dim=20,
@@ -734,6 +740,7 @@ class BBOB_MixInt(BaseBBOB):
 
     available_dimensions = {5, 10, 20, 40, 80, 160}
     num_objectives = 1
+    num_constraints = 0
 
     def __init__(self, 
                  dim=5,
@@ -750,6 +757,7 @@ class BBOB_Noisy(BaseBBOB):
 
     available_dimensions = {2, 3, 5, 10, 20, 40}
     num_objectives = 1
+    num_constraints = 0
 
     def __init__(self, 
                  dim=2,

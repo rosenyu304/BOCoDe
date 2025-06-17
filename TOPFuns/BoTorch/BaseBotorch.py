@@ -1,7 +1,5 @@
-import modact.problems as pb
 from ..base import *
 from typing import Tuple
-import numpy as np
 
 class BotorchProblem(BenchmarkProblem):
 
