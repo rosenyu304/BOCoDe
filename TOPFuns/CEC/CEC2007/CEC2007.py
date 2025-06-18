@@ -28,6 +28,7 @@ class CEC2007_OKA2(BenchmarkProblem):
 
     available_dimensions = 3
     num_objectives = 2
+    num_constraints = 0
 
     def __init__(self):
         dim = 3
@@ -60,6 +61,7 @@ class CEC2007_SYMPART(BenchmarkProblem):
     # requires at least 2 variables (even-length rotations), unlimited upper
     available_dimensions = (2, None)
     num_objectives = 2
+    num_constraints = 0
 
     def __init__(self, dim: int):
         if dim < 2 or dim % 2 != 0:
@@ -129,6 +131,7 @@ class CEC2007_S_ZDT1(BenchmarkProblem):
 
     available_dimensions = 100
     num_objectives = 2
+    num_constraints = 0
 
     # shift & scaling parameters (100-dim)
     _o = torch.tensor([0.950, 0.231, 0.607, 0.486, 0.891, 0.762, 0.457, 0.019, 0.821, 0.445, 0.615, 0.792, 0.922, 0.738, 0.176, 0.406, 0.936, 0.917, 0.410, 0.894, 0.058, 0.353, 0.813, 0.010, 0.139, 0.203, 0.199, 0.604, 0.272, 0.199, 0.015, 0.747, 0.445, 0.932, 0.466, 0.419, 0.846, 0.525, 0.203, 0.672, 0.838, 0.020, 0.681, 0.380, 0.832, 0.503, 0.710, 0.429, 0.305, 0.190, 0.193, 0.682, 0.303, 0.542, 0.151, 0.698, 0.378, 0.860, 0.854, 0.594, 0.497, 0.900, 0.822, 0.645, 0.818, 0.660, 0.342, 0.290, 0.341, 0.534, 0.727, 0.309, 0.839, 0.568, 0.370, 0.703, 0.547, 0.445, 0.695, 0.621, 0.795, 0.957, 0.523, 0.880, 0.173, 0.980, 0.271, 0.252, 0.876, 0.737, 0.137, 0.012, 0.894, 0.199, 0.299, 0.661, 0.284, 0.469, 0.065, 0.988], dtype=torch.float32)     # fill with the 100 values from C code
@@ -221,6 +224,7 @@ class CEC2007_S_ZDT4(BenchmarkProblem):
 
     available_dimensions = 100
     num_objectives = 2
+    num_constraints = 0
 
     _o = torch.tensor([0.957, 0.436, 2.092, 5.523, 5.686, 3.616, 1.646, 9.461, 0.881, 7.606, 4.401, 4.251, 5.182, 6.320, 9.136, 9.871, 7.308, 6.021, 1.941, 0.640, 0.581, 4.970, 4.677, 4.436, 3.997, 1.971, 0.071, 8.880, 9.464, 4.152, 1.318, 4.620, 9.296, 2.804, 9.034, 1.787, 5.197, 7.792, 5.364, 7.301, 0.953, 6.922, 5.955, 5.000, 1.437, 1.800, 2.796, 2.448, 0.499, 2.813, 3.784, 5.816, 7.544, 9.607, 0.634, 7.079, 6.864, 9.367, 2.498, 3.362, 5.484, 8.693, 2.720, 0.246, 1.878, 7.354, 4.399, 8.886, 1.394, 4.045, 7.694, 1.343, 4.430, 4.077, 1.512, 5.488, 7.547, 3.081, 7.321, 7.537, 3.430, 1.710, 9.287, 3.121, 5.341, 1.471, 5.165, 3.627, 7.946, 1.710, 9.013, 7.844, 9.240, 6.567, 4.996, 3.462, 1.847, 2.767, 9.231, 8.492], dtype=torch.float32)
     _d_l = torch.tensor([0.099, 1.905, 2.486, 1.323, 0.823, 1.519, 1.737, 1.969, 2.072, 1.949, 1.812, 1.895, 0.571, 2.378, 1.079, 0.673, 1.300, 1.929, 2.052, 1.499, 2.282, 1.721, 0.675, 1.275, 1.282, 2.080, 1.178, 1.539, 2.319, 0.672, 1.243, 0.883, 0.939, 2.239, 1.249, 1.833, 1.154, 1.773, 1.743, 2.152, 2.445, 1.783, 0.753, 1.610, 1.248, 0.749, 0.703, 1.544, 2.203, 2.355, 1.373, 1.570, 1.330, 0.834, 1.183, 0.731, 1.142, 1.991, 2.101, 1.163, 1.817, 0.849, 1.631, 0.934, 1.672, 1.313, 1.488, 0.826, 1.907, 2.250, 0.676, 0.593, 1.953, 0.699, 1.340, 1.880, 0.690, 1.655, 1.804, 2.296, 1.826, 0.856, 1.924, 1.652, 1.501, 0.903, 1.852, 1.661, 2.351, 2.107, 1.819, 0.574, 0.803, 1.662, 2.390, 2.402, 1.007, 0.654, 1.845, 2.116], dtype=torch.float32)
@@ -328,6 +332,7 @@ class CEC2007_S_DTLZ2(BenchmarkProblem):
 
     available_dimensions = (2, None)
     num_objectives = (2, None)
+    num_constraints = 0
 
     _o = torch.tensor([0.366, 0.303, 0.852, 0.759, 0.950, 0.558, 0.014, 0.596, 0.816, 0.977, 0.222, 0.704, 0.522, 0.933, 0.713, 0.228, 0.450, 0.172, 0.969, 0.356, 0.049, 0.755, 0.895, 0.286, 0.251, 0.933, 0.131, 0.941, 0.702, 0.848], dtype=torch.float32)   # length 30
     _d_l = torch.tensor([0.155, 0.119, 0.185, 0.064, 0.07, 0.203, 0.166, 0.151, 0.219, 0.083, 0.161, 0.057, 0.169, 0.072, 0.135, 0.114, 0.241, 0.129, 0.23, 0.181, 0.195, 0.058, 0.152, 0.107, 0.119, 0.219, 0.203, 0.212, 0.126, 0.238], dtype=torch.float32) # length 30
@@ -426,6 +431,7 @@ class CEC2007_R_ZDT4(BenchmarkProblem):
 
     available_dimensions = [10, 30]
     num_objectives = 2
+    num_constraints = 0
 
     def __init__(self, dim: int):
         if dim not in (10, 30):
@@ -584,6 +590,7 @@ class CEC2007_R_DTLZ2(BenchmarkProblem):
 
     available_dimensions = [10, 30]
     num_objectives = (2, None)
+    num_constraints = 0
 
     def __init__(self,
                  num_objectives: int = 3,
@@ -730,6 +737,7 @@ class CEC2007_R_DTLZ2(BenchmarkProblem):
 class CEC2007_WFG1(BenchmarkProblem):
     available_dimensions = (2, None)
     num_objectives = (2, None)
+    num_constraints = 0
 
     def __init__(self, num_objectives: int = 3, dim: Optional[int] = None):
         if num_objectives < 2:
@@ -848,6 +856,7 @@ class CEC2007_WFG8(BenchmarkProblem):
 
     available_dimensions = (2, None)
     num_objectives = (2, None)
+    num_constraints = 0
 
     def __init__(self,
                  num_objectives: int = 3,
