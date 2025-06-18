@@ -15,6 +15,7 @@ class CEC2020_p1(BenchmarkProblem):
 
     num_objectives = 1
     available_dimensions = 9
+    num_constraints = 8
 
     def __init__(self):
         super().__init__(dim=9, 
@@ -63,6 +64,7 @@ class CEC2020_p2(BenchmarkProblem):
 
     num_objectives = 1
     available_dimensions = 11
+    num_constraints = 9
 
     def __init__(self):
         super().__init__(dim=11, 
@@ -112,6 +114,7 @@ class CEC2020_p3(BenchmarkProblem):
 
     num_objectives = 1
     available_dimensions = 7
+    num_constraints = 0
 
     def __init__(self):
         super().__init__(dim=7, 
@@ -165,7 +168,8 @@ class CEC2020_p4(BenchmarkProblem):
     '''
 
     num_objectives = 1
-    available_dimensions = 6
+    available_dimensions = 4
+    num_constraints = 4
 
     def __init__(self):
         super().__init__(dim=6, 
@@ -218,6 +222,7 @@ class CEC2020_p5(BenchmarkProblem):
 
     num_objectives = 1
     available_dimensions = 9
+    num_constraints = 4
 
     def __init__(self):
         super().__init__(dim=9, 
@@ -265,6 +270,7 @@ class CEC2020_p6(BenchmarkProblem):
 
     num_objectives = 1
     available_dimensions = 38
+    num_constraints = 32
 
     def __init__(self):
         super().__init__(dim=38, 
@@ -338,6 +344,7 @@ class CEC2020_p7(BenchmarkProblem):
 
     num_objectives = 1
     available_dimensions = 48
+    num_constraints = 38
 
     def __init__(self):
         super().__init__(dim=48, 
@@ -431,6 +438,7 @@ class CEC2020_p8(BenchmarkProblem):
 
     num_objectives = 1
     available_dimensions = 2
+    num_constraints = 0
 
     def __init__(self):
         super().__init__(dim=2, 
@@ -476,6 +484,7 @@ class CEC2020_p9(BenchmarkProblem):
 
     num_objectives = 1
     available_dimensions = 3
+    num_constraints = 1
 
     def __init__(self):
         super().__init__(dim=3, 
@@ -517,6 +526,7 @@ class CEC2020_p10(BenchmarkProblem):
 
     num_objectives = 1
     available_dimensions = 3
+    num_constraints = 0
 
     def __init__(self):
         super().__init__(dim=3, 
@@ -563,6 +573,7 @@ class CEC2020_p11(BenchmarkProblem):
 
     num_objectives = 1
     available_dimensions = 7
+    num_constraints = 4
 
     def __init__(self):
         super().__init__(dim=7, 
@@ -623,6 +634,7 @@ class CEC2020_p12(BenchmarkProblem):
 
     num_objectives = 1
     available_dimensions = 7
+    num_constraints = 0
 
     def __init__(self):
         super().__init__(dim=7, 
@@ -681,6 +693,7 @@ class CEC2020_p13(BenchmarkProblem):
 
     num_objectives = 1
     available_dimensions = 5
+    num_constraints = 0
 
     def __init__(self):
         super().__init__(dim=5, 
@@ -735,6 +748,7 @@ class CEC2020_p14(BenchmarkProblem):
 
     num_objectives = 1
     available_dimensions = 10
+    num_constraints = 0
 
     def __init__(self):
         super().__init__(dim=10, 
@@ -809,6 +823,7 @@ class CEC2020_p15(BenchmarkProblem):
 
     num_objectives = 1
     available_dimensions = 7
+    num_constraints = 0
 
     def __init__(self):
         super().__init__(dim=7, 
@@ -861,6 +876,7 @@ class CEC2020_p16(BenchmarkProblem):
 
     num_objectives = 1
     available_dimensions = 14
+    num_constraints = 0
 
     def __init__(self):
         super().__init__(dim=14, 
@@ -940,6 +956,7 @@ class CEC2020_p17(BenchmarkProblem):
 
     num_objectives = 1
     available_dimensions = 3
+    num_constraints = 0
 
     def __init__(self):
         super().__init__(dim=3, 
@@ -988,6 +1005,7 @@ class CEC2020_p18(BenchmarkProblem):
 
     num_objectives = 1
     available_dimensions = 4
+    num_constraints = 0
 
     def __init__(self):
         super().__init__(dim=4, 
@@ -1041,6 +1059,7 @@ class CEC2020_p19(BenchmarkProblem):
 
     num_objectives = 1
     available_dimensions = 4
+    num_constraints = 0
 
     def __init__(self):
         super().__init__(dim=4, 
@@ -1111,6 +1130,7 @@ class CEC2020_p20(BenchmarkProblem):
 
     num_objectives = 1
     available_dimensions = 2
+    num_constraints = 0
 
     def __init__(self):
         super().__init__(dim=2, 
