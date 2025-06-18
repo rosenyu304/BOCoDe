@@ -49,6 +49,7 @@ class CEC2017_p1(BaseOpfunuCEC):
 
     problem = opfunu.cec_based.cec2017.F12017
     available_dimensions = problem().dim_supported
+    num_constraints = 0
 
     def __init__(self, dim=None):
         
@@ -61,6 +62,7 @@ class CEC2017_p2(BaseOpfunuCEC):
 
     problem = opfunu.cec_based.cec2017.F22017
     available_dimensions = problem().dim_supported
+    num_constraints = 0
 
     def __init__(self, dim=None):
         
@@ -73,6 +75,7 @@ class CEC2017_p3(BaseOpfunuCEC):
 
     problem = opfunu.cec_based.cec2017.F32017
     available_dimensions = problem().dim_supported
+    num_constraints = 0
 
     def __init__(self, dim=None):
         
@@ -85,6 +88,7 @@ class CEC2017_p4(BaseOpfunuCEC):
 
     problem = opfunu.cec_based.cec2017.F42017
     available_dimensions = problem().dim_supported
+    num_constraints = 0
 
     def __init__(self, dim=None):
         
@@ -97,6 +101,7 @@ class CEC2017_p5(BaseOpfunuCEC):
 
     problem = opfunu.cec_based.cec2017.F52017
     available_dimensions = problem().dim_supported
+    num_constraints = 0
 
     def __init__(self, dim=None):
         
@@ -109,6 +114,7 @@ class CEC2017_p6(BaseOpfunuCEC):
 
     problem = opfunu.cec_based.cec2017.F62017
     available_dimensions = problem().dim_supported
+    num_constraints = 0
 
     def __init__(self, dim=None):
         
@@ -121,6 +127,7 @@ class CEC2017_p7(BaseOpfunuCEC):
 
     problem = opfunu.cec_based.cec2017.F72017
     available_dimensions = problem().dim_supported
+    num_constraints = 0
 
     def __init__(self, dim=None):
         
@@ -133,6 +140,7 @@ class CEC2017_p8(BaseOpfunuCEC):
 
     problem = opfunu.cec_based.cec2017.F82017
     available_dimensions = problem().dim_supported
+    num_constraints = 0
 
     def __init__(self, dim=None):
         
@@ -145,6 +153,7 @@ class CEC2017_p9(BaseOpfunuCEC):
 
     problem = opfunu.cec_based.cec2017.F92017
     available_dimensions = problem().dim_supported
+    num_constraints = 0
 
     def __init__(self, dim=None):
         
@@ -157,6 +166,7 @@ class CEC2017_p10(BaseOpfunuCEC):
 
     problem = opfunu.cec_based.cec2017.F102017
     available_dimensions = problem().dim_supported
+    num_constraints = 0
 
     def __init__(self, dim=None):
         
@@ -169,6 +179,7 @@ class CEC2017_p11(BaseOpfunuCEC):
 
     problem = opfunu.cec_based.cec2017.F112017
     available_dimensions = problem().dim_supported
+    num_constraints = 0
 
     def __init__(self, dim=None):
         
@@ -181,6 +192,7 @@ class CEC2017_p12(BaseOpfunuCEC):
 
     problem = opfunu.cec_based.cec2017.F122017
     available_dimensions = problem().dim_supported
+    num_constraints = 0
 
     def __init__(self, dim=None):
         
@@ -193,6 +205,7 @@ class CEC2017_p13(BaseOpfunuCEC):
 
     problem = opfunu.cec_based.cec2017.F132017
     available_dimensions = problem().dim_supported
+    num_constraints = 0
 
     def __init__(self, dim=None):
         
@@ -205,6 +218,7 @@ class CEC2017_p14(BaseOpfunuCEC):
 
     problem = opfunu.cec_based.cec2017.F142017
     available_dimensions = problem().dim_supported
+    num_constraints = 0
 
     def __init__(self, dim=None):
         
@@ -217,6 +231,7 @@ class CEC2017_p15(BaseOpfunuCEC):
 
     problem = opfunu.cec_based.cec2017.F152017
     available_dimensions = problem().dim_supported
+    num_constraints = 0
 
     def __init__(self, dim=None):
         
@@ -229,6 +244,7 @@ class CEC2017_p16(BaseOpfunuCEC):
 
     problem = opfunu.cec_based.cec2017.F162017
     available_dimensions = problem().dim_supported
+    num_constraints = 0
 
     def __init__(self, dim=None):
         
@@ -241,6 +257,7 @@ class CEC2017_p17(BaseOpfunuCEC):
 
     problem = opfunu.cec_based.cec2017.F172017
     available_dimensions = [30, 50, 100]
+    num_constraints = 0
 
     def __init__(self, dim=None):
         
@@ -253,6 +270,7 @@ class CEC2017_p18(BaseOpfunuCEC):
 
     problem = opfunu.cec_based.cec2017.F182017
     available_dimensions = problem().dim_supported
+    num_constraints = 0
 
     def __init__(self, dim=None):
         
@@ -265,6 +283,7 @@ class CEC2017_p19(BaseOpfunuCEC):
 
     problem = opfunu.cec_based.cec2017.F192017
     available_dimensions = problem().dim_supported
+    num_constraints = 0
 
     def __init__(self, dim=None):
         
@@ -277,6 +296,7 @@ class CEC2017_p20(BaseOpfunuCEC):
 
     problem = opfunu.cec_based.cec2017.F202017
     available_dimensions = problem().dim_supported
+    num_constraints = 0
 
     def __init__(self, dim=None):
         
@@ -289,6 +309,7 @@ class CEC2017_p21(BaseOpfunuCEC):
 
     problem = opfunu.cec_based.cec2017.F212017
     available_dimensions = problem().dim_supported
+    num_constraints = 0
 
     def __init__(self, dim=None):
         
@@ -301,6 +322,7 @@ class CEC2017_p22(BaseOpfunuCEC):
 
     problem = opfunu.cec_based.cec2017.F222017
     available_dimensions = problem().dim_supported
+    num_constraints = 0
 
     def __init__(self, dim=None):
         
@@ -313,6 +335,7 @@ class CEC2017_p23(BaseOpfunuCEC):
 
     problem = opfunu.cec_based.cec2017.F232017
     available_dimensions = problem().dim_supported
+    num_constraints = 0
 
     def __init__(self, dim=None):
         
@@ -325,6 +348,7 @@ class CEC2017_p24(BaseOpfunuCEC):
 
     problem = opfunu.cec_based.cec2017.F242017
     available_dimensions = problem().dim_supported
+    num_constraints = 0
 
     def __init__(self, dim=None):
         
@@ -337,6 +361,7 @@ class CEC2017_p25(BaseOpfunuCEC):
 
     problem = opfunu.cec_based.cec2017.F252017
     available_dimensions = problem().dim_supported
+    num_constraints = 0
 
     def __init__(self, dim=None):
         
@@ -349,6 +374,7 @@ class CEC2017_p26(BaseOpfunuCEC):
 
     problem = opfunu.cec_based.cec2017.F262017
     available_dimensions = problem().dim_supported
+    num_constraints = 0
 
     def __init__(self, dim=None):
         
@@ -361,6 +387,7 @@ class CEC2017_p27(BaseOpfunuCEC):
 
     problem = opfunu.cec_based.cec2017.F272017
     available_dimensions = problem().dim_supported
+    num_constraints = 0
 
     def __init__(self, dim=None):
         
@@ -373,6 +400,7 @@ class CEC2017_p28(BaseOpfunuCEC):
 
     problem = opfunu.cec_based.cec2017.F282017
     available_dimensions = problem().dim_supported
+    num_constraints = 0
 
     def __init__(self, dim=None):
         
@@ -385,6 +413,7 @@ class CEC2017_p29(BaseOpfunuCEC):
 
     problem = opfunu.cec_based.cec2017.F292017
     available_dimensions = [30, 50, 100]
+    num_constraints = 0
 
     def __init__(self, dim=None):
         
