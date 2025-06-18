@@ -29,6 +29,7 @@ class CEC2019_p1(BaseOpfunuCEC):
 
     problem = opfunu.cec_based.cec2019.F12019
     available_dimensions = 9
+    num_constraints = 0
 
     def __init__(self, dim=None):
         
@@ -41,6 +42,7 @@ class CEC2019_p2(BaseOpfunuCEC):
 
     problem = opfunu.cec_based.cec2019.F22019
     available_dimensions = 16
+    num_constraints = 0
 
     def __init__(self, dim=None):
 
@@ -53,6 +55,7 @@ class CEC2019_p3(BaseOpfunuCEC):
 
     problem = opfunu.cec_based.cec2019.F32019
     available_dimensions = 18
+    num_constraints = 0
 
     def __init__(self, dim=None):
 
@@ -65,6 +68,7 @@ class CEC2019_p4(BaseOpfunuCEC):
 
     problem = opfunu.cec_based.cec2019.F42019
     available_dimensions = 10
+    num_constraints = 0
 
     def __init__(self, dim=None):
 
@@ -77,6 +81,7 @@ class CEC2019_p5(BaseOpfunuCEC):
 
     problem = opfunu.cec_based.cec2019.F52019
     available_dimensions = 10
+    num_constraints = 0
 
     def __init__(self, dim=None):
 
@@ -89,6 +94,7 @@ class CEC2019_p6(BaseOpfunuCEC):
 
     problem = opfunu.cec_based.cec2019.F62019
     available_dimensions = 10
+    num_constraints = 0
 
     def __init__(self, dim=None):
 
@@ -101,6 +107,7 @@ class CEC2019_p7(BaseOpfunuCEC):
 
     problem = opfunu.cec_based.cec2019.F72019
     available_dimensions = 10
+    num_constraints = 0
 
     def __init__(self, dim=None):
 
@@ -113,6 +120,7 @@ class CEC2019_p8(BaseOpfunuCEC):
 
     problem = opfunu.cec_based.cec2019.F82019
     available_dimensions = 10
+    num_constraints = 0
 
     def __init__(self, dim=None):
 
@@ -125,6 +133,7 @@ class CEC2019_p9(BaseOpfunuCEC):
 
     problem = opfunu.cec_based.cec2019.F92019
     available_dimensions = 10
+    num_constraints = 0
 
     def __init__(self, dim=None):
 
@@ -137,6 +146,7 @@ class CEC2019_p10(BaseOpfunuCEC):
 
     problem = opfunu.cec_based.cec2019.F102019
     available_dimensions = 10
+    num_constraints = 0
 
     def __init__(self, dim=None):
 
