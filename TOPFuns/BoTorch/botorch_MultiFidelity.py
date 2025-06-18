@@ -6,6 +6,7 @@ class AugmentedBranin(BotorchProblem):
 
     available_dimensions = botorch.test_functions.multi_fidelity.AugmentedBranin().dim
     num_objectives = botorch.test_functions.multi_fidelity.AugmentedBranin().num_objectives
+    num_constraints = botorch.test_functions.multi_fidelity.AugmentedBranin().num_constraints if hasattr(botorch.test_functions.multi_fidelity.AugmentedBranin(), 'num_constraints') else 0
 
     def __init__(self):
         super().__init__(botorch_problem=botorch.test_functions.multi_fidelity.AugmentedBranin, 
@@ -18,6 +19,7 @@ class AugmentedHartmann(BotorchProblem):
 
     available_dimensions = botorch.test_functions.multi_fidelity.AugmentedHartmann().dim
     num_objectives = botorch.test_functions.multi_fidelity.AugmentedHartmann().num_objectives
+    num_constraints = botorch.test_functions.multi_fidelity.AugmentedHartmann().num_constraints if hasattr(botorch.test_functions.multi_fidelity.AugmentedHartmann(), 'num_constraints') else 0
     
     def __init__(self):
         super().__init__(botorch_problem=botorch.test_functions.multi_fidelity.AugmentedHartmann, 
@@ -29,6 +31,7 @@ class AugmentedRosenbrock(BotorchProblem):
 
     available_dimensions = botorch.test_functions.multi_fidelity.AugmentedRosenbrock().dim
     num_objectives = botorch.test_functions.multi_fidelity.AugmentedRosenbrock().num_objectives
+    num_constraints = botorch.test_functions.multi_fidelity.AugmentedRosenbrock().num_constraints if hasattr(botorch.test_functions.multi_fidelity.AugmentedRosenbrock(), 'num_constraints') else 0
     
     def __init__(self):
         super().__init__(botorch_problem=botorch.test_functions.multi_fidelity.AugmentedRosenbrock, 
