@@ -86,6 +86,7 @@ def _has_valid_val(val: ValType, constraint = Callable[[int], bool]) -> bool:
 
 def filter_functions(dimension_filter: Callable[[int], bool] = lambda x: x > 0,
                      objectives_filter: Callable[[int], bool] = lambda x: x > 0,
+                     constraints_filter: Callable[[int], bool] = lambda x: x >= 0,
                      category_filter: Callable[[str], bool] = lambda x: True,
                      ) -> Dict[str, List[str]]:
     """
@@ -117,11 +118,15 @@ def filter_functions(dimension_filter: Callable[[int], bool] = lambda x: x > 0,
         for func in functions:
             dimensions = getattr(func, "available_dimensions", None)
             objectives = getattr(func, "num_objectives", None)
+            constraints = getattr(func, "num_constraints", None)
 
             if dimensions is not None and not _has_valid_val(dimensions, dimension_filter):
                 continue
 
             if objectives is not None and not _has_valid_val(objectives, objectives_filter):
+                continue
+
+            if constraints is not None and not _has_valid_val(constraints, constraints_filter):
                 continue
 
             filtered_funcs[category].append(func.__name__)
