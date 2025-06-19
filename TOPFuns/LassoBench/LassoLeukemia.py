@@ -18,6 +18,7 @@ class LassoLeukemia(BenchmarkProblem):
 
     available_dimensions = 7129
     num_objectives = 1
+    num_constraints = 0
 
     def __init__(self):
         

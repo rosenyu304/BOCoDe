@@ -19,6 +19,7 @@ class LassoBreastCancer(BenchmarkProblem):
 
     available_dimensions = 10
     num_objectives = 1
+    num_constraints = 0
 
     def __init__(self):
         

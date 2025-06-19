@@ -18,6 +18,7 @@ class LassoSyntSimple(BenchmarkProblem):
 
     available_dimensions = 60
     num_objectives = 1
+    num_constraints = 0
 
     def __init__(self):
         
