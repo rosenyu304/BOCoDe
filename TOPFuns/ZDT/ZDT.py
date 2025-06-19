@@ -18,6 +18,7 @@ class BaseZDT(BenchmarkProblem):
 
     available_dimensions = (1, None)
     num_objectives = 2
+    num_constraints = 0
 
     ZDTProblem = None
 
@@ -56,6 +57,7 @@ class ZDT4(BaseZDT):
 class ZDT5(BenchmarkProblem):
     available_dimensions = 80
     num_objectives = 2
+    num_constraints = 0
     ZDTProblem = optproblems.zdt.ZDT5
 
     def __init__(self):
