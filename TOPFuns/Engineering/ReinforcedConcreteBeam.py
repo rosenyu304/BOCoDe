@@ -12,6 +12,7 @@ class ReinforcedConcreteBeam(BenchmarkProblem):
 
     available_dimensions = 3
     num_objectives = 1
+    num_constraints = 2
 
     tags = {"single_objective", "constrained", "continuous", "3D"}
 

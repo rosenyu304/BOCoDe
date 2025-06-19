@@ -10,6 +10,7 @@ class GearTrain(BenchmarkProblem):
 
     available_dimensions = 4
     num_objectives = 1
+    num_constraints = 0
 
     # 4D objective, 0 constraints, X = n-by-4
 

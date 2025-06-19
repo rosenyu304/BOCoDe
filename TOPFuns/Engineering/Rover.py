@@ -9,6 +9,7 @@ class Rover(BenchmarkProblem):
 
     available_dimensions = 100
     num_objectives = 1
+    num_constraints = 0
 
     # ND objective, 0 constraints, X = n-by-dim
 

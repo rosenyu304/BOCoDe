@@ -12,6 +12,7 @@ class CarSideImpact(BenchmarkProblem):
 
     available_dimensions = 7
     num_objectives = 3
+    num_constraints = 10
 
     # 7D objective, 10 constraints, X = 7-by-dim
 

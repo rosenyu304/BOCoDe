@@ -16,6 +16,7 @@ class Truss72D_FourForces(BenchmarkProblem):
 
     available_dimensions = 72
     num_objectives = 1
+    num_constraints = 88
 
     def __init__(self):
         super().__init__(dim = 72, num_objectives = 1, num_constraints = 88, bounds = [(0.1, 33.5)]*72)
@@ -299,6 +300,7 @@ class Truss72D_SingleForce(BenchmarkProblem):
 
     available_dimensions = 72
     num_objectives = 1
+    num_constraints = 88
 
     def __init__(self):
         super().__init__(dim = 72, num_objectives = 1, num_constraints = 88, bounds = [(0.1, 33.5)]*72)

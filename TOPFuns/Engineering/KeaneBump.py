@@ -12,6 +12,7 @@ class KeaneBump(BenchmarkProblem):
 
     available_dimensions = (5, None)
     num_objectives = 1
+    num_constraints = 2
 
     tags = {"single_objective", "constrained", "continuous", "ND"}
 

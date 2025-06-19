@@ -20,6 +20,7 @@ class BaseDTLZ(BenchmarkProblem):
 
     available_dimensions = (2, None)
     num_objectives = (2, None)
+    num_constraints = 0
 
     DTLZProblem = None
 

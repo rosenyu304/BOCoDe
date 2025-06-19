@@ -10,6 +10,7 @@ class CantileverBeam(BenchmarkProblem):
 
     available_dimensions = 10
     num_objectives = 1
+    num_constraints = 11
 
     # 10D objective, 11 constraints, X = n-by-10
 

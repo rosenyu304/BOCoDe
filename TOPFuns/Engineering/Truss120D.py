@@ -14,6 +14,7 @@ class Truss120D(BenchmarkProblem):
 
     available_dimensions = 120
     num_objectives = 1
+    num_constraints = 121
 
     tags = {"single_objective", "constrained", "120D", "extra_imports"}
 

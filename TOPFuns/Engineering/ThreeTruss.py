@@ -12,6 +12,7 @@ class ThreeTruss(BenchmarkProblem):
 
     available_dimensions = 2
     num_objectives = 1
+    num_constraints = 3
 
     tags = {"single_objective", "constrained", "2D"}
 

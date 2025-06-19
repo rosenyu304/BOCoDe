@@ -11,6 +11,7 @@ class Mazda_SCA(BenchmarkProblem):
 
     available_dimensions = 148
     num_objectives = 4
+    num_constraints = 36
 
     # 222D objective, 54 constraints, X = n-by-222
     # 2 Cars Optimization Case
@@ -125,6 +126,7 @@ class Mazda(BenchmarkProblem):
 
     available_dimensions = 222
     num_objectives = 5
+    num_constraints = 54
 
     # 222D objective, 54 constraints, X = n-by-222
     # 3 car optimization case

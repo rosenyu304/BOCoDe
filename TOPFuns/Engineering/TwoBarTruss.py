@@ -10,6 +10,7 @@ class TwoBarTruss(BenchmarkProblem):
 
     available_dimensions = 2
     num_objectives = 2
+    num_constraints = 5
 
     # 2D objective, 5 constraints, X = 2-by-dim
 

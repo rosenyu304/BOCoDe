@@ -9,6 +9,7 @@ class RobotPush(BenchmarkProblem):
 
     available_dimensions = 14
     num_objectives = 1
+    num_constraints = 0
 
     # 14D objective, 0 constraints, X = n-by-14
 

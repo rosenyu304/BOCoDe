@@ -12,6 +12,7 @@ class Truss25D(BenchmarkProblem):
 
     available_dimensions = 25
     num_objectives = 1
+    num_constraints = 31
 
     def __init__(self):
         

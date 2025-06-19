@@ -12,6 +12,7 @@ class Car(BenchmarkProblem):
 
     available_dimensions = 11
     num_objectives = 1
+    num_constraints = 10
 
     tags = {"single_objective", "constrained", "11D"}
 

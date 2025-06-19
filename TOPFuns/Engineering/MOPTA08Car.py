@@ -9,6 +9,7 @@ class MOPTA08Car(BenchmarkProblem):
 
     available_dimensions = 124
     num_objectives = 1
+    num_constraints = 68
 
     # 124D objective, 68 constraints, X = n-by-124
 

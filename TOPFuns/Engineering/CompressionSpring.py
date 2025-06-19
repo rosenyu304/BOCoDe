@@ -12,6 +12,7 @@ class CompressionSpring(BenchmarkProblem):
 
     available_dimensions = 3
     num_objectives = 1
+    num_constraints = 4
 
     tags = {"single_objective", "constrained", "3D"}
 

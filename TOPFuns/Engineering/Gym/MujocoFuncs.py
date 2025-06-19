@@ -6,6 +6,7 @@ from ...base import BenchmarkProblem
 class AntProblem(BenchmarkProblem):
     available_dimensions = 8
     num_objectives = 1
+    num_constraints = 0
 
     def __init__(self):
         super().__init__(
@@ -33,6 +34,7 @@ class AntProblem(BenchmarkProblem):
 class HalfCheetahProblem(BenchmarkProblem):
     available_dimensions = 6
     num_objectives = 1
+    num_constraints = 0
 
     def __init__(self):
         super().__init__(
@@ -60,6 +62,7 @@ class HalfCheetahProblem(BenchmarkProblem):
 class HopperProblem(BenchmarkProblem):
     available_dimensions = 3
     num_objectives = 1
+    num_constraints = 0
 
     def __init__(self):
         super().__init__(
@@ -87,6 +90,7 @@ class HopperProblem(BenchmarkProblem):
 class HumanoidProblem(BenchmarkProblem):
     available_dimensions = 17
     num_objectives = 1
+    num_constraints = 0
 
     def __init__(self):
         super().__init__(
@@ -114,6 +118,7 @@ class HumanoidProblem(BenchmarkProblem):
 class HumanoidStandupProblem(BenchmarkProblem):
     available_dimensions = 17
     num_objectives = 1
+    num_constraints = 0
 
     def __init__(self):
         super().__init__(
@@ -141,6 +146,7 @@ class HumanoidStandupProblem(BenchmarkProblem):
 class InvertedDoublePendulumProblem(BenchmarkProblem):
     available_dimensions = 1
     num_objectives = 1
+    num_constraints = 0
 
     def __init__(self):
         super().__init__(
@@ -168,6 +174,7 @@ class InvertedDoublePendulumProblem(BenchmarkProblem):
 class InvertedPendulumProblem(BenchmarkProblem):
     available_dimensions = 1
     num_objectives = 1
+    num_constraints = 0
 
     def __init__(self):
         super().__init__(
@@ -195,6 +202,7 @@ class InvertedPendulumProblem(BenchmarkProblem):
 class PusherProblem(BenchmarkProblem):
     available_dimensions = 7
     num_objectives = 1
+    num_constraints = 0
 
     def __init__(self):
         super().__init__(
@@ -222,6 +230,7 @@ class PusherProblem(BenchmarkProblem):
 class ReacherProblem(BenchmarkProblem):
     available_dimensions = 2
     num_objectives = 1
+    num_constraints = 0
 
     def __init__(self):
         super().__init__(
@@ -249,6 +258,7 @@ class ReacherProblem(BenchmarkProblem):
 class SwimmerProblem(BenchmarkProblem):
     available_dimensions = 2
     num_objectives = 1
+    num_constraints = 0
 
     def __init__(self):
         super().__init__(
@@ -276,6 +286,7 @@ class SwimmerProblem(BenchmarkProblem):
 class Walker2DProblem(BenchmarkProblem):
     available_dimensions = 6
     num_objectives = 1
+    num_constraints = 0
 
     def __init__(self):
         super().__init__(

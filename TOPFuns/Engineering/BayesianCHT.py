@@ -136,6 +136,7 @@ class NonLinearConstraintProblemA3(BenchmarkProblem):
 
     available_dimensions = (1, None)
     num_objectives = (1, None)
+    num_constraints = 0
 
     def __init__(
         self,
@@ -198,6 +199,7 @@ class NonLinearConstraintProblemA4(BenchmarkProblem):
 
     available_dimensions = (1, None)
     num_objectives = (1, None)
+    num_constraints = 0
 
     def __init__(
         self,
@@ -242,6 +244,7 @@ class NonLinearConstraintProblemA7(BenchmarkProblem):
 
     available_dimensions = (1, None)
     num_objectives = (1, None)
+    num_constraints = [1, 3]
 
     def __init__(
         self,
@@ -316,6 +319,7 @@ class NonLinearConstraintProblemA8(BenchmarkProblem):
 
     available_dimensions = (1, None)
     num_objectives = (1, None)
+    num_constraints = [2, 4]
 
     def __init__(self,
             dim: int,
@@ -397,6 +401,7 @@ class NonLinearConstraintProblemB3(BenchmarkProblem):
 
     available_dimensions = (1, None)
     num_objectives = (1, None)
+    num_constraints = 0
 
     def __init__(self,
             dim: int,
@@ -431,6 +436,7 @@ class NonLinearConstraintProblemB4(BenchmarkProblem):
 
     available_dimensions = (1, None)
     num_objectives = (1, None)
+    num_constraints = 1
 
     def __init__(self,
             dim: int,
@@ -472,6 +478,7 @@ class NonLinearConstraintProblemB7(BenchmarkProblem):
 
     available_dimensions = (1, None)
     num_objectives = (1, None)
+    num_constraints = [1, 2]
 
     def __init__(self,
             dim: int,
@@ -538,6 +545,7 @@ class NonLinearConstraintProblemB8(BenchmarkProblem):
 
     available_dimensions = (1, None)
     num_objectives = (1, None)
+    num_constraints = [2, 4]
         
     def __init__(self,
             dim: int,

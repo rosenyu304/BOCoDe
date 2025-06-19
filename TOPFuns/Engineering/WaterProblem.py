@@ -12,6 +12,7 @@ class WaterProblem(BenchmarkProblem):
 
     available_dimensions = 3
     num_objectives = 5
+    num_constraints = 7
 
     # 3D objective, 7 constraints, X = 3-by-dim
 

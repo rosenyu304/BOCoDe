@@ -5,6 +5,7 @@ class Truss10D(BenchmarkProblem):
 
     available_dimensions = 10
     num_objectives = 1
+    num_constraints = 14
 
     def __init__(self):
 
