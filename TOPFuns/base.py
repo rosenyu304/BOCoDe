@@ -28,8 +28,7 @@ class BenchmarkProblem:
         optimum: Optional[torch.Tensor] = None,
         ref_point: Optional[torch.Tensor] = None,
         tags: Optional[List[str]] = None,
-        debug: bool = False,
-        show_info: bool = False,
+        debug: bool = False
     ) -> None:
         """Initialize the BenchmarkProblem class.
         
@@ -59,15 +58,6 @@ class BenchmarkProblem:
         self.ref_point = ref_point
         self.tags = tags
         self.debug = debug
-        self.show_info = show_info
-        
-        if self.show_info:
-            print(f"Function info:\n",
-                f"Number of objectives: {self.num_objectives}\n",
-                f"Number of constraints: {self.num_constraints}\n",
-                f"Number of dimensions: {self.dim} (setable)\n",
-                f"Bounds: {self.bounds}\n",
-                )
 
     def scale(self, X):
         """
@@ -94,6 +84,18 @@ class BenchmarkProblem:
         X_scaled = torch.add(torch.mul(X, (self.bounds[:, 1] - self.bounds[:, 0])), self.bounds[:, 0])
 
         return X_scaled
+    
+    def show_info(self):
+        """
+        Prints the information about the benchmark problem.
+        """
+        print(f"Function info:\n",
+              f"Number of objectives: {self.num_objectives}\n",
+              f"Number of constraints: {self.num_constraints}\n",
+              f"Number of dimensions: {self.dim} (setable)\n",
+              f"Optimum Value: {self.optimum}\n",
+              f"Optimal Decision Variables: {self.x_opt}\n",
+              f"Bounds: {self.bounds}\n",)
     
     def visualize_function(self, sampling_density=50):
         """
