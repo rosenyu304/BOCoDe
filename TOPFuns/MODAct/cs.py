@@ -10,6 +10,7 @@ class CS1(BaseModactProblem):
     p = pb.get_problem(problem_name)
     available_dimensions = len(p.bounds()[0])
     num_objectives = len(p.weights)
+    num_constraints = len(p.c_weights)
     
     def __init__(self):
         super().__init__("cs1")
@@ -20,6 +21,7 @@ class CT1(BaseModactProblem):
     p = pb.get_problem(problem_name)
     available_dimensions = len(p.bounds()[0])
     num_objectives = len(p.weights)
+    num_constraints = len(p.c_weights)
     
     def __init__(self):
         super().__init__("ct1")
@@ -30,6 +32,7 @@ class CTS1(BaseModactProblem):
     p = pb.get_problem(problem_name)
     available_dimensions = len(p.bounds()[0])
     num_objectives = len(p.weights)
+    num_constraints = len(p.c_weights)
     
     def __init__(self):
         super().__init__("cts1")
@@ -40,6 +43,7 @@ class CTSE1(BaseModactProblem):
     p = pb.get_problem(problem_name)
     available_dimensions = len(p.bounds()[0])
     num_objectives = len(p.weights)
+    num_constraints = len(p.c_weights)
     
     def __init__(self):
         super().__init__("ctse1")
@@ -50,6 +54,7 @@ class CTSEI1(BaseModactProblem):
     p = pb.get_problem(problem_name)
     available_dimensions = len(p.bounds()[0])
     num_objectives = len(p.weights)
+    num_constraints = len(p.c_weights)
     
     def __init__(self):
         super().__init__("ctsei1")
@@ -60,6 +65,7 @@ class CS2(BaseModactProblem):
     p = pb.get_problem(problem_name)
     available_dimensions = len(p.bounds()[0])
     num_objectives = len(p.weights)
+    num_constraints = len(p.c_weights)
     
     def __init__(self):
         super().__init__("cs2")
@@ -70,6 +76,7 @@ class CT2(BaseModactProblem):
     p = pb.get_problem(problem_name)
     available_dimensions = len(p.bounds()[0])
     num_objectives = len(p.weights)
+    num_constraints = len(p.c_weights)
     
     def __init__(self):
         super().__init__("ct2")
@@ -80,6 +87,7 @@ class CTS2(BaseModactProblem):
     p = pb.get_problem(problem_name)
     available_dimensions = len(p.bounds()[0])
     num_objectives = len(p.weights)
+    num_constraints = len(p.c_weights)
     
     def __init__(self):
         super().__init__("cts2")
@@ -90,6 +98,7 @@ class CTSE2(BaseModactProblem):
     p = pb.get_problem(problem_name)
     available_dimensions = len(p.bounds()[0])
     num_objectives = len(p.weights)
+    num_constraints = len(p.c_weights)
     
     def __init__(self):
         super().__init__("ctse2")
@@ -100,6 +109,7 @@ class CTSEI2(BaseModactProblem):
     p = pb.get_problem(problem_name)
     available_dimensions = len(p.bounds()[0])
     num_objectives = len(p.weights)
+    num_constraints = len(p.c_weights)
     
     def __init__(self):
         super().__init__("ctsei2")
@@ -110,6 +120,7 @@ class CS3(BaseModactProblem):
     p = pb.get_problem(problem_name)
     available_dimensions = len(p.bounds()[0])
     num_objectives = len(p.weights)
+    num_constraints = len(p.c_weights)
     
     def __init__(self):
         super().__init__("cs3")
@@ -120,6 +131,7 @@ class CT3(BaseModactProblem):
     p = pb.get_problem(problem_name)
     available_dimensions = len(p.bounds()[0])
     num_objectives = len(p.weights)
+    num_constraints = len(p.c_weights)
     
     def __init__(self):
         super().__init__("ct3")
@@ -130,6 +142,7 @@ class CTS3(BaseModactProblem):
     p = pb.get_problem(problem_name)
     available_dimensions = len(p.bounds()[0])
     num_objectives = len(p.weights)
+    num_constraints = len(p.c_weights)
     
     def __init__(self):
         super().__init__("cts3")
@@ -140,6 +153,7 @@ class CTSE3(BaseModactProblem):
     p = pb.get_problem(problem_name)
     available_dimensions = len(p.bounds()[0])
     num_objectives = len(p.weights)
+    num_constraints = len(p.c_weights)
     
     def __init__(self):
         super().__init__("ctse3")
@@ -150,6 +164,7 @@ class CTSEI3(BaseModactProblem):
     p = pb.get_problem(problem_name)
     available_dimensions = len(p.bounds()[0])
     num_objectives = len(p.weights)
+    num_constraints = len(p.c_weights)
     
     def __init__(self):
         super().__init__("ctsei3")
@@ -160,6 +175,7 @@ class CS4(BaseModactProblem):
     p = pb.get_problem(problem_name)
     available_dimensions = len(p.bounds()[0])
     num_objectives = len(p.weights)
+    num_constraints = len(p.c_weights)
     
     def __init__(self):
         super().__init__("cs4")
@@ -170,7 +186,8 @@ class CT4(BaseModactProblem):
     p = pb.get_problem(problem_name)
     available_dimensions = len(p.bounds()[0])
     num_objectives = len(p.weights)
-    
+    num_constraints = len(p.c_weights)
+
     def __init__(self):
         super().__init__("ct4")
 
@@ -180,6 +197,7 @@ class CTS4(BaseModactProblem):
     p = pb.get_problem(problem_name)
     available_dimensions = len(p.bounds()[0])
     num_objectives = len(p.weights)
+    num_constraints = len(p.c_weights)
     
     def __init__(self):
         super().__init__("cts4")
@@ -190,6 +208,7 @@ class CTSE4(BaseModactProblem):
     p = pb.get_problem(problem_name)
     available_dimensions = len(p.bounds()[0])
     num_objectives = len(p.weights)
+    num_constraints = len(p.c_weights)
     
     def __init__(self):
         super().__init__("ctse4")
@@ -200,6 +219,7 @@ class CTSEI4(BaseModactProblem):
     p = pb.get_problem(problem_name)
     available_dimensions = len(p.bounds()[0])
     num_objectives = len(p.weights)
+    num_constraints = len(p.c_weights)
     
     def __init__(self):
         super().__init__("ctsei4")
