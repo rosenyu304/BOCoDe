@@ -19,6 +19,7 @@ Example Usage
     filtered_functions_list = optbench.filter_functions(
         dimension_filter = lambda x: x>=5, # Include only functions with dimensionality of 5 or greater
         objectives_filter = lambda x: x==1, # Include only single-objective functions
+        constraints_filter = lambda x: x==0, # Include functions with 0 constraints (Functions with only simple bound constraints)
         category_filter = lambda x: x!="CEC2020_RW_Constrained" # Exclude all CEC2020 functions
         )
 
@@ -29,9 +30,8 @@ Output:
 .. code-block:: console
 
     {
-    'Synthetics': ['Ackley', 'DixonPrice', 'Griewank', 'Levy', 'Michalewicz', 'Powell', 'Rastrigin', 'Rosenbrock', 'StyblinskiTang'], 
+    'Synthetics': ['DixonPrice', 'Griewank', 'Levy', 'Michalewicz', 'Powell', 'Rastrigin', 'Rosenbrock', 'StyblinskiTang', 'Cosine8', 'Hartmann6D', 'SVM'], 
     'LassoBench': ['LassoBreastCancer', 'LassoDiabetes', 'LassoDNA', 'LassoLeukemia', 'LassoRCV1', 'LassoSyntHard', 'LassoSyntHigh', 'LassoSyntMedium', 'LassoSyntSimple'], 
-    'Engineering': ['MOPTA08Car', 'RobotPush', 'Rover', 'Truss10D', 'Truss25D'], 
-    'BBOB': ['BBOB', 'BBOB_Boxed', 'BBOB_Constrained', 'BBOB_LargeScale', 'BBOB_MixInt', 'BBOB_Noisy']
+    'Engineering': ['RobotPush', 'Rover', 'NonLinearConstraintProblemA3', 'NonLinearConstraintProblemA4', 'NonLinearConstraintProblemB3', 'AntProblem', 'HalfCheetahProblem', 'HumanoidProblem', 'HumanoidStandupProblem', 'PusherProblem', 'Walker2DProblem'], 
     ...
     }
