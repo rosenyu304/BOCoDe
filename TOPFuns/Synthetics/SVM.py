@@ -15,6 +15,7 @@ class SVM(BenchmarkProblem):
 
     available_dimensions = 388
     num_objectives = 1
+    num_constraints = 0
 
     def __init__(self):
         self.dims = 388

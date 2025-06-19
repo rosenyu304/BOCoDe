@@ -10,6 +10,7 @@ class Beale(BenchmarkProblem):
 
     available_dimensions = 2
     num_objectives = 1
+    num_constraints = 0
 
     def __init__(self):
         
@@ -52,6 +53,7 @@ class Cosine8(BenchmarkProblem):
 
     available_dimensions = 8
     num_objectives = 1
+    num_constraints = 0
 
     def __init__(self):
         
@@ -94,6 +96,7 @@ class DropWave(BenchmarkProblem):
 
     available_dimensions = 2
     num_objectives = 1
+    num_constraints = 0
 
     def __init__(self):
         
@@ -136,6 +139,7 @@ class EggHolder(BenchmarkProblem):
 
     available_dimensions = 2
     num_objectives = 1
+    num_constraints = 0
 
     def __init__(self):
         
@@ -178,6 +182,7 @@ class Hartmann3D(BenchmarkProblem):
 
     available_dimensions = 3
     num_objectives = 1
+    num_constraints = 0
 
     def __init__(self):
         
@@ -251,6 +256,7 @@ class Hartmann6D(BenchmarkProblem):
 
     available_dimensions = 6
     num_objectives = 1
+    num_constraints = 0
 
     def __init__(self):
         
@@ -293,6 +299,7 @@ class HolderTable(BenchmarkProblem):
 
     available_dimensions = 2
     num_objectives = 1
+    num_constraints = 0
 
     def __init__(self):
         
@@ -335,6 +342,7 @@ class BaseShekel(BenchmarkProblem):
 
     available_dimensions = 4
     num_objectives = 1
+    num_constraints = 0
 
     def __init__(self, m: int, optimum):
         
@@ -393,6 +401,7 @@ class SixHumpCamel(BenchmarkProblem):
 
     available_dimensions = 2
     num_objectives = 1
+    num_constraints = 0
 
     def __init__(self):
         
@@ -435,6 +444,7 @@ class ThreeHumpCamel(BenchmarkProblem):
 
     available_dimensions = 2
     num_objectives = 1
+    num_constraints = 0
 
     def __init__(self):
         
@@ -477,6 +487,7 @@ class ConstrainedGramacy(BenchmarkProblem):
 
     available_dimensions = 2
     num_objectives = 1
+    num_constraints = 2
 
     def __init__(self):
         
@@ -521,6 +532,7 @@ class ConstrainedHartmann(BenchmarkProblem):
 
     available_dimensions = 6
     num_objectives = 1
+    num_constraints = 1
 
     def __init__(self):
         
@@ -565,6 +577,7 @@ class ConstrainedHartmannSmooth(BenchmarkProblem):
 
     available_dimensions = 6
     num_objectives = 1
+    num_constraints = 1
 
     def __init__(self):
         
@@ -609,6 +622,7 @@ class PressureVessel(BenchmarkProblem):
 
     available_dimensions = 4
     num_objectives = 1
+    num_constraints = 4
 
     def __init__(self):
         
@@ -651,6 +665,7 @@ class WeldedBeamSO(BenchmarkProblem):
 
     available_dimensions = 4
     num_objectives = 1
+    num_constraints = 4
 
     def __init__(self):
         
@@ -693,6 +708,7 @@ class TensionCompressionString(BenchmarkProblem):
 
     available_dimensions = 3
     num_objectives = 1
+    num_constraints = 2
 
     def __init__(self):
         
@@ -735,6 +751,7 @@ class SpeedReducer(BenchmarkProblem):
 
     available_dimensions = 7
     num_objectives = 1
+    num_constraints = 11
 
     def __init__(self):
         

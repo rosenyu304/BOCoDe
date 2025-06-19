@@ -10,6 +10,7 @@ class Goldstein(BenchmarkProblem):
 
     available_dimensions = 2
     num_objectives = 1
+    num_constraints = 0
 
     def __init__(self):
             

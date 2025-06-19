@@ -9,6 +9,7 @@ class StyblinskiTang(BenchmarkProblem):
 
     available_dimensions = (1,None)
     num_objectives = 1
+    num_constraints = 0
 
     def __init__(self, dim: int = 10):
 
