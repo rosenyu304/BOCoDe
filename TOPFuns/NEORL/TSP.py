@@ -15,6 +15,7 @@ class TSP_51Cities(BenchmarkProblem):
 
     available_dimensions = 51
     num_objectives = 1
+    num_constraints = 0
     
     def __init__(self):
         self.city_loc_list = [
@@ -71,6 +72,7 @@ class TSP_100Cities(BenchmarkProblem):
 
     available_dimensions = 100
     num_objectives = 1
+    num_constraints = 0
     
     def __init__(self):
         # 100 cities

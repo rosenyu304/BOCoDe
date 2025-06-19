@@ -15,6 +15,7 @@ class Reactivity8Drums(BenchmarkProblem):
 
     available_dimensions = 8
     num_objectives = 1
+    num_constraints = 0
 
     def __init__(self, typ: str = "wtd"):
         self.model = ReactivityModel(typ)
