@@ -62,7 +62,10 @@ import decobo
 import torch
 
 # Instantiate a Synthetic benchmark problem
-problem = decobo.Synthetics.Ackley(show_info=True) # show_info=True to show info of the problem 
+problem = decobo.Synthetics.Ackley()
+
+# Show problem information
+problem.show_info()
 
 # Evaluate at a in bounds of [0,1]s
 x = torch.rand(5,problem.dim)

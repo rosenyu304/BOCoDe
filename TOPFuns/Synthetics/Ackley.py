@@ -15,8 +15,7 @@ class Ackley(BenchmarkProblem):
     num_constraints = 2
 
     def __init__(self, 
-                 dim: int = 2, 
-                 show_info = False,
+                 dim: int = 2
                  ):
         
         tags = ["Ackley",
@@ -34,8 +33,7 @@ class Ackley(BenchmarkProblem):
                          optimum = [[0]],
                          x_opt=[[0]*dim], 
                          bounds = [(-5, 10)]*dim,
-                         tags = tags,
-                         show_info = show_info,
+                         tags = tags
                         )
         
         
