@@ -12,6 +12,14 @@ import numpy as np
 import warnings
 warnings.filterwarnings("ignore")  # Ignore all warnings
 
+class DataType:
+    """
+    Data types for the decision variables.
+    """
+    CONTINUOUS = "continuous"
+    DISCRETE = "discrete"
+    MIXED = "mixed"
+
 class BenchmarkProblem:
 
     available_dimensions = None
@@ -19,7 +27,6 @@ class BenchmarkProblem:
 
     def __init__(
         self,
-
         dim: int = 1,
         bounds: Union[List[Union[Tuple, Set]], None] = None,
         num_objectives: int = 1,
