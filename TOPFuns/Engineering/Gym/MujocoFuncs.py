@@ -1,7 +1,7 @@
 import gymnasium as gym
 import torch
 from typing import Tuple
-from ...base import BenchmarkProblem
+from ...base import *
 
 class AntProblem(BenchmarkProblem):
     available_dimensions = 8

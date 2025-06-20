@@ -335,6 +335,7 @@ class CEC2007_S_ZDT6(CEC2007_S_ZDT1):
 class CEC2007_S_DTLZ2(BenchmarkProblem):
 
     available_dimensions = (2, None)
+    input_type = DataType.CONTINUOUS
     num_objectives = (2, None)
     num_constraints = 0
 
@@ -741,7 +742,7 @@ class CEC2007_R_DTLZ2(BenchmarkProblem):
 # =============================================================================
 
 class CEC2007_WFG1(BenchmarkProblem):
-    
+
     available_dimensions = (2, None)
     input_type = DataType.CONTINUOUS
     num_objectives = (2, None)

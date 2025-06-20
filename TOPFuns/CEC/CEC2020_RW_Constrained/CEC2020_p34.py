@@ -1,6 +1,6 @@
 import torch
 import numpy as np
-from ...base import BenchmarkProblem
+from ...base import *
 from .helperFuncs import *
 from pathlib import Path
 

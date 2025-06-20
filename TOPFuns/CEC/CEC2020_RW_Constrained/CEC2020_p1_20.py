@@ -1,6 +1,6 @@
 import torch
 import numpy as np
-from ...base import BenchmarkProblem, DataType
+from ...base import *
 from .helperFuncs import *
 
 r'''
