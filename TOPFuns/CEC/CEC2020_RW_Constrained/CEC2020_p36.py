@@ -15,6 +15,7 @@ class CEC2020_p36(BenchmarkProblem):
     '''
 
     num_objectives = 1
+    input_type = DataType.CONTINUOUS
     available_dimensions = 158
     num_constraints = 148
 
@@ -24,7 +25,7 @@ class CEC2020_p36(BenchmarkProblem):
                          num_constraints = 148, 
                         #  X_opt= [[8.9093896456E-02] * 158], 
                          optimum = [0.047733529], 
-                         bounds = [[-1,1]]*158,
+                         bounds=[(-1.0, 1.0)]*158,
                         )
 
     def _evaluate_implementation(self, X, scaling = False):

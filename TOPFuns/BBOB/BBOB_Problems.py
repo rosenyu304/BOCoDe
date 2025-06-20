@@ -10,6 +10,8 @@ class BaseBBOB(BenchmarkProblem):
     N. Hansen, A. Auger, R. Ros, O. Mersmann, T. Tušar, D. Brockhoff. COCO: A Platform for Comparing Continuous Optimizers in a Black-Box Setting, Optimization Methods and Software, 36(1), pp. 114-144, 2021.
     '''
 
+    input_type = DataType.CONTINUOUS
+
     def __init__(self,
                  dim,
                  suite,

@@ -1,5 +1,5 @@
 import torch
-from ..base import BenchmarkProblem
+from ..base import *
 import math
 from typing import Optional, Union, List, Tuple, Set
 

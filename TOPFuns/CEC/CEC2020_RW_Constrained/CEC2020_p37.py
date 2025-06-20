@@ -15,6 +15,7 @@ class CEC2020_p37(BenchmarkProblem):
     '''
 
     num_objectives = 1
+    input_type = DataType.CONTINUOUS
     available_dimensions = 126
     num_constraints = 116
 
@@ -24,7 +25,7 @@ class CEC2020_p37(BenchmarkProblem):
                          num_constraints = 116, 
                         #  X_opt= [[0] * 116], 
                          optimum = [0.018593563], 
-                         bounds = [[-1.0, 1.0]] * 116 + [[0.0, 1.0]] * 10,
+                         bounds=[(-1.0, 1.0)] * 116 + [(0.0, 1.0)] * 10,
                         )
 
     def _evaluate_implementation(self, X, scaling = False):

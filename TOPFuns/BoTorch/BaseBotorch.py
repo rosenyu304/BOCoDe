@@ -7,8 +7,9 @@ class BotorchProblem(BenchmarkProblem):
     Sources:
     M. Balandat, B. Karrer, D. R. Jiang, S. Daulton, B. Letham, A. G. Wilson, and E. Bakshy. BoTorch: A Framework for Efficient Monte-Carlo Bayesian Optimization. Advances in Neural Information Processing Systems 33, 2020.
     http://arxiv.org/abs/1910.06403
-
     """
+
+    input_type = DataType.CONTINUOUS
 
     def __init__(self, botorch_problem, optimum=None, x_opt=None, dim=None):
 
@@ -43,6 +44,8 @@ class BotorchProblem(BenchmarkProblem):
         
     
 class MultiObjBotorchProblem(BenchmarkProblem):
+
+    input_type = DataType.CONTINUOUS
     
     def __init__(self, botorch_problem, optimum=None, x_opt=None, dim=None):
 

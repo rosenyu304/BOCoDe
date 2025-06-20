@@ -24,7 +24,7 @@ class CEC2020_p40(BenchmarkProblem):
                          num_constraints=76, 
                         #  X_opt=[[0] * 76], 
                          optimum=[0.0], 
-                         bounds=[[-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [-1, 1], [0, 2], [0, 2]],
+                         bounds=[(-1.0, 1.0)]*76,
                         )
 
     def _evaluate_implementation(self, X, scaling = False):
@@ -108,7 +108,7 @@ class CEC2020_p41(BenchmarkProblem):
                          num_constraints=74, 
                         #  X_opt=[[0] * 74], 
                          optimum=[0.0], 
-                         bounds=[[-1, 1]]*74,
+                         bounds=[(-1.0, 1.0)]*74,
                         )
 
     def _evaluate_implementation(self, X, scaling = False):
@@ -192,7 +192,7 @@ class CEC2020_p42(BenchmarkProblem):
                          num_constraints=76, 
                         #  X_opt=[[0] * 86], 
                          optimum=[0.077027102], 
-                         bounds=[[-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [0.0, 2.0], [0.0, 2.0], [0.0, 500.0], [0.0, 500.0], [0.0, 500.0], [0.0, 500.0], [0.0, 500.0], [0.0, 500.0], [0.0, 500.0], [0.0, 500.0], [0.0, 500.0], [0.0, 500.0]],
+                         bounds=[(-1.0, 1.0)]*86,
                         )
 
     def _evaluate_implementation(self, X, scaling = False):
@@ -273,7 +273,7 @@ class CEC2020_p43(BenchmarkProblem):
                          num_constraints=76, 
                         #  X_opt=[[0] * 86], 
                          optimum=[0.07983597], 
-                         bounds=[[-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [0.0, 2.0], [0.0, 2.0], [0.0, 500.0], [0.0, 500.0], [0.0, 500.0], [0.0, 500.0], [0.0, 500.0], [0.0, 500.0], [0.0, 500.0], [0.0, 500.0], [0.0, 500.0], [0.0, 500.0]],
+                         bounds=[(-1.0, 1.0)]*86,
                         )
 
     def _evaluate_implementation(self, X, scaling = False):
@@ -354,7 +354,7 @@ class CEC2020_p44(BenchmarkProblem):
                          num_constraints=0, 
                         #  X_opt=[[0] * 30], 
                          optimum=[-6273.1715], 
-                         bounds = [[40, 1960]]*30,
+                         bounds=[(40.0, 1960.0)]*30,
                         )
 
     def _evaluate_implementation(self, X, scaling = False):
@@ -432,7 +432,7 @@ class CEC2020_p45(BenchmarkProblem):
                          num_constraints=1, 
                         #  X_opt=[[0] * 25], 
                          optimum=[0.03073936], 
-                         bounds = [[0, 90]]*25,
+                         bounds=[(0.0, 90.0)]*25,
                         )
 
     def _evaluate_implementation(self, X, scaling = False):
@@ -491,7 +491,7 @@ class CEC2020_p46(BenchmarkProblem):
                          num_constraints=1, 
                         #  X_opt=[[0] * 25], 
                          optimum=[0.020240335], 
-                         bounds = [[0, 90]]*25,
+                         bounds=[(0.0, 90.0)]*25,
                         )
 
     def _evaluate_implementation(self, X, scaling = False):
@@ -548,7 +548,7 @@ class CEC2020_p47(BenchmarkProblem):
                          num_constraints=1, 
                         #  X_opt=[[0] * 25], 
                          optimum=[0.012783068], 
-                         bounds = [[0, 90]]*25,
+                         bounds=[(0.0, 90.0)]*25,
                         )
 
     def _evaluate_implementation(self, X, scaling = False):
@@ -606,7 +606,7 @@ class CEC2020_p48(BenchmarkProblem):
                          num_constraints=1, 
                         #  X_opt=[[0] * 30], 
                          optimum=[0.016787535766], 
-                         bounds = [[0, 90]]*30,
+                         bounds=[(0.0, 90.0)]*30,
                         )
 
     def _evaluate_implementation(self, X, scaling = False):
@@ -664,7 +664,7 @@ class CEC2020_p49(BenchmarkProblem):
                          num_constraints=1, 
                         #  X_opt=[[0] * 30], 
                          optimum=[0.00931187418], 
-                         bounds = [[0, 90]]*30,
+                         bounds=[(0.0, 90.0)]*30,
                         )
 
     def _evaluate_implementation(self, X, scaling = False):
@@ -722,7 +722,7 @@ class CEC2020_p50(BenchmarkProblem):
                          num_constraints=1, 
                         #  X_opt=[[0] * 30], 
                          optimum=[0.01505147], 
-                         bounds = [[0, 90]]*30,
+                         bounds=[(0.0, 90.0)]*30,
                         )
 
     def _evaluate_implementation(self, X, scaling = False):
@@ -779,7 +779,7 @@ class CEC2020_p51(BenchmarkProblem):
                          num_constraints=1, 
                         #  X_opt=[[0] * 59], 
                          optimum=[4550.8511497], 
-                         bounds = [[0, 10]]*59,
+                         bounds=[(0.0, 10.0)]*59,
                         )
 
     def _evaluate_implementation(self, X, scaling = False):
@@ -843,7 +843,7 @@ class CEC2020_p52(BenchmarkProblem):
                          num_constraints=1, 
                         #  X_opt=[[0] * 59], 
                          optimum=[3348.9821493], 
-                         bounds = [[0, 10]]*59,
+                         bounds=[(0.0, 10.0)]*59,
                         )
 
     def _evaluate_implementation(self, X, scaling = False):
@@ -907,7 +907,7 @@ class CEC2020_p53(BenchmarkProblem):
                          num_constraints=1, 
                         #  X_opt=[[0] * 59], 
                          optimum=[4997.606929], 
-                         bounds = [[0, 10]]*59,
+                         bounds=[(0.0, 10.0)]*59,
                         )
 
     def _evaluate_implementation(self, X, scaling = False):
@@ -973,7 +973,7 @@ class CEC2020_p54(BenchmarkProblem):
                          num_constraints=1, 
                         #  X_opt=[[0] * 59], 
                          optimum=[4240.5482538], 
-                         bounds = [[0, 10]]*59,
+                         bounds=[(0.0, 10.0)]*59,
                         )
 
     def _evaluate_implementation(self, X, scaling = False):
@@ -1037,7 +1037,7 @@ class CEC2020_p55(BenchmarkProblem):
                          num_constraints=6, 
                         #  X_opt=[[0] * 64], 
                          optimum=[6696.4145128], 
-                         bounds = [[0, 10]]*64,
+                         bounds=[(0.0, 10.0)]*64,
                         )
 
     def _evaluate_implementation(self, X, scaling = False):
@@ -1093,7 +1093,7 @@ class CEC2020_p56(BenchmarkProblem):
                          num_constraints=6, 
                         #  X_opt=[[0] * 64], 
                          optimum=[14746.58], 
-                         bounds = [[0, 10]]*64,
+                         bounds=[(0.0, 10.0)]*64,
                         )
 
     def _evaluate_implementation(self, X, scaling = False):
@@ -1149,7 +1149,7 @@ class CEC2020_p57(BenchmarkProblem):
                          num_constraints=6, 
                         #  X_opt=[[0] * 64], 
                          optimum=[3213.2917019], 
-                         bounds = [[0, 10]]*64,
+                         bounds=[(0.0, 10.0)]*64,
                         )
 
     def _evaluate_implementation(self, X, scaling = False):

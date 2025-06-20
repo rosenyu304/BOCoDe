@@ -1,4 +1,4 @@
-from ..base import BenchmarkProblem
+from ..base import *
 import opfunu
 import torch
 
@@ -9,6 +9,7 @@ class BaseOpfunuCEC(BenchmarkProblem):
 
     problem = None
     available_dimensions = None
+    input_type = DataType.CONTINUOUS
     num_objectives = 1
 
     def __init__(self, dim=None, num_objectives=1, num_constraints=0):

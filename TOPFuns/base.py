@@ -52,7 +52,7 @@ class BenchmarkProblem:
             debug (bool, optional): Debugging flag. Defaults to False.
         """
 
-        if self.__class__.available_dimensions is None or self.__class__.num_objectives is None or self.__class__.num_constraints is None:
+        if any(getattr(self.__class__, attr, None) is None for attr in ["available_dimensions", "num_objectives", "num_constraints", "input_type"]):
             raise NotImplementedError("This benchmark problem is not fully implemented yet.")
 
         self.dim = dim

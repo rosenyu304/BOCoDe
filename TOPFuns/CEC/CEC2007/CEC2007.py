@@ -27,6 +27,7 @@ class FunctionDefinitionAssertionError(Exception):
 class CEC2007_OKA2(BenchmarkProblem):
 
     available_dimensions = 3
+    input_type = DataType.CONTINUOUS
     num_objectives = 2
     num_constraints = 0
 
@@ -60,6 +61,7 @@ class CEC2007_SYMPART(BenchmarkProblem):
 
     # requires at least 2 variables (even-length rotations), unlimited upper
     available_dimensions = (2, None)
+    input_type = DataType.CONTINUOUS
     num_objectives = 2
     num_constraints = 0
 
@@ -130,6 +132,7 @@ class CEC2007_SYMPART(BenchmarkProblem):
 class CEC2007_S_ZDT1(BenchmarkProblem):
 
     available_dimensions = 100
+    input_type = DataType.CONTINUOUS
     num_objectives = 2
     num_constraints = 0
 
@@ -223,6 +226,7 @@ class CEC2007_S_ZDT2(CEC2007_S_ZDT1):
 class CEC2007_S_ZDT4(BenchmarkProblem):
 
     available_dimensions = 100
+    input_type = DataType.CONTINUOUS
     num_objectives = 2
     num_constraints = 0
 
@@ -430,6 +434,7 @@ class CEC2007_S_DTLZ3(CEC2007_S_DTLZ2):
 class CEC2007_R_ZDT4(BenchmarkProblem):
 
     available_dimensions = [10, 30]
+    input_type = DataType.CONTINUOUS
     num_objectives = 2
     num_constraints = 0
 
@@ -589,6 +594,7 @@ class CEC2007_R_ZDT4(BenchmarkProblem):
 class CEC2007_R_DTLZ2(BenchmarkProblem):
 
     available_dimensions = [10, 30]
+    input_type = DataType.CONTINUOUS
     num_objectives = (2, None)
     num_constraints = 0
 
@@ -735,7 +741,9 @@ class CEC2007_R_DTLZ2(BenchmarkProblem):
 # =============================================================================
 
 class CEC2007_WFG1(BenchmarkProblem):
+    
     available_dimensions = (2, None)
+    input_type = DataType.CONTINUOUS
     num_objectives = (2, None)
     num_constraints = 0
 
@@ -855,6 +863,7 @@ class CEC2007_WFG1(BenchmarkProblem):
 class CEC2007_WFG8(BenchmarkProblem):
 
     available_dimensions = (2, None)
+    input_type = DataType.CONTINUOUS
     num_objectives = (2, None)
     num_constraints = 0
 

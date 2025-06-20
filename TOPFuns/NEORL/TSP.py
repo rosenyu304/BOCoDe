@@ -1,4 +1,4 @@
-from ..base import BenchmarkProblem
+from ..base import *
 import torch
 from typing import Tuple
 from .neorl_lib import TSP

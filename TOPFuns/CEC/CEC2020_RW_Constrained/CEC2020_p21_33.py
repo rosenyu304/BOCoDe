@@ -14,6 +14,7 @@ class CEC2020_p21(BenchmarkProblem):
     '''
 
     num_objectives = 1
+    input_type = DataType.CONTINUOUS
     available_dimensions = 5
     num_constraints = 0
 
@@ -23,7 +24,7 @@ class CEC2020_p21(BenchmarkProblem):
                          num_constraints=0, 
                         #  X_opt=[[0] * 5], 
                          optimum=[0.2352424579], 
-                         bounds=[[60, 80], [90, 110], [1, 3], [0, 1000], [2, 9]],
+                         bounds=[(60.0, 80.0), (90.0, 110.0), (1.0, 3.0), (0.0, 1000.0), (2.0, 9.0)],
                         )
 
     def _evaluate_implementation(self, X, scaling = False):
@@ -87,6 +88,7 @@ class CEC2020_p22(BenchmarkProblem):
     '''
 
     num_objectives = 1
+    input_type = DataType.CONTINUOUS
     available_dimensions = 9
     num_constraints = 1
 
@@ -96,7 +98,7 @@ class CEC2020_p22(BenchmarkProblem):
                          num_constraints=1, 
                         #  X_opt=[[0] * 9], 
                          optimum=[0.52576870748], 
-                         bounds=[[16.51, 96.49], [13.51, 54.49], [13.51, 51.49], [16.51, 46.49], [13.51, 51.49], [47.51, 124.49], [0.51, 3.49], [0.51, 6.49], [0.51, 6.49]],
+                         bounds=[(16.51, 96.49), (13.51, 54.49), (13.51, 51.49), (16.51, 46.49), (13.51, 51.49), (47.51, 124.49), (0.51, 3.49), (0.51, 6.49), (0.51, 6.49)],
                         )
 
     def _evaluate_implementation(self, X, scaling = False):
@@ -174,6 +176,7 @@ class CEC2020_p23(BenchmarkProblem):
     '''
 
     num_objectives = 1
+    input_type = DataType.CONTINUOUS
     available_dimensions = 5
     num_constraints = 3
 
@@ -183,7 +186,7 @@ class CEC2020_p23(BenchmarkProblem):
                          num_constraints=3, 
                         #  X_opt=[[0] * 5], 
                          optimum=[16.069868725], 
-                         bounds=[[0, 60], [0, 60], [0, 90], [0, 90], [0, 90]],
+                         bounds=[(0, 60), (0, 60), (0, 90), (0, 90), (0, 90)],
                         )
 
     def _evaluate_implementation(self, X, scaling = False):
@@ -260,6 +263,7 @@ class CEC2020_p24(BenchmarkProblem):
     '''
 
     num_objectives = 1
+    input_type = DataType.CONTINUOUS
     available_dimensions = 7
     num_constraints = 0
 
@@ -269,7 +273,7 @@ class CEC2020_p24(BenchmarkProblem):
                          num_constraints=0, 
                         #  X_opt=[[0] * 7], 
                          optimum=[2.5287918415], 
-                         bounds=[[10, 150], [10, 150], [100, 200], [0, 50], [10, 150], [100, 300], [1, 3.14]],
+                         bounds=[(10, 150), (10, 150), (100, 200), (0, 50), (10, 150), (100, 300), (1, 3.14)],
                         )
 
     def _evaluate_implementation(self, X, scaling = False):
@@ -358,6 +362,7 @@ class CEC2020_p25(BenchmarkProblem):
     '''
 
     num_objectives = 1
+    input_type = DataType.CONTINUOUS
     available_dimensions = 7
     num_constraints = 0
 
@@ -367,7 +372,7 @@ class CEC2020_p25(BenchmarkProblem):
                          num_constraints=0, 
                         #  X_opt=[[0] * 7], 
                          optimum=[1616.1197651], 
-                         bounds=[[10, 150], [10, 150], [100, 200], [0, 50], [10, 150], [100, 300], [1, 3.14]],
+                         bounds=[(10, 150), (10, 150), (100, 200), (0, 50), (10, 150), (100, 300), (1, 3.14)],
                         )
 
     def _evaluate_implementation(self, X, scaling = False):
@@ -431,6 +436,7 @@ class CEC2020_p26(BenchmarkProblem):
     '''
 
     num_objectives = 1
+    input_type = DataType.CONTINUOUS
     available_dimensions = 22
     num_constraints = 0
 
@@ -440,7 +446,7 @@ class CEC2020_p26(BenchmarkProblem):
                          num_constraints=0, 
                         #  X_opt=[[0] * 22], 
                          optimum=[35.359231973], 
-                         bounds=[[6.51, 76.49], [6.51, 76.49], [6.51, 76.49], [6.51, 76.49], [6.51, 76.49], [6.51, 76.49], [6.51, 76.49], [6.51, 76.49], [0.51, 4.49], [0.51, 4.49], [0.51, 4.49], [0.51, 4.49], [0.51, 9.49], [0.51, 9.49], [0.51, 9.49], [0.51, 9.49], [0.51, 9.49], [0.51, 9.49], [0.51, 9.49], [0.51, 9.49], [0.51, 9.49], [0.51, 9.49]],
+                         bounds=[(6.51, 76.49), (6.51, 76.49), (6.51, 76.49), (6.51, 76.49), (6.51, 76.49), (6.51, 76.49), (6.51, 76.49), (6.51, 76.49), (0.51, 4.49), (0.51, 4.49), (0.51, 4.49), (0.51, 4.49), (0.51, 9.49), (0.51, 9.49), (0.51, 9.49), (0.51, 9.49), (0.51, 9.49), (0.51, 9.49), (0.51, 9.49), (0.51, 9.49), (0.51, 9.49), (0.51, 9.49)],
                         )
 
     def _evaluate_implementation(self, X, scaling = False):
@@ -612,6 +618,7 @@ class CEC2020_p27(BenchmarkProblem):
     '''
 
     num_objectives = 1
+    input_type = DataType.CONTINUOUS
     available_dimensions = 10
     num_constraints = 0
 
@@ -621,7 +628,7 @@ class CEC2020_p27(BenchmarkProblem):
                          num_constraints=0, 
                         #  X_opt=[[0] * 10], 
                          optimum=[524.45076066], 
-                         bounds=[[0.645e-4, 50e-4]]*10,
+                         bounds=[(0.0000645, 0.005),]*10,
                         )
 
     def _evaluate_implementation(self, X, scaling = False):
@@ -659,6 +666,7 @@ class CEC2020_p28(BenchmarkProblem):
     '''
 
     num_objectives = 1
+    input_type = DataType.CONTINUOUS
     available_dimensions = 10
     num_constraints = 0
 
@@ -668,7 +676,7 @@ class CEC2020_p28(BenchmarkProblem):
                          num_constraints=0, 
                         #  X_opt=[[0] * 10], 
                          optimum=[14614.135715], 
-                         bounds=[[125, 150], [10.5, 31.5], [4.51, 50.49], [0.515, 0.6], [0.515, 0.6], [0.4, 0.5], [0.6, 0.7], [0.3, 0.4], [0.02, 0.1], [0.6, 0.85]],
+                         bounds=[(125.0, 150.0), (10.5, 31.5), (4.51, 50.49), (0.515, 0.6), (0.515, 0.6), (0.4, 0.5), (0.6, 0.7), (0.3, 0.4), (0.02, 0.1), (0.6, 0.85)],
                         )
 
     def _evaluate_implementation(self, X, scaling = False):
@@ -736,6 +744,7 @@ class CEC2020_p29(BenchmarkProblem):
     '''
 
     num_objectives = 1
+    input_type = DataType.CONTINUOUS
     available_dimensions = 4
     num_constraints = 0
 
@@ -745,7 +754,7 @@ class CEC2020_p29(BenchmarkProblem):
                          num_constraints=0, 
                         #  X_opt=[[0] * 4], 
                          optimum=[2964895.4173], 
-                         bounds=[[20, 50], [1, 10], [20, 50], [0.1, 60]],
+                         bounds=[(20, 50), (1, 10), (20, 50), (0.1, 60)],
                         )
 
     def _evaluate_implementation(self, X, scaling = False):
@@ -781,6 +790,7 @@ class CEC2020_p30(BenchmarkProblem):
     '''
 
     num_objectives = 1
+    input_type = DataType.CONTINUOUS
     available_dimensions = 3
     num_constraints = 0
 
@@ -790,7 +800,7 @@ class CEC2020_p30(BenchmarkProblem):
                          num_constraints=0, 
                         #  X_opt=[[0] * 3], 
                          optimum=[2.6138840583], 
-                         bounds=[[0.51, 70.49], [0.6, 3], [0.51, 42.49]],
+                         bounds=[(0.51, 70.49), (0.6, 3), (0.51, 42.49)],
                         )
 
     def _evaluate_implementation(self, X, scaling = False):
@@ -846,6 +856,7 @@ class CEC2020_p31(BenchmarkProblem):
     '''
 
     num_objectives = 1
+    input_type = DataType.CONTINUOUS
     available_dimensions = 4
     num_constraints = 0
 
@@ -855,7 +866,7 @@ class CEC2020_p31(BenchmarkProblem):
                          num_constraints=0, 
                         #  X_opt=[[0] * 4], 
                          optimum=[0.0], 
-                         bounds=[[12, 60]]*4,
+                         bounds=[(12, 60)]*4,
                         )
 
     def _evaluate_implementation(self, X, scaling = False):
@@ -892,6 +903,7 @@ class CEC2020_p32(BenchmarkProblem):
     '''
 
     num_objectives = 1
+    input_type = DataType.CONTINUOUS
     available_dimensions = 5
     num_constraints = 0
 
@@ -901,7 +913,7 @@ class CEC2020_p32(BenchmarkProblem):
                          num_constraints=0, 
                         #  X_opt=[[0] * 5], 
                          optimum=[-30665.538672], 
-                         bounds=[[78, 102], [33, 45], [27, 45], [27, 45], [27, 45]],
+                         bounds=[(78.0, 102.0), (33.0, 45.0), (27.0, 45.0), (27.0, 45.0), (27.0, 45.0)],
                         )
 
     def _evaluate_implementation(self, X, scaling = False):
@@ -951,6 +963,7 @@ class CEC2020_p33(BenchmarkProblem):
     '''
 
     num_objectives = 1
+    input_type = DataType.CONTINUOUS
     available_dimensions = 30
     num_constraints = 0
 
@@ -960,7 +973,7 @@ class CEC2020_p33(BenchmarkProblem):
                          num_constraints=0, 
                         #  X_opt=[[0] * 30], 
                          optimum=[2.639346497], 
-                         bounds=[[0.001, 1]]*30,
+                         bounds=[(0.001, 1.0)]*30,
                         )
 
     def _evaluate_implementation(self, X, scaling = False):

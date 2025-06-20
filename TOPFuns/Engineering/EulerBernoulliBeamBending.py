@@ -1,5 +1,5 @@
 import torch
-from ..base import BenchmarkProblem
+from ..base import *
 
 class EulerBernoulliBeamBending(BenchmarkProblem):
 

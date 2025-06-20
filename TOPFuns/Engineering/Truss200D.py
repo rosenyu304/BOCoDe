@@ -1,6 +1,6 @@
 
 import torch
-from ..base import BenchmarkProblem
+from ..base import *
 import numpy as np
 
 class Truss200D(BenchmarkProblem):
