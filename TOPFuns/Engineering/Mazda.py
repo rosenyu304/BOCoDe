@@ -10,6 +10,7 @@ class Mazda_SCA(BenchmarkProblem):
     '''
 
     available_dimensions = 148
+    input_type = DataType.CONTINUOUS
     num_objectives = 4
     num_constraints = 36
 
