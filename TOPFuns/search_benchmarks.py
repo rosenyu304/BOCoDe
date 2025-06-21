@@ -85,6 +85,7 @@ def _has_valid_val(val: ValType, constraint = Callable[[int], bool]) -> bool:
         raise ValueError(f"Unsupported val type: {val}")
 
 def filter_functions(dimension_filter: Callable[[int], bool] = lambda x: x > 0,
+                     input_type_filter: Callable[[DataType], bool] = lambda x: True,
                      objectives_filter: Callable[[int], bool] = lambda x: x > 0,
                      constraints_filter: Callable[[int], bool] = lambda x: x >= 0,
                      category_filter: Callable[[str], bool] = lambda x: True,
@@ -98,6 +99,8 @@ def filter_functions(dimension_filter: Callable[[int], bool] = lambda x: x > 0,
     ----------
     dimension_filter : Callable[[int], bool], optional
         A function that takes a dimension number and returns a boolean, by default unfiltered
+    input_type_filter : Callable[[DataType], bool], optional
+        A function that takes an input type and returns a boolean, by default unfiltered
     objectives_filter : Callable[[int], bool], optional
         A function that takes an objective number and returns a boolean, by default unfiltered
     constraints_filter : Callable[[int], bool], optional
@@ -118,9 +121,13 @@ def filter_functions(dimension_filter: Callable[[int], bool] = lambda x: x > 0,
             continue
 
         for func in functions:
+            input_type = getattr(func, "input_type", None)
             dimensions = getattr(func, "available_dimensions", None)
             objectives = getattr(func, "num_objectives", None)
             constraints = getattr(func, "num_constraints", None)
+
+            if input_type is not None and not input_type_filter(input_type):
+                continue
 
             if dimensions is not None and not _has_valid_val(dimensions, dimension_filter):
                 continue
