@@ -13,6 +13,7 @@ class Truss120D(BenchmarkProblem):
     # 120D objective, 121 constraints, X = n-by-120
 
     available_dimensions = 120
+    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 121
 

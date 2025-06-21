@@ -9,6 +9,7 @@ class Beale(BenchmarkProblem):
     '''
 
     available_dimensions = 2
+    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 0
 
@@ -52,6 +53,7 @@ class Cosine8(BenchmarkProblem):
     '''
 
     available_dimensions = 8
+    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 0
 
@@ -95,6 +97,7 @@ class DropWave(BenchmarkProblem):
     '''
 
     available_dimensions = 2
+    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 0
 
@@ -138,6 +141,7 @@ class EggHolder(BenchmarkProblem):
     '''
 
     available_dimensions = 2
+    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 0
 
@@ -181,6 +185,7 @@ class Hartmann3D(BenchmarkProblem):
     '''
 
     available_dimensions = 3
+    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 0
 
@@ -255,6 +260,7 @@ class Hartmann6D(BenchmarkProblem):
     '''
 
     available_dimensions = 6
+    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 0
 
@@ -298,6 +304,7 @@ class HolderTable(BenchmarkProblem):
     '''
 
     available_dimensions = 2
+    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 0
 
@@ -341,6 +348,7 @@ class BaseShekel(BenchmarkProblem):
     '''
 
     available_dimensions = 4
+    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 0
 
@@ -400,6 +408,7 @@ class SixHumpCamel(BenchmarkProblem):
     '''
 
     available_dimensions = 2
+    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 0
 
@@ -443,6 +452,7 @@ class ThreeHumpCamel(BenchmarkProblem):
     '''
 
     available_dimensions = 2
+    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 0
 
@@ -486,6 +496,7 @@ class ConstrainedGramacy(BenchmarkProblem):
     '''
 
     available_dimensions = 2
+    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 2
 
@@ -531,6 +542,7 @@ class ConstrainedHartmann(BenchmarkProblem):
     '''
 
     available_dimensions = 6
+    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 1
 
@@ -576,6 +588,7 @@ class ConstrainedHartmannSmooth(BenchmarkProblem):
     '''
 
     available_dimensions = 6
+    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 1
 
@@ -621,6 +634,7 @@ class PressureVessel(BenchmarkProblem):
     '''
 
     available_dimensions = 4
+    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 4
 
@@ -664,6 +678,7 @@ class WeldedBeamSO(BenchmarkProblem):
     '''
 
     available_dimensions = 4
+    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 4
 
@@ -707,6 +722,7 @@ class TensionCompressionString(BenchmarkProblem):
     '''
 
     available_dimensions = 3
+    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 2
 
@@ -750,6 +766,7 @@ class SpeedReducer(BenchmarkProblem):
     '''
 
     available_dimensions = 7
+    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 11
 

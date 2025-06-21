@@ -11,6 +11,7 @@ class Truss25D(BenchmarkProblem):
     '''
 
     available_dimensions = 25
+    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 31
 

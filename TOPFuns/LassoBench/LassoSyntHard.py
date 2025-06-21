@@ -17,6 +17,7 @@ class LassoSyntHard(BenchmarkProblem):
     '''
 
     available_dimensions = 1000
+    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 0
 

@@ -11,6 +11,7 @@ class Car(BenchmarkProblem):
     # 11D objective, 10 constraints, X = n-by-11
 
     available_dimensions = 11
+    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 10
 

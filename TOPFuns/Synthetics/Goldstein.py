@@ -9,6 +9,7 @@ class Goldstein(BenchmarkProblem):
     '''
 
     available_dimensions = 2
+    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 0
 
@@ -67,6 +68,8 @@ class Goldstein_Discrete(Goldstein):
     (Alt Name: Goldstein-Price)
     LVGP paper: https://www.nature.com/articles/s41598-020-60652-9
     '''
+
+    input_type = DataType.MIXED
 
     def __init__(self):
                 

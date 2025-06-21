@@ -5,6 +5,8 @@ import numpy as np
 
 class BaseModactProblem(BenchmarkProblem):
 
+    input_type = DataType.CONTINUOUS
+
     def __init__(self, problem: str, optimum=None, x_opt=None):
 
         self.problem = pb.get_problem(problem)

@@ -135,6 +135,7 @@ def objectivefunB(x: torch.Tensor, m: int, p: int) -> torch.Tensor:
 class NonLinearConstraintProblemA3(BenchmarkProblem):
 
     available_dimensions = (1, None)
+    input_type = DataType.CONTINUOUS
     num_objectives = (1, None)
     num_constraints = 0
 
@@ -198,6 +199,7 @@ class NonLinearConstraintProblemA3(BenchmarkProblem):
 class NonLinearConstraintProblemA4(BenchmarkProblem):
 
     available_dimensions = (1, None)
+    input_type = DataType.CONTINUOUS
     num_objectives = (1, None)
     num_constraints = 0
 
@@ -243,6 +245,7 @@ class NonLinearConstraintProblemA4(BenchmarkProblem):
 class NonLinearConstraintProblemA7(BenchmarkProblem):
 
     available_dimensions = (1, None)
+    input_type = DataType.CONTINUOUS
     num_objectives = (1, None)
     num_constraints = [1, 3]
 
@@ -318,6 +321,7 @@ class NonLinearConstraintProblemA7(BenchmarkProblem):
 class NonLinearConstraintProblemA8(BenchmarkProblem):
 
     available_dimensions = (1, None)
+    input_type = DataType.CONTINUOUS
     num_objectives = (1, None)
     num_constraints = [2, 4]
 
@@ -400,6 +404,7 @@ class NonLinearConstraintProblemA8(BenchmarkProblem):
 class NonLinearConstraintProblemB3(BenchmarkProblem):
 
     available_dimensions = (1, None)
+    input_type = DataType.CONTINUOUS
     num_objectives = (1, None)
     num_constraints = 0
 
@@ -435,6 +440,7 @@ class NonLinearConstraintProblemB3(BenchmarkProblem):
 class NonLinearConstraintProblemB4(BenchmarkProblem):
 
     available_dimensions = (1, None)
+    input_type = DataType.CONTINUOUS
     num_objectives = (1, None)
     num_constraints = 1
 
@@ -477,6 +483,7 @@ class NonLinearConstraintProblemB4(BenchmarkProblem):
 class NonLinearConstraintProblemB7(BenchmarkProblem):
 
     available_dimensions = (1, None)
+    input_type = DataType.CONTINUOUS
     num_objectives = (1, None)
     num_constraints = [1, 2]
 
@@ -544,6 +551,7 @@ class NonLinearConstraintProblemB7(BenchmarkProblem):
 class NonLinearConstraintProblemB8(BenchmarkProblem):
 
     available_dimensions = (1, None)
+    input_type = DataType.CONTINUOUS
     num_objectives = (1, None)
     num_constraints = [2, 4]
         

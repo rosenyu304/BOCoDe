@@ -17,6 +17,7 @@ class LassoRCV1(BenchmarkProblem):
     '''
 
     available_dimensions = 47236
+    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 0
 

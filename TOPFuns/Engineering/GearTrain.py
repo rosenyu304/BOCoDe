@@ -9,6 +9,7 @@ class GearTrain(BenchmarkProblem):
     '''
 
     available_dimensions = 4
+    input_type = DataType.MIXED
     num_objectives = 1
     num_constraints = 0
 

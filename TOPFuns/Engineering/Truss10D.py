@@ -4,6 +4,7 @@ from ..base import *
 class Truss10D(BenchmarkProblem):
 
     available_dimensions = 10
+    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 14
 

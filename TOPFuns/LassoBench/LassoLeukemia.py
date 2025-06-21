@@ -17,6 +17,7 @@ class LassoLeukemia(BenchmarkProblem):
     '''
 
     available_dimensions = 7129
+    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 0
 

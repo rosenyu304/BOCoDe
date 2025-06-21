@@ -15,6 +15,7 @@ class Truss72D_FourForces(BenchmarkProblem):
     tags = {"single_objective", "constrained", "72D", "extra_imports"}
 
     available_dimensions = 72
+    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 88
 
@@ -299,6 +300,7 @@ class Truss72D_SingleForce(BenchmarkProblem):
     tags = {"single_objective", "constrained", "72D", "extra_imports"}
 
     available_dimensions = 72
+    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 88
 

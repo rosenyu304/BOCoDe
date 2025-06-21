@@ -8,6 +8,7 @@ class Michalewicz(BenchmarkProblem):
     '''
 
     available_dimensions = (1,None)
+    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 0
 

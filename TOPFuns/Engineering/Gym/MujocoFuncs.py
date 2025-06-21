@@ -5,6 +5,7 @@ from ...base import *
 
 class AntProblem(BenchmarkProblem):
     available_dimensions = 8
+    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 0
 
@@ -33,6 +34,7 @@ class AntProblem(BenchmarkProblem):
 
 class HalfCheetahProblem(BenchmarkProblem):
     available_dimensions = 6
+    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 0
 
@@ -61,6 +63,7 @@ class HalfCheetahProblem(BenchmarkProblem):
 
 class HopperProblem(BenchmarkProblem):
     available_dimensions = 3
+    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 0
 
@@ -89,6 +92,7 @@ class HopperProblem(BenchmarkProblem):
 
 class HumanoidProblem(BenchmarkProblem):
     available_dimensions = 17
+    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 0
 
@@ -117,6 +121,7 @@ class HumanoidProblem(BenchmarkProblem):
 
 class HumanoidStandupProblem(BenchmarkProblem):
     available_dimensions = 17
+    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 0
 
@@ -145,6 +150,7 @@ class HumanoidStandupProblem(BenchmarkProblem):
 
 class InvertedDoublePendulumProblem(BenchmarkProblem):
     available_dimensions = 1
+    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 0
 
@@ -173,6 +179,7 @@ class InvertedDoublePendulumProblem(BenchmarkProblem):
 
 class InvertedPendulumProblem(BenchmarkProblem):
     available_dimensions = 1
+    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 0
 
@@ -201,6 +208,7 @@ class InvertedPendulumProblem(BenchmarkProblem):
 
 class PusherProblem(BenchmarkProblem):
     available_dimensions = 7
+    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 0
 
@@ -229,6 +237,7 @@ class PusherProblem(BenchmarkProblem):
 
 class ReacherProblem(BenchmarkProblem):
     available_dimensions = 2
+    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 0
 
@@ -257,6 +266,7 @@ class ReacherProblem(BenchmarkProblem):
 
 class SwimmerProblem(BenchmarkProblem):
     available_dimensions = 2
+    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 0
 
@@ -285,6 +295,7 @@ class SwimmerProblem(BenchmarkProblem):
 
 class Walker2DProblem(BenchmarkProblem):
     available_dimensions = 6
+    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 0
 

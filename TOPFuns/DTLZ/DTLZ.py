@@ -19,6 +19,7 @@ class FunctionDefinitionAssertionError(Exception):
 class BaseDTLZ(BenchmarkProblem):
 
     available_dimensions = (2, None)
+    input_type = DataType.CONTINUOUS
     num_objectives = (2, None)
     num_constraints = 0
 

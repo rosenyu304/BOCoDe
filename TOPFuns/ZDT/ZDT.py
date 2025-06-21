@@ -17,6 +17,7 @@ class FunctionDefinitionAssertionError(Exception):
 class BaseZDT(BenchmarkProblem):
 
     available_dimensions = (1, None)
+    input_type = DataType.CONTINUOUS
     num_objectives = 2
     num_constraints = 0
 
@@ -56,6 +57,7 @@ class ZDT4(BaseZDT):
 
 class ZDT5(BenchmarkProblem):
     available_dimensions = 80
+    input_type = DataType.CONTINUOUS
     num_objectives = 2
     num_constraints = 0
     ZDTProblem = optproblems.zdt.ZDT5
@@ -67,7 +69,7 @@ class ZDT5(BenchmarkProblem):
         super().__init__(dim = 80, 
                          num_objectives = 2, 
                          num_constraints = 0, 
-                         bounds = [[0, 1]] * 80,
+                         bounds = [(0, 1)] * 80,
                          )
     
     def _evaluate_implementation(self, x: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:

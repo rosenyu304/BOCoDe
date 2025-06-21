@@ -8,6 +8,7 @@ class Powell(BenchmarkProblem):
     '''
 
     available_dimensions = (4,None)
+    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 0
 

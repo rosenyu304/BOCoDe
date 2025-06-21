@@ -11,6 +11,7 @@ class KeaneBump(BenchmarkProblem):
     # N-D objective, 2 constraints, X = n-by-dim
 
     available_dimensions = (5, None)
+    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 2
 

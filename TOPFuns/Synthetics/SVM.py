@@ -14,6 +14,7 @@ Xu, Z., Wang, H., Phillips, J. M., & Zhe, S. (2025). Standard Gaussian Process i
 class SVM(BenchmarkProblem):
 
     available_dimensions = 388
+    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 0
 

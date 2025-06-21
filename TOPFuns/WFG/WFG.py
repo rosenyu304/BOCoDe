@@ -16,6 +16,7 @@ class FunctionDefinitionAssertionError(Exception):
 
 class BaseWFG(BenchmarkProblem):
 
+    input_type = DataType.CONTINUOUS
     available_dimensions = (2, None)
     num_objectives = (2, None)
     num_constraints = 0

@@ -10,6 +10,7 @@ class EulerBernoulliBeamBending(BenchmarkProblem):
     '''
 
     available_dimensions = 3
+    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 0
 

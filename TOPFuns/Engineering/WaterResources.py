@@ -9,6 +9,7 @@ class WaterResources(BenchmarkProblem):
     '''
 
     available_dimensions = 3
+    input_type = DataType.CONTINUOUS
     num_objectives = 5
     num_constraints = 7
 
