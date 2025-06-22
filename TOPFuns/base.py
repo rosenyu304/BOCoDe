@@ -116,9 +116,12 @@ class BenchmarkProblem:
 
         bounds = self.bounds
 
-        if any((isinstance(elem, list) or isinstance(elem, set)) for elem in bounds):
+        if self.__class__.input_type == DataType.DISCRETE or self.__class__.input_type == DataType.MIXED:
             print("Visualization is not supported for discrete functions.")
             return
+
+        if self.dim > 15:
+            print("Visualization may take a while to render for functions with high dimensionality.")
 
         D = self.dim
         M = self.num_objectives

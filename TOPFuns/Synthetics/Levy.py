@@ -36,7 +36,7 @@ class Levy(BenchmarkProblem):
 
         from botorch.test_functions.synthetic import Levy as Levy_imported
 
-        fun = Levy_imported(dim=self.dim)
+        fun = Levy_imported(dim=self.dim, negate=True)
 
         fun.bounds = torch.tensor(self.bounds, dtype=torch.float32).T
 

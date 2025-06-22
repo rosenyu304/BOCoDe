@@ -38,7 +38,7 @@ class DixonPrice(BenchmarkProblem):
 
         from botorch.test_functions.synthetic import DixonPrice as DixonPrice_imported
 
-        fun = DixonPrice_imported(dim=self.dim)
+        fun = DixonPrice_imported(dim=self.dim, negate=True)
 
         fun.bounds = torch.tensor(self.bounds, dtype=torch.float32).T
 

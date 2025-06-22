@@ -38,7 +38,7 @@ class Goldstein(BenchmarkProblem):
                     "IMPORTS: N/A",
                 ]
         # bounds, tags, optimum, x_opt
-        return ([(-2, 2), (0, 1)], tags, [-3], [[0, -1]])
+        return ([(-2, 2), (-2, 2)], tags, [-3], [[0, -1]])
 
     def _evaluate_implementation(self, X: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
 

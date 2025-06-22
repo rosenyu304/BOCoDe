@@ -40,7 +40,7 @@ class Beale(BenchmarkProblem):
 
         from botorch.test_functions.synthetic import Beale as Beale_imported
 
-        fun = Beale_imported()
+        fun = Beale_imported(negate=True)
 
         fun.bounds = torch.tensor(self.bounds, dtype=torch.float32).T
 
@@ -128,7 +128,7 @@ class DropWave(BenchmarkProblem):
 
         from botorch.test_functions.synthetic import DropWave as DropWave_imported
 
-        fun = DropWave_imported()
+        fun = DropWave_imported(negate=True)
 
         fun.bounds = torch.tensor(self.bounds, dtype=torch.float32).T
 
@@ -172,7 +172,7 @@ class EggHolder(BenchmarkProblem):
 
         from botorch.test_functions.synthetic import EggHolder as EggHolder_imported
 
-        fun = EggHolder_imported()
+        fun = EggHolder_imported(negate=True)
 
         fun.bounds = torch.tensor(self.bounds, dtype=torch.float32).T
 
@@ -291,7 +291,7 @@ class Hartmann6D(BenchmarkProblem):
 
         from botorch.test_functions.synthetic import Hartmann as Hartmann_imported
 
-        fun = Hartmann_imported(dim=self.dim)
+        fun = Hartmann_imported(dim=self.dim, negate=True)
 
         fun.bounds = torch.tensor(self.bounds, dtype=torch.float32).T
 
@@ -335,7 +335,7 @@ class HolderTable(BenchmarkProblem):
 
         from botorch.test_functions.synthetic import HolderTable as HolderTable_imported
 
-        fun = HolderTable_imported()
+        fun = HolderTable_imported(negate=True)
 
         fun.bounds = torch.tensor(self.bounds, dtype=torch.float32).T
 
@@ -379,7 +379,7 @@ class BaseShekel(BenchmarkProblem):
 
         from botorch.test_functions.synthetic import Shekel as Shekel_imported
 
-        fun = Shekel_imported(m=self.m)
+        fun = Shekel_imported(m=self.m, negate=True)
 
         fun.bounds = torch.tensor(self.bounds, dtype=torch.float32).T
 
@@ -439,7 +439,7 @@ class SixHumpCamel(BenchmarkProblem):
 
         from botorch.test_functions.synthetic import SixHumpCamel as SixHumpCamel_imported
 
-        fun = SixHumpCamel_imported()
+        fun = SixHumpCamel_imported(negate=True)
 
         fun.bounds = torch.tensor(self.bounds, dtype=torch.float32).T
 
@@ -483,7 +483,7 @@ class ThreeHumpCamel(BenchmarkProblem):
 
         from botorch.test_functions.synthetic import ThreeHumpCamel as ThreeHumpCamel_imported
 
-        fun = ThreeHumpCamel_imported()
+        fun = ThreeHumpCamel_imported(negate=True)
 
         fun.bounds = torch.tensor(self.bounds, dtype=torch.float32).T
 
@@ -527,7 +527,7 @@ class ConstrainedGramacy(BenchmarkProblem):
 
         from botorch.test_functions.synthetic import ConstrainedGramacy as ConstrainedGramacy_imported
 
-        fun = ConstrainedGramacy_imported()
+        fun = ConstrainedGramacy_imported(negate=True)
 
         gx = fun.evaluate_slack(X)
 
@@ -573,7 +573,7 @@ class ConstrainedHartmann(BenchmarkProblem):
 
         from botorch.test_functions.synthetic import ConstrainedHartmann as Hartmann_imported
 
-        fun = Hartmann_imported(dim=self.dim)
+        fun = Hartmann_imported(dim=self.dim, negate=True)
 
         gx = fun.evaluate_slack(X)
 
@@ -619,7 +619,7 @@ class ConstrainedHartmannSmooth(BenchmarkProblem):
 
         from botorch.test_functions.synthetic import ConstrainedHartmannSmooth as Hartmann_imported
 
-        fun = Hartmann_imported(dim=self.dim)
+        fun = Hartmann_imported(dim=self.dim, negate=True)
 
         gx = fun.evaluate_slack(X)
 
@@ -663,7 +663,7 @@ class PressureVessel(BenchmarkProblem):
 
         from botorch.test_functions.synthetic import PressureVessel as PressureVessel_imported
 
-        fun = PressureVessel_imported()
+        fun = PressureVessel_imported(negate=True)
 
         gx = fun.evaluate_slack(X)
 
@@ -707,7 +707,7 @@ class WeldedBeamSO(BenchmarkProblem):
 
         from botorch.test_functions.synthetic import WeldedBeamSO as WeldedBeam_imported
 
-        fun = WeldedBeam_imported()
+        fun = WeldedBeam_imported(negate=True)
 
         gx = fun.evaluate_slack(X)
 
@@ -751,7 +751,7 @@ class TensionCompressionString(BenchmarkProblem):
 
         from botorch.test_functions.synthetic import TensionCompressionString as TensionCompressionString_imported
 
-        fun = TensionCompressionString_imported()
+        fun = TensionCompressionString_imported(negate=True)
 
         gx = fun.evaluate_slack(X)
 
@@ -795,7 +795,7 @@ class SpeedReducer(BenchmarkProblem):
         
         from botorch.test_functions.synthetic import SpeedReducer as SpeedReducer_imported
 
-        fun = SpeedReducer_imported()
+        fun = SpeedReducer_imported(negate=True)
 
         gx = fun.evaluate_slack(X)
 
