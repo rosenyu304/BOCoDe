@@ -116,7 +116,7 @@ class DropWave(BenchmarkProblem):
                          num_objectives = 1, 
                          num_constraints = 0, 
                          bounds = [(-5.12,5.12)]*2,
-                         optimum = [[-1]],
+                         optimum = [[1]],
                          x_opt = [[0, 0]],
                          tags = tags
                         )
@@ -160,7 +160,7 @@ class EggHolder(BenchmarkProblem):
                          num_objectives = 1, 
                          num_constraints = 0, 
                          bounds = [(-512,512)]*2,
-                         optimum = [[-959.6407]],
+                         optimum = [[959.6407]],
                          x_opt = [[512, 404.2319]],
                          tags = tags
                         )
@@ -279,7 +279,7 @@ class Hartmann6D(BenchmarkProblem):
                          num_objectives = 1, 
                          num_constraints = 0, 
                          bounds = [(0,1)]*6,
-                         optimum = [[-3.32237]],
+                         optimum = [[3.32237]],
                          x_opt = [[0.20169, 0.150011, 0.476874, 0.275332, 0.311652, 0.6573]],
                          tags = tags
                         )
@@ -323,7 +323,7 @@ class HolderTable(BenchmarkProblem):
                          num_objectives = 1, 
                          num_constraints = 0, 
                          bounds = [(-10,10)]*2,
-                         optimum = [[-19.2085]],
+                         optimum = [[19.2085]],
                          x_opt = [[8.05502, 9.66459]],
                          tags = tags
                         )
@@ -387,15 +387,15 @@ class BaseShekel(BenchmarkProblem):
     
 class Shekelm5(BaseShekel):
     def __init__(self):
-        super().__init__(m=5, optimum=[-10.1532])
+        super().__init__(m=5, optimum=[10.1532])
 
 class Shekelm7(BaseShekel):
     def __init__(self):
-        super().__init__(m=7, optimum=[-10.4029])
+        super().__init__(m=7, optimum=[10.4029])
 
 class Shekelm10(BaseShekel):
     def __init__(self):
-        super().__init__(m=10, optimum=[-10.5364])
+        super().__init__(m=10, optimum=[10.5364])
 
 class Shekel(BaseShekel):
     def __init__(self, m):
@@ -427,7 +427,7 @@ class SixHumpCamel(BenchmarkProblem):
                          num_objectives = 1, 
                          num_constraints = 0, 
                          bounds = [(-3,3)]*2,
-                         optimum = [[-1.0316],[-1.0316]],
+                         optimum = [[1.0316],[1.0316]],
                          x_opt = [[0.0898, -0.7126],[-0.0898, 0.7126]],
                          tags = tags
                         )
@@ -515,7 +515,7 @@ class ConstrainedGramacy(BenchmarkProblem):
                          num_objectives = 1, 
                          num_constraints = 2, 
                          bounds = [(0,1)]*2,
-                         optimum = [[0.5998]],
+                         optimum = [[-0.5998]],
                          x_opt = [[0.1954, 0.4044]],
                          tags = tags
                         )
@@ -561,7 +561,7 @@ class ConstrainedHartmann(BenchmarkProblem):
                          num_objectives = 1, 
                          num_constraints = 1, 
                          bounds = [(0,1)]*6,
-                         optimum = [[-3.32237]],
+                         optimum = [[3.32237]],
                          x_opt = [[0.20169, 0.150011, 0.476874, 0.275332, 0.311652, 0.6573]],
                          tags = tags
                         )
@@ -607,7 +607,7 @@ class ConstrainedHartmannSmooth(BenchmarkProblem):
                          num_objectives = 1, 
                          num_constraints = 1, 
                          bounds = [(0,1)]*6,
-                         optimum = [[-3.32237]],
+                         optimum = [[3.32237]],
                          x_opt = [[0.20169, 0.150011, 0.476874, 0.275332, 0.311652, 0.6573]],
                          tags = tags
                         )
