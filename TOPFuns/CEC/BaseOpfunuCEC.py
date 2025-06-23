@@ -32,4 +32,4 @@ class BaseOpfunuCEC(BenchmarkProblem):
             f = self.problem.evaluate(el.tolist())
             fx[i, :] = torch.Tensor([f])
 
-        return None, torch.tensor(fx)
+        return None, -torch.tensor(fx)
