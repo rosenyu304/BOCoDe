@@ -1,6 +1,3 @@
-# wheel # For cec2019comp100digit
-# Cython # For cec2019comp100digit
-
 git+https://github.com/ksehic/LassoBench.git#egg=LassoBench
 pytest
 botorch

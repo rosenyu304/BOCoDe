@@ -20,7 +20,7 @@ class Car(BenchmarkProblem):
     def __init__(self):
         super().__init__(dim = 11, num_objectives = 1, num_constraints = 10, bounds = [(0.5, 1.5), (0.45, 1.35), (0.5, 1.5), (0.5, 1.5),
                                                                          (0.5, 1.5), (0.5, 1.5), (0.5, 1.5), (0.192, 0.345),
-                                                                         (0.192, 0.345), (0, -20), (0, -20)])
+                                                                         (0.192, 0.345), (-20, 0), (-20, 0)])
 
     def _evaluate_implementation(self, X, scaling = False):
         if scaling:

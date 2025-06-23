@@ -56,8 +56,9 @@ class ZDT4(BaseZDT):
     ZDTProblem = optproblems.zdt.ZDT4
 
 class ZDT5(BenchmarkProblem):
+
     available_dimensions = 80
-    input_type = DataType.CONTINUOUS
+    input_type = DataType.DISCRETE
     num_objectives = 2
     num_constraints = 0
     ZDTProblem = optproblems.zdt.ZDT5
@@ -73,7 +74,6 @@ class ZDT5(BenchmarkProblem):
                          )
     
     def _evaluate_implementation(self, x: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
-
         fx = torch.zeros(x.shape[0], self.num_objectives)
         
         for i, el in enumerate(x):
