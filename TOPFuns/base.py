@@ -275,19 +275,21 @@ class BenchmarkProblem:
             sliders = []
             for dim in range(D):
                 if dim in (i, j):
-                    # print(f"Skipping slider for dimension {dim}")
                     continue
                 low, high = bounds[dim]
                 step = (high - low) / 100.0
                 sliders.append(html.Div([
                     html.Label(f"x{dim} ="),
                     dcc.Slider(
-                        id={"type":"slider","index": dim},
-                        min=low, max=high, step=step, value=mids[dim],
-                        marks={low:str(low), high:str(high)}
+                        id={"type": "slider", "index": int(dim)},
+                        min=float(low),
+                        max=float(high),
+                        step=float(step),
+                        value=float(mids[dim]),
+                        marks={str(low): str(low), str(high): str(high)}
                     )
-                ], style={"margin":"10px 0"}))
-            return sliders
+                ], style={"margin": "10px 0"}))
+            return html.Div(sliders)
 
         # updates 3d visualization when anything updates
         @app.callback(
