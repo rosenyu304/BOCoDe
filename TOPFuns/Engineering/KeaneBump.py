@@ -26,6 +26,7 @@ class KeaneBump(BenchmarkProblem):
             X = super().scale(X)
 
         n = X.size(0)
+        dim = X.shape[1]
 
         fx = torch.zeros(n, 1).to(torch.float64)
         gx1 = torch.zeros(n, 1).to(torch.float64)
@@ -41,7 +42,7 @@ class KeaneBump(BenchmarkProblem):
             pi_sum = 1
             sigma_sum = 0
 
-            for j in range(n):
+            for j in range(dim):
                 cos4 += torch.cos(x[j]) ** 4
                 cos2 *= torch.cos(x[j]) ** 2
                 sq_denom += (j+1) * (x[j])**2
@@ -53,7 +54,7 @@ class KeaneBump(BenchmarkProblem):
             fx[i] = test_function
 
             gx1[i] = 0.75 - pi_sum
-            gx2[i] = sigma_sum - 7.5* (X.shape[1])
+            gx2[i] = sigma_sum - 7.5* dim
 
         gx = torch.cat((gx1, gx2), 1)
         return gx, fx
