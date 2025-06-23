@@ -3,8 +3,18 @@ from typing import Callable, Iterable, List, Union, Dict
 from collections import defaultdict
 import TOPFuns as optbench
 from TOPFuns import *
+import importlib
 
 ValType = Union[int, tuple, set, list]
+
+def qualify_classes(class_list, module_name):
+    """
+    Given a list of class objects and a module name (string),
+    return a list of fully qualified class objects from the specified module.
+    """
+    full_module_path = "TOPFuns." + module_name.replace('.', '/').replace('/', '.')
+    module = importlib.import_module(full_module_path)
+    return [getattr(module, cls.__name__) for cls in class_list]
 
 SyntheticsFuncs = [Ackley, Bukin, DixonPrice, Goldstein, Goldstein_Discrete, Griewank, Levy, Michalewicz, 
                    Powell, Rastrigin, Rosenbrock, StyblinskiTang, Beale, Cosine8, DropWave, EggHolder, 
@@ -51,18 +61,21 @@ categorized_classes = {
     "Synthetics": SyntheticsFuncs,
     "LassoBench": LassoBenchFuncs,
     "Engineering": EngineeringFuncs,
-    "CEC2020_RW_Constrained": CEC2020Funcs,
+    "CEC.CEC2020_RW_Constrained": CEC2020Funcs,
     "BBOB": BBOBFuncs,
     "BoTorch": BotorchFuncs,
     "MODAct": MODActFuncs,
-    "CEC2017": CEC2017Funcs,
+    "CEC.CEC2017": CEC2017Funcs,
     "WFG": WFGFuncs,
     "ZDT": ZDTFuncs,
     "DTLZ": DTLZFuncs,
-    "CEC2007": CEC2007Funcs,
-    "CEC2019": CEC2019Funcs,
+    "CEC.CEC2007": CEC2007Funcs,
+    "CEC.CEC2019": CEC2019Funcs,
     "NEORL": NEORLFuncs,
 }
+
+for category, functions in categorized_classes.items():
+    categorized_classes[category] = qualify_classes(functions, category)
 
 def _has_valid_val(val: ValType, constraint = Callable[[int], bool]) -> bool:
     if isinstance(val, int):
@@ -93,7 +106,7 @@ def filter_functions(dimension_filter: Callable[[int], bool] = lambda x: x > 0,
     """
     Filter functions based on the given constraints.
 
-    Available Categories: ["Synthetics", "LassoBench", "Engineering", "CEC2020_RW_Constrained", "BBOB", "BoTorch"]
+    Available Categories: ["Synthetics", "LassoBench", "Engineering", "CEC.CEC2020_RW_Constrained", "BBOB", "BoTorch", "MODAct", "CEC.CEC2017", "WFG", "ZDT", "DTLZ", "CEC.CEC2007", "CEC.CEC2019", "NEORL"]
 
     Parameters
     ----------
@@ -138,6 +151,8 @@ def filter_functions(dimension_filter: Callable[[int], bool] = lambda x: x > 0,
             if constraints is not None and not _has_valid_val(constraints, constraints_filter):
                 continue
 
-            filtered_funcs[category].append(func.__name__)
+            # Compose the path as 'TOPFuns.<category>.<ClassName>'
+            class_name = func.__name__ if hasattr(func, "__name__") else func.__class__.__name__
+            filtered_funcs[category].append(f"TOPFuns.{category}.{class_name}")
 
     return dict(filtered_funcs)
