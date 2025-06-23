@@ -51,7 +51,7 @@ class CEC2007_OKA2(BenchmarkProblem):
             + torch.abs(x3 - 5.0 * torch.sin(x1)) ** (1.0 / 3.0)
         )
         fx = torch.stack((f1, f2), dim=1)
-        return None, fx
+        return None, -fx
 
 
 # =============================================================================
@@ -123,7 +123,7 @@ class CEC2007_SYMPART(BenchmarkProblem):
         f0 = f0 / self.dim
         f1 = f1 / self.dim
         fx = torch.stack((f0, f1), dim=1)
-        return None, fx
+        return None, -fx
 
 
 # =============================================================================
@@ -179,7 +179,7 @@ class CEC2007_S_ZDT1(BenchmarkProblem):
         f1 = (g * (1.0 - torch.sqrt(zz0 / g)) + 1.0) * (2.0 / (1.0 + torch.exp(-psum)))
 
         fx = torch.stack((f0, f1), dim=1)
-        return None, fx
+        return None, -fx
 
 
 # =============================================================================
@@ -217,7 +217,7 @@ class CEC2007_S_ZDT2(CEC2007_S_ZDT1):
         f1 = (g * (1.0 - (zz0 / g) ** 2) + 1.0) * (2.0 / (1.0 + torch.exp(-psum)))
 
         fx = torch.stack((f0, f1), dim=1)
-        return None, fx
+        return None, -fx
 
 
 # =============================================================================
@@ -282,7 +282,7 @@ class CEC2007_S_ZDT4(BenchmarkProblem):
         f1 = (g * (1.0 - torch.sqrt(zz0 / g)) + 1.0) * (2.0 / (1.0 + torch.exp(-psum)))
 
         fx = torch.stack((f0, f1), dim=1)
-        return None, fx
+        return None, -fx
 
 
 # =============================================================================
@@ -326,7 +326,7 @@ class CEC2007_S_ZDT6(CEC2007_S_ZDT1):
         f1 = (g * (1.0 - (base / g) ** 2) + 1.0) * (2.0 / (1.0 + torch.exp(-psum)))
 
         fx = torch.stack((f0, f1), dim=1)
-        return None, fx
+        return None, -fx
 
 
 # =============================================================================
@@ -390,7 +390,7 @@ class CEC2007_S_DTLZ2(BenchmarkProblem):
                 ff = ff * torch.sin(zz[:, j] * math.pi / 2.0).unsqueeze(1)
             fx.append((2.0 / (1.0 + torch.exp(-psum[:, i]))) * (ff.squeeze(1) + 1.0))
         fx = torch.stack(fx, dim=1)
-        return None, fx
+        return None, -fx
 
 
 class CEC2007_S_DTLZ3(CEC2007_S_DTLZ2):
@@ -425,7 +425,7 @@ class CEC2007_S_DTLZ3(CEC2007_S_DTLZ2):
                 ff = ff * torch.sin(zz[:, j] * math.pi / 2.0).unsqueeze(1)
             fx.append((2.0 / (1.0 + torch.exp(-psum[:, i]))) * (ff.squeeze(1) + 1.0))
         fx = torch.stack(fx, dim=1)
-        return None, fx
+        return None, -fx
 
 
 # =============================================================================
@@ -587,7 +587,7 @@ class CEC2007_R_ZDT4(BenchmarkProblem):
         f1 = (g * (1.0 - torch.sqrt(zz0 / g)) + 1.0) * (2.0 / (1.0 + torch.exp(-psum)))
 
         fx = torch.stack((f0, f1), dim=1)
-        return None, fx
+        return None, -fx
     
 # =============================================================================
 # R_DTLZ2 (rotated DTLZ2)
@@ -734,7 +734,7 @@ class CEC2007_R_DTLZ2(BenchmarkProblem):
             F = F.squeeze(1)
             fx.append((2.0 / (1.0 + torch.exp(-psum[:, i]))) * (F + 1.0))
         fx = torch.stack(fx, dim=1)
-        return None, fx
+        return None, -fx
 
 
 # =============================================================================
@@ -855,7 +855,7 @@ class CEC2007_WFG1(BenchmarkProblem):
         S = torch.arange(2.0, 2.0*(M+1), 2.0, device=Z.device)
         f = X[:, -1].unsqueeze(1) + S * H  # shape (batch, M)
 
-        return None, f
+        return None, -f
 
 
 # =============================================================================
@@ -956,7 +956,7 @@ class CEC2007_WFG8(BenchmarkProblem):
         S = torch.arange(2.0, 2.0*(M+1), 2.0, device=device)
         F = X[:, -1].unsqueeze(1) + S * H
 
-        return None, F
+        return None, -F
 
 
 # =============================================================================
@@ -1047,4 +1047,4 @@ class CEC2007_WFG9(CEC2007_WFG1):
         S_m = torch.arange(2.0, 2.0*(M+1), 2.0, device=device)
         f = X[:, -1].unsqueeze(1) + S_m * H
 
-        return None, f
+        return None, -f
