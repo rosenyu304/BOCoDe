@@ -20,7 +20,7 @@ class BaseOpfunuCEC(BenchmarkProblem):
         bounds = [tuple(bound) for bound in bounds]
 
         self.problem = self.__class__.problem(ndim=dim)
-        super().__init__(dim=dim, num_objectives=num_objectives, num_constraints=num_constraints, bounds=bounds, optimum=[self.problem.f_global], x_opt=[self.problem.x_global])
+        super().__init__(dim=dim, num_objectives=num_objectives, num_constraints=num_constraints, bounds=bounds, optimum=[-self.problem.f_global], x_opt=[self.problem.x_global])
 
     def _evaluate_implementation(self, x: torch.Tensor):
         """
