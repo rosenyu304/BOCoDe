@@ -13,6 +13,11 @@ Example Usage
     import optbench
     import optbench.DataType as DataType
 
+    # Available DataTypes:
+    #    DataType.CONTINUOUS
+    #    DataType.DISCRETE
+    #    DataType.CATEGORICAL
+
     # Retrieve all available categories
     available_categories = optbench.filter_functions().keys()
 

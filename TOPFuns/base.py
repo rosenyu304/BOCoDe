@@ -15,6 +15,10 @@ warnings.filterwarnings("ignore")  # Ignore all warnings
 class DataType:
     """
     Data types for the decision variables.
+    Available DataTypes:
+        - DataType.CONTINUOUS
+        - DataType.DISCRETE
+        - DataType.CATEGORICAL
     """
     CONTINUOUS = "continuous"
     DISCRETE = "discrete"

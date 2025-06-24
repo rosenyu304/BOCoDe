@@ -112,12 +112,21 @@ def filter_functions(dimension_filter: Callable[[int], bool] = lambda x: x > 0,
     ----------
     dimension_filter : Callable[[int], bool], optional
         A function that takes a dimension number and returns a boolean, by default unfiltered
+
     input_type_filter : Callable[[DataType], bool], optional
-        A function that takes an input type and returns a boolean, by default unfiltered
+        A function that takes an input type and returns a boolean, by default unfiltered.
+        
+        Available DataTypes:
+         - DataType.CONTINUOUS
+         - DataType.DISCRETE
+         - DataType.CATEGORICAL
+    
     objectives_filter : Callable[[int], bool], optional
         A function that takes an objective number and returns a boolean, by default unfiltered
+
     constraints_filter : Callable[[int], bool], optional
         A function that takes a constraint number and returns a boolean, by default unfiltered
+
     category_filter : Callable[[str], bool], optional
         A function that takes a category string and returns a boolean, by default unfiltered
 
