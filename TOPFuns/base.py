@@ -203,20 +203,6 @@ class BenchmarkProblem:
 
         app = dash.Dash(__name__)
 
-        # OLD LAYOUT: VERITCAL STACKING
-        # app.layout = html.Div([
-        #     html.Div([
-        #         html.Label("Dimension pair:"),
-        #         dcc.Dropdown(id="dimension-pair", options=pair_options, value=pair_options[0]["value"])
-        #     ], style={"width":"30%", "display":"inline-block"}),
-        #     html.Div([
-        #         html.Label("Objective:"),
-        #         dcc.Dropdown(id="objective", options=obj_options, value="0")
-        #     ], style={"width":"20%", "display":"inline-block", "marginLeft":"2%"}),
-        #     html.Div(id="sliders", style={"marginTop":"20px"}),
-        #     dcc.Graph(id="graph", style={"height":"80vh"})
-        # ])
-
         app.layout = html.Div([
             html.Div([
                 html.Div([
