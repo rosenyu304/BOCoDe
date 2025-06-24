@@ -8,10 +8,6 @@ OptBench documentation
 
 OptBench is a Python library contains optimization benchmark problems.
 
-Add your content using ``reStructuredText`` syntax. See the
-`reStructuredText <https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html>`_
-documentation for details.
-
 .. note::
 
    This project is under active development.
@@ -41,9 +37,9 @@ Contents
    basic_user_guide/index
    benchmarks/index
 
-Indices and tables
-==================
+.. Indices and tables
+.. ==================
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+.. * :ref:`genindex`
+.. * :ref:`modindex`
+.. * :ref:`search`
