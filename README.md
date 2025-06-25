@@ -1,8 +1,13 @@
-# DeCoBO
+# BOCode: Benchmarks for Optimization and Computational design
 
-We present DeCoBO (Design Computational Benchmark for Optimization), a Python and PyTorch-based library that contains the most comprehensive suite of engineering design optimization problems and an interface to popular synthetic optimization problems, with access to 300+ problems for optimization algorithm benchmarking. Our goal is to provide not only a Python optimization benchmark library but also to allow the PyTorch interface for facilitating machine learning optimization algorithms and applications such as surrogate and Bayesian optimization.
+> [!IMPORTANT]
+>
+> The optimization tasks in this library can be used for all kinds of optimization algorithms benchmarking. 
+> Key difference: Bayesian optimization algorithms are typically MAXIMIZING
 
-# What is in DeCoBO?
+We present BOCode, a Python and PyTorch-based library that contains the most comprehensive suite of engineering design optimization problems and an interface to popular synthetic optimization problems, with access to 300+ problems for optimization algorithm benchmarking. Our goal is to provide not only a Python optimization benchmark library but also to allow the PyTorch interface for facilitating machine learning optimization algorithms and applications such as surrogate and Bayesian optimization.
+
+# What is in BOCode?
 
 ## Engineering design problems
 We present a diverse collection of engineering design problems including car design, cantilever beam, truss structure optimization, and physics simulation of robotics problems. 
@@ -28,7 +33,7 @@ pip install git+https://github.com/rosenyu304/OptBenckmarkLibrary@WIP/May27
 
 After PyPI upload:
 ```
-pip install decobo
+pip install bocode
 ```
 
 # Optimization Problem Definition
@@ -42,11 +47,11 @@ For details of each problem's usage, please read our docs. Here we provide examp
 
 1. Direct evaluation
 ```
-import decobo
+import bocode
 import torch
 
 # Instantiate a Synthetic benchmark problem
-problem = decobo.Engineering.Car()
+problem = bocode.Engineering.Car()
 
 # Evaluate at a point
 x = torch.Tensor([[0.0] * problem.dim])
@@ -58,14 +63,11 @@ print(f"Function value at origin: {values[0]}")
 
 2. Scaling parameters sampled from unit hypercube (typical Bayesian optimization practice)
 ```
-import decobo
+import bocode
 import torch
 
 # Instantiate a Synthetic benchmark problem
-problem = decobo.Synthetics.Ackley()
-
-# Show problem information
-problem.show_info()
+problem = bocode.Synthetics.Ackley(show_info=True) # show_info=True to show info of the problem 
 
 # Evaluate at a in bounds of [0,1]s
 x = torch.rand(5,problem.dim)
@@ -88,17 +90,17 @@ print(f"Function value at origin: {values[0]}")
 
 # Development
 
-DeCoBO is an open source projects and we welcome contributions! If you want to add a new problem, please reach out to us first to see if it is a good fit for DeCoBO.
+BOCode is an open source projects and we welcome contributions! If you want to add a new problem, please reach out to us first to see if it is a good fit for BOCode.
 
 # Citing
 
-1. If you use DeCoBO in your research, please cite the following paper:
+1. If you use BOCode in your research, please cite the following paper:
 ```
 todo
 ```
 
-2. If you use the the DeCoBO interfaces to other libraries or open source code functions (ex: BoTorch, BBOB, NEORL, MODAact, LassoBench, ...), please cite them accordingly.
+2. If you use the the BOCode interfaces to other libraries or open source code functions (ex: BoTorch, BBOB, NEORL, MODAact, LassoBench, ...), please cite them accordingly.
 
 
 # License
-DeCoBO is MIT licensed, as found in the LICENSE file.
+BOCode is MIT licensed, as found in the LICENSE file.

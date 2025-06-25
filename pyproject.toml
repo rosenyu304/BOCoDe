@@ -3,9 +3,9 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "TOPFuns"
+name = "BOCode"
 version = "0.0.1"
-description = "OptBench is a Python library contains optimization benchmark problems."
+description = "BOCode is a Python library contains optimization benchmark problems."
 authors = [
     { name = "Temporary", email = "example@example.com" }
 ]
@@ -42,7 +42,7 @@ include-package-data = true
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["TOPFuns*"]
+include = ["BOCode*"]
 
 [project.urls]
 Homepage = "https://github.com/rosenyu304/OptBenckmarkLibrary/"
