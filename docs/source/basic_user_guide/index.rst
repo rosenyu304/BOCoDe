@@ -9,6 +9,7 @@ This guide will help you understand how to use OptBench effectively for both sin
 .. toctree::
    :maxdepth: 2
 
+   benchmark_problem
    single_objective
    multi_objective
    filtering

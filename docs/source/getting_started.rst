@@ -33,7 +33,7 @@ Here's a simple example of how to use OptBench:
     x = torch.Tensor([[0.0] * problem.dim])
     constraints, values = problem._evaluate_implementation(x)
     
-    print(f"Goldstein Discrete function value at origin: {values[0]}")
+    print(f"Ackley function value at origin: {values[0]}")
 
 Basic Concepts
 -------------

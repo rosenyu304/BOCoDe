@@ -70,12 +70,18 @@ class BenchmarkProblem:
         self.tags = tags
         self.debug = debug
 
+    def _evaluate_implementation(self, X: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
+        """
+        Evaluates the objective and constraint functions.
+        """
+        raise NotImplementedError("This benchmark problem is not fully implemented yet.")
+
     def scale(self, X):
         """
         Scales a fully continuous X to the problem's bounds.
 
         Input Args:
-            X (torch.Tensor): continuous data in range of [0, 1]
+            X (torch.Tensor): continuous data in range of (0, 1)
 
         Returns:
             X (torch.Tensor): continuous data scaled to bounds
@@ -87,7 +93,7 @@ class BenchmarkProblem:
         if X.size(1) != self.dim:
             raise DimensionException("Error: Incorrect X dimensions.")
         if torch.max(X) > 1 or torch.min(X) < 0:
-            raise RangeException("Error: Incorrect X range: must be [0, 1].")
+            raise RangeException("Error: Incorrect X range: must be (0, 1).")
 
         if not torch.is_tensor(self.bounds):
             self.bounds = torch.tensor(self.bounds).cpu()
@@ -103,7 +109,7 @@ class BenchmarkProblem:
         print(f"Function info:\n",
               f"Number of objectives: {self.num_objectives}\n",
               f"Number of constraints: {self.num_constraints}\n",
-              f"Number of dimensions: {self.dim} (setable)\n",
+              f"Number of dimensions: {self.dim}\n",
               f"Optimum Value: {self.optimum}\n",
               f"Optimal Decision Variables: {self.x_opt}\n",
               f"Bounds: {self.bounds}\n",)
