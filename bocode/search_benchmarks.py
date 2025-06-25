@@ -12,7 +12,7 @@ def qualify_classes(class_list, module_name):
     Given a list of class objects and a module name (string),
     return a list of fully qualified class objects from the specified module.
     """
-    full_module_path = "TOPFuns." + module_name.replace('.', '/').replace('/', '.')
+    full_module_path = "bocode." + module_name.replace('.', '/').replace('/', '.')
     module = importlib.import_module(full_module_path)
     return [getattr(module, cls.__name__) for cls in class_list]
 
@@ -160,8 +160,8 @@ def filter_functions(dimension_filter: Callable[[int], bool] = lambda x: x > 0,
             if constraints is not None and not _has_valid_val(constraints, constraints_filter):
                 continue
 
-            # Compose the path as 'TOPFuns.<category>.<ClassName>'
+            # Compose the path as 'bocode.<category>.<ClassName>'
             class_name = func.__name__ if hasattr(func, "__name__") else func.__class__.__name__
-            filtered_funcs[category].append(f"TOPFuns.{category}.{class_name}")
+            filtered_funcs[category].append(f"bocode.{category}.{class_name}")
 
     return dict(filtered_funcs)
