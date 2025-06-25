@@ -5,6 +5,9 @@ BenchmarkProblem Class
 
 The ``BenchmarkProblem`` class is the parent class for all benchmark problems in the library.
 
+.. note::
+   See the :ref:`glossary` for definitions of key terms like 'objective function', 'constraint', and 'bounds'.
+
 Class Attributes
 ----------------
 
@@ -32,6 +35,22 @@ Definition Scheme:
 - ``int``: A single possible value for the problem. E.g. ``1`` 
 - ``Tuple[int, Optional[int]]``: A range of possible values for the problem. E.g. ``(1, 3)`` means 1, 2, or 3.
 - ``Set[int] or List[int]``: A set of possible values for the problem. E.g. ``{1, 3, 4}`` means 1, 3, or 4.
+
+Example:
+
+.. code-block:: python
+
+    import optbench
+
+    print(optbench.Synthetics.Ackley.available_dimensions)
+    # Output: (1, None)
+    # This means that the problem can be defined with 1 or more dimensions.
+    print(optbench.Synthetics.Ackley.num_objectives)
+    # Output: 1
+    # This means that the problem has 1 objective function.
+    print(optbench.Synthetics.Ackley.num_constraints)
+    # Output: 2
+    # This means that the problem has 2 constraint functions.
 
 Instance Attributes
 ------------------
@@ -84,7 +103,7 @@ Evaluates the objective and constraint functions.
 
 .. note::
 
-    Some problems (Like the CEC2020 functions) may have additional return values. See :ref:`benchmarks` for more details. 
+    Some problems (Like the CEC2020 functions) may have additional return values for equality constraints. See :ref:`benchmarks` for more details. 
 
 scale(X)
 ~~~~~~~~
@@ -181,3 +200,18 @@ Creates interactive visualizations of the objective function(s).
     problem.visualize_function()
 
 You may need to open a browser to http://127.0.0.1:8050/ to fully see the visualization for problems with more than 2 dimensions. See :ref:`function_visualization` for examples.
+
+.. rubric:: Glossary
+
+.. _glossary:
+
+Glossary
+--------
+
+- **Objective function**: The function(s) to be optimized (maximized or minimized) in a benchmark problem.
+- **Constraint**: A function that restricts the feasible region of the decision variables to be **g(x) ≤ 0**. Some problems may have equality constraints. See :ref:`benchmarks` for more details on the specific problem.
+- **Dimension**: The number of decision variables in the problem.
+- **Bounds**: A type of constraint that restricts the decision variables to a certain range (continuous) or a set of values (discrete/categorical).
+- **Decision variable**: A variable whose value is to be determined by the optimization process. This is the input to the objective and constraint functions, also referred to as `X`.
+- **Optimum**: The maximum value of the objective function(s) for the problem within the feasible region.
+- **Feasible region**: The set of all points that satisfy the constraints and bounds.
