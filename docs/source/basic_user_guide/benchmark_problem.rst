@@ -57,6 +57,7 @@ Instance Attributes
 
 After initialization, a ``BenchmarkProblem`` instance contains the following attributes:
 
+.. _benchmark_attributes:
 .. list-table:: Instance Attributes
    :widths: 20 15 65
    :header-rows: 1
@@ -88,6 +89,7 @@ Methods
 -------
 .. TODO: Change the name of _evaluate_implementation to evaluate
 
+.. _evaluate_implementation:
 _evaluate_implementation(X)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -103,7 +105,7 @@ Evaluates the objective and constraint functions.
 
 .. note::
 
-    Some problems (Like the CEC2020 functions) may have additional return values for equality constraints. See :ref:`benchmarks` for more details. 
+    Some problems (Like the CEC2020 functions) may have additional return values for equality constraints. See :ref:`benchmarks` for more details and examples. 
 
 scale(X)
 ~~~~~~~~

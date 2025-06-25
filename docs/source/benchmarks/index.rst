@@ -19,5 +19,6 @@ OptBench includes benchmark problems from various sources. Each collection has i
    CEC/index
    wfg
    zdt
+   dtlz
    MODAct
    neorl
