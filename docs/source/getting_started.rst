@@ -40,8 +40,8 @@ Basic Concepts
 
 OptBench provides a standardized interface for various benchmark problems. Each problem has:
 
-* An objective function
-* Input dimension
-* Bounds on the variables
-* Optional constraints
-* Known optimal value (for most problems)
+* An :ref:`objective function <evaluate_implementation>`
+* Input :ref:`dimension <benchmark_attributes>`
+* :ref:`Bounds <benchmark_attributes>` on the variables
+* Optional :ref:`constraints <benchmark_attributes>`
+* Known :ref:`optimum <benchmark_attributes>` value (for some problems)

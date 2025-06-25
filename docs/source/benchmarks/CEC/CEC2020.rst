@@ -6,6 +6,8 @@ CEC 2020 Benchmarks
 The CEC2020 benchmark collection contains all functions from the CEC 2020 Competition.
 More information can be found in the `2020-RW-Constrained-Optimisation GitHub page <https://github.com/P-N-Suganthan/2020-RW-Constrained-Optimisation/>`_.
 
+**The CEC2020 functions include equality constraints. Equality constraints are defined such that g(x) = 0. Please see** :ref:`cec2020_example_usage` **for an example of how to use them**.
+
 Available Problems
 ----------------
 
@@ -67,8 +69,9 @@ Available Problems
 * :code:`optbench.CEC.CEC2020_RW_Constrained.CEC2020_p56`
 * :code:`optbench.CEC.CEC2020_RW_Constrained.CEC2020_p57`
 
+.. _cec2020_example_usage:
 Example Usage
-------------
+-------------
 
 .. code-block:: python
 
