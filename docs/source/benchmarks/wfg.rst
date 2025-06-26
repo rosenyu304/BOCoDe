@@ -12,29 +12,29 @@ Sources:
 Available Problems
 ----------------
 
-* :code:`optbench.WFG.WFG1`
-* :code:`optbench.WFG.WFG2`
-* :code:`optbench.WFG.WFG3`
-* :code:`optbench.WFG.WFG4`
-* :code:`optbench.WFG.WFG5`
-* :code:`optbench.WFG.WFG6`
-* :code:`optbench.WFG.WFG7`
-* :code:`optbench.WFG.WFG8`
-* :code:`optbench.WFG.WFG9`
+* :code:`bocode.WFG.WFG1`
+* :code:`bocode.WFG.WFG2`
+* :code:`bocode.WFG.WFG3`
+* :code:`bocode.WFG.WFG4`
+* :code:`bocode.WFG.WFG5`
+* :code:`bocode.WFG.WFG6`
+* :code:`bocode.WFG.WFG7`
+* :code:`bocode.WFG.WFG8`
+* :code:`bocode.WFG.WFG9`
 
 Example Usage
 ------------
 
 .. code-block:: python
 
-    import optbench
+    import bocode
     import torch
 
     # Retrieve available dimensions for instantiation
-    available_dimensions = optbench.WFG.WFG1.available_dimensions
+    available_dimensions = bocode.WFG.WFG1.available_dimensions
 
     # Create a Botorch benchmark problem
-    problem = optbench.WFG.WFG1(dim=5)
+    problem = bocode.WFG.WFG1(dim=5)
 
     # Get problem information
     bounds = problem.bounds

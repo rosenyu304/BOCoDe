@@ -13,20 +13,20 @@ Source:
 Available Problems
 ----------------
 
-* :code:`optbench.NEORL.TSP_51Cities` (Ex 1)
-* :code:`optbench.NEORL.TSP_100Cities` (Ex 1)
-* :code:`optbench.NEORL.Reactivity8Drums` (Ex 11)
+* :code:`bocode.NEORL.TSP_51Cities` (Ex 1)
+* :code:`bocode.NEORL.TSP_100Cities` (Ex 1)
+* :code:`bocode.NEORL.Reactivity8Drums` (Ex 11)
 
 Example Usage
 ------------
 
 .. code-block:: python
 
-    import optbench
+    import bocode
     import torch
 
     # Create a Botorch benchmark problem
-    problem = optbench.NEORL.TSP_100Cities()
+    problem = bocode.NEORL.TSP_100Cities()
 
     # Get problem information
     bounds = problem.bounds # Each input is an integer between 1 and 100

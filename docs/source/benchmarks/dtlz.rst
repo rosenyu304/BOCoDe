@@ -13,27 +13,27 @@ Sources:
 Available Problems
 ----------------
 
-* :code:`optbench.DTLZ.DTLZ1`
-* :code:`optbench.DTLZ.DTLZ2`
-* :code:`optbench.DTLZ.DTLZ3`
-* :code:`optbench.DTLZ.DTLZ4`
-* :code:`optbench.DTLZ.DTLZ5`
-* :code:`optbench.DTLZ.DTLZ6`
-* :code:`optbench.DTLZ.DTLZ7`
+* :code:`bocode.DTLZ.DTLZ1`
+* :code:`bocode.DTLZ.DTLZ2`
+* :code:`bocode.DTLZ.DTLZ3`
+* :code:`bocode.DTLZ.DTLZ4`
+* :code:`bocode.DTLZ.DTLZ5`
+* :code:`bocode.DTLZ.DTLZ6`
+* :code:`bocode.DTLZ.DTLZ7`
 
 Example Usage
 ------------
 
 .. code-block:: python
 
-    import optbench
+    import bocode
     import torch
 
     # Retrieve available dimensions for instantiation
-    available_dimensions = optbench.DTLZ.DTLZ1.available_dimensions
+    available_dimensions = bocode.DTLZ.DTLZ1.available_dimensions
 
     # Create a Botorch benchmark problem
-    problem = optbench.DTLZ.DTLZ1(dim=10)
+    problem = bocode.DTLZ.DTLZ1(dim=10)
 
     # Get problem information
     bounds = problem.bounds

@@ -8,14 +8,14 @@ Visit the `COCO platform <https://numbbo.github.io/coco/testsuites/bbob>`_ for a
 
 Available Suites
 -----------------
-- bbob: :code:`optbench.BBOB_Problems.BBOB`
-- bbob-biobj: :code:`optbench.BBOB_Problems.BBOB_Biobj`
-- bbob-biobj-mixint: :code:`optbench.BBOB_BiobjMixInt`
-- bbob-boxed: :code:`optbench.BBOB_Problems.BBOB_Boxed`
-- bbob-constrained: :code:`optbench.BBOB_Problems.BBOB_Constrained`
-- bbob-largescale: :code:`optbench.BBOB_Problems.BBOB_LargeScale`
-- bbob-mixint: :code:`optbench.BBOB_Problems.BBOB_MixInt`
-- bbob-noisy: :code:`optbench.BBOB_Problems.BBOB_Noisy`
+- bbob: :code:`bocode.BBOB_Problems.BBOB`
+- bbob-biobj: :code:`bocode.BBOB_Problems.BBOB_Biobj`
+- bbob-biobj-mixint: :code:`bocode.BBOB_BiobjMixInt`
+- bbob-boxed: :code:`bocode.BBOB_Problems.BBOB_Boxed`
+- bbob-constrained: :code:`bocode.BBOB_Problems.BBOB_Constrained`
+- bbob-largescale: :code:`bocode.BBOB_Problems.BBOB_LargeScale`
+- bbob-mixint: :code:`bocode.BBOB_Problems.BBOB_MixInt`
+- bbob-noisy: :code:`bocode.BBOB_Problems.BBOB_Noisy`
 
 Available Functions
 -----------------
@@ -32,11 +32,11 @@ Example Usage
 
 .. code-block:: python
 
-    import optbench
+    import bocode
     import torch
 
     # Create a BBOB benchmark problem
-    problem = optbench.BBOB_Problems.BBOB(dim=5, function_number=2, instance_number=1) # Separable 5-dimensional ellipsoidal function
+    problem = bocode.BBOB_Problems.BBOB(dim=5, function_number=2, instance_number=1) # Separable 5-dimensional ellipsoidal function
     
     # Get problem information
     bounds = problem.bounds

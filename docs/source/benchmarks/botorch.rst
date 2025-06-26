@@ -8,57 +8,57 @@ The Botorch benchmark collection includes synthetic test problems commonly used 
 Single Objective Problems
 ----------------
 
-* :code:`optbench.BoTorch.AugmentedBranin`
-* :code:`optbench.BoTorch.AugmentedHartmann`
-* :code:`optbench.BoTorch.AugmentedRosenbrock`
-* :code:`optbench.BoTorch.Ishigami`
-* :code:`optbench.BoTorch.Gsobol`
-* :code:`optbench.BoTorch.Morris`
+* :code:`bocode.BoTorch.AugmentedBranin`
+* :code:`bocode.BoTorch.AugmentedHartmann`
+* :code:`bocode.BoTorch.AugmentedRosenbrock`
+* :code:`bocode.BoTorch.Ishigami`
+* :code:`bocode.BoTorch.Gsobol`
+* :code:`bocode.BoTorch.Morris`
 
 Multi Objective Problems
 ----------------
 
-* :code:`optbench.BoTorch.MOMFBraninCurrin`
-* :code:`optbench.BoTorch.MOMFPark1`
-* :code:`optbench.BoTorch.BraninCurrin`
-* :code:`optbench.BoTorch.DH1`
-* :code:`optbench.BoTorch.DH2`
-* :code:`optbench.BoTorch.DH3`
-* :code:`optbench.BoTorch.DH4`
-* :code:`optbench.BoTorch.DTLZ1`
-* :code:`optbench.BoTorch.DTLZ2`
-* :code:`optbench.BoTorch.DTLZ3`
-* :code:`optbench.BoTorch.DTLZ4`
-* :code:`optbench.BoTorch.DTLZ5`
-* :code:`optbench.BoTorch.DTLZ7`
-* :code:`optbench.BoTorch.GMM`
-* :code:`optbench.BoTorch.Penicillin`
-* :code:`optbench.BoTorch.ToyRobust`
-* :code:`optbench.BoTorch.VehicleSafety`
-* :code:`optbench.BoTorch.ZDT1`
-* :code:`optbench.BoTorch.ZDT2`
-* :code:`optbench.BoTorch.ZDT3`
-* :code:`optbench.BoTorch.CarSideImpact`
-* :code:`optbench.BoTorch.BNH`
-* :code:`optbench.BoTorch.CONSTR`
-* :code:`optbench.BoTorch.ConstrainedBraninCurrin`
-* :code:`optbench.BoTorch.C2DTLZ2`
-* :code:`optbench.BoTorch.DiscBrake`
-* :code:`optbench.BoTorch.MW7`
-* :code:`optbench.BoTorch.OSY`
-* :code:`optbench.BoTorch.SRN`
-* :code:`optbench.BoTorch.WeldedBeam`
+* :code:`bocode.BoTorch.MOMFBraninCurrin`
+* :code:`bocode.BoTorch.MOMFPark1`
+* :code:`bocode.BoTorch.BraninCurrin`
+* :code:`bocode.BoTorch.DH1`
+* :code:`bocode.BoTorch.DH2`
+* :code:`bocode.BoTorch.DH3`
+* :code:`bocode.BoTorch.DH4`
+* :code:`bocode.BoTorch.DTLZ1`
+* :code:`bocode.BoTorch.DTLZ2`
+* :code:`bocode.BoTorch.DTLZ3`
+* :code:`bocode.BoTorch.DTLZ4`
+* :code:`bocode.BoTorch.DTLZ5`
+* :code:`bocode.BoTorch.DTLZ7`
+* :code:`bocode.BoTorch.GMM`
+* :code:`bocode.BoTorch.Penicillin`
+* :code:`bocode.BoTorch.ToyRobust`
+* :code:`bocode.BoTorch.VehicleSafety`
+* :code:`bocode.BoTorch.ZDT1`
+* :code:`bocode.BoTorch.ZDT2`
+* :code:`bocode.BoTorch.ZDT3`
+* :code:`bocode.BoTorch.CarSideImpact`
+* :code:`bocode.BoTorch.BNH`
+* :code:`bocode.BoTorch.CONSTR`
+* :code:`bocode.BoTorch.ConstrainedBraninCurrin`
+* :code:`bocode.BoTorch.C2DTLZ2`
+* :code:`bocode.BoTorch.DiscBrake`
+* :code:`bocode.BoTorch.MW7`
+* :code:`bocode.BoTorch.OSY`
+* :code:`bocode.BoTorch.SRN`
+* :code:`bocode.BoTorch.WeldedBeam`
 
 Single Objective Example Usage
 ------------
 
 .. code-block:: python
 
-    import optbench
+    import bocode
     import torch
 
     # Create a Botorch benchmark problem
-    problem = optbench.BoTorch.AugmentedBranin()
+    problem = bocode.BoTorch.AugmentedBranin()
 
     # Evaluate at a point
     x = torch.Tensor([[0.0] * problem.dim])
@@ -77,11 +77,11 @@ Multi Objective Example Usage
 
 .. code-block:: python
 
-    import optbench
+    import bocode
     import torch
 
     # Create a Botorch benchmark problem
-    problem = optbench.BoTorch.MOMFBraninCurrin()
+    problem = bocode.BoTorch.MOMFBraninCurrin()
 
     # Evaluate at a point
     x = torch.Tensor([[0.0] * problem.dim])

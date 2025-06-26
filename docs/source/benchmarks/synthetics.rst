@@ -8,50 +8,50 @@ The Botorch benchmark collection includes synthetic test problems commonly used 
 Available Problems
 ----------------
 
-* :code:`optbench.Synthetics.Ackley`
-* :code:`optbench.Synthetics.Bukin`
-* :code:`optbench.Synthetics.DixonPrice`
-* :code:`optbench.Synthetics.Goldstein`
-* :code:`optbench.Synthetics.Goldstein_Discrete`
-* :code:`optbench.Synthetics.Griewank`
-* :code:`optbench.Synthetics.Levy`
-* :code:`optbench.Synthetics.Michalewicz`
-* :code:`optbench.Synthetics.Powell`
-* :code:`optbench.Synthetics.Rastrigin`
-* :code:`optbench.Synthetics.Rosenbrock`
-* :code:`optbench.Synthetics.Styblinski-Tang`
-* :code:`optbench.Synthetics.Beale`
-* :code:`optbench.Synthetics.Cosine8`
-* :code:`optbench.Synthetics.DropWave`
-* :code:`optbench.Synthetics.EggHolder`
-* :code:`optbench.Synthetics.Hartmann3D`
-* :code:`optbench.Synthetics.Hartmann6D`
-* :code:`optbench.Synthetics.HolderTable`
-* :code:`optbench.Synthetics.Shekelm5`
-* :code:`optbench.Synthetics.Shekelm7`
-* :code:`optbench.Synthetics.Shekelm10`
-* :code:`optbench.Synthetics.Shekel`
-* :code:`optbench.Synthetics.SixHumpCamel`
-* :code:`optbench.Synthetics.ThreeHumpCamel`
-* :code:`optbench.Synthetics.ConstrainedGramacy`
-* :code:`optbench.Synthetics.ConstrainedHartmann`
-* :code:`optbench.Synthetics.ConstrainedHartmannSmooth`
-* :code:`optbench.Synthetics.PressureVessel`
-* :code:`optbench.Synthetics.WeldedBeamSO`
-* :code:`optbench.Synthetics.TensionCompressionString`
-* :code:`optbench.Synthetics.SpeedReducer`
-* :code:`optbench.Synthetics.SVM`
+* :code:`bocode.Synthetics.Ackley`
+* :code:`bocode.Synthetics.Bukin`
+* :code:`bocode.Synthetics.DixonPrice`
+* :code:`bocode.Synthetics.Goldstein`
+* :code:`bocode.Synthetics.Goldstein_Discrete`
+* :code:`bocode.Synthetics.Griewank`
+* :code:`bocode.Synthetics.Levy`
+* :code:`bocode.Synthetics.Michalewicz`
+* :code:`bocode.Synthetics.Powell`
+* :code:`bocode.Synthetics.Rastrigin`
+* :code:`bocode.Synthetics.Rosenbrock`
+* :code:`bocode.Synthetics.Styblinski-Tang`
+* :code:`bocode.Synthetics.Beale`
+* :code:`bocode.Synthetics.Cosine8`
+* :code:`bocode.Synthetics.DropWave`
+* :code:`bocode.Synthetics.EggHolder`
+* :code:`bocode.Synthetics.Hartmann3D`
+* :code:`bocode.Synthetics.Hartmann6D`
+* :code:`bocode.Synthetics.HolderTable`
+* :code:`bocode.Synthetics.Shekelm5`
+* :code:`bocode.Synthetics.Shekelm7`
+* :code:`bocode.Synthetics.Shekelm10`
+* :code:`bocode.Synthetics.Shekel`
+* :code:`bocode.Synthetics.SixHumpCamel`
+* :code:`bocode.Synthetics.ThreeHumpCamel`
+* :code:`bocode.Synthetics.ConstrainedGramacy`
+* :code:`bocode.Synthetics.ConstrainedHartmann`
+* :code:`bocode.Synthetics.ConstrainedHartmannSmooth`
+* :code:`bocode.Synthetics.PressureVessel`
+* :code:`bocode.Synthetics.WeldedBeamSO`
+* :code:`bocode.Synthetics.TensionCompressionString`
+* :code:`bocode.Synthetics.SpeedReducer`
+* :code:`bocode.Synthetics.SVM`
 
 Example Usage
 ------------
 
 .. code-block:: python
 
-    import optbench
+    import bocode
     import torch
 
     # Create a Botorch benchmark problem
-    problem = optbench.Synthetics.Goldstein_Discrete()
+    problem = bocode.Synthetics.Goldstein_Discrete()
     
     # Evaluate at a point
     x = torch.Tensor([[0.0] * problem.dim])

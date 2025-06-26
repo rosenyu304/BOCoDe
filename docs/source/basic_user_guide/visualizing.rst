@@ -10,10 +10,10 @@ Example Usage
 
 .. code-block:: python
 
-    import optbench
+    import bocode
 
     # Initialize the function
-    problem = optbench.Synthetics.Powell() 
+    problem = bocode.Synthetics.Powell() 
 
     # Visualize the function
     problem.visualize_function()

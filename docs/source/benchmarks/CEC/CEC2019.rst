@@ -13,16 +13,16 @@ Sources:
 Available Problems
 ----------------
 
-* :code:`optbench.CEC.CEC2019.CEC2019_p1`
-* :code:`optbench.CEC.CEC2019.CEC2019_p2`
-* :code:`optbench.CEC.CEC2019.CEC2019_p3`
-* :code:`optbench.CEC.CEC2019.CEC2019_p4`
-* :code:`optbench.CEC.CEC2019.CEC2019_p5`
-* :code:`optbench.CEC.CEC2019.CEC2019_p6`
-* :code:`optbench.CEC.CEC2019.CEC2019_p7`
-* :code:`optbench.CEC.CEC2019.CEC2019_p8`
-* :code:`optbench.CEC.CEC2019.CEC2019_p9`
-* :code:`optbench.CEC.CEC2019.CEC2019_p10`
+* :code:`bocode.CEC.CEC2019.CEC2019_p1`
+* :code:`bocode.CEC.CEC2019.CEC2019_p2`
+* :code:`bocode.CEC.CEC2019.CEC2019_p3`
+* :code:`bocode.CEC.CEC2019.CEC2019_p4`
+* :code:`bocode.CEC.CEC2019.CEC2019_p5`
+* :code:`bocode.CEC.CEC2019.CEC2019_p6`
+* :code:`bocode.CEC.CEC2019.CEC2019_p7`
+* :code:`bocode.CEC.CEC2019.CEC2019_p8`
+* :code:`bocode.CEC.CEC2019.CEC2019_p9`
+* :code:`bocode.CEC.CEC2019.CEC2019_p10`
 
 Problem Details
 ----------------
@@ -56,11 +56,11 @@ Example Usage
 
 .. code-block:: python
 
-    import optbench
+    import bocode
     import torch
 
     # Create a Botorch benchmark problem
-    problem = optbench.CEC.CEC2019.CEC2019_p1()
+    problem = bocode.CEC.CEC2019.CEC2019_p1()
 
     # Get problem information
     bounds = problem.bounds

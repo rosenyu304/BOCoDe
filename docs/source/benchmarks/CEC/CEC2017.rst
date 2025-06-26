@@ -13,35 +13,35 @@ Sources:
 Available Problems
 ----------------
 
-* :code:`optbench.CEC.CEC2017.CEC2017_p1`
-* :code:`optbench.CEC.CEC2017.CEC2017_p2`
-* :code:`optbench.CEC.CEC2017.CEC2017_p3`
-* :code:`optbench.CEC.CEC2017.CEC2017_p4`
-* :code:`optbench.CEC.CEC2017.CEC2017_p5`
-* :code:`optbench.CEC.CEC2017.CEC2017_p6`
-* :code:`optbench.CEC.CEC2017.CEC2017_p7`
-* :code:`optbench.CEC.CEC2017.CEC2017_p8`
-* :code:`optbench.CEC.CEC2017.CEC2017_p9`
-* :code:`optbench.CEC.CEC2017.CEC2017_p10`
-* :code:`optbench.CEC.CEC2017.CEC2017_p11`
-* :code:`optbench.CEC.CEC2017.CEC2017_p12`
-* :code:`optbench.CEC.CEC2017.CEC2017_p13`
-* :code:`optbench.CEC.CEC2017.CEC2017_p14`
-* :code:`optbench.CEC.CEC2017.CEC2017_p15`
-* :code:`optbench.CEC.CEC2017.CEC2017_p16`
-* :code:`optbench.CEC.CEC2017.CEC2017_p17`
-* :code:`optbench.CEC.CEC2017.CEC2017_p18`
-* :code:`optbench.CEC.CEC2017.CEC2017_p19`
-* :code:`optbench.CEC.CEC2017.CEC2017_p20`
-* :code:`optbench.CEC.CEC2017.CEC2017_p21`
-* :code:`optbench.CEC.CEC2017.CEC2017_p22`
-* :code:`optbench.CEC.CEC2017.CEC2017_p23`
-* :code:`optbench.CEC.CEC2017.CEC2017_p24`
-* :code:`optbench.CEC.CEC2017.CEC2017_p25`
-* :code:`optbench.CEC.CEC2017.CEC2017_p26`
-* :code:`optbench.CEC.CEC2017.CEC2017_p27`
-* :code:`optbench.CEC.CEC2017.CEC2017_p28`
-* :code:`optbench.CEC.CEC2017.CEC2017_p29`
+* :code:`bocode.CEC.CEC2017.CEC2017_p1`
+* :code:`bocode.CEC.CEC2017.CEC2017_p2`
+* :code:`bocode.CEC.CEC2017.CEC2017_p3`
+* :code:`bocode.CEC.CEC2017.CEC2017_p4`
+* :code:`bocode.CEC.CEC2017.CEC2017_p5`
+* :code:`bocode.CEC.CEC2017.CEC2017_p6`
+* :code:`bocode.CEC.CEC2017.CEC2017_p7`
+* :code:`bocode.CEC.CEC2017.CEC2017_p8`
+* :code:`bocode.CEC.CEC2017.CEC2017_p9`
+* :code:`bocode.CEC.CEC2017.CEC2017_p10`
+* :code:`bocode.CEC.CEC2017.CEC2017_p11`
+* :code:`bocode.CEC.CEC2017.CEC2017_p12`
+* :code:`bocode.CEC.CEC2017.CEC2017_p13`
+* :code:`bocode.CEC.CEC2017.CEC2017_p14`
+* :code:`bocode.CEC.CEC2017.CEC2017_p15`
+* :code:`bocode.CEC.CEC2017.CEC2017_p16`
+* :code:`bocode.CEC.CEC2017.CEC2017_p17`
+* :code:`bocode.CEC.CEC2017.CEC2017_p18`
+* :code:`bocode.CEC.CEC2017.CEC2017_p19`
+* :code:`bocode.CEC.CEC2017.CEC2017_p20`
+* :code:`bocode.CEC.CEC2017.CEC2017_p21`
+* :code:`bocode.CEC.CEC2017.CEC2017_p22`
+* :code:`bocode.CEC.CEC2017.CEC2017_p23`
+* :code:`bocode.CEC.CEC2017.CEC2017_p24`
+* :code:`bocode.CEC.CEC2017.CEC2017_p25`
+* :code:`bocode.CEC.CEC2017.CEC2017_p26`
+* :code:`bocode.CEC.CEC2017.CEC2017_p27`
+* :code:`bocode.CEC.CEC2017.CEC2017_p28`
+* :code:`bocode.CEC.CEC2017.CEC2017_p29`
 
 
 Problem Details
@@ -115,11 +115,11 @@ Example Usage
 
 .. code-block:: python
 
-    import optbench
+    import bocode
     import torch
 
     # Create a Botorch benchmark problem
-    problem = optbench.CEC.CEC2017.CEC2017_p1()
+    problem = bocode.CEC.CEC2017.CEC2017_p1()
 
     # Get problem information
     bounds = problem.bounds

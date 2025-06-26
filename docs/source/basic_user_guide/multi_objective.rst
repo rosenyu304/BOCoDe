@@ -4,16 +4,16 @@
 Multi-Objective Optimization
 ========================
 
-This guide shows how to work with multi-objective optimization problems in OptBench.
+This guide shows how to work with multi-objective optimization problems in BoCoDe.
 
 Basic Example
 ------------
 
-Here's an example of using OptBench with a multi-objective problem:
+Here's an example of using BoCoDe with a multi-objective problem:
 
 .. code-block:: python
 
-    import optbench
+    import bocode
     import numpy as np
     from pymoo.algorithms.moo.nsga2 import NSGA2
     from pymoo.optimize import minimize
@@ -21,7 +21,7 @@ Here's an example of using OptBench with a multi-objective problem:
     import torch
 
     # Create a multi-objective benchmark problem
-    problem = optbench.Engineering.CarSideImpact()
+    problem = bocode.Engineering.CarSideImpact()
 
     # Wrap the problem as a Pymoo Problem
     class CarSideImpactProblem(Problem):

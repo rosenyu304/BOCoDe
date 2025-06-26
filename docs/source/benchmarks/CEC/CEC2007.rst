@@ -16,30 +16,30 @@ Sources:
 Available Problems
 ----------------
 
-* :code:`optbench.CEC.CEC2007.CEC2007_OKA2`
-* :code:`optbench.CEC.CEC2007.CEC2007_R_DTLZ2`
-* :code:`optbench.CEC.CEC2007.CEC2007_R_ZDT4`
-* :code:`optbench.CEC.CEC2007.CEC2007_SYMPART`
-* :code:`optbench.CEC.CEC2007.CEC2007_S_DTLZ2`
-* :code:`optbench.CEC.CEC2007.CEC2007_S_DTLZ3`
-* :code:`optbench.CEC.CEC2007.CEC2007_S_ZDT1`
-* :code:`optbench.CEC.CEC2007.CEC2007_S_ZDT2`
-* :code:`optbench.CEC.CEC2007.CEC2007_S_ZDT4`
-* :code:`optbench.CEC.CEC2007.CEC2007_S_ZDT6`
-* :code:`optbench.CEC.CEC2007.CEC2007_WFG1`
-* :code:`optbench.CEC.CEC2007.CEC2007_WFG8`
-* :code:`optbench.CEC.CEC2007.CEC2007_WFG9`
+* :code:`bocode.CEC.CEC2007.CEC2007_OKA2`
+* :code:`bocode.CEC.CEC2007.CEC2007_R_DTLZ2`
+* :code:`bocode.CEC.CEC2007.CEC2007_R_ZDT4`
+* :code:`bocode.CEC.CEC2007.CEC2007_SYMPART`
+* :code:`bocode.CEC.CEC2007.CEC2007_S_DTLZ2`
+* :code:`bocode.CEC.CEC2007.CEC2007_S_DTLZ3`
+* :code:`bocode.CEC.CEC2007.CEC2007_S_ZDT1`
+* :code:`bocode.CEC.CEC2007.CEC2007_S_ZDT2`
+* :code:`bocode.CEC.CEC2007.CEC2007_S_ZDT4`
+* :code:`bocode.CEC.CEC2007.CEC2007_S_ZDT6`
+* :code:`bocode.CEC.CEC2007.CEC2007_WFG1`
+* :code:`bocode.CEC.CEC2007.CEC2007_WFG8`
+* :code:`bocode.CEC.CEC2007.CEC2007_WFG9`
 
 Example Usage
 ------------
 
 .. code-block:: python
 
-    import optbench
+    import bocode
     import torch
 
     # Create a Botorch benchmark problem
-    problem = optbench.CEC.CEC2007.CEC2007_OKA2()
+    problem = bocode.CEC.CEC2007.CEC2007_OKA2()
 
     # Get problem information
     bounds = problem.bounds

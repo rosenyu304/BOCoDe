@@ -10,8 +10,8 @@ Example Usage
 
 .. code-block:: python
 
-    import optbench
-    import optbench.DataType as DataType
+    import bocode
+    import bocode.DataType as DataType
 
     # Available DataTypes:
     #    DataType.CONTINUOUS
@@ -19,10 +19,10 @@ Example Usage
     #    DataType.CATEGORICAL
 
     # Retrieve all available categories
-    available_categories = optbench.filter_functions().keys()
+    available_categories = bocode.filter_functions().keys()
 
     # Example of filtering functions
-    filtered_functions_list = optbench.filter_functions(
+    filtered_functions_list = bocode.filter_functions(
         dimension_filter = lambda dim: dim>=5, # Include only functions with dimensionality of 5 or greater
         input_type_filter = lambda input_type: input_type==DataType.CONTINUOUS, # Include only continuous functions
         objectives_filter = lambda n: n==1, # Include only single-objective functions
@@ -36,8 +36,8 @@ Output:
 
 .. code-block:: console
 
-    {'Synthetics': ['optbench.Synthetics.DixonPrice', 'optbench.Synthetics.Griewank', 'optbench.Synthetics.Levy', 'optbench.Synthetics.Michalewicz', 'optbench.Synthetics.Powell', 'optbench.Synthetics.Rastrigin', 'optbench.Synthetics.Rosenbrock', 'optbench.Synthetics.StyblinskiTang', 'optbench.Synthetics.Cosine8', 'optbench.Synthetics.Hartmann6D', 'optbench.Synthetics.SVM'],
-     'LassoBench': ['optbench.LassoBench.LassoBreastCancer', 'optbench.LassoBench.LassoDiabetes', 'optbench.LassoBench.LassoDNA', 'optbench.LassoBench.LassoLeukemia', 'optbench.LassoBench.LassoRCV1', 'optbench.LassoBench.LassoSyntHard', 'optbench.LassoBench.LassoSyntHigh', 'optbench.LassoBench.LassoSyntMedium', 'optbench.LassoBench.LassoSyntSimple'], 
-     'Engineering': ['optbench.Engineering.RobotPush', 'optbench.Engineering.Rover', 'optbench.Engineering.NonLinearConstraintProblemA3', 'optbench.Engineering.NonLinearConstraintProblemA4', 'optbench.Engineering.NonLinearConstraintProblemB3', 'optbench.Engineering.AntProblem', 'optbench.Engineering.HalfCheetahProblem', 'optbench.Engineering.HumanoidProblem', 'optbench.Engineering.HumanoidStandupProblem', 'optbench.Engineering.PusherProblem', 'optbench.Engineering.Walker2DProblem'], 
+    {'Synthetics': ['bocode.Synthetics.DixonPrice', 'bocode.Synthetics.Griewank', 'bocode.Synthetics.Levy', 'bocode.Synthetics.Michalewicz', 'bocode.Synthetics.Powell', 'bocode.Synthetics.Rastrigin', 'bocode.Synthetics.Rosenbrock', 'bocode.Synthetics.StyblinskiTang', 'bocode.Synthetics.Cosine8', 'bocode.Synthetics.Hartmann6D', 'bocode.Synthetics.SVM'],
+     'LassoBench': ['bocode.LassoBench.LassoBreastCancer', 'bocode.LassoBench.LassoDiabetes', 'bocode.LassoBench.LassoDNA', 'bocode.LassoBench.LassoLeukemia', 'bocode.LassoBench.LassoRCV1', 'bocode.LassoBench.LassoSyntHard', 'bocode.LassoBench.LassoSyntHigh', 'bocode.LassoBench.LassoSyntMedium', 'bocode.LassoBench.LassoSyntSimple'], 
+     'Engineering': ['bocode.Engineering.RobotPush', 'bocode.Engineering.Rover', 'bocode.Engineering.NonLinearConstraintProblemA3', 'bocode.Engineering.NonLinearConstraintProblemA4', 'bocode.Engineering.NonLinearConstraintProblemB3', 'bocode.Engineering.AntProblem', 'bocode.Engineering.HalfCheetahProblem', 'bocode.Engineering.HumanoidProblem', 'bocode.Engineering.HumanoidStandupProblem', 'bocode.Engineering.PusherProblem', 'bocode.Engineering.Walker2DProblem'], 
      ...
      }

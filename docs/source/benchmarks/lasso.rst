@@ -9,26 +9,26 @@ More information about the functions is available in the `LassoBench <https://gi
 Available Problems
 ----------------
 
-* :code:`optbench.LassoBench.LassoBreastCancer`
-* :code:`optbench.LassoBench.LassoDiabetes`
-* :code:`optbench.LassoBench.LassoDNA`
-* :code:`optbench.LassoBench.LassoLeukemia`
-* :code:`optbench.LassoBench.LassoRCV1`
-* :code:`optbench.LassoBench.LassoSyntHard`
-* :code:`optbench.LassoBench.LassoSyntHigh`
-* :code:`optbench.LassoBench.LassoSyntMedium`
-* :code:`optbench.LassoBench.LassoSyntSimple`
+* :code:`bocode.LassoBench.LassoBreastCancer`
+* :code:`bocode.LassoBench.LassoDiabetes`
+* :code:`bocode.LassoBench.LassoDNA`
+* :code:`bocode.LassoBench.LassoLeukemia`
+* :code:`bocode.LassoBench.LassoRCV1`
+* :code:`bocode.LassoBench.LassoSyntHard`
+* :code:`bocode.LassoBench.LassoSyntHigh`
+* :code:`bocode.LassoBench.LassoSyntMedium`
+* :code:`bocode.LassoBench.LassoSyntSimple`
 
 Example Usage
 ------------
 
 .. code-block:: python
 
-    import optbench
+    import bocode
     import torch
 
     # Create a Botorch benchmark problem
-    problem = optbench.LassoBench.LassoBreastCancer()
+    problem = bocode.LassoBench.LassoBreastCancer()
     
     # Get problem information
     bounds = problem.bounds

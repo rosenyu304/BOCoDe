@@ -4,22 +4,22 @@
 Single Objective Optimization
 =========================
 
-This guide demonstrates how to use OptBench for single-objective optimization problems.
+This guide demonstrates how to use BoCoDe for single-objective optimization problems.
 
 Basic Example
 ------------
 
-Here's a complete example of using OptBench with a single-objective optimization problem:
+Here's a complete example of using BoCoDe with a single-objective optimization problem:
 
 .. code-block:: python
 
-    import optbench
+    import bocode
     import numpy as np
     import torch
     from scipy.optimize import minimize
 
     # Create a benchmark problem
-    problem = optbench.Synthetics.Michalewicz()
+    problem = bocode.Synthetics.Michalewicz()
 
     # Get problem bounds
     bounds = problem.bounds

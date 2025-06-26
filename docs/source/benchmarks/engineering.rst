@@ -9,59 +9,59 @@ Available Problems
 ----------------
 
 
-* :code:`optbench.Engineering.CarSideImpact`
-* :code:`optbench.Engineering.EulerBernoulliBeamBending`
-* :code:`optbench.Engineering.GearTrain`
-* :code:`optbench.Engineering.Mazda_SCA`
-* :code:`optbench.Engineering.Mazda`
-* :code:`optbench.Engineering.MOPTA08Car`
-* :code:`optbench.Engineering.RobotPush`
-* :code:`optbench.Engineering.Rover`
-* :code:`optbench.Engineering.Truss10D`
-* :code:`optbench.Engineering.Truss25D`
-* :code:`optbench.Engineering.TwoBarTruss`
-* :code:`optbench.Engineering.WaterProblem`
-* :code:`optbench.Engineering.WaterResources`
-* Bayesian CHT Functions (:code:`optbench.Engineering.BayesianCHT`) 
+* :code:`bocode.Engineering.CarSideImpact`
+* :code:`bocode.Engineering.EulerBernoulliBeamBending`
+* :code:`bocode.Engineering.GearTrain`
+* :code:`bocode.Engineering.Mazda_SCA`
+* :code:`bocode.Engineering.Mazda`
+* :code:`bocode.Engineering.MOPTA08Car`
+* :code:`bocode.Engineering.RobotPush`
+* :code:`bocode.Engineering.Rover`
+* :code:`bocode.Engineering.Truss10D`
+* :code:`bocode.Engineering.Truss25D`
+* :code:`bocode.Engineering.TwoBarTruss`
+* :code:`bocode.Engineering.WaterProblem`
+* :code:`bocode.Engineering.WaterResources`
+* Bayesian CHT Functions (:code:`bocode.Engineering.BayesianCHT`) 
     `Source <https://link.springer.com/article/10.1007/s00158-024-03859-y>`_
 
      Y.-K. Tsai and R. J. Malak Jr, “Surrogate-assisted constraint-handling technique for constrained parametric multi-objective optimization,” Structural and Multidisciplinary Optimization, 2024. 
     
-    * :code:`optbench.Engineering.BayesianCHT.NonLinearConstraintProblemA3`
-    * :code:`optbench.Engineering.BayesianCHT.NonLinearConstraintProblemA4`
-    * :code:`optbench.Engineering.BayesianCHT.NonLinearConstraintProblemA7`
-    * :code:`optbench.Engineering.BayesianCHT.NonLinearConstraintProblemA8`
-    * :code:`optbench.Engineering.BayesianCHT.NonLinearConstraintProblemB3`
-    * :code:`optbench.Engineering.BayesianCHT.NonLinearConstraintProblemB4`
-    * :code:`optbench.Engineering.BayesianCHT.NonLinearConstraintProblemB7`
-    * :code:`optbench.Engineering.BayesianCHT.NonLinearConstraintProblemB8`
-* Mujoco Functions (:code:`optbench.Engineering.Gym`) 
+    * :code:`bocode.Engineering.BayesianCHT.NonLinearConstraintProblemA3`
+    * :code:`bocode.Engineering.BayesianCHT.NonLinearConstraintProblemA4`
+    * :code:`bocode.Engineering.BayesianCHT.NonLinearConstraintProblemA7`
+    * :code:`bocode.Engineering.BayesianCHT.NonLinearConstraintProblemA8`
+    * :code:`bocode.Engineering.BayesianCHT.NonLinearConstraintProblemB3`
+    * :code:`bocode.Engineering.BayesianCHT.NonLinearConstraintProblemB4`
+    * :code:`bocode.Engineering.BayesianCHT.NonLinearConstraintProblemB7`
+    * :code:`bocode.Engineering.BayesianCHT.NonLinearConstraintProblemB8`
+* Mujoco Functions (:code:`bocode.Engineering.Gym`) 
     `Source <https://gymnasium.farama.org/environments/mujoco/>`_
 
      E. Todorov, T. Erez, and Y. Tassa, “MuJoCo: A physics engine for model-based control,” in Proc. IEEE/RSJ Int. Conf. Intell. Robots Syst., pp. 5026–5033, 2012. doi: 10.1109/IROS.2012.6386109.
 
-    * :code:`optbench.Engineering.Gym.AntProblem`
-    * :code:`optbench.Engineering.Gym.HalfCheetahProblem`
-    * :code:`optbench.Engineering.Gym.HopperProblem`
-    * :code:`optbench.Engineering.Gym.HumanoidProblem`
-    * :code:`optbench.Engineering.Gym.HumanoidStandupProblem`
-    * :code:`optbench.Engineering.Gym.InvertedDoublePendulumProblem`
-    * :code:`optbench.Engineering.Gym.InvertedPendulumProblem`
-    * :code:`optbench.Engineering.Gym.PusherProblem`
-    * :code:`optbench.Engineering.Gym.ReacherProblem`
-    * :code:`optbench.Engineering.Gym.SwimmerProblem`
-    * :code:`optbench.Engineering.Gym.Walker2DProblem`
+    * :code:`bocode.Engineering.Gym.AntProblem`
+    * :code:`bocode.Engineering.Gym.HalfCheetahProblem`
+    * :code:`bocode.Engineering.Gym.HopperProblem`
+    * :code:`bocode.Engineering.Gym.HumanoidProblem`
+    * :code:`bocode.Engineering.Gym.HumanoidStandupProblem`
+    * :code:`bocode.Engineering.Gym.InvertedDoublePendulumProblem`
+    * :code:`bocode.Engineering.Gym.InvertedPendulumProblem`
+    * :code:`bocode.Engineering.Gym.PusherProblem`
+    * :code:`bocode.Engineering.Gym.ReacherProblem`
+    * :code:`bocode.Engineering.Gym.SwimmerProblem`
+    * :code:`bocode.Engineering.Gym.Walker2DProblem`
 
 Example Usage
 ------------
 
 .. code-block:: python
 
-    import optbench
+    import bocode
     import torch
 
     # Create a Botorch benchmark problem
-    problem = optbench.Engineering.GearTrain()
+    problem = bocode.Engineering.GearTrain()
     
     # Get problem information
     bounds = problem.bounds

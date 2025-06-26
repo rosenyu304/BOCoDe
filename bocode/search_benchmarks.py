@@ -1,7 +1,6 @@
 import math
 from typing import Callable, Iterable, List, Union, Dict
 from collections import defaultdict
-import bocode as optbench
 from bocode import *
 import importlib
 
