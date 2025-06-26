@@ -3,9 +3,9 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "optbench"
+name = "bocode"
 version = "0.0.1"
-description = "OptBench is a Python library contains optimization benchmark problems."
+description = "BOCode is a Python library contains optimization benchmark problems."
 authors = [
     { name = "Temporary", email = "example@example.com" }
 ]
@@ -32,15 +32,17 @@ dependencies = [
     "python-fcl",
     "scipy",
     "trimesh",
-    "LassoBench @ git+ssh://https://github.com/ksehic/LassoBench.git",
-    "modact @ git+ssh://https://github.com/epfl-lamd/modact.git"
+    "dash",
+    "LassoBench @ git+ssh://git@github.com/ksehic/LassoBench.git",
+    "modact @ git+ssh://git@github.com/epfl-lamd/modact.git"
 ]
 
 [tool.setuptools]
 include-package-data = true
 
 [tool.setuptools.packages.find]
-where = ["OptBenchmarksLibrary"]
+where = ["."]
+include = ["bocode*"]
 
 [project.urls]
 Homepage = "https://github.com/rosenyu304/OptBenckmarkLibrary/"

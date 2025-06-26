@@ -1,0 +1,97 @@
+.. _cec2020_benchmarks:
+
+CEC 2020 Benchmarks
+=================
+
+The CEC2020 benchmark collection contains all functions from the CEC 2020 Competition.
+More information can be found in the `2020-RW-Constrained-Optimisation GitHub page <https://github.com/P-N-Suganthan/2020-RW-Constrained-Optimisation/>`_.
+
+**The CEC2020 functions include equality constraints. Equality constraints are defined such that g(x) = 0. Please see** :ref:`cec2020_example_usage` **for an example of how to use them**.
+
+Available Problems
+----------------
+
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p1`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p2`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p3`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p4`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p5`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p6`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p7`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p8`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p9`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p10`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p11`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p12`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p13`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p14`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p15`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p16`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p17`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p18`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p19`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p20`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p21`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p22`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p23`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p24`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p25`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p26`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p27`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p28`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p29`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p30`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p31`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p32`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p33`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p34`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p35`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p36`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p37`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p38`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p39`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p40`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p41`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p42`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p43`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p44`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p45`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p46`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p47`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p48`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p49`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p50`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p51`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p52`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p53`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p54`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p55`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p56`
+* :code:`bocode.CEC.CEC2020_RW_Constrained.CEC2020_p57`
+
+.. _cec2020_example_usage:
+Example Usage
+-------------
+
+.. code-block:: python
+
+    import bocode
+    import torch
+
+    # Create a Botorch benchmark problem
+    problem = bocode.CEC.CEC2020_RW_Constrained.CEC2020_p1()
+    
+    # Get problem information
+    bounds = problem.bounds
+    
+    # Evaluate at a point
+    x = torch.Tensor([[0.0] * problem.dim])
+    inequality_constraints, equality_constraints, values = problem._evaluate_implementation(x)
+    
+    print(f"First CEC 2020 function value at origin: {values[0]}")
+
+Output:
+
+.. code-block:: console
+
+    First CEC 2020 function value at origin: tensor([-0.])

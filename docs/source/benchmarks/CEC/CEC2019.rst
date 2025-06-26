@@ -1,0 +1,78 @@
+.. _cec2019_benchmarks:
+
+CEC 2019 Benchmarks
+=================
+
+The CEC2019 benchmark collection contains all functions from the CEC 2019 Competition.
+More information can be found in the `CEC 2019 GitHub page <https://github.com/P-N-Suganthan/CEC2019/>`_.
+
+Sources:
+
+ K. V. Price, N. H. Awad, M. Z. Ali, P. N. Suganthan, "Problem Definitions and Evaluation Criteria for the 100-Digit Challenge Special Session and Competition on Single Objective Numerical Optimization," Technical Report, Nanyang Technological University, Singapore, November 2018.
+
+Available Problems
+----------------
+
+* :code:`bocode.CEC.CEC2019.CEC2019_p1`
+* :code:`bocode.CEC.CEC2019.CEC2019_p2`
+* :code:`bocode.CEC.CEC2019.CEC2019_p3`
+* :code:`bocode.CEC.CEC2019.CEC2019_p4`
+* :code:`bocode.CEC.CEC2019.CEC2019_p5`
+* :code:`bocode.CEC.CEC2019.CEC2019_p6`
+* :code:`bocode.CEC.CEC2019.CEC2019_p7`
+* :code:`bocode.CEC.CEC2019.CEC2019_p8`
+* :code:`bocode.CEC.CEC2019.CEC2019_p9`
+* :code:`bocode.CEC.CEC2019.CEC2019_p10`
+
+Problem Details
+----------------
+
++-----+--------------------------------------------------------------+----+------------------+
+| No. | Functions                                                    | D  | Bounds           |
++=====+==============================================================+====+==================+
+|  1  | Storn's Chebyshev Polynomial Fitting Problem                 |  9 | [-8192, 8192]    |
++-----+--------------------------------------------------------------+----+------------------+
+|  2  | Inverse Hilbert Matrix Problem                               | 16 | [-16384, 16384]  |
++-----+--------------------------------------------------------------+----+------------------+
+|  3  | Lennard-Jones Minimum Energy Cluster                         | 18 | [-4, 4]          |
++-----+--------------------------------------------------------------+----+------------------+
+|  4  | Rastrigin’s Function                                         | 10 | [-100, 100]      |
++-----+--------------------------------------------------------------+----+------------------+
+|  5  | Griewangk’s Function                                         | 10 | [-100, 100]      |
++-----+--------------------------------------------------------------+----+------------------+
+|  6  | Weierstrass Function                                         | 10 | [-100, 100]      |
++-----+--------------------------------------------------------------+----+------------------+
+|  7  | Modified Schwefel’s Function                                 | 10 | [-100, 100]      |
++-----+--------------------------------------------------------------+----+------------------+
+|  8  | Expanded Schaffer’s F6 Function                              | 10 | [-100, 100]      |
++-----+--------------------------------------------------------------+----+------------------+
+|  9  | Happy Cat Function                                           | 10 | [-100, 100]      |
++-----+--------------------------------------------------------------+----+------------------+
+| 10  | Ackley Function                                              | 10 | [-100, 100]      |
++-----+--------------------------------------------------------------+----+------------------+
+
+Example Usage
+------------
+
+.. code-block:: python
+
+    import bocode
+    import torch
+
+    # Create a Botorch benchmark problem
+    problem = bocode.CEC.CEC2019.CEC2019_p1()
+
+    # Get problem information
+    bounds = problem.bounds
+
+    # Evaluate at a point
+    x = torch.Tensor([[0.0] * problem.dim])
+    constraints, values = problem._evaluate_implementation(x)
+
+    print(f"CEC 2019 Problem 1 (Storn's Chebyshev Polynomial Fitting Problem) function value at origin: {values[0]}")
+
+Output:
+
+.. code-block:: console
+
+    CEC 2019 Problem 1 (Storn's Chebyshev Polynomial Fitting Problem) function value at origin: tensor([1.])

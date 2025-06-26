@@ -1,24 +1,106 @@
+# BOCode: Benchmarks for Optimization and Computational design
+
+> [!IMPORTANT]
+>
+> The optimization tasks in this library can be used for all kinds of optimization algorithms benchmarking. 
+> Key difference: Bayesian optimization algorithms are typically MAXIMIZING
+
+We present BOCode, a Python and PyTorch-based library that contains the most comprehensive suite of engineering design optimization problems and an interface to popular synthetic optimization problems, with access to 300+ problems for optimization algorithm benchmarking. Our goal is to provide not only a Python optimization benchmark library but also to allow the PyTorch interface for facilitating machine learning optimization algorithms and applications such as surrogate and Bayesian optimization.
+
+# What is in BOCode?
+
+## Engineering design problems
+We present a diverse collection of engineering design problems including car design, cantilever beam, truss structure optimization, and physics simulation of robotics problems. 
+
+<center><img src="docs/Figures/TopFuns_Icon_v1.png" width="400"></center>
+
+
+## Interface to popular benchmarks
+
+(still editing) other opensource libraries: [MODAct](https://github.com/epfl-lamd/modact), [Lassobench](https://github.com/ksehic/LassoBench), 
+
+| [Botorch](https://botorch.org/)  | [BBOB/COCO](https://coco-platform.org/) | [OPFUNU<br/>(IEEE CEC benchmarks)](https://github.com/thieu1995/opfunu) | [Gym Mujoco](https://www.gymlibrary.dev/environments/mujoco/index.html) | [NEORL](https://neorl.readthedocs.io/en/latest/#) |
+| :------: | :------:  | :------:   | :------:   | :------:   |
+| <img src="docs/Figures/botorch_icon.png" width="50">  | <img src="docs/Figures/coco-logo.svg" width="50">      | <img src="docs/Figures/opfunu.png" width="100">        | <img src="docs/Figures/gym_logo.png" width="120">  | <img src="docs/Figures/Neorl_logo.png" width="50">  |
+
+
 # Installation
-Hi hope you are doing well! Overall, great job on making good progress on literally everything! 
 
-To-Dos:
-1. Remove cont_to_disc: I'm unsure if you recognized a function called cont_to_disc in some mixed variable functions. So we want to remove this in every function. This library ONLY takes in raw data. AKA if the function can only take in discrete X values, we should not assume that the users will pass in continuous ones. (As cont_to_disc is technically a design choice in algorithms). Therefore, I want you to double check all the function ONLY assume that the X got passed in is **Correct**, meaning that if a feature is discrete, the user should pass in discrete X, and not continuous. 
+For our own testing now:
+```
+pip install git+https://github.com/rosenyu304/OptBenckmarkLibrary@WIP/May27
+```
 
-2. Documentation: Update the documentation with all your additional functions and add tutorials for all categories of functions
-  
-3. More functions
-  - Trusses related function:
-    - Look into the other folder and find the truss problems. In theory, these files should also include the paper on the truss problems (let me know if you don't have access to the papers). Look at the original problem formulated in the paper and check if the implementation on our side is correct since the python library for this truss problem does not specify the units of anything.
-    - From the software perspective, I think some Truss problems have different variances, think about how to best structure them. Right now we classify them as Truss10D, 25D, ...etc.
-  - Other source: Make sure our library includes all the problems / functions from these sources、
-    - NEORL: https://neorl.readthedocs.io/en/latest/index.html
-    - The real-world problem from this: https://dl.acm.org/doi/10.1145/3583133.3595060 (Let me know if you have access)
-   
-   
+After PyPI upload:
+```
+pip install bocode
+```
+
+# Optimization Problem Definition
+Here we define all our problems for **maximization** optimization algorithms (therefore please negate the evaluated value if your optimization algorithms are doing minimization). For the constraints here, they are inequality constraints with constraint values (gx) <= 0 as feasible.
+
+<center><img src="docs/Figures/opt_definition.png" width="200"></center>
+
+# Example Usage
+
+For details of each problem's usage, please read our docs. Here we provide examples to common usage of this library:
+
+1. Direct evaluation
+```
+import bocode
+import torch
+
+# Instantiate a Synthetic benchmark problem
+problem = bocode.Engineering.Car()
+
+# Evaluate at a point
+x = torch.Tensor([[0.0] * problem.dim])
+constraints, values = problem._evaluate_implementation(x)
+
+print(f"Is it feasible? {(constraints<=0).all()}")
+print(f"Function value at origin: {values[0]}")
+```
+
+2. Scaling parameters sampled from unit hypercube (typical Bayesian optimization practice)
+```
+import bocode
+import torch
+
+# Instantiate a Synthetic benchmark problem
+problem = bocode.Synthetics.Ackley(show_info=True) # show_info=True to show info of the problem 
+
+# Evaluate at a in bounds of [0,1]s
+x = torch.rand(5,problem.dim)
+print("X in [0,1]s:\n",x,"\n")
+
+# Scale it w.r.t. the problem bounds
+x = problem.scale(x)
+print("Scaled X in bounds:\n",x)
+constraints, values = problem._evaluate_implementation(x)
+
+print(f"Is each sample feasible? {(constraints<=0).all(dim=1)}")
+print(f"Function value at origin: {values[0]}")
+```
+
+3. Example using a scipy minimization for this
+
+4. Synthetic function visualization
 
 
 
-# Feb 5 Notes
-1. The OptBenchmarksLibrary/base.py have the BenchmarkProblem class
-2. The actual f(x) in the most commonly used continuous version should be be a subclass of BenchmarkProblem
-3. The other variant of f(x) should be a subclass of the actual f(x)
+# Development
+
+BOCode is an open source projects and we welcome contributions! If you want to add a new problem, please reach out to us first to see if it is a good fit for BOCode.
+
+# Citing
+
+1. If you use BOCode in your research, please cite the following paper:
+```
+todo
+```
+
+2. If you use the the BOCode interfaces to other libraries or open source code functions (ex: BoTorch, BBOB, NEORL, MODAact, LassoBench, ...), please cite them accordingly.
+
+
+# License
+BOCode is MIT licensed, as found in the LICENSE file.
