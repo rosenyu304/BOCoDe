@@ -11,7 +11,7 @@ Example Usage
 .. code-block:: python
 
     import bocode
-    import bocode.DataType as DataType
+    from bocode import DataType
 
     # Available DataTypes:
     #    DataType.CONTINUOUS
@@ -38,6 +38,6 @@ Output:
 
     {'Synthetics': ['bocode.Synthetics.DixonPrice', 'bocode.Synthetics.Griewank', 'bocode.Synthetics.Levy', 'bocode.Synthetics.Michalewicz', 'bocode.Synthetics.Powell', 'bocode.Synthetics.Rastrigin', 'bocode.Synthetics.Rosenbrock', 'bocode.Synthetics.StyblinskiTang', 'bocode.Synthetics.Cosine8', 'bocode.Synthetics.Hartmann6D', 'bocode.Synthetics.SVM'],
      'LassoBench': ['bocode.LassoBench.LassoBreastCancer', 'bocode.LassoBench.LassoDiabetes', 'bocode.LassoBench.LassoDNA', 'bocode.LassoBench.LassoLeukemia', 'bocode.LassoBench.LassoRCV1', 'bocode.LassoBench.LassoSyntHard', 'bocode.LassoBench.LassoSyntHigh', 'bocode.LassoBench.LassoSyntMedium', 'bocode.LassoBench.LassoSyntSimple'], 
-     'Engineering': ['bocode.Engineering.RobotPush', 'bocode.Engineering.Rover', 'bocode.Engineering.NonLinearConstraintProblemA3', 'bocode.Engineering.NonLinearConstraintProblemA4', 'bocode.Engineering.NonLinearConstraintProblemB3', 'bocode.Engineering.AntProblem', 'bocode.Engineering.HalfCheetahProblem', 'bocode.Engineering.HumanoidProblem', 'bocode.Engineering.HumanoidStandupProblem', 'bocode.Engineering.PusherProblem', 'bocode.Engineering.Walker2DProblem'], 
+     'Engineering': ['bocode.Engineering.RobotPush', 'bocode.Engineering.Rover'],
      ...
      }

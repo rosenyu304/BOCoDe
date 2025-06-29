@@ -25,11 +25,11 @@ LassoBenchFuncs = [LassoBreastCancer, LassoDiabetes, LassoDNA, LassoLeukemia, La
 EngineeringFuncs = [CarSideImpact, CantileverBeam, Car, CompressionSpring, EulerBernoulliBeamBending, GearTrain, 
                     KeaneBump, Mazda, Mazda_SCA, MOPTA08Car, ReinforcedConcreteBeam, RobotPush, Rover, Truss10D, 
                     Truss25D, Truss72D_FourForces, Truss72D_SingleForce, Truss120D, Truss200D, TwoBarTruss, 
-                    ThreeTruss, WaterProblem, WaterResources, NonLinearConstraintProblemA3, NonLinearConstraintProblemA4, 
-                    NonLinearConstraintProblemA7, NonLinearConstraintProblemA8, NonLinearConstraintProblemB3, 
-                    NonLinearConstraintProblemB4, NonLinearConstraintProblemB7, NonLinearConstraintProblemB8, AntProblem, 
-                    HalfCheetahProblem, HopperProblem, HumanoidProblem, HumanoidStandupProblem, InvertedDoublePendulumProblem, 
-                    InvertedPendulumProblem, PusherProblem, ReacherProblem, SwimmerProblem, Walker2DProblem]
+                    ThreeTruss, WaterProblem, WaterResources]
+MujocoFuncs = [AntProblem, HalfCheetahProblem, HopperProblem, HumanoidProblem, HumanoidStandupProblem, InvertedDoublePendulumProblem, 
+               InvertedPendulumProblem, PusherProblem, ReacherProblem, SwimmerProblem, Walker2DProblem]
+BayesianCHTFuncs = [NonLinearConstraintProblemA3, NonLinearConstraintProblemA4, NonLinearConstraintProblemA7, NonLinearConstraintProblemA8, 
+                    NonLinearConstraintProblemB3, NonLinearConstraintProblemB4, NonLinearConstraintProblemB7, NonLinearConstraintProblemB8]
 CEC2020Funcs = [CEC2020_p1, CEC2020_p2, CEC2020_p3, CEC2020_p4, CEC2020_p5, CEC2020_p6, CEC2020_p7, CEC2020_p8, CEC2020_p9, 
                 CEC2020_p10, CEC2020_p11, CEC2020_p12, CEC2020_p13, CEC2020_p14, CEC2020_p15, CEC2020_p16, CEC2020_p17, 
                 CEC2020_p18, CEC2020_p19, CEC2020_p20, CEC2020_p21, CEC2020_p22, CEC2020_p23, CEC2020_p24, CEC2020_p25, 
@@ -60,6 +60,8 @@ categorized_classes = {
     "Synthetics": SyntheticsFuncs,
     "LassoBench": LassoBenchFuncs,
     "Engineering": EngineeringFuncs,
+    "Engineering.Gym": MujocoFuncs,
+    "Engineering.BayesianCHT": BayesianCHTFuncs,
     "CEC.CEC2020_RW_Constrained": CEC2020Funcs,
     "BBOB": BBOBFuncs,
     "BoTorch": BotorchFuncs,
@@ -105,7 +107,7 @@ def filter_functions(dimension_filter: Callable[[int], bool] = lambda x: x > 0,
     """
     Filter functions based on the given constraints.
 
-    Available Categories: ["Synthetics", "LassoBench", "Engineering", "CEC.CEC2020_RW_Constrained", "BBOB", "BoTorch", "MODAct", "CEC.CEC2017", "WFG", "ZDT", "DTLZ", "CEC.CEC2007", "CEC.CEC2019", "NEORL"]
+    Available Categories: ['Synthetics', 'LassoBench', 'Engineering', 'Engineering.Gym', 'Engineering.BayesianCHT', 'CEC.CEC2020_RW_Constrained', 'BBOB', 'BoTorch', 'MODAct', 'CEC.CEC2017', 'WFG', 'ZDT', 'DTLZ', 'CEC.CEC2007', 'CEC.CEC2019', 'NEORL']
 
     Parameters
     ----------
