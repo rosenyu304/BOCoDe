@@ -3,7 +3,7 @@ import torch
 import numpy as np
 from typing import Tuple
 import math
-from .neorl_lib.reactivity_model import ReactivityModel
+from .neorl_lib.reactivity_model import ReactivityModel as Reactivity_Model
 
 class ReactivityModel(BenchmarkProblem):
     """
@@ -19,7 +19,10 @@ class ReactivityModel(BenchmarkProblem):
     num_constraints = 0
 
     def __init__(self, typ: str = "wtd"):
-        self.model = ReactivityModel(typ)
+        """
+        typ can be "abs", "wtd" or "refl"
+        """
+        self.model = Reactivity_Model(typ)
 
         super().__init__(
             dim=8,
