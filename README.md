@@ -36,7 +36,7 @@ pip install bocode
 ```
 
 # Optimization Problem Definition
-Here we define all our problems for **maximization** optimization algorithms (therefore please negate the evaluated value if your optimization algorithms are doing minimization). For the constraints here, they are inequality constraints with constraint values (gx) <= 0 as feasible.
+Here we define all our problems for **maximization** optimization algorithms (for minimization, negate the evaluated value). For the constraints here, they are inequality constraints with constraint values (gx) <= 0 as feasible.
 
 <center><img src="docs/Figures/opt_definition.png" width="200"></center>
 
@@ -45,7 +45,7 @@ Here we define all our problems for **maximization** optimization algorithms (th
 For details of each problem's usage, please read our docs. Here we provide examples to common usage of this library:
 
 1. Direct evaluation
-```
+```python
 import bocode
 import torch
 
@@ -61,7 +61,7 @@ print(f"Function value at origin: {values[0]}")
 ```
 
 2. Scaling parameters sampled from unit hypercube (typical Bayesian optimization practice)
-```
+```python
 import bocode
 import torch
 
