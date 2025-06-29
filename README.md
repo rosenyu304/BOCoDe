@@ -27,7 +27,7 @@ We present a diverse collection of engineering design problems including car des
 
 For our own testing now:
 ```
-pip install git+https://github.com/rosenyu304/OptBenckmarkLibrary@WIP/May27
+pip install git+https://github.com/rosenyu304/OptBenckmarkLibrary
 ```
 
 After PyPI upload:
@@ -89,7 +89,7 @@ print(f"Function value at origin: {values[0]}")
 
 # Development
 
-BOCode is an open source projects and we welcome contributions! If you want to add a new problem, please reach out to us first to see if it is a good fit for BOCode.
+BOCode is an open source project and we welcome contributions! If you want to add a new problem, please reach out to us first to see if it is a good fit for BOCode.
 
 # Citing
 
@@ -98,7 +98,7 @@ BOCode is an open source projects and we welcome contributions! If you want to a
 todo
 ```
 
-2. If you use the the BOCode interfaces to other libraries or open source code functions (ex: BoTorch, BBOB, NEORL, MODAact, LassoBench, ...), please cite them accordingly.
+2. If you use the the BOCode interfaces to other libraries or open source code functions (ex: BoTorch, BBOB, NEORL, MODAct, LassoBench, ...), please cite them accordingly.
 
 
 # License
