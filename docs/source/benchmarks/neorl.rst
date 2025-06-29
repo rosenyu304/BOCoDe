@@ -16,6 +16,7 @@ Available Problems
 * :code:`bocode.NEORL.TSP_51Cities` (Ex 1)
 * :code:`bocode.NEORL.TSP_100Cities` (Ex 1)
 * :code:`bocode.NEORL.ReactivityModel` (Ex 11)
+* :code:`bocode.NEORL.QPowerModel` (Ex 11)
 
 Example Usage
 ------------

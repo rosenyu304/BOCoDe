@@ -22,14 +22,16 @@ class QPowerModel:
     """
     def __init__(self):
         #Find and load file
-        model_file = cpath / Path("tools/microreactor_power_model.h5")
+        model_file = cpath / Path("tools/microreactor_power_model.keras")
         self.raw_model = load_model(model_file)
 
     def eval(self, pert):
         pert2 = pert.copy()
-        pertn = np.array([pert2, ])
+        # Reshape to 3D input as expected by the model: (batch_size, time_steps, features)
+        pertn = np.array([pert2, ]).reshape(1, 1, -1)
         unorm = self.raw_model.predict(pertn).flatten()
-        return unorm/unorm.sum()
+        # Return a scalar objective value (sum of normalized power distribution)
+        return float(unorm.sum())
 
 def qPowerModel(pert):
     """Wrapper for QPowerModel that initializes and runs"""
