@@ -2,7 +2,12 @@ import torch
 import pytest
 from ..Gym.MujocoFuncs import *
 
-benchmark_classes = [AntProblem, HalfCheetahProblem, HopperProblem, HumanoidProblem, HumanoidStandupProblem, InvertedDoublePendulumProblem, InvertedPendulumProblem, PusherProblem, ReacherProblem, SwimmerProblem, Walker2DProblem]
+benchmark_classes = [AntProblem, HalfCheetahProblem, HopperProblem, 
+                     HumanoidProblem, HumanoidStandupProblem, InvertedDoublePendulumProblem, 
+                     InvertedPendulumProblem, PusherProblem, ReacherProblem, 
+                     SwimmerProblem, Walker2DProblem, SwimmerPolicySearchProblem,
+                     AntPolicySearchProblem, HalfCheetahPolicySearchProblem,
+                     HopperPolicySearchProblem, Walker2DPolicySearchProblem]
 
 @pytest.mark.parametrize("benchmark", benchmark_classes)
 def test_CEC2017_evaluate(benchmark):
