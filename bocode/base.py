@@ -69,6 +69,14 @@ class BenchmarkProblem:
         self.ref_point = ref_point
         self.tags = tags
         self.debug = debug
+        
+    def evaluate(self, X: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
+        """
+        Evaluates the objective and constraint functions.
+        """
+        constraints, values = self._evaluate_implementation(X)
+        return values, constraints
+
 
     def _evaluate_implementation(self, X: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
         """
