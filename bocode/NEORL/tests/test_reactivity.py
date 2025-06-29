@@ -3,7 +3,7 @@ import pytest
 from .. import *
 
 def test_reactivity_evaluate():
-    problem = Reactivity8Drums()
+    problem = ReactivityModel()
 
     dim = problem.dim
 

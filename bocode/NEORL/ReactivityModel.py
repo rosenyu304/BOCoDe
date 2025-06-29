@@ -5,7 +5,7 @@ from typing import Tuple
 import math
 from .neorl_lib.reactivity_model import ReactivityModel
 
-class Reactivity8Drums(BenchmarkProblem):
+class ReactivityModel(BenchmarkProblem):
     """
     Eight-drum reactivity insertion problem.
     Uses the ReactivityModel.eval(pert) to compute the total reactivity worth
