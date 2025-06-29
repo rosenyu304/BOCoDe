@@ -12,5 +12,9 @@ __all__ = [
     "ReacherProblem",
     "SwimmerProblem",
     "Walker2DProblem",
-    "SwimmerPolicySearchProblem"
+    "SwimmerPolicySearchProblem",
+    "AntPolicySearchProblem",
+    "HalfCheetahPolicySearchProblem",
+    "HopperPolicySearchProblem",
+    "Walker2DPolicySearchProblem"
 ]
