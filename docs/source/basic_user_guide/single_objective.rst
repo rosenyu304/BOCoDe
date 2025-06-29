@@ -4,12 +4,12 @@
 Single Objective Optimization
 =========================
 
-This guide demonstrates how to use BoCoDe for single-objective optimization problems.
+This guide demonstrates how to use BOCode for single-objective optimization problems.
 
 Basic Example
 ------------
 
-Here's a complete example of using BoCoDe with a single-objective optimization problem:
+Here's a complete example of using BOCode with a single-objective optimization problem:
 
 .. code-block:: python
 

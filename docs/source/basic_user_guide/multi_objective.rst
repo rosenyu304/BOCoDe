@@ -4,12 +4,12 @@
 Multi-Objective Optimization
 ========================
 
-This guide shows how to work with multi-objective optimization problems in BoCoDe.
+This guide shows how to work with multi-objective optimization problems in BOCode.
 
 Basic Example
 ------------
 
-Here's an example of using BoCoDe with a multi-objective problem:
+Here's an example of using BOCode with a multi-objective problem:
 
 .. code-block:: python
 
