@@ -51,6 +51,11 @@ Available Problems
     * :code:`bocode.Engineering.Gym.ReacherProblem`
     * :code:`bocode.Engineering.Gym.SwimmerProblem`
     * :code:`bocode.Engineering.Gym.Walker2DProblem`
+    * :code:`bocode.Engineering.Gym.SwimmerPolicySearchProblem`
+    * :code:`bocode.Engineering.Gym.AntPolicySearchProblem`
+    * :code:`bocode.Engineering.Gym.HalfCheetahPolicySearchProblem`
+    * :code:`bocode.Engineering.Gym.HopperPolicySearchProblem`
+    * :code:`bocode.Engineering.Gym.Walker2DPolicySearchProblem`
 
 Example Usage
 ------------
