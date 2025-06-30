@@ -73,9 +73,14 @@ class BenchmarkProblem:
     def evaluate(self, X: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
         """
         Evaluates the objective and constraint functions.
+
+        Returns (values, constraints) or (values, equality constraints, inequality constraints) for problems with equality constraints
         """
-        constraints, values = self._evaluate_implementation(X)
-        return values, constraints
+        output = self._evaluate_implementation(X)
+        if len(output) == 2:
+            return output[1], output[0] # values, constraints
+        # len(output) is 3 for CEC2020 functions
+        return output[2], output[1], output[0] # values, equality constraints, inequality constraints
 
 
     def _evaluate_implementation(self, X: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
