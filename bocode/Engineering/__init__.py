@@ -21,6 +21,7 @@ from .Truss72D import *
 from .Truss120D import *
 from .Truss200D import *
 from .Gym import *
+from .Gym import SwimmerPolicySearchProblem, AntPolicySearchProblem, HalfCheetahPolicySearchProblem, HopperPolicySearchProblem, Walker2DPolicySearchProblem
 
 __all__ = [
            'CarSideImpact',
@@ -64,5 +65,10 @@ __all__ = [
             "PusherProblem",
             "ReacherProblem",
             "SwimmerProblem",
-            "Walker2DProblem"
+            "Walker2DProblem",
+            "SwimmerPolicySearchProblem",
+            "AntPolicySearchProblem",
+            "HalfCheetahPolicySearchProblem",
+            "HopperPolicySearchProblem",
+            "Walker2DPolicySearchProblem"
           ]
