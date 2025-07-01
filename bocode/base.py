@@ -155,7 +155,7 @@ class BenchmarkProblem:
         lbs = torch.tensor([b[0] for b in bounds], dtype=torch.float32)
         ubs = torch.tensor([b[1] for b in bounds], dtype=torch.float32)
         X_rand = lbs + (ubs - lbs) * torch.rand(num_samples, D)
-        Y_rand = self._evaluate_implementation(X_rand)[1]
+        Y_rand = self.evaluate(X_rand)[0]
 
         Xn = X_rand.detach().cpu().numpy()
         Yn = Y_rand.detach().cpu().numpy()
@@ -165,7 +165,7 @@ class BenchmarkProblem:
             for i in range(M):
                 xs = np.linspace(bounds[0][0], bounds[0][1], sampling_density)
                 ys = (
-                    self._evaluate_implementation(torch.from_numpy(xs.reshape(-1, 1).astype(np.float32)))[1]
+                    self.evaluate(torch.from_numpy(xs.reshape(-1, 1).astype(np.float32)))[0]
                     .detach()
                     .cpu()
                     .numpy()[:, i]
@@ -191,7 +191,7 @@ class BenchmarkProblem:
                     np.stack([Xg.ravel(), Yg.ravel()], axis=1).astype(np.float32)
                 )
                 Zg = (
-                    self._evaluate_implementation(pts)[1]
+                    self.evaluate(pts)[0]
                     .detach()
                     .cpu()
                     .numpy()[:, i]
@@ -326,7 +326,7 @@ class BenchmarkProblem:
             pts[:, j] = Xj.ravel()
 
             with torch.no_grad():
-                Y = self._evaluate_implementation(torch.from_numpy(pts.astype(np.float32)))[1]
+                Y = self.evaluate(torch.from_numpy(pts.astype(np.float32)))[0]
             Z = Y.detach().cpu().numpy()[:, obj].reshape(sampling_density, sampling_density)
 
             surf = go.Surface(x=Xi, y=Xj, z=Z, colorscale="Viridis", opacity=0.8)
