@@ -45,5 +45,5 @@ where = ["."]
 include = ["bocode*"]
 
 [project.urls]
-Homepage = "https://github.com/rosenyu304/OptBenckmarkLibrary/"
-Repository = "https://github.com/rosenyu304/OptBenckmarkLibrary/"
+Homepage = "https://github.com/rosenyu304/BOCoDe/"
+Repository = "https://github.com/rosenyu304/BOCoDe/"
