@@ -87,10 +87,9 @@ After initialization, a ``BenchmarkProblem`` instance contains the following att
 
 Methods
 -------
-.. TODO: Change the name of _evaluate_implementation to evaluate
 
-.. _evaluate_implementation:
-_evaluate_implementation(X)
+.. evaluate:
+evaluate(X)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Evaluates the objective and constraint functions.
@@ -101,7 +100,7 @@ Evaluates the objective and constraint functions.
 
 **Returns:**
 
-- ``Tuple[torch.Tensor, torch.Tensor]:``: Constraints and objective values (in that order) with shape (n_samples, num_constraints) and (n_samples, num_objectives) respectively.
+- ``Tuple[torch.Tensor, torch.Tensor]:``: Objective and Constraint values (in that order) with shape ``(n_samples, num_constraints)`` and ``(n_samples, num_objectives)`` respectively.
 
 .. note::
 
