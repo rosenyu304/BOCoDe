@@ -51,6 +51,11 @@ Available Problems
     * :code:`bocode.Engineering.Gym.ReacherProblem`
     * :code:`bocode.Engineering.Gym.SwimmerProblem`
     * :code:`bocode.Engineering.Gym.Walker2DProblem`
+    * :code:`bocode.Engineering.Gym.SwimmerPolicySearchProblem`
+    * :code:`bocode.Engineering.Gym.AntPolicySearchProblem`
+    * :code:`bocode.Engineering.Gym.HalfCheetahPolicySearchProblem`
+    * :code:`bocode.Engineering.Gym.HopperPolicySearchProblem`
+    * :code:`bocode.Engineering.Gym.Walker2DPolicySearchProblem`
 
 Example Usage
 ------------
@@ -68,7 +73,7 @@ Example Usage
     
     # Evaluate at a point
     x = torch.Tensor([[0.0] * problem.dim])
-    constraints, values = problem._evaluate_implementation(x)
+    values, constraints = problem.evaluate(x)
     
     print(f"Gear Train function value at [0.5]*4: {values[0]}")
 

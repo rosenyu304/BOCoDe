@@ -4,12 +4,12 @@
 Single Objective Optimization
 =========================
 
-This guide demonstrates how to use BOCode for single-objective optimization problems.
+This guide demonstrates how to use BOCoDe for single-objective optimization problems.
 
 Basic Example
 ------------
 
-Here's a complete example of using BOCode with a single-objective optimization problem:
+Here's a complete example of using BOCoDe with a single-objective optimization problem:
 
 .. code-block:: python
 
@@ -27,7 +27,7 @@ Here's a complete example of using BOCode with a single-objective optimization p
     # Define objective function for optimizer
     def objective(x):
         x = torch.Tensor([x])
-        _, fx = problem._evaluate_implementation(x)
+        fx, _ = problem.evaluate(x)
         return fx.numpy()[0][0]
 
     # Starting point 2 dimensional

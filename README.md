@@ -56,7 +56,7 @@ problem = bocode.Engineering.Car()
 
 # Evaluate at a point
 x = torch.Tensor([[0.0] * problem.dim])
-constraints, values = problem._evaluate_implementation(x)
+values, constraints = problem.evaluate(x)
 
 print(f"Is it feasible? {(constraints<=0).all()}")
 print(f"Function value at origin: {values[0]}")
@@ -77,7 +77,7 @@ print("X in [0,1]s:\n",x,"\n")
 # Scale it w.r.t. the problem bounds
 x = problem.scale(x)
 print("Scaled X in bounds:\n",x)
-constraints, values = problem._evaluate_implementation(x)
+values, constraints = problem.evaluate(x)
 
 print(f"Is each sample feasible? {(constraints<=0).all(dim=1)}")
 print(f"Function value at origin: {values[0]}")
@@ -96,8 +96,13 @@ BOCoDe is an open source project and we welcome contributions! If you want to ad
 # Citing
 
 1. If you use BOCoDe in your research, please cite the following paper:
-```
-todo
+```bibtex
+@misc{yu2025bocode,
+    author={Rosen Ting-Ying Yu, Advaith Narayanan, Cyril Picard, Faez Ahmed},
+    title = {{BOCoDe}: Benchmarks for Optimization and Computational Design},
+    year={2025},
+    url={https://github.com/rosenyu304/BOCoDe}
+}
 ```
 
 2. If you use the the BOCoDe interfaces to other libraries or open source code functions (ex: BoTorch, BBOB, NEORL, MODAct, LassoBench, ...), please cite them accordingly.

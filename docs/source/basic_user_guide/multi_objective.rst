@@ -4,12 +4,12 @@
 Multi-Objective Optimization
 ========================
 
-This guide shows how to work with multi-objective optimization problems in BOCode.
+This guide shows how to work with multi-objective optimization problems in BOCoDe.
 
 Basic Example
 ------------
 
-Here's an example of using BOCode with a multi-objective problem:
+Here's an example of using BOCoDe with a multi-objective problem:
 
 .. code-block:: python
 
@@ -34,7 +34,7 @@ Here's an example of using BOCode with a multi-objective problem:
                                 )
         
         def _evaluate(self, x, out, *args, **kwargs):
-            constraints, values = problem._evaluate_implementation(torch.Tensor(x), scaling = False)
+            values, constraints = problem.evaluate(torch.Tensor(x), scaling = False)
             out["F"] = values.numpy()
             out["G"] = constraints.numpy()
 

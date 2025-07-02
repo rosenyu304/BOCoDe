@@ -37,7 +37,7 @@ Example Usage
     
     # Evaluate at a point
     x = torch.Tensor([[0.0] * problem.dim])
-    constraints, values = problem._evaluate_implementation(x)
+    values, constraints = problem.evaluate(x)
     
     print(f"Lasso Breast Cancer function value at origin: {values[0]}")
 

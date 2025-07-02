@@ -40,7 +40,7 @@ Example Usage
 
     # Evaluate at a point
     x = torch.Tensor([[0.5] * problem.dim])
-    constraints, values = problem._evaluate_implementation(x)
+    values, constraints = problem.evaluate(x)
 
     print(f"First DTLZ function values at [0.5]*dim: {values[0]}")
 

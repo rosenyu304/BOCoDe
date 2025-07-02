@@ -27,7 +27,8 @@ EngineeringFuncs = [CarSideImpact, CantileverBeam, Car, CompressionSpring, Euler
                     Truss25D, Truss72D_FourForces, Truss72D_SingleForce, Truss120D, Truss200D, TwoBarTruss, 
                     ThreeTruss, WaterProblem, WaterResources]
 MujocoFuncs = [AntProblem, HalfCheetahProblem, HopperProblem, HumanoidProblem, HumanoidStandupProblem, InvertedDoublePendulumProblem, 
-               InvertedPendulumProblem, PusherProblem, ReacherProblem, SwimmerProblem, Walker2DProblem]
+               InvertedPendulumProblem, PusherProblem, ReacherProblem, SwimmerProblem, Walker2DProblem, SwimmerPolicySearchProblem,
+               AntPolicySearchProblem, HalfCheetahPolicySearchProblem, HopperPolicySearchProblem, Walker2DPolicySearchProblem]
 BayesianCHTFuncs = [NonLinearConstraintProblemA3, NonLinearConstraintProblemA4, NonLinearConstraintProblemA7, NonLinearConstraintProblemA8, 
                     NonLinearConstraintProblemB3, NonLinearConstraintProblemB4, NonLinearConstraintProblemB7, NonLinearConstraintProblemB8]
 CEC2020Funcs = [CEC2020_p1, CEC2020_p2, CEC2020_p3, CEC2020_p4, CEC2020_p5, CEC2020_p6, CEC2020_p7, CEC2020_p8, CEC2020_p9, 
