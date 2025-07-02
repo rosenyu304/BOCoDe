@@ -86,7 +86,7 @@ Example Usage
     
     # Evaluate at a point
     x = torch.Tensor([[0.0] * problem.dim])
-    inequality_constraints, equality_constraints, values = problem._evaluate_implementation(x)
+    values, inequality_constraints, equality_constraints = problem.evaluate(x)
     
     print(f"First CEC 2020 function value at origin: {values[0]}")
 

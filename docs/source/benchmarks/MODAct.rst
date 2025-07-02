@@ -42,7 +42,7 @@ Example Usage
 
     # Evaluate at a point
     x = torch.Tensor([[0.5]*problem.dim])
-    constraints, values = problem._evaluate_implementation(x)
+    values, constraints = problem.evaluate(x)
 
     print(f"CS1 objective function values at origin: {values[0]}")
 

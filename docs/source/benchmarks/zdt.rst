@@ -39,7 +39,7 @@ Example Usage
 
     # Evaluate at a point
     x = torch.Tensor([[0.5] * problem.dim])
-    constraints, values = problem._evaluate_implementation(x)
+    values, constraints = problem.evaluate(x)
 
     print(f"First ZDT function values at [0.5]*5: {values[0]}")
 
@@ -65,7 +65,7 @@ Example Usage of ZDT5
 
     # Evaluate using 80 random bits of 0s and 1s
     x = torch.randint(0, 2, (1, 80))
-    constraints, values = problem._evaluate_implementation(x)
+    values, constraints = problem.evaluate(x)
 
     print(f"ZDT5 function values at x: {values[0]}")
 

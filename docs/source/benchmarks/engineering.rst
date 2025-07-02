@@ -73,7 +73,7 @@ Example Usage
     
     # Evaluate at a point
     x = torch.Tensor([[0.0] * problem.dim])
-    constraints, values = problem._evaluate_implementation(x)
+    values, constraints = problem.evaluate(x)
     
     print(f"Gear Train function value at [0.5]*4: {values[0]}")
 

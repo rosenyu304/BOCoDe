@@ -41,7 +41,7 @@ Example Usage
     # Scale to ints between 1 and 100
     X = (X * 100).long() + 1
 
-    constraints, values = problem._evaluate_implementation(X)
+    values, constraints = problem.evaluate(X)
 
     print(f"Travelling Salesman Problem (TSP) with 100 cities function value at random point: {values[0]}")
 
