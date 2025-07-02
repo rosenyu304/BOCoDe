@@ -80,7 +80,7 @@ class BenchmarkProblem:
         if len(output) == 2:
             return output[1], output[0] # values, constraints
         # len(output) is 3 for CEC2020 functions
-        return output[2], output[1], output[0] # values, equality constraints, inequality constraints
+        return output[2], output[0], output[1] # values, equality constraints, inequality constraints
 
 
     def _evaluate_implementation(self, X: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
