@@ -6,7 +6,7 @@ Getting Started
 Installation
 ------------
 
-To use BOCode, first install it using pip:
+To use BOCoDe, first install it using pip:
 
 .. code-block:: console
 
@@ -15,7 +15,7 @@ To use BOCode, first install it using pip:
 Quick Start
 ----------
 
-Here's a simple example of how to use BOCode:
+Here's a simple example of how to use BOCoDe:
 
 .. code-block:: python
 
@@ -38,7 +38,7 @@ Here's a simple example of how to use BOCode:
 Basic Concepts
 -------------
 
-BOCode provides a standardized interface for various benchmark problems. Each problem has:
+BOCoDe provides a standardized interface for various benchmark problems. Each problem has:
 
 * An :ref:`objective function <evaluate_implementation>`
 * Input :ref:`dimension <benchmark_attributes>`

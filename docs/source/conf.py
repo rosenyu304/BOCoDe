@@ -6,7 +6,7 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'BOCode'
+project = 'BOCoDe'
 copyright = '2025, Rosen'
 author = 'Rosen'
 release = '0.1.0'
