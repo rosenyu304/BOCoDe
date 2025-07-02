@@ -27,7 +27,7 @@ Here's a complete example of using BOCode with a single-objective optimization p
     # Define objective function for optimizer
     def objective(x):
         x = torch.Tensor([x])
-        _, fx = problem._evaluate_implementation(x)
+        fx, _ = problem.evaluate(x)
         return fx.numpy()[0][0]
 
     # Starting point 2 dimensional
