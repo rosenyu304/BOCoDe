@@ -7,7 +7,10 @@ name = "bocode"
 version = "0.0.1"
 description = "BOCode is a Python library contains optimization benchmark problems."
 authors = [
-    { name = "Temporary", email = "example@example.com" }
+      { name = "Rosen Yu" },
+      { name = "Advaith Narayanan" },
+      { name = "Cyril Picard" },
+      { name = "Faez Ahmed" },
 ]
 dependencies = [
     "pytest",
@@ -45,5 +48,5 @@ where = ["."]
 include = ["bocode*"]
 
 [project.urls]
-Homepage = "https://github.com/rosenyu304/OptBenckmarkLibrary/"
-Repository = "https://github.com/rosenyu304/OptBenckmarkLibrary/"
+Homepage = "https://github.com/rosenyu304/BOCoDe/"
+Repository = "https://github.com/rosenyu304/BOCoDe/"
