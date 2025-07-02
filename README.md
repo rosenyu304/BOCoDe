@@ -1,4 +1,4 @@
-# BOCoDe: Benchmarks for Optimization and Computational design
+# BOCoDe: Benchmarks for Optimization and Computational Design
 
 We present BOCoDe, a Python and PyTorch-based library that contains the most comprehensive suite of engineering design optimization problems and an interface to popular synthetic optimization problems, with access to 300+ problems for optimization algorithm benchmarking. Our goal is to provide not only a Python optimization benchmark library but also to allow the PyTorch interface for facilitating machine learning optimization algorithms and applications such as surrogate and Bayesian optimization.
 
