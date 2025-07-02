@@ -1,18 +1,20 @@
 # BOCode: Benchmarks for Optimization and Computational design
 
+We present BOCode, a Python and PyTorch-based library that contains the most comprehensive suite of engineering design optimization problems and an interface to popular synthetic optimization problems, with access to 300+ problems for optimization algorithm benchmarking. Our goal is to provide not only a Python optimization benchmark library but also to allow the PyTorch interface for facilitating machine learning optimization algorithms and applications such as surrogate and Bayesian optimization.
+
+
 > [!IMPORTANT]
 >
 > The optimization tasks in this library can be used for all kinds of optimization algorithms benchmarking. 
-> Key difference: Bayesian optimization algorithms are typically MAXIMIZING
-
-We present BOCode, a Python and PyTorch-based library that contains the most comprehensive suite of engineering design optimization problems and an interface to popular synthetic optimization problems, with access to 300+ problems for optimization algorithm benchmarking. Our goal is to provide not only a Python optimization benchmark library but also to allow the PyTorch interface for facilitating machine learning optimization algorithms and applications such as surrogate and Bayesian optimization.
+> As it is originally design for Bayesian optimization algorithms, the values output here are meant to be MAXIMIZED.
+> If you are using minimization algorithms, please negate the output objective value for your use.
 
 # What is in BOCode?
 
 ## Engineering design problems
 We present a diverse collection of engineering design problems including car design, cantilever beam, truss structure optimization, and physics simulation of robotics problems. 
 
-<center><img src="docs/Figures/TopFuns_Icon_v1.png" width="400"></center>
+<center><img src="docs/Figures/TopFuns_Icon_v1.png" width="500"></center>
 
 
 ## Interface to popular benchmarks
@@ -27,7 +29,7 @@ We present a diverse collection of engineering design problems including car des
 
 For our own testing now:
 ```
-pip install git+https://github.com/rosenyu304/OptBenckmarkLibrary
+pip install git+https://github.com/rosenyu304/BOCoDe
 ```
 
 After PyPI upload:
@@ -38,7 +40,7 @@ pip install bocode
 # Optimization Problem Definition
 Here we define all our problems for **maximization** optimization algorithms (for minimization, negate the evaluated value). For the constraints here, they are inequality constraints with constraint values (gx) <= 0 as feasible.
 
-<center><img src="docs/Figures/opt_definition.png" width="200"></center>
+<center><img src="docs/Figures/opt_definition.png" width="300"></center>
 
 # Example Usage
 
