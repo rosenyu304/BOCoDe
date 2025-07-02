@@ -54,7 +54,7 @@ problem = bocode.Engineering.Car()
 
 # Evaluate at a point
 x = torch.Tensor([[0.0] * problem.dim])
-constraints, values = problem._evaluate_implementation(x)
+values, constraints = problem.evaluate(x)
 
 print(f"Is it feasible? {(constraints<=0).all()}")
 print(f"Function value at origin: {values[0]}")
@@ -75,7 +75,7 @@ print("X in [0,1]s:\n",x,"\n")
 # Scale it w.r.t. the problem bounds
 x = problem.scale(x)
 print("Scaled X in bounds:\n",x)
-constraints, values = problem._evaluate_implementation(x)
+values, constraints = problem.evaluate(x)
 
 print(f"Is each sample feasible? {(constraints<=0).all(dim=1)}")
 print(f"Function value at origin: {values[0]}")
