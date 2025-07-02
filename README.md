@@ -1,6 +1,6 @@
-# BOCode: Benchmarks for Optimization and Computational design
+# BOCoDe: Benchmarks for Optimization and Computational Design
 
-We present BOCode, a Python and PyTorch-based library that contains the most comprehensive suite of engineering design optimization problems and an interface to popular synthetic optimization problems, with access to 300+ problems for optimization algorithm benchmarking. Our goal is to provide not only a Python optimization benchmark library but also to allow the PyTorch interface for facilitating machine learning optimization algorithms and applications such as surrogate and Bayesian optimization.
+We present BOCoDe, a Python and PyTorch-based library that contains the most comprehensive suite of engineering design optimization problems and an interface to popular synthetic optimization problems, with access to 300+ problems for optimization algorithm benchmarking. Our goal is to provide not only a Python optimization benchmark library but also to allow the PyTorch interface for facilitating machine learning optimization algorithms and applications such as surrogate and Bayesian optimization.
 
 
 > [!IMPORTANT]
@@ -9,7 +9,7 @@ We present BOCode, a Python and PyTorch-based library that contains the most com
 > As it is originally design for Bayesian optimization algorithms, the values output here are meant to be MAXIMIZED.
 > If you are using minimization algorithms, please negate the output objective value for your use.
 
-# What is in BOCode?
+# What is in BOCoDe?
 
 ## Engineering design problems
 We present a diverse collection of engineering design problems including car design, cantilever beam, truss structure optimization, and physics simulation of robotics problems. 
@@ -91,17 +91,17 @@ print(f"Function value at origin: {values[0]}")
 
 # Development
 
-BOCode is an open source project and we welcome contributions! If you want to add a new problem, please reach out to us first to see if it is a good fit for BOCode.
+BOCoDe is an open source project and we welcome contributions! If you want to add a new problem, please reach out to us first to see if it is a good fit for BOCoDe.
 
 # Citing
 
-1. If you use BOCode in your research, please cite the following paper:
+1. If you use BOCoDe in your research, please cite the following paper:
 ```
 todo
 ```
 
-2. If you use the the BOCode interfaces to other libraries or open source code functions (ex: BoTorch, BBOB, NEORL, MODAct, LassoBench, ...), please cite them accordingly.
+2. If you use the the BOCoDe interfaces to other libraries or open source code functions (ex: BoTorch, BBOB, NEORL, MODAct, LassoBench, ...), please cite them accordingly.
 
 
 # License
-BOCode is MIT licensed, as found in the LICENSE file.
+BOCoDe is MIT licensed, as found in the LICENSE file.
