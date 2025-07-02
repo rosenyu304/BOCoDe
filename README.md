@@ -96,8 +96,13 @@ BOCoDe is an open source project and we welcome contributions! If you want to ad
 # Citing
 
 1. If you use BOCoDe in your research, please cite the following paper:
-```
-todo
+```bibtex
+@misc{yu2025bocode,
+    author={Rosen Ting-Ying Yu, Advaith Narayanan, Cyril Picard, Faez Ahmed},
+    title = {{BOCoDe}: Benchmarks for Optimization and Computational Design},
+    year={2025},
+    url={https://github.com/rosenyu304/BOCoDe}
+}
 ```
 
 2. If you use the the BOCoDe interfaces to other libraries or open source code functions (ex: BoTorch, BBOB, NEORL, MODAct, LassoBench, ...), please cite them accordingly.
