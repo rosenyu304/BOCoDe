@@ -1,7 +1,7 @@
 import pytest
 import math
 
-from bocode.base import DataType
+from bocode.base import BenchmarkProblem, DataType
 from bocode.search_benchmarks import (
     filter_functions,
     categorized_classes,
@@ -126,9 +126,8 @@ class TestSearchBenchmarks:
             assert len(functions) > 0
 
             # Check that function names have correct format
-            for func_name in functions:
-                assert func_name.startswith("bocode.")
-                assert category in func_name
+            for func in functions:
+                assert issubclass(func, BenchmarkProblem)
 
     def test_filter_functions_dimension_filter(self):
         """Test filter_functions with dimension filtering."""
@@ -262,9 +261,8 @@ class TestSearchBenchmarks:
         for category, functions in result.items():
             assert isinstance(category, str)
             assert isinstance(functions, list)
-            for func_name in functions:
-                assert isinstance(func_name, str)
-                assert func_name.startswith("bocode.")
+            for func in functions:
+                assert issubclass(func, BenchmarkProblem)
 
     def test_specific_benchmark_categories(self):
         """Test that specific benchmark categories contain expected functions."""
@@ -278,13 +276,15 @@ class TestSearchBenchmarks:
             # Should have 57 CEC2020 functions
             assert len(cec2020_funcs) == 57
 
+            cec2020_func_names = [func.__name__ for func in cec2020_funcs]
+
             # Check that some expected functions are present
             expected_funcs = [
-                "bocode.CEC.CEC2020_RW_Constrained.CEC2020_p1",
-                "bocode.CEC.CEC2020_RW_Constrained.CEC2020_p57",
+                "CEC2020_p1",
+                "CEC2020_p57",
             ]
             for expected in expected_funcs:
-                assert expected in cec2020_funcs
+                assert expected in cec2020_func_names
 
     def test_filter_functions_edge_cases(self):
         """Test filter_functions with edge cases."""
@@ -322,22 +322,6 @@ class TestSearchBenchmarks:
         # Should have some results
         total_multi = sum(len(funcs) for funcs in result_multi.values())
         assert total_multi > 0
-
-    def test_benchmark_function_name_format(self):
-        """Test that benchmark function names follow the expected format."""
-        result = filter_functions()
-
-        for category, functions in result.items():
-            for func_name in functions:
-                # Should start with 'bocode.'
-                assert func_name.startswith("bocode.")
-
-                # Should contain the category name
-                assert category in func_name
-
-                # Should have at least 3 parts when split by '.'
-                parts = func_name.split(".")
-                assert len(parts) >= 3
 
     def test_specific_data_types(self):
         """Test filtering with specific data types."""
@@ -382,9 +366,8 @@ class TestSearchBenchmarks:
         # Test specific nested category
         gym_result = filter_functions(category_filter=lambda x: x == "Engineering.Gym")
 
-        if "Engineering.Gym" in gym_result:
-            assert len(gym_result) == 1  # Should only contain this category
-            assert "Engineering.Gym" in gym_result
+        assert len(gym_result) == 1  # Should only contain this category
+        assert "Engineering.Gym" in gym_result
 
     def test_function_count_consistency(self):
         """Test that function counts are consistent across different filters."""
@@ -448,27 +431,6 @@ class TestSearchBenchmarks:
         assert (
             total_complex >= 0
         )  # At least 0 results (could be 0 if filters are too restrictive)
-
-    def test_integration_with_actual_benchmarks(self):
-        """Test that the filtering actually works with real benchmark classes."""
-        # Get some synthetic functions
-        synthetic_result = filter_functions(
-            category_filter=lambda x: x == "Synthetics",
-            dimension_filter=lambda x: x <= 5,
-        )
-
-        # Should have Synthetics category
-        assert "Synthetics" in synthetic_result
-
-        # Test that the function names are valid
-        for func_name in synthetic_result["Synthetics"][:3]:  # Test first 3
-            # Should be able to resolve the function path
-            assert func_name.startswith("bocode.Synthetics.")
-
-            # Extract class name
-            class_name = func_name.split(".")[-1]
-            assert len(class_name) > 0
-            assert class_name[0].isupper()  # Should be a class name
 
     def test_has_valid_val_edge_cases(self):
         """Test edge cases for _has_valid_val function."""
