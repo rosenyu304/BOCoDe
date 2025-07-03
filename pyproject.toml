@@ -4,7 +4,6 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "bocode"
-version = "0.0.1"
 description = "BOCoDe is a Python library contains optimization benchmark problems."
 authors = [
       { name = "Rosen Yu" },
@@ -35,6 +34,7 @@ dependencies = [
 ]
 readme = "README.md"
 requires-python = ">=3.10"
+dynamic = ["version"]
 
 [project.optional-dependencies]
 viz = [
