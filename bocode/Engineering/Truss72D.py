@@ -287,7 +287,7 @@ class Truss72D_FourForces(BenchmarkProblem):
 
 
 class Truss72D_SingleForce(BenchmarkProblem):
-    r"""
+    """
     Duc Thang Le, Dac-Khuong Bui, Tuan Duc Ngo, Quoc-Hung Nguyen, H. Nguyen-Xuan, (2019).
     "A novel hybrid method combining electromagnetism-like mechanism and firefly algorithms
     for constrained design optimization of discrete truss structures,"

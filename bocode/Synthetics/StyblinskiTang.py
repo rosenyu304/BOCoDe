@@ -6,7 +6,7 @@ from ..base import BenchmarkProblem, DataType
 
 
 class StyblinskiTang(BenchmarkProblem):
-    r"""
+    """
     https://www.sfu.ca/~ssurjano/stybtang.html
     """
 

@@ -10,7 +10,7 @@ from ..base import BenchmarkProblem, DataType
 
 
 class LassoBreastCancer(BenchmarkProblem):
-    r"""
+    """
     ...
     """
 

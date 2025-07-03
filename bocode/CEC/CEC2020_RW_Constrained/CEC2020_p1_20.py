@@ -83,7 +83,7 @@ class CEC2020_p1(BenchmarkProblem):
 
 
 class CEC2020_p2(BenchmarkProblem):
-    r"""
+    """
     CEC2020 Problem 2
     """
 
@@ -172,7 +172,7 @@ class CEC2020_p2(BenchmarkProblem):
 
 
 class CEC2020_p3(BenchmarkProblem):
-    r"""
+    """
     CEC2020 Problem 3
     """
 
@@ -283,7 +283,7 @@ class CEC2020_p3(BenchmarkProblem):
 
 
 class CEC2020_p4(BenchmarkProblem):
-    r"""
+    """
     CEC2020 Problem 4
     """
 
@@ -339,7 +339,7 @@ class CEC2020_p4(BenchmarkProblem):
 
 
 class CEC2020_p5(BenchmarkProblem):
-    r"""
+    """
     CEC2020 Problem 5
     """
 
@@ -406,7 +406,7 @@ class CEC2020_p5(BenchmarkProblem):
 
 
 class CEC2020_p6(BenchmarkProblem):
-    r"""
+    """
     CEC2020 Problem 6
     """
 
@@ -543,7 +543,7 @@ class CEC2020_p6(BenchmarkProblem):
 
 
 class CEC2020_p7(BenchmarkProblem):
-    r"""
+    """
     CEC2020 Problem 7
     """
 
@@ -726,7 +726,7 @@ class CEC2020_p7(BenchmarkProblem):
 
 
 class CEC2020_p8(BenchmarkProblem):
-    r"""
+    """
     CEC2020 Problem 8
     """
 
@@ -775,7 +775,7 @@ class CEC2020_p8(BenchmarkProblem):
 
 
 class CEC2020_p9(BenchmarkProblem):
-    r"""
+    """
     CEC2020 Problem 9
     """
 
@@ -820,7 +820,7 @@ class CEC2020_p9(BenchmarkProblem):
 
 
 class CEC2020_p10(BenchmarkProblem):
-    r"""
+    """
     CEC2020 Problem 10
     """
 
@@ -870,7 +870,7 @@ class CEC2020_p10(BenchmarkProblem):
 
 
 class CEC2020_p11(BenchmarkProblem):
-    r"""
+    """
     CEC2020 Problem 11
     """
 
@@ -942,7 +942,7 @@ class CEC2020_p11(BenchmarkProblem):
 
 
 class CEC2020_p12(BenchmarkProblem):
-    r"""
+    """
     CEC2020 Problem 12
     """
 
@@ -1020,7 +1020,7 @@ class CEC2020_p12(BenchmarkProblem):
 
 
 class CEC2020_p13(BenchmarkProblem):
-    r"""
+    """
     CEC2020 Problem 13
     """
 
@@ -1091,7 +1091,7 @@ class CEC2020_p13(BenchmarkProblem):
 
 
 class CEC2020_p14(BenchmarkProblem):
-    r"""
+    """
     CEC2020 Problem 14
     """
 
@@ -1178,7 +1178,7 @@ class CEC2020_p14(BenchmarkProblem):
 
 
 class CEC2020_p15(BenchmarkProblem):
-    r"""
+    """
     CEC2020 Problem 15
     """
 
@@ -1260,7 +1260,7 @@ class CEC2020_p15(BenchmarkProblem):
 
 
 class CEC2020_p16(BenchmarkProblem):
-    r"""
+    """
     CEC2020 Problem 16
     """
 
@@ -1357,7 +1357,7 @@ class CEC2020_p16(BenchmarkProblem):
 
 
 class CEC2020_p17(BenchmarkProblem):
-    r"""
+    """
     CEC2020 Problem 17
     """
 
@@ -1411,7 +1411,7 @@ class CEC2020_p17(BenchmarkProblem):
 
 
 class CEC2020_p18(BenchmarkProblem):
-    r"""
+    """
     CEC2020 Problem 18
     """
 
@@ -1470,7 +1470,7 @@ class CEC2020_p18(BenchmarkProblem):
 
 
 class CEC2020_p19(BenchmarkProblem):
-    r"""
+    """
     CEC2020 Problem 19
     """
 
@@ -1554,7 +1554,7 @@ class CEC2020_p19(BenchmarkProblem):
 
 
 class CEC2020_p20(BenchmarkProblem):
-    r"""
+    """
     CEC2020 Problem 20
     """
 

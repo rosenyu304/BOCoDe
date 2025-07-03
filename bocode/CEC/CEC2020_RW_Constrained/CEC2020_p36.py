@@ -11,7 +11,7 @@ from ...base import BenchmarkProblem, DataType
 
 
 class CEC2020_p36(BenchmarkProblem):
-    r"""
+    """
     CEC2020_36 problem 36
     """
 

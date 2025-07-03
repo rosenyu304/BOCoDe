@@ -1,4 +1,3 @@
-
 import torch
 
 from bocode.Synthetics import SVM

@@ -6,7 +6,7 @@ from ..base import BenchmarkProblem, DataType
 
 
 class Griewank(BenchmarkProblem):
-    r"""
+    """
     https://www.sfu.ca/~ssurjano/griewank.html
     """
 

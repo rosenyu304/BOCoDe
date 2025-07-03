@@ -6,7 +6,7 @@ from ..base import BenchmarkProblem, DataType
 
 
 class Goldstein(BenchmarkProblem):
-    r"""
+    """
     (Alt Name: Goldstein-Price)
     LVGP paper: https://www.nature.com/articles/s41598-020-60652-9
     """
@@ -83,7 +83,7 @@ class Goldstein(BenchmarkProblem):
 
 
 class Goldstein_Discrete(Goldstein):
-    r"""
+    """
     (Alt Name: Goldstein-Price)
     LVGP paper: https://www.nature.com/articles/s41598-020-60652-9
     """

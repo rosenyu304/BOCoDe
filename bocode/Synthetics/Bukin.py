@@ -6,7 +6,7 @@ from ..base import BenchmarkProblem, DataType
 
 
 class Bukin(BenchmarkProblem):
-    r"""
+    """
     https://www.sfu.ca/~ssurjano/bukin6.html
     """
 

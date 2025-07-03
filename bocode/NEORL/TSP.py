@@ -8,7 +8,7 @@ from .neorl_lib.tsp import TSP
 
 
 class TSP_51Cities(BenchmarkProblem):
-    r"""
+    """
     Travelling Salesman Problem (TSP) with 51 cities.
     https://neorl.readthedocs.io/en/latest/examples/ex1.html#problem-description
     """
@@ -170,7 +170,7 @@ class TSP_51Cities(BenchmarkProblem):
 
 
 class TSP_100Cities(BenchmarkProblem):
-    r"""
+    """
     Travelling Salesman Problem (TSP) with 100 cities.
     https://neorl.readthedocs.io/en/latest/examples/ex1.html#problem-description
     """

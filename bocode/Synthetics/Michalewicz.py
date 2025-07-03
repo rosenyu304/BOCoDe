@@ -6,7 +6,7 @@ from ..base import BenchmarkProblem, DataType
 
 
 class Michalewicz(BenchmarkProblem):
-    r"""
+    """
     https://www.sfu.ca/~ssurjano/michal.html
     """
 

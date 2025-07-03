@@ -6,7 +6,7 @@ from ..base import BenchmarkProblem, DataType
 
 
 class Rosenbrock(BenchmarkProblem):
-    r"""
+    """
     https://www.sfu.ca/~ssurjano/rosen.html
     """
 

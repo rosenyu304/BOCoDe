@@ -7,7 +7,7 @@ from ..base import BenchmarkProblem, DataType
 
 
 class Beale(BenchmarkProblem):
-    r"""
+    """
     https://www.sfu.ca/~ssurjano/beale.html
     """
 
@@ -53,7 +53,7 @@ class Beale(BenchmarkProblem):
 
 
 class Cosine8(BenchmarkProblem):
-    r"""
+    """
     https://www.sfu.ca/~ssurjano/beale.html
     """
 
@@ -99,7 +99,7 @@ class Cosine8(BenchmarkProblem):
 
 
 class DropWave(BenchmarkProblem):
-    r"""
+    """
     https://www.sfu.ca/~ssurjano/drop.html
     """
 
@@ -145,7 +145,7 @@ class DropWave(BenchmarkProblem):
 
 
 class EggHolder(BenchmarkProblem):
-    r"""
+    """
     https://www.sfu.ca/~ssurjano/egg.html
     """
 
@@ -191,7 +191,7 @@ class EggHolder(BenchmarkProblem):
 
 
 class Hartmann3D(BenchmarkProblem):
-    r"""
+    """
     https://www.sfu.ca/~ssurjano/hart3.html
     """
 
@@ -265,7 +265,7 @@ class Hartmann3D(BenchmarkProblem):
 
 
 class Hartmann6D(BenchmarkProblem):
-    r"""
+    """
     https://www.sfu.ca/~ssurjano/hart6.html
     """
 
@@ -311,7 +311,7 @@ class Hartmann6D(BenchmarkProblem):
 
 
 class HolderTable(BenchmarkProblem):
-    r"""
+    """
     https://www.sfu.ca/~ssurjano/holder.html
     """
 
@@ -357,7 +357,7 @@ class HolderTable(BenchmarkProblem):
 
 
 class BaseShekel(BenchmarkProblem):
-    r"""
+    """
     https://www.sfu.ca/~ssurjano/shekel.html
     """
 
@@ -423,7 +423,7 @@ class Shekel(BaseShekel):
 
 
 class SixHumpCamel(BenchmarkProblem):
-    r"""
+    """
     https://www.sfu.ca/~ssurjano/camel6.html
     """
 
@@ -471,7 +471,7 @@ class SixHumpCamel(BenchmarkProblem):
 
 
 class ThreeHumpCamel(BenchmarkProblem):
-    r"""
+    """
     https://www.sfu.ca/~ssurjano/camel3.html
     """
 
@@ -519,7 +519,7 @@ class ThreeHumpCamel(BenchmarkProblem):
 
 
 class ConstrainedGramacy(BenchmarkProblem):
-    r"""
+    """
     https://www.sfu.ca/~ssurjano/camel3.html
     """
 
@@ -569,7 +569,7 @@ class ConstrainedGramacy(BenchmarkProblem):
 
 
 class ConstrainedHartmann(BenchmarkProblem):
-    r"""
+    """
     https://www.sfu.ca/~ssurjano/hart6.html
     """
 
@@ -619,7 +619,7 @@ class ConstrainedHartmann(BenchmarkProblem):
 
 
 class ConstrainedHartmannSmooth(BenchmarkProblem):
-    r"""
+    """
     https://www.sfu.ca/~ssurjano/hart6.html
     """
 
@@ -669,7 +669,7 @@ class ConstrainedHartmannSmooth(BenchmarkProblem):
 
 
 class PressureVessel(BenchmarkProblem):
-    r""" """
+    """ """
 
     available_dimensions = 4
     input_type = DataType.CONTINUOUS
@@ -715,7 +715,7 @@ class PressureVessel(BenchmarkProblem):
 
 
 class WeldedBeamSO(BenchmarkProblem):
-    r""" """
+    """ """
 
     available_dimensions = 4
     input_type = DataType.CONTINUOUS
@@ -759,7 +759,7 @@ class WeldedBeamSO(BenchmarkProblem):
 
 
 class TensionCompressionString(BenchmarkProblem):
-    r""" """
+    """ """
 
     available_dimensions = 3
     input_type = DataType.CONTINUOUS
@@ -805,7 +805,7 @@ class TensionCompressionString(BenchmarkProblem):
 
 
 class SpeedReducer(BenchmarkProblem):
-    r""" """
+    """ """
 
     available_dimensions = 7
     input_type = DataType.CONTINUOUS

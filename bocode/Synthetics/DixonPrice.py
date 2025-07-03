@@ -6,7 +6,7 @@ from ..base import BenchmarkProblem, DataType
 
 
 class DixonPrice(BenchmarkProblem):
-    r"""
+    """
     https://www.sfu.ca/~ssurjano/dixonpr.html
     """
 

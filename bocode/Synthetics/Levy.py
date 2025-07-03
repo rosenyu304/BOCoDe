@@ -6,7 +6,7 @@ from ..base import BenchmarkProblem, DataType
 
 
 class Levy(BenchmarkProblem):
-    r"""
+    """
     https://www.sfu.ca/~ssurjano/levy.html
     """
 
