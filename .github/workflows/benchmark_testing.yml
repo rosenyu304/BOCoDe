@@ -1,9 +1,6 @@
 name: Benchmark Testing
 
-on:
-  push:
-    branches:
-      - '**'
+on: [ push, pull_request ]
 
 jobs:
   build:
@@ -11,17 +8,17 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set Up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: "3.12.10"
 
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install .[tests]
+          pip install .[test]
 
       - name: Run Tests
         run: |
