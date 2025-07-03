@@ -69,7 +69,7 @@ import bocode
 import torch
 
 # Instantiate a Synthetic benchmark problem
-problem = bocode.Synthetics.Ackley(show_info=True) # show_info=True to show info of the problem 
+problem = bocode.Synthetics.Ackley()
 
 # Evaluate at a in bounds of [0,1]s
 x = torch.rand(5,problem.dim)
