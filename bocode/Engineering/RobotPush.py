@@ -1,11 +1,28 @@
+import numpy as np
 import torch
-from ..base import *
+
+from os import environ
+
+environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "1"
+
+import pygame
+from Box2D import (
+    b2World,
+    b2PolygonShape,
+    b2CircleShape,
+    b2_staticBody,
+    b2_dynamicBody,
+    b2Vec2,
+)
+
+
+from ..base import BenchmarkProblem, DataType
+
 
 class RobotPush(BenchmarkProblem):
-
-    r'''
+    """
     https://github.com/zi-w/Ensemble-Bayesian-Optimization/tree/4e6f9ed04833cc2e21b5906b1181bc067298f914
-    '''
+    """
 
     available_dimensions = 14
     input_type = DataType.CONTINUOUS
@@ -17,13 +34,31 @@ class RobotPush(BenchmarkProblem):
     tags = {"single_objective", "unconstrained", "continuous", "14D", "extra_imports"}
 
     def __init__(self):
-        super().__init__(dim = 14, 
-                         num_objectives = 1, 
-                         num_constraints = 0, 
-                         bounds = [(-5, 5), (-5, 5), (-10, 10), (-10, 10), (2, 30), (0, 2*np.pi), (-5, 5), (-5, 5), (-10, 10), (-10, 10), (2, 30), (0, 2*np.pi), (-5, 5), (-5, 5)])
+        super().__init__(
+            dim=14,
+            num_objectives=1,
+            num_constraints=0,
+            bounds=[
+                (-5, 5),
+                (-5, 5),
+                (-10, 10),
+                (-10, 10),
+                (2, 30),
+                (0, 2 * np.pi),
+                (-5, 5),
+                (-5, 5),
+                (-10, 10),
+                (-10, 10),
+                (2, 30),
+                (0, 2 * np.pi),
+                (-5, 5),
+                (-5, 5),
+            ],
+        )
 
-    def _evaluate_implementation(self, X, scaling = False):
+    def _evaluate_implementation(self, X, scaling=False):
         from joblib import Parallel, delayed
+
         f = PushReward()
 
         if scaling:
@@ -36,8 +71,10 @@ class RobotPush(BenchmarkProblem):
         # Number of simulations to run in parallel
         n_jobs = 5
 
-        fx[:, 0] = Parallel(n_jobs=n_jobs)(delayed(f)(X[i, :].numpy()) for i in range(X.shape[0]))
-        
+        fx[:, 0] = Parallel(n_jobs=n_jobs)(
+            delayed(f)(X[i, :].numpy()) for i in range(X.shape[0])
+        )
+
         # for i in range(X.shape[0]):
         #     fx[i,0] = f(X[i,:].numpy())
 
@@ -50,17 +87,41 @@ class RobotPush(BenchmarkProblem):
 ##############################
 # Helper Functions
 ##############################
-
-# from push_utils import b2WorldInterface, make_base, create_body, end_effector, run_simulation
-
-import numpy as np
-
 class PushReward:
     def __init__(self):
-
         # domain of this function
-        self.xmin = [-5., -5., -10., -10., 2., 0., -5., -5., -10., -10., 2., 0., -5., -5.]
-        self.xmax = [5., 5., 10., 10., 30., 2.*np.pi, 5., 5., 10., 10., 30., 2.*np.pi, 5., 5.]
+        self.xmin = [
+            -5.0,
+            -5.0,
+            -10.0,
+            -10.0,
+            2.0,
+            0.0,
+            -5.0,
+            -5.0,
+            -10.0,
+            -10.0,
+            2.0,
+            0.0,
+            -5.0,
+            -5.0,
+        ]
+        self.xmax = [
+            5.0,
+            5.0,
+            10.0,
+            10.0,
+            30.0,
+            2.0 * np.pi,
+            5.0,
+            5.0,
+            10.0,
+            10.0,
+            30.0,
+            2.0 * np.pi,
+            5.0,
+            5.0,
+        ]
 
         # starting xy locations for the two objects
         self.sxy = (0, 2)
@@ -72,13 +133,15 @@ class PushReward:
     @property
     def f_max(self):
         # maximum value of this function
-        return np.linalg.norm(np.array(self.gxy) - np.array(self.sxy)) \
-            + np.linalg.norm(np.array(self.gxy2) - np.array(self.sxy2))
+        return np.linalg.norm(np.array(self.gxy) - np.array(self.sxy)) + np.linalg.norm(
+            np.array(self.gxy2) - np.array(self.sxy2)
+        )
+
     @property
     def dx(self):
         # dimension of the input
         return self._dx
-    
+
     def __call__(self, argv):
         # returns the reward of pushing two objects with two robots
         rx = float(argv[0])
@@ -95,37 +158,49 @@ class PushReward:
         init_angle2 = float(argv[11])
         rtor = float(argv[12])
         rtor2 = float(argv[13])
-        
+
         initial_dist = self.f_max
 
         world = b2WorldInterface(True)
-        oshape, osize, ofriction, odensity, bfriction, hand_shape, hand_size = \
-            'circle', 1, 0.01, 0.05, 0.01, 'rectangle', (1, 0.3)
+        _, _, ofriction, odensity, _, hand_shape, hand_size = (
+            "circle",
+            1,
+            0.01,
+            0.05,
+            0.01,
+            "rectangle",
+            (1, 0.3),
+        )
 
         base = make_base(500, 500, world)
-        body = create_body(base, world, 'rectangle', (0.5, 0.5), ofriction, odensity, self.sxy)
-        body2 = create_body(base, world, 'circle', 1, ofriction, odensity, self.sxy2)
+        body = create_body(
+            base, world, "rectangle", (0.5, 0.5), ofriction, odensity, self.sxy
+        )
+        body2 = create_body(base, world, "circle", 1, ofriction, odensity, self.sxy2)
 
-        robot = end_effector(world, (rx,ry), base, init_angle, hand_shape, hand_size)
-        robot2 = end_effector(world, (rx2,ry2), base, init_angle2, hand_shape, hand_size)
-        (ret1, ret2) = run_simulation(world, body, body2, robot, robot2, xvel, yvel, \
-                                      xvel2, yvel2, rtor, rtor2, simu_steps, simu_steps2)
+        robot = end_effector(world, (rx, ry), base, init_angle, hand_shape, hand_size)
+        robot2 = end_effector(
+            world, (rx2, ry2), base, init_angle2, hand_shape, hand_size
+        )
+        (ret1, ret2) = run_simulation(
+            world,
+            body,
+            body2,
+            robot,
+            robot2,
+            xvel,
+            yvel,
+            xvel2,
+            yvel2,
+            rtor,
+            rtor2,
+            simu_steps,
+            simu_steps2,
+        )
 
         ret1 = np.linalg.norm(np.array(self.gxy) - ret1)
         ret2 = np.linalg.norm(np.array(self.gxy2) - ret2)
-        return initial_dist - ret1 - ret2 
-
-
-
-# import numpy as np
-
-# Hides the hello from pygame print
-from os import environ
-environ['PYGAME_HIDE_SUPPORT_PROMPT'] = '1'
-
-import pygame
-from Box2D import *
-from Box2D.b2 import *
+        return initial_dist - ret1 - ret2
 
 
 class guiWorld:
@@ -133,18 +208,25 @@ class guiWorld:
         self.SCREEN_WIDTH, self.SCREEN_HEIGHT = 1000, 1000
         self.TARGET_FPS = fps
         self.PPM = 10.0  # pixels per meter
-        self.screen = pygame.display.set_mode((self.SCREEN_WIDTH, self.SCREEN_HEIGHT), 0, 32)
-        pygame.display.set_caption('push simulator')
+        self.screen = pygame.display.set_mode(
+            (self.SCREEN_WIDTH, self.SCREEN_HEIGHT), 0, 32
+        )
+        pygame.display.set_caption("push simulator")
         self.clock = pygame.time.Clock()
-        self.screen_origin = b2Vec2(self.SCREEN_WIDTH / (2 * self.PPM), self.SCREEN_HEIGHT / (self.PPM * 2))
+        self.screen_origin = b2Vec2(
+            self.SCREEN_WIDTH / (2 * self.PPM), self.SCREEN_HEIGHT / (self.PPM * 2)
+        )
         self.colors = {
             b2_staticBody: (255, 255, 255, 255),
-            b2_dynamicBody: (163, 209, 224, 255)
+            b2_dynamicBody: (163, 209, 224, 255),
         }
 
     def draw(self, bodies, bg_color=(64, 64, 64, 0)):
         def my_draw_polygon(polygon, body, fixture):
-            vertices = [(self.screen_origin + body.transform * v) * self.PPM for v in polygon.vertices]
+            vertices = [
+                (self.screen_origin + body.transform * v) * self.PPM
+                for v in polygon.vertices
+            ]
             vertices = [(v[0], self.SCREEN_HEIGHT - v[1]) for v in vertices]
             color = self.colors[body.type]
             if body.userData == "obs":
@@ -160,8 +242,12 @@ class guiWorld:
             color = self.colors[body.type]
             if body.userData == "hand":
                 color = (174, 136, 218, 0)
-            pygame.draw.circle(self.screen, color, [int(x) for x in
-                                                    position], int(circle.radius * self.PPM))
+            pygame.draw.circle(
+                self.screen,
+                color,
+                [int(x) for x in position],
+                int(circle.radius * self.PPM),
+            )
 
         b2PolygonShape.draw = my_draw_polygon
         b2CircleShape.draw = my_draw_circle
@@ -191,7 +277,7 @@ class b2WorldInterface:
             self.gui_world = None
 
     def initialize_gui(self):
-        if self.gui_world == None:
+        if self.gui_world is None:
             self.gui_world = guiWorld(self.TARGET_FPS)
         self.do_gui = True
 
@@ -199,8 +285,8 @@ class b2WorldInterface:
         self.do_gui = False
 
     def add_bodies(self, new_bodies):
-        """ add a single b2Body or list of b2Bodies to the world"""
-        if type(new_bodies) == list:
+        """add a single b2Body or list of b2Bodies to the world"""
+        if isinstance(new_bodies, list):
             self.bodies += new_bodies
         else:
             self.bodies.append(new_bodies)
@@ -212,31 +298,35 @@ class b2WorldInterface:
 
 
 class end_effector:
-    def __init__(self, b2world_interface, init_pos, base, init_angle, hand_shape='rectangle', hand_size=(0.3, 1)):
+    def __init__(
+        self,
+        b2world_interface,
+        init_pos,
+        base,
+        init_angle,
+        hand_shape="rectangle",
+        hand_size=(0.3, 1),
+    ):
         world = b2world_interface.world
         self.hand = world.CreateDynamicBody(position=init_pos, angle=init_angle)
         self.hand_shape = hand_shape
         self.hand_size = hand_size
         # forceunit for circle and rect
-        if hand_shape == 'rectangle':
+        if hand_shape == "rectangle":
             rshape = b2PolygonShape(box=hand_size)
             self.forceunit = 30.0
-        elif hand_shape == 'circle':
+        elif hand_shape == "circle":
             rshape = b2CircleShape(radius=hand_size)
             self.forceunit = 100.0
-        elif hand_shape == 'polygon':
+        elif hand_shape == "polygon":
             rshape = b2PolygonShape(vertices=hand_size)
         else:
             raise Exception("%s is not a correct shape" % hand_shape)
 
-        self.hand.CreateFixture(
-            shape=rshape,
-            density=.1,
-            friction=.1
-        )
+        self.hand.CreateFixture(shape=rshape, density=0.1, friction=0.1)
         self.hand.userData = "hand"
 
-        friction_joint = world.CreateFrictionJoint(
+        _ = world.CreateFrictionJoint(
             bodyA=base,
             bodyB=self.hand,
             maxForce=2,
@@ -249,7 +339,6 @@ class end_effector:
         self.hand.angle = angle
 
     def apply_wrench(self, rlvel=(0, 0), ravel=0):
-
         avel = self.hand.angularVelocity
         delta_avel = ravel - avel
         torque = self.hand.mass * delta_avel * 30.0
@@ -261,26 +350,34 @@ class end_effector:
         self.hand.ApplyForce(force, self.hand.position, wake=True)
 
     def get_state(self, verbose=False):
-        state = list(self.hand.position) + [self.hand.angle] + \
-                list(self.hand.linearVelocity) + [self.hand.angularVelocity]
+        state = (
+            list(self.hand.position)
+            + [self.hand.angle]
+            + list(self.hand.linearVelocity)
+            + [self.hand.angularVelocity]
+        )
         if verbose:
             print_state = ["%.3f" % x for x in state]
             print
-            "position, velocity: (%s), (%s) " % \
-            ((", ").join(print_state[:3]), (", ").join(print_state[3:]))
+            "position, velocity: (%s), (%s) " % (
+                (", ").join(print_state[:3]),
+                (", ").join(print_state[3:]),
+            )
 
         return state
 
 
-def create_body(base, b2world_interface, body_shape, body_size, body_friction, body_density, obj_loc):
+def create_body(
+    base, b2world_interface, body_shape, body_size, body_friction, body_density, obj_loc
+):
     world = b2world_interface.world
 
     link = world.CreateDynamicBody(position=obj_loc)
-    if body_shape == 'rectangle':
+    if body_shape == "rectangle":
         linkshape = b2PolygonShape(box=body_size)
-    elif body_shape == 'circle':
+    elif body_shape == "circle":
         linkshape = b2CircleShape(radius=body_size)
-    elif body_shape == 'polygon':
+    elif body_shape == "polygon":
         linkshape = b2PolygonShape(vertices=body_size)
     else:
         raise Exception("%s is not a correct shape" % body_shape)
@@ -290,7 +387,7 @@ def create_body(base, b2world_interface, body_shape, body_size, body_friction, b
         density=body_density,
         friction=body_friction,
     )
-    friction_joint = world.CreateFrictionJoint(
+    _ = world.CreateFrictionJoint(
         bodyA=base,
         bodyB=link,
         maxForce=5,
@@ -312,40 +409,33 @@ def make_base(table_width, table_length, b2world_interface):
     return base
 
 
-def add_obstacles(b2world_interface, obsverts):
-    world = b2world_interface.world
-    obs = []
-    for verts in obsverts:
-        tmp = world.CreateStaticBody(
-            position=(0, 0),
-            shapes=b2PolygonShape(vertices=verts),
-        )
-        tmp.userData = "obs"
-        obs.append(tmp)
-
-    # add boundaries
-    x, y = sm.wbpolygon.exterior.xy
-    minx, maxx, miny, maxy = np.min(x), np.max(x), np.min(y), np.max(y)
-    centers = [(0, miny - 1), (0, maxy + 1), (minx - 1, 0), (maxx + 1, 0)]
-    boxlen = [(maxx - minx, 0.5), (maxx - minx, 0.5), (0.5, maxy - miny), (0.5, maxy - miny)]
-    for (pos, blen) in zip(centers, boxlen):
-        tmp = world.CreateStaticBody(
-            position=pos,
-            shapes=b2PolygonShape(box=blen),
-        )
-        obs.append(tmp)
-    b2world_interface.add_bodies(obs)
-
-
-def run_simulation(world, body, body2, robot, robot2, xvel, yvel, \
-                   xvel2, yvel2, rtor, rtor2, simulation_steps,
-                   simulation_steps2):
+def run_simulation(
+    world,
+    body,
+    body2,
+    robot,
+    robot2,
+    xvel,
+    yvel,
+    xvel2,
+    yvel2,
+    rtor,
+    rtor2,
+    simulation_steps,
+    simulation_steps2,
+):
     # simulating push with fixed direction pointing from robot location to body location
     desired_vel = np.array([xvel, yvel])
-    rvel = b2Vec2(desired_vel[0] + np.random.normal(0, 0.01), desired_vel[1] + np.random.normal(0, 0.01))
+    rvel = b2Vec2(
+        desired_vel[0] + np.random.normal(0, 0.01),
+        desired_vel[1] + np.random.normal(0, 0.01),
+    )
 
     desired_vel2 = np.array([xvel2, yvel2])
-    rvel2 = b2Vec2(desired_vel2[0] + np.random.normal(0, 0.01), desired_vel2[1] + np.random.normal(0, 0.01))
+    rvel2 = b2Vec2(
+        desired_vel2[0] + np.random.normal(0, 0.01),
+        desired_vel2[1] + np.random.normal(0, 0.01),
+    )
 
     tmax = np.max([simulation_steps, simulation_steps2])
     for t in range(tmax + 100):
@@ -356,4 +446,3 @@ def run_simulation(world, body, body2, robot, robot2, xvel, yvel, \
         world.step()
 
     return (list(body.position), list(body2.position))
-

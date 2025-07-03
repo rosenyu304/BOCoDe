@@ -1,6 +1,7 @@
-from ..base import *
-import opfunu
 import torch
+
+from ..base import BenchmarkProblem, DataType
+
 
 class BaseOpfunuCEC(BenchmarkProblem):
     """
@@ -20,16 +21,23 @@ class BaseOpfunuCEC(BenchmarkProblem):
         bounds = [tuple(bound) for bound in bounds]
 
         self.problem = self.__class__.problem(ndim=dim)
-        super().__init__(dim=dim, num_objectives=num_objectives, num_constraints=num_constraints, bounds=bounds, optimum=[-self.problem.f_global], x_opt=[self.problem.x_global])
+        super().__init__(
+            dim=dim,
+            num_objectives=num_objectives,
+            num_constraints=num_constraints,
+            bounds=bounds,
+            optimum=[-self.problem.f_global],
+            x_opt=[self.problem.x_global],
+        )
 
     def _evaluate_implementation(self, x: torch.Tensor):
         """
         Evaluate the CEC benchmark function.
         """
         fx = torch.zeros(x.shape[0], self.num_objectives)
-        
+
         for i, el in enumerate(x):
             f = self.problem.evaluate(el.tolist())
             fx[i, :] = torch.Tensor([f])
 
-        return None, -torch.tensor(fx)
+        return None, -fx

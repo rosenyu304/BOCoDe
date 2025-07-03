@@ -1,12 +1,13 @@
 import torch
-from ..base import *
+
+from ..base import BenchmarkProblem, DataType
+
 
 class CantileverBeam(BenchmarkProblem):
-
-    r'''
+    """
     Yang XS, Hossein Gandomi A (2012) Bat algorithm: a novel approach for
     global engineering optimization. Engineering computations 29(5):464–483
-    '''
+    """
 
     available_dimensions = 10
     input_type = DataType.CONTINUOUS
@@ -18,10 +19,25 @@ class CantileverBeam(BenchmarkProblem):
     tags = {"single_objective", "constrained", "10D"}
 
     def __init__(self):
-        super().__init__(dim = 10, num_objectives = 1, num_constraints = 11, bounds = [(1, 5), (1, 5), (1, 5), (1, 5), (1, 5),
-                                                                         (30, 65), (30, 65), (30, 65), (30, 65), (30, 65)])
+        super().__init__(
+            dim=10,
+            num_objectives=1,
+            num_constraints=11,
+            bounds=[
+                (1, 5),
+                (1, 5),
+                (1, 5),
+                (1, 5),
+                (1, 5),
+                (30, 65),
+                (30, 65),
+                (30, 65),
+                (30, 65),
+                (30, 65),
+            ],
+        )
 
-    def _evaluate_implementation(self, X, scaling = False):
+    def _evaluate_implementation(self, X, scaling=False):
         if scaling:
             X = super().scale(X)
 

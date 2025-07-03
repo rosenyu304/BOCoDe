@@ -1,12 +1,13 @@
 import torch
-from ..base import *
+
+from ..base import BenchmarkProblem, DataType
+
 
 class ThreeTruss(BenchmarkProblem):
-
-    r'''
+    """
     Yang XS, Hossein Gandomi A (2012) Bat algorithm: a novel approach for global engineering optimization.
     Engineering computations 29(5):464–483
-    '''
+    """
 
     # 2D objective, 3 constraints, X = n-by-2
 
@@ -18,10 +19,11 @@ class ThreeTruss(BenchmarkProblem):
     tags = {"single_objective", "constrained", "2D"}
 
     def __init__(self):
-        super().__init__(dim = 2, num_objectives = 1, num_constraints = 3, bounds = [(0, 1), (0, 1)])
+        super().__init__(
+            dim=2, num_objectives=1, num_constraints=3, bounds=[(0, 1), (0, 1)]
+        )
 
-    def _evaluate_implementation(self, X, scaling = False):
-
+    def _evaluate_implementation(self, X, scaling=False):
         if scaling:
             X = super().scale(X)
 

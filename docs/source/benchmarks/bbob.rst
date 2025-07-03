@@ -8,14 +8,14 @@ Visit the `COCO platform <https://numbbo.github.io/coco/testsuites/bbob>`_ for a
 
 Available Suites
 -----------------
-- bbob: :code:`bocode.BBOB_Problems.BBOB`
-- bbob-biobj: :code:`bocode.BBOB_Problems.BBOB_Biobj`
-- bbob-biobj-mixint: :code:`bocode.BBOB_BiobjMixInt`
-- bbob-boxed: :code:`bocode.BBOB_Problems.BBOB_Boxed`
-- bbob-constrained: :code:`bocode.BBOB_Problems.BBOB_Constrained`
-- bbob-largescale: :code:`bocode.BBOB_Problems.BBOB_LargeScale`
-- bbob-mixint: :code:`bocode.BBOB_Problems.BBOB_MixInt`
-- bbob-noisy: :code:`bocode.BBOB_Problems.BBOB_Noisy`
+- bbob: :code:`bocode.BBOB.BBOB`
+- bbob-biobj: :code:`bocode.BBOB.BBOB_Biobj`
+- bbob-biobj-mixint: :code:`bocode.BBOB.BBOB_BiobjMixInt`
+- bbob-boxed: :code:`bocode.BBOB.BBOB_Boxed`
+- bbob-constrained: :code:`bocode.BBOB.BBOB_Constrained`
+- bbob-largescale: :code:`bocode.BBOB.BBOB_LargeScale`
+- bbob-mixint: :code:`bocode.BBOB.BBOB_MixInt`
+- bbob-noisy: :code:`bocode.BBOB.BBOB_Noisy`
 
 Available Functions
 -----------------
@@ -36,8 +36,8 @@ Example Usage
     import torch
 
     # Create a BBOB benchmark problem
-    problem = bocode.BBOB_Problems.BBOB(dim=5, function_number=2, instance_number=1) # Separable 5-dimensional ellipsoidal function
-    
+    problem = bocode.BBOB.BBOB(dim=5, function_number=2, instance_number=1) # Separable 5-dimensional ellipsoidal function
+
     # Get problem information
     bounds = problem.bounds
     

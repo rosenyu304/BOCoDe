@@ -1,14 +1,15 @@
 import torch
-from ..base import *
+
+from ..base import BenchmarkProblem, DataType
+
 
 class WaterProblem(BenchmarkProblem):
-
-    r'''
+    """
     H. Jain and K. Deb. An evolutionary many-objective optimization algorithm
     using reference-point based nondominated sorting approach,
     part II: Handling constraints and extending to an adaptive approach,
     IEEE Transactions on Evolutionary Computation 18(4):602–622, 2014
-    '''
+    """
 
     available_dimensions = 3
     input_type = DataType.CONTINUOUS
@@ -20,13 +21,14 @@ class WaterProblem(BenchmarkProblem):
     tags = {"multi_objective", "constrained", "continuous", "3D"}
 
     def __init__(self):
-        super().__init__(dim = 3, 
-                         num_objectives = 5, 
-                         num_constraints = 7, 
-                         bounds = [(0.01, 0.45), (0.01, 0.10), (0.01, 0.10)])
+        super().__init__(
+            dim=3,
+            num_objectives=5,
+            num_constraints=7,
+            bounds=[(0.01, 0.45), (0.01, 0.10), (0.01, 0.10)],
+        )
 
-    def _evaluate_implementation(self, X, scaling = False):
-
+    def _evaluate_implementation(self, X, scaling=False):
         if scaling:
             X = super().scale(X)
 
@@ -40,8 +42,8 @@ class WaterProblem(BenchmarkProblem):
         # negate for maximization
         fx[:, 0] = -(106780.37 * (x2 + x3) + 61704.67)
         fx[:, 1] = -(3000.0 * x1)
-        fx[:, 2] = -(30570 * 0.02289 * x2 / (0.06 * 2289.0)**0.65)
-        fx[:, 3] = -(250.0 * 2289.0 * torch.e**(-39.75 * x2 + 9.9 * x3 + 2.74))
+        fx[:, 2] = -(30570 * 0.02289 * x2 / (0.06 * 2289.0) ** 0.65)
+        fx[:, 3] = -(250.0 * 2289.0 * torch.e ** (-39.75 * x2 + 9.9 * x3 + 2.74))
         fx[:, 4] = -(25.0 * ((1.39 / (x1 * x2)) + 4940.0 * x3 - 80.0))
 
         gx = torch.zeros((n, self.num_constraints))

@@ -1,12 +1,13 @@
 import torch
-from ..base import *
+
+from ..base import BenchmarkProblem, DataType
+
 
 class WaterResources(BenchmarkProblem):
-
-    r'''
-    K. Musselman and J. Talavage. A trade-off cut approach to multiple objective optimization. 
-    Operations Research 28(6):1424–1435, 1980    
-    '''
+    """
+    K. Musselman and J. Talavage. A trade-off cut approach to multiple objective optimization.
+    Operations Research 28(6):1424–1435, 1980
+    """
 
     available_dimensions = 3
     input_type = DataType.CONTINUOUS
@@ -18,18 +19,19 @@ class WaterResources(BenchmarkProblem):
     tags = {"multi_objective", "constrained", "continuous", "3D"}
 
     def __init__(self):
-        super().__init__(dim = 3, 
-                         num_objectives = 5, 
-                         num_constraints = 7, 
-                         bounds = [(0.01, 0.45), (0.01, 0.10), (0.01, 0.10)])
+        super().__init__(
+            dim=3,
+            num_objectives=5,
+            num_constraints=7,
+            bounds=[(0.01, 0.45), (0.01, 0.10), (0.01, 0.10)],
+        )
 
-    def _evaluate_implementation(self, X, scaling = False):
-
+    def _evaluate_implementation(self, X, scaling=False):
         if scaling:
             X = super().scale(X)
 
         n = X.size(0)
-      
+
         x1 = X[:, 0]
         x2 = X[:, 1]
         x3 = X[:, 2]
