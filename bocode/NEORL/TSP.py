@@ -4,7 +4,7 @@ import numpy as np
 import torch
 
 from ..base import BenchmarkProblem, DataType
-from .neorl_lib import TSP
+from .neorl_lib.tsp import TSP
 
 
 class TSP_51Cities(BenchmarkProblem):
