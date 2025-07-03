@@ -51,7 +51,8 @@ doc = [
 ]
 
 test = [
-    "pytest"
+    "pytest",
+    "pytest-cov",
 ]
 
 dev = [{include-group = "test"}, {include-group = "doc"}]
@@ -71,7 +72,7 @@ Repository = "https://github.com/rosenyu304/BOCoDe/"
 
 [tool.pytest.ini_options]
 minversion = "6.0"
-addopts = "-ra -q"
+addopts = "-ra -q --cov=bocode --cov-report html --cov-report term"
 testpaths = [
     "tests",
 ]
