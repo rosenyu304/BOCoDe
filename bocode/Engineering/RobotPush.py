@@ -6,8 +6,14 @@ from os import environ
 environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "1"
 
 import pygame
-from Box2D import *
-from Box2D.b2 import *
+from Box2D import (
+    b2World,
+    b2PolygonShape,
+    b2CircleShape,
+    b2_staticBody,
+    b2_dynamicBody,
+    b2Vec2,
+)
 
 
 from ..base import BenchmarkProblem, DataType
@@ -401,36 +407,6 @@ def make_base(table_width, table_length, b2world_interface):
 
     b2world_interface.add_bodies([base])
     return base
-
-
-def add_obstacles(b2world_interface, obsverts):
-    world = b2world_interface.world
-    obs = []
-    for verts in obsverts:
-        tmp = world.CreateStaticBody(
-            position=(0, 0),
-            shapes=b2PolygonShape(vertices=verts),
-        )
-        tmp.userData = "obs"
-        obs.append(tmp)
-
-    # add boundaries
-    x, y = sm.wbpolygon.exterior.xy
-    minx, maxx, miny, maxy = np.min(x), np.max(x), np.min(y), np.max(y)
-    centers = [(0, miny - 1), (0, maxy + 1), (minx - 1, 0), (maxx + 1, 0)]
-    boxlen = [
-        (maxx - minx, 0.5),
-        (maxx - minx, 0.5),
-        (0.5, maxy - miny),
-        (0.5, maxy - miny),
-    ]
-    for pos, blen in zip(centers, boxlen):
-        tmp = world.CreateStaticBody(
-            position=pos,
-            shapes=b2PolygonShape(box=blen),
-        )
-        obs.append(tmp)
-    b2world_interface.add_bodies(obs)
 
 
 def run_simulation(
