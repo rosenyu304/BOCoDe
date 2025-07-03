@@ -108,9 +108,6 @@ class CEC2020_p37(BenchmarkProblem):
             [delIr[:, 1:30], delIm[:, 1:30], delP[:, 1:30], delQ[:, 1:30]], axis=1
         )
 
-        # No inequality constraints
-        g = np.zeros((n_samples, 0))
-
         if self.is_constrained:
             if "penalty_constrained" in self.flag:
                 return (

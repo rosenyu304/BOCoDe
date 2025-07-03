@@ -1,4 +1,21 @@
-from .MujocoFuncs import *
+from .MujocoFuncs import (
+    AntPolicySearchProblem,
+    AntProblem,
+    HalfCheetahPolicySearchProblem,
+    HalfCheetahProblem,
+    HopperPolicySearchProblem,
+    HopperProblem,
+    HumanoidProblem,
+    HumanoidStandupProblem,
+    InvertedDoublePendulumProblem,
+    InvertedPendulumProblem,
+    PusherProblem,
+    ReacherProblem,
+    SwimmerPolicySearchProblem,
+    SwimmerProblem,
+    Walker2DPolicySearchProblem,
+    Walker2DProblem,
+)
 
 __all__ = [
     "AntProblem",

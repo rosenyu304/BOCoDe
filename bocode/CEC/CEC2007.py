@@ -2013,7 +2013,7 @@ class CEC2007_R_DTLZ2(BenchmarkProblem):
             # three cases
             in01 = (zi >= 0.0) & (zi <= 1.0)
             below = zi < 0.0
-            above = zi > 1.0
+            # above = zi > 1.0
             zz[:, i] = torch.where(
                 in01, zi, torch.where(below, -lam[i] * zi, 1.0 - lam[i] * (zi - 1.0))
             )
