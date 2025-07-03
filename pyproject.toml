@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=61.0", "wheel"]
+requires = ["setuptools>=64.0", "wheel", "setuptools_scm>=8"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -13,10 +13,8 @@ authors = [
       { name = "Faez Ahmed" },
 ]
 dependencies = [
-    "pytest",
     "botorch",
     "torch",
-    "jax",
     "numpy",
     "cocopp",
     "coco-experiment",
@@ -29,16 +27,32 @@ dependencies = [
     "opfunu",
     "gym",
     "gymnasium[MuJoCo]",
-    "attrs",
-    "cached_property>=1.5.1",
-    "networkx",
-    "python-fcl",
     "scipy",
-    "trimesh",
-    "dash",
-    "LassoBench @ git+ssh://git@github.com/ksehic/LassoBench.git",
-    "modact @ git+ssh://git@github.com/epfl-lamd/modact.git"
+    "LassoBench @ git+https://github.com/ksehic/LassoBench.git",
+    "modact @ git+https://github.com/epfl-lamd/modact.git",
+    "gpy >= 1.13.0",
+    "onnxruntime>=1.22.0",
 ]
+readme = "README.md"
+requires-python = ">=3.10"
+
+[project.optional-dependencies]
+viz = [
+    "dash",
+    "plotly",
+    "matplotlib",
+]
+
+[dependency-groups]
+doc = [
+    "sphinx"
+]
+
+test = [
+    "pytest"
+]
+
+dev = [{include-group = "test"}, {include-group = "doc"}]
 
 [tool.setuptools]
 include-package-data = true
@@ -47,6 +61,15 @@ include-package-data = true
 where = ["."]
 include = ["bocode*"]
 
+[tool.setuptools_scm]
+
 [project.urls]
 Homepage = "https://github.com/rosenyu304/BOCoDe/"
 Repository = "https://github.com/rosenyu304/BOCoDe/"
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q"
+testpaths = [
+    "tests",
+]

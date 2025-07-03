@@ -2,7 +2,6 @@
 
 We present BOCoDe, a Python and PyTorch-based library that contains the most comprehensive suite of engineering design optimization problems and an interface to popular synthetic optimization problems, with access to 300+ problems for optimization algorithm benchmarking. Our goal is to provide not only a Python optimization benchmark library but also to allow the PyTorch interface for facilitating machine learning optimization algorithms and applications such as surrogate and Bayesian optimization.
 
-
 > [!IMPORTANT]
 >
 > The optimization tasks in this library can be used for all kinds of optimization algorithms benchmarking. 
@@ -28,12 +27,14 @@ We present a diverse collection of engineering design problems including car des
 # Installation
 
 For our own testing now:
-```
+
+```bash
 pip install git+https://github.com/rosenyu304/BOCoDe
 ```
 
 After PyPI upload:
-```
+
+```bash
 pip install bocode
 ```
 

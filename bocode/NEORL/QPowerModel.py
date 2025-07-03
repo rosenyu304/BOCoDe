@@ -1,9 +1,11 @@
-from ..base import *
-import torch
-import numpy as np
-from typing import Tuple
 import math
+from typing import Tuple
+
+import torch
+
+from ..base import BenchmarkProblem, DataType
 from .neorl_lib.qpower_model import QPowerModel as Q_Power_Model
+
 
 class QPowerModel(BenchmarkProblem):
     """

@@ -1,12 +1,13 @@
 import torch
-from ..base import *
+
+from ..base import BenchmarkProblem, DataType
+
 
 class ReinforcedConcreteBeam(BenchmarkProblem):
-
-    r'''
+    """
     Gandomi AH, Yang XS, Alavi AH (2011) Mixed variable structural optimization using firefly
     algorithm. Computers & Structures 89(23-24):2325–2336
-    '''
+    """
 
     # 3D objective, 2 constraints, X = n-by-3
 
@@ -18,10 +19,14 @@ class ReinforcedConcreteBeam(BenchmarkProblem):
     tags = {"single_objective", "constrained", "continuous", "3D"}
 
     def __init__(self):
-        super().__init__(dim = 3, num_objectives = 1, num_constraints = 2, bounds = [(0.2, 15), (28, 40), (5, 10)])
+        super().__init__(
+            dim=3,
+            num_objectives=1,
+            num_constraints=2,
+            bounds=[(0.2, 15), (28, 40), (5, 10)],
+        )
 
-    def _evaluate_implementation(self, X, scaling = False):
-
+    def _evaluate_implementation(self, X, scaling=False):
         if scaling:
             X = super().scale(X)
 

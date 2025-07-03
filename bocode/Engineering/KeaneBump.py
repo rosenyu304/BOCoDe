@@ -1,12 +1,13 @@
 import torch
-from ..base import *
+
+from ..base import BenchmarkProblem, DataType
+
 
 class KeaneBump(BenchmarkProblem):
-
-    r'''
+    """
     Keane A (1994) Experiences with optimizers instructural design. In: Proceedings of the conference
     on adaptive computing in engineering design and control, pp 14–27
-    '''
+    """
 
     # N-D objective, 2 constraints, X = n-by-dim
 
@@ -18,10 +19,11 @@ class KeaneBump(BenchmarkProblem):
     tags = {"single_objective", "constrained", "continuous", "ND"}
 
     def __init__(self, dim=18):
-        super().__init__(dim, num_objectives = 1, num_constraints = 2, bounds = [(0, 10)]*dim)
+        super().__init__(
+            dim, num_objectives=1, num_constraints=2, bounds=[(0, 10)] * dim
+        )
 
-    def _evaluate_implementation(self, X, scaling = False):
-
+    def _evaluate_implementation(self, X, scaling=False):
         if scaling:
             X = super().scale(X)
 
@@ -33,7 +35,7 @@ class KeaneBump(BenchmarkProblem):
         gx2 = torch.zeros(n, 1).to(torch.float64)
 
         for i in range(n):
-            x = X[i,:]
+            x = X[i, :]
 
             cos4 = 0
             cos2 = 1
@@ -45,16 +47,16 @@ class KeaneBump(BenchmarkProblem):
             for j in range(dim):
                 cos4 += torch.cos(x[j]) ** 4
                 cos2 *= torch.cos(x[j]) ** 2
-                sq_denom += (j+1) * (x[j])**2
+                sq_denom += (j + 1) * (x[j]) ** 2
 
                 pi_sum *= x[j]
                 sigma_sum += x[j]
 
-            test_function = torch.abs((cos4 - 2*cos2) / torch.sqrt(sq_denom))
+            test_function = torch.abs((cos4 - 2 * cos2) / torch.sqrt(sq_denom))
             fx[i] = test_function
 
             gx1[i] = 0.75 - pi_sum
-            gx2[i] = sigma_sum - 7.5* dim
+            gx2[i] = sigma_sum - 7.5 * dim
 
         gx = torch.cat((gx1, gx2), 1)
         return gx, fx

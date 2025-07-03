@@ -1,12 +1,13 @@
 import torch
-from ..base import *
+
+from ..base import BenchmarkProblem, DataType
+
 
 class Car(BenchmarkProblem):
-
-    r'''
+    """
     Gandomi AH, Yang XS, Alavi AH (2011) Mixed variable structural optimization using firefly
     algorithm. Computers & Structures 89(23-24):2325–2336
-    '''
+    """
 
     # 11D objective, 10 constraints, X = n-by-11
 
@@ -18,17 +19,47 @@ class Car(BenchmarkProblem):
     tags = {"single_objective", "constrained", "11D"}
 
     def __init__(self):
-        super().__init__(dim = 11, num_objectives = 1, num_constraints = 10, bounds = [(0.5, 1.5), (0.45, 1.35), (0.5, 1.5), (0.5, 1.5),
-                                                                         (0.5, 1.5), (0.5, 1.5), (0.5, 1.5), (0.192, 0.345),
-                                                                         (0.192, 0.345), (-20, 0), (-20, 0)])
+        super().__init__(
+            dim=11,
+            num_objectives=1,
+            num_constraints=10,
+            bounds=[
+                (0.5, 1.5),
+                (0.45, 1.35),
+                (0.5, 1.5),
+                (0.5, 1.5),
+                (0.5, 1.5),
+                (0.5, 1.5),
+                (0.5, 1.5),
+                (0.192, 0.345),
+                (0.192, 0.345),
+                (-20, 0),
+                (-20, 0),
+            ],
+        )
 
-    def _evaluate_implementation(self, X, scaling = False):
+    def _evaluate_implementation(self, X, scaling=False):
         if scaling:
             X = super().scale(X)
 
         n = X.size(0)
 
-        test_function = -torch.tensor([[4.90], [6.67], [6.98], [4.01], [1.78], [0], [2.73], [0], [0], [0], [0], [1.98]])
+        test_function = -torch.tensor(
+            [
+                [4.90],
+                [6.67],
+                [6.98],
+                [4.01],
+                [1.78],
+                [0],
+                [2.73],
+                [0],
+                [0],
+                [0],
+                [0],
+                [1.98],
+            ]
+        )
         X_1 = torch.cat((X, torch.tensor([[1] * n]).T), 1)
         fx = X_1 @ test_function
 
