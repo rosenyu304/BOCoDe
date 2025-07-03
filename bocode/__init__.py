@@ -1,7 +1,7 @@
 from importlib.metadata import PackageNotFoundError, version
 
 try:
-    __version__ = version("package-name")
+    __version__ = version("bocode")
 except PackageNotFoundError:
     # package is not installed
     pass
@@ -18,6 +18,8 @@ import bocode.Synthetics as Synthetics
 import bocode.WFG as WFG
 import bocode.ZDT as ZDT
 
+from .base import DataType
+
 from .exceptions import (
     DimensionException,
     FunctionDefinitionAssertionError,
@@ -28,6 +30,7 @@ from .search_benchmarks import filter_functions
 
 __all__ = [
     "__version__",
+    "DataType",
     "BBOB",
     "BoTorch",
     "CEC",

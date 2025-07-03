@@ -1,23 +1,11 @@
-import importlib
 import math
 from collections import defaultdict
 from typing import Callable, Dict, List, Union
 
 import bocode
-from .base import DataType
+from .base import BenchmarkProblem, DataType
 
 ValType = Union[int, tuple, set, list]
-
-
-def qualify_classes(class_list, module_name):
-    """
-    Given a list of class objects and a module name (string),
-    return a list of fully qualified class objects from the specified module.
-    """
-    full_module_path = "bocode." + module_name.replace(".", "/").replace("/", ".")
-    module = importlib.import_module(full_module_path)
-    return [getattr(module, cls.__name__) for cls in class_list]
-
 
 SyntheticsFuncs = [
     bocode.Synthetics.Ackley,
@@ -346,21 +334,18 @@ categorized_classes = {
     "Engineering": EngineeringFuncs,
     "Engineering.Gym": MujocoFuncs,
     "Engineering.BayesianCHT": BayesianCHTFuncs,
-    "CEC.CEC2020_RW_Constrained": CEC2020Funcs,
     "BBOB": BBOBFuncs,
     "BoTorch": BotorchFuncs,
     "MODAct": MODActFuncs,
-    "CEC.CEC2017": CEC2017Funcs,
     "WFG": WFGFuncs,
     "ZDT": ZDTFuncs,
     "DTLZ": DTLZFuncs,
     "CEC.CEC2007": CEC2007Funcs,
+    "CEC.CEC2017": CEC2017Funcs,
     "CEC.CEC2019": CEC2019Funcs,
+    "CEC.CEC2020_RW_Constrained": CEC2020Funcs,
     "NEORL": NEORLFuncs,
 }
-
-for category, functions in categorized_classes.items():
-    categorized_classes[category] = qualify_classes(functions, category)
 
 
 def _has_valid_val(val: ValType, constraint=Callable[[int], bool]) -> bool:
@@ -390,7 +375,7 @@ def filter_functions(
     objectives_filter: Callable[[int], bool] = lambda x: x > 0,
     constraints_filter: Callable[[int], bool] = lambda x: x >= 0,
     category_filter: Callable[[str], bool] = lambda x: True,
-) -> Dict[str, List[str]]:
+) -> Dict[str, List[BenchmarkProblem]]:
     """
     Filter functions based on the given constraints.
 
@@ -454,10 +439,6 @@ def filter_functions(
             ):
                 continue
 
-            # Compose the path as 'bocode.<category>.<ClassName>'
-            class_name = (
-                func.__name__ if hasattr(func, "__name__") else func.__class__.__name__
-            )
-            filtered_funcs[category].append(f"bocode.{category}.{class_name}")
+            filtered_funcs[category].append(func)
 
     return dict(filtered_funcs)
