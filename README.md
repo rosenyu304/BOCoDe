@@ -13,7 +13,7 @@ We present BOCoDe, a Python and PyTorch-based library that contains the most com
 ## Engineering design problems
 We present a diverse collection of engineering design problems including car design, cantilever beam, truss structure optimization, and physics simulation of robotics problems. 
 
-<center><img src="docs/Figures/TopFuns_Icon_v1.png" width="500"></center>
+<center><img src="docs/Figures/TopFuns_Icon_v2.png" width="500"></center>
 
 
 ## Interface to popular benchmarks
