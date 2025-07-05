@@ -3,27 +3,24 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-BOCoDe documentation
-======================
+BOCoDe Documentation
+====================
 
-BOCoDe is a Python library contains optimization benchmark problems.
+BOCoDe is a comprehensive Python library containing optimization benchmark problems for testing and evaluating optimization algorithms.
 
 .. note::
 
    This project is under active development.
 
-
-
-
 Features
 --------
 
-* Collection of benchmark problems from various sources (Botorch, BBOB)
-* Single and multi-objective optimization problems
-* Standardized interface for all benchmark problems
-* Easy integration with popular optimization frameworks
-
-
+* **Diverse Benchmark Collection**: Problems from various sources including Botorch, BBOB, CEC competitions, and engineering applications
+* **Multiple Problem Types**: Single and multi-objective, with and without constraints
+* **Standardized Interface** across all benchmark problems
+* **Function Filtering** to find problems matching specific criteria
+* **Visualization Tools** for understanding problem landscapes and behavior
+* **Framework Integration**
 
 Contents
 --------

@@ -3,7 +3,7 @@
 WFG Benchmarks
 =================
 
-The WFG benchmark collection contains all functions from the WFG (Walking Fish Group) benchmark suite. Python implementation of the original C++ code is derived from the `optproblems python library <https://www.simonwessing.de/optproblems/doc/wfg.html>`_.
+The WFG (Walking Fish Group) benchmark collection contains all functions from the WFG benchmark suite. Python implementation of the original C++ code is derived from the `optproblems python library <https://www.simonwessing.de/optproblems/doc/wfg.html>`_.
 
 Sources:
 
@@ -33,7 +33,7 @@ Example Usage
     # Retrieve available dimensions for instantiation
     available_dimensions = bocode.WFG.WFG1.available_dimensions
 
-    # Create a Botorch benchmark problem
+    # Create a WFG benchmark problem
     problem = bocode.WFG.WFG1(dim=5)
 
     # Get problem information

@@ -19,7 +19,7 @@ Here's a complete example of using BOCoDe with a single-objective optimization p
     from scipy.optimize import minimize
 
     # Create a benchmark problem
-    problem = bocode.Synthetics.Michalewicz()
+    problem = bocode.Synthetics.Michalewicz(dim=2)
 
     # Get problem bounds
     bounds = problem.bounds
@@ -30,7 +30,7 @@ Here's a complete example of using BOCoDe with a single-objective optimization p
         fx, _ = problem.evaluate(x)
         return fx.numpy()[0][0]
 
-    # Starting point 2 dimensional
+    # Starting point (2-dimensional)
     x0 = np.zeros(2)
 
     # Optimize using SciPy

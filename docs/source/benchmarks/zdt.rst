@@ -3,7 +3,7 @@
 ZDT Benchmarks
 =================
 
-The ZDT benchmark collection contains all functions from the ZDT (Zitzler, Deb, and Thiele) benchmark suite. Python implementation is derived from the `optproblems python library <https://www.simonwessing.de/optproblems/doc/zdt.html>`_.
+The ZDT (Zitzler, Deb, and Thiele) benchmark collection contains all functions from the ZDT benchmark suite. Python implementation is derived from the `optproblems python library <https://www.simonwessing.de/optproblems/doc/zdt.html>`_.
 
 Sources:
 
@@ -17,7 +17,7 @@ Available Problems
 * :code:`bocode.ZDT.ZDT3`
 * :code:`bocode.ZDT.ZDT4`
 * :code:`bocode.ZDT.ZDT5`
-    * Accepts 80 bits as input, automatically splitting it into the necessary sublists. See example below.
+    * ZDT 5 accepts 80 bits as input, automatically splitting it into the necessary sublists. See example below.
 * :code:`bocode.ZDT.ZDT6`
 
 Example Usage
@@ -31,7 +31,7 @@ Example Usage
     # Retrieve available dimensions for instantiation
     available_dimensions = bocode.ZDT.ZDT1.available_dimensions
 
-    # Create a Botorch benchmark problem
+    # Create a ZDT benchmark problem
     problem = bocode.ZDT.ZDT1(dim=5)
 
     # Get problem information
@@ -50,6 +50,7 @@ Output:
     First ZDT function values at [0.5]*5: tensor([0.5000, 3.8417])
 
 .. _ref-zdt5:
+
 Example Usage of ZDT5
 ------------
 .. code-block:: python
@@ -57,7 +58,7 @@ Example Usage of ZDT5
     import bocode
     import torch
 
-    # Create a Botorch benchmark problem
+    # Create a ZDT5 benchmark problem
     problem = bocode.ZDT.ZDT5()
 
     # Get problem information

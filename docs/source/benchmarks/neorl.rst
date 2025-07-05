@@ -26,11 +26,11 @@ Example Usage
     import bocode
     import torch
 
-    # Create a Botorch benchmark problem
+    # Create a NEORL benchmark problem
     problem = bocode.NEORL.TSP_100Cities()
 
     # Get problem information
-    bounds = problem.bounds # Each input is an integer between 1 and 100
+    bounds = problem.bounds  # Each input is an integer between 1 and 100
 
     # Get the optimum input value
     optimum_input_value = problem.x_opt[0]
@@ -38,7 +38,7 @@ Example Usage
     # Generate a random test point
     X = torch.rand((1, problem.dim))
 
-    # Scale to ints between 1 and 100
+    # Scale to integers between 1 and 100
     X = (X * 100).long() + 1
 
     values, constraints = problem.evaluate(X)

@@ -37,17 +37,17 @@ Example Usage
     import bocode
     import torch
 
-    # Create a Botorch benchmark problem
+    # Create a MODAct benchmark problem
     problem = bocode.MODAct.CS1()
 
     # Evaluate at a point
-    x = torch.Tensor([[0.5]*problem.dim])
+    x = torch.tensor([[0.5] * problem.dim])
     values, constraints = problem.evaluate(x)
 
-    print(f"CS1 objective function values at origin: {values[0]}")
+    print(f"CS1 objective function values at [0.5]*dim: {values[0]}")
 
 Output:
 
 .. code-block:: console
 
-    CS1 objective function values at origin: tensor([0.3887, -50.4243])
+    CS1 objective function values at [0.5]*dim: tensor([0.3887, -50.4243])

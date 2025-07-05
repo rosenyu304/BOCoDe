@@ -3,7 +3,7 @@
 Search for functions with custom filters
 =================
 
-You can search for benchmark functions with filters for category, dimensionality, and number of objectives.
+You can search for benchmark functions in BOCoDe using custom filters for dimensionality, number of objectives, number of constraints, and other criteria.
 
 Example Usage
 ------------
@@ -21,7 +21,7 @@ Example Usage
     # Retrieve all available categories
     available_categories = bocode.filter_functions().keys()
 
-    # Example of filtering functions
+    # Example of filtering functions using all available filters
     filtered_functions_list = bocode.filter_functions(
         dimension_filter = lambda dim: dim>=5, # Include only functions with dimensionality of 5 or greater
         input_type_filter = lambda input_type: input_type==DataType.CONTINUOUS, # Include only continuous functions

@@ -1,9 +1,9 @@
 .. _synthetics_benchmarks:
 
 Synthetic Benchmarks
-=================
+===================
 
-The Botorch benchmark collection includes synthetic test problems commonly used in Bayesian optimization research.
+The Synthetic benchmark collection includes classic mathematical test functions commonly used in optimization research.
 
 Available Problems
 ----------------
@@ -50,7 +50,7 @@ Example Usage
     import bocode
     import torch
 
-    # Create a Botorch benchmark problem
+    # Create a synthetic benchmark problem
     problem = bocode.Synthetics.Goldstein_Discrete()
     
     # Evaluate at a point

@@ -1,7 +1,7 @@
 .. _botorch_benchmarks:
 
-Botorch Benchmarks
-=================
+BoTorch Benchmarks
+==================
 
 The Botorch benchmark collection includes synthetic test problems commonly used in Bayesian optimization research.
 
@@ -57,7 +57,7 @@ Single Objective Example Usage
     import bocode
     import torch
 
-    # Create a Botorch benchmark problem
+    # Create a BoTorch benchmark problem
     problem = bocode.BoTorch.AugmentedBranin()
 
     # Evaluate at a point
@@ -80,7 +80,7 @@ Multi Objective Example Usage
     import bocode
     import torch
 
-    # Create a Botorch benchmark problem
+    # Create a BoTorch benchmark problem
     problem = bocode.BoTorch.MOMFBraninCurrin()
 
     # Evaluate at a point

@@ -23,18 +23,18 @@ Here's an example of using BOCoDe with a multi-objective problem:
     # Create a multi-objective benchmark problem
     problem = bocode.Engineering.CarSideImpact()
 
-    # Wrap the problem as a Pymoo Problem
+    # Wrap the problem as a PyMOO Problem
     class CarSideImpactProblem(Problem):
         def __init__(self):
             super().__init__(n_var=problem.dim,
-                                n_obj=problem.num_objectives,
-                                n_constr=problem.num_constraints,
-                                xl=np.array([b[0] for b in problem.bounds], dtype=float),
-                                xu=np.array([b[1] for b in problem.bounds], dtype=float),
-                                )
+                            n_obj=problem.num_objectives,
+                            n_constr=problem.num_constraints,
+                            xl=np.array([b[0] for b in problem.bounds], dtype=float),
+                            xu=np.array([b[1] for b in problem.bounds], dtype=float),
+                            )
         
         def _evaluate(self, x, out, *args, **kwargs):
-            values, constraints = problem.evaluate(torch.Tensor(x), scaling = False)
+            values, constraints = problem.evaluate(torch.Tensor(x), scaling=False)
             out["F"] = values.numpy()
             out["G"] = constraints.numpy()
 
@@ -43,8 +43,8 @@ Here's an example of using BOCoDe with a multi-objective problem:
 
     # Optimize
     res = minimize(CarSideImpactProblem(),
-                    algorithm,
-                    verbose=True)
+                  algorithm,
+                  verbose=True)
 
     # Get Pareto front
     pareto_front = res.F

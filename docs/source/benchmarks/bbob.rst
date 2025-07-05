@@ -45,10 +45,10 @@ Example Usage
     x = torch.Tensor([[0.0] * 5])
     values, constraints = problem.evaluate(x)
     
-    print(f"Sphere function value at origin: {values[0]}")
+    print(f"BBOB function value at origin: {values[0]}")
 
 Output:
 
 .. code-block:: console
 
-    Sphere function value at origin: tensor([42420381.6772])
+    BBOB function value at origin: tensor([42420381.6772])

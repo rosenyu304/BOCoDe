@@ -3,7 +3,7 @@
 DTLZ Benchmarks
 =================
 
-The DTLZ benchmark collection contains all functions from the DTLZ (Deb, Thiele, Laumanns, Zitzler) benchmark suite. Python implementation of the original C++ code is derived from the `optproblems python library <https://www.simonwessing.de/optproblems/doc/wfg.html>`_.
+The DTLZ (Deb, Thiele, Laumanns, Zitzler) benchmark collection contains all functions from the DTLZ benchmark suite. Python implementation of the original C++ code is derived from the `optproblems python library <https://www.simonwessing.de/optproblems/doc/wfg.html>`_.
 
 Sources:
 
@@ -32,7 +32,7 @@ Example Usage
     # Retrieve available dimensions for instantiation
     available_dimensions = bocode.DTLZ.DTLZ1.available_dimensions
 
-    # Create a Botorch benchmark problem
+    # Create a DTLZ benchmark problem
     problem = bocode.DTLZ.DTLZ1(dim=10)
 
     # Get problem information

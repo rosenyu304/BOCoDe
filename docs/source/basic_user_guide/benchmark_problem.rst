@@ -92,7 +92,7 @@ Methods
 evaluate(X)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Evaluates the objective and constraint functions.
+Evaluates the objective and constraint functions at the given input points.
 
 **Parameters:**
 
@@ -100,11 +100,11 @@ Evaluates the objective and constraint functions.
 
 **Returns:**
 
-- ``Tuple[torch.Tensor, torch.Tensor]:``: Objective and Constraint values (in that order) with shape ``(n_samples, num_constraints)`` and ``(n_samples, num_objectives)`` respectively.
+- ``Tuple[torch.Tensor, torch.Tensor]:``: Objective and constraint values (in that order) with shape ``(n_samples, num_objectives)`` and ``(n_samples, num_constraints)`` respectively.
 
 .. note::
 
-    Some problems (Like the CEC2020 functions) may have additional return values for equality constraints. See :ref:`benchmarks` for more details and examples. 
+    Some problems (like the CEC2020 functions) may have additional return values for equality constraints. See :ref:`benchmarks` for more details and examples. 
 
 scale(X)
 ~~~~~~~~
@@ -210,7 +210,7 @@ Glossary
 --------
 
 - **Objective function**: The function(s) to be optimized (maximized or minimized) in a benchmark problem.
-- **Constraint**: A function that restricts the feasible region of the decision variables to be **g(x) ≤ 0**. Some problems may have equality constraints. See :ref:`benchmarks` for more details on the specific problem.
+- **Constraint**: A function that restricts the feasible region of the decision variables to be **g(x) ≤ 0**. Some problems may have equality constraints. See :ref:`benchmarks` for more details on specific problems.
 - **Dimension**: The number of decision variables in the problem.
 - **Bounds**: A type of constraint that restricts the decision variables to a certain range (continuous) or a set of values (discrete/categorical).
 - **Decision variable**: A variable whose value is to be determined by the optimization process. This is the input to the objective and constraint functions, also referred to as `X`.

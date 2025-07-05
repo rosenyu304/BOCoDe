@@ -1,10 +1,11 @@
 .. _lasso_benchmarks:
 
-Lasso Benchmarks
-=================
+LassoBench Benchmarks
+=====================
 
-The Lasso benchmark collection is for high-dimensional hyperparameter optimization benchmarks based on Weighted Lasso regression.
-More information about the functions is available in the `LassoBench <https://github.com/ksehic/LassoBench>`_ docs.
+The LassoBench collection provides high-dimensional hyperparameter optimization benchmarks based on Weighted Lasso regression.
+
+More information about the functions is available in the `LassoBench <https://github.com/ksehic/LassoBench>`_ documentation.
 
 Available Problems
 ----------------
@@ -27,7 +28,7 @@ Example Usage
     import bocode
     import torch
 
-    # Create a Botorch benchmark problem
+    # Create a LassoBench problem
     problem = bocode.LassoBench.LassoBreastCancer()
     
     # Get problem information
