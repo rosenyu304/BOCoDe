@@ -6,10 +6,10 @@ import torch
 from dash import dcc, html
 from dash.dependencies import ALL, Input, Output, State
 
-from bocode.base import BaseProblem, DataType
+from bocode.base import BenchmarkProblem, DataType
 
 
-def visualize_function(prob: BaseProblem, sampling_density: int = 50) -> None:
+def visualize_function(prob: BenchmarkProblem, sampling_density: int = 50) -> None:
     """
     Decrease sampling_density for faster rendering. Default is 50. Increase for better resolution.
     -----

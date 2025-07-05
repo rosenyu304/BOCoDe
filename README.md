@@ -105,7 +105,7 @@ bounds = problem.bounds
 def objective(x):
     x = torch.Tensor([x])
     fx, _ = problem.evaluate(x)
-    fx = -fx # Negate the objective function for MAXIMIZATION
+    fx = -fx # Negate the objective function for MINIMIZATION
     return fx.numpy()[0][0]
 
 # Starting point (2-dimensional)
