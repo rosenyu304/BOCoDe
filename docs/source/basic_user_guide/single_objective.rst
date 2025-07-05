@@ -21,6 +21,8 @@ Here's a complete example of using BOCoDe with a single-objective optimization p
     # Create a benchmark problem
     problem = bocode.Synthetics.Michalewicz(dim=2)
 
+    problem.visualize_function()
+
     # Get problem bounds
     bounds = problem.bounds
 
@@ -28,6 +30,7 @@ Here's a complete example of using BOCoDe with a single-objective optimization p
     def objective(x):
         x = torch.Tensor([x])
         fx, _ = problem.evaluate(x)
+        fx = -fx # Negate the objective function for MAXIMIZATION
         return fx.numpy()[0][0]
 
     # Starting point (2-dimensional)
@@ -37,7 +40,10 @@ Here's a complete example of using BOCoDe with a single-objective optimization p
     result = minimize(objective, x0, method='Powell', bounds=bounds)
 
     print(f"Optimal value found: {result.fun}")
-    print(f"Optimal point: {result.x}")
+    print(f"Optimal point found: {result.x}")
+
+    print(f"Actual optimal value: {-problem.optimum[0]}")
+    print(f"Actual optimal point: {problem.x_opt[0]}")
 
 Advanced Features
 ---------------
