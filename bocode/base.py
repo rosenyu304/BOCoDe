@@ -62,13 +62,12 @@ class BenchmarkProblem:
 
         Args:
             dim (int, optional): Dimension of the decision space. Defaults to 1.
-            bound (Union[Tuple, Set]): Bounds of the decision variables.
+            bounds (Union[List[Union[Tuple, Set]], None]): Bounds of the decision variables.
             num_objectives (int, optional): Number of objective functions. Defaults to 1.
             num_constraints (int, optional): Number of constraint functions. Defaults to 0.
             x_opt (torch.Tensor, optional): The decision variables that maximize the objective function(s). Defaults to None.
             optimum (torch.Tensor, optional): The optimal objective values corresponding to the x_opt. Defaults to None.
             ref_point (torch.Tensor, optional): Reference point for calculating hypervolume. Defaults to None.
-            constraints (ConstraintConfig, optional): Additional Constraints. Defaults to None.
             tags (List[str], optional): More information for the benchmark problem. Defaults to None.
             debug (bool, optional): Debugging flag. Defaults to False.
         """
@@ -121,7 +120,7 @@ class BenchmarkProblem:
             "This benchmark problem is not fully implemented yet."
         )
 
-    def scale(self, X):
+    def scale(self, X) -> torch.Tensor:
         """
         Scales a fully continuous X to the problem's bounds.
 
@@ -146,7 +145,7 @@ class BenchmarkProblem:
 
         return X_scaled
 
-    def show_info(self):
+    def show_info(self) -> None:
         """
         Prints the information about the benchmark problem.
         """
@@ -160,7 +159,7 @@ class BenchmarkProblem:
             f"Bounds: {self.bounds}\n",
         )
 
-    def visualize_function(self, sampling_density=50):
+    def visualize_function(self, sampling_density: int = 50) -> None:
         """
         Visualizes the benchmark problem function.
         Decrease sampling_density for faster rendering. Default is 50. Increase for better resolution.
