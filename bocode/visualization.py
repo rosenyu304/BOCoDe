@@ -13,7 +13,7 @@ def visualize_function(prob: BenchmarkProblem, sampling_density: int = 50) -> No
     """
     Decrease sampling_density for faster rendering. Default is 50. Increase for better resolution.
     -----
-    sampling_density: sampling density per axis. Number of evaluated points = sampling_density^2
+    sampling_density: sampling density per axis. Number of evaluated points = sampling_density^2 for any problem with 2 or more decision variables
     """
 
     if prob.bounds is None or len(prob.bounds) != prob.dim:
@@ -107,6 +107,7 @@ def visualize_function(prob: BenchmarkProblem, sampling_density: int = 50) -> No
             fig.show()
         return
 
+    # 3+ dimensional input, M objectives --> 3D cross section surfaces with sliders
     lbs = np.array([b[0] for b in bounds], dtype=float)
     ubs = np.array([b[1] for b in bounds], dtype=float)
     mids = (lbs + ubs) / 2.0
