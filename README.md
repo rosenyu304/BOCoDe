@@ -153,4 +153,4 @@ BOCoDe is an open source project and we welcome contributions! If you want to ad
 
 
 # License
-BOCoDe is MIT licensed, as found in the LICENSE file.
+BOCoDe is MIT licensed, as found in [LICENSE](LICENSE)
