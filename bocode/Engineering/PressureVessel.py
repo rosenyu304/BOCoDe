@@ -51,4 +51,4 @@ class PressureVessel(BenchmarkProblem):
         )
         gx[:, 3] = L - 240
 
-        return gx, fx
+        return gx, fx.reshape(n, 1)
