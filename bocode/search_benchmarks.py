@@ -65,6 +65,8 @@ EngineeringFuncs = [
     bocode.Engineering.Mazda,
     bocode.Engineering.Mazda_SCA,
     bocode.Engineering.MOPTA08Car,
+    bocode.Engineering.PD4CartPole,
+    bocode.Engineering.PID4Acrobot,
     bocode.Engineering.PressureVessel,
     bocode.Engineering.ReinforcedConcreteBeam,
     bocode.Engineering.RobotPush,

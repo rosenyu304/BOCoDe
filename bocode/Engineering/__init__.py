@@ -36,6 +36,8 @@ from .Gym import (
 from .KeaneBump import KeaneBump
 from .Mazda import Mazda, Mazda_SCA
 from .MOPTA08Car import MOPTA08Car
+from .PD4CartPole import PD4CartPole
+from .PID4Acrobot import PID4Acrobot
 from .PressureVessel import PressureVessel
 from .ReinforcedConcreteBeam import ReinforcedConcreteBeam
 from .RobotPush import RobotPush
@@ -63,6 +65,8 @@ __all__ = [
     "Mazda",
     "Mazda_SCA",
     "MOPTA08Car",
+    "PD4CartPole",
+    "PID4Acrobot",
     "PressureVessel",
     "ReinforcedConcreteBeam",
     "RobotPush",
