@@ -28,14 +28,6 @@ Other open-source libraries and benchmarks: [MODAct](https://github.com/epfl-lam
 
 # Installation
 
-For our own testing now:
-
-```bash
-pip install git+https://github.com/rosenyu304/BOCoDe
-```
-
-After PyPI upload:
-
 ```bash
 pip install bocode
 ```
