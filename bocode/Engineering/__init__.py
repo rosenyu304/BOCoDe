@@ -14,6 +14,7 @@ from .CarSideImpact import CarSideImpact
 from .CompressionSpring import CompressionSpring
 from .EulerBernoulliBeamBending import EulerBernoulliBeamBending
 from .GearTrain import GearTrain
+from .HeatExchanger import HeatExchanger
 from .Gym import (
     AntPolicySearchProblem,
     AntProblem,
@@ -35,9 +36,11 @@ from .Gym import (
 from .KeaneBump import KeaneBump
 from .Mazda import Mazda, Mazda_SCA
 from .MOPTA08Car import MOPTA08Car
+from .PressureVessel import PressureVessel
 from .ReinforcedConcreteBeam import ReinforcedConcreteBeam
 from .RobotPush import RobotPush
 from .Rover import Rover
+from .SpeedReducer import SpeedReducer
 from .ThreeTruss import ThreeTruss
 from .Truss10D import Truss10D
 from .Truss25D import Truss25D
@@ -55,13 +58,16 @@ __all__ = [
     "Car",
     "EulerBernoulliBeamBending",
     "GearTrain",
+    "HeatExchanger",
     "KeaneBump",
     "Mazda",
     "Mazda_SCA",
     "MOPTA08Car",
+    "PressureVessel",
     "ReinforcedConcreteBeam",
     "RobotPush",
     "Rover",
+    "SpeedReducer",
     "Truss10D",
     "Truss25D",
     "Truss72D_FourForces",
