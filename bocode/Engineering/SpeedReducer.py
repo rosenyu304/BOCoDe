@@ -49,13 +49,13 @@ class SpeedReducer(BenchmarkProblem):
         L2 = X[:, 4]
         d1 = X[:, 5]
         d2 = X[:, 6]
-        
+
         C1 = 0.7854 * b * m * m
         C2 = 3.3333 * z * z + 14.9334 * z - 43.0934
         C3 = 1.508 * b * (d1 * d1 + d2 * d2)
         C4 = 7.4777 * (d1 * d1 * d1 + d2 * d2 * d2)
         C5 = 0.7854 * (L1 * d1 * d1 + L2 * d2 * d2)
-        
+
         test_function = -(C1 * C2 - C3 + C4 + C5)
 
         fx = test_function.reshape(n, self.num_objectives)
@@ -64,10 +64,14 @@ class SpeedReducer(BenchmarkProblem):
         gx[:, 1] = 397.5 / (b * m * m * z * z) - 1
         gx[:, 2] = 1.93 * L1**3 / (m * z * d1**4) - 1
         gx[:, 3] = 1.93 * L2**3 / (m * z * d2**4) - 1
-        gx[:, 4] = torch.sqrt((745 * L1 / (m * z)) ** 2 + 1.69 * 1e6)/ (110 * d1**3) - 1
-        gx[:, 5] = torch.sqrt((745 * L2 / (m * z)) ** 2 + 157.5 * 1e6) / (85 * d2**3) - 1
+        gx[:, 4] = (
+            torch.sqrt((745 * L1 / (m * z)) ** 2 + 1.69 * 1e6) / (110 * d1**3) - 1
+        )
+        gx[:, 5] = (
+            torch.sqrt((745 * L2 / (m * z)) ** 2 + 157.5 * 1e6) / (85 * d2**3) - 1
+        )
         gx[:, 6] = m * z / 40 - 1
         gx[:, 7] = 5 * m / (b) - 1
         gx[:, 8] = b / (12 * m) - 1
-        
+
         return gx, fx

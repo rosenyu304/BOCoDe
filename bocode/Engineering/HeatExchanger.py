@@ -51,7 +51,7 @@ class HeatExchanger(BenchmarkProblem):
         x6 = X[:, 5]
         x7 = X[:, 6]
         x8 = X[:, 7]
-        
+
         test_function = -(x1 + x2 + x3)
 
         fx = test_function.reshape(n, self.num_objectives)
@@ -62,5 +62,5 @@ class HeatExchanger(BenchmarkProblem):
         gx[:, 3] = 833.33252 * x4 + 100 * x1 - x1 * x6 - 83333.333
         gx[:, 4] = 1250 * x5 + x2 * x4 - x2 * x7 - 125 * x4
         gx[:, 5] = x3 * x5 - 2500 * x5 - x3 * x8 + 125 * 10000
-        
+
         return gx, fx
