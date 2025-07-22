@@ -5,6 +5,8 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "bocode"
 description = "BOCoDe is a Python library contains optimization benchmark problems."
+license = { text = "MIT" }
+keywords = ["engineering design", "optimization", "benchmark", "engineering", "bayesian-optimization"]
 authors = [
       { name = "Rosen Yu" },
       { name = "Advaith Narayanan" },
@@ -33,6 +35,15 @@ dependencies = [
 readme = "README.md"
 requires-python = ">=3.10"
 dynamic = ["version"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "License :: OSI Approved :: MIT License",
+    "Intended Audience :: Science/Research",
+]
 
 [project.optional-dependencies]
 viz = [
@@ -46,16 +57,16 @@ full = [
     "modact @ git+https://github.com/epfl-lamd/modact.git",
 ]
 
+test = [
+    "pytest",
+    "pytest-cov",
+]
+
 [dependency-groups]
 doc = [
     "sphinx>=7.0.0,<8.0.0",
     "furo==2024.04.27",
     "sphinx_copybutton==0.5.2",
-]
-
-test = [
-    "pytest",
-    "pytest-cov",
 ]
 
 dev = [{include-group = "test"}, {include-group = "doc"}]
