@@ -27,8 +27,6 @@ dependencies = [
     "gym",
     "gymnasium[MuJoCo]",
     "scipy",
-    "LassoBench @ git+https://github.com/ksehic/LassoBench.git",
-    "modact @ git+https://github.com/epfl-lamd/modact.git",
     "gpy >= 1.13.0",
     "onnxruntime>=1.22.0",
 ]
@@ -41,6 +39,11 @@ viz = [
     "dash",
     "plotly",
     "matplotlib",
+]
+
+full = [
+    "LassoBench @ git+https://github.com/ksehic/LassoBench.git",
+    "modact @ git+https://github.com/epfl-lamd/modact.git",
 ]
 
 [dependency-groups]
