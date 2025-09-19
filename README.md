@@ -46,7 +46,7 @@ pip install bocode
 Full Installation (with External Dependencies)
 This library also supports benchmarks from `LassoBench` and `modact`, which are not available on PyPI. To use them, you must install them directly from their Git repositories after installing bocode:
 ```bash
-git clone github.com/rosenyu304/BOCoDe/
+git clone http://github.com/rosenyu304/BOCoDe/
 cd BOCoDe
 pip install -e .[full]
 ```
