@@ -39,9 +39,7 @@ class Hartmann3D(BenchmarkProblem):
     def hart3(self, X):
         # Parameters
         alpha = torch.tensor([1.0, 1.2, 3.0, 3.2])
-        A = torch.tensor(
-            [[3.0, 10, 30], [0.1, 10, 35], [3.0, 10, 30], [0.1, 10, 35]]
-        )
+        A = torch.tensor([[3.0, 10, 30], [0.1, 10, 35], [3.0, 10, 30], [0.1, 10, 35]])
         P = 1e-4 * torch.tensor(
             [
                 [3689, 1170, 2673],
