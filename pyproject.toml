@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=64.0", "wheel", "setuptools_scm>=8"]
+requires = ["setuptools>=64.0,<81", "wheel", "setuptools_scm>=8"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -26,7 +26,7 @@ dependencies = [
     "diversipy",
     "optproblems",
     "opfunu",
-    "setuptools",
+    "setuptools<81",
     "gym",
     "gymnasium[MuJoCo]",
     "scipy",
