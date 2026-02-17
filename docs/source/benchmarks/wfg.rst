@@ -12,15 +12,15 @@ Sources:
 Available Problems
 ----------------
 
-* :code:`bocode.WFG.WFG1`
-* :code:`bocode.WFG.WFG2`
-* :code:`bocode.WFG.WFG3`
-* :code:`bocode.WFG.WFG4`
-* :code:`bocode.WFG.WFG5`
-* :code:`bocode.WFG.WFG6`
-* :code:`bocode.WFG.WFG7`
-* :code:`bocode.WFG.WFG8`
-* :code:`bocode.WFG.WFG9`
+* :code:`bocode.Synthetics.WFG.WFG1`
+* :code:`bocode.Synthetics.WFG.WFG2`
+* :code:`bocode.Synthetics.WFG.WFG3`
+* :code:`bocode.Synthetics.WFG.WFG4`
+* :code:`bocode.Synthetics.WFG.WFG5`
+* :code:`bocode.Synthetics.WFG.WFG6`
+* :code:`bocode.Synthetics.WFG.WFG7`
+* :code:`bocode.Synthetics.WFG.WFG8`
+* :code:`bocode.Synthetics.WFG.WFG9`
 
 Example Usage
 ------------
@@ -31,10 +31,10 @@ Example Usage
     import torch
 
     # Retrieve available dimensions for instantiation
-    available_dimensions = bocode.WFG.WFG1.available_dimensions
+    available_dimensions = bocode.Synthetics.WFG.WFG1.available_dimensions
 
     # Create a WFG benchmark problem
-    problem = bocode.WFG.WFG1(dim=5)
+    problem = bocode.Synthetics.WFG.WFG1(dim=5)
 
     # Get problem information
     bounds = problem.bounds

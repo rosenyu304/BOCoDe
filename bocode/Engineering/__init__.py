@@ -1,13 +1,3 @@
-from .BayesianCHT import (
-    NonLinearConstraintProblemA3,
-    NonLinearConstraintProblemA4,
-    NonLinearConstraintProblemA7,
-    NonLinearConstraintProblemA8,
-    NonLinearConstraintProblemB3,
-    NonLinearConstraintProblemB4,
-    NonLinearConstraintProblemB7,
-    NonLinearConstraintProblemB8,
-)
 from .CantileverBeam import CantileverBeam
 from .Car import Car
 from .CarSideImpact import CarSideImpact
@@ -52,6 +42,17 @@ from .Truss200D import Truss200D
 from .TwoBarTruss import TwoBarTruss
 from .WaterProblem import WaterProblem
 from .WaterResources import WaterResources
+from .SVM import SVM
+
+from . import MODAct
+from . import CEC2020_RW_Constrained
+
+from ..BoTorch.botorch_MultiObj import Penicillin as Penicillin
+from ..BoTorch.botorch_MultiObj import VehicleSafety as VehicleSafety
+from ..BoTorch.botorch_MultiObj import CarSideImpact as BotorchCarSideImpact
+from ..BoTorch.botorch_MultiObj import DiscBrake as DiscBrake
+from ..BoTorch.botorch_MultiObj import OSY as OSY
+from ..BoTorch.botorch_MultiObj import WeldedBeam as WeldedBeam
 
 __all__ = [
     "CarSideImpact",
@@ -82,14 +83,6 @@ __all__ = [
     "ThreeTruss",
     "WaterProblem",
     "WaterResources",
-    "NonLinearConstraintProblemA3",
-    "NonLinearConstraintProblemA4",
-    "NonLinearConstraintProblemA7",
-    "NonLinearConstraintProblemA8",
-    "NonLinearConstraintProblemB3",
-    "NonLinearConstraintProblemB4",
-    "NonLinearConstraintProblemB7",
-    "NonLinearConstraintProblemB8",
     "AntProblem",
     "HalfCheetahProblem",
     "HopperProblem",
@@ -106,4 +99,13 @@ __all__ = [
     "HalfCheetahPolicySearchProblem",
     "HopperPolicySearchProblem",
     "Walker2DPolicySearchProblem",
+    "SVM",
+    "MODAct",
+    "CEC2020_RW_Constrained",
+    "Penicillin",
+    "VehicleSafety",
+    "BotorchCarSideImpact",
+    "DiscBrake",
+    "OSY",
+    "WeldedBeam",
 ]

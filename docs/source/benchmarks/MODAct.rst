@@ -8,26 +8,26 @@ The `MODAct <https://github.com/epfl-lamd/modact>`_ (Multi-Objective Design of e
 Available Problems
 ----------------
 
-* :code:`bocode.MODAct.CS1`
-* :code:`bocode.MODAct.CT1`
-* :code:`bocode.MODAct.CTS1`
-* :code:`bocode.MODAct.CTSE1`
-* :code:`bocode.MODAct.CTSEI1`
-* :code:`bocode.MODAct.CS2`
-* :code:`bocode.MODAct.CT2`
-* :code:`bocode.MODAct.CTS2`
-* :code:`bocode.MODAct.CTSE2`
-* :code:`bocode.MODAct.CTSEI2`
-* :code:`bocode.MODAct.CS3`
-* :code:`bocode.MODAct.CT3`
-* :code:`bocode.MODAct.CTS3`
-* :code:`bocode.MODAct.CTSE3`
-* :code:`bocode.MODAct.CTSEI3`
-* :code:`bocode.MODAct.CS4`
-* :code:`bocode.MODAct.CT4`
-* :code:`bocode.MODAct.CTS4`
-* :code:`bocode.MODAct.CTSE4`
-* :code:`bocode.MODAct.CTSEI4`
+* :code:`bocode.Engineering.MODAct.CS1`
+* :code:`bocode.Engineering.MODAct.CT1`
+* :code:`bocode.Engineering.MODAct.CTS1`
+* :code:`bocode.Engineering.MODAct.CTSE1`
+* :code:`bocode.Engineering.MODAct.CTSEI1`
+* :code:`bocode.Engineering.MODAct.CS2`
+* :code:`bocode.Engineering.MODAct.CT2`
+* :code:`bocode.Engineering.MODAct.CTS2`
+* :code:`bocode.Engineering.MODAct.CTSE2`
+* :code:`bocode.Engineering.MODAct.CTSEI2`
+* :code:`bocode.Engineering.MODAct.CS3`
+* :code:`bocode.Engineering.MODAct.CT3`
+* :code:`bocode.Engineering.MODAct.CTS3`
+* :code:`bocode.Engineering.MODAct.CTSE3`
+* :code:`bocode.Engineering.MODAct.CTSEI3`
+* :code:`bocode.Engineering.MODAct.CS4`
+* :code:`bocode.Engineering.MODAct.CT4`
+* :code:`bocode.Engineering.MODAct.CTS4`
+* :code:`bocode.Engineering.MODAct.CTSE4`
+* :code:`bocode.Engineering.MODAct.CTSEI4`
 
 Example Usage
 ------------
@@ -38,7 +38,7 @@ Example Usage
     import torch
 
     # Create a MODAct benchmark problem
-    problem = bocode.MODAct.CS1()
+    problem = bocode.Engineering.MODAct.CS1()
 
     # Evaluate at a point
     x = torch.tensor([[0.5] * problem.dim])

@@ -7,10 +7,9 @@ from ..base import BenchmarkProblem, DataType
 
 class Ackley(BenchmarkProblem):
     """
-    Sources:
-    (1) https://www.sfu.ca/~ssurjano/ackley.html
-    (2) Eriksson D, Poloczek M (2021) Scalable constrained bayesian optimization.
-    In: International Conference on Artificial Intelligence and Statistics, PMLR, pp 730–738
+    https://www.sfu.ca/~ssurjano/ackley.html
+    and
+    BoTorch: https://github.com/meta-pytorch/botorch/blob/main/botorch/test_functions/synthetic.py
     """
 
     available_dimensions = (1, None)
@@ -35,7 +34,7 @@ class Ackley(BenchmarkProblem):
             num_constraints=2,
             optimum=[[0]],
             x_opt=[[0] * dim],
-            bounds=[(-5, 10)] * dim,
+            bounds=[(-32.768, 32.768)] * dim,
             tags=tags,
         )
 

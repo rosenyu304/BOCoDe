@@ -1,27 +1,27 @@
 import pytest
 import torch
 
-from bocode import CEC
+from bocode.Engineering import CEC2020_RW_Constrained
 
 benchmark_classes = [
-    CEC.CEC2020_p40,
-    CEC.CEC2020_p41,
-    CEC.CEC2020_p42,
-    CEC.CEC2020_p43,
-    CEC.CEC2020_p44,
-    CEC.CEC2020_p45,
-    CEC.CEC2020_p46,
-    CEC.CEC2020_p47,
-    CEC.CEC2020_p48,
-    CEC.CEC2020_p49,
-    CEC.CEC2020_p50,
-    CEC.CEC2020_p51,
-    CEC.CEC2020_p52,
-    CEC.CEC2020_p53,
-    CEC.CEC2020_p54,
-    CEC.CEC2020_p55,
-    CEC.CEC2020_p56,
-    CEC.CEC2020_p57,
+    CEC2020_RW_Constrained.CEC2020_p40,
+    CEC2020_RW_Constrained.CEC2020_p41,
+    CEC2020_RW_Constrained.CEC2020_p42,
+    CEC2020_RW_Constrained.CEC2020_p43,
+    CEC2020_RW_Constrained.CEC2020_p44,
+    CEC2020_RW_Constrained.CEC2020_p45,
+    CEC2020_RW_Constrained.CEC2020_p46,
+    CEC2020_RW_Constrained.CEC2020_p47,
+    CEC2020_RW_Constrained.CEC2020_p48,
+    CEC2020_RW_Constrained.CEC2020_p49,
+    CEC2020_RW_Constrained.CEC2020_p50,
+    CEC2020_RW_Constrained.CEC2020_p51,
+    CEC2020_RW_Constrained.CEC2020_p52,
+    CEC2020_RW_Constrained.CEC2020_p53,
+    CEC2020_RW_Constrained.CEC2020_p54,
+    CEC2020_RW_Constrained.CEC2020_p55,
+    CEC2020_RW_Constrained.CEC2020_p56,
+    CEC2020_RW_Constrained.CEC2020_p57,
 ]
 
 

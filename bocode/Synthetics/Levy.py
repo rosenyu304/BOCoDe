@@ -8,6 +8,8 @@ from ..base import BenchmarkProblem, DataType
 class Levy(BenchmarkProblem):
     """
     https://www.sfu.ca/~ssurjano/levy.html
+    and
+    BoTorch: https://github.com/meta-pytorch/botorch/blob/main/botorch/test_functions/synthetic.py
     """
 
     available_dimensions = (1, None)

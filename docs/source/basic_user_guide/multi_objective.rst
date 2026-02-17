@@ -34,7 +34,7 @@ Here's an example of using BOCoDe with a multi-objective problem:
                             )
         
         def _evaluate(self, x, out, *args, **kwargs):
-            values, constraints = problem.evaluate(torch.Tensor(x), scaling=False)
+            values, constraints = problem.evaluate(torch.Tensor(x))
             out["F"] = values.numpy()
             out["G"] = constraints.numpy()
 

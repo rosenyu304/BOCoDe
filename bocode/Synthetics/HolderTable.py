@@ -5,46 +5,49 @@ import torch
 from ..base import BenchmarkProblem, DataType
 
 
-class Griewank(BenchmarkProblem):
+class HolderTable(BenchmarkProblem):
     """
-    https://www.sfu.ca/~ssurjano/griewank.html
+    https://www.sfu.ca/~ssurjano/holder.html
     and
     BoTorch: https://github.com/meta-pytorch/botorch/blob/main/botorch/test_functions/synthetic.py
     """
 
-    available_dimensions = (1, None)
+    available_dimensions = 2
     input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 0
 
-    def __init__(self, dim: int = 2):
+    def __init__(self):
         tags = [
-            "Griewank",
+            "HolderTable",
             "-----------------------------",
             "OBJECTIVES: Single Objective (1)",
             "CONSTRAINTS: N/A",
             "SPACE: Continuous",
-            "SCALABLE: N-Dim",
+            "SCALABLE: 2-Dim",
             "IMPORTS: BoTorch",
         ]
 
         super().__init__(
-            dim,
+            dim=2,
             num_objectives=1,
             num_constraints=0,
-            bounds=[(-600, 600)] * dim,
-            optimum=[[0]],
-            x_opt=[[0] * dim],
+            bounds=[(-10, 10)] * 2,
+            optimum=[[19.2085]],
+            x_opt=[[8.05502, 9.66459]],
             tags=tags,
         )
 
     def _evaluate_implementation(
-        self, X: torch.Tensor
+        self, X: torch.Tensor, scaling=False
     ) -> Tuple[torch.Tensor, torch.Tensor]:
-        from botorch.test_functions.synthetic import Griewank as Griewank_imported
+        if scaling:
+            X = super().scale(X)
 
-        fun = Griewank_imported(dim=self.dim, negate=True)
+        from botorch.test_functions.synthetic import HolderTable as HolderTable_imported
+
+        fun = HolderTable_imported(negate=True)
 
         fun.bounds = self.torch_bounds.to(dtype=torch.float32).T
 
-        return None, fun(X).unsqueeze(1)
+        return None, fun(X).unsqueeze(-1)

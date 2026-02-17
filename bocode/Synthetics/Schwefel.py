@@ -5,11 +5,9 @@ import torch
 from ..base import BenchmarkProblem, DataType
 
 
-class Griewank(BenchmarkProblem):
+class Schwefel(BenchmarkProblem):
     """
-    https://www.sfu.ca/~ssurjano/griewank.html
-    and
-    BoTorch: https://github.com/meta-pytorch/botorch/blob/main/botorch/test_functions/synthetic.py
+    https://www.sfu.ca/~ssurjano/schwef.html
     """
 
     available_dimensions = (1, None)
@@ -19,32 +17,31 @@ class Griewank(BenchmarkProblem):
 
     def __init__(self, dim: int = 2):
         tags = [
-            "Griewank",
+            "Schwefel",
             "-----------------------------",
             "OBJECTIVES: Single Objective (1)",
             "CONSTRAINTS: N/A",
             "SPACE: Continuous",
-            "SCALABLE: N-Dim",
-            "IMPORTS: BoTorch",
+            "SCALABLE: Arbitrary d",
+            "IMPORTS: torch, math",
         ]
 
         super().__init__(
-            dim,
+            dim=dim,
             num_objectives=1,
             num_constraints=0,
-            bounds=[(-600, 600)] * dim,
-            optimum=[[0]],
-            x_opt=[[0] * dim],
+            optimum=[[0.0]],
+            x_opt=[[420.9687] * dim],
+            bounds=[(-500.0, 500.0)] * dim,
             tags=tags,
         )
+
+        self.constant = 418.9829
 
     def _evaluate_implementation(
         self, X: torch.Tensor
     ) -> Tuple[torch.Tensor, torch.Tensor]:
-        from botorch.test_functions.synthetic import Griewank as Griewank_imported
-
-        fun = Griewank_imported(dim=self.dim, negate=True)
-
-        fun.bounds = self.torch_bounds.to(dtype=torch.float32).T
-
-        return None, fun(X).unsqueeze(1)
+        absX = torch.abs(X)
+        term = X * torch.sin(torch.sqrt(absX))
+        fx = self.constant * X.shape[-1] - torch.sum(term, dim=-1)
+        return None, -fx.unsqueeze(-1)  # Negate for maximization

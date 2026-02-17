@@ -10,8 +10,8 @@ from typing import Tuple
 import optproblems.dtlz
 import torch
 
-from .base import BenchmarkProblem, DataType
-from .exceptions import FunctionDefinitionAssertionError
+from ..base import BenchmarkProblem, DataType
+from ..exceptions import FunctionDefinitionAssertionError
 
 
 class BaseDTLZ(BenchmarkProblem):
@@ -22,7 +22,7 @@ class BaseDTLZ(BenchmarkProblem):
 
     DTLZProblem = None
 
-    def __init__(self, dim: int, num_objectives: int = 2):
+    def __init__(self, dim: int = 3, num_objectives: int = 2):
         """
         Optional Parameter k: The number of position related parameters (must be less than dim and a multiple of num_objectives-1). Default is 4 if num_objectives==2, otherwise 2*(num_objectives-1).
         Note: Some inputs for dim and num_objectives may not be valid for the specific DTLZ function.

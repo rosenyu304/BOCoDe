@@ -8,7 +8,7 @@ from typing import Tuple
 import optproblems.zdt
 import torch
 
-from .base import BenchmarkProblem, DataType
+from ..base import BenchmarkProblem, DataType
 
 
 class BaseZDT(BenchmarkProblem):
@@ -19,7 +19,7 @@ class BaseZDT(BenchmarkProblem):
 
     ZDTProblem = None
 
-    def __init__(self, dim: int):
+    def __init__(self, dim: int = 2):
         self.problem = self.__class__.ZDTProblem(dim)
 
         super().__init__(

@@ -2,7 +2,7 @@ import pytest
 import torch
 
 from bocode.exceptions import FunctionDefinitionAssertionError
-from bocode.WFG import WFG1, WFG2, WFG3, WFG4, WFG5, WFG6, WFG7, WFG8, WFG9
+from bocode.Synthetics.WFG import WFG1, WFG2, WFG3, WFG4, WFG5, WFG6, WFG7, WFG8, WFG9
 
 benchmark_classes = [WFG1, WFG2, WFG3, WFG4, WFG5, WFG6, WFG7, WFG8, WFG9]
 

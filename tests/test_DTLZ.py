@@ -1,7 +1,7 @@
 import pytest
 import torch
 
-from bocode import DTLZ
+from bocode.Synthetics import DTLZ
 from bocode.exceptions import FunctionDefinitionAssertionError
 
 benchmark_classes = [

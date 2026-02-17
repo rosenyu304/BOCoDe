@@ -12,13 +12,13 @@ Sources:
 Available Problems
 ----------------
 
-* :code:`bocode.ZDT.ZDT1`
-* :code:`bocode.ZDT.ZDT2`
-* :code:`bocode.ZDT.ZDT3`
-* :code:`bocode.ZDT.ZDT4`
-* :code:`bocode.ZDT.ZDT5`
+* :code:`bocode.Synthetics.ZDT.ZDT1`
+* :code:`bocode.Synthetics.ZDT.ZDT2`
+* :code:`bocode.Synthetics.ZDT.ZDT3`
+* :code:`bocode.Synthetics.ZDT.ZDT4`
+* :code:`bocode.Synthetics.ZDT.ZDT5`
     * ZDT 5 accepts 80 bits as input, automatically splitting it into the necessary sublists. See example below.
-* :code:`bocode.ZDT.ZDT6`
+* :code:`bocode.Synthetics.ZDT.ZDT6`
 
 Example Usage
 ------------
@@ -29,10 +29,10 @@ Example Usage
     import torch
 
     # Retrieve available dimensions for instantiation
-    available_dimensions = bocode.ZDT.ZDT1.available_dimensions
+    available_dimensions = bocode.Synthetics.ZDT.ZDT1.available_dimensions
 
     # Create a ZDT benchmark problem
-    problem = bocode.ZDT.ZDT1(dim=5)
+    problem = bocode.Synthetics.ZDT.ZDT1(dim=5)
 
     # Get problem information
     bounds = problem.bounds
@@ -59,7 +59,7 @@ Example Usage of ZDT5
     import torch
 
     # Create a ZDT5 benchmark problem
-    problem = bocode.ZDT.ZDT5()
+    problem = bocode.Synthetics.ZDT.ZDT5()
 
     # Get problem information
     bounds = problem.bounds

@@ -35,6 +35,7 @@ from .botorch_MultiObj import (
     WeldedBeam,
 )
 from .botorch_SensitivityAnalysis import Gsobol, Ishigami, Morris
+from .botorch_Synthetic import Ackley
 
 # Or if you want to be more explicit about what's being exported:
 __all__ = [
@@ -74,4 +75,5 @@ __all__ = [
     "OSY",
     "SRN",
     "WeldedBeam",
+    "Ackley",
 ]

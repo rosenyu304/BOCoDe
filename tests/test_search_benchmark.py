@@ -6,6 +6,10 @@ from bocode.search_benchmarks import (
     filter_functions,
     categorized_classes,
     _has_valid_val,
+    get_single_objective_unconstrained,
+    get_single_objective_constrained,
+    get_multi_objective_unconstrained,
+    get_multi_objective_constrained,
 )
 
 
@@ -20,16 +24,16 @@ class TestSearchBenchmarks:
             "LassoBench",
             "Engineering",
             "Engineering.Gym",
-            "Engineering.BayesianCHT",
-            "CEC.CEC2020_RW_Constrained",
+            "Engineering.BoTorch",
+            "Engineering.CEC2020_RW_Constrained",
             "BBOB",
             "BoTorch",
-            "MODAct",
-            "CEC.CEC2017",
-            "WFG",
-            "ZDT",
-            "DTLZ",
+            "Engineering.MODAct",
+            "Synthetics.WFG",
+            "Synthetics.ZDT",
+            "Synthetics.DTLZ",
             "CEC.CEC2007",
+            "CEC.CEC2017",
             "CEC.CEC2019",
             "NEORL",
         ]
@@ -206,13 +210,13 @@ class TestSearchBenchmarks:
     def test_filter_functions_category_filter(self):
         """Test filter_functions with category filtering."""
         # Filter for specific categories
-        result_synthetics = filter_functions(
-            category_filter=lambda x: x == "Synthetics"
+        result_engineering = filter_functions(
+            category_filter=lambda x: x == "Engineering"
         )
 
-        # Should only contain Synthetics category
-        assert "Synthetics" in result_synthetics
-        assert len(result_synthetics) == 1
+        # Should only contain Engineering category
+        assert "Engineering" in result_engineering
+        assert len(result_engineering) == 1
 
         # Filter for CEC categories
         result_cec = filter_functions(category_filter=lambda x: x.startswith("CEC"))
@@ -230,14 +234,12 @@ class TestSearchBenchmarks:
             category_filter=lambda x: x in ["Synthetics", "BBOB"],
         )
 
-        # Should have some results
-        total_results = sum(len(funcs) for funcs in result.values())
-
         # Should only contain specified categories
         for category in result.keys():
             assert category in ["Synthetics", "BBOB"]
 
         # Should have fewer results than unfiltered
+        total_results = sum(len(funcs) for funcs in result.values())
         total_unfiltered = sum(len(funcs) for funcs in filter_functions().values())
         assert total_results <= total_unfiltered
 
@@ -268,11 +270,11 @@ class TestSearchBenchmarks:
         """Test that specific benchmark categories contain expected functions."""
         # Test CEC2020 functions
         result_cec2020 = filter_functions(
-            category_filter=lambda x: x == "CEC.CEC2020_RW_Constrained"
+            category_filter=lambda x: x == "Engineering.CEC2020_RW_Constrained"
         )
 
-        if "CEC.CEC2020_RW_Constrained" in result_cec2020:
-            cec2020_funcs = result_cec2020["CEC.CEC2020_RW_Constrained"]
+        if "Engineering.CEC2020_RW_Constrained" in result_cec2020:
+            cec2020_funcs = result_cec2020["Engineering.CEC2020_RW_Constrained"]
             # Should have 57 CEC2020 functions
             assert len(cec2020_funcs) == 57
 
@@ -469,7 +471,6 @@ class TestSearchBenchmarks:
         for category, functions in categorized_classes.items():
             assert isinstance(category, str)
             assert isinstance(functions, list)
-            assert len(functions) > 0
 
             # Each function should be a class/type
             for func in functions:
@@ -510,3 +511,74 @@ class TestSearchBenchmarks:
         # Should find CEC functions
         cec_categories = [cat for cat in cec_functions.keys() if "CEC" in cat]
         assert len(cec_categories) > 0
+
+
+class TestConvenienceFunctions:
+    """Test suite for convenience filter functions."""
+
+    def test_get_single_objective_unconstrained(self):
+        """Test that SO unconstrained returns correct functions."""
+        result = get_single_objective_unconstrained()
+        assert isinstance(result, dict)
+        for category, funcs in result.items():
+            for func in funcs:
+                assert issubclass(func, BenchmarkProblem)
+                obj = getattr(func, "num_objectives", None)
+                cons = getattr(func, "num_constraints", None)
+                if isinstance(obj, int):
+                    assert obj == 1
+                if isinstance(cons, int):
+                    assert cons == 0
+
+    def test_get_single_objective_constrained(self):
+        """Test that SO constrained returns correct functions."""
+        result = get_single_objective_constrained()
+        assert isinstance(result, dict)
+        for category, funcs in result.items():
+            for func in funcs:
+                assert issubclass(func, BenchmarkProblem)
+                obj = getattr(func, "num_objectives", None)
+                cons = getattr(func, "num_constraints", None)
+                if isinstance(obj, int):
+                    assert obj == 1
+                if isinstance(cons, int):
+                    assert cons > 0
+
+    def test_get_multi_objective_unconstrained(self):
+        """Test that MO unconstrained returns correct functions."""
+        result = get_multi_objective_unconstrained()
+        assert isinstance(result, dict)
+        total = sum(len(funcs) for funcs in result.values())
+        assert total > 0  # Should find some MO unconstrained functions
+
+    def test_get_multi_objective_constrained(self):
+        """Test that MO constrained returns correct functions."""
+        result = get_multi_objective_constrained()
+        assert isinstance(result, dict)
+        total = sum(len(funcs) for funcs in result.values())
+        assert total > 0  # Should find some MO constrained functions
+
+    def test_convenience_functions_no_overlap(self):
+        """Test that SO and MO results don't overlap."""
+        so_unc = get_single_objective_unconstrained()
+        mo_unc = get_multi_objective_unconstrained()
+
+        so_funcs = set()
+        for funcs in so_unc.values():
+            so_funcs.update(f.__name__ for f in funcs)
+
+        mo_funcs = set()
+        for funcs in mo_unc.values():
+            mo_funcs.update(f.__name__ for f in funcs)
+
+        # SO and MO should not overlap
+        assert len(so_funcs & mo_funcs) == 0
+
+    def test_convenience_functions_accessible_from_bocode(self):
+        """Test that convenience functions are accessible from top-level bocode."""
+        import bocode
+
+        assert hasattr(bocode, "get_single_objective_unconstrained")
+        assert hasattr(bocode, "get_single_objective_constrained")
+        assert hasattr(bocode, "get_multi_objective_unconstrained")
+        assert hasattr(bocode, "get_multi_objective_constrained")

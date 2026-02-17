@@ -58,7 +58,7 @@ class CEC2007_SYMPART(BenchmarkProblem):
     num_objectives = 2
     num_constraints = 0
 
-    def __init__(self, dim: int):
+    def __init__(self, dim: int = 2):
         if dim < 2 or dim % 2 != 0:
             raise FunctionDefinitionAssertionError(
                 "SYMPART requires an even dimension ≥ 2"

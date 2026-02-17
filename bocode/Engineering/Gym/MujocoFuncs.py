@@ -452,7 +452,7 @@ class SwimmerPolicySearchProblem(BenchmarkProblem):
 
                 total_return += episode_return
 
-            fvals[i, 0] = -total_return / self.num_rollouts  # negate if you MINIMISE
+            fvals[i, 0] = total_return / self.num_rollouts  # negate if you MINIMISE
         return None, fvals
 
 

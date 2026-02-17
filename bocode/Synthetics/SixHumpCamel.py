@@ -5,46 +5,49 @@ import torch
 from ..base import BenchmarkProblem, DataType
 
 
-class Griewank(BenchmarkProblem):
+class SixHumpCamel(BenchmarkProblem):
     """
-    https://www.sfu.ca/~ssurjano/griewank.html
-    and
-    BoTorch: https://github.com/meta-pytorch/botorch/blob/main/botorch/test_functions/synthetic.py
+    https://www.sfu.ca/~ssurjano/camel6.html
     """
 
-    available_dimensions = (1, None)
+    available_dimensions = 2
     input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 0
 
-    def __init__(self, dim: int = 2):
+    def __init__(self):
         tags = [
-            "Griewank",
+            "SixHumpCamel",
             "-----------------------------",
             "OBJECTIVES: Single Objective (1)",
             "CONSTRAINTS: N/A",
             "SPACE: Continuous",
-            "SCALABLE: N-Dim",
+            "SCALABLE: 2-Dim",
             "IMPORTS: BoTorch",
         ]
 
         super().__init__(
-            dim,
+            dim=2,
             num_objectives=1,
             num_constraints=0,
-            bounds=[(-600, 600)] * dim,
-            optimum=[[0]],
-            x_opt=[[0] * dim],
+            bounds=[(-3, 3)] * 2,
+            optimum=[[1.0316], [1.0316]],
+            x_opt=[[0.0898, -0.7126], [-0.0898, 0.7126]],
             tags=tags,
         )
 
     def _evaluate_implementation(
-        self, X: torch.Tensor
+        self, X: torch.Tensor, scaling=False
     ) -> Tuple[torch.Tensor, torch.Tensor]:
-        from botorch.test_functions.synthetic import Griewank as Griewank_imported
+        if scaling:
+            X = super().scale(X)
 
-        fun = Griewank_imported(dim=self.dim, negate=True)
+        from botorch.test_functions.synthetic import (
+            SixHumpCamel as SixHumpCamel_imported,
+        )
+
+        fun = SixHumpCamel_imported(negate=True)
 
         fun.bounds = self.torch_bounds.to(dtype=torch.float32).T
 
-        return None, fun(X).unsqueeze(1)
+        return None, fun(X).unsqueeze(-1)

@@ -1,7 +1,7 @@
 import pytest
 import torch
 
-from bocode.ZDT import ZDT1, ZDT2, ZDT3, ZDT4, ZDT5, ZDT6
+from bocode.Synthetics.ZDT import ZDT1, ZDT2, ZDT3, ZDT4, ZDT5, ZDT6
 
 benchmark_classes = [ZDT1, ZDT2, ZDT3, ZDT4, ZDT6]
 

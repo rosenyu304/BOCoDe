@@ -1,7 +1,7 @@
 import pytest
 import torch
 
-from bocode.MODAct import (
+from bocode.Engineering.MODAct import (
     CS1,
     CS2,
     CS3,

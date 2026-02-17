@@ -8,8 +8,8 @@ from typing import Tuple
 import optproblems.wfg
 import torch
 
-from .base import BenchmarkProblem, DataType
-from .exceptions import FunctionDefinitionAssertionError
+from ..base import BenchmarkProblem, DataType
+from ..exceptions import FunctionDefinitionAssertionError
 
 
 class BaseWFG(BenchmarkProblem):
@@ -20,7 +20,7 @@ class BaseWFG(BenchmarkProblem):
 
     WFGProblem = None
 
-    def __init__(self, dim: int, num_objectives: int = 2, k: int = None):
+    def __init__(self, dim: int = 2, num_objectives: int = 2, k: int = None):
         """
         Optional Parameter k: The number of position related parameters (must be less than dim and a multiple of num_objectives-1). Default is 4 if num_objectives==2, otherwise 2*(num_objectives-1).
         Note: Some inputs for dim and num_objectives may not be valid for the specific WFG function.
@@ -73,9 +73,10 @@ class WFG2(BaseWFG):
 
     def _specialCheck(self, dim, num_objectives, k):
         if (dim - k) % 2 != 0:
+            print(dim, k)
             raise FunctionDefinitionAssertionError()
 
-    def __init__(self, dim: int, num_objectives: int = 2, k: int = None):
+    def __init__(self, dim: int = 3, num_objectives: int = 2, k: int = None):
         super().__init__(dim, num_objectives, k)
 
 
@@ -84,9 +85,10 @@ class WFG3(BaseWFG):
 
     def _specialCheck(self, dim, num_objectives, k):
         if (dim - k) % 2 != 0:
+            print(dim, k)
             raise FunctionDefinitionAssertionError()
 
-    def __init__(self, dim: int, num_objectives: int = 2, k: int = None):
+    def __init__(self, dim: int = 3, num_objectives: int = 2, k: int = None):
         super().__init__(dim, num_objectives, k)
 
 

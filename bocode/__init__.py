@@ -9,14 +9,10 @@ except PackageNotFoundError:
 import bocode.BBOB as BBOB
 import bocode.BoTorch as BoTorch
 import bocode.CEC as CEC
-import bocode.DTLZ as DTLZ
 import bocode.Engineering as Engineering
 import bocode.LassoBench as LassoBench
-import bocode.MODAct as MODAct
 import bocode.NEORL as NEORL
 import bocode.Synthetics as Synthetics
-import bocode.WFG as WFG
-import bocode.ZDT as ZDT
 
 from .base import DataType
 
@@ -26,7 +22,13 @@ from .exceptions import (
     RangeException,
     TypeException,
 )
-from .search_benchmarks import filter_functions
+from .search_benchmarks import (
+    filter_functions,
+    get_multi_objective_constrained,
+    get_multi_objective_unconstrained,
+    get_single_objective_constrained,
+    get_single_objective_unconstrained,
+)
 
 __all__ = [
     "__version__",
@@ -34,15 +36,15 @@ __all__ = [
     "BBOB",
     "BoTorch",
     "CEC",
-    "DTLZ",
     "Engineering",
     "LassoBench",
-    "MODAct",
     "NEORL",
     "Synthetics",
-    "WFG",
-    "ZDT",
     "filter_functions",
+    "get_single_objective_unconstrained",
+    "get_single_objective_constrained",
+    "get_multi_objective_unconstrained",
+    "get_multi_objective_constrained",
     "DimensionException",
     "FunctionDefinitionAssertionError",
     "RangeException",

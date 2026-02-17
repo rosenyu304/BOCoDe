@@ -13,13 +13,13 @@ Sources:
 Available Problems
 ----------------
 
-* :code:`bocode.DTLZ.DTLZ1`
-* :code:`bocode.DTLZ.DTLZ2`
-* :code:`bocode.DTLZ.DTLZ3`
-* :code:`bocode.DTLZ.DTLZ4`
-* :code:`bocode.DTLZ.DTLZ5`
-* :code:`bocode.DTLZ.DTLZ6`
-* :code:`bocode.DTLZ.DTLZ7`
+* :code:`bocode.Synthetics.DTLZ.DTLZ1`
+* :code:`bocode.Synthetics.DTLZ.DTLZ2`
+* :code:`bocode.Synthetics.DTLZ.DTLZ3`
+* :code:`bocode.Synthetics.DTLZ.DTLZ4`
+* :code:`bocode.Synthetics.DTLZ.DTLZ5`
+* :code:`bocode.Synthetics.DTLZ.DTLZ6`
+* :code:`bocode.Synthetics.DTLZ.DTLZ7`
 
 Example Usage
 ------------
@@ -30,10 +30,10 @@ Example Usage
     import torch
 
     # Retrieve available dimensions for instantiation
-    available_dimensions = bocode.DTLZ.DTLZ1.available_dimensions
+    available_dimensions = bocode.Synthetics.DTLZ.DTLZ1.available_dimensions
 
     # Create a DTLZ benchmark problem
-    problem = bocode.DTLZ.DTLZ1(dim=10)
+    problem = bocode.Synthetics.DTLZ.DTLZ1(dim=10)
 
     # Get problem information
     bounds = problem.bounds

@@ -3,7 +3,7 @@ from typing import Tuple
 import modact.problems as pb
 import torch
 
-from .base import BenchmarkProblem, DataType
+from ...base import BenchmarkProblem, DataType
 
 
 class BaseModactProblem(BenchmarkProblem):
