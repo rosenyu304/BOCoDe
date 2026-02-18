@@ -1,5 +1,7 @@
+import pytest
 import torch
 
+pytest.importorskip("LassoBench")
 from bocode.LassoBench import LassoBreastCancer
 
 

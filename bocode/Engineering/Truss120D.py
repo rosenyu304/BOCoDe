@@ -25,8 +25,8 @@ class Truss120D(BenchmarkProblem):
             dim=120, num_objectives=1, num_constraints=121, bounds=[(0.775, 20)] * 120
         )
 
-    def _evaluate_implementation(self, X, version="4_forces", to_verify=True):
-        X = super().scale(X, to_verify)
+    def _evaluate_implementation(self, X, version="4_forces"):
+        X = super().scale(X)
 
         # import slientruss3d
         from slientruss3d.truss import Truss

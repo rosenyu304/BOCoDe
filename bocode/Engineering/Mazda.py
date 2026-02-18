@@ -102,7 +102,7 @@ class Mazda_SCA(BenchmarkProblem):
         # Read the data from the file into a pandas DataFrame
         file_path = script_dir / "Mazda_Data" / "pop_objs_eval.txt"
 
-        objs_dataframe = pd.read_csv(file_path, delim_whitespace=True, header=None)
+        objs_dataframe = pd.read_csv(file_path, sep=r"\s+", header=None)
 
         # Convert the DataFrame to a numpy array
         objs_data_numpy = objs_dataframe.values
@@ -114,7 +114,7 @@ class Mazda_SCA(BenchmarkProblem):
 
         # Read the data from the file into a pandas DataFrame
         file_path = script_dir / "Mazda_Data" / "pop_cons_eval.txt"
-        cons_dataframe = pd.read_csv(file_path, delim_whitespace=True, header=None)
+        cons_dataframe = pd.read_csv(file_path, sep=r"\s+", header=None)
 
         # Convert the DataFrame to a numpy array
         cons_data_numpy = cons_dataframe.values
@@ -221,7 +221,7 @@ class Mazda(BenchmarkProblem):
 
         # Read the data from the file into a pandas DataFrame
         file_path = script_dir / "Mazda_Data" / "pop_objs_eval.txt"
-        objs_dataframe = pd.read_csv(file_path, delim_whitespace=True, header=None)
+        objs_dataframe = pd.read_csv(file_path, sep=r"\s+", header=None)
 
         # Convert the DataFrame to a numpy array
         objs_data_numpy = objs_dataframe.values
@@ -233,7 +233,7 @@ class Mazda(BenchmarkProblem):
 
         # Read the data from the file into a pandas DataFrame
         file_path = script_dir / "Mazda_Data" / "pop_cons_eval.txt"
-        cons_dataframe = pd.read_csv(file_path, delim_whitespace=True, header=None)
+        cons_dataframe = pd.read_csv(file_path, sep=r"\s+", header=None)
 
         # Convert the DataFrame to a numpy array
         cons_data_numpy = cons_dataframe.values

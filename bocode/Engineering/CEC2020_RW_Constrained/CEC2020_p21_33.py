@@ -154,52 +154,58 @@ class CEC2020_p22(BenchmarkProblem):
         m1 = mind[X[:, 7].astype(int) - 1]
         m2 = mind[X[:, 8].astype(int) - 1]
 
-        i1 = N6 / N4
-        i01 = 3.11
+        with np.errstate(divide="ignore", invalid="ignore"):
+            i1 = N6 / N4
+            i01 = 3.11
 
-        i2 = N6 * (N1 * N3 + N2 * N4) / (N1 * N3 * (N6 - N4))
-        i02 = 1.84
+            i2 = N6 * (N1 * N3 + N2 * N4) / (N1 * N3 * (N6 - N4))
+            i02 = 1.84
 
-        iR = -(N2 * N6 / (N1 * N3))
-        i0R = -3.11
+            iR = -(N2 * N6 / (N1 * N3))
+            i0R = -3.11
 
-        # Objective function
-        f = np.max(np.column_stack([i1 - i01, i2 - i02, iR - i0R]), axis=1)
+            # Objective function
+            f = np.max(np.column_stack([i1 - i01, i2 - i02, iR - i0R]), axis=1)
 
-        Dmax = 220
-        dlt22 = 0.5
-        dlt33 = 0.5
-        dlt55 = 0.5
-        dlt35 = 0.5
-        dlt34 = 0.5
-        dlt56 = 0.5
+            Dmax = 220
+            dlt22 = 0.5
+            dlt33 = 0.5
+            dlt55 = 0.5
+            dlt35 = 0.5
+            dlt34 = 0.5
+            dlt56 = 0.5
 
-        beta = np.arccos(
-            ((N6 - N3) ** 2 + (N4 + N5) ** 2 - (N3 + N5) ** 2)
-            / (2 * (N6 - N3) * (N4 + N5))
-        )
+            beta = np.arccos(
+                ((N6 - N3) ** 2 + (N4 + N5) ** 2 - (N3 + N5) ** 2)
+                / (2 * (N6 - N3) * (N4 + N5))
+            )
 
-        # Inequality constraints
-        g = np.zeros((n_samples, 10))
-        g[:, 0] = m2 * (N6 + 2.5) - Dmax
-        g[:, 1] = m1 * (N1 + N2) + m1 * (N2 + 2) - Dmax
-        g[:, 2] = m2 * (N4 + N5) + m2 * (N5 + 2) - Dmax
-        g[:, 3] = np.abs(m1 * (N1 + N2) - m2 * (N6 - N3)) - m1 - m2
-        g[:, 4] = -((N1 + N2) * np.sin(np.pi / p) - N2 - 2 - dlt22)
-        g[:, 5] = -((N6 - N3) * np.sin(np.pi / p) - N3 - 2 - dlt33)
-        g[:, 6] = -((N4 + N5) * np.sin(np.pi / p) - N5 - 2 - dlt55)
-        g[:, 7] = np.where(
-            np.isreal(beta),
-            (N3 + N5 + 2 + dlt35) ** 2
-            - (
-                (N6 - N3) ** 2
-                + (N4 + N5) ** 2
-                - 2 * (N6 - N3) * (N4 + N5) * np.cos(2 * np.pi / p - beta)
-            ),
-            1e6,
-        )
-        g[:, 8] = -(N6 - 2 * N3 - N4 - 4 - 2 * dlt34)
-        g[:, 9] = -(N6 - N4 - 2 * N5 - 4 - 2 * dlt56)
+            # Inequality constraints
+            g = np.zeros((n_samples, 10))
+            g[:, 0] = m2 * (N6 + 2.5) - Dmax
+            g[:, 1] = m1 * (N1 + N2) + m1 * (N2 + 2) - Dmax
+            g[:, 2] = m2 * (N4 + N5) + m2 * (N5 + 2) - Dmax
+            g[:, 3] = np.abs(m1 * (N1 + N2) - m2 * (N6 - N3)) - m1 - m2
+            g[:, 4] = -((N1 + N2) * np.sin(np.pi / p) - N2 - 2 - dlt22)
+            g[:, 5] = -((N6 - N3) * np.sin(np.pi / p) - N3 - 2 - dlt33)
+            g[:, 6] = -((N4 + N5) * np.sin(np.pi / p) - N5 - 2 - dlt55)
+            g[:, 7] = np.where(
+                np.isreal(beta),
+                (N3 + N5 + 2 + dlt35) ** 2
+                - (
+                    (N6 - N3) ** 2
+                    + (N4 + N5) ** 2
+                    - 2 * (N6 - N3) * (N4 + N5) * np.cos(2 * np.pi / p - beta)
+                ),
+                1e6,
+            )
+            g[:, 8] = -(N6 - 2 * N3 - N4 - 4 - 2 * dlt34)
+            g[:, 9] = -(N6 - N4 - 2 * N5 - 4 - 2 * dlt56)
+
+        g[np.isinf(g)] = 1e6
+        g[np.isnan(g)] = 1e6
+        f[np.isinf(f)] = 1e6
+        f[np.isnan(f)] = 1e6
 
         # Equality constraints
         h = np.remainder(N6 - N4, p)
@@ -402,36 +408,37 @@ class CEC2020_p24(BenchmarkProblem):
         #     (a**2 + (l**2 + e**2) - b**2) / (2 * a * np.sqrt(l**2 + e**2))
         # ) + np.arctan(e / l)
 
-        beta_0 = np.arccos(
-            (b**2 + (l**2 + e**2) - a**2) / (2 * b * np.sqrt(l**2 + e**2))
-        ) - np.arctan(e / l)
+        with np.errstate(divide="ignore", invalid="ignore"):
+            beta_0 = np.arccos(
+                (b**2 + (l**2 + e**2) - a**2) / (2 * b * np.sqrt(l**2 + e**2))
+            ) - np.arctan(e / l)
 
-        # alpha_m = np.arccos(
-        #     (a**2 + ((l - Zmax) ** 2 + e**2) - b**2)
-        #     / (2 * a * np.sqrt((l - Zmax) ** 2 + e**2))
-        # ) + np.arctan(e / (l - Zmax))
+            # alpha_m = np.arccos(
+            #     (a**2 + ((l - Zmax) ** 2 + e**2) - b**2)
+            #     / (2 * a * np.sqrt((l - Zmax) ** 2 + e**2))
+            # ) + np.arctan(e / (l - Zmax))
 
-        beta_m = np.arccos(
-            (b**2 + ((l - Zmax) ** 2 + e**2) - a**2)
-            / (2 * b * np.sqrt((l - Zmax) ** 2 + e**2))
-        ) - np.arctan(e / (l - Zmax))
+            beta_m = np.arccos(
+                (b**2 + ((l - Zmax) ** 2 + e**2) - a**2)
+                / (2 * b * np.sqrt((l - Zmax) ** 2 + e**2))
+            ) - np.arctan(e / (l - Zmax))
 
-        # Objective function
-        f = np.zeros(n_samples)
-        for i in range(n_samples):
-            f[i] = -OBJ11(X[i, :-1], 2) - OBJ11(X[i, :-1], 1)
+            # Objective function
+            f = np.zeros(n_samples)
+            for i in range(n_samples):
+                f[i] = -OBJ11(X[i, :-1], 2) - OBJ11(X[i, :-1], 1)
 
-        # Inequality constraints
-        Yxmin = 2 * (e + ff + c * np.sin(beta_m + delta))
-        Yxmax = 2 * (e + ff + c * np.sin(beta_0 + delta))
-        g = np.zeros((X.shape[0], 7))
-        g[:, 0] = Yxmin - Ymin
-        g[:, 1] = -Yxmin
-        g[:, 2] = Ymax - Yxmax
-        g[:, 3] = Yxmax - YG
-        g[:, 4] = l**2 + e**2 - (a + b) ** 2
-        g[:, 5] = b**2 - (a - e) ** 2 - (l - Zmax) ** 2
-        g[:, 6] = Zmax - l
+            # Inequality constraints
+            Yxmin = 2 * (e + ff + c * np.sin(beta_m + delta))
+            Yxmax = 2 * (e + ff + c * np.sin(beta_0 + delta))
+            g = np.zeros((X.shape[0], 7))
+            g[:, 0] = Yxmin - Ymin
+            g[:, 1] = -Yxmin
+            g[:, 2] = Ymax - Yxmax
+            g[:, 3] = Yxmax - YG
+            g[:, 4] = l**2 + e**2 - (a + b) ** 2
+            g[:, 5] = b**2 - (a - e) ** 2 - (l - Zmax) ** 2
+            g[:, 6] = Zmax - l
 
         # No equality constraints
         h = np.zeros((n_samples, 0))
@@ -440,6 +447,10 @@ class CEC2020_p24(BenchmarkProblem):
         f[tt] = 1e4
         tt = np.imag(g) != 0
         g[tt] = 1e4
+        g[np.isinf(np.real(g))] = 1e6
+        g[np.isnan(np.real(g))] = 1e6
+        f[np.isinf(np.real(f))] = 1e6
+        f[np.isnan(np.real(f))] = 1e6
 
         return (
             torch.from_numpy(np.abs(h) - 1e-4),
@@ -638,6 +649,9 @@ class CEC2020_p26(BenchmarkProblem):
         wmin = 245
         wmax = 255
         Cp = 464
+
+        # Suppress divide-by-zero / invalid warnings from constraint expressions
+        _old_err = np.seterr(divide="ignore", invalid="ignore")
 
         # Objective function
         f = (np.pi / 1000) * (
@@ -881,6 +895,10 @@ class CEC2020_p26(BenchmarkProblem):
         g[:, 85] = wmin - w1 * (Np1 * Np2 * Np3 * Np4) / (Ng1 * Ng2 * Ng3 * Ng4)
         g[:, 86] = -wmax + w1 * (Np1 * Np2 * Np3 * Np4) / (Ng1 * Ng2 * Ng3 * Ng4)
         g[np.isinf(g)] = 1e6
+        g[np.isnan(g)] = 1e6
+        f[np.isinf(f)] = 1e6
+        f[np.isnan(f)] = 1e6
+        np.seterr(**_old_err)
 
         # No equality constraints
         h = np.zeros((n_samples, 0))
@@ -1001,49 +1019,55 @@ class CEC2020_p28(BenchmarkProblem):
         e = X[:, 8]
         chi = X[:, 9]
 
-        phi_o = 2 * np.pi - 2 * np.arccos(
-            (
-                ((D - d) * 0.5 - 0.75 * T) ** 2
-                + (0.5 * D - 0.25 * T - Db) ** 2
-                - (0.5 * d + 0.25 * T) ** 2
-            )
-            / (2 * (0.5 * (D - d) - 0.75 * T) * (0.5 * D - 0.25 * T - Db))
-        )
-
-        gamma = Db / Dm
-
-        fc = (
-            37.91
-            * (
-                1
-                + (
-                    1.04
-                    * ((1 - gamma) / (1 + gamma)) ** 1.72
-                    * (fi * (2 * fo - 1) / (fo * (2 * fi - 1))) ** 0.41
+        with np.errstate(divide="ignore", invalid="ignore"):
+            phi_o = 2 * np.pi - 2 * np.arccos(
+                (
+                    ((D - d) * 0.5 - 0.75 * T) ** 2
+                    + (0.5 * D - 0.25 * T - Db) ** 2
+                    - (0.5 * d + 0.25 * T) ** 2
                 )
-                ** (10 / 3)
+                / (2 * (0.5 * (D - d) - 0.75 * T) * (0.5 * D - 0.25 * T - Db))
             )
-            ** (-0.3)
-            * (gamma**0.3 * (1 - gamma) ** 1.39 / (1 + gamma) ** (1 / 3))
-            * (2 * fi / (2 * fi - 1)) ** 0.41
-        )
 
-        # Objective function
-        ind = np.where(Db > 25.4)
-        f = fc * Z ** (2 / 3) * Db**1.8
-        f[ind] = 3.647 * fc[ind] * Z[ind] ** (2 / 3) * Db[ind] ** 1.4
+            gamma = Db / Dm
 
-        # Inequality constraints
-        g = np.zeros((n_samples, 9))
-        g[:, 0] = Z - 1 - phi_o / (2 * np.arcsin(Db / Dm))
-        g[:, 1] = KDmin * (D - d) - 2 * Db
-        g[:, 2] = 2 * Db - KDmax * (D - d)
-        g[:, 3] = chi * Bw - Db
-        g[:, 4] = 0.5 * (D + d) - Dm
-        g[:, 5] = Dm - (0.5 + e) * (D + d)
-        g[:, 6] = eps * Db - 0.5 * (D - Dm - Db)
-        g[:, 7] = 0.515 - fi
-        g[:, 8] = 0.515 - fo
+            fc = (
+                37.91
+                * (
+                    1
+                    + (
+                        1.04
+                        * ((1 - gamma) / (1 + gamma)) ** 1.72
+                        * (fi * (2 * fo - 1) / (fo * (2 * fi - 1))) ** 0.41
+                    )
+                    ** (10 / 3)
+                )
+                ** (-0.3)
+                * (gamma**0.3 * (1 - gamma) ** 1.39 / (1 + gamma) ** (1 / 3))
+                * (2 * fi / (2 * fi - 1)) ** 0.41
+            )
+
+            # Objective function
+            ind = np.where(Db > 25.4)
+            f = fc * Z ** (2 / 3) * Db**1.8
+            f[ind] = 3.647 * fc[ind] * Z[ind] ** (2 / 3) * Db[ind] ** 1.4
+
+            # Inequality constraints
+            g = np.zeros((n_samples, 9))
+            g[:, 0] = Z - 1 - phi_o / (2 * np.arcsin(Db / Dm))
+            g[:, 1] = KDmin * (D - d) - 2 * Db
+            g[:, 2] = 2 * Db - KDmax * (D - d)
+            g[:, 3] = chi * Bw - Db
+            g[:, 4] = 0.5 * (D + d) - Dm
+            g[:, 5] = Dm - (0.5 + e) * (D + d)
+            g[:, 6] = eps * Db - 0.5 * (D - Dm - Db)
+            g[:, 7] = 0.515 - fi
+            g[:, 8] = 0.515 - fo
+
+        g[np.isinf(g)] = 1e6
+        g[np.isnan(g)] = 1e6
+        f[np.isinf(f)] = 1e6
+        f[np.isnan(f)] = 1e6
 
         # No equality constraints
         h = np.zeros((n_samples, 0))
@@ -1193,23 +1217,27 @@ class CEC2020_p30(BenchmarkProblem):
         x3 = x3.reshape(-1)
 
         # Objective function
-        f = (np.pi**2 * x2 * x3**2 * (x1 + 2)) / 4
+        with np.errstate(divide="ignore", invalid="ignore"):
+            f = (np.pi**2 * x2 * x3**2 * (x1 + 2)) / 4
 
-        cf = (4 * x2 / x3 - 1) / (4 * x2 / x3 - 4) + 0.615 * x3 / x2
-        K = (11.5 * 10**6 * x3**4) / (8 * x1 * x2**3)
-        lf = 1000 / K + 1.05 * (x1 + 2) * x3
-        sigp = 300 / K
+            cf = (4 * x2 / x3 - 1) / (4 * x2 / x3 - 4) + 0.615 * x3 / x2
+            K = (11.5 * 10**6 * x3**4) / (8 * x1 * x2**3)
+            lf = 1000 / K + 1.05 * (x1 + 2) * x3
+            sigp = 300 / K
 
-        # Inequality constraints
-        g = np.zeros((n_samples, 8))
-        g[:, 0] = (8000 * cf * x2) / (np.pi * x3**3) - 189000
-        g[:, 1] = lf - 14
-        g[:, 2] = 0.2 - x3
-        g[:, 3] = x2 - 3
-        g[:, 4] = 3 - x2 / x3
-        g[:, 5] = sigp - 6
-        g[:, 6] = sigp + 700 / K + 1.05 * (x1 + 2) * x3 - lf
-        g[:, 7] = 1.25 - 700 / K
+            # Inequality constraints
+            g = np.zeros((n_samples, 8))
+            g[:, 0] = (8000 * cf * x2) / (np.pi * x3**3) - 189000
+            g[:, 1] = lf - 14
+            g[:, 2] = 0.2 - x3
+            g[:, 3] = x2 - 3
+            g[:, 4] = 3 - x2 / x3
+            g[:, 5] = sigp - 6
+            g[:, 6] = sigp + 700 / K + 1.05 * (x1 + 2) * x3 - lf
+            g[:, 7] = 1.25 - 700 / K
+
+        g[np.isinf(g)] = 1e6
+        g[np.isnan(g)] = 1e6
 
         # No equality constraints
         h = np.zeros((n_samples, 0))

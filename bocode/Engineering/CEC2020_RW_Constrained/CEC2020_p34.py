@@ -107,43 +107,10 @@ class CEC2020_p34(BenchmarkProblem):
         # g = np.zeros((n_samples, 1))
 
         if self.is_constrained:
-            if "penalty_constrained" in self.flag:
-                return (
-                    None,
-                    None,
-                    -(
-                        torch.from_numpy(f)
-                        + torch.from_numpy((np.sum(abs(h), axis=1) - 1e-4) / 100)
-                    ).unsqueeze(-1),
-                )
-
-            else:
-                return (
-                    torch.from_numpy(abs(h) - 1e-4),
-                    None,
-                    -torch.from_numpy(f).unsqueeze(-1),
-                )
+            return (
+                torch.from_numpy(abs(h) - 1e-4),
+                None,
+                -torch.from_numpy(f).unsqueeze(-1),
+            )
         else:
             return None, None, -torch.from_numpy(f).unsqueeze(-1)
-
-            # if scaling:
-            X = super().scale(X)
-
-        # n = X.size(0)
-
-        # gx = torch.zeros((n, self.num_constraints))
-
-        # fun = Ackley_imported(dim=self.dim, negate=True).to(dtype=dtype, device=device)
-        # fun.bounds[0, :].fill_(-5)
-        # fun.bounds[1, :].fill_(10)
-
-        # fx = fun(X)
-        # fx = fx.reshape((n, 1))
-
-        # gX[:, 0] = torch.sum(X,1)
-        # gX[:, 1] = (torch.norm(X, p=2, dim=1)-5)
-
-        # if self.is_constrained:
-        #     return gx, fx
-        # else:
-        #     return None, fx

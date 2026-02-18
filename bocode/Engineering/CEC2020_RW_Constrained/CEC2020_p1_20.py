@@ -1526,25 +1526,29 @@ class CEC2020_p19(BenchmarkProblem):
         )
         sigma = 6 * P * L / (X[:, 3] * X[:, 2] ** 2)
         delta = 6 * P * L**3 / (E * X[:, 2] ** 2 * X[:, 3])
-        J = 2 * (
-            np.sqrt(2)
-            * X[:, 0]
-            * X[:, 1]
-            * (X[:, 1] ** 2 / 4 + (X[:, 0] + X[:, 2]) ** 2 / 4)
-        )
-        R = np.sqrt(X[:, 1] ** 2 / 4 + (X[:, 0] + X[:, 2]) ** 2 / 4)
-        M = P * (L + X[:, 1] / 2)
-        ttt = M * R / J
-        tt = P / (np.sqrt(2) * X[:, 0] * X[:, 1])
-        t = np.sqrt(tt**2 + 2 * tt * ttt * X[:, 1] / (2 * R) + ttt**2)
+        with np.errstate(divide="ignore", invalid="ignore"):
+            J = 2 * (
+                np.sqrt(2)
+                * X[:, 0]
+                * X[:, 1]
+                * (X[:, 1] ** 2 / 4 + (X[:, 0] + X[:, 2]) ** 2 / 4)
+            )
+            R = np.sqrt(X[:, 1] ** 2 / 4 + (X[:, 0] + X[:, 2]) ** 2 / 4)
+            M = P * (L + X[:, 1] / 2)
+            ttt = M * R / J
+            tt = P / (np.sqrt(2) * X[:, 0] * X[:, 1])
+            t = np.sqrt(tt**2 + 2 * tt * ttt * X[:, 1] / (2 * R) + ttt**2)
 
-        # Inequality constraints
-        g = np.zeros((n_samples, 5))
-        g[:, 0] = t - T_max
-        g[:, 1] = sigma - sigma_max
-        g[:, 2] = X[:, 0] - X[:, 3]
-        g[:, 3] = delta - delta_max
-        g[:, 4] = P - Pc
+            # Inequality constraints
+            g = np.zeros((n_samples, 5))
+            g[:, 0] = t - T_max
+            g[:, 1] = sigma - sigma_max
+            g[:, 2] = X[:, 0] - X[:, 3]
+            g[:, 3] = delta - delta_max
+            g[:, 4] = P - Pc
+
+        g[np.isinf(g)] = 1e6
+        g[np.isnan(g)] = 1e6
 
         return (
             torch.from_numpy(np.abs(h) - 1e-4),
@@ -1591,11 +1595,16 @@ class CEC2020_p20(BenchmarkProblem):
 
         # Inequality constraints
         g = np.zeros((n_samples, 3))
-        g[:, 0] = (np.sqrt(2) * X[:, 0] + X[:, 1]) / (
-            np.sqrt(2) * X[:, 0] ** 2 + 2 * X[:, 0] * X[:, 1]
-        ) * 2 - 2
-        g[:, 1] = X[:, 1] / (np.sqrt(2) * X[:, 0] ** 2 + 2 * X[:, 0] * X[:, 1]) * 2 - 2
-        g[:, 2] = 1 / (np.sqrt(2) * X[:, 1] + X[:, 0]) * 2 - 2
+        with np.errstate(divide="ignore", invalid="ignore"):
+            g[:, 0] = (np.sqrt(2) * X[:, 0] + X[:, 1]) / (
+                np.sqrt(2) * X[:, 0] ** 2 + 2 * X[:, 0] * X[:, 1]
+            ) * 2 - 2
+            g[:, 1] = (
+                X[:, 1] / (np.sqrt(2) * X[:, 0] ** 2 + 2 * X[:, 0] * X[:, 1]) * 2 - 2
+            )
+            g[:, 2] = 1 / (np.sqrt(2) * X[:, 1] + X[:, 0]) * 2 - 2
+        g[np.isinf(g)] = 1e6
+        g[np.isnan(g)] = 1e6
 
         return (
             torch.from_numpy(np.abs(h) - 1e-4),

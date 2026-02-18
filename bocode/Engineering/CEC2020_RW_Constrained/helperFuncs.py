@@ -239,7 +239,7 @@ def FE(nelx, nely, x, penal):
     alldofs = np.arange(ndof)
     freedofs = np.setdiff1d(alldofs, fixeddofs)
 
-    U[freedofs, 0] = spsolve(K[freedofs, :][:, freedofs], F[freedofs, 0])
+    U[freedofs, 0] = spsolve(K.tocsc()[freedofs, :][:, freedofs], F[freedofs, 0])
     U[fixeddofs, 0] = 0
 
     return U

@@ -99,9 +99,6 @@ class CEC2020_p37(BenchmarkProblem):
         # if prob_k == 37:  # Minimize active power loss
         # if '37' in self.flag:
         f = np.real(V[:, 0] * np.conj(I[:, 0])) + np.sum(Psp[:, 1:30], axis=1)
-        if "penalty_constrained" in self.flag:
-            f = abs(f)
-        FACTOR = 25
 
         # Equality constraints
         h = np.concatenate(
@@ -109,21 +106,10 @@ class CEC2020_p37(BenchmarkProblem):
         )
 
         if self.is_constrained:
-            if "penalty_constrained" in self.flag:
-                return (
-                    None,
-                    None,
-                    -(
-                        torch.from_numpy(f)
-                        + torch.from_numpy((np.sum(abs(h), axis=1) - 1e-4) / FACTOR)
-                    ).unsqueeze(-1),
-                )
-
-            else:
-                return (
-                    torch.from_numpy(abs(h) - 1e-4),
-                    None,
-                    -torch.from_numpy(f).unsqueeze(-1),
-                )
+            return (
+                torch.from_numpy(abs(h) - 1e-4),
+                None,
+                -torch.from_numpy(f).unsqueeze(-1),
+            )
         else:
             return None, None, -torch.from_numpy(f).unsqueeze(-1)
