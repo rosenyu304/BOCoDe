@@ -46,6 +46,7 @@ from .SVM import SVM
 
 from . import MODAct
 from . import CEC2020_RW_Constrained
+from . import reproblems
 
 from ..BoTorch.botorch_MultiObj import Penicillin as Penicillin
 from ..BoTorch.botorch_MultiObj import VehicleSafety as VehicleSafety
@@ -102,6 +103,7 @@ __all__ = [
     "SVM",
     "MODAct",
     "CEC2020_RW_Constrained",
+    "reproblems",
     "Penicillin",
     "VehicleSafety",
     "BotorchCarSideImpact",

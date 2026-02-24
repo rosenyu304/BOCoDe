@@ -36,6 +36,7 @@ class TestSearchBenchmarks:
             "CEC.CEC2017",
             "CEC.CEC2019",
             "NEORL",
+            "Engineering.reproblems",
         ]
 
         for category in expected_categories:

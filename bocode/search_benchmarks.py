@@ -333,6 +333,32 @@ BotorchEngineeringFuncs = [
     bocode.Engineering.OSY,
     bocode.Engineering.WeldedBeam,
 ]
+REProblemsFuncs = [
+    bocode.Engineering.reproblems.RE21,
+    bocode.Engineering.reproblems.RE22,
+    bocode.Engineering.reproblems.RE23,
+    bocode.Engineering.reproblems.RE24,
+    bocode.Engineering.reproblems.RE25,
+    bocode.Engineering.reproblems.RE31,
+    bocode.Engineering.reproblems.RE32,
+    bocode.Engineering.reproblems.RE33,
+    bocode.Engineering.reproblems.RE34,
+    bocode.Engineering.reproblems.RE35,
+    bocode.Engineering.reproblems.RE36,
+    bocode.Engineering.reproblems.RE37,
+    bocode.Engineering.reproblems.RE41,
+    bocode.Engineering.reproblems.RE42,
+    bocode.Engineering.reproblems.RE61,
+    bocode.Engineering.reproblems.RE91,
+    bocode.Engineering.reproblems.CRE21,
+    bocode.Engineering.reproblems.CRE22,
+    bocode.Engineering.reproblems.CRE23,
+    bocode.Engineering.reproblems.CRE24,
+    bocode.Engineering.reproblems.CRE25,
+    bocode.Engineering.reproblems.CRE31,
+    bocode.Engineering.reproblems.CRE32,
+    bocode.Engineering.reproblems.CRE51,
+]
 
 categorized_classes = {
     "Synthetics": SyntheticsFuncs,
@@ -351,6 +377,7 @@ categorized_classes = {
     "CEC.CEC2017": CEC2017Funcs,
     "CEC.CEC2019": CEC2019Funcs,
     "NEORL": NEORLFuncs,
+    "Engineering.reproblems": REProblemsFuncs,
 }
 
 
@@ -385,7 +412,7 @@ def filter_functions(
     """
     Filter functions based on the given constraints.
 
-    Available Categories: ['Synthetics', 'LassoBench', 'Engineering', 'Engineering.Gym', 'Engineering.BoTorch', 'Engineering.CEC2020_RW_Constrained', 'BBOB', 'BoTorch', 'Engineering.MODAct', 'Synthetics.WFG', 'Synthetics.ZDT', 'Synthetics.DTLZ', 'CEC.CEC2007', 'CEC.CEC2017', 'CEC.CEC2019', 'NEORL']
+    Available Categories: ['Synthetics', 'LassoBench', 'Engineering', 'Engineering.Gym', 'Engineering.BoTorch', 'Engineering.CEC2020_RW_Constrained', 'BBOB', 'BoTorch', 'Engineering.MODAct', 'Synthetics.WFG', 'Synthetics.ZDT', 'Synthetics.DTLZ', 'CEC.CEC2007', 'CEC.CEC2017', 'CEC.CEC2019', 'NEORL', 'Engineering.reproblems']
 
     Parameters
     ----------
