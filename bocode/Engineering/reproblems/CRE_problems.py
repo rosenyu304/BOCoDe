@@ -45,8 +45,8 @@ class CRE21(BenchmarkProblem):
         x2 = X[:, 1]
         x3 = X[:, 2]
 
-        fx = torch.zeros((n, self.num_objectives))
-        gx = torch.zeros((n, self.num_constraints))
+        fx = torch.zeros((n, self.num_objectives), device=X.device)
+        gx = torch.zeros((n, self.num_constraints), device=X.device)
 
         fx[:, 0] = x1 * torch.sqrt(16.0 + (x3 * x3)) + x2 * torch.sqrt(1.0 + x3 * x3)
         fx[:, 1] = (20.0 * torch.sqrt(16.0 + (x3 * x3))) / (x1 * x3)
@@ -95,8 +95,8 @@ class CRE22(BenchmarkProblem):
         tauMax = 13600
         sigmaMax = 30000
 
-        fx = torch.zeros((n, self.num_objectives))
-        gx = torch.zeros((n, self.num_constraints))
+        fx = torch.zeros((n, self.num_objectives), device=X.device)
+        gx = torch.zeros((n, self.num_constraints), device=X.device)
 
         fx[:, 0] = (1.10471 * x1 * x1 * x2) + (0.04811 * x3 * x4) * (14.0 + x2)
         fx[:, 1] = (4 * P * L * L * L) / (E * x4 * x3 * x3 * x3)
@@ -163,8 +163,8 @@ class CRE23(BenchmarkProblem):
         x3 = X[:, 2]
         x4 = X[:, 3]
 
-        fx = torch.zeros((n, self.num_objectives))
-        gx = torch.zeros((n, self.num_constraints))
+        fx = torch.zeros((n, self.num_objectives), device=X.device)
+        gx = torch.zeros((n, self.num_constraints), device=X.device)
 
         fx[:, 0] = 4.9 * 1e-5 * (x2 * x2 - x1 * x1) * (x4 - 1.0)
         fx[:, 1] = ((9.82 * 1e6) * (x2 * x2 - x1 * x1)) / (
@@ -223,8 +223,8 @@ class CRE24(BenchmarkProblem):
         x6 = X[:, 5]
         x7 = X[:, 6]
 
-        fx = torch.zeros((n, self.num_objectives))
-        gx = torch.zeros((n, self.num_constraints))
+        fx = torch.zeros((n, self.num_objectives), device=X.device)
+        gx = torch.zeros((n, self.num_constraints), device=X.device)
 
         fx[:, 0] = (
             0.7854
@@ -280,8 +280,8 @@ class CRE25(BenchmarkProblem):
         x3 = torch.round(X[:, 2])
         x4 = torch.round(X[:, 3])
 
-        fx = torch.zeros((n, self.num_objectives))
-        gx = torch.zeros((n, self.num_constraints))
+        fx = torch.zeros((n, self.num_objectives), device=X.device)
+        gx = torch.zeros((n, self.num_constraints), device=X.device)
 
         fx[:, 0] = torch.abs(6.931 - ((x3 / x1) * (x4 / x2)))
         fx[:, 1] = torch.stack([x1, x2, x3, x4], dim=1).max(dim=1).values
@@ -327,8 +327,8 @@ class CRE31(BenchmarkProblem):
         x6 = X[:, 5]
         x7 = X[:, 6]
 
-        fx = torch.zeros((n, self.num_objectives))
-        gx = torch.zeros((n, self.num_constraints))
+        fx = torch.zeros((n, self.num_objectives), device=X.device)
+        gx = torch.zeros((n, self.num_constraints), device=X.device)
 
         fx[:, 0] = (
             1.98
@@ -483,8 +483,8 @@ class CRE32(BenchmarkProblem):
         annual_costs = capital_costs + running_costs + voyage_costs
         annual_cargo = cargo_DWT * RTPA
 
-        fx = torch.zeros((n, self.num_objectives))
-        gx = torch.zeros((n, self.num_constraints))
+        fx = torch.zeros((n, self.num_objectives), device=X.device)
+        gx = torch.zeros((n, self.num_constraints), device=X.device)
 
         fx[:, 0] = annual_costs / annual_cargo
         fx[:, 1] = light_ship_weight
@@ -535,8 +535,8 @@ class CRE51(BenchmarkProblem):
         x2 = X[:, 1]
         x3 = X[:, 2]
 
-        fx = torch.zeros((n, self.num_objectives))
-        gx = torch.zeros((n, self.num_constraints))
+        fx = torch.zeros((n, self.num_objectives), device=X.device)
+        gx = torch.zeros((n, self.num_constraints), device=X.device)
 
         fx[:, 0] = 106780.37 * (x2 + x3) + 61704.67
         fx[:, 1] = 3000 * x1

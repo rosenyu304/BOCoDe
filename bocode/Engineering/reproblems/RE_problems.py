@@ -51,8 +51,8 @@ class RE21(BenchmarkProblem):
         E = 2.0 * 1e5
         L = 200.0
 
-        fx = torch.zeros((n, self.num_objectives))
-        gx = torch.zeros((n, 0))
+        fx = torch.zeros((n, self.num_objectives), device=X.device)
+        gx = torch.zeros((n, 0), device=X.device)
 
         fx[:, 0] = L * ((2 * x1) + math.sqrt(2.0) * x2 + torch.sqrt(x3) + x4)
         fx[:, 1] = ((F * L) / E) * (
@@ -175,8 +175,8 @@ class RE22(BenchmarkProblem):
         x2 = X[:, 1]
         x3 = X[:, 2]
 
-        fx = torch.zeros((n, self.num_objectives))
-        gx = torch.zeros((n, 0))
+        fx = torch.zeros((n, self.num_objectives), device=X.device)
+        gx = torch.zeros((n, 0), device=X.device)
 
         fx[:, 0] = (29.4 * x1) + (0.6 * x2 * x3)
 
@@ -218,8 +218,8 @@ class RE23(BenchmarkProblem):
         x3 = X[:, 2]
         x4 = X[:, 3]
 
-        fx = torch.zeros((n, self.num_objectives))
-        gx = torch.zeros((n, 0))
+        fx = torch.zeros((n, self.num_objectives), device=X.device)
+        gx = torch.zeros((n, 0), device=X.device)
 
         fx[:, 0] = (
             (0.6224 * x1 * x3 * x4)
@@ -268,8 +268,8 @@ class RE24(BenchmarkProblem):
         x1 = X[:, 0]
         x2 = X[:, 1]
 
-        fx = torch.zeros((n, self.num_objectives))
-        gx = torch.zeros((n, 0))
+        fx = torch.zeros((n, self.num_objectives), device=X.device)
+        gx = torch.zeros((n, 0), device=X.device)
 
         fx[:, 0] = x1 + (120 * x2)
 
@@ -370,8 +370,8 @@ class RE25(BenchmarkProblem):
         idx = torch.abs(vals.unsqueeze(0) - X[:, 2].unsqueeze(1)).argmin(dim=1)
         x3 = vals[idx]
 
-        fx = torch.zeros((n, self.num_objectives))
-        gx = torch.zeros((n, 0))
+        fx = torch.zeros((n, self.num_objectives), device=X.device)
+        gx = torch.zeros((n, 0), device=X.device)
 
         fx[:, 0] = (math.pi * math.pi * x2 * x3 * x3 * (x1 + 2)) / 4.0
 
@@ -395,7 +395,7 @@ class RE25(BenchmarkProblem):
         g5 = sigmaW - ((Fmax - Fp) / K)
 
         g_list = [g0, g1, g2, g3, g4, g5]
-        penalty = torch.zeros(n)
+        penalty = torch.zeros(n, device=X.device)
         for g in g_list:
             penalty = penalty + torch.where(g < 0, -g, torch.zeros_like(g))
         fx[:, 1] = penalty
@@ -430,8 +430,8 @@ class RE31(BenchmarkProblem):
         x2 = X[:, 1]
         x3 = X[:, 2]
 
-        fx = torch.zeros((n, self.num_objectives))
-        gx = torch.zeros((n, 0))
+        fx = torch.zeros((n, self.num_objectives), device=X.device)
+        gx = torch.zeros((n, 0), device=X.device)
 
         fx[:, 0] = x1 * torch.sqrt(16.0 + (x3 * x3)) + x2 * torch.sqrt(1.0 + x3 * x3)
         fx[:, 1] = (20.0 * torch.sqrt(16.0 + (x3 * x3))) / (x1 * x3)
@@ -483,8 +483,8 @@ class RE32(BenchmarkProblem):
         tauMax = 13600
         sigmaMax = 30000
 
-        fx = torch.zeros((n, self.num_objectives))
-        gx = torch.zeros((n, 0))
+        fx = torch.zeros((n, self.num_objectives), device=X.device)
+        gx = torch.zeros((n, 0), device=X.device)
 
         fx[:, 0] = (1.10471 * x1 * x1 * x2) + (0.04811 * x3 * x4) * (14.0 + x2)
         fx[:, 1] = (4 * P * L * L * L) / (E * x4 * x3 * x3 * x3)
@@ -519,7 +519,7 @@ class RE32(BenchmarkProblem):
         g3 = PC - P
 
         g_list = [g0, g1, g2, g3]
-        penalty = torch.zeros(n)
+        penalty = torch.zeros(n, device=X.device)
         for g in g_list:
             penalty = penalty + torch.where(g < 0, -g, torch.zeros_like(g))
         fx[:, 2] = penalty
@@ -556,8 +556,8 @@ class RE33(BenchmarkProblem):
         x3 = X[:, 2]
         x4 = X[:, 3]
 
-        fx = torch.zeros((n, self.num_objectives))
-        gx = torch.zeros((n, 0))
+        fx = torch.zeros((n, self.num_objectives), device=X.device)
+        gx = torch.zeros((n, 0), device=X.device)
 
         fx[:, 0] = 4.9 * 1e-5 * (x2 * x2 - x1 * x1) * (x4 - 1.0)
         fx[:, 1] = ((9.82 * 1e6) * (x2 * x2 - x1 * x1)) / (
@@ -574,7 +574,7 @@ class RE33(BenchmarkProblem):
         ) - 900.0
 
         g_list = [g0, g1, g2, g3]
-        penalty = torch.zeros(n)
+        penalty = torch.zeros(n, device=X.device)
         for g in g_list:
             penalty = penalty + torch.where(g < 0, -g, torch.zeros_like(g))
         fx[:, 2] = penalty
@@ -607,8 +607,8 @@ class RE34(BenchmarkProblem):
         x4 = X[:, 3]
         x5 = X[:, 4]
 
-        fx = torch.zeros((n, self.num_objectives))
-        gx = torch.zeros((n, 0))
+        fx = torch.zeros((n, self.num_objectives), device=X.device)
+        gx = torch.zeros((n, 0), device=X.device)
 
         fx[:, 0] = (
             1640.2823
@@ -683,8 +683,8 @@ class RE35(BenchmarkProblem):
         x6 = X[:, 5]
         x7 = X[:, 6]
 
-        fx = torch.zeros((n, self.num_objectives))
-        gx = torch.zeros((n, 0))
+        fx = torch.zeros((n, self.num_objectives), device=X.device)
+        gx = torch.zeros((n, 0), device=X.device)
 
         fx[:, 0] = (
             0.7854
@@ -713,7 +713,7 @@ class RE35(BenchmarkProblem):
         g10 = -torch.sqrt(tmpVar) / (0.1 * x7 * x7 * x7) + 1100.0
 
         g_list = [g0, g1, g2, g3, g4, g5, g6, g7, g8, g9, g10]
-        penalty = torch.zeros(n)
+        penalty = torch.zeros(n, device=X.device)
         for g in g_list:
             penalty = penalty + torch.where(g < 0, -g, torch.zeros_like(g))
         fx[:, 2] = penalty
@@ -745,8 +745,8 @@ class RE36(BenchmarkProblem):
         x3 = torch.round(X[:, 2])
         x4 = torch.round(X[:, 3])
 
-        fx = torch.zeros((n, self.num_objectives))
-        gx = torch.zeros((n, 0))
+        fx = torch.zeros((n, self.num_objectives), device=X.device)
+        gx = torch.zeros((n, 0), device=X.device)
 
         fx[:, 0] = torch.abs(6.931 - ((x3 / x1) * (x4 / x2)))
         fx[:, 1] = torch.stack([x1, x2, x3, x4], dim=1).max(dim=1).values
@@ -782,8 +782,8 @@ class RE37(BenchmarkProblem):
         xOA = X[:, 2]
         xOPTT = X[:, 3]
 
-        fx = torch.zeros((n, self.num_objectives))
-        gx = torch.zeros((n, 0))
+        fx = torch.zeros((n, self.num_objectives), device=X.device)
+        gx = torch.zeros((n, 0), device=X.device)
 
         fx[:, 0] = (
             0.692
@@ -881,8 +881,8 @@ class RE41(BenchmarkProblem):
         x6 = X[:, 5]
         x7 = X[:, 6]
 
-        fx = torch.zeros((n, self.num_objectives))
-        gx = torch.zeros((n, 0))
+        fx = torch.zeros((n, self.num_objectives), device=X.device)
+        gx = torch.zeros((n, 0), device=X.device)
 
         fx[:, 0] = (
             1.98
@@ -932,7 +932,7 @@ class RE41(BenchmarkProblem):
         g9 = 15.7 - Vfd
 
         g_list = [g0, g1, g2, g3, g4, g5, g6, g7, g8, g9]
-        penalty = torch.zeros(n)
+        penalty = torch.zeros(n, device=X.device)
         for g in g_list:
             penalty = penalty + torch.where(g < 0, -g, torch.zeros_like(g))
         fx[:, 3] = penalty
@@ -1031,8 +1031,8 @@ class RE42(BenchmarkProblem):
         annual_costs = capital_costs + running_costs + voyage_costs
         annual_cargo = cargo_DWT * RTPA
 
-        fx = torch.zeros((n, self.num_objectives))
-        gx = torch.zeros((n, 0))
+        fx = torch.zeros((n, self.num_objectives), device=X.device)
+        gx = torch.zeros((n, 0), device=X.device)
 
         fx[:, 0] = annual_costs / annual_cargo
         fx[:, 1] = light_ship_weight
@@ -1053,7 +1053,7 @@ class RE42(BenchmarkProblem):
         cf8 = (KB + BMT - KG) - (0.07 * x_B)
 
         cf_list = [cf0, cf1, cf2, cf3, cf4, cf5, cf6, cf7, cf8]
-        penalty = torch.zeros(n)
+        penalty = torch.zeros(n, device=X.device)
         for cf in cf_list:
             penalty = penalty + torch.where(cf < 0, -cf, torch.zeros_like(cf))
         fx[:, 3] = penalty
@@ -1088,8 +1088,8 @@ class RE61(BenchmarkProblem):
         x2 = X[:, 1]
         x3 = X[:, 2]
 
-        fx = torch.zeros((n, self.num_objectives))
-        gx = torch.zeros((n, 0))
+        fx = torch.zeros((n, self.num_objectives), device=X.device)
+        gx = torch.zeros((n, 0), device=X.device)
 
         fx[:, 0] = 106780.37 * (x2 + x3) + 61704.67
         fx[:, 1] = 3000 * x1
@@ -1106,7 +1106,7 @@ class RE61(BenchmarkProblem):
         g6 = 550 - (0.164 / (x1 * x2) + 631.13 * x3 - 54.48)
 
         g_list = [g0, g1, g2, g3, g4, g5, g6]
-        penalty = torch.zeros(n)
+        penalty = torch.zeros(n, device=X.device)
         for g in g_list:
             penalty = penalty + torch.where(g < 0, -g, torch.zeros_like(g))
         fx[:, 5] = penalty
@@ -1150,13 +1150,13 @@ class RE91(BenchmarkProblem):
         x7 = X[:, 6]
 
         # Stochastic variables
-        x8 = 0.006 * torch.randn(n) + 0.345
-        x9 = 0.006 * torch.randn(n) + 0.192
-        x10 = 10 * torch.randn(n)
-        x11 = 10 * torch.randn(n)
+        x8 = 0.006 * torch.randn(n, device=X.device) + 0.345
+        x9 = 0.006 * torch.randn(n, device=X.device) + 0.192
+        x10 = 10 * torch.randn(n, device=X.device)
+        x11 = 10 * torch.randn(n, device=X.device)
 
-        fx = torch.zeros((n, self.num_objectives))
-        gx = torch.zeros((n, 0))
+        fx = torch.zeros((n, self.num_objectives), device=X.device)
+        gx = torch.zeros((n, 0), device=X.device)
 
         fx[:, 0] = (
             1.98
