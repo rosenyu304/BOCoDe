@@ -65,11 +65,13 @@ def build_table() -> str:
     rows.sort(key=lambda r: (r[1], r[0]))
 
     header = (
-        "| Problem | Application | Dim | #Obj | #Constr | Variables | Scalable | "
+        "| # | Problem | Application | Dim | #Obj | #Constr | Variables | Scalable | "
         "Convex | NP-hard |\n"
-        "|---|---|---|---|---|---|---|---|---|\n"
+        "|---|---|---|---|---|---|---|---|---|---|\n"
     )
-    body = "\n".join("| " + " | ".join(r) + " |" for r in rows)
+    body = "\n".join(
+        "| " + " | ".join((str(i),) + r) + " |" for i, r in enumerate(rows, start=1)
+    )
     return header + body + "\n"
 
 
