@@ -1,0 +1,46 @@
+{
+  "name": "SpeedReducer",
+  "module": "bocode.opt_problems.engineering.SpeedReducer",
+  "extra": null,
+  "num_objectives": 1,
+  "num_constraints": 9,
+  "available_dimensions": 7,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 7,
+  "bounds": [
+    [
+      3.6,
+      2.6
+    ],
+    [
+      0.8,
+      0.7
+    ],
+    [
+      28,
+      17
+    ],
+    [
+      8.3,
+      7.3
+    ],
+    [
+      8.3,
+      7.3
+    ],
+    [
+      3.9,
+      2.9
+    ],
+    [
+      5.5,
+      5
+    ]
+  ],
+  "num_integer_variables": null,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "source": "Yang XS, Hossein Gandomi A (2012) Bat algorithm: a novel approach for global engineering optimization. Engineering computations 29(5):464\u2013483."
+}

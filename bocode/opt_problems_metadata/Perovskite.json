@@ -1,0 +1,30 @@
+{
+  "name": "Perovskite",
+  "module": "bocode.opt_problems.materials.Perovskite",
+  "extra": null,
+  "num_objectives": 1,
+  "num_constraints": 0,
+  "available_dimensions": 3,
+  "input_type": "discrete",
+  "scalable": false,
+  "dim": 3,
+  "bounds": [
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ]
+  ],
+  "num_integer_variables": null,
+  "application": "Materials",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "source": "Minimise the instability index of a halide perovskite (3 composition inputs)."
+}

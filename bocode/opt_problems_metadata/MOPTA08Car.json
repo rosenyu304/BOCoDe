@@ -1,0 +1,17 @@
+{
+  "name": "MOPTA08Car",
+  "module": "bocode.opt_problems.engineering.MOPTA08Car",
+  "extra": null,
+  "num_objectives": 1,
+  "num_constraints": 68,
+  "available_dimensions": 124,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 124,
+  "bounds": null,
+  "num_integer_variables": null,
+  "application": "Engineering",
+  "convex": false,
+  "np_hard": "unknown",
+  "source": "https://leonard.papenmeier.io/2023/02/09/mopta08-executables.html"
+}

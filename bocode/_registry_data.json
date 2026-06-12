@@ -1,0 +1,658 @@
+{
+  "AgNP": [
+    "opt_problems.materials.AgNP",
+    null
+  ],
+  "AntPolicySearchProblem": [
+    "opt_problems.control.mujoco.MujocoFuncs",
+    "mujoco"
+  ],
+  "AntProblem": [
+    "opt_problems.control.mujoco.MujocoFuncs",
+    "mujoco"
+  ],
+  "AutoAM": [
+    "opt_problems.materials.AutoAM",
+    null
+  ],
+  "BotorchCarSideImpact": [
+    "opt_problems.engineering.BotorchCarSideImpact",
+    null
+  ],
+  "CEC2020_p1": [
+    "opt_problems.cec2020_rw.CEC2020_p1_20",
+    null
+  ],
+  "CEC2020_p10": [
+    "opt_problems.cec2020_rw.CEC2020_p1_20",
+    null
+  ],
+  "CEC2020_p11": [
+    "opt_problems.cec2020_rw.CEC2020_p1_20",
+    null
+  ],
+  "CEC2020_p12": [
+    "opt_problems.cec2020_rw.CEC2020_p1_20",
+    null
+  ],
+  "CEC2020_p13": [
+    "opt_problems.cec2020_rw.CEC2020_p1_20",
+    null
+  ],
+  "CEC2020_p14": [
+    "opt_problems.cec2020_rw.CEC2020_p1_20",
+    null
+  ],
+  "CEC2020_p15": [
+    "opt_problems.cec2020_rw.CEC2020_p1_20",
+    null
+  ],
+  "CEC2020_p16": [
+    "opt_problems.cec2020_rw.CEC2020_p1_20",
+    null
+  ],
+  "CEC2020_p17": [
+    "opt_problems.cec2020_rw.CEC2020_p1_20",
+    null
+  ],
+  "CEC2020_p18": [
+    "opt_problems.cec2020_rw.CEC2020_p1_20",
+    null
+  ],
+  "CEC2020_p19": [
+    "opt_problems.cec2020_rw.CEC2020_p1_20",
+    null
+  ],
+  "CEC2020_p2": [
+    "opt_problems.cec2020_rw.CEC2020_p1_20",
+    null
+  ],
+  "CEC2020_p20": [
+    "opt_problems.cec2020_rw.CEC2020_p1_20",
+    null
+  ],
+  "CEC2020_p21": [
+    "opt_problems.cec2020_rw.CEC2020_p21_33",
+    null
+  ],
+  "CEC2020_p22": [
+    "opt_problems.cec2020_rw.CEC2020_p21_33",
+    null
+  ],
+  "CEC2020_p23": [
+    "opt_problems.cec2020_rw.CEC2020_p21_33",
+    null
+  ],
+  "CEC2020_p24": [
+    "opt_problems.cec2020_rw.CEC2020_p21_33",
+    null
+  ],
+  "CEC2020_p25": [
+    "opt_problems.cec2020_rw.CEC2020_p21_33",
+    null
+  ],
+  "CEC2020_p26": [
+    "opt_problems.cec2020_rw.CEC2020_p21_33",
+    null
+  ],
+  "CEC2020_p27": [
+    "opt_problems.cec2020_rw.CEC2020_p21_33",
+    null
+  ],
+  "CEC2020_p28": [
+    "opt_problems.cec2020_rw.CEC2020_p21_33",
+    null
+  ],
+  "CEC2020_p29": [
+    "opt_problems.cec2020_rw.CEC2020_p21_33",
+    null
+  ],
+  "CEC2020_p3": [
+    "opt_problems.cec2020_rw.CEC2020_p1_20",
+    null
+  ],
+  "CEC2020_p30": [
+    "opt_problems.cec2020_rw.CEC2020_p21_33",
+    null
+  ],
+  "CEC2020_p31": [
+    "opt_problems.cec2020_rw.CEC2020_p21_33",
+    null
+  ],
+  "CEC2020_p32": [
+    "opt_problems.cec2020_rw.CEC2020_p21_33",
+    null
+  ],
+  "CEC2020_p33": [
+    "opt_problems.cec2020_rw.CEC2020_p21_33",
+    null
+  ],
+  "CEC2020_p34": [
+    "opt_problems.cec2020_rw.CEC2020_p34",
+    null
+  ],
+  "CEC2020_p35": [
+    "opt_problems.cec2020_rw.CEC2020_p35",
+    null
+  ],
+  "CEC2020_p36": [
+    "opt_problems.cec2020_rw.CEC2020_p36",
+    null
+  ],
+  "CEC2020_p37": [
+    "opt_problems.cec2020_rw.CEC2020_p37",
+    null
+  ],
+  "CEC2020_p38": [
+    "opt_problems.cec2020_rw.CEC2020_p38",
+    null
+  ],
+  "CEC2020_p39": [
+    "opt_problems.cec2020_rw.CEC2020_p39",
+    null
+  ],
+  "CEC2020_p4": [
+    "opt_problems.cec2020_rw.CEC2020_p1_20",
+    null
+  ],
+  "CEC2020_p40": [
+    "opt_problems.cec2020_rw.CEC2020_p40_57",
+    null
+  ],
+  "CEC2020_p41": [
+    "opt_problems.cec2020_rw.CEC2020_p40_57",
+    null
+  ],
+  "CEC2020_p42": [
+    "opt_problems.cec2020_rw.CEC2020_p40_57",
+    null
+  ],
+  "CEC2020_p43": [
+    "opt_problems.cec2020_rw.CEC2020_p40_57",
+    null
+  ],
+  "CEC2020_p44": [
+    "opt_problems.cec2020_rw.CEC2020_p40_57",
+    null
+  ],
+  "CEC2020_p45": [
+    "opt_problems.cec2020_rw.CEC2020_p40_57",
+    null
+  ],
+  "CEC2020_p46": [
+    "opt_problems.cec2020_rw.CEC2020_p40_57",
+    null
+  ],
+  "CEC2020_p47": [
+    "opt_problems.cec2020_rw.CEC2020_p40_57",
+    null
+  ],
+  "CEC2020_p48": [
+    "opt_problems.cec2020_rw.CEC2020_p40_57",
+    null
+  ],
+  "CEC2020_p49": [
+    "opt_problems.cec2020_rw.CEC2020_p40_57",
+    null
+  ],
+  "CEC2020_p5": [
+    "opt_problems.cec2020_rw.CEC2020_p1_20",
+    null
+  ],
+  "CEC2020_p50": [
+    "opt_problems.cec2020_rw.CEC2020_p40_57",
+    null
+  ],
+  "CEC2020_p51": [
+    "opt_problems.cec2020_rw.CEC2020_p40_57",
+    null
+  ],
+  "CEC2020_p52": [
+    "opt_problems.cec2020_rw.CEC2020_p40_57",
+    null
+  ],
+  "CEC2020_p53": [
+    "opt_problems.cec2020_rw.CEC2020_p40_57",
+    null
+  ],
+  "CEC2020_p54": [
+    "opt_problems.cec2020_rw.CEC2020_p40_57",
+    null
+  ],
+  "CEC2020_p55": [
+    "opt_problems.cec2020_rw.CEC2020_p40_57",
+    null
+  ],
+  "CEC2020_p56": [
+    "opt_problems.cec2020_rw.CEC2020_p40_57",
+    null
+  ],
+  "CEC2020_p57": [
+    "opt_problems.cec2020_rw.CEC2020_p40_57",
+    null
+  ],
+  "CEC2020_p6": [
+    "opt_problems.cec2020_rw.CEC2020_p1_20",
+    null
+  ],
+  "CEC2020_p7": [
+    "opt_problems.cec2020_rw.CEC2020_p1_20",
+    null
+  ],
+  "CEC2020_p8": [
+    "opt_problems.cec2020_rw.CEC2020_p1_20",
+    null
+  ],
+  "CEC2020_p9": [
+    "opt_problems.cec2020_rw.CEC2020_p1_20",
+    null
+  ],
+  "CRE21": [
+    "opt_problems.reproblems.CRE_problems",
+    null
+  ],
+  "CRE22": [
+    "opt_problems.reproblems.CRE_problems",
+    null
+  ],
+  "CRE23": [
+    "opt_problems.reproblems.CRE_problems",
+    null
+  ],
+  "CRE24": [
+    "opt_problems.reproblems.CRE_problems",
+    null
+  ],
+  "CRE25": [
+    "opt_problems.reproblems.CRE_problems",
+    null
+  ],
+  "CRE31": [
+    "opt_problems.reproblems.CRE_problems",
+    null
+  ],
+  "CRE32": [
+    "opt_problems.reproblems.CRE_problems",
+    null
+  ],
+  "CRE51": [
+    "opt_problems.reproblems.CRE_problems",
+    null
+  ],
+  "CS1": [
+    "opt_problems.modact.MODAct",
+    "modact"
+  ],
+  "CS2": [
+    "opt_problems.modact.MODAct",
+    "modact"
+  ],
+  "CS3": [
+    "opt_problems.modact.MODAct",
+    "modact"
+  ],
+  "CS4": [
+    "opt_problems.modact.MODAct",
+    "modact"
+  ],
+  "CT1": [
+    "opt_problems.modact.MODAct",
+    "modact"
+  ],
+  "CT2": [
+    "opt_problems.modact.MODAct",
+    "modact"
+  ],
+  "CT3": [
+    "opt_problems.modact.MODAct",
+    "modact"
+  ],
+  "CT4": [
+    "opt_problems.modact.MODAct",
+    "modact"
+  ],
+  "CTS1": [
+    "opt_problems.modact.MODAct",
+    "modact"
+  ],
+  "CTS2": [
+    "opt_problems.modact.MODAct",
+    "modact"
+  ],
+  "CTS3": [
+    "opt_problems.modact.MODAct",
+    "modact"
+  ],
+  "CTS4": [
+    "opt_problems.modact.MODAct",
+    "modact"
+  ],
+  "CTSE1": [
+    "opt_problems.modact.MODAct",
+    "modact"
+  ],
+  "CTSE2": [
+    "opt_problems.modact.MODAct",
+    "modact"
+  ],
+  "CTSE3": [
+    "opt_problems.modact.MODAct",
+    "modact"
+  ],
+  "CTSE4": [
+    "opt_problems.modact.MODAct",
+    "modact"
+  ],
+  "CTSEI1": [
+    "opt_problems.modact.MODAct",
+    "modact"
+  ],
+  "CTSEI2": [
+    "opt_problems.modact.MODAct",
+    "modact"
+  ],
+  "CTSEI3": [
+    "opt_problems.modact.MODAct",
+    "modact"
+  ],
+  "CTSEI4": [
+    "opt_problems.modact.MODAct",
+    "modact"
+  ],
+  "CantileverBeam": [
+    "opt_problems.engineering.CantileverBeam",
+    null
+  ],
+  "Car": [
+    "opt_problems.engineering.Car",
+    null
+  ],
+  "CarSideImpact": [
+    "opt_problems.engineering.CarSideImpact",
+    null
+  ],
+  "CompressionSpring": [
+    "opt_problems.engineering.CompressionSpring",
+    null
+  ],
+  "CrossedBarrel": [
+    "opt_problems.materials.CrossedBarrel",
+    null
+  ],
+  "DiscBrake": [
+    "opt_problems.engineering.DiscBrake",
+    null
+  ],
+  "EulerBernoulliBeamBending": [
+    "opt_problems.engineering.EulerBernoulliBeamBending",
+    null
+  ],
+  "GearTrain": [
+    "opt_problems.engineering.GearTrain",
+    null
+  ],
+  "HalfCheetahPolicySearchProblem": [
+    "opt_problems.control.mujoco.MujocoFuncs",
+    "mujoco"
+  ],
+  "HalfCheetahProblem": [
+    "opt_problems.control.mujoco.MujocoFuncs",
+    "mujoco"
+  ],
+  "HeatExchanger": [
+    "opt_problems.engineering.HeatExchanger",
+    null
+  ],
+  "HopperPolicySearchProblem": [
+    "opt_problems.control.mujoco.MujocoFuncs",
+    "mujoco"
+  ],
+  "HopperProblem": [
+    "opt_problems.control.mujoco.MujocoFuncs",
+    "mujoco"
+  ],
+  "HumanoidProblem": [
+    "opt_problems.control.mujoco.MujocoFuncs",
+    "mujoco"
+  ],
+  "HumanoidStandupProblem": [
+    "opt_problems.control.mujoco.MujocoFuncs",
+    "mujoco"
+  ],
+  "InvertedDoublePendulumProblem": [
+    "opt_problems.control.mujoco.MujocoFuncs",
+    "mujoco"
+  ],
+  "InvertedPendulumProblem": [
+    "opt_problems.control.mujoco.MujocoFuncs",
+    "mujoco"
+  ],
+  "LassoBreastCancer": [
+    "opt_problems.hpo.LassoBreastCancer",
+    "lasso"
+  ],
+  "LassoDNA": [
+    "opt_problems.hpo.LassoDNA",
+    "lasso"
+  ],
+  "LassoDiabetes": [
+    "opt_problems.hpo.LassoDiabetes",
+    "lasso"
+  ],
+  "LassoLeukemia": [
+    "opt_problems.hpo.LassoLeukemia",
+    "lasso"
+  ],
+  "LassoRCV1": [
+    "opt_problems.hpo.LassoRCV1",
+    "lasso"
+  ],
+  "MOPTA08Car": [
+    "opt_problems.engineering.MOPTA08Car",
+    null
+  ],
+  "Mazda": [
+    "opt_problems.engineering.Mazda",
+    "mazda"
+  ],
+  "Mazda_SCA": [
+    "opt_problems.engineering.Mazda",
+    "mazda"
+  ],
+  "P3HT": [
+    "opt_problems.materials.P3HT",
+    null
+  ],
+  "PD4CartPole": [
+    "opt_problems.control.PD4CartPole",
+    "control"
+  ],
+  "PID4Acrobot": [
+    "opt_problems.control.PID4Acrobot",
+    "control"
+  ],
+  "Penicillin": [
+    "opt_problems.engineering.Penicillin",
+    null
+  ],
+  "Perovskite": [
+    "opt_problems.materials.Perovskite",
+    null
+  ],
+  "PressureVessel": [
+    "opt_problems.engineering.PressureVessel",
+    null
+  ],
+  "PusherProblem": [
+    "opt_problems.control.mujoco.MujocoFuncs",
+    "mujoco"
+  ],
+  "QPowerModel": [
+    "opt_problems.engineering.QPowerModel",
+    "neorl"
+  ],
+  "RE21": [
+    "opt_problems.reproblems.RE_problems",
+    null
+  ],
+  "RE22": [
+    "opt_problems.reproblems.RE_problems",
+    null
+  ],
+  "RE23": [
+    "opt_problems.reproblems.RE_problems",
+    null
+  ],
+  "RE24": [
+    "opt_problems.reproblems.RE_problems",
+    null
+  ],
+  "RE25": [
+    "opt_problems.reproblems.RE_problems",
+    null
+  ],
+  "RE31": [
+    "opt_problems.reproblems.RE_problems",
+    null
+  ],
+  "RE32": [
+    "opt_problems.reproblems.RE_problems",
+    null
+  ],
+  "RE33": [
+    "opt_problems.reproblems.RE_problems",
+    null
+  ],
+  "RE34": [
+    "opt_problems.reproblems.RE_problems",
+    null
+  ],
+  "RE35": [
+    "opt_problems.reproblems.RE_problems",
+    null
+  ],
+  "RE36": [
+    "opt_problems.reproblems.RE_problems",
+    null
+  ],
+  "RE37": [
+    "opt_problems.reproblems.RE_problems",
+    null
+  ],
+  "RE41": [
+    "opt_problems.reproblems.RE_problems",
+    null
+  ],
+  "RE42": [
+    "opt_problems.reproblems.RE_problems",
+    null
+  ],
+  "RE61": [
+    "opt_problems.reproblems.RE_problems",
+    null
+  ],
+  "RE91": [
+    "opt_problems.reproblems.RE_problems",
+    null
+  ],
+  "ReacherProblem": [
+    "opt_problems.control.mujoco.MujocoFuncs",
+    "mujoco"
+  ],
+  "ReactivityModel": [
+    "opt_problems.engineering.ReactivityModel",
+    null
+  ],
+  "ReinforcedConcreteBeam": [
+    "opt_problems.engineering.ReinforcedConcreteBeam",
+    null
+  ],
+  "RobotPush": [
+    "opt_problems.engineering.RobotPush",
+    "box2d"
+  ],
+  "Rover": [
+    "opt_problems.engineering.Rover",
+    null
+  ],
+  "SVM": [
+    "opt_problems.hpo.SVM",
+    "hpo"
+  ],
+  "SpeedReducer": [
+    "opt_problems.engineering.SpeedReducer",
+    null
+  ],
+  "SwimmerPolicySearchProblem": [
+    "opt_problems.control.mujoco.MujocoFuncs",
+    "mujoco"
+  ],
+  "SwimmerProblem": [
+    "opt_problems.control.mujoco.MujocoFuncs",
+    "mujoco"
+  ],
+  "TSP_100Cities": [
+    "opt_problems.combinatorial.TSP",
+    null
+  ],
+  "TSP_51Cities": [
+    "opt_problems.combinatorial.TSP",
+    null
+  ],
+  "ThreeTruss": [
+    "opt_problems.engineering.ThreeTruss",
+    null
+  ],
+  "Truss10D": [
+    "opt_problems.engineering.Truss10D",
+    "truss"
+  ],
+  "Truss120D": [
+    "opt_problems.engineering.Truss120D",
+    "truss"
+  ],
+  "Truss200D": [
+    "opt_problems.engineering.Truss200D",
+    "truss"
+  ],
+  "Truss25D": [
+    "opt_problems.engineering.Truss25D",
+    "truss"
+  ],
+  "Truss72D_FourForces": [
+    "opt_problems.engineering.Truss72D",
+    "truss"
+  ],
+  "Truss72D_SingleForce": [
+    "opt_problems.engineering.Truss72D",
+    "truss"
+  ],
+  "TwoBarTruss": [
+    "opt_problems.engineering.TwoBarTruss",
+    null
+  ],
+  "VehicleSafety": [
+    "opt_problems.engineering.VehicleSafety",
+    null
+  ],
+  "Walker2DPolicySearchProblem": [
+    "opt_problems.control.mujoco.MujocoFuncs",
+    "mujoco"
+  ],
+  "Walker2DProblem": [
+    "opt_problems.control.mujoco.MujocoFuncs",
+    "mujoco"
+  ],
+  "WaterProblem": [
+    "opt_problems.engineering.WaterProblem",
+    null
+  ],
+  "WaterResources": [
+    "opt_problems.engineering.WaterResources",
+    null
+  ],
+  "WeldedBeam": [
+    "opt_problems.engineering.WeldedBeam",
+    null
+  ]
+}

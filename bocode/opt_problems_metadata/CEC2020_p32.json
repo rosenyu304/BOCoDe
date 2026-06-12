@@ -1,0 +1,38 @@
+{
+  "name": "CEC2020_p32",
+  "module": "bocode.opt_problems.cec2020_rw.CEC2020_p21_33",
+  "extra": null,
+  "num_objectives": 1,
+  "num_constraints": 0,
+  "available_dimensions": 5,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 5,
+  "bounds": [
+    [
+      78.0,
+      102.0
+    ],
+    [
+      33.0,
+      45.0
+    ],
+    [
+      27.0,
+      45.0
+    ],
+    [
+      27.0,
+      45.0
+    ],
+    [
+      27.0,
+      45.0
+    ]
+  ],
+  "num_integer_variables": null,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "source": "CEC2020 Problem 32"
+}

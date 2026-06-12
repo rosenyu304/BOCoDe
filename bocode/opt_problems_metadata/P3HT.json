@@ -1,0 +1,38 @@
+{
+  "name": "P3HT",
+  "module": "bocode.opt_problems.materials.P3HT",
+  "extra": null,
+  "num_objectives": 1,
+  "num_constraints": 0,
+  "available_dimensions": 5,
+  "input_type": "discrete",
+  "scalable": false,
+  "dim": 5,
+  "bounds": [
+    [
+      15.0,
+      96.27
+    ],
+    [
+      0.0,
+      60.0
+    ],
+    [
+      0.0,
+      70.0
+    ],
+    [
+      0.0,
+      85.0
+    ],
+    [
+      0.0,
+      75.0
+    ]
+  ],
+  "num_integer_variables": null,
+  "application": "Materials",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "source": "Maximise measured conductivity of a P3HT-CNT composite (5 content inputs)."
+}

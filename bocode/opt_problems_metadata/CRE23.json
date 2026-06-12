@@ -1,0 +1,34 @@
+{
+  "name": "CRE23",
+  "module": "bocode.opt_problems.reproblems.CRE_problems",
+  "extra": null,
+  "num_objectives": 2,
+  "num_constraints": 4,
+  "available_dimensions": 4,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 4,
+  "bounds": [
+    [
+      55.0,
+      80.0
+    ],
+    [
+      75.0,
+      110.0
+    ],
+    [
+      1000.0,
+      3000.0
+    ],
+    [
+      11.0,
+      20.0
+    ]
+  ],
+  "num_integer_variables": null,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "source": "CRE benchmark problems (Tanabe & Ishibuchi, 2020). 8 constrained multi-objective problems with explicit constraints. Reference: Ryoji Tanabe, Hisao Ishibuchi, \"An Easy-to-use Real-world Multi-objective Problem Suite\" Applied Soft Computing. 89: 106078 (2020) Note: Original reproblems use g >= 0 = satisfied. BOCoDe uses g <= 0 = satisfied. Constraints are negated accordingly."
+}

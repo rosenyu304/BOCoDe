@@ -177,3 +177,11 @@ pop_objs_eval.txt
 pop_vars_eval.txt
 input.txt
 output.txt
+# Large problem assets — fetched on demand via bocode/_fetch.py (see README)
+bocode/opt_problems/hpo/data/slice_localization_data.csv
+bocode/opt_problems/engineering/Mopta_Data/*.bin
+bocode/opt_problems/engineering/Mazda_Data/bin/mazda_mop
+bocode/opt_problems/engineering/Mazda_Data/bin/mazda_mop_sca
+bocode/opt_problems/engineering/Mopta_Data/input.txt
+bocode/opt_problems/engineering/Mopta_Data/output.txt
+bocode/opt_problems/engineering/Mazda_Data/pop_*.txt

@@ -1,0 +1,46 @@
+{
+  "name": "CEC2020_p15",
+  "module": "bocode.opt_problems.cec2020_rw.CEC2020_p1_20",
+  "extra": null,
+  "num_objectives": 1,
+  "num_constraints": 0,
+  "available_dimensions": 7,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 7,
+  "bounds": [
+    [
+      2.6,
+      3.6
+    ],
+    [
+      0.7,
+      0.8
+    ],
+    [
+      17,
+      28
+    ],
+    [
+      7.3,
+      8.3
+    ],
+    [
+      7.3,
+      8.3
+    ],
+    [
+      2.9,
+      3.9
+    ],
+    [
+      5,
+      5.5
+    ]
+  ],
+  "num_integer_variables": null,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "source": "CEC2020 Problem 15"
+}

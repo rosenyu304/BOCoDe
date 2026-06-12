@@ -1,0 +1,34 @@
+{
+  "name": "WeldedBeam",
+  "module": "bocode.opt_problems.engineering.WeldedBeam",
+  "extra": null,
+  "num_objectives": 2,
+  "num_constraints": 4,
+  "available_dimensions": 4,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 4,
+  "bounds": [
+    [
+      0.125,
+      5.0
+    ],
+    [
+      0.1,
+      10.0
+    ],
+    [
+      0.1,
+      10.0
+    ],
+    [
+      0.125,
+      5.0
+    ]
+  ],
+  "num_integer_variables": null,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "source": "Welded beam design: minimise cost and end deflection (2 obj, 4 constraints, 4D)."
+}

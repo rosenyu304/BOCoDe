@@ -1,0 +1,34 @@
+{
+  "name": "RE21",
+  "module": "bocode.opt_problems.reproblems.RE_problems",
+  "extra": null,
+  "num_objectives": 2,
+  "num_constraints": 0,
+  "available_dimensions": 4,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 4,
+  "bounds": [
+    [
+      1.0,
+      3.0
+    ],
+    [
+      1.4142135623730951,
+      3.0
+    ],
+    [
+      1.4142135623730951,
+      3.0
+    ],
+    [
+      1.0,
+      3.0
+    ]
+  ],
+  "num_integer_variables": null,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "source": "RE benchmark problems (Tanabe & Ishibuchi, 2020). 16 unconstrained multi-objective problems where original constraints are reformulated as penalty objectives. Reference: Ryoji Tanabe, Hisao Ishibuchi, \"An Easy-to-use Real-world Multi-objective Problem Suite\" Applied Soft Computing. 89: 106078 (2020)"
+}

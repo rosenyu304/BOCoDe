@@ -1,0 +1,58 @@
+{
+  "name": "CantileverBeam",
+  "module": "bocode.opt_problems.engineering.CantileverBeam",
+  "extra": null,
+  "num_objectives": 1,
+  "num_constraints": 11,
+  "available_dimensions": 10,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 10,
+  "bounds": [
+    [
+      1,
+      5
+    ],
+    [
+      1,
+      5
+    ],
+    [
+      1,
+      5
+    ],
+    [
+      1,
+      5
+    ],
+    [
+      1,
+      5
+    ],
+    [
+      30,
+      65
+    ],
+    [
+      30,
+      65
+    ],
+    [
+      30,
+      65
+    ],
+    [
+      30,
+      65
+    ],
+    [
+      30,
+      65
+    ]
+  ],
+  "num_integer_variables": null,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "source": "Yang XS, Hossein Gandomi A (2012) Bat algorithm: a novel approach for global engineering optimization. Engineering computations 29(5):464\u2013483"
+}

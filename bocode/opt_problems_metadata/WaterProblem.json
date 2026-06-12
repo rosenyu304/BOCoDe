@@ -1,0 +1,30 @@
+{
+  "name": "WaterProblem",
+  "module": "bocode.opt_problems.engineering.WaterProblem",
+  "extra": null,
+  "num_objectives": 5,
+  "num_constraints": 7,
+  "available_dimensions": 3,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 3,
+  "bounds": [
+    [
+      0.01,
+      0.45
+    ],
+    [
+      0.01,
+      0.1
+    ],
+    [
+      0.01,
+      0.1
+    ]
+  ],
+  "num_integer_variables": null,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "source": "H. Jain and K. Deb. An evolutionary many-objective optimization algorithm using reference-point based nondominated sorting approach, part II: Handling constraints and extending to an adaptive approach, IEEE Transactions on Evolutionary Computation 18(4):602\u2013622, 2014"
+}

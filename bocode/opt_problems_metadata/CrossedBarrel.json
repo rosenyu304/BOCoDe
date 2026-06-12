@@ -1,0 +1,34 @@
+{
+  "name": "CrossedBarrel",
+  "module": "bocode.opt_problems.materials.CrossedBarrel",
+  "extra": null,
+  "num_objectives": 1,
+  "num_constraints": 0,
+  "available_dimensions": 4,
+  "input_type": "discrete",
+  "scalable": false,
+  "dim": 4,
+  "bounds": [
+    [
+      6.0,
+      12.0
+    ],
+    [
+      0.0,
+      200.0
+    ],
+    [
+      1.5,
+      2.5
+    ],
+    [
+      0.7,
+      1.4
+    ]
+  ],
+  "num_integer_variables": null,
+  "application": "Materials",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "source": "Maximise toughness of a crossed-barrel structure (4 geometric inputs)."
+}

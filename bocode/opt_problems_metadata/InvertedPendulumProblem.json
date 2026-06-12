@@ -1,0 +1,22 @@
+{
+  "name": "InvertedPendulumProblem",
+  "module": "bocode.opt_problems.control.mujoco.MujocoFuncs",
+  "extra": "mujoco",
+  "num_objectives": 1,
+  "num_constraints": 0,
+  "available_dimensions": 1,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 1,
+  "bounds": [
+    [
+      -3.0,
+      3.0
+    ]
+  ],
+  "num_integer_variables": null,
+  "application": "Control",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "source": ""
+}

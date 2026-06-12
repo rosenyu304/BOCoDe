@@ -1,0 +1,38 @@
+{
+  "name": "VehicleSafety",
+  "module": "bocode.opt_problems.engineering.VehicleSafety",
+  "extra": null,
+  "num_objectives": 3,
+  "num_constraints": 0,
+  "available_dimensions": 5,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 5,
+  "bounds": [
+    [
+      1.0,
+      3.0
+    ],
+    [
+      1.0,
+      3.0
+    ],
+    [
+      1.0,
+      3.0
+    ],
+    [
+      1.0,
+      3.0
+    ],
+    [
+      1.0,
+      3.0
+    ]
+  ],
+  "num_integer_variables": null,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "source": "Vehicle crash safety: 3 objectives, unconstrained, 5D."
+}

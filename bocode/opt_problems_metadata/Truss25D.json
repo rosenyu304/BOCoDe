@@ -1,0 +1,118 @@
+{
+  "name": "Truss25D",
+  "module": "bocode.opt_problems.engineering.Truss25D",
+  "extra": "truss",
+  "num_objectives": 1,
+  "num_constraints": 31,
+  "available_dimensions": 25,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 25,
+  "bounds": [
+    [
+      0.1,
+      3.4
+    ],
+    [
+      0.1,
+      3.4
+    ],
+    [
+      0.1,
+      3.4
+    ],
+    [
+      0.1,
+      3.4
+    ],
+    [
+      0.1,
+      3.4
+    ],
+    [
+      0.1,
+      3.4
+    ],
+    [
+      0.1,
+      3.4
+    ],
+    [
+      0.1,
+      3.4
+    ],
+    [
+      0.1,
+      3.4
+    ],
+    [
+      0.1,
+      3.4
+    ],
+    [
+      0.1,
+      3.4
+    ],
+    [
+      0.1,
+      3.4
+    ],
+    [
+      0.1,
+      3.4
+    ],
+    [
+      0.1,
+      3.4
+    ],
+    [
+      0.1,
+      3.4
+    ],
+    [
+      0.1,
+      3.4
+    ],
+    [
+      0.1,
+      3.4
+    ],
+    [
+      0.1,
+      3.4
+    ],
+    [
+      0.1,
+      3.4
+    ],
+    [
+      0.1,
+      3.4
+    ],
+    [
+      0.1,
+      3.4
+    ],
+    [
+      0.1,
+      3.4
+    ],
+    [
+      0.1,
+      3.4
+    ],
+    [
+      0.1,
+      3.4
+    ],
+    [
+      0.1,
+      3.4
+    ]
+  ],
+  "num_integer_variables": null,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "source": "Duc Thang Le, Dac-Khuong Bui, Tuan Duc Ngo, Quoc-Hung Nguyen, H. Nguyen-Xuan, (2019). \"A novel hybrid method combining electromagnetism-like mechanism and firefly algorithms for constrained design optimization of discrete truss structures,\" Computers & Structures, Volume 212."
+}

@@ -1,0 +1,30 @@
+{
+  "name": "CompressionSpring",
+  "module": "bocode.opt_problems.engineering.CompressionSpring",
+  "extra": null,
+  "num_objectives": 1,
+  "num_constraints": 4,
+  "available_dimensions": 3,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 3,
+  "bounds": [
+    [
+      0.05,
+      1
+    ],
+    [
+      0.25,
+      1.3
+    ],
+    [
+      2,
+      15
+    ]
+  ],
+  "num_integer_variables": null,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "source": "Gandomi AH, Yang XS, Alavi AH (2011) Mixed variable structural optimization using firefly algorithm. Computers & Structures 89(23-24):2325\u20132336"
+}

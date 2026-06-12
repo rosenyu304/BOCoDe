@@ -1,0 +1,62 @@
+{
+  "name": "Car",
+  "module": "bocode.opt_problems.engineering.Car",
+  "extra": null,
+  "num_objectives": 1,
+  "num_constraints": 10,
+  "available_dimensions": 11,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 11,
+  "bounds": [
+    [
+      0.5,
+      1.5
+    ],
+    [
+      0.45,
+      1.35
+    ],
+    [
+      0.5,
+      1.5
+    ],
+    [
+      0.5,
+      1.5
+    ],
+    [
+      0.5,
+      1.5
+    ],
+    [
+      0.5,
+      1.5
+    ],
+    [
+      0.5,
+      1.5
+    ],
+    [
+      0.192,
+      0.345
+    ],
+    [
+      0.192,
+      0.345
+    ],
+    [
+      -20,
+      0
+    ],
+    [
+      -20,
+      0
+    ]
+  ],
+  "num_integer_variables": null,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "source": "Gandomi AH, Yang XS, Alavi AH (2011) Mixed variable structural optimization using firefly algorithm. Computers & Structures 89(23-24):2325\u20132336"
+}

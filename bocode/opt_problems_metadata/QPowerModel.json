@@ -1,0 +1,50 @@
+{
+  "name": "QPowerModel",
+  "module": "bocode.opt_problems.engineering.QPowerModel",
+  "extra": "neorl",
+  "num_objectives": 1,
+  "num_constraints": 0,
+  "available_dimensions": 8,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 8,
+  "bounds": [
+    [
+      -3.141592653589793,
+      3.141592653589793
+    ],
+    [
+      -3.141592653589793,
+      3.141592653589793
+    ],
+    [
+      -3.141592653589793,
+      3.141592653589793
+    ],
+    [
+      -3.141592653589793,
+      3.141592653589793
+    ],
+    [
+      -3.141592653589793,
+      3.141592653589793
+    ],
+    [
+      -3.141592653589793,
+      3.141592653589793
+    ],
+    [
+      -3.141592653589793,
+      3.141592653589793
+    ],
+    [
+      -3.141592653589793,
+      3.141592653589793
+    ]
+  ],
+  "num_integer_variables": null,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "source": "Eight-drum reactivity insertion problem. Uses the QPowerModel.eval(pert) to compute the reactor's power distribution https://neorl.readthedocs.io/en/latest/examples/ex11.html#problem-description"
+}

@@ -1,0 +1,17 @@
+{
+  "name": "Mazda_SCA",
+  "module": "bocode.opt_problems.engineering.Mazda",
+  "extra": "mazda",
+  "num_objectives": 4,
+  "num_constraints": 36,
+  "available_dimensions": 148,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 148,
+  "bounds": null,
+  "num_integer_variables": null,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "source": "https://ladse.eng.isas.jaxa.jp/benchmark/"
+}

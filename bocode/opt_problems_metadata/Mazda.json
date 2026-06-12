@@ -1,0 +1,17 @@
+{
+  "name": "Mazda",
+  "module": "bocode.opt_problems.engineering.Mazda",
+  "extra": "mazda",
+  "num_objectives": 5,
+  "num_constraints": 54,
+  "available_dimensions": 222,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 222,
+  "bounds": null,
+  "num_integer_variables": null,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "source": "https://ladse.eng.isas.jaxa.jp/benchmark/ Meanings of each objective: - The first column is total weight of three vehicles. - The second column is number of common gauge parts. - The third column is weight of SUV. - The fourth column is weight of LV. - The fifth column is weight of SV."
+}

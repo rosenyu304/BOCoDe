@@ -1,0 +1,50 @@
+{
+  "name": "HeatExchanger",
+  "module": "bocode.opt_problems.engineering.HeatExchanger",
+  "extra": null,
+  "num_objectives": 1,
+  "num_constraints": 6,
+  "available_dimensions": 8,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 8,
+  "bounds": [
+    [
+      100,
+      100000
+    ],
+    [
+      100,
+      100000
+    ],
+    [
+      100,
+      100000
+    ],
+    [
+      10,
+      1000
+    ],
+    [
+      10,
+      1000
+    ],
+    [
+      10,
+      1000
+    ],
+    [
+      10,
+      1000
+    ],
+    [
+      10,
+      1000
+    ]
+  ],
+  "num_integer_variables": null,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "source": "Yang XS, Hossein Gandomi A (2012) Bat algorithm: a novel approach for global engineering optimization. Engineering computations 29(5):464\u2013483"
+}

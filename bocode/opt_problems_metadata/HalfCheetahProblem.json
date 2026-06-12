@@ -1,0 +1,42 @@
+{
+  "name": "HalfCheetahProblem",
+  "module": "bocode.opt_problems.control.mujoco.MujocoFuncs",
+  "extra": "mujoco",
+  "num_objectives": 1,
+  "num_constraints": 0,
+  "available_dimensions": 6,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 6,
+  "bounds": [
+    [
+      -1.0,
+      1.0
+    ],
+    [
+      -1.0,
+      1.0
+    ],
+    [
+      -1.0,
+      1.0
+    ],
+    [
+      -1.0,
+      1.0
+    ],
+    [
+      -1.0,
+      1.0
+    ],
+    [
+      -1.0,
+      1.0
+    ]
+  ],
+  "num_integer_variables": null,
+  "application": "Control",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "source": ""
+}

@@ -1,0 +1,38 @@
+{
+  "name": "AgNP",
+  "module": "bocode.opt_problems.materials.AgNP",
+  "extra": null,
+  "num_objectives": 1,
+  "num_constraints": 0,
+  "available_dimensions": 5,
+  "input_type": "discrete",
+  "scalable": false,
+  "dim": 5,
+  "bounds": [
+    [
+      4.53,
+      42.80981595
+    ],
+    [
+      9.999518096,
+      40.00101474
+    ],
+    [
+      0.5,
+      30.5
+    ],
+    [
+      0.498851653,
+      19.5
+    ],
+    [
+      200.0,
+      983.0
+    ]
+  ],
+  "num_integer_variables": null,
+  "application": "Materials",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "source": "Minimise the spectral loss of a silver-nanoparticle synthesis (5 flow inputs)."
+}

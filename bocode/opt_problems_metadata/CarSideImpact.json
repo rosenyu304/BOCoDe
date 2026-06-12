@@ -1,0 +1,46 @@
+{
+  "name": "CarSideImpact",
+  "module": "bocode.opt_problems.engineering.CarSideImpact",
+  "extra": null,
+  "num_objectives": 3,
+  "num_constraints": 10,
+  "available_dimensions": 7,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 7,
+  "bounds": [
+    [
+      0.5,
+      1.5
+    ],
+    [
+      0.45,
+      1.35
+    ],
+    [
+      0.5,
+      1.5
+    ],
+    [
+      0.5,
+      1.5
+    ],
+    [
+      0.875,
+      2.625
+    ],
+    [
+      0.4,
+      1.2
+    ],
+    [
+      0.4,
+      1.2
+    ]
+  ],
+  "num_integer_variables": null,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "source": "H. Jain and K. Deb. An evolutionary many-objective optimization algorithm using reference-point based nondominated sorting approach, part II: Handling constraints and extending to an adaptive approach, IEEE Transactions on Evolutionary Computation 18(4):602\u2013622, 2014"
+}

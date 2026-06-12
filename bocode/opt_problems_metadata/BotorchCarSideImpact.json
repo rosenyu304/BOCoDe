@@ -1,0 +1,46 @@
+{
+  "name": "BotorchCarSideImpact",
+  "module": "bocode.opt_problems.engineering.BotorchCarSideImpact",
+  "extra": null,
+  "num_objectives": 4,
+  "num_constraints": 0,
+  "available_dimensions": 7,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 7,
+  "bounds": [
+    [
+      0.5,
+      1.5
+    ],
+    [
+      0.45,
+      1.35
+    ],
+    [
+      0.5,
+      1.5
+    ],
+    [
+      0.5,
+      1.5
+    ],
+    [
+      0.875,
+      2.625
+    ],
+    [
+      0.4,
+      1.2
+    ],
+    [
+      0.4,
+      1.2
+    ]
+  ],
+  "num_integer_variables": null,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "source": "Car side impact (BoTorch 4-objective variant), unconstrained, 7D. Distinct from :class:`bocode.opt_problems.engineering.CarSideImpact.CarSideImpact`, which is the 2-objective / 10-constraint formulation."
+}

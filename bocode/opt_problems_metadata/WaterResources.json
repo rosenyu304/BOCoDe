@@ -1,0 +1,30 @@
+{
+  "name": "WaterResources",
+  "module": "bocode.opt_problems.engineering.WaterResources",
+  "extra": null,
+  "num_objectives": 5,
+  "num_constraints": 7,
+  "available_dimensions": 3,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 3,
+  "bounds": [
+    [
+      0.01,
+      0.45
+    ],
+    [
+      0.01,
+      0.1
+    ],
+    [
+      0.01,
+      0.1
+    ]
+  ],
+  "num_integer_variables": null,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "source": "K. Musselman and J. Talavage. A trade-off cut approach to multiple objective optimization. Operations Research 28(6):1424\u20131435, 1980"
+}

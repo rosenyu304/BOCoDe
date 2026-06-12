@@ -1,0 +1,50 @@
+{
+  "name": "ReactivityModel",
+  "module": "bocode.opt_problems.engineering.ReactivityModel",
+  "extra": null,
+  "num_objectives": 1,
+  "num_constraints": 0,
+  "available_dimensions": 8,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 8,
+  "bounds": [
+    [
+      -3.141592653589793,
+      3.141592653589793
+    ],
+    [
+      -3.141592653589793,
+      3.141592653589793
+    ],
+    [
+      -3.141592653589793,
+      3.141592653589793
+    ],
+    [
+      -3.141592653589793,
+      3.141592653589793
+    ],
+    [
+      -3.141592653589793,
+      3.141592653589793
+    ],
+    [
+      -3.141592653589793,
+      3.141592653589793
+    ],
+    [
+      -3.141592653589793,
+      3.141592653589793
+    ],
+    [
+      -3.141592653589793,
+      3.141592653589793
+    ]
+  ],
+  "num_integer_variables": null,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "source": "Eight-drum reactivity insertion problem. Uses the ReactivityModel.eval(pert) to compute the total reactivity worth of 8 control-drum angles (in radians). https://neorl.readthedocs.io/en/latest/examples/ex11.html#problem-description"
+}

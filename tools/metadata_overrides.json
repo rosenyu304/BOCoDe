@@ -1,0 +1,9 @@
+{
+  "TSP_51Cities": {"np_hard": true, "convex": false, "application": "Combinatorial"},
+  "TSP_100Cities": {"np_hard": true, "convex": false, "application": "Combinatorial"},
+  "SVM": {"application": "Hyperparameter Optimization", "dim": 388, "convex": false},
+  "Mazda": {"application": "Engineering", "dim": 222},
+  "Mazda_SCA": {"application": "Engineering", "dim": 148},
+  "MOPTA08Car": {"application": "Engineering", "dim": 124, "convex": false},
+  "RobotPush": {"application": "Engineering", "dim": 14, "convex": false}
+}
