@@ -64,15 +64,21 @@ def _application(name: str, module: str, overrides: dict) -> str:
 
 
 def _source(cls) -> str:
-    """Extract a one-line source citation from the class or module docstring."""
-    for doc in (cls.__doc__, sys.modules[cls.__module__].__doc__):
+    """Extract a one-line source citation from the class or module docstring.
+
+    Prefer an explicit ``Sources:`` block (in either the class or module
+    docstring); fall back to the first non-empty docstring otherwise.
+    """
+    docs = [cls.__doc__, sys.modules[cls.__module__].__doc__]
+    for doc in docs:
         if not doc:
             continue
         m = re.search(r"[Ss]ource[s]?:\s*(.+)", doc, re.S)
-        text = m.group(1) if m else doc
-        line = " ".join(text.split())
-        if line:
-            return line[:500]
+        if m:
+            return " ".join(m.group(1).split())[:500]
+    for doc in docs:
+        if doc and doc.strip():
+            return " ".join(doc.split())[:500]
     return ""
 
 

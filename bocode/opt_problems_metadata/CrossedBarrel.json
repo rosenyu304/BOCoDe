@@ -30,5 +30,5 @@
   "application": "Materials",
   "convex": "unknown",
   "np_hard": "unknown",
-  "source": "Maximise toughness of a crossed-barrel structure (4 geometric inputs)."
+  "source": "A. E. Gongora, B. Xu, W. Perry, et al. A Bayesian experimental autonomous researcher for mechanical design. Science Advances 6(15):eaaz1708, 2020. Dataset via the PV-Lab benchmarking suite: https://github.com/PV-Lab/Benchmarking"
 }

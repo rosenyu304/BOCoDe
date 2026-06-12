@@ -26,5 +26,5 @@
   "application": "Materials",
   "convex": "unknown",
   "np_hard": "unknown",
-  "source": "Minimise the instability index of a halide perovskite (3 composition inputs)."
+  "source": "S. Sun, A. Tiihonen, F. Oviedo, et al. A data fusion approach to optimize compositional stability of halide perovskites. Matter 4(4):1305-1322, 2021. Dataset via the PV-Lab benchmarking suite: https://github.com/PV-Lab/Benchmarking"
 }

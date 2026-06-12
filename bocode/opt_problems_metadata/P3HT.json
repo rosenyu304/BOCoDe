@@ -34,5 +34,5 @@
   "application": "Materials",
   "convex": "unknown",
   "np_hard": "unknown",
-  "source": "Maximise measured conductivity of a P3HT-CNT composite (5 content inputs)."
+  "source": "D. Bash, Y. Cai, V. Chellappan, et al. Multi-fidelity high-throughput optimization of electrical conductivity in P3HT-CNT composites. Advanced Functional Materials 31:2102606, 2021. Dataset via the PV-Lab benchmarking suite: https://github.com/PV-Lab/Benchmarking"
 }

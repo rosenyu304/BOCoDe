@@ -30,5 +30,5 @@
   "application": "Materials",
   "convex": "unknown",
   "np_hard": "unknown",
-  "source": "Maximise the print-quality score of a 3D printer (4 process inputs)."
+  "source": "J. R. Deneault, J. Chang, J. Myung, et al. Toward autonomous additive manufacturing: Bayesian optimization on a 3D printer. MRS Bulletin 46:566-575, 2021. Dataset via the PV-Lab benchmarking suite: https://github.com/PV-Lab/Benchmarking"
 }

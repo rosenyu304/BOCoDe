@@ -1,49 +1,14 @@
-"""
+"""Weighted-Lasso hyperparameter optimization on the LassoBench RCV1 dataset.
+
 Sources:
-(1) Šehić Kenan, Gramfort Alexandre, Salmon Joseph and Nardi Luigi, "LassoBench: A High-Dimensional Hyperparameter Optimization Benchmark Suite for Lasso", Proceedings of the 1st International Conference on Automated Machine Learning, 2022.
+Kenan Šehić, Alexandre Gramfort, Joseph Salmon, and Luigi Nardi. LassoBench: A High-Dimensional Hyperparameter Optimization Benchmark Suite for Lasso. Proceedings of the 1st International Conference on Automated Machine Learning (AutoML), 2022.
 """
 
-import torch
-
-from ...base import BenchmarkProblem, DataType
+from ._lasso_base import LassoBenchRealProblem
 
 
-class LassoRCV1(BenchmarkProblem):
-    """
-    ...
-    """
+class LassoRCV1(LassoBenchRealProblem):
+    """Weighted-Lasso hyperparameter optimization on the LassoBench RCV1 dataset. (47236-dimensional weighted-Lasso tuning)."""
 
     available_dimensions = 47236
-    input_type = DataType.CONTINUOUS
-    num_objectives = 1
-    num_constraints = 0
-
-    def __init__(self):
-        tags = [
-            "LassoRCV1",
-            "-----------------------------",
-            "OBJECTIVES: Single Objective (1)",
-            "CONSTRAINTS: N/A",
-            "SPACE: Continuous",
-            "SCALABLE: 47236-Dim",
-            "IMPORTS: LassoBench",
-        ]
-
-        super().__init__(
-            dim=47236,
-            num_objectives=1,
-            num_constraints=0,
-            bounds=[(-1, 1)] * 47236,
-            tags=tags,
-        )
-
-    def _evaluate_implementation(self, X):
-        import LassoBench
-
-        fx = torch.zeros(X.shape[0], 1)
-        real_bench = LassoBench.RealBenchmark(pick_data="rcv1")
-        for i in range(X.shape[0]):
-            # loss = real_bench.evaluate(X[i,:].numpy())
-            fx[i, 0] = -real_bench.evaluate(X[i, :].to(torch.double).numpy())
-
-        return None, fx
+    pick_data = "rcv1"
