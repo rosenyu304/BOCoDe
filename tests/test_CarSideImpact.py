@@ -1,6 +1,6 @@
 import torch
 
-from bocode.Engineering import CarSideImpact
+from bocode import CarSideImpact
 
 
 def test_carSideImpact_evaluate():

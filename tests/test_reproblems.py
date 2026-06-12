@@ -1,7 +1,7 @@
 import pytest
 import torch
 
-from bocode.Engineering import reproblems
+from bocode.opt_problems import reproblems
 
 re_classes = [
     reproblems.RE21,

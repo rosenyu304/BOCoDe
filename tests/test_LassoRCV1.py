@@ -2,7 +2,7 @@ import pytest
 import torch
 
 pytest.importorskip("LassoBench")
-from bocode.LassoBench import LassoRCV1
+from bocode import LassoRCV1
 
 
 def test_rcv1_evaluate():

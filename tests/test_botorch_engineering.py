@@ -1,9 +1,8 @@
 import torch
 
-from bocode.Engineering import (
+from bocode import (
     BotorchCarSideImpact,
     DiscBrake,
-    OSY,
     Penicillin,
     VehicleSafety,
     WeldedBeam,
@@ -37,10 +36,6 @@ def test_botorch_car_side_impact():
 
 def test_disc_brake():
     _general_test(DiscBrake)
-
-
-def test_osy():
-    _general_test(OSY)
 
 
 def test_welded_beam():

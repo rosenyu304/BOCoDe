@@ -1,6 +1,6 @@
 import torch
 
-from bocode.Engineering import CantileverBeam
+from bocode import CantileverBeam
 
 
 def test_cantileverBeam_evaluate():

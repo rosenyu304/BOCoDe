@@ -1,5 +1,6 @@
-import torch
 import numpy as np
+import torch
+
 try:
     import gymnasium as gym
 except ImportError as _exc:  # pragma: no cover - exercised only without the extra
@@ -108,7 +109,9 @@ class PID4Acrobot(BenchmarkProblem):
                 integral = 0
 
                 for _ in range(500):  # Max steps per episode
-                    state = env.state
+                    # gymnasium wraps the env in TimeLimit; the raw env state
+                    # lives on .unwrapped.
+                    state = env.unwrapped.state
 
                     # Compute PID control signal for the first joint angle
                     control_signal, prev_error, integral = self._compute_pid_control(

@@ -1,19 +1,19 @@
+from os import environ
+
 import numpy as np
 import torch
-
-from os import environ
 
 environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "1"
 
 try:
     import pygame
     from Box2D import (
-        b2World,
-        b2PolygonShape,
-        b2CircleShape,
-        b2_staticBody,
         b2_dynamicBody,
+        b2_staticBody,
+        b2CircleShape,
+        b2PolygonShape,
         b2Vec2,
+        b2World,
     )
 except ImportError as _exc:  # pragma: no cover - exercised only without the extra
     raise ImportError(
@@ -39,7 +39,10 @@ class RobotPush(BenchmarkProblem):
 
     tags = {"single_objective", "unconstrained", "continuous", "14D", "extra_imports"}
 
-    def __init__(self):
+    def __init__(self, do_gui: bool = False):
+        # do_gui opens a pygame visualization window during evaluation; it is off
+        # by default so benchmarking runs headless (no window pop-ups, CI-safe).
+        self.do_gui = do_gui
         super().__init__(
             dim=14,
             num_objectives=1,
@@ -65,7 +68,7 @@ class RobotPush(BenchmarkProblem):
     def _evaluate_implementation(self, X, scaling=False):
         from joblib import Parallel, delayed
 
-        f = PushReward()
+        f = PushReward(do_gui=self.do_gui)
 
         if scaling:
             X = super().scale(X)
@@ -94,7 +97,8 @@ class RobotPush(BenchmarkProblem):
 # Helper Functions
 ##############################
 class PushReward:
-    def __init__(self):
+    def __init__(self, do_gui: bool = False):
+        self.do_gui = do_gui
         # domain of this function
         self.xmin = [
             -5.0,
@@ -167,7 +171,10 @@ class PushReward:
 
         initial_dist = self.f_max
 
-        world = b2WorldInterface(True)
+        # Run headless: the push reward is computed from the physics simulation
+        # and does not require rendering. Opening a pygame window during
+        # benchmarking is disruptive and breaks headless/CI machines.
+        world = b2WorldInterface(self.do_gui)
         _, _, ofriction, odensity, _, hand_shape, hand_size = (
             "circle",
             1,

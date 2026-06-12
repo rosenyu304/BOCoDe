@@ -13,9 +13,7 @@ where Bayesian optimization selects among already-characterized experiments.
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Optional, Tuple
 
-import numpy as np
 import pandas as pd
 import torch
 
@@ -37,7 +35,7 @@ class MaterialsDatasetProblem(BenchmarkProblem):
     num_constraints = 0
 
     csv_name: str = ""
-    feature_columns: Optional[list] = None
+    feature_columns: list | None = None
     objective_column: str = ""
     minimize: bool = True
 
@@ -74,7 +72,7 @@ class MaterialsDatasetProblem(BenchmarkProblem):
 
     def _evaluate_implementation(
         self, X: torch.Tensor
-    ) -> Tuple[Optional[torch.Tensor], torch.Tensor]:
+    ) -> tuple[torch.Tensor | None, torch.Tensor]:
         """Return the measured objective of the nearest candidate row for each X."""
         Xq = X.to(self._X.dtype)
         # squared Euclidean distance to every candidate, then take the closest

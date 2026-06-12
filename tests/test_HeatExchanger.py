@@ -1,6 +1,6 @@
 import torch
 
-from bocode.Engineering import HeatExchanger
+from bocode import HeatExchanger
 
 
 def test_heatExchanger_evaluate():

@@ -1,6 +1,6 @@
 import torch
 
-from bocode.NEORL import ReactivityModel
+from bocode import ReactivityModel
 
 
 def test_reactivity_evaluate():

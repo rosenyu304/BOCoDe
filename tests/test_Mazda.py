@@ -3,7 +3,7 @@ import sys
 import pytest
 import torch
 
-from bocode.Engineering import Mazda, Mazda_SCA
+from bocode import Mazda, Mazda_SCA
 
 
 # Repeat 200 times

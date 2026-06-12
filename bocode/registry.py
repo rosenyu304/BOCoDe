@@ -17,9 +17,8 @@ from __future__ import annotations
 
 import importlib
 import json
-from functools import lru_cache
+from functools import cache
 from importlib import resources
-from typing import Dict, List, Optional, Tuple
 
 __all__ = [
     "list_problems",
@@ -35,14 +34,14 @@ __all__ = [
 ]
 
 
-def _load_registry() -> Dict[str, Tuple[str, Optional[str]]]:
+def _load_registry() -> dict[str, tuple[str, str | None]]:
     with resources.files("bocode").joinpath("_registry_data.json").open("r") as fh:
         raw = json.load(fh)
     return {name: (mod, extra) for name, (mod, extra) in raw.items()}
 
 
 # name -> (module path relative to bocode, required extra or None)
-PROBLEM_REGISTRY: Dict[str, Tuple[str, Optional[str]]] = _load_registry()
+PROBLEM_REGISTRY: dict[str, tuple[str, str | None]] = _load_registry()
 
 # Human-readable install hint per extra.
 _EXTRA_HINT = {
@@ -60,12 +59,12 @@ _EXTRA_HINT = {
 
 def list_problems(
     *,
-    application: Optional[str] = None,
-    num_objectives: Optional[int] = None,
-    constrained: Optional[bool] = None,
-    input_type: Optional[str] = None,
-    scalable: Optional[bool] = None,
-) -> List[str]:
+    application: str | None = None,
+    num_objectives: int | None = None,
+    constrained: bool | None = None,
+    input_type: str | None = None,
+    scalable: bool | None = None,
+) -> list[str]:
     """Return sorted problem names, optionally filtered by metadata fields.
 
     Args:
@@ -112,7 +111,7 @@ def get_problem(name: str):
     return getattr(module, name)
 
 
-@lru_cache(maxsize=None)
+@cache
 def get_metadata(name: str) -> dict:
     """Return the JSON metadata dict for ``name``."""
     if name not in PROBLEM_REGISTRY:
@@ -121,18 +120,18 @@ def get_metadata(name: str) -> dict:
         return json.load(fh)
 
 
-def list_metadata() -> List[dict]:
+def list_metadata() -> list[dict]:
     """Return metadata dicts for every registered problem."""
     return [get_metadata(n) for n in sorted(PROBLEM_REGISTRY)]
 
 
 def filter_functions(
     *,
-    num_objectives: Optional[int] = None,
-    constrained: Optional[bool] = None,
-    input_type: Optional[str] = None,
-    application: Optional[str] = None,
-) -> List[str]:
+    num_objectives: int | None = None,
+    constrained: bool | None = None,
+    input_type: str | None = None,
+    application: str | None = None,
+) -> list[str]:
     """Alias of :func:`list_problems` kept for backward compatibility."""
     return list_problems(
         num_objectives=num_objectives,
@@ -142,17 +141,17 @@ def filter_functions(
     )
 
 
-def get_single_objective_unconstrained() -> List[str]:
+def get_single_objective_unconstrained() -> list[str]:
     """Single-objective, unconstrained problems."""
     return list_problems(num_objectives=1, constrained=False)
 
 
-def get_single_objective_constrained() -> List[str]:
+def get_single_objective_constrained() -> list[str]:
     """Single-objective, constrained problems."""
     return list_problems(num_objectives=1, constrained=True)
 
 
-def get_multi_objective_unconstrained() -> List[str]:
+def get_multi_objective_unconstrained() -> list[str]:
     """Multi-objective (>=2), unconstrained problems."""
     return sorted(
         n
@@ -161,7 +160,7 @@ def get_multi_objective_unconstrained() -> List[str]:
     )
 
 
-def get_multi_objective_constrained() -> List[str]:
+def get_multi_objective_constrained() -> list[str]:
     """Multi-objective (>=2), constrained problems."""
     return sorted(
         n

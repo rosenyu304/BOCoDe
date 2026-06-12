@@ -1,6 +1,6 @@
 import torch
 
-from bocode.Engineering import CompressionSpring
+from bocode import CompressionSpring
 
 
 def test_compressionSpring_evaluate():

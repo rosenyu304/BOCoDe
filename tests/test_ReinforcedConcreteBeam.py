@@ -1,6 +1,6 @@
 import torch
 
-from bocode.Engineering import ReinforcedConcreteBeam
+from bocode import ReinforcedConcreteBeam
 
 
 def test_reinforcedConcreteBeam_evaluate():

@@ -1,6 +1,6 @@
 import torch
 
-from bocode.Engineering import ThreeTruss
+from bocode import ThreeTruss
 
 
 def test_threeTruss_evaluate():

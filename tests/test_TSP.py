@@ -1,6 +1,6 @@
 import torch
 
-from bocode.NEORL import TSP_51Cities, TSP_100Cities
+from bocode import TSP_51Cities, TSP_100Cities
 
 
 def test_TSP51_evaluate():

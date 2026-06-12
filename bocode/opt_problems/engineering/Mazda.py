@@ -7,8 +7,8 @@ import numpy as np
 import pandas as pd
 import torch
 
-from ...base import BenchmarkProblem, DataType
 from ..._fetch import fetch_data_file
+from ...base import BenchmarkProblem, DataType
 
 
 class Mazda_SCA(BenchmarkProblem):

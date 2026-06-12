@@ -1,6 +1,6 @@
 import torch
 
-from bocode.Engineering import SpeedReducer
+from bocode import SpeedReducer
 
 
 def test_speedReducer_evaluate():

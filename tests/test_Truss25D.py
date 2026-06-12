@@ -1,6 +1,6 @@
 import torch
 
-from bocode.Engineering import Truss25D
+from bocode import Truss25D
 
 
 def test_truss25D_evaluate():

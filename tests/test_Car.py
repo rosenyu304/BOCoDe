@@ -1,6 +1,6 @@
 import torch
 
-from bocode.Engineering import Car
+from bocode import Car
 
 
 def test_car_evaluate():

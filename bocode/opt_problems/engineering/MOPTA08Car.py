@@ -8,8 +8,8 @@ from pathlib import Path
 import numpy as np
 import torch
 
-from ...base import BenchmarkProblem, DataType
 from ..._fetch import fetch_data_file
+from ...base import BenchmarkProblem, DataType
 
 
 class MOPTA08Car(BenchmarkProblem):

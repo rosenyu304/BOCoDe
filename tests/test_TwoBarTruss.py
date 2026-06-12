@@ -1,6 +1,6 @@
 import torch
 
-from bocode.Engineering import TwoBarTruss
+from bocode import TwoBarTruss
 
 
 def test_twoBarTruss_evaluate():

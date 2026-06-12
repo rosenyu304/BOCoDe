@@ -1,6 +1,6 @@
 import torch
 
-from bocode.Engineering import WaterResources
+from bocode import WaterResources
 
 
 def test_waterResources_evaluate():

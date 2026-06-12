@@ -1,6 +1,6 @@
 import torch
 
-from bocode.Engineering import RobotPush
+from bocode import RobotPush
 
 
 def test_robotPush_evaluate():

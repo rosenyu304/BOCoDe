@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=64.0,<81", "wheel", "setuptools_scm>=8"]
+requires = ["setuptools>=64.0", "wheel", "setuptools_scm>=8"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -13,26 +13,14 @@ authors = [
       { name = "Cyril Picard" },
       { name = "Faez Ahmed" },
 ]
+# Core dependencies — enough to import bocode and run most problems. Problems
+# needing heavy/native libraries declare an optional extra below and import it
+# lazily with an actionable error message (see bocode/registry.py).
 dependencies = [
     "botorch",
     "torch",
     "numpy",
-    "cocopp",
-    "coco-experiment",
-    "pygame",
-    "Box2D",
-    "slientruss3d",
-    "openpyxl",
-    "diversipy",
-    "optproblems",
-    "opfunu",
-    "setuptools<81",
-    "gym",
-    "gymnasium[MuJoCo]",
     "scipy",
-    "gpy >= 1.13.0",
-    "onnxruntime>=1.22.0",
-    "modact",
     "pandas",
 ]
 readme = "README.md"
@@ -48,7 +36,33 @@ classifiers = [
 ]
 
 [project.optional-dependencies]
+# Per-problem-group extras. Install with e.g. pip install "bocode[mujoco,truss]".
+mujoco = ["gymnasium[mujoco]"]          # MuJoCo control problems
+control = ["gymnasium"]                  # PD4CartPole, PID4Acrobot (classic control)
+modact = ["modact"]                      # MODAct CS/CT/CTS/CTSE/CTSEI suite
+neorl = ["onnxruntime>=1.22.0"]          # QPowerModel surrogate
+box2d = ["Box2D", "pygame", "joblib"]    # RobotPush
+truss = ["slientruss3d"]                 # Truss10D..Truss200D
+mazda = ["openpyxl"]                     # Mazda (reads the .xlsx design table)
+hpo = ["scikit-learn"]                   # SVM hyperparameter problem
+lasso = ["LassoBench @ git+https://github.com/ksehic/LassoBench.git"]  # not on PyPI
 viz = [
+    "dash",
+    "plotly",
+    "matplotlib",
+]
+# Everything installable from PyPI (excludes the lasso git dependency, which must
+# be installed explicitly with pip install "bocode[lasso]").
+all = [
+    "gymnasium[mujoco]",
+    "modact",
+    "onnxruntime>=1.22.0",
+    "Box2D",
+    "pygame",
+    "joblib",
+    "slientruss3d",
+    "openpyxl",
+    "scikit-learn",
     "dash",
     "plotly",
     "matplotlib",
@@ -94,12 +108,16 @@ testpaths = [
 ]
 
 [tool.ruff]
-# Assume Python 3.12
 target-version = "py312"
 
 [tool.ruff.lint]
-ignore = ["E741"]
-
-# Allow fix for all enabled rules (when `--fix`) is provided.
+# E/F: pyflakes+pycodestyle, I: import sorting, UP: pyupgrade, B: bugbear.
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["E741", "E501", "B008"]
 fixable = ["ALL"]
 unfixable = []
+
+[tool.ruff.lint.per-file-ignores]
+# Vendored upstream code and the metadata generator are exempt from style rules.
+"bocode/opt_problems/_vendor/**" = ["ALL"]
+"tools/**" = ["E402"]

@@ -1,6 +1,6 @@
 import torch
 
-from bocode.Engineering import GearTrain
+from bocode import GearTrain
 
 
 def test_gearTrain_evaluate():

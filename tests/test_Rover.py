@@ -1,6 +1,6 @@
 import torch
 
-from bocode.Engineering import Rover
+from bocode import Rover
 
 
 def test_rover_evaluate():

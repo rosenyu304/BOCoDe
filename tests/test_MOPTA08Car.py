@@ -2,7 +2,7 @@ import sys
 import pytest
 import torch
 
-from bocode.Engineering import MOPTA08Car
+from bocode import MOPTA08Car
 
 
 # Repeat 200 times

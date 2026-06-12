@@ -1,5 +1,6 @@
-import torch
 import numpy as np
+import torch
+
 try:
     import gymnasium as gym
 except ImportError as _exc:  # pragma: no cover - exercised only without the extra

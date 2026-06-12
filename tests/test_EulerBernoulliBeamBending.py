@@ -1,6 +1,6 @@
 import torch
 
-from bocode.Engineering import EulerBernoulliBeamBending
+from bocode import EulerBernoulliBeamBending
 
 
 def test_eulerBernoulliBeamBending_evaluate():

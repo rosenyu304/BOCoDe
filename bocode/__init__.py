@@ -21,14 +21,14 @@ try:
 except PackageNotFoundError:  # package is not installed
     __version__ = "unknown"
 
-from .base import DataType
-from .exceptions import (
+from .base import DataType  # noqa: F401  (re-exported as public API)
+from .exceptions import (  # noqa: F401  (re-exported as public API)
     DimensionException,
     FunctionDefinitionAssertionError,
     RangeException,
     TypeException,
 )
-from .registry import (
+from .registry import (  # noqa: F401  (re-exported as public API)
     PROBLEM_REGISTRY,
     filter_functions,
     get_metadata,

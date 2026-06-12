@@ -13,8 +13,8 @@ except ImportError as _exc:  # pragma: no cover - exercised only without the ext
         "Install it with: pip install 'bocode[hpo]'"
     ) from _exc
 
-from ...base import BenchmarkProblem, DataType
 from ..._fetch import fetch_data_file
+from ...base import BenchmarkProblem, DataType
 
 """
 Source:

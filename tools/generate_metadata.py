@@ -19,7 +19,6 @@ their ``dim``/``bounds`` come from the overrides file instead.
 
 from __future__ import annotations
 
-import inspect
 import json
 import re
 import sys

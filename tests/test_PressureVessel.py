@@ -1,6 +1,6 @@
 import torch
 
-from bocode.Engineering import PressureVessel
+from bocode import PressureVessel
 
 
 def test_pressureVessel_evaluate():

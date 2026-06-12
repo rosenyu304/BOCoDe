@@ -1,7 +1,7 @@
 import pytest
 import torch
 
-from bocode.Engineering import CEC2020_RW_Constrained
+from bocode.opt_problems import cec2020_rw as CEC2020_RW_Constrained
 
 benchmark_classes = [
     CEC2020_RW_Constrained.CEC2020_p21,

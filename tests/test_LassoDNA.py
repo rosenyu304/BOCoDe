@@ -2,7 +2,7 @@ import pytest
 import torch
 
 pytest.importorskip("LassoBench")
-from bocode.LassoBench import LassoDNA
+from bocode import LassoDNA
 
 
 def test_dna_evaluate():

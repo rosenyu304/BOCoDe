@@ -21,7 +21,6 @@ import os
 import shutil
 import urllib.request
 from pathlib import Path
-from typing import Optional
 
 # Hugging Face dataset that hosts the large assets. The resolve/main path serves
 # raw files over HTTPS. Override with BOCODE_DATA_BASE_URL (must end with '/').
@@ -67,7 +66,7 @@ def _verify(path: Path, filename: str) -> None:
         )
 
 
-def fetch_data_file(filename: str, local_fallback: Optional[str] = None) -> str:
+def fetch_data_file(filename: str, local_fallback: str | None = None) -> str:
     """Return a local path to ``filename``, downloading and caching it if needed.
 
     Resolution order:

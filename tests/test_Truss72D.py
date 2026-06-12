@@ -1,6 +1,6 @@
 import torch
 
-from bocode.Engineering import Truss72D_FourForces, Truss72D_SingleForce
+from bocode import Truss72D_FourForces, Truss72D_SingleForce
 
 
 def test_truss72D_FourForces_evaluate():

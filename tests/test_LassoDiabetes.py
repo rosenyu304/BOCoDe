@@ -2,7 +2,7 @@ import pytest
 import torch
 
 pytest.importorskip("LassoBench")
-from bocode.LassoBench import LassoDiabetes
+from bocode import LassoDiabetes
 
 
 def test_diabetes_evaluate():

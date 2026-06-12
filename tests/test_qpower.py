@@ -1,6 +1,6 @@
 import torch
 
-from bocode.NEORL import QPowerModel
+from bocode import QPowerModel
 
 
 def test_qpower_evaluate():
