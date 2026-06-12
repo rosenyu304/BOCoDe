@@ -10,15 +10,11 @@ More information about the functions is available in the `LassoBench <https://gi
 Available Problems
 ----------------
 
-* :code:`bocode.LassoBench.LassoBreastCancer`
-* :code:`bocode.LassoBench.LassoDiabetes`
-* :code:`bocode.LassoBench.LassoDNA`
-* :code:`bocode.LassoBench.LassoLeukemia`
-* :code:`bocode.LassoBench.LassoRCV1`
-* :code:`bocode.LassoBench.LassoSyntHard`
-* :code:`bocode.LassoBench.LassoSyntHigh`
-* :code:`bocode.LassoBench.LassoSyntMedium`
-* :code:`bocode.LassoBench.LassoSyntSimple`
+* :code:`bocode.LassoBreastCancer`
+* :code:`bocode.LassoDiabetes`
+* :code:`bocode.LassoDNA`
+* :code:`bocode.LassoLeukemia`
+* :code:`bocode.LassoRCV1`
 
 Example Usage
 ------------
@@ -29,7 +25,7 @@ Example Usage
     import torch
 
     # Create a LassoBench problem
-    problem = bocode.LassoBench.LassoBreastCancer()
+    problem = bocode.LassoBreastCancer()
     
     # Get problem information
     bounds = problem.bounds

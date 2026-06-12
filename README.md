@@ -6,155 +6,179 @@
     https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](
     https://github.com/astral-sh/ruff)
 
-We present BOCoDe, a Python and PyTorch-based library that contains the most comprehensive suite of engineering design optimization problems and an interface to popular synthetic optimization problems, with access to 300+ problems for optimization algorithm benchmarking. 
-
-Our goal is to provide not only a Python optimization benchmark library but also to allow the PyTorch interface for facilitating machine learning optimization algorithms and applications such as surrogate and Bayesian optimization.
+BOCoDe is a Python/PyTorch library of **real-world** optimization problems for
+benchmarking optimization algorithms, with a first-class BoTorch/Ax interface for
+Bayesian optimization research. It collects engineering design, control,
+materials-science, hyperparameter, and combinatorial problems drawn from the
+literature — deliberately excluding purely synthetic test functions (Ackley,
+Rosenbrock, ZDT, DTLZ, …) so that benchmarks reflect problems people actually
+solve.
 
 > [!IMPORTANT]
->
-> The optimization tasks in this library can be used for all kinds of optimization algorithms benchmarking. 
-> As it was originally designed for Bayesian Optimization algorithms, the output objective values are meant to be **_maximized_**.
-> If you are using minimization algorithms, please negate the output objective value for your use.
+> Output objective values are meant to be **maximized** (the library was designed
+> for Bayesian optimization). For minimization algorithms, negate the objective.
+> Constraints are **inequality constraints**: `gx <= 0` is feasible.
 
 > [!NOTE]
-> The library is still under construction. Please open a pull request or an issue to let us know if you run into problems. Thanks!
+> This branch (`dev/2026_06`) is a substantial restructuring. See
+> [What changed](#-what-changed-dev2026_06) below.
 
 # 💡 What is in BOCoDe?
 
-## Engineering Design Problems
-We present a diverse collection of engineering design problems including car design, cantilever beam, truss structure optimization, and physics simulation of robotics problems. 
+Every problem is a real-world problem with a cited source. Problems are grouped by
+application area and accessed by name through a central registry:
 
-<center><img src="docs/Figures/TopFuns_Icon_v2.png" width="500"></center>
+| Area | Examples | Count |
+|---|---|---|
+| **Engineering** | trusses, pressure vessel, speed reducer, Mazda & MOPTA08 car design, CEC2020 real-world constrained suite (57), RE/CRE multi-objective suite (24), welded beam, disc brake | ~133 |
+| **Control** | MuJoCo locomotion (Ant, HalfCheetah, Hopper, …), CartPole / Acrobot PID tuning | ~18 |
+| **Materials** | AgNP, CrossedBarrel, P3HT, Perovskite, AutoAM (PV-Lab experimental datasets) | 5 |
+| **Hyperparameter Optimization** | SVM, LassoBench real datasets (DNA, Leukemia, RCV1, …) | 6 |
+| **Combinatorial** | Traveling Salesman (51 / 100 cities) | 2 |
 
-
-## Interface to Popular Benchmarks
-
-| [Botorch](https://botorch.org/)  | [BBOB/COCO](https://coco-platform.org/) | [OPFUNU<br/>(IEEE CEC benchmarks)](https://github.com/thieu1995/opfunu) | [Gym Mujoco](https://www.gymlibrary.dev/environments/mujoco/index.html) | [NEORL](https://neorl.readthedocs.io/en/latest/#) |
-| :------: | :------:  | :------:   | :------:   | :------:   |
-| <img src="docs/Figures/botorch_icon.png" width="50">  | <img src="docs/Figures/coco-logo.svg" width="50">      | <img src="docs/Figures/opfunu.png" width="100">        | <img src="docs/Figures/gym_logo.png" width="120">  | <img src="docs/Figures/Neorl_logo.png" width="50">  |
-
-Other open-source libraries and benchmarks: [MODAct](https://github.com/epfl-lamd/modact), [Lassobench](https://github.com/ksehic/LassoBench), [BayesianCHT](https://github.com/TsaiYK/BayesianCHT), [DTLZ](https://www.research-collection.ethz.ch/handle/20.500.11850/145762), [WFG](https://ieeexplore.ieee.org/document/1705400), [ZDT](https://pubmed.ncbi.nlm.nih.gov/10843520/)
+See **[CATEGORIZATION.md](CATEGORIZATION.md)** for the full per-problem table
+(dimensions, objectives, constraints, variable types, convexity, NP-hardness)
+and the NP-hardness assessment methodology.
 
 # 💻 Installation
 
-You can install the core library from PyPI:
+Core install (enough to import `bocode` and run most problems):
 
 ```bash
 pip install bocode
 ```
 
-Full Installation (with External Dependencies)
-This library also supports benchmarks from `LassoBench` and `modact`, which are not available on PyPI. To use them, you must install them directly from their Git repositories after installing bocode:
+Some problems need heavy or native dependencies, shipped as optional **extras**.
+Install only what you need:
+
 ```bash
-git clone http://github.com/rosenyu304/BOCoDe/
-cd BOCoDe
-pip install -e .[full]
+pip install "bocode[mujoco]"     # MuJoCo control problems
+pip install "bocode[truss]"      # Truss10D..Truss200D
+pip install "bocode[box2d]"      # RobotPush
+pip install "bocode[modact]"     # MODAct suite
+pip install "bocode[hpo]"        # SVM
+pip install "bocode[mazda]"      # Mazda car design
+pip install "bocode[neorl]"      # QPowerModel surrogate
+pip install "bocode[all]"        # everything available on PyPI
 ```
 
-# 📒 [Documentation](https://bocode.readthedocs.io/en/latest/)
+| Extra | Enables | Backing dependency |
+|---|---|---|
+| `mujoco` | MuJoCo locomotion problems | `gymnasium[mujoco]` |
+| `control` | CartPole / Acrobot | `gymnasium` |
+| `truss` | Truss10D…Truss200D | `slientruss3d` |
+| `box2d` | RobotPush | `Box2D`, `pygame`, `joblib` |
+| `modact` | MODAct CS/CT/CTS/CTSE/CTSEI | `modact` |
+| `hpo` | SVM | `scikit-learn` |
+| `mazda` | Mazda | `openpyxl` |
+| `neorl` | QPowerModel | `onnxruntime` |
+| `lasso` | LassoBench real datasets | `LassoBench` (git, not on PyPI) |
+| `viz` | function visualization | `dash`, `plotly`, `matplotlib` |
 
-Documentation for BOCoDe is available at [Read the Docs](https://bocode.readthedocs.io/en/latest/).
+`LassoBench` is not on PyPI, so the `lasso` extra installs it from git:
 
-# ✍️ Optimization Problem Definition
-Here we define all our problems for **maximization** optimization algorithms (for minimization, negate the evaluated value). We define constraints to be **inequality constraints** (i.e. constraint values (gx) <= 0 as feasible).
+```bash
+pip install "bocode[lasso]"
+```
 
-<center><img src="docs/Figures/opt_definition.png" width="300"></center>
+Accessing a problem without its extra installed raises a clear error telling you
+which extra to install.
+
+### Large data files
+
+A few problems use large data (the SVM dataset, the MOPTA08 and Mazda binaries).
+These are **not shipped** in the package; they are downloaded on first use to
+`~/.cache/bocode` (override with `BOCODE_CACHE_DIR`) and verified by checksum. Set
+`BOCODE_DATA_BASE_URL` to point at a mirror if needed.
 
 # 🔍 Example Usage
 
-For details of each problem's usage, please read our docs. Here we provide examples to common usage of this library:
+Problems are accessed by name (flat API) or via the registry:
 
-1. Direct evaluation
 ```python
 import bocode
 import torch
 
-# Instantiate a benchmark problem
-problem = bocode.Engineering.Car()
+# List and filter problems by metadata
+bocode.list_problems(application="Engineering")
+bocode.list_problems(num_objectives=2, constrained=True)
 
-# Evaluate at a point
-x = torch.Tensor([[0.0] * problem.dim])
+# Instantiate by name (both forms are equivalent)
+problem = bocode.Car()
+problem = bocode.get_problem("Car")()
+
+# Inspect metadata
+meta = bocode.get_metadata("Car")     # dim, #obj, #constraints, bounds, source, ...
+
+# Evaluate
+x = torch.rand(5, problem.dim)
+x = problem.scale(x)                   # map [0, 1] samples into the problem bounds
 values, constraints = problem.evaluate(x)
-
-print(f"Is it feasible? {(constraints<=0).all()}")
-print(f"Function value at origin: {values[0]}")
+print("feasible:", (constraints <= 0).all(dim=1))
 ```
 
-2. Scaling parameters sampled from unit hypercube (typical Bayesian optimization practice)
+Convenience selectors for algorithm benchmarking:
+
 ```python
-import bocode
-import torch
-
-# Instantiate a Synthetic benchmark problem
-problem = bocode.Synthetics.Ackley()
-
-# Evaluate at a in bounds of [0,1]s
-x = torch.rand(5,problem.dim)
-print("X in [0,1]s:\n",x,"\n")
-
-# Scale it w.r.t. the problem bounds
-x = problem.scale(x)
-print("Scaled X in bounds:\n",x)
-values, constraints = problem.evaluate(x)
-
-print(f"Is each sample feasible? {(constraints<=0).all(dim=1)}")
-print(f"Function value at origin: {values[0]}")
+bocode.get_single_objective_unconstrained()
+bocode.get_single_objective_constrained()
+bocode.get_multi_objective_unconstrained()
+bocode.get_multi_objective_constrained()
 ```
 
-3. Example using a scipy minimization for this
+Materials problems are discrete dataset-lookup problems — optimize over the
+measured candidate set:
+
 ```python
-import bocode
-import numpy as np
-import torch
-from scipy.optimize import minimize
-
-# Create a benchmark problem
-problem = bocode.Synthetics.Michalewicz(dim=2)
-
-problem.visualize_function()
-
-# Get problem bounds
-bounds = problem.bounds
-
-# Define objective function for optimizer
-def objective(x):
-    x = torch.Tensor([x])
-    fx, _ = problem.evaluate(x)
-    fx = -fx # Negate the objective function for MINIMIZATION
-    return fx.numpy()[0][0]
-
-# Starting point (2-dimensional)
-x0 = np.zeros(2)
-
-# Optimize using SciPy
-result = minimize(objective, x0, method='Powell', bounds=bounds)
-
-print(f"Optimal value found: {result.fun}")
-print(f"Optimal point found: {result.x}")
-
-print(f"Actual optimal value: {-problem.optimum[0]}")
-print(f"Actual optimal point: {problem.x_opt[0]}")
+p = bocode.AgNP()
+values, _ = p.evaluate(p.candidates[:10])   # measured objective of those candidates
 ```
 
-4. Synthetic function visualization
-```python
-import bocode
-import torch
+> The old `bocode.Engineering.Car` namespace still works but emits a
+> `DeprecationWarning`; prefer `bocode.Car` / `bocode.get_problem("Car")`.
 
-# Instantiate a benchmark problem
-problem = bocode.Synthetics.Powell() 
+# 🧮 Algorithms
 
-# Visualize the function
-problem.visualize_function()
-```
+`algorithms/` holds single-file, CleanRL-style BO baselines (random search, TuRBO,
+Vanilla BO, SCBO, qEHVI/qNEHVI, …) organized by problem category. This is
+research code, separate from the installable package. See
+[algorithms/README.md](algorithms/README.md). *(Scaffolding on this branch;
+implementations land in Push 2 — see the roadmap.)*
+
+# 🗺️ Roadmap
+
+- **Foundation (this push)** — restructure into `bocode/opt_problems/`, remove
+  synthetic problems, per-problem JSON metadata + registry, CATEGORIZATION.md,
+  slim packaging with extras, download-on-demand data, materials dataset problems.
+- **Push 2 — GP algorithms.** CleanRL-style baselines under `algorithms/`, each
+  with problem-optimization and dataset-optimization variants.
+- **Push 3 — more problems & methods.** LassoBench modernization, minimdo
+  engineering problems, firefly-paper problems (mixed-integer + continuous), and
+  transformer-based methods (GIT-BO, PFN-CEI / TabPFN).
 
 # 🛠️ Development
 
-BOCoDe is an open source project and we welcome contributions! If you want to add a new problem, please reach out to us first to see if it is a good fit for BOCoDe.
+```bash
+mamba create -n bocode python=3.12 -y
+mamba run -n bocode pip install -e ".[all]" pytest pytest-cov ruff
+mamba run -n bocode pytest tests/        # smoke test skips problems whose extra is absent
+```
+
+Regenerate the registry, metadata, and categorization table after adding a
+problem:
+
+```bash
+python tools/generate_registry.py
+python tools/generate_metadata.py
+python tools/render_categorization.py
+```
+
+We welcome contributions! New problems should be real-world problems with a cited
+source, one file per problem, following the existing `"""Sources: ..."""`
+docstring convention.
 
 # Citing
 
-1. If you use BOCoDe in your research, please cite the following paper (full report coming soon):
 ```bibtex
 @misc{yu2025bocode,
     author={Rosen Ting-Ying Yu, Advaith Narayanan, Cyril Picard, Faez Ahmed},
@@ -164,8 +188,11 @@ BOCoDe is an open source project and we welcome contributions! If you want to ad
 }
 ```
 
-2. If you use the the BOCoDe interfaces to other libraries or open source code functions (ex: BoTorch, BBOB, NEORL, MODAct, LassoBench, ...), please cite them accordingly.
-
+If you use a BOCoDe problem derived from another library or paper (BoTorch,
+MODAct, LassoBench, the PV-Lab materials datasets, the CEC2020 / RE suites, …),
+please also cite that source — each problem records its citation in its docstring
+and metadata.
 
 # License
-BOCoDe is MIT licensed, as found in [LICENSE](LICENSE)
+
+BOCoDe is MIT licensed, as found in [LICENSE](LICENSE).

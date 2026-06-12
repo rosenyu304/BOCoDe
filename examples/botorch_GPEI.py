@@ -12,7 +12,7 @@ dim = 11
 train_X = torch.rand(20, dim)
 
 # Problem setup
-problem = bocode.Engineering.Car()
+problem = bocode.Car()
 train_objectives, train_constraints = problem.evaluate(train_X.clone())
 penalty = torch.clamp(train_constraints, min=0).sum(dim=1, keepdim=True)
 train_Y = train_objectives - penalty

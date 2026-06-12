@@ -1,30 +1,47 @@
 import pytest
 import torch
 
-from bocode import Engineering
+from bocode import (
+    AntPolicySearchProblem,
+    AntProblem,
+    HalfCheetahPolicySearchProblem,
+    HalfCheetahProblem,
+    HopperPolicySearchProblem,
+    HopperProblem,
+    HumanoidProblem,
+    HumanoidStandupProblem,
+    InvertedDoublePendulumProblem,
+    InvertedPendulumProblem,
+    PusherProblem,
+    ReacherProblem,
+    SwimmerPolicySearchProblem,
+    SwimmerProblem,
+    Walker2DPolicySearchProblem,
+    Walker2DProblem,
+)
 
 benchmark_classes = [
-    Engineering.AntProblem,
-    Engineering.HalfCheetahProblem,
-    Engineering.HopperProblem,
-    Engineering.HumanoidProblem,
-    Engineering.HumanoidStandupProblem,
-    Engineering.InvertedDoublePendulumProblem,
-    Engineering.InvertedPendulumProblem,
-    Engineering.PusherProblem,
-    Engineering.ReacherProblem,
-    Engineering.SwimmerProblem,
-    Engineering.Walker2DProblem,
-    Engineering.SwimmerPolicySearchProblem,
-    Engineering.AntPolicySearchProblem,
-    Engineering.HalfCheetahPolicySearchProblem,
-    Engineering.HopperPolicySearchProblem,
-    Engineering.Walker2DPolicySearchProblem,
+    AntProblem,
+    HalfCheetahProblem,
+    HopperProblem,
+    HumanoidProblem,
+    HumanoidStandupProblem,
+    InvertedDoublePendulumProblem,
+    InvertedPendulumProblem,
+    PusherProblem,
+    ReacherProblem,
+    SwimmerProblem,
+    Walker2DProblem,
+    SwimmerPolicySearchProblem,
+    AntPolicySearchProblem,
+    HalfCheetahPolicySearchProblem,
+    HopperPolicySearchProblem,
+    Walker2DPolicySearchProblem,
 ]
 
 
 @pytest.mark.parametrize("benchmark", benchmark_classes)
-def test_CEC2017_evaluate(benchmark):
+def test_mujoco_evaluate(benchmark):
     problem = benchmark()
 
     dim = problem.dim

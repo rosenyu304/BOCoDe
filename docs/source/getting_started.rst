@@ -22,18 +22,19 @@ Here's a simple example of how to use BOCoDe:
     import bocode
     import torch
 
-    # Retrieve all available benchmark problems in BOCoDe by searching with no filters
-    all_problems = bocode.filter_functions()
-    print(all_problems)
+    # List all available problems (optionally filter by metadata)
+    print(bocode.list_problems())
+    print(bocode.list_problems(application="Engineering"))
 
-    # Instantiate a synthetic benchmark problem
-    problem = bocode.Synthetics.Ackley()
-    
-    # Evaluate at a point
-    x = torch.Tensor([[0.0] * problem.dim])
+    # Instantiate a real-world benchmark problem by name
+    problem = bocode.CantileverBeam()
+
+    # Evaluate at random points scaled into the problem bounds
+    x = problem.scale(torch.rand(5, problem.dim))
     values, constraints = problem.evaluate(x)
-    
-    print(f"Ackley function value at origin: {values[0]}")
+
+    print("objective values:", values.flatten())
+    print("inspect metadata:", bocode.get_metadata("CantileverBeam"))
 
 Basic Concepts
 -------------

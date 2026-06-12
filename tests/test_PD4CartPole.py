@@ -1,33 +1,21 @@
 import torch
 
-from bocode import CantileverBeam
+from bocode import PD4CartPole
 
 
-def test_cantileverBeam_evaluate():
-    problem = CantileverBeam()
+def test_pd4cartpole_evaluate():
+    problem = PD4CartPole()
+    dim = problem.dim
+    assert dim == 4
+    assert len(problem.bounds) == dim
 
-    dim = 10
-
-    rand_test_points = 4  # Number of random points to test
-
-    # Generate random points within constraints
+    rand_test_points = 2  # simulations are not cheap; keep this small
     X = torch.rand((rand_test_points, dim))
+    X = problem.scale(X)
 
     gx, fx = problem._evaluate_implementation(X)
 
-    assert fx.shape == (rand_test_points, problem.num_objectives), (
-        f"Unexpected fx shape: {fx.shape}"
-    )
-    assert gx.shape == (rand_test_points, problem.num_constraints), (
-        f"Unexpected gx shape: {gx.shape}"
-    )
-
-    assert len(problem.bounds) == dim, "Number of bounds does not match dimension"
-
+    assert fx.shape == (rand_test_points, problem.num_objectives)
+    if gx is not None and problem.num_constraints > 0:
+        assert gx.shape == (rand_test_points, problem.num_constraints)
     assert torch.isfinite(fx).all(), "fx contains NaN or Inf values"
-
-    if problem.x_opt is not None and problem.optimum is not None:
-        eval_opt = problem._evaluate_implementation(torch.Tensor(problem.x_opt))[1]
-        assert torch.allclose(eval_opt, torch.Tensor(problem.optimum), atol=1e-4), (
-            f"X_opt ({problem.x_opt}) evaluation ({eval_opt}) does not match optimum ({problem.optimum})"
-        )

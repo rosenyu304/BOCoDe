@@ -8,16 +8,9 @@ BOCoDe includes benchmark problems from various sources. Each collection has its
 .. toctree::
    :maxdepth: 3
    :caption: Contents:
-   :glob:
 
-   synthetics
-   botorch
-   bbob
-   lasso
    engineering
+   lasso
    CEC/index
-   wfg
-   zdt
-   dtlz
    MODAct
    neorl

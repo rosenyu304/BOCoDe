@@ -19,7 +19,7 @@ Here's a complete example of using BOCoDe with a single-objective optimization p
     from scipy.optimize import minimize
 
     # Create a benchmark problem
-    problem = bocode.Synthetics.Michalewicz(dim=2)
+    problem = bocode.ReinforcedConcreteBeam()
 
     problem.visualize_function()
 

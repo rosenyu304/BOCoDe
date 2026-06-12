@@ -13,10 +13,10 @@ Source:
 Available Problems
 ----------------
 
-* :code:`bocode.NEORL.TSP_51Cities` (Ex 1)
-* :code:`bocode.NEORL.TSP_100Cities` (Ex 1)
-* :code:`bocode.NEORL.ReactivityModel` (Ex 11)
-* :code:`bocode.NEORL.QPowerModel` (Ex 11)
+* :code:`bocode.TSP_51Cities` (Ex 1)
+* :code:`bocode.TSP_100Cities` (Ex 1)
+* :code:`bocode.ReactivityModel` (Ex 11)
+* :code:`bocode.QPowerModel` (Ex 11)
 
 Example Usage
 ------------
@@ -27,7 +27,7 @@ Example Usage
     import torch
 
     # Create a NEORL benchmark problem
-    problem = bocode.NEORL.TSP_100Cities()
+    problem = bocode.TSP_100Cities()
 
     # Get problem information
     bounds = problem.bounds  # Each input is an integer between 1 and 100

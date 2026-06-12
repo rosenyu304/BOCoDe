@@ -13,7 +13,7 @@ Example Usage
     import bocode
 
     # Initialize the function
-    problem = bocode.Synthetics.Powell()
+    problem = bocode.ReinforcedConcreteBeam()
 
     # Visualize the function
     problem.visualize_function()

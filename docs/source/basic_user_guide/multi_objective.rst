@@ -21,7 +21,7 @@ Here's an example of using BOCoDe with a multi-objective problem:
     import torch
 
     # Create a multi-objective benchmark problem
-    problem = bocode.Engineering.CarSideImpact()
+    problem = bocode.CarSideImpact()
 
     # Wrap the problem as a PyMOO Problem
     class CarSideImpactProblem(Problem):

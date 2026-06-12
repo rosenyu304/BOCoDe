@@ -42,13 +42,13 @@ Example:
 
     import bocode
 
-    print(bocode.Synthetics.Ackley.available_dimensions)
+    print(bocode.CantileverBeam.available_dimensions)
     # Output: (1, None)
     # This means that the problem can be defined with 1 or more dimensions.
-    print(bocode.Synthetics.Ackley.num_objectives)
+    print(bocode.CantileverBeam.num_objectives)
     # Output: 1
     # This means that the problem has 1 objective function.
-    print(bocode.Synthetics.Ackley.num_constraints)
+    print(bocode.CantileverBeam.num_constraints)
     # Output: 2
     # This means that the problem has 2 constraint functions.
 
@@ -133,7 +133,7 @@ Scales continuous input data from the normalized range (0, 1) to the problem's a
     import torch
 
     # Create a problem
-    problem = bocode.Engineering.KeaneBump(dim=2)
+    problem = bocode.KeaneBump(dim=2)
 
     # Print problem bounds
     print(problem.bounds)
@@ -158,7 +158,7 @@ Prints information about the benchmark problem.
 
     import bocode
 
-    problem = bocode.Synthetics.Ackley(dim=2)
+    problem = bocode.CantileverBeam()
     problem.show_info()
     
 Output:
@@ -197,7 +197,7 @@ Creates interactive visualizations of the objective function(s).
 .. code-block:: python
 
     # Create and visualize a 2D problem
-    problem = bocode.Synthetics.Rastrigin(dim=5)
+    problem = bocode.ReinforcedConcreteBeam()
     problem.visualize_function()
 
 You may need to open a browser to http://127.0.0.1:8050/ to fully see the visualization for problems with more than 2 dimensions. See :ref:`function_visualization` for examples.

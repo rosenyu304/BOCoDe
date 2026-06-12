@@ -185,3 +185,8 @@ bocode/opt_problems/engineering/Mazda_Data/bin/mazda_mop_sca
 bocode/opt_problems/engineering/Mopta_Data/input.txt
 bocode/opt_problems/engineering/Mopta_Data/output.txt
 bocode/opt_problems/engineering/Mazda_Data/pop_*.txt
+
+# Tooling caches
+.ruff_cache/
+# Local data cache for download-on-demand assets (if placed in-tree)
+.cache/
