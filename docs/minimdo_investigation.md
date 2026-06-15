@@ -53,9 +53,26 @@ Gauss–Seidel iterations or `scipy.optimize.fsolve`), define the bounds, and re
 diameters, three thicknesses — with buoyancy/hydrodynamic constraints) is a clean
 second addition if a marine-energy problem is desired.
 
-## Proposed next step
+## Black-box-suitability survey of all `applications/`
 
-Implement `bocode/opt_problems/engineering/SatelliteDesign.py` (and optionally
-`PEARL.py`) as standalone numpy problems with the SMAD citation, pending your
-go-ahead. They would be continuous-variable, constrained, single-objective
-(mass), with an inner MDA solve.
+A problem is "black-box-portable" if it has a self-contained `.py` formulation that
+maps design variables to outputs (so it can become a BoCoDe `evaluate(x) -> y`).
+
+| Application | Form | Black-box-portable? | Notes |
+|---|---|---|---|
+| `satellite/sat_initial.py` | `.py` | ✅ **DONE** | implemented as `SatelliteDesign` |
+| `pearl/pearl_initial_formulation.py` | `.py` (150 lines) | ✅ **yes — next candidate** | autonomous marine/ocean sensing platform: coupled geometry / hydrodynamics / mass / propulsion / communications / power; ~6 continuous geometry variables (three diameters Df/Ds/Dd, three thicknesses tf/ts/td) plus operational vars (speed `v`, data rate `R`); natural objective = minimize total mass with power/buoyancy constraints. Ports the same way as satellite. |
+| `bliss/bliss_gen4.ipynb` | notebook only | ⚠️ needs extraction | **BLISS / SSBJ** (supersonic business jet) — a *recognized* MDO benchmark (Sobieszczanski-Sobieski et al.), so high value, but the equations live in a Jupyter notebook and would need extraction + the BLISS coupling solve. |
+| `thesis_coffee/app_coffee_v*.ipynb` | notebook only | ✖ | thesis demonstration, not a standard design benchmark |
+| `synthetic/`, `random_presolve/` | notebooks / CSVs | ✖ | synthetic sparsity studies and MDO-reconfiguration method experiments, not design problems |
+
+**Recommended order:** (1) `SatelliteDesign` — done; (2) **PEARL** marine platform —
+clean `.py`, ports like satellite; (3) **BLISS/SSBJ** — recognized aircraft MDO
+benchmark, worth the notebook extraction if an aircraft problem is wanted.
+
+## Status / next step
+
+`SatelliteDesign` is implemented (`bocode/opt_problems/engineering/SatelliteDesign.py`,
+SMAD citation, closed-form mass coupling, lifetime/link-budget/power constraints).
+PEARL and BLISS are recommended follow-ups, pending go-ahead — both would be
+continuous-variable constrained problems with an inner discipline solve.
