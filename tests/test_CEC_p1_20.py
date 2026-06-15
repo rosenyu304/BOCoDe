@@ -38,25 +38,22 @@ def test_CEC1_20_evaluate(benchmark):
     # Generate random points within constraints
     X = torch.rand((rand_test_points, dim))
 
-    gx, ex, fx = problem._evaluate_implementation(X)
+    # evaluate() concatenates equality + inequality into one constraint tensor,
+    # so its width equals num_constraints for every problem.
+    values, constraints = problem.evaluate(X)
 
-    assert fx.shape == (rand_test_points, problem.num_objectives), (
-        f"Unexpected fx shape: {fx.shape}"
+    assert values.shape == (rand_test_points, problem.num_objectives), (
+        f"Unexpected objective shape: {values.shape}"
     )
-    if gx is not None and problem.num_constraints > 0:
-        assert gx.shape == (rand_test_points, problem.num_constraints), (
-            f"Unexpected gx shape: {gx.shape}"
-        )
+    assert constraints.shape == (rand_test_points, problem.num_constraints), (
+        f"Unexpected constraint shape: {constraints.shape}"
+    )
 
     assert len(problem.bounds) == dim, "Number of bounds does not match dimension"
-
-    if problem.num_constraints == 0 and (ex is None or ex.numel() == 0):
-        assert torch.isfinite(fx).all(), "fx contains NaN or Inf values"
+    assert torch.isfinite(values).all(), "objective contains NaN or Inf values"
 
     if problem.x_opt is not None and problem.optimum is not None:
-        eval_opt = problem._evaluate_implementation(
-            torch.Tensor(problem.x_opt), scaling=False
-        )[2].float()
+        eval_opt = problem.evaluate(torch.Tensor(problem.x_opt))[0].float()
         assert torch.allclose(eval_opt, torch.Tensor(problem.optimum), atol=1e-4), (
             f"X_opt ({problem.x_opt}) evaluation ({eval_opt}) does not match optimum ({problem.optimum})"
         )

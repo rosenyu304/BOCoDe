@@ -179,13 +179,13 @@ class CEC2020_p3(BenchmarkProblem):
     num_objectives = 1
     input_type = DataType.CONTINUOUS
     available_dimensions = 7
-    num_constraints = 0
+    num_constraints = 14
 
     def __init__(self):
         super().__init__(
             dim=7,
             num_objectives=1,
-            num_constraints=0,
+            num_constraints=14,
             #  x_opt=[[0] * 7],
             optimum=[-4529.1197395],
             bounds=[
@@ -218,7 +218,7 @@ class CEC2020_p3(BenchmarkProblem):
         )
 
         # No equality constraints
-        h = (n_samples, 0)
+        h = np.zeros((n_samples, 0))
 
         # Inequality constraints
         g = np.zeros((n_samples, 14))
@@ -289,14 +289,14 @@ class CEC2020_p4(BenchmarkProblem):
 
     num_objectives = 1
     input_type = DataType.CONTINUOUS
-    available_dimensions = 4
-    num_constraints = 4
+    available_dimensions = 6
+    num_constraints = 5
 
     def __init__(self):
         super().__init__(
             dim=6,
             num_objectives=1,
-            num_constraints=4,
+            num_constraints=5,
             #  x_opt=[[0] * 6],
             optimum=[-0.38826043623],
             bounds=[(0, 1), (0, 1), (0, 1), (0, 1), (1e-5, 16), (1e-5, 16)],
@@ -346,13 +346,13 @@ class CEC2020_p5(BenchmarkProblem):
     num_objectives = 1
     input_type = DataType.CONTINUOUS
     available_dimensions = 9
-    num_constraints = 4
+    num_constraints = 6
 
     def __init__(self):
         super().__init__(
             dim=9,
             num_objectives=1,
-            num_constraints=4,
+            num_constraints=6,
             #  x_opt=[[0] * 9],
             optimum=[-400.0056],
             bounds=[
@@ -733,13 +733,13 @@ class CEC2020_p8(BenchmarkProblem):
     num_objectives = 1
     input_type = DataType.CONTINUOUS
     available_dimensions = 2
-    num_constraints = 0
+    num_constraints = 2
 
     def __init__(self):
         super().__init__(
             dim=2,
             num_objectives=1,
-            num_constraints=0,
+            num_constraints=2,
             #  x_opt=[[0] * 2],
             optimum=[2.0],
             bounds=[(0, 1.6), (-0.51, 1.49)],
@@ -782,13 +782,13 @@ class CEC2020_p9(BenchmarkProblem):
     num_objectives = 1
     input_type = DataType.CONTINUOUS
     available_dimensions = 3
-    num_constraints = 1
+    num_constraints = 2
 
     def __init__(self):
         super().__init__(
             dim=3,
             num_objectives=1,
-            num_constraints=1,
+            num_constraints=2,
             #  x_opt=[[0] * 3],
             optimum=[2.557654574],
             bounds=[(0.5, 1.4), (0.5, 1.4), (-0.51, 1.49)],
@@ -827,13 +827,13 @@ class CEC2020_p10(BenchmarkProblem):
     num_objectives = 1
     input_type = DataType.CONTINUOUS
     available_dimensions = 3
-    num_constraints = 0
+    num_constraints = 3
 
     def __init__(self):
         super().__init__(
             dim=3,
             num_objectives=1,
-            num_constraints=0,
+            num_constraints=3,
             #  x_opt=[[0] * 3],
             optimum=[1.0765430833],
             bounds=[(0.2, 1.0), (-2.22554, -1.0), (-0.51, 1.49)],
@@ -877,13 +877,13 @@ class CEC2020_p11(BenchmarkProblem):
     num_objectives = 1
     input_type = DataType.CONTINUOUS
     available_dimensions = 7
-    num_constraints = 4
+    num_constraints = 8
 
     def __init__(self):
         super().__init__(
             dim=7,
             num_objectives=1,
-            num_constraints=4,
+            num_constraints=8,
             #  x_opt=[[0] * 7],
             optimum=[99.238463653],
             bounds=[
@@ -949,13 +949,13 @@ class CEC2020_p12(BenchmarkProblem):
     num_objectives = 1
     input_type = DataType.CONTINUOUS
     available_dimensions = 7
-    num_constraints = 0
+    num_constraints = 9
 
     def __init__(self):
         super().__init__(
             dim=7,
             num_objectives=1,
-            num_constraints=0,
+            num_constraints=9,
             #  x_opt=[[0] * 7],
             optimum=[2.9248305537],
             bounds=[
@@ -1027,13 +1027,13 @@ class CEC2020_p13(BenchmarkProblem):
     num_objectives = 1
     input_type = DataType.CONTINUOUS
     available_dimensions = 5
-    num_constraints = 0
+    num_constraints = 3
 
     def __init__(self):
         super().__init__(
             dim=5,
             num_objectives=1,
-            num_constraints=0,
+            num_constraints=3,
             #  x_opt=[[0] * 5],
             optimum=[26887.0],
             bounds=[(27, 45), (27, 45), (27, 45), (77.51, 102.49), (32.51, 45.49)],
@@ -1098,13 +1098,13 @@ class CEC2020_p14(BenchmarkProblem):
     num_objectives = 1
     input_type = DataType.CONTINUOUS
     available_dimensions = 10
-    num_constraints = 0
+    num_constraints = 10
 
     def __init__(self):
         super().__init__(
             dim=10,
             num_objectives=1,
-            num_constraints=0,
+            num_constraints=10,
             #  x_opt=[[0] * 10],
             optimum=[53638.942722],
             bounds=[
@@ -1185,13 +1185,13 @@ class CEC2020_p15(BenchmarkProblem):
     num_objectives = 1
     input_type = DataType.CONTINUOUS
     available_dimensions = 7
-    num_constraints = 0
+    num_constraints = 11
 
     def __init__(self):
         super().__init__(
             dim=7,
             num_objectives=1,
-            num_constraints=0,
+            num_constraints=11,
             #  x_opt=[[0] * 7],
             optimum=[2994.4244658],
             bounds=[
@@ -1267,13 +1267,13 @@ class CEC2020_p16(BenchmarkProblem):
     num_objectives = 1
     input_type = DataType.CONTINUOUS
     available_dimensions = 14
-    num_constraints = 0
+    num_constraints = 15
 
     def __init__(self):
         super().__init__(
             dim=14,
             num_objectives=1,
-            num_constraints=0,
+            num_constraints=15,
             #  x_opt=[[0] * 14],
             optimum=[0.032213000814],
             bounds=[(0.001, 5)] * 14,
@@ -1364,13 +1364,13 @@ class CEC2020_p17(BenchmarkProblem):
     num_objectives = 1
     input_type = DataType.CONTINUOUS
     available_dimensions = 3
-    num_constraints = 0
+    num_constraints = 4
 
     def __init__(self):
         super().__init__(
             dim=3,
             num_objectives=1,
-            num_constraints=0,
+            num_constraints=4,
             #  x_opt=[[0] * 3],
             optimum=[0.012665232788],
             bounds=[(0.05, 2), (0.25, 1.3), (2.00, 15.0)],
@@ -1418,13 +1418,13 @@ class CEC2020_p18(BenchmarkProblem):
     num_objectives = 1
     input_type = DataType.CONTINUOUS
     available_dimensions = 4
-    num_constraints = 0
+    num_constraints = 4
 
     def __init__(self):
         super().__init__(
             dim=4,
             num_objectives=1,
-            num_constraints=0,
+            num_constraints=4,
             x_opt=[[0.8125, 0.4375, 42.0984455958549, 176.6365958424394]],
             #  optimum=[6059.714335048436],
             bounds=[(0.0625, 99 * 0.0625), (0.0625, 99 * 0.0625), (10, 200), (10, 200)],
@@ -1477,13 +1477,13 @@ class CEC2020_p19(BenchmarkProblem):
     num_objectives = 1
     input_type = DataType.CONTINUOUS
     available_dimensions = 4
-    num_constraints = 0
+    num_constraints = 5
 
     def __init__(self):
         super().__init__(
             dim=4,
             num_objectives=1,
-            num_constraints=0,
+            num_constraints=5,
             #  x_opt=[[0] * 4],
             optimum=[1.6702177263],
             bounds=[(0.125, 2), (0.1, 10), (0.1, 10), (0.1, 2)],
@@ -1565,13 +1565,13 @@ class CEC2020_p20(BenchmarkProblem):
     num_objectives = 1
     input_type = DataType.CONTINUOUS
     available_dimensions = 2
-    num_constraints = 0
+    num_constraints = 3
 
     def __init__(self):
         super().__init__(
             dim=2,
             num_objectives=1,
-            num_constraints=0,
+            num_constraints=3,
             #  x_opt=[[0] * 2],
             optimum=[263.89584338],
             bounds=[(0, 1)] * 2,

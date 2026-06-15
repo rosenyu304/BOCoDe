@@ -21,7 +21,7 @@ PERMUTATION_CLASSES = {"TSP_51Cities", "TSP_100Cities"}
 DATASET_CLASSES = {"AgNP", "CrossedBarrel", "P3HT", "Perovskite", "AutoAM"}
 
 # Problems with known upstream issues (see docs/AUDIT_findings_2026_06.md).
-XFAIL_CLASSES = {"CEC2020_p3"}
+XFAIL_CLASSES: set[str] = set()
 
 
 def _extra_available(extra: str | None) -> bool:

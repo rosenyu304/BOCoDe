@@ -86,11 +86,19 @@ combinatorial problems that have explicit hardness proofs.
 
 ## Known limitations
 
-The CEC2020 real-world constrained suite currently declares `num_constraints`
-counting only equality constraints for several inequality-only problems; the
-table therefore understates the constraint count for those problems. This is
-tracked in `docs/AUDIT_findings_2026_06.md` and will be corrected in the
-constraint-semantics cleanup.
+The CEC2020 `num_constraints` semantics were corrected so that the count is the
+total number of constraints (equality + inequality), matching the source paper's
+`g + h`, and `evaluate()` now returns a single concatenated constraint tensor of
+that width. Two residual discrepancies versus the guideline paper remain and are
+tracked in `docs/AUDIT_findings_2026_06.md`:
+
+- **CEC2020_p31** (gear train) is implemented as unconstrained (0 constraints);
+  the paper lists `g=1, h=1`. The classic gear-train formulation is unconstrained,
+  so resolving this needs the original MATLAB source to confirm the intended
+  constraints. Marked `0` rather than fabricated.
+- **CEC2020_p44** (wind-farm layout) generates the complete set of pairwise
+  turbine-spacing constraints, `C(15,2) = 105`; the paper table lists `91`. The
+  105-count is the mathematically complete pairwise set.
 
 ## Problem table
 
@@ -123,62 +131,62 @@ problem count (currently **164**).
 | 20 | Walker2DProblem | Control | 6 | 1 | 0 | continuous | no | unknown | unknown |
 | 21 | BotorchCarSideImpact | Engineering | 7 | 4 | 0 | continuous | no | unknown | unknown |
 | 22 | CEC2020_p1 | Engineering | 9 | 1 | 8 | continuous | no | unknown | unknown |
-| 23 | CEC2020_p10 | Engineering | 3 | 1 | 0 | continuous | no | unknown | unknown |
-| 24 | CEC2020_p11 | Engineering | 7 | 1 | 4 | continuous | no | unknown | unknown |
-| 25 | CEC2020_p12 | Engineering | 7 | 1 | 0 | continuous | no | unknown | unknown |
-| 26 | CEC2020_p13 | Engineering | 5 | 1 | 0 | continuous | no | unknown | unknown |
-| 27 | CEC2020_p14 | Engineering | 10 | 1 | 0 | continuous | no | unknown | unknown |
-| 28 | CEC2020_p15 | Engineering | 7 | 1 | 0 | continuous | no | unknown | unknown |
-| 29 | CEC2020_p16 | Engineering | 14 | 1 | 0 | continuous | no | unknown | unknown |
-| 30 | CEC2020_p17 | Engineering | 3 | 1 | 0 | continuous | no | unknown | unknown |
-| 31 | CEC2020_p18 | Engineering | 4 | 1 | 0 | continuous | no | unknown | unknown |
-| 32 | CEC2020_p19 | Engineering | 4 | 1 | 0 | continuous | no | unknown | unknown |
+| 23 | CEC2020_p10 | Engineering | 3 | 1 | 3 | continuous | no | unknown | unknown |
+| 24 | CEC2020_p11 | Engineering | 7 | 1 | 8 | continuous | no | unknown | unknown |
+| 25 | CEC2020_p12 | Engineering | 7 | 1 | 9 | continuous | no | unknown | unknown |
+| 26 | CEC2020_p13 | Engineering | 5 | 1 | 3 | continuous | no | unknown | unknown |
+| 27 | CEC2020_p14 | Engineering | 10 | 1 | 10 | continuous | no | unknown | unknown |
+| 28 | CEC2020_p15 | Engineering | 7 | 1 | 11 | continuous | no | unknown | unknown |
+| 29 | CEC2020_p16 | Engineering | 14 | 1 | 15 | continuous | no | unknown | unknown |
+| 30 | CEC2020_p17 | Engineering | 3 | 1 | 4 | continuous | no | unknown | unknown |
+| 31 | CEC2020_p18 | Engineering | 4 | 1 | 4 | continuous | no | unknown | unknown |
+| 32 | CEC2020_p19 | Engineering | 4 | 1 | 5 | continuous | no | unknown | unknown |
 | 33 | CEC2020_p2 | Engineering | 11 | 1 | 9 | continuous | no | unknown | unknown |
-| 34 | CEC2020_p20 | Engineering | 2 | 1 | 0 | continuous | no | unknown | unknown |
-| 35 | CEC2020_p21 | Engineering | 5 | 1 | 0 | continuous | no | unknown | unknown |
-| 36 | CEC2020_p22 | Engineering | 9 | 1 | 1 | continuous | no | unknown | unknown |
-| 37 | CEC2020_p23 | Engineering | 5 | 1 | 3 | continuous | no | unknown | unknown |
-| 38 | CEC2020_p24 | Engineering | 7 | 1 | 0 | continuous | no | unknown | unknown |
-| 39 | CEC2020_p25 | Engineering | 7 | 1 | 0 | continuous | no | unknown | unknown |
-| 40 | CEC2020_p26 | Engineering | 22 | 1 | 0 | continuous | no | unknown | unknown |
-| 41 | CEC2020_p27 | Engineering | 10 | 1 | 0 | continuous | no | unknown | unknown |
-| 42 | CEC2020_p28 | Engineering | 10 | 1 | 0 | continuous | no | unknown | unknown |
-| 43 | CEC2020_p29 | Engineering | 4 | 1 | 0 | continuous | no | unknown | unknown |
-| 44 | CEC2020_p3 | Engineering | 7 | 1 | 0 | continuous | no | unknown | unknown |
-| 45 | CEC2020_p30 | Engineering | 3 | 1 | 0 | continuous | no | unknown | unknown |
+| 34 | CEC2020_p20 | Engineering | 2 | 1 | 3 | continuous | no | unknown | unknown |
+| 35 | CEC2020_p21 | Engineering | 5 | 1 | 8 | continuous | no | unknown | unknown |
+| 36 | CEC2020_p22 | Engineering | 9 | 1 | 11 | continuous | no | unknown | unknown |
+| 37 | CEC2020_p23 | Engineering | 5 | 1 | 11 | continuous | no | unknown | unknown |
+| 38 | CEC2020_p24 | Engineering | 7 | 1 | 7 | continuous | no | unknown | unknown |
+| 39 | CEC2020_p25 | Engineering | 7 | 1 | 7 | continuous | no | unknown | unknown |
+| 40 | CEC2020_p26 | Engineering | 22 | 1 | 87 | continuous | no | unknown | unknown |
+| 41 | CEC2020_p27 | Engineering | 10 | 1 | 3 | continuous | no | unknown | unknown |
+| 42 | CEC2020_p28 | Engineering | 10 | 1 | 9 | continuous | no | unknown | unknown |
+| 43 | CEC2020_p29 | Engineering | 4 | 1 | 1 | continuous | no | unknown | unknown |
+| 44 | CEC2020_p3 | Engineering | 7 | 1 | 14 | continuous | no | unknown | unknown |
+| 45 | CEC2020_p30 | Engineering | 3 | 1 | 8 | continuous | no | unknown | unknown |
 | 46 | CEC2020_p31 | Engineering | 4 | 1 | 0 | continuous | no | unknown | unknown |
-| 47 | CEC2020_p32 | Engineering | 5 | 1 | 0 | continuous | no | unknown | unknown |
-| 48 | CEC2020_p33 | Engineering | 30 | 1 | 0 | continuous | no | unknown | unknown |
+| 47 | CEC2020_p32 | Engineering | 5 | 1 | 6 | continuous | no | unknown | unknown |
+| 48 | CEC2020_p33 | Engineering | 30 | 1 | 30 | continuous | no | unknown | unknown |
 | 49 | CEC2020_p34 | Engineering | 118 | 1 | 108 | continuous | no | unknown | unknown |
 | 50 | CEC2020_p35 | Engineering | 153 | 1 | 148 | continuous | no | unknown | unknown |
 | 51 | CEC2020_p36 | Engineering | 158 | 1 | 148 | continuous | no | unknown | unknown |
 | 52 | CEC2020_p37 | Engineering | 126 | 1 | 116 | continuous | no | unknown | unknown |
 | 53 | CEC2020_p38 | Engineering | 126 | 1 | 116 | continuous | no | unknown | unknown |
 | 54 | CEC2020_p39 | Engineering | 126 | 1 | 116 | continuous | no | unknown | unknown |
-| 55 | CEC2020_p4 | Engineering | 6 | 1 | 4 | continuous | no | unknown | unknown |
+| 55 | CEC2020_p4 | Engineering | 6 | 1 | 5 | continuous | no | unknown | unknown |
 | 56 | CEC2020_p40 | Engineering | 76 | 1 | 76 | continuous | no | unknown | unknown |
 | 57 | CEC2020_p41 | Engineering | 74 | 1 | 74 | continuous | no | unknown | unknown |
 | 58 | CEC2020_p42 | Engineering | 86 | 1 | 76 | continuous | no | unknown | unknown |
 | 59 | CEC2020_p43 | Engineering | 86 | 1 | 76 | continuous | no | unknown | unknown |
-| 60 | CEC2020_p44 | Engineering | 30 | 1 | 0 | continuous | no | unknown | unknown |
-| 61 | CEC2020_p45 | Engineering | 25 | 1 | 1 | continuous | no | unknown | unknown |
-| 62 | CEC2020_p46 | Engineering | 25 | 1 | 1 | continuous | no | unknown | unknown |
-| 63 | CEC2020_p47 | Engineering | 25 | 1 | 1 | continuous | no | unknown | unknown |
-| 64 | CEC2020_p48 | Engineering | 30 | 1 | 1 | continuous | no | unknown | unknown |
-| 65 | CEC2020_p49 | Engineering | 30 | 1 | 1 | continuous | no | unknown | unknown |
-| 66 | CEC2020_p5 | Engineering | 9 | 1 | 4 | continuous | no | unknown | unknown |
-| 67 | CEC2020_p50 | Engineering | 30 | 1 | 1 | continuous | no | unknown | unknown |
-| 68 | CEC2020_p51 | Engineering | 59 | 1 | 1 | continuous | no | unknown | unknown |
-| 69 | CEC2020_p52 | Engineering | 59 | 1 | 1 | continuous | no | unknown | unknown |
-| 70 | CEC2020_p53 | Engineering | 59 | 1 | 1 | continuous | no | unknown | unknown |
-| 71 | CEC2020_p54 | Engineering | 59 | 1 | 1 | continuous | no | unknown | unknown |
+| 60 | CEC2020_p44 | Engineering | 30 | 1 | 105 | continuous | no | unknown | unknown |
+| 61 | CEC2020_p45 | Engineering | 25 | 1 | 25 | continuous | no | unknown | unknown |
+| 62 | CEC2020_p46 | Engineering | 25 | 1 | 25 | continuous | no | unknown | unknown |
+| 63 | CEC2020_p47 | Engineering | 25 | 1 | 25 | continuous | no | unknown | unknown |
+| 64 | CEC2020_p48 | Engineering | 30 | 1 | 30 | continuous | no | unknown | unknown |
+| 65 | CEC2020_p49 | Engineering | 30 | 1 | 30 | continuous | no | unknown | unknown |
+| 66 | CEC2020_p5 | Engineering | 9 | 1 | 6 | continuous | no | unknown | unknown |
+| 67 | CEC2020_p50 | Engineering | 30 | 1 | 30 | continuous | no | unknown | unknown |
+| 68 | CEC2020_p51 | Engineering | 59 | 1 | 15 | continuous | no | unknown | unknown |
+| 69 | CEC2020_p52 | Engineering | 59 | 1 | 15 | continuous | no | unknown | unknown |
+| 70 | CEC2020_p53 | Engineering | 59 | 1 | 15 | continuous | no | unknown | unknown |
+| 71 | CEC2020_p54 | Engineering | 59 | 1 | 15 | continuous | no | unknown | unknown |
 | 72 | CEC2020_p55 | Engineering | 64 | 1 | 6 | continuous | no | unknown | unknown |
 | 73 | CEC2020_p56 | Engineering | 64 | 1 | 6 | continuous | no | unknown | unknown |
 | 74 | CEC2020_p57 | Engineering | 64 | 1 | 6 | continuous | no | unknown | unknown |
 | 75 | CEC2020_p6 | Engineering | 38 | 1 | 32 | continuous | no | unknown | unknown |
 | 76 | CEC2020_p7 | Engineering | 48 | 1 | 38 | continuous | no | unknown | unknown |
-| 77 | CEC2020_p8 | Engineering | 2 | 1 | 0 | continuous | no | unknown | unknown |
-| 78 | CEC2020_p9 | Engineering | 3 | 1 | 1 | continuous | no | unknown | unknown |
+| 77 | CEC2020_p8 | Engineering | 2 | 1 | 2 | continuous | no | unknown | unknown |
+| 78 | CEC2020_p9 | Engineering | 3 | 1 | 2 | continuous | no | unknown | unknown |
 | 79 | CRE21 | Engineering | 3 | 2 | 3 | continuous | no | unknown | unknown |
 | 80 | CRE22 | Engineering | 4 | 2 | 4 | continuous | no | unknown | unknown |
 | 81 | CRE23 | Engineering | 4 | 2 | 4 | continuous | no | unknown | unknown |

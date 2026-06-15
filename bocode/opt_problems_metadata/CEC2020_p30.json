@@ -3,7 +3,7 @@
   "module": "bocode.opt_problems.cec2020_rw.CEC2020_p21_33",
   "extra": null,
   "num_objectives": 1,
-  "num_constraints": 0,
+  "num_constraints": 8,
   "available_dimensions": 3,
   "input_type": "continuous",
   "scalable": false,

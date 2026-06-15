@@ -372,13 +372,13 @@ class CEC2020_p44(BenchmarkProblem):
     num_objectives = 1
     input_type = DataType.CONTINUOUS
     available_dimensions = 30
-    num_constraints = 0
+    num_constraints = 105
 
     def __init__(self):
         super().__init__(
             dim=30,
             num_objectives=1,
-            num_constraints=0,
+            num_constraints=105,
             #  X_opt=[[0] * 30],
             optimum=[-6273.1715],
             bounds=[(40.0, 1960.0)] * 30,
@@ -391,7 +391,7 @@ class CEC2020_p44(BenchmarkProblem):
 
         n_samples = X.shape[0]
 
-        D = n_samples
+        D = X.shape[1]  # problem dimension (fixes a bug where D was set to the batch size)
         f = np.zeros((n_samples, 1))
 
         interval = 15
@@ -515,13 +515,13 @@ class CEC2020_p45(BenchmarkProblem):
     num_objectives = 1
     input_type = DataType.CONTINUOUS
     available_dimensions = 25
-    num_constraints = 1
+    num_constraints = 25
 
     def __init__(self):
         super().__init__(
             dim=25,
             num_objectives=1,
-            num_constraints=1,
+            num_constraints=25,
             #  X_opt=[[0] * 25],
             optimum=[0.03073936],
             bounds=[(0.0, 90.0)] * 25,
@@ -536,7 +536,7 @@ class CEC2020_p45(BenchmarkProblem):
 
         n_samples = X.shape[0]
 
-        D = n_samples
+        D = X.shape[1]  # problem dimension (fixes a bug where D was set to the batch size)
         f = np.zeros((n_samples, 1))
 
         m = 0.32
@@ -610,13 +610,13 @@ class CEC2020_p46(BenchmarkProblem):
     num_objectives = 1
     input_type = DataType.CONTINUOUS
     available_dimensions = 25
-    num_constraints = 1
+    num_constraints = 25
 
     def __init__(self):
         super().__init__(
             dim=25,
             num_objectives=1,
-            num_constraints=1,
+            num_constraints=25,
             #  X_opt=[[0] * 25],
             optimum=[0.020240335],
             bounds=[(0.0, 90.0)] * 25,
@@ -631,7 +631,7 @@ class CEC2020_p46(BenchmarkProblem):
 
         n_samples = X.shape[0]
 
-        D = n_samples
+        D = X.shape[1]  # problem dimension (fixes a bug where D was set to the batch size)
         f = np.zeros((n_samples, 1))
 
         m = 0.32
@@ -729,13 +729,13 @@ class CEC2020_p47(BenchmarkProblem):
     num_objectives = 1
     input_type = DataType.CONTINUOUS
     available_dimensions = 25
-    num_constraints = 1
+    num_constraints = 25
 
     def __init__(self):
         super().__init__(
             dim=25,
             num_objectives=1,
-            num_constraints=1,
+            num_constraints=25,
             #  X_opt=[[0] * 25],
             optimum=[0.012783068],
             bounds=[(0.0, 90.0)] * 25,
@@ -750,7 +750,7 @@ class CEC2020_p47(BenchmarkProblem):
 
         n_samples = X.shape[0]
 
-        D = n_samples
+        D = X.shape[1]  # problem dimension (fixes a bug where D was set to the batch size)
         f = np.zeros((n_samples, 1))
 
         m = 0.36
@@ -848,13 +848,13 @@ class CEC2020_p48(BenchmarkProblem):
     num_objectives = 1
     input_type = DataType.CONTINUOUS
     available_dimensions = 30
-    num_constraints = 1
+    num_constraints = 30
 
     def __init__(self):
         super().__init__(
             dim=30,
             num_objectives=1,
-            num_constraints=1,
+            num_constraints=30,
             #  X_opt=[[0] * 30],
             optimum=[0.016787535766],
             bounds=[(0.0, 90.0)] * 30,
@@ -869,7 +869,7 @@ class CEC2020_p48(BenchmarkProblem):
 
         n_samples = X.shape[0]
 
-        D = n_samples
+        D = X.shape[1]  # problem dimension (fixes a bug where D was set to the batch size)
         f = np.zeros((n_samples, 1))
 
         m = 0.32
@@ -972,13 +972,13 @@ class CEC2020_p49(BenchmarkProblem):
     num_objectives = 1
     input_type = DataType.CONTINUOUS
     available_dimensions = 30
-    num_constraints = 1
+    num_constraints = 30
 
     def __init__(self):
         super().__init__(
             dim=30,
             num_objectives=1,
-            num_constraints=1,
+            num_constraints=30,
             #  X_opt=[[0] * 30],
             optimum=[0.00931187418],
             bounds=[(0.0, 90.0)] * 30,
@@ -993,7 +993,7 @@ class CEC2020_p49(BenchmarkProblem):
 
         n_samples = X.shape[0]
 
-        D = n_samples
+        D = X.shape[1]  # problem dimension (fixes a bug where D was set to the batch size)
         f = np.zeros((n_samples, 1))
 
         m = 0.3333
@@ -1096,13 +1096,13 @@ class CEC2020_p50(BenchmarkProblem):
     num_objectives = 1
     input_type = DataType.CONTINUOUS
     available_dimensions = 30
-    num_constraints = 1
+    num_constraints = 30
 
     def __init__(self):
         super().__init__(
             dim=30,
             num_objectives=1,
-            num_constraints=1,
+            num_constraints=30,
             #  X_opt=[[0] * 30],
             optimum=[0.01505147],
             bounds=[(0.0, 90.0)] * 30,
@@ -1117,7 +1117,7 @@ class CEC2020_p50(BenchmarkProblem):
 
         n_samples = X.shape[0]
 
-        D = n_samples
+        D = X.shape[1]  # problem dimension (fixes a bug where D was set to the batch size)
         f = np.zeros((n_samples, 1))
 
         m = 0.32
@@ -1220,13 +1220,13 @@ class CEC2020_p51(BenchmarkProblem):
     num_objectives = 1
     input_type = DataType.CONTINUOUS
     available_dimensions = 59
-    num_constraints = 1
+    num_constraints = 15
 
     def __init__(self):
         super().__init__(
             dim=59,
             num_objectives=1,
-            num_constraints=1,
+            num_constraints=15,
             #  X_opt=[[0] * 59],
             optimum=[4550.8511497],
             bounds=[(0.0, 10.0)] * 59,
@@ -1293,13 +1293,13 @@ class CEC2020_p52(BenchmarkProblem):
     num_objectives = 1
     input_type = DataType.CONTINUOUS
     available_dimensions = 59
-    num_constraints = 1
+    num_constraints = 15
 
     def __init__(self):
         super().__init__(
             dim=59,
             num_objectives=1,
-            num_constraints=1,
+            num_constraints=15,
             #  X_opt=[[0] * 59],
             optimum=[3348.9821493],
             bounds=[(0.0, 10.0)] * 59,
@@ -1366,13 +1366,13 @@ class CEC2020_p53(BenchmarkProblem):
     num_objectives = 1
     input_type = DataType.CONTINUOUS
     available_dimensions = 59
-    num_constraints = 1
+    num_constraints = 15
 
     def __init__(self):
         super().__init__(
             dim=59,
             num_objectives=1,
-            num_constraints=1,
+            num_constraints=15,
             #  X_opt=[[0] * 59],
             optimum=[4997.606929],
             bounds=[(0.0, 10.0)] * 59,
@@ -1440,13 +1440,13 @@ class CEC2020_p54(BenchmarkProblem):
     num_objectives = 1
     input_type = DataType.CONTINUOUS
     available_dimensions = 59
-    num_constraints = 1
+    num_constraints = 15
 
     def __init__(self):
         super().__init__(
             dim=59,
             num_objectives=1,
-            num_constraints=1,
+            num_constraints=15,
             #  X_opt=[[0] * 59],
             optimum=[4240.5482538],
             bounds=[(0.0, 10.0)] * 59,

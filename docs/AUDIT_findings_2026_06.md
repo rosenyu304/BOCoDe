@@ -8,28 +8,40 @@ all 8 CRE problems are implemented and registered. The Tanabe paper's Table 4
 simulation problems (radar waveform, MarioGAN, etc.) are intentionally not part
 of the RE suite and are correctly absent.
 
-The audit also surfaced correctness issues to fix in a follow-up (kept separate
-from the foundation refactor so the restructure stays reviewable):
+The audit surfaced correctness issues. Status below (FIXED items resolved in the
+2026-06 constraint-semantics cleanup; see commit history).
 
-## Bugs (should fix)
-1. **`CEC2020_p3` runtime bug** (`cec2020_rw/CEC2020_p1_20.py`): `h = (n_samples, 0)`
-   assigns a tuple, so the constraint return becomes a shape-(2,) array instead
-   of an `(n, 0)` empty matrix. Will raise/return garbage when evaluated.
-2. **`CEC2020_p31` (gear train) constraints missing**: paper specifies g=1, h=1;
-   implementation returns neither and does not round the integer teeth counts.
-3. **`num_constraints` counts only equality constraints across CEC2020**: every
-   inequality-only problem (p3, p8, p10, p12–p21, p24–p33, p44, …) declares
-   `num_constraints=0`, so `is_constrained` is wrong and metadata understates the
-   constraint count. Paper counts are g+h. **This propagates into the generated
-   metadata JSON** — the constraint counts for those problems reflect the code's
-   current (understated) attributes, not the paper. Flagged for the constraint-
-   semantics cleanup.
-4. **Return-shape inconsistencies**: p51–p54 and p33 `unsqueeze(-1)` an already-2D
-   constraint tensor → `(n, k, 1)`; p34–p39 return `None` for g instead of `(n, 0)`.
-5. **`CEC2020_p4`**: class attribute `available_dimensions = 4` contradicts the
-   actual `dim = 6` (paper D=6).
-6. **`CEC2020_p33` MATLAB→Python port**: `n1 = (nely+1)*(elx-1) + ely` keeps
+## Bugs
+1. **[FIXED] `CEC2020_p3` runtime bug** (`cec2020_rw/CEC2020_p1_20.py`):
+   `h = (n_samples, 0)` assigned a tuple, so the constraint return became a
+   shape-(2,) array. Now `h = np.zeros((n_samples, 0))`.
+2. **[FIXED] `D = n_samples` bug in p44–p50** (`CEC2020_p40_57.py`): `D` was set to
+   the batch size instead of the problem dimension, which silently corrupted both
+   the objective (summed over the wrong number of dimensions) and the constraint
+   count (e.g. p45 produced 2 of 24 spacing constraints). Now `D = X.shape[1]`.
+   After the fix p45–p50 match the paper exactly (25/25/25/30/30/30 constraints).
+3. **[FIXED] `num_constraints` counts only equality constraints across CEC2020**:
+   every problem now declares the total constraint count (equality + inequality),
+   and `base.evaluate()` concatenates the two blocks into one `(n, num_constraints)`
+   constraint tensor, consistent with every other problem. Verified: all 57
+   problems have `num_constraints == evaluate() constraint width`, and the widths
+   match the paper's `g + h` except p31 and p44 (below).
+4. **[FIXED] Return-shape inconsistencies**: handled centrally in
+   `base.evaluate()` / `_normalize_constraints` — `None` → `(n, 0)`, a stray
+   trailing singleton (`(n, k, 1)` from p51–p54's `unsqueeze`) is squeezed, and a
+   1-D block becomes `(n, 1)`. p34–p39's `None` equality blocks are normalized.
+5. **[FIXED] `CEC2020_p4`**: `available_dimensions` corrected from 4 to 6 (paper D=6).
+6. **[OPEN] `CEC2020_p33` MATLAB→Python port**: `n1 = (nely+1)*(elx-1) + ely` keeps
    MATLAB 1-based indexing with 0-based `elx`, producing negative indices into `U`.
+   The problem evaluates (Python negative indexing wraps) but may not match the
+   reference; needs validation against the original MATLAB. Constraint count (30)
+   matches the paper.
+7. **[OPEN / documented] `CEC2020_p31`** (gear train) implemented as unconstrained
+   (paper: g=1, h=1). The classic gear-train problem is unconstrained; resolving
+   needs the original MATLAB source. Left at 0 rather than fabricated.
+8. **[OPEN / documented] `CEC2020_p44`** produces the complete pairwise spacing
+   constraint set `C(15,2)=105`; paper table says 91. 105 is the mathematically
+   complete set.
 
 ## Decisions to confirm with maintainer
 - Constraint-count deltas vs the guideline table where the library matches the

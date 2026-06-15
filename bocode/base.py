@@ -97,19 +97,48 @@ class BenchmarkProblem:
     def evaluate(self, X: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
         """
         Evaluates the objective and constraint functions.
-        Enforces X to be casted to float
+        Enforces X to be casted to float.
 
-        Returns (values, constraints) or (values, equality constraints, inequality constraints) for problems with equality constraints
+        Returns ``(values, constraints)``. ``values`` has shape
+        ``(n, num_objectives)`` and ``constraints`` has shape
+        ``(n, num_constraints)`` with the convention that a constraint is
+        satisfied when its value is ``<= 0``.
+
+        Problems may implement either a 2-element return ``(constraints, values)``
+        or, for problems with separate equality and inequality constraints (e.g.
+        the CEC2020 suite), a 3-element return
+        ``(equality_constraints, inequality_constraints, values)``. In the latter
+        case the two constraint blocks are concatenated here into a single
+        ``constraints`` tensor, so that ``constraints.shape[1] == num_constraints``
+        for every problem.
         """
         output = self._evaluate_implementation(X.clone().to(torch.float))
+        n = X.shape[0]
         if len(output) == 2:
-            return output[1], output[0]  # values, constraints
-        # len(output) is 3 for CEC2020 functions
-        return (
-            output[2],
-            output[0],
-            output[1],
-        )  # values, equality constraints, inequality constraints
+            constraints, values = output
+            return values, self._normalize_constraints(constraints, n)
+        # len(output) == 3: (equality, inequality, values) for CEC2020 functions.
+        equality, inequality, values = output
+        eq = self._normalize_constraints(equality, n)
+        ineq = self._normalize_constraints(inequality, n)
+        return values, torch.cat([eq, ineq], dim=1)
+
+    @staticmethod
+    def _normalize_constraints(constraints, n: int) -> torch.Tensor:
+        """Coerce a constraint block to a 2-D ``(n, k)`` tensor.
+
+        Handles the shape inconsistencies present across the problem suite:
+        ``None`` becomes an empty ``(n, 0)`` block, a stray trailing singleton
+        dimension from an erroneous ``unsqueeze`` is removed, and a 1-D block is
+        treated as a single constraint column.
+        """
+        if constraints is None:
+            return torch.zeros((n, 0))
+        if constraints.dim() == 3 and constraints.shape[-1] == 1:
+            constraints = constraints.squeeze(-1)
+        if constraints.dim() == 1:
+            constraints = constraints.unsqueeze(-1)
+        return constraints
 
     def _evaluate_implementation(
         self, X: torch.Tensor
