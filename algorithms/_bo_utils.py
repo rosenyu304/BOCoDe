@@ -42,6 +42,24 @@ def set_seed(seed: int) -> None:
     torch.use_deterministic_algorithms(True, warn_only=True)
 
 
+def _scale_clamped(problem, X_unit: torch.Tensor) -> torch.Tensor:
+    """Scale unit-cube proposals to the problem bounds, clamped to stay inside.
+
+    ``optimize_acqf`` can return points a hair outside ``[0, 1]`` and the scaling
+    multiply can overshoot the bound by a float epsilon; some problems (BoTorch
+    test functions) validate their input bounds strictly, so we clamp to be safe.
+    """
+    X_unit = X_unit.clamp(0.0, 1.0).to(DTYPE)
+    X = problem.scale(X_unit)
+    bounds = problem.torch_bounds.to(X)
+    lo, hi = bounds[:, 0], bounds[:, 1]
+    # Inset by a tiny relative epsilon so the point stays strictly inside the
+    # bounds even after the float32 cast inside evaluate() (BoTorch test problems
+    # validate their input bounds strictly).
+    eps = 1e-6 * (hi - lo).clamp_min(1e-12)
+    return torch.maximum(torch.minimum(X, hi - eps), lo + eps)
+
+
 def penalized(values: torch.Tensor, constraints: torch.Tensor) -> torch.Tensor:
     """Fold constraint violations into the objective for unconstrained solvers.
 
@@ -71,8 +89,7 @@ class ProblemObjective:
         ).to(DTYPE)
 
     def evaluate_raw(self, X_unit: torch.Tensor):
-        X_unit = X_unit.clamp(0.0, 1.0).to(DTYPE)
-        X = self.problem.scale(X_unit)
+        X = _scale_clamped(self.problem, X_unit)
         values, constraints = self.problem.evaluate(X)
         return values[:, :1].to(DTYPE), (
             None if constraints is None else constraints.to(DTYPE)
@@ -103,6 +120,37 @@ class DatasetObjective:
 
     def select(self, idx: torch.Tensor) -> torch.Tensor:
         return self.Y[idx]
+
+
+class MultiObjectiveProblem:
+    """Continuous multi-objective maximization over the unit cube ``[0, 1]^d``.
+
+    Exposes the full objective vector (shape ``(n, m)``, maximized) plus the
+    constraints, and a reference point for hypervolume computations (the problem's
+    ``ref_point`` if it provides one, otherwise inferred from observed data).
+    """
+
+    def __init__(self, problem):
+        self.problem = problem
+        self.dim = problem.dim
+        self.num_objectives = problem.num_objectives
+        self.num_constraints = problem.num_constraints
+        self.bounds = torch.stack([torch.zeros(self.dim), torch.ones(self.dim)]).to(DTYPE)
+        rp = getattr(problem, "ref_point", None)
+        self.ref_point = None if rp is None else torch.as_tensor(rp, dtype=DTYPE)
+
+    def evaluate_raw(self, X_unit: torch.Tensor):
+        X = _scale_clamped(self.problem, X_unit)
+        values, constraints = self.problem.evaluate(X)
+        return values.to(DTYPE), (None if constraints is None else constraints.to(DTYPE))
+
+    def infer_ref_point(self, Y: torch.Tensor) -> torch.Tensor:
+        """Reference point for hypervolume: the problem's, or slightly below the nadir."""
+        if self.ref_point is not None:
+            return self.ref_point
+        nadir = Y.min(dim=0).values
+        span = (Y.max(dim=0).values - nadir).clamp_min(1e-9)
+        return nadir - 0.1 * span
 
 
 def fit_gp(train_X: torch.Tensor, train_Y: torch.Tensor) -> SingleTaskGP:

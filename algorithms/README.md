@@ -5,31 +5,41 @@ baselines that run against the BoCoDe problem suite. These are **research
 scripts**, not part of the installable `bocode` package: each file is
 self-contained, seeded, and runnable on its own.
 
-> Status: **scaffolding only** (Foundation push, dev/2026_06). The folders below
-> define where each algorithm will live; the implementations land in Push 2.
+## Layout and status
 
-## Layout
+Folders mirror the problem categories the algorithm targets. Each script exposes
+`optimize_problem(problem, ...)` and (where a discrete candidate set is the natural
+search space) `optimize_dataset(dataset_problem, ...)`, plus a CLI:
 
-Folders mirror the problem categories the algorithm targets:
+```bash
+python -m algorithms.single_obj.vanilla_bo --problem Car --init 10 --iters 50
+python -m algorithms.single_obj.turbo --dataset CrossedBarrel --init 10 --iters 40
+python -m algorithms.single_obj_constrained.scbo --problem PressureVessel --iters 80
+python -m algorithms.multi_obj.qnehvi --problem Penicillin --init 10 --iters 50
+```
 
-| Folder | Target problems | Planned baselines |
+| Folder | Implemented | Notes |
 |---|---|---|
-| `single_obj/` | single-objective, unconstrained, continuous | Random search, TuRBO, Vanilla BO, Standard GP (HDBO) |
-| `single_obj_constrained/` | single-objective, constrained, continuous | Random search, SCBO, constrained EI |
-| `single_obj_mixed_variable/` | single-objective, mixed integer/categorical | Random search, mixed-variable BO (Bounce / MCBO-style) |
-| `multi_obj/` | multi-objective, unconstrained | Random search, qEHVI, qNEHVI, qNParEGO |
-| `multi_obj_constrained/` | multi-objective, constrained | Random search, constrained qNEHVI, qParEGO |
+| `single_obj/` | ✅ `random_search`, `vanilla_bo`, `turbo`, `standard_gp` | problem + dataset variants |
+| `single_obj_constrained/` | ✅ `random_search`, `constrained_ei`, `scbo` | problem variant (no constrained dataset problems yet) |
+| `multi_obj/` | ✅ `random_search`, `qnehvi`, `qnparego` | problem variant; hypervolume-tracked |
+| `multi_obj_constrained/` | ✅ `random_search` (via `multi_obj`), `constrained_qnehvi` | problem variant |
+| `single_obj_mixed_variable/` | ⏳ Push 3 | mixed-variable BO (with the firefly mixed-integer problems) |
 
-## Conventions (for Push 2 implementations)
+Dataset-optimization variants are provided for the single-objective unconstrained
+algorithms, since BoCoDe's discrete dataset problems (the PV-Lab materials sets)
+are single-objective and unconstrained.
 
-- **One algorithm per script.** Every training detail lives in the file; a
-  separate evaluation harness handles metrics and plotting.
-- **Two entry points per algorithm**: a *problem-optimization* loop (query the
-  problem's `evaluate`) and a *dataset-optimization* loop (select from a fixed
-  candidate set, as in the PV-Lab benchmarking framework).
-- **Reproducibility**: seed all RNGs, make PyTorch deterministic, log
-  hyperparameters.
-- **Always include a Random search baseline** for each category.
+## Conventions
+
+- **One algorithm per script.** Every step lives in the file; the shared
+  `_bo_utils.py` holds only the evaluation plumbing (seeding, the problem/dataset
+  adapters, GP fitting, the result trace).
+- **Maximization.** Every adapter exposes an objective to *maximize* (BoCoDe's
+  convention); the continuous search space is the unit cube `[0, 1]^d`, scaled to
+  the problem bounds before evaluation.
+- **Reproducibility**: all RNGs are seeded and PyTorch is made deterministic.
+- **Always a Random search baseline** per category.
 
 ## Correctness notes carried from review
 
