@@ -150,9 +150,16 @@ def build_one(name: str, overrides: dict) -> dict:
             bounds = getattr(inst, "bounds", None)
             if bounds is not None:
                 meta["bounds"] = [list(b) for b in bounds]
-            # integer/mixed problems: count integer dims if exposed, else leave None
             meta["num_objectives"] = getattr(inst, "num_objectives", meta["num_objectives"])
             meta["num_constraints"] = getattr(inst, "num_constraints", meta["num_constraints"])
+            # per-dimension variable types (all "continuous" unless the class
+            # declares otherwise via variable_types); count the non-continuous ones.
+            vtypes = inst.resolved_variable_types()
+            meta["variable_types"] = vtypes
+            meta["num_integer_variables"] = sum(1 for t in vtypes if t == "integer")
+            meta["num_categorical_variables"] = sum(
+                1 for t in vtypes if not isinstance(t, str)
+            )
         except Exception as exc:  # noqa: BLE001 - record and continue
             meta["_instantiation_error"] = f"{type(exc).__name__}: {exc}"
 

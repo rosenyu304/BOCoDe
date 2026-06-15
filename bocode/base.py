@@ -93,6 +93,53 @@ class BenchmarkProblem:
             return self.bounds
         return torch.tensor(self.bounds)
 
+    # Per-dimension variable types, used to give "democracy with guardrails": a
+    # problem may be continuous in some dimensions and integer/categorical in
+    # others in its original formulation. ``variable_types`` is a list of length
+    # ``dim`` where each entry is either:
+    #   * ``"continuous"``                        — any value within the bounds;
+    #   * ``"integer"``                           — round to the nearest integer;
+    #   * a list/tuple of allowed values ``[...]`` — snap to the nearest of these
+    #                                               (categorical or discrete grid).
+    # ``None`` (the default) means every dimension is continuous.
+    variable_types = None
+
+    def resolved_variable_types(self) -> list:
+        """Return the per-dimension variable types, defaulting to all-continuous."""
+        if self.variable_types is None:
+            return ["continuous"] * self.dim
+        if len(self.variable_types) != self.dim:
+            raise ValueError(
+                f"{type(self).__name__}: variable_types has length "
+                f"{len(self.variable_types)} but dim={self.dim}."
+            )
+        return list(self.variable_types)
+
+    @property
+    def is_mixed_variable(self) -> bool:
+        """True if any decision variable is integer or categorical."""
+        return any(t != "continuous" for t in self.resolved_variable_types())
+
+    def enforce_variable_types(self, X: torch.Tensor) -> torch.Tensor:
+        """Snap each dimension of ``X`` to its variable type (round/snap-to-allowed).
+
+        Continuous dimensions are unchanged; integer dimensions are rounded to the
+        nearest integer; categorical/discrete-grid dimensions are snapped to the
+        nearest allowed value. Use this before evaluating if you want to respect a
+        problem's mixed-variable structure when sampling continuously.
+        """
+        X = X.clone()
+        for j, t in enumerate(self.resolved_variable_types()):
+            if t == "continuous":
+                continue
+            if t == "integer":
+                X[:, j] = torch.round(X[:, j])
+            else:  # list/tuple of allowed values: snap to nearest
+                allowed = torch.tensor(list(t), dtype=X.dtype, device=X.device)
+                idx = torch.argmin((X[:, j].unsqueeze(1) - allowed.unsqueeze(0)).abs(), dim=1)
+                X[:, j] = allowed[idx]
+        return X
+
     def evaluate(self, X: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
         """
         Evaluates the objective and constraint functions.
