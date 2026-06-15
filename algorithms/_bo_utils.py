@@ -68,7 +68,12 @@ def _scale_clamped(problem, X_unit: torch.Tensor) -> torch.Tensor:
     # bounds even after the float32 cast inside evaluate() (BoTorch test problems
     # validate their input bounds strictly).
     eps = 1e-6 * (hi - lo).clamp_min(1e-12)
-    return torch.maximum(torch.minimum(X, hi - eps), lo + eps)
+    X = torch.maximum(torch.minimum(X, hi - eps), lo + eps)
+    # Mixed-variable problems: project the continuous proposal onto valid points
+    # (round integers / snap categoricals). No-op for continuous problems.
+    if getattr(problem, "is_mixed_variable", False):
+        X = problem.enforce_variable_types(X)
+    return X
 
 
 def penalized(values: torch.Tensor, constraints: torch.Tensor) -> torch.Tensor:

@@ -120,6 +120,22 @@ class BenchmarkProblem:
         """True if any decision variable is integer or categorical."""
         return any(t != "continuous" for t in self.resolved_variable_types())
 
+    def sample(self, n: int, seed: int | None = None) -> torch.Tensor:
+        """Draw ``n`` valid points in the problem's bounds, respecting variable types.
+
+        Continuous dimensions get a Latin-Hypercube design within the bounds;
+        integer dimensions get integers within the bounds; categorical/discrete-grid
+        dimensions are drawn from their allowed values. For a fully-continuous
+        problem this is just a Latin-Hypercube sample in the bounds. Use this for
+        the initial design — the same call works for continuous and mixed problems.
+        """
+        from scipy.stats import qmc
+
+        sampler = qmc.LatinHypercube(d=self.dim, seed=seed)
+        unit = torch.from_numpy(sampler.random(n)).to(torch.double)
+        scaled = self.scale(unit)
+        return self.enforce_variable_types(scaled)
+
     def enforce_variable_types(self, X: torch.Tensor) -> torch.Tensor:
         """Snap each dimension of ``X`` to its variable type (round/snap-to-allowed).
 
