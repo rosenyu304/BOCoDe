@@ -429,23 +429,23 @@
   ],
   "LassoBreastCancer": [
     "opt_problems.hpo.LassoBreastCancer",
-    "lasso"
+    "hpo"
   ],
   "LassoDNA": [
     "opt_problems.hpo.LassoDNA",
-    "lasso"
+    "hpo"
   ],
   "LassoDiabetes": [
     "opt_problems.hpo.LassoDiabetes",
-    "lasso"
+    "hpo"
   ],
   "LassoLeukemia": [
     "opt_problems.hpo.LassoLeukemia",
-    "lasso"
+    "hpo"
   ],
   "LassoRCV1": [
     "opt_problems.hpo.LassoRCV1",
-    "lasso"
+    "hpo"
   ],
   "MOPTA08Car": [
     "opt_problems.engineering.MOPTA08Car",

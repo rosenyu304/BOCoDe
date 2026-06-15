@@ -2,6 +2,7 @@
   "name": "WeldedBeam",
   "module": "bocode.opt_problems.engineering.WeldedBeam",
   "extra": null,
+  "suite": "Engineering (standalone)",
   "num_objectives": 2,
   "num_constraints": 4,
   "available_dimensions": 4,

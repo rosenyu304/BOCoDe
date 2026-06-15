@@ -2,6 +2,7 @@
   "name": "ThreeTruss",
   "module": "bocode.opt_problems.engineering.ThreeTruss",
   "extra": null,
+  "suite": "Engineering (standalone)",
   "num_objectives": 1,
   "num_constraints": 3,
   "available_dimensions": 2,

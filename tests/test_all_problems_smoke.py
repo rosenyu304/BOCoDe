@@ -23,6 +23,12 @@ DATASET_CLASSES = {"AgNP", "CrossedBarrel", "P3HT", "Perovskite", "AutoAM"}
 # Problems with known upstream issues (see docs/AUDIT_findings_2026_06.md).
 XFAIL_CLASSES: set[str] = set()
 
+# Problems whose evaluation downloads a dataset (network) and/or is heavy; skipped
+# in the smoke test. The LassoBench problems fetch from OpenML / fetch_rcv1.
+NETWORK_CLASSES = {
+    "LassoDiabetes", "LassoBreastCancer", "LassoDNA", "LassoLeukemia", "LassoRCV1",
+}
+
 
 def _extra_available(extra: str | None) -> bool:
     """Return True if the optional dependency backing ``extra`` is importable."""
@@ -32,7 +38,6 @@ def _extra_available(extra: str | None) -> bool:
         "mujoco": "gymnasium",
         "control": "gymnasium",
         "modact": "modact",
-        "lasso": "LassoBench",
         "hpo": "sklearn",
         "mazda": "openpyxl",
         "neorl": "onnxruntime",
@@ -50,6 +55,8 @@ def test_smoke(name):
     extra = PROBLEM_REGISTRY[name][1]
     if not _extra_available(extra):
         pytest.skip(f"{name}: optional dependency '{extra}' not installed")
+    if name in NETWORK_CLASSES:
+        pytest.skip(f"{name}: evaluation downloads a dataset (network); skipped in smoke")
     if name in XFAIL_CLASSES:
         pytest.xfail(f"{name}: known upstream issue (see AUDIT_findings)")
 

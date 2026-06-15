@@ -2,6 +2,7 @@
   "name": "MOPTA08Car",
   "module": "bocode.opt_problems.engineering.MOPTA08Car",
   "extra": null,
+  "suite": "Engineering (standalone)",
   "num_objectives": 1,
   "num_constraints": 68,
   "available_dimensions": 124,

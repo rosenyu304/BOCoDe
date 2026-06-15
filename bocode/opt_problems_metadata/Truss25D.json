@@ -2,6 +2,7 @@
   "name": "Truss25D",
   "module": "bocode.opt_problems.engineering.Truss25D",
   "extra": "truss",
+  "suite": "Engineering (standalone)",
   "num_objectives": 1,
   "num_constraints": 31,
   "available_dimensions": 25,

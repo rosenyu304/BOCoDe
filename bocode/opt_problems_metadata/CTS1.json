@@ -2,6 +2,7 @@
   "name": "CTS1",
   "module": "bocode.opt_problems.modact.MODAct",
   "extra": "modact",
+  "suite": "MODAct (actuator design)",
   "num_objectives": 3,
   "num_constraints": 7,
   "available_dimensions": 20,

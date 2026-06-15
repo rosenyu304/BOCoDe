@@ -2,6 +2,7 @@
   "name": "CantileverBeam",
   "module": "bocode.opt_problems.engineering.CantileverBeam",
   "extra": null,
+  "suite": "Engineering (standalone)",
   "num_objectives": 1,
   "num_constraints": 11,
   "available_dimensions": 10,

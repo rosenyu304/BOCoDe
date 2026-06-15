@@ -2,6 +2,7 @@
   "name": "Penicillin",
   "module": "bocode.opt_problems.engineering.Penicillin",
   "extra": null,
+  "suite": "Engineering (standalone)",
   "num_objectives": 3,
   "num_constraints": 0,
   "available_dimensions": 7,

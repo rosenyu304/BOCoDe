@@ -49,7 +49,6 @@ _EXTRA_HINT = {
     "mujoco": "pip install 'bocode[mujoco]'",
     "control": "pip install 'bocode[control]'",
     "modact": "pip install 'bocode[modact]'",
-    "lasso": "pip install 'bocode[lasso]'",
     "hpo": "pip install 'bocode[hpo]'",
     "mazda": "pip install 'bocode[mazda]'",
     "neorl": "pip install 'bocode[neorl]'",

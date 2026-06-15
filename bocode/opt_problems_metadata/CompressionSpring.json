@@ -2,6 +2,7 @@
   "name": "CompressionSpring",
   "module": "bocode.opt_problems.engineering.CompressionSpring",
   "extra": null,
+  "suite": "Engineering (standalone)",
   "num_objectives": 1,
   "num_constraints": 4,
   "available_dimensions": 3,

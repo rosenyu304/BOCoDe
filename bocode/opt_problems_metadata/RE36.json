@@ -2,6 +2,7 @@
   "name": "RE36",
   "module": "bocode.opt_problems.reproblems.RE_problems",
   "extra": null,
+  "suite": "RE (Tanabe-Ishibuchi)",
   "num_objectives": 3,
   "num_constraints": 0,
   "available_dimensions": 4,

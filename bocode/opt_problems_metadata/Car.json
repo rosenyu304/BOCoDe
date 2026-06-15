@@ -2,6 +2,7 @@
   "name": "Car",
   "module": "bocode.opt_problems.engineering.Car",
   "extra": null,
+  "suite": "Engineering (standalone)",
   "num_objectives": 1,
   "num_constraints": 10,
   "available_dimensions": 11,

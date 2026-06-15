@@ -2,6 +2,7 @@
   "name": "CrossedBarrel",
   "module": "bocode.opt_problems.materials.CrossedBarrel",
   "extra": null,
+  "suite": "PV-Lab materials",
   "num_objectives": 1,
   "num_constraints": 0,
   "available_dimensions": 4,

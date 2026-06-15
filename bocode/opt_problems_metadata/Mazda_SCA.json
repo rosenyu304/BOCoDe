@@ -2,6 +2,7 @@
   "name": "Mazda_SCA",
   "module": "bocode.opt_problems.engineering.Mazda",
   "extra": "mazda",
+  "suite": "Engineering (standalone)",
   "num_objectives": 4,
   "num_constraints": 36,
   "available_dimensions": 148,

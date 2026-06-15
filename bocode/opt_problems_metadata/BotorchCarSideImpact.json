@@ -2,6 +2,7 @@
   "name": "BotorchCarSideImpact",
   "module": "bocode.opt_problems.engineering.BotorchCarSideImpact",
   "extra": null,
+  "suite": "Engineering (standalone)",
   "num_objectives": 4,
   "num_constraints": 0,
   "available_dimensions": 7,

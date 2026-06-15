@@ -1,14 +1,14 @@
-"""Weighted-Lasso hyperparameter optimization on the LassoBench leukemia dataset.
+"""Weighted-Lasso HPO on the leukemia gene-expression dataset (7129 features).
 
 Sources:
 Kenan Šehić, Alexandre Gramfort, Joseph Salmon, and Luigi Nardi. LassoBench: A High-Dimensional Hyperparameter Optimization Benchmark Suite for Lasso. Proceedings of the 1st International Conference on Automated Machine Learning (AutoML), 2022.
 """
 
-from ._lasso_base import LassoBenchRealProblem
+from ._lasso_base import WeightedLassoHPO
 
 
-class LassoLeukemia(LassoBenchRealProblem):
-    """Weighted-Lasso hyperparameter optimization on the LassoBench leukemia dataset. (7129-dimensional weighted-Lasso tuning)."""
+class LassoLeukemia(WeightedLassoHPO):
+    """Weighted-Lasso HPO on the leukemia gene-expression dataset (7129 features)."""
 
     available_dimensions = 7129
-    pick_data = "leukemia"
+    openml_id = 1104

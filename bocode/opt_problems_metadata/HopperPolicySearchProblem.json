@@ -2,6 +2,7 @@
   "name": "HopperPolicySearchProblem",
   "module": "bocode.opt_problems.control.mujoco.MujocoFuncs",
   "extra": "mujoco",
+  "suite": "MuJoCo control",
   "num_objectives": 1,
   "num_constraints": 0,
   "available_dimensions": 102,

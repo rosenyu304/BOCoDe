@@ -69,17 +69,15 @@ pip install "bocode[all]"        # everything available on PyPI
 | `truss` | Truss10D…Truss200D | `slientruss3d` |
 | `box2d` | RobotPush | `Box2D`, `pygame`, `joblib` |
 | `modact` | MODAct CS/CT/CTS/CTSE/CTSEI | `modact` |
-| `hpo` | SVM | `scikit-learn` |
+| `hpo` | SVM and the weighted-Lasso (LassoBench) problems | `scikit-learn` |
 | `mazda` | Mazda | `openpyxl` |
 | `neorl` | QPowerModel | `onnxruntime` |
-| `lasso` | LassoBench real datasets | `LassoBench` (git, not on PyPI) |
 | `viz` | function visualization | `dash`, `plotly`, `matplotlib` |
 
-`LassoBench` is not on PyPI, so the `lasso` extra installs it from git:
-
-```bash
-pip install "bocode[lasso]"
-```
+The Lasso problems are a clean-room weighted-Lasso reimplementation that needs only
+scikit-learn (the `hpo` extra); their datasets are fetched from OpenML on first use
+(network required). See `bocode/opt_problems/hpo/_lasso_base.py` for how it differs
+from upstream LassoBench.
 
 Accessing a problem without its extra installed raises a clear error telling you
 which extra to install.

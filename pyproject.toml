@@ -44,15 +44,13 @@ neorl = ["onnxruntime>=1.22.0"]          # QPowerModel surrogate
 box2d = ["Box2D", "pygame", "joblib"]    # RobotPush
 truss = ["slientruss3d"]                 # Truss10D..Truss200D
 mazda = ["openpyxl"]                     # Mazda (reads the .xlsx design table)
-hpo = ["scikit-learn"]                   # SVM hyperparameter problem
-lasso = ["LassoBench @ git+https://github.com/ksehic/LassoBench.git"]  # not on PyPI
+hpo = ["scikit-learn"]                   # SVM + weighted-Lasso (LassoBench) problems
 viz = [
     "dash",
     "plotly",
     "matplotlib",
 ]
-# Everything installable from PyPI (excludes the lasso git dependency, which must
-# be installed explicitly with pip install "bocode[lasso]").
+# Everything installable from PyPI.
 all = [
     "gymnasium[mujoco]",
     "modact",

@@ -1,7 +1,8 @@
 {
   "name": "LassoLeukemia",
   "module": "bocode.opt_problems.hpo.LassoLeukemia",
-  "extra": "lasso",
+  "extra": "hpo",
+  "suite": "HPO (LassoBench / GP-HDBO)",
   "num_objectives": 1,
   "num_constraints": 0,
   "available_dimensions": 7129,

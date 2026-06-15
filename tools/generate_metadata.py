@@ -63,6 +63,30 @@ def _application(name: str, module: str, overrides: dict) -> str:
     return "Unknown"
 
 
+# Benchmark suite / family by module, so grouped problems (CS1, RE21, …) are
+# identifiable. Order matters: more specific module paths first.
+_SUITE_BY_MODULE = (
+    ("opt_problems.modact", "MODAct (actuator design)"),
+    ("opt_problems.cec2020_rw", "CEC2020 RW-Constrained"),
+    ("opt_problems.reproblems.RE_problems", "RE (Tanabe-Ishibuchi)"),
+    ("opt_problems.reproblems.CRE_problems", "CRE (Tanabe-Ishibuchi)"),
+    ("opt_problems.materials", "PV-Lab materials"),
+    ("opt_problems.control.mujoco", "MuJoCo control"),
+    ("opt_problems.control", "Classic control"),
+    ("opt_problems.combinatorial", "TSP / NEORL"),
+    ("opt_problems.hpo", "HPO (LassoBench / GP-HDBO)"),
+)
+
+
+def _suite(name: str, module: str, overrides: dict) -> str:
+    if name in overrides and "suite" in overrides[name]:
+        return overrides[name]["suite"]
+    for prefix, suite in _SUITE_BY_MODULE:
+        if module.startswith(prefix):
+            return suite
+    return "Engineering (standalone)"
+
+
 def _source(cls) -> str:
     """Extract a one-line source citation from the class or module docstring.
 
@@ -103,6 +127,7 @@ def build_one(name: str, overrides: dict) -> dict:
         "name": name,
         "module": f"bocode.{module}",
         "extra": extra,
+        "suite": _suite(name, module, overrides),
         "num_objectives": getattr(cls, "num_objectives", None),
         "num_constraints": getattr(cls, "num_constraints", None),
         "available_dimensions": _jsonify(getattr(cls, "available_dimensions", None)),

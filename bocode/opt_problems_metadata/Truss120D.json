@@ -2,6 +2,7 @@
   "name": "Truss120D",
   "module": "bocode.opt_problems.engineering.Truss120D",
   "extra": "truss",
+  "suite": "Engineering (standalone)",
   "num_objectives": 1,
   "num_constraints": 121,
   "available_dimensions": 120,

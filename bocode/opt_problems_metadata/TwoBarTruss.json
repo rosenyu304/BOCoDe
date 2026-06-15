@@ -2,6 +2,7 @@
   "name": "TwoBarTruss",
   "module": "bocode.opt_problems.engineering.TwoBarTruss",
   "extra": null,
+  "suite": "Engineering (standalone)",
   "num_objectives": 2,
   "num_constraints": 5,
   "available_dimensions": 2,

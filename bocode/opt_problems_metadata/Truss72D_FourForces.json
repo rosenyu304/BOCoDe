@@ -2,6 +2,7 @@
   "name": "Truss72D_FourForces",
   "module": "bocode.opt_problems.engineering.Truss72D",
   "extra": "truss",
+  "suite": "Engineering (standalone)",
   "num_objectives": 1,
   "num_constraints": 88,
   "available_dimensions": 72,

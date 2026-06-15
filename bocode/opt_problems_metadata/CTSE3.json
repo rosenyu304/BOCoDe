@@ -2,6 +2,7 @@
   "name": "CTSE3",
   "module": "bocode.opt_problems.modact.MODAct",
   "extra": "modact",
+  "suite": "MODAct (actuator design)",
   "num_objectives": 4,
   "num_constraints": 10,
   "available_dimensions": 20,

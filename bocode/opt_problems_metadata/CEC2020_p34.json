@@ -2,6 +2,7 @@
   "name": "CEC2020_p34",
   "module": "bocode.opt_problems.cec2020_rw.CEC2020_p34",
   "extra": null,
+  "suite": "CEC2020 RW-Constrained",
   "num_objectives": 1,
   "num_constraints": 108,
   "available_dimensions": 118,

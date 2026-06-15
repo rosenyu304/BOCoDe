@@ -2,6 +2,7 @@
   "name": "RobotPush",
   "module": "bocode.opt_problems.engineering.RobotPush",
   "extra": "box2d",
+  "suite": "Engineering (standalone)",
   "num_objectives": 1,
   "num_constraints": 0,
   "available_dimensions": 14,

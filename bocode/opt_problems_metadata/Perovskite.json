@@ -2,6 +2,7 @@
   "name": "Perovskite",
   "module": "bocode.opt_problems.materials.Perovskite",
   "extra": null,
+  "suite": "PV-Lab materials",
   "num_objectives": 1,
   "num_constraints": 0,
   "available_dimensions": 3,

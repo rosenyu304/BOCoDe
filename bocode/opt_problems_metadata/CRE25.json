@@ -2,6 +2,7 @@
   "name": "CRE25",
   "module": "bocode.opt_problems.reproblems.CRE_problems",
   "extra": null,
+  "suite": "CRE (Tanabe-Ishibuchi)",
   "num_objectives": 2,
   "num_constraints": 1,
   "available_dimensions": 4,

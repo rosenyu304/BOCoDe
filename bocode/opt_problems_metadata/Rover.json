@@ -2,6 +2,7 @@
   "name": "Rover",
   "module": "bocode.opt_problems.engineering.Rover",
   "extra": null,
+  "suite": "Engineering (standalone)",
   "num_objectives": 1,
   "num_constraints": 0,
   "available_dimensions": 100,

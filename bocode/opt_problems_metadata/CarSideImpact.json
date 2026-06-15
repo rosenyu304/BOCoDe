@@ -2,6 +2,7 @@
   "name": "CarSideImpact",
   "module": "bocode.opt_problems.engineering.CarSideImpact",
   "extra": null,
+  "suite": "Engineering (standalone)",
   "num_objectives": 3,
   "num_constraints": 10,
   "available_dimensions": 7,

@@ -2,6 +2,7 @@
   "name": "AgNP",
   "module": "bocode.opt_problems.materials.AgNP",
   "extra": null,
+  "suite": "PV-Lab materials",
   "num_objectives": 1,
   "num_constraints": 0,
   "available_dimensions": 5,

@@ -2,6 +2,7 @@
   "name": "WaterResources",
   "module": "bocode.opt_problems.engineering.WaterResources",
   "extra": null,
+  "suite": "Engineering (standalone)",
   "num_objectives": 5,
   "num_constraints": 7,
   "available_dimensions": 3,

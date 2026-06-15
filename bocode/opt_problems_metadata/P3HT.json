@@ -2,6 +2,7 @@
   "name": "P3HT",
   "module": "bocode.opt_problems.materials.P3HT",
   "extra": null,
+  "suite": "PV-Lab materials",
   "num_objectives": 1,
   "num_constraints": 0,
   "available_dimensions": 5,

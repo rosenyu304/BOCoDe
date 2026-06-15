@@ -2,6 +2,7 @@
   "name": "Mazda",
   "module": "bocode.opt_problems.engineering.Mazda",
   "extra": "mazda",
+  "suite": "Engineering (standalone)",
   "num_objectives": 5,
   "num_constraints": 54,
   "available_dimensions": 222,
