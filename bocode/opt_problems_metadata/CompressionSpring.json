@@ -23,9 +23,15 @@
       15
     ]
   ],
-  "num_integer_variables": null,
+  "num_integer_variables": 0,
   "application": "Engineering",
   "convex": "unknown",
   "np_hard": "unknown",
-  "source": "Gandomi AH, Yang XS, Alavi AH (2011) Mixed variable structural optimization using firefly algorithm. Computers & Structures 89(23-24):2325\u20132336"
+  "source": "Gandomi AH, Yang XS, Alavi AH (2011) Mixed variable structural optimization using firefly algorithm. Computers & Structures 89(23-24):2325\u20132336",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
 }

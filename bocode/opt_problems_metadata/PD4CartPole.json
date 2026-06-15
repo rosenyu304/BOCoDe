@@ -27,9 +27,16 @@
       3.0
     ]
   ],
-  "num_integer_variables": null,
+  "num_integer_variables": 0,
   "application": "Control",
   "convex": "unknown",
   "np_hard": "unknown",
-  "source": "https://github.com/PREDICT-EPFL/ECC24_BOmeetsControl_workshop/blob/master/exercise2.ipynb By Wenjie Xu"
+  "source": "https://github.com/PREDICT-EPFL/ECC24_BOmeetsControl_workshop/blob/master/exercise2.ipynb By Wenjie Xu",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
 }

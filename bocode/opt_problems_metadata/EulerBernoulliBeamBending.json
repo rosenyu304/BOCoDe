@@ -23,9 +23,15 @@
       1
     ]
   ],
-  "num_integer_variables": null,
+  "num_integer_variables": 0,
   "application": "Engineering",
   "convex": "unknown",
   "np_hard": "unknown",
-  "source": "Cuesta Ramirez, J., Le Riche, R., Roustant, O. et al. (2022) A comparison of mixed-variables Bayesian optimization approaches. Adv. Model. and Simul. in Eng. Sci. 9, 6 ."
+  "source": "Cuesta Ramirez, J., Le Riche, R., Roustant, O. et al. (2022) A comparison of mixed-variables Bayesian optimization approaches. Adv. Model. and Simul. in Eng. Sci. 9, 6 .",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
 }

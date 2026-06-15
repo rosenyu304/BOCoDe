@@ -12,9 +12,13 @@ class Car(BenchmarkProblem):
     # 11D objective, 10 constraints, X = n-by-11
 
     available_dimensions = 11
-    input_type = DataType.CONTINUOUS
+    input_type = DataType.MIXED
     num_objectives = 1
     num_constraints = 10
+    # x8, x9 (indices 7, 8) are two-level material choices {0.192, 0.345}.
+    variable_types = (
+        ["continuous"] * 7 + [[0.192, 0.345], [0.192, 0.345]] + ["continuous"] * 2
+    )
 
     tags = {"single_objective", "constrained", "11D"}
 

@@ -23,9 +23,15 @@
       0.1
     ]
   ],
-  "num_integer_variables": null,
+  "num_integer_variables": 0,
   "application": "Engineering",
   "convex": "unknown",
   "np_hard": "unknown",
-  "source": "K. Musselman and J. Talavage. A trade-off cut approach to multiple objective optimization. Operations Research 28(6):1424\u20131435, 1980"
+  "source": "K. Musselman and J. Talavage. A trade-off cut approach to multiple objective optimization. Operations Research 28(6):1424\u20131435, 1980",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
 }

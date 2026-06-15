@@ -10,9 +10,11 @@ class SpeedReducer(BenchmarkProblem):
     """
 
     available_dimensions = 7
-    input_type = DataType.CONTINUOUS
+    input_type = DataType.MIXED
     num_objectives = 1
     num_constraints = 9
+    # x3 (index 2) is the number of teeth on the pinion — an integer in [17, 28].
+    variable_types = ["continuous", "continuous", "integer"] + ["continuous"] * 4
 
     # 7D objective, 1 constraint, X = n-by-7
 

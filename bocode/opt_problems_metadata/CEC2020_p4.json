@@ -35,9 +35,18 @@
       16
     ]
   ],
-  "num_integer_variables": null,
+  "num_integer_variables": 0,
   "application": "Engineering",
   "convex": "unknown",
   "np_hard": "unknown",
-  "source": "CEC2020 Problem 4"
+  "source": "CEC2020 Problem 4",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
 }

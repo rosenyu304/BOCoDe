@@ -39,9 +39,19 @@
       6.5
     ]
   ],
-  "num_integer_variables": null,
+  "num_integer_variables": 0,
   "application": "Engineering",
   "convex": "unknown",
   "np_hard": "unknown",
-  "source": "Q. Liang and L. Lai. Scalable Bayesian optimization accelerates process optimization of penicillin production. NeurIPS 2021 AI for Science Workshop, 2021. BoTorch implementation: M. Balandat et al. BoTorch: A Framework for Efficient Monte-Carlo Bayesian Optimization. NeurIPS 33, 2020. http://arxiv.org/abs/1910.06403"
+  "source": "Q. Liang and L. Lai. Scalable Bayesian optimization accelerates process optimization of penicillin production. NeurIPS 2021 AI for Science Workshop, 2021. BoTorch implementation: M. Balandat et al. BoTorch: A Framework for Efficient Monte-Carlo Bayesian Optimization. NeurIPS 33, 2020. http://arxiv.org/abs/1910.06403",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
 }

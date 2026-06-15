@@ -14,9 +14,13 @@ class PressureVessel(BenchmarkProblem):
     # 4D objective, 4 constraints, X = n-by-4
 
     available_dimensions = 4
-    input_type = DataType.CONTINUOUS
+    input_type = DataType.MIXED
     num_objectives = 1
     num_constraints = 4
+    # x1, x2 (shell/head thickness, indices 0,1) are integer multiples of 0.0625
+    # inch; x3, x4 (radius, length) are continuous.
+    _GAUGE = [round(0.0625 * k, 4) for k in range(1, 100)]
+    variable_types = [_GAUGE, _GAUGE, "continuous", "continuous"]
 
     tags = {"single_objective", "constrained", "4D"}
 

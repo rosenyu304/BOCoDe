@@ -43,9 +43,20 @@
       3.141592653589793
     ]
   ],
-  "num_integer_variables": null,
+  "num_integer_variables": 0,
   "application": "Engineering",
   "convex": "unknown",
   "np_hard": "unknown",
-  "source": "Eight-drum reactivity insertion problem. Uses the QPowerModel.eval(pert) to compute the reactor's power distribution https://neorl.readthedocs.io/en/latest/examples/ex11.html#problem-description"
+  "source": "Eight-drum reactivity insertion problem. Uses the QPowerModel.eval(pert) to compute the reactor's power distribution https://neorl.readthedocs.io/en/latest/examples/ex11.html#problem-description",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
 }

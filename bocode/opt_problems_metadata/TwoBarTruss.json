@@ -19,9 +19,14 @@
       1
     ]
   ],
-  "num_integer_variables": null,
+  "num_integer_variables": 0,
   "application": "Engineering",
   "convex": "unknown",
   "np_hard": "unknown",
-  "source": "S. S. Rao. Game theory approach for multiobjective structural optimization. Computers and Structures 26(1):119\u2013127, 1987"
+  "source": "S. S. Rao. Game theory approach for multiobjective structural optimization. Computers and Structures 26(1):119\u2013127, 1987",
+  "variable_types": [
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
 }

@@ -31,9 +31,17 @@
       3.0
     ]
   ],
-  "num_integer_variables": null,
+  "num_integer_variables": 0,
   "application": "Engineering",
   "convex": "unknown",
   "np_hard": "unknown",
-  "source": "X. Liao, Q. Li, X. Yang, W. Zhang, and W. Li. Multiobjective optimization for crash safety design of vehicles using stepwise regression model. Structural and Multidisciplinary Optimization 35(6):561-569, 2008. R. Tanabe and H. Ishibuchi. An easy-to-use real-world multi-objective optimization problem suite. Applied Soft Computing 89:106078, 2020. BoTorch implementation: M. Balandat et al. BoTorch: A Framework for Efficient Monte-Carlo Bayesian Optimization. NeurIPS 33, 2020. http://arxiv.org/abs/"
+  "source": "X. Liao, Q. Li, X. Yang, W. Zhang, and W. Li. Multiobjective optimization for crash safety design of vehicles using stepwise regression model. Structural and Multidisciplinary Optimization 35(6):561-569, 2008. R. Tanabe and H. Ishibuchi. An easy-to-use real-world multi-objective optimization problem suite. Applied Soft Computing 89:106078, 2020. BoTorch implementation: M. Balandat et al. BoTorch: A Framework for Efficient Monte-Carlo Bayesian Optimization. NeurIPS 33, 2020. http://arxiv.org/abs/",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
 }

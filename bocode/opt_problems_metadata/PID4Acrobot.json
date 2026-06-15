@@ -23,9 +23,15 @@
       3.0
     ]
   ],
-  "num_integer_variables": null,
+  "num_integer_variables": 0,
   "application": "Control",
   "convex": "unknown",
   "np_hard": "unknown",
-  "source": "https://github.com/PREDICT-EPFL/ECC24_BOmeetsControl_workshop/blob/master/demo2.ipynb By Wenjie Xu BoTorch BenchmarkProblem for tuning a PID controller on the OpenAI Gym Acrobot-v1 environment. The goal is to find the PID gains (kp, ki, kd) that maximize the cumulative reward, which corresponds to swinging the acrobot's free end to a target height as quickly as possible. Note: The evaluation function is stochastic, averaging the outcome over 5 distinct simulation seeds. The action space is also "
+  "source": "https://github.com/PREDICT-EPFL/ECC24_BOmeetsControl_workshop/blob/master/demo2.ipynb By Wenjie Xu BoTorch BenchmarkProblem for tuning a PID controller on the OpenAI Gym Acrobot-v1 environment. The goal is to find the PID gains (kp, ki, kd) that maximize the cumulative reward, which corresponds to swinging the acrobot's free end to a target height as quickly as possible. Note: The evaluation function is stochastic, averaging the outcome over 5 distinct simulation seeds. The action space is also ",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
 }

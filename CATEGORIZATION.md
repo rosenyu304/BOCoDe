@@ -199,7 +199,7 @@ problem count (currently **164**).
 | 85 | CRE51 | Engineering | CRE (Tanabe-Ishibuchi) | 3 | 5 | 7 | continuous | no | unknown | unknown |
 | 86 | BotorchCarSideImpact | Engineering | Engineering (standalone) | 7 | 4 | 0 | continuous | no | unknown | unknown |
 | 87 | CantileverBeam | Engineering | Engineering (standalone) | 10 | 1 | 11 | continuous | no | unknown | unknown |
-| 88 | Car | Engineering | Engineering (standalone) | 11 | 1 | 10 | continuous | no | unknown | unknown |
+| 88 | Car | Engineering | Engineering (standalone) | 11 | 1 | 10 | mixed | no | unknown | unknown |
 | 89 | CarSideImpact | Engineering | Engineering (standalone) | 7 | 3 | 10 | continuous | no | unknown | unknown |
 | 90 | CompressionSpring | Engineering | Engineering (standalone) | 3 | 1 | 4 | continuous | no | unknown | unknown |
 | 91 | DiscBrake | Engineering | Engineering (standalone) | 4 | 2 | 4 | continuous | no | unknown | unknown |
@@ -210,13 +210,13 @@ problem count (currently **164**).
 | 96 | Mazda | Engineering | Engineering (standalone) | 222 | 5 | 54 | continuous | no | unknown | unknown |
 | 97 | Mazda_SCA | Engineering | Engineering (standalone) | 148 | 4 | 36 | continuous | no | unknown | unknown |
 | 98 | Penicillin | Engineering | Engineering (standalone) | 7 | 3 | 0 | continuous | no | unknown | unknown |
-| 99 | PressureVessel | Engineering | Engineering (standalone) | 4 | 1 | 4 | continuous | no | unknown | unknown |
+| 99 | PressureVessel | Engineering | Engineering (standalone) | 4 | 1 | 4 | mixed | no | unknown | unknown |
 | 100 | QPowerModel | Engineering | Engineering (standalone) | 8 | 1 | 0 | continuous | no | unknown | unknown |
 | 101 | ReactivityModel | Engineering | Engineering (standalone) | 8 | 1 | 0 | continuous | no | unknown | unknown |
 | 102 | ReinforcedConcreteBeam | Engineering | Engineering (standalone) | 3 | 1 | 2 | continuous | no | unknown | unknown |
 | 103 | RobotPush | Engineering | Engineering (standalone) | 14 | 1 | 0 | continuous | no | no | unknown |
 | 104 | Rover | Engineering | Engineering (standalone) | 100 | 1 | 0 | continuous | no | unknown | unknown |
-| 105 | SpeedReducer | Engineering | Engineering (standalone) | 7 | 1 | 9 | continuous | no | unknown | unknown |
+| 105 | SpeedReducer | Engineering | Engineering (standalone) | 7 | 1 | 9 | mixed | no | unknown | unknown |
 | 106 | ThreeTruss | Engineering | Engineering (standalone) | 2 | 1 | 3 | continuous | no | unknown | unknown |
 | 107 | Truss10D | Engineering | Engineering (standalone) | 10 | 1 | 14 | continuous | no | unknown | unknown |
 | 108 | Truss120D | Engineering | Engineering (standalone) | 120 | 1 | 121 | continuous | no | unknown | unknown |

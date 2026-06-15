@@ -215,9 +215,16 @@
       60
     ]
   ],
-  "num_integer_variables": null,
+  "num_integer_variables": 4,
   "application": "Engineering",
   "convex": "unknown",
   "np_hard": "unknown",
-  "source": "Sandgren, E. (1990). Nonlinear Integer and Discrete Programming in Mechanical Design Optimization.\" ASME. J. Mech. Des. June 1990; 112(2): 223\u2013229."
+  "source": "Sandgren, E. (1990). Nonlinear Integer and Discrete Programming in Mechanical Design Optimization.\" ASME. J. Mech. Des. June 1990; 112(2): 223\u2013229.",
+  "variable_types": [
+    "integer",
+    "integer",
+    "integer",
+    "integer"
+  ],
+  "num_categorical_variables": 0
 }

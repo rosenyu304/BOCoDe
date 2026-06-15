@@ -11,6 +11,8 @@ class GearTrain(BenchmarkProblem):
     input_type = DataType.MIXED
     num_objectives = 1
     num_constraints = 0
+    # All four variables are gear-teeth counts (integers in [12, 60]).
+    variable_types = ["integer"] * 4
 
     # 4D objective, 0 constraints, X = n-by-4
 
