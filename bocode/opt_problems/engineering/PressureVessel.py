@@ -20,11 +20,21 @@ class PressureVessel(BenchmarkProblem):
     # x1, x2 (shell/head thickness, indices 0,1) are integer multiples of 0.0625
     # inch; x3, x4 (radius, length) are continuous.
     _GAUGE = [round(0.0625 * k, 4) for k in range(1, 100)]
-    variable_types = [_GAUGE, _GAUGE, "continuous", "continuous"]
 
     tags = {"single_objective", "constrained", "4D"}
 
-    def __init__(self):
+    def __init__(self, is_discrete: bool = True):
+        # is_discrete=True (default) is the firefly mixed-variable formulation
+        # (thicknesses snap to the 0.0625" gauge grid); is_discrete=False is the
+        # fully-continuous relaxation.
+        self.is_discrete = is_discrete
+        self.variable_types = (
+            [self._GAUGE, self._GAUGE, "continuous", "continuous"]
+            if is_discrete
+            else None
+        )
+        if not is_discrete:
+            self.input_type = DataType.CONTINUOUS
         super().__init__(
             dim=4,
             num_objectives=1,

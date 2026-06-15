@@ -13,14 +13,22 @@ class SpeedReducer(BenchmarkProblem):
     input_type = DataType.MIXED
     num_objectives = 1
     num_constraints = 9
-    # x3 (index 2) is the number of teeth on the pinion — an integer in [17, 28].
-    variable_types = ["continuous", "continuous", "integer"] + ["continuous"] * 4
 
     # 7D objective, 1 constraint, X = n-by-7
 
     tags = {"single_objective", "constrained", "7D"}
 
-    def __init__(self):
+    def __init__(self, is_discrete: bool = True):
+        # x3 (index 2) is the number of teeth on the pinion — an integer in [17,28]
+        # in the original (firefly) mixed formulation; is_discrete=False relaxes it.
+        self.is_discrete = is_discrete
+        self.variable_types = (
+            ["continuous", "continuous", "integer"] + ["continuous"] * 4
+            if is_discrete
+            else None
+        )
+        if not is_discrete:
+            self.input_type = DataType.CONTINUOUS
         super().__init__(
             dim=7,
             num_objectives=1,

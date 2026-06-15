@@ -15,14 +15,20 @@ class Car(BenchmarkProblem):
     input_type = DataType.MIXED
     num_objectives = 1
     num_constraints = 10
-    # x8, x9 (indices 7, 8) are two-level material choices {0.192, 0.345}.
-    variable_types = (
-        ["continuous"] * 7 + [[0.192, 0.345], [0.192, 0.345]] + ["continuous"] * 2
-    )
 
     tags = {"single_objective", "constrained", "11D"}
 
-    def __init__(self):
+    def __init__(self, is_discrete: bool = True):
+        # x8, x9 (indices 7, 8) are two-level material choices {0.192, 0.345} in the
+        # original (firefly) mixed formulation; is_discrete=False relaxes them.
+        self.is_discrete = is_discrete
+        self.variable_types = (
+            ["continuous"] * 7 + [[0.192, 0.345], [0.192, 0.345]] + ["continuous"] * 2
+            if is_discrete
+            else None
+        )
+        if not is_discrete:
+            self.input_type = DataType.CONTINUOUS
         super().__init__(
             dim=11,
             num_objectives=1,
