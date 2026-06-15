@@ -4,7 +4,6 @@ Sources:
 M. Balandat, B. Karrer, D. R. Jiang, S. Daulton, B. Letham, A. G. Wilson, and E. Bakshy. BoTorch: A Framework for Efficient Monte-Carlo Bayesian Optimization. Advances in Neural Information Processing Systems 33, 2020. http://arxiv.org/abs/1910.06403
 """
 
-from typing import Optional, Tuple
 
 import torch
 
@@ -25,9 +24,9 @@ class MultiObjBotorchProblem(BenchmarkProblem):
     def __init__(
         self,
         botorch_problem,
-        optimum: Optional[torch.Tensor] = None,
-        x_opt: Optional[torch.Tensor] = None,
-        dim: Optional[int] = None,
+        optimum: torch.Tensor | None = None,
+        x_opt: torch.Tensor | None = None,
+        dim: int | None = None,
     ) -> None:
         if dim is None:
             self.botorch_problem = botorch_problem()
@@ -49,7 +48,7 @@ class MultiObjBotorchProblem(BenchmarkProblem):
 
     def _evaluate_implementation(
         self, X: torch.Tensor, scaling: bool = False
-    ) -> Tuple[Optional[torch.Tensor], torch.Tensor]:
+    ) -> tuple[torch.Tensor | None, torch.Tensor]:
         if scaling:
             X = super().scale(X)
 

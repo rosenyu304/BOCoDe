@@ -26,7 +26,14 @@ from torch.quasirandom import SobolEngine
 
 import bocode
 
-from .._bo_utils import DTYPE, ProblemObjective, Result, fit_gp, set_seed
+from .._bo_utils import (
+    DTYPE,
+    ProblemObjective,
+    Result,
+    fit_gp,
+    initial_design,  # noqa: E501
+    set_seed,
+)
 from ..single_obj.turbo import TrustRegion
 
 
@@ -51,7 +58,7 @@ def optimize_problem(problem, n_init: int = 10, iters: int = 80, seed: int = 0) 
     assert obj.num_constraints > 0, "scbo requires a constrained problem"
     res = Result("scbo", type(problem).__name__, seed)
 
-    X = SobolEngine(obj.dim, scramble=True, seed=seed).draw(n_init).to(DTYPE)
+    X = initial_design(n_init, obj.dim, seed)
     Yo, Yc = obj.evaluate_raw(X)
     best, _ = _best_feasible(Yo, Yc)
     for _ in range(n_init):

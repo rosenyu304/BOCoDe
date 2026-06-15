@@ -19,11 +19,15 @@ import argparse
 from botorch.utils.multi_objective.box_decompositions.dominated import (
     DominatedPartitioning,
 )
-from torch.quasirandom import SobolEngine
 
 import bocode
 
-from .._bo_utils import DTYPE, MultiObjectiveProblem, Result, set_seed
+from .._bo_utils import (
+    MultiObjectiveProblem,
+    Result,
+    initial_design,  # noqa: E501
+    set_seed,
+)
 
 
 def optimize_problem(problem, iters: int = 200, seed: int = 0) -> Result:
@@ -31,7 +35,7 @@ def optimize_problem(problem, iters: int = 200, seed: int = 0) -> Result:
     obj = MultiObjectiveProblem(problem)
     res = Result("random_search", type(problem).__name__, seed)
 
-    X = SobolEngine(obj.dim, scramble=True, seed=seed).draw(iters).to(DTYPE)
+    X = initial_design(iters, obj.dim, seed)
     Y, _ = obj.evaluate_raw(X)
     ref_point = obj.infer_ref_point(Y)
 

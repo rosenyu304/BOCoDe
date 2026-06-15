@@ -8,7 +8,7 @@ high-dimensional BO methods. This script implements that baseline: a
 lengthscale grows with ``sqrt(dim)`` (keeping the effective signal variance
 roughly dimension-invariant), optimized with LogExpectedImprovement.
 
-The difference from ``vanilla_bo`` is the modeling choice (the dimension-scaled
+The difference from ``vanilla_highdim_bo`` is the modeling choice (the dimension-scaled
 prior) rather than the acquisition-optimization tricks.
 
 Run::
@@ -36,11 +36,17 @@ from botorch.optim import optimize_acqf
 from gpytorch.kernels import MaternKernel, ScaleKernel
 from gpytorch.mlls import ExactMarginalLogLikelihood
 from gpytorch.priors import GammaPrior
-from torch.quasirandom import SobolEngine
 
 import bocode
 
-from .._bo_utils import DTYPE, DatasetObjective, ProblemObjective, Result, set_seed
+from .._bo_utils import (
+    DTYPE,
+    DatasetObjective,
+    ProblemObjective,
+    Result,
+    initial_design,  # noqa: E501
+    set_seed,
+)
 
 
 def _standard_gp(train_X: torch.Tensor, train_Y: torch.Tensor) -> SingleTaskGP:
@@ -78,7 +84,7 @@ def optimize_problem(problem, n_init: int = 20, iters: int = 100, seed: int = 0)
     obj = ProblemObjective(problem)
     res = Result("standard_gp", type(problem).__name__, seed)
 
-    train_X = SobolEngine(obj.dim, scramble=True, seed=seed).draw(n_init).to(DTYPE)
+    train_X = initial_design(n_init, obj.dim, seed)
     train_Y = obj(train_X)
     best = train_Y.max().item()
     for _ in range(n_init):

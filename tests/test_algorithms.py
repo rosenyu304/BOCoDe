@@ -13,7 +13,8 @@ import bocode
 
 SINGLE_OBJ = [
     "algorithms.single_obj.random_search",
-    "algorithms.single_obj.vanilla_bo",
+    "algorithms.single_obj.single_task_gp",
+    "algorithms.single_obj.vanilla_highdim_bo",
     "algorithms.single_obj.turbo",
     "algorithms.single_obj.standard_gp",
 ]
@@ -93,9 +94,15 @@ def test_multi_obj_runs(modname):
 
 
 @pytest.mark.slow
-def test_constrained_multi_obj_runs():
-    from algorithms.multi_obj_constrained import constrained_qnehvi
-
-    res = constrained_qnehvi.optimize_problem(bocode.WeldedBeam(), n_init=8, iters=2, seed=0)
+@pytest.mark.parametrize(
+    "modname",
+    [
+        "algorithms.multi_obj_constrained.constrained_qnehvi",
+        "algorithms.multi_obj_constrained.constrained_qparego",
+    ],
+)
+def test_constrained_multi_obj_runs(modname):
+    mod = _mod(modname)
+    res = mod.optimize_problem(bocode.WeldedBeam(), n_init=8, iters=2, seed=0)
     assert len(res.best_history) >= 10
     assert _monotone(res.best_history)

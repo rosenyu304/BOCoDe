@@ -1,5 +1,4 @@
 from pathlib import Path
-from typing import Optional, Tuple
 
 import numpy as np
 import torch
@@ -37,7 +36,7 @@ class AntProblem(BenchmarkProblem):
 
     def _evaluate_implementation(
         self, x: torch.Tensor
-    ) -> Tuple[torch.Tensor, torch.Tensor]:
+    ) -> tuple[torch.Tensor, torch.Tensor]:
         batch_size = x.shape[0]
         rewards = torch.zeros(batch_size, self.__class__.num_objectives)
         for i in range(batch_size):
@@ -70,7 +69,7 @@ class HalfCheetahProblem(BenchmarkProblem):
 
     def _evaluate_implementation(
         self, x: torch.Tensor
-    ) -> Tuple[torch.Tensor, torch.Tensor]:
+    ) -> tuple[torch.Tensor, torch.Tensor]:
         batch_size = x.shape[0]
         rewards = torch.zeros(batch_size, self.__class__.num_objectives)
         for i in range(batch_size):
@@ -103,7 +102,7 @@ class HopperProblem(BenchmarkProblem):
 
     def _evaluate_implementation(
         self, x: torch.Tensor
-    ) -> Tuple[torch.Tensor, torch.Tensor]:
+    ) -> tuple[torch.Tensor, torch.Tensor]:
         batch_size = x.shape[0]
         rewards = torch.zeros(batch_size, self.__class__.num_objectives)
         for i in range(batch_size):
@@ -136,7 +135,7 @@ class HumanoidProblem(BenchmarkProblem):
 
     def _evaluate_implementation(
         self, x: torch.Tensor
-    ) -> Tuple[torch.Tensor, torch.Tensor]:
+    ) -> tuple[torch.Tensor, torch.Tensor]:
         batch_size = x.shape[0]
         rewards = torch.zeros(batch_size, self.__class__.num_objectives)
         for i in range(batch_size):
@@ -169,7 +168,7 @@ class HumanoidStandupProblem(BenchmarkProblem):
 
     def _evaluate_implementation(
         self, x: torch.Tensor
-    ) -> Tuple[torch.Tensor, torch.Tensor]:
+    ) -> tuple[torch.Tensor, torch.Tensor]:
         batch_size = x.shape[0]
         rewards = torch.zeros(batch_size, self.__class__.num_objectives)
         for i in range(batch_size):
@@ -202,7 +201,7 @@ class InvertedDoublePendulumProblem(BenchmarkProblem):
 
     def _evaluate_implementation(
         self, x: torch.Tensor
-    ) -> Tuple[torch.Tensor, torch.Tensor]:
+    ) -> tuple[torch.Tensor, torch.Tensor]:
         batch_size = x.shape[0]
         rewards = torch.zeros(batch_size, self.__class__.num_objectives)
         for i in range(batch_size):
@@ -235,7 +234,7 @@ class InvertedPendulumProblem(BenchmarkProblem):
 
     def _evaluate_implementation(
         self, x: torch.Tensor
-    ) -> Tuple[torch.Tensor, torch.Tensor]:
+    ) -> tuple[torch.Tensor, torch.Tensor]:
         batch_size = x.shape[0]
         rewards = torch.zeros(batch_size, self.__class__.num_objectives)
         for i in range(batch_size):
@@ -268,7 +267,7 @@ class PusherProblem(BenchmarkProblem):
 
     def _evaluate_implementation(
         self, x: torch.Tensor
-    ) -> Tuple[torch.Tensor, torch.Tensor]:
+    ) -> tuple[torch.Tensor, torch.Tensor]:
         batch_size = x.shape[0]
         rewards = torch.zeros(batch_size, self.__class__.num_objectives)
         for i in range(batch_size):
@@ -301,7 +300,7 @@ class ReacherProblem(BenchmarkProblem):
 
     def _evaluate_implementation(
         self, x: torch.Tensor
-    ) -> Tuple[torch.Tensor, torch.Tensor]:
+    ) -> tuple[torch.Tensor, torch.Tensor]:
         batch_size = x.shape[0]
         rewards = torch.zeros(batch_size, self.__class__.num_objectives)
         for i in range(batch_size):
@@ -334,7 +333,7 @@ class Walker2DProblem(BenchmarkProblem):
 
     def _evaluate_implementation(
         self, x: torch.Tensor
-    ) -> Tuple[torch.Tensor, torch.Tensor]:
+    ) -> tuple[torch.Tensor, torch.Tensor]:
         batch_size = x.shape[0]
         rewards = torch.zeros(batch_size, self.__class__.num_objectives)
         for i in range(batch_size):
@@ -367,7 +366,7 @@ class SwimmerProblem(BenchmarkProblem):
 
     def _evaluate_implementation(
         self, x: torch.Tensor
-    ) -> Tuple[torch.Tensor, torch.Tensor]:
+    ) -> tuple[torch.Tensor, torch.Tensor]:
         batch_size = x.shape[0]
         rewards = torch.zeros(batch_size, self.__class__.num_objectives)
         for i in range(batch_size):
@@ -388,7 +387,7 @@ class SwimmerPolicySearchProblem(BenchmarkProblem):
         self,
         num_rollouts: int = 5,
         render: bool = False,
-        template_file: Optional[str] = None,
+        template_file: str | None = None,
     ):
         # ---------------------------------------------------------------------
         self.env = gym.make("Swimmer-v5")
@@ -429,7 +428,7 @@ class SwimmerPolicySearchProblem(BenchmarkProblem):
     # -------------------------------------------------------------------------
     def _evaluate_implementation(
         self, x: torch.Tensor
-    ) -> Tuple[torch.Tensor, torch.Tensor]:
+    ) -> tuple[torch.Tensor, torch.Tensor]:
         batch_size = x.shape[0]
         fvals = torch.empty(batch_size, 1, device=x.device)
 
@@ -473,7 +472,7 @@ class AntPolicySearchProblem(BenchmarkProblem):
         self,
         num_rollouts: int = 5,
         render: bool = False,
-        template_file: Optional[str] = None,
+        template_file: str | None = None,
     ):
         # ---------------------------------------------------------------------
         self.env = gym.make("Ant-v5")
@@ -514,7 +513,7 @@ class AntPolicySearchProblem(BenchmarkProblem):
     # -------------------------------------------------------------------------
     def _evaluate_implementation(
         self, x: torch.Tensor
-    ) -> Tuple[torch.Tensor, torch.Tensor]:
+    ) -> tuple[torch.Tensor, torch.Tensor]:
         batch_size = x.shape[0]
         fvals = torch.empty(batch_size, 1, device=x.device)
 
@@ -558,7 +557,7 @@ class HalfCheetahPolicySearchProblem(BenchmarkProblem):
         self,
         num_rollouts: int = 5,
         render: bool = False,
-        template_file: Optional[str] = None,
+        template_file: str | None = None,
     ):
         # ---------------------------------------------------------------------
         self.env = gym.make("HalfCheetah-v5")
@@ -599,7 +598,7 @@ class HalfCheetahPolicySearchProblem(BenchmarkProblem):
     # -------------------------------------------------------------------------
     def _evaluate_implementation(
         self, x: torch.Tensor
-    ) -> Tuple[torch.Tensor, torch.Tensor]:
+    ) -> tuple[torch.Tensor, torch.Tensor]:
         batch_size = x.shape[0]
         fvals = torch.empty(batch_size, 1, device=x.device)
 
@@ -643,7 +642,7 @@ class HopperPolicySearchProblem(BenchmarkProblem):
         self,
         num_rollouts: int = 5,
         render: bool = False,
-        template_file: Optional[str] = None,
+        template_file: str | None = None,
     ):
         # ---------------------------------------------------------------------
         self.env = gym.make("Hopper-v5")
@@ -684,7 +683,7 @@ class HopperPolicySearchProblem(BenchmarkProblem):
     # -------------------------------------------------------------------------
     def _evaluate_implementation(
         self, x: torch.Tensor
-    ) -> Tuple[torch.Tensor, torch.Tensor]:
+    ) -> tuple[torch.Tensor, torch.Tensor]:
         batch_size = x.shape[0]
         fvals = torch.empty(batch_size, 1, device=x.device)
 
@@ -728,7 +727,7 @@ class Walker2DPolicySearchProblem(BenchmarkProblem):
         self,
         num_rollouts: int = 5,
         render: bool = False,
-        template_file: Optional[str] = None,
+        template_file: str | None = None,
     ):
         # ---------------------------------------------------------------------
         self.env = gym.make("Walker2d-v5")
@@ -769,7 +768,7 @@ class Walker2DPolicySearchProblem(BenchmarkProblem):
     # -------------------------------------------------------------------------
     def _evaluate_implementation(
         self, x: torch.Tensor
-    ) -> Tuple[torch.Tensor, torch.Tensor]:
+    ) -> tuple[torch.Tensor, torch.Tensor]:
         batch_size = x.shape[0]
         fvals = torch.empty(batch_size, 1, device=x.device)
 

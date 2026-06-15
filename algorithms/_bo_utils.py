@@ -30,6 +30,7 @@ from botorch.fit import fit_gpytorch_mll
 from botorch.models import SingleTaskGP
 from botorch.models.transforms import Normalize, Standardize
 from gpytorch.mlls import ExactMarginalLogLikelihood
+from scipy.stats import qmc
 
 DTYPE = torch.double
 
@@ -40,6 +41,16 @@ def set_seed(seed: int) -> None:
     np.random.seed(seed)
     torch.manual_seed(seed)
     torch.use_deterministic_algorithms(True, warn_only=True)
+
+
+def initial_design(n: int, dim: int, seed: int) -> torch.Tensor:
+    """Latin Hypercube initial design over the unit cube ``[0, 1]^d``.
+
+    Uses SciPy's ``qmc.LatinHypercube`` for a space-filling, seeded initial set of
+    points (the design from which every BO loop starts before fitting a GP).
+    """
+    sampler = qmc.LatinHypercube(d=dim, seed=seed)
+    return torch.from_numpy(sampler.random(n)).to(DTYPE)
 
 
 def _scale_clamped(problem, X_unit: torch.Tensor) -> torch.Tensor:

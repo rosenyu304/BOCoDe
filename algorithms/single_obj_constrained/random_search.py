@@ -17,11 +17,15 @@ from __future__ import annotations
 import argparse
 
 import torch
-from torch.quasirandom import SobolEngine
 
 import bocode
 
-from .._bo_utils import DTYPE, ProblemObjective, Result, set_seed
+from .._bo_utils import (
+    ProblemObjective,
+    Result,
+    initial_design,  # noqa: E501
+    set_seed,
+)
 
 
 def optimize_problem(problem, iters: int = 200, seed: int = 0) -> Result:
@@ -29,7 +33,7 @@ def optimize_problem(problem, iters: int = 200, seed: int = 0) -> Result:
     obj = ProblemObjective(problem)
     res = Result("random_search", type(problem).__name__, seed)
 
-    X = SobolEngine(obj.dim, scramble=True, seed=seed).draw(iters).to(DTYPE)
+    X = initial_design(iters, obj.dim, seed)
     values, constraints = obj.evaluate_raw(X)
     feasible = (
         torch.ones(iters, dtype=torch.bool)

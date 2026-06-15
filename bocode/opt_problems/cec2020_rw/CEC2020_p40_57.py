@@ -8,7 +8,7 @@ import numpy as np
 import torch
 
 from ...base import BenchmarkProblem, DataType
-from .helperFuncs import ybus, Fitness
+from .helperFuncs import Fitness, ybus
 
 
 class CEC2020_p40(BenchmarkProblem):

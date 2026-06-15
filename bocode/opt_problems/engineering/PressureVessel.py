@@ -1,5 +1,6 @@
-import torch
 import math
+
+import torch
 
 from ...base import BenchmarkProblem, DataType
 

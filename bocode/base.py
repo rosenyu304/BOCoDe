@@ -1,6 +1,5 @@
 import warnings
 from functools import cached_property
-from typing import List, Optional, Set, Tuple, Union
 
 import torch
 
@@ -49,13 +48,13 @@ class BenchmarkProblem:
     def __init__(
         self,
         dim: int = 1,
-        bounds: Union[List[Union[Tuple, Set]], None] = None,
+        bounds: list[tuple | set] | None = None,
         num_objectives: int = 1,
         num_constraints: int = 0,
-        x_opt: Optional[torch.Tensor] = None,
-        optimum: Optional[torch.Tensor] = None,
-        ref_point: Optional[torch.Tensor] = None,
-        tags: Optional[List[str]] = None,
+        x_opt: torch.Tensor | None = None,
+        optimum: torch.Tensor | None = None,
+        ref_point: torch.Tensor | None = None,
+        tags: list[str] | None = None,
         debug: bool = False,
     ) -> None:
         """Initialize the BenchmarkProblem class.
@@ -94,7 +93,7 @@ class BenchmarkProblem:
             return self.bounds
         return torch.tensor(self.bounds)
 
-    def evaluate(self, X: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
+    def evaluate(self, X: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
         """
         Evaluates the objective and constraint functions.
         Enforces X to be casted to float.
@@ -142,7 +141,7 @@ class BenchmarkProblem:
 
     def _evaluate_implementation(
         self, X: torch.Tensor
-    ) -> Tuple[torch.Tensor, torch.Tensor]:
+    ) -> tuple[torch.Tensor, torch.Tensor]:
         """
         Evaluates the objective and constraint functions.
         """

@@ -1,4 +1,4 @@
-"""Vanilla Bayesian optimization for single-objective problems.
+"""Vanilla high-dimensional Bayesian optimization for single-objective problems.
 
 A faithful reimplementation of the "Vanilla BO" baseline from Hvarfner et al.,
 2024 ("Vanilla Bayesian Optimization Performs Great in High Dimensions"), using
@@ -19,8 +19,8 @@ the baseline silently underperform (see Research_Plan.md §10):
 
 Run::
 
-    python -m algorithms.single_obj.vanilla_bo --problem Car --init 10 --iters 50
-    python -m algorithms.single_obj.vanilla_bo --dataset AgNP --init 10 --iters 40
+    python -m algorithms.single_obj.vanilla_highdim_bo --problem Car --init 10 --iters 50
+    python -m algorithms.single_obj.vanilla_highdim_bo --dataset AgNP --init 10 --iters 40
 
 Sources:
 C. Hvarfner, E. Hellsten, and L. Nardi. Vanilla Bayesian Optimization Performs Great in High Dimensions. ICML 2024. https://arxiv.org/abs/2402.02229
@@ -35,16 +35,15 @@ import argparse
 import torch
 from botorch.acquisition import LogExpectedImprovement
 from botorch.optim import optimize_acqf
-from torch.quasirandom import SobolEngine
 
 import bocode
 
 from .._bo_utils import (
-    DTYPE,
     DatasetObjective,
     ProblemObjective,
     Result,
     fit_gp,
+    initial_design,  # noqa: E501
     set_seed,
 )
 
@@ -59,9 +58,9 @@ def optimize_problem(
     """Continuous Vanilla BO over the unit cube for a problem."""
     set_seed(seed)
     obj = ProblemObjective(problem)
-    res = Result("vanilla_bo", type(problem).__name__, seed)
+    res = Result("vanilla_highdim_bo", type(problem).__name__, seed)
 
-    train_X = SobolEngine(obj.dim, scramble=True, seed=seed).draw(n_init).to(DTYPE)
+    train_X = initial_design(n_init, obj.dim, seed)
     train_Y = obj(train_X)
 
     best = train_Y.max().item()
@@ -93,7 +92,7 @@ def optimize_dataset(
     """Discrete Vanilla BO: maximize LogEI over the unobserved candidate pool."""
     set_seed(seed)
     data = DatasetObjective(dataset_problem)
-    res = Result("vanilla_bo", type(dataset_problem).__name__, seed)
+    res = Result("vanilla_highdim_bo", type(dataset_problem).__name__, seed)
 
     perm = torch.randperm(data.n_candidates)
     observed = perm[:n_init].tolist()

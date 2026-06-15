@@ -12,7 +12,7 @@ Folders mirror the problem categories the algorithm targets. Each script exposes
 search space) `optimize_dataset(dataset_problem, ...)`, plus a CLI:
 
 ```bash
-python -m algorithms.single_obj.vanilla_bo --problem Car --init 10 --iters 50
+python -m algorithms.single_obj.vanilla_highdim_bo --problem Car --init 10 --iters 50
 python -m algorithms.single_obj.turbo --dataset CrossedBarrel --init 10 --iters 40
 python -m algorithms.single_obj_constrained.scbo --problem PressureVessel --iters 80
 python -m algorithms.multi_obj.qnehvi --problem Penicillin --init 10 --iters 50
@@ -20,7 +20,7 @@ python -m algorithms.multi_obj.qnehvi --problem Penicillin --init 10 --iters 50
 
 | Folder | Implemented | Notes |
 |---|---|---|
-| `single_obj/` | ✅ `random_search`, `vanilla_bo`, `turbo`, `standard_gp` | problem + dataset variants |
+| `single_obj/` | ✅ `random_search`, `vanilla_highdim_bo`, `turbo`, `standard_gp` | problem + dataset variants |
 | `single_obj_constrained/` | ✅ `random_search`, `constrained_ei`, `scbo` | problem variant (no constrained dataset problems yet) |
 | `multi_obj/` | ✅ `random_search`, `qnehvi`, `qnparego` | problem variant; hypervolume-tracked |
 | `multi_obj_constrained/` | ✅ `random_search` (via `multi_obj`), `constrained_qnehvi` | problem variant |

@@ -27,11 +27,15 @@ from botorch.models import ModelListGP, SingleTaskGP
 from botorch.models.transforms import Normalize, Standardize
 from botorch.optim import optimize_acqf
 from gpytorch.mlls import SumMarginalLogLikelihood
-from torch.quasirandom import SobolEngine
 
 import bocode
 
-from .._bo_utils import DTYPE, ProblemObjective, Result, set_seed
+from .._bo_utils import (
+    ProblemObjective,
+    Result,
+    initial_design,  # noqa: E501
+    set_seed,
+)
 
 
 def _fit_model_list(train_X, train_obj, train_con):
@@ -62,7 +66,7 @@ def optimize_problem(problem, n_init: int = 10, iters: int = 50, seed: int = 0) 
     assert obj.num_constraints > 0, "constrained_ei requires a constrained problem"
     res = Result("constrained_ei", type(problem).__name__, seed)
 
-    train_X = SobolEngine(obj.dim, scramble=True, seed=seed).draw(n_init).to(DTYPE)
+    train_X = initial_design(n_init, obj.dim, seed)
     train_obj, train_con = obj.evaluate_raw(train_X)
 
     def best_feasible(obj_v, con_v):

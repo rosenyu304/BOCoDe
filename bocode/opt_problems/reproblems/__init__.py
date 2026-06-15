@@ -1,3 +1,13 @@
+from .CRE_problems import (
+    CRE21,
+    CRE22,
+    CRE23,
+    CRE24,
+    CRE25,
+    CRE31,
+    CRE32,
+    CRE51,
+)
 from .RE_problems import (
     RE21,
     RE22,
@@ -15,16 +25,6 @@ from .RE_problems import (
     RE42,
     RE61,
     RE91,
-)
-from .CRE_problems import (
-    CRE21,
-    CRE22,
-    CRE23,
-    CRE24,
-    CRE25,
-    CRE31,
-    CRE32,
-    CRE51,
 )
 
 __all__ = [

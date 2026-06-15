@@ -588,8 +588,8 @@ def plot_2d_rover(
     )
 
     # set title to be the total cost
-    plt.title("traj cost: {0}".format(traj_cost))
-    print("traj cost: {0}".format(traj_cost))
+    plt.title(f"traj cost: {traj_cost}")
+    print(f"traj cost: {traj_cost}")
     # plot cost function
     cmesh = plt.pcolormesh(
         grid_points[0], grid_points[1], costs.reshape((ngrid_points, -1)), cmap=colormap

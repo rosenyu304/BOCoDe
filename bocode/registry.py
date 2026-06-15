@@ -22,6 +22,7 @@ from importlib import resources
 
 __all__ = [
     "list_problems",
+    "list_synthetic",
     "get_problem",
     "get_metadata",
     "list_metadata",
@@ -92,13 +93,22 @@ def list_problems(
 
 
 def get_problem(name: str):
-    """Import and return the problem class registered under ``name``."""
-    try:
-        module_suffix, extra = PROBLEM_REGISTRY[name]
-    except KeyError as exc:
+    """Import and return the problem class registered under ``name``.
+
+    Falls back to the synthetic test functions (``bocode.synthetic``) so the
+    algorithm CLIs can target e.g. ``Ackley`` or ``BraninCurrin``, even though
+    those are not part of the real-world ``list_problems`` registry.
+    """
+    if name not in PROBLEM_REGISTRY:
+        from bocode.synthetic import SYNTHETIC_PROBLEMS
+
+        if name in SYNTHETIC_PROBLEMS:
+            return SYNTHETIC_PROBLEMS[name]
         raise KeyError(
-            f"Unknown problem {name!r}. Use bocode.list_problems() to see available problems."
-        ) from exc
+            f"Unknown problem {name!r}. Use bocode.list_problems() (real problems) "
+            "or bocode.list_synthetic() (test functions) to see what is available."
+        )
+    module_suffix, extra = PROBLEM_REGISTRY[name]
     try:
         module = importlib.import_module(f"bocode.{module_suffix}")
     except ImportError as exc:
@@ -109,6 +119,13 @@ def get_problem(name: str):
             ) from exc
         raise
     return getattr(module, name)
+
+
+def list_synthetic() -> list[str]:
+    """Return the names of the synthetic test functions (separate from list_problems)."""
+    from bocode.synthetic import SYNTHETIC_PROBLEMS
+
+    return sorted(SYNTHETIC_PROBLEMS)
 
 
 @cache

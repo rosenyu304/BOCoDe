@@ -21,6 +21,7 @@ try:
 except PackageNotFoundError:  # package is not installed
     __version__ = "unknown"
 
+from . import synthetic  # noqa: F401  (bocode.synthetic.<Name> test functions)
 from .base import DataType  # noqa: F401  (re-exported as public API)
 from .exceptions import (  # noqa: F401  (re-exported as public API)
     DimensionException,
@@ -39,6 +40,7 @@ from .registry import (  # noqa: F401  (re-exported as public API)
     get_single_objective_unconstrained,
     list_metadata,
     list_problems,
+    list_synthetic,
 )
 
 _API = {
@@ -54,6 +56,8 @@ _API = {
     "get_problem",
     "list_metadata",
     "list_problems",
+    "list_synthetic",
+    "synthetic",
     "get_multi_objective_constrained",
     "get_multi_objective_unconstrained",
     "get_single_objective_constrained",

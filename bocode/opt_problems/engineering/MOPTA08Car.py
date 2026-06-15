@@ -85,7 +85,7 @@ class MOPTA08Car(BenchmarkProblem):
                 shell=True,
             )
 
-            with open(os.path.join(directory_name, "output.txt"), "r") as tmp_file:
+            with open(os.path.join(directory_name, "output.txt")) as tmp_file:
                 tmp_file.seek(0)
                 output = tmp_file.read().split("\n")
             output = [m.strip() for m in output]

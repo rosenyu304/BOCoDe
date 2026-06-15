@@ -6,12 +6,12 @@ import torch
 
 from ...base import BenchmarkProblem, DataType
 from .helperFuncs import (
-    OBJ11,
-    function_fitness,
-    ConsBar10,
     FE,
-    lk,
+    OBJ11,
+    ConsBar10,
     check,
+    function_fitness,
+    lk,
 )
 
 

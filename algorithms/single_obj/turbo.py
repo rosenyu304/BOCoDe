@@ -36,6 +36,7 @@ from .._bo_utils import (
     ProblemObjective,
     Result,
     fit_gp,
+    initial_design,  # noqa: E501
     set_seed,
 )
 
@@ -110,7 +111,7 @@ def optimize_problem(
     res = Result("turbo", type(problem).__name__, seed)
 
     def restart_data():
-        X = SobolEngine(obj.dim, scramble=True, seed=seed).draw(n_init).to(DTYPE)
+        X = initial_design(n_init, obj.dim, seed)
         return X, obj(X)
 
     train_X, train_Y = restart_data()

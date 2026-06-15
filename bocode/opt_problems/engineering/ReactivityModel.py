@@ -1,5 +1,4 @@
 import math
-from typing import Tuple
 
 import torch
 
@@ -35,7 +34,7 @@ class ReactivityModel(BenchmarkProblem):
 
     def _evaluate_implementation(
         self, X: torch.Tensor
-    ) -> Tuple[torch.Tensor, torch.Tensor]:
+    ) -> tuple[torch.Tensor, torch.Tensor]:
         """
         :param X: tensor of shape (batch_size, 8) containing drum angles in radians
         :returns: (None, fx) where fx[i] = self.model.eval( X[i].numpy() )

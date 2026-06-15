@@ -1,4 +1,3 @@
-from typing import Tuple
 
 import numpy as np
 import torch
@@ -140,7 +139,7 @@ class TSP_51Cities(BenchmarkProblem):
 
     def _evaluate_implementation(
         self, X: torch.Tensor
-    ) -> Tuple[torch.Tensor, torch.Tensor]:
+    ) -> tuple[torch.Tensor, torch.Tensor]:
         """
         Evaluate the total distance of a TSP tour.
 
@@ -401,7 +400,7 @@ class TSP_100Cities(BenchmarkProblem):
 
     def _evaluate_implementation(
         self, X: torch.Tensor
-    ) -> Tuple[torch.Tensor, torch.Tensor]:
+    ) -> tuple[torch.Tensor, torch.Tensor]:
         """
         Evaluate the total distance of a TSP tour.
 

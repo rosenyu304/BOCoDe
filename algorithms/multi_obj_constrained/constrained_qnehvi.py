@@ -35,11 +35,15 @@ from botorch.utils.multi_objective.box_decompositions.dominated import (
     DominatedPartitioning,
 )
 from gpytorch.mlls import SumMarginalLogLikelihood
-from torch.quasirandom import SobolEngine
 
 import bocode
 
-from .._bo_utils import DTYPE, MultiObjectiveProblem, Result, set_seed
+from .._bo_utils import (
+    MultiObjectiveProblem,
+    Result,
+    initial_design,  # noqa: E501
+    set_seed,
+)
 
 
 def _fit(train_X, train_Y, train_C):
@@ -67,7 +71,7 @@ def optimize_problem(problem, n_init: int = 12, iters: int = 50, seed: int = 0) 
     assert nc > 0, "constrained_qnehvi requires a constrained problem"
     res = Result("constrained_qnehvi", type(problem).__name__, seed)
 
-    train_X = SobolEngine(obj.dim, scramble=True, seed=seed).draw(n_init).to(DTYPE)
+    train_X = initial_design(n_init, obj.dim, seed)
     train_Y, train_C = obj.evaluate_raw(train_X)
     ref_point = obj.infer_ref_point(train_Y)
 

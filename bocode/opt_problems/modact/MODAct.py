@@ -1,4 +1,3 @@
-from typing import Tuple
 
 import torch
 
@@ -41,7 +40,7 @@ class BaseModactProblem(BenchmarkProblem):
 
     def _evaluate_implementation(
         self, X: torch.Tensor, scaling=False
-    ) -> Tuple[torch.Tensor, torch.Tensor]:
+    ) -> tuple[torch.Tensor, torch.Tensor]:
         if scaling:
             X = super().scale(X)
 
