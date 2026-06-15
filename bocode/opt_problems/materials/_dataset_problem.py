@@ -26,8 +26,9 @@ class MaterialsDatasetProblem(BenchmarkProblem):
     """Base class for discrete dataset-driven materials problems.
 
     Subclasses set ``csv_name``, ``feature_columns``, ``objective_column``, and
-    ``minimize``. The objective is always exposed for minimization (a maximized
-    quantity is negated internally), consistent with BoCoDe's convention.
+    ``minimize``. The returned objective is always exposed for *maximization*
+    (BoCoDe's convention): a quantity that should be minimized (e.g. a loss) is
+    negated internally, a quantity to be maximized is returned as-is.
     """
 
     input_type = DataType.DISCRETE
@@ -46,7 +47,10 @@ class MaterialsDatasetProblem(BenchmarkProblem):
         ]
         self._X = torch.tensor(df[features].to_numpy(), dtype=torch.float64)
         y = df[self.objective_column].to_numpy(dtype=float)
-        self._y = torch.tensor(y if self.minimize else -y, dtype=torch.float64)
+        # BoCoDe maximizes the returned objective, so a quantity that should be
+        # minimized (e.g. a loss) is negated and a quantity to be maximized is
+        # returned as-is.
+        self._y = torch.tensor(-y if self.minimize else y, dtype=torch.float64)
         self._feature_names = features
 
         bounds = [
@@ -67,7 +71,7 @@ class MaterialsDatasetProblem(BenchmarkProblem):
 
     @property
     def values(self) -> torch.Tensor:
-        """Objective values aligned with :attr:`candidates` (minimization)."""
+        """Objective values aligned with :attr:`candidates` (maximization)."""
         return self._y
 
     def _evaluate_implementation(
