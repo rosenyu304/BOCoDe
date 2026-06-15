@@ -20,7 +20,7 @@ from __future__ import annotations
 
 import torch
 
-from ..base import BenchmarkProblem, DataType
+from ...base import BenchmarkProblem, DataType
 
 
 def _scale_clamped(problem: BenchmarkProblem, X: torch.Tensor) -> torch.Tensor:

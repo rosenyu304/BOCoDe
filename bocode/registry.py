@@ -99,7 +99,7 @@ def get_problem(name: str):
     those are not part of the real-world ``list_problems`` registry.
     """
     if name not in PROBLEM_REGISTRY:
-        from bocode.synthetic import SYNTHETIC_PROBLEMS
+        from bocode.opt_problems.synthetic import SYNTHETIC_PROBLEMS
 
         if name in SYNTHETIC_PROBLEMS:
             return SYNTHETIC_PROBLEMS[name]
@@ -122,7 +122,7 @@ def get_problem(name: str):
 
 def list_synthetic() -> list[str]:
     """Return the names of the synthetic test functions (separate from list_problems)."""
-    from bocode.synthetic import SYNTHETIC_PROBLEMS
+    from bocode.opt_problems.synthetic import SYNTHETIC_PROBLEMS
 
     return sorted(SYNTHETIC_PROBLEMS)
 
