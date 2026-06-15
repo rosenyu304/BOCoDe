@@ -23,6 +23,8 @@ import bocode
 from .._bo_utils import (
     ProblemObjective,
     Result,
+    add_common_args,
+    finalize,
     initial_design,  # noqa: E501
     set_seed,
 )
@@ -31,7 +33,7 @@ from .._bo_utils import (
 def optimize_problem(problem, iters: int = 200, seed: int = 0) -> Result:
     set_seed(seed)
     obj = ProblemObjective(problem)
-    res = Result("random_search", type(problem).__name__, seed)
+    res = Result("random_search", type(problem).__name__, seed, acquisition_function="none")
 
     X = initial_design(iters, obj.dim, seed)
     values, constraints = obj.evaluate_raw(X)
@@ -45,7 +47,7 @@ def optimize_problem(problem, iters: int = 200, seed: int = 0) -> Result:
     for i in range(iters):
         if feasible[i]:
             best = max(best, values[i].item())
-        res.log(best)
+        res.record(best)
     return res
 
 
@@ -53,10 +55,10 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--problem", required=True)
     parser.add_argument("--iters", type=int, default=200)
-    parser.add_argument("--seed", type=int, default=0)
+    add_common_args(parser)
     args = parser.parse_args()
     res = optimize_problem(bocode.get_problem(args.problem)(), args.iters, args.seed)
-    print(f"{res.algorithm} on {res.problem}: best feasible={res.best:.6g} after {len(res.best_history)} evals")
+    finalize(res, args)
 
 
 if __name__ == "__main__":

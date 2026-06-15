@@ -30,6 +30,8 @@ from .._bo_utils import (
     DTYPE,
     ProblemObjective,
     Result,
+    add_common_args,
+    finalize,
     fit_gp,
     initial_design,  # noqa: E501
     set_seed,
@@ -56,13 +58,12 @@ def optimize_problem(problem, n_init: int = 10, iters: int = 80, seed: int = 0) 
     set_seed(seed)
     obj = ProblemObjective(problem)
     assert obj.num_constraints > 0, "scbo requires a constrained problem"
-    res = Result("scbo", type(problem).__name__, seed)
+    res = Result("scbo", type(problem).__name__, seed, acquisition_function="Thompson sampling")
 
     X = initial_design(n_init, obj.dim, seed)
     Yo, Yc = obj.evaluate_raw(X)
     best, _ = _best_feasible(Yo, Yc)
-    for _ in range(n_init):
-        res.log(best)
+    res.start(best)
 
     tr = TrustRegion(dim=obj.dim)
     for it in range(iters):
@@ -103,7 +104,7 @@ def optimize_problem(problem, n_init: int = 10, iters: int = 80, seed: int = 0) 
         # "success" = strictly improved the best feasible objective
         improved = best > prev_best + 1e-9 if prev_best != -float("inf") else _feasible_mask(c).any().item()
         tr.update(bool(improved))
-        res.log(best)
+        res.record(best)
         if tr.restart:
             tr = TrustRegion(dim=obj.dim)
     return res
@@ -114,10 +115,10 @@ def main() -> None:
     parser.add_argument("--problem", required=True)
     parser.add_argument("--init", type=int, default=10)
     parser.add_argument("--iters", type=int, default=80)
-    parser.add_argument("--seed", type=int, default=0)
+    add_common_args(parser)
     args = parser.parse_args()
     res = optimize_problem(bocode.get_problem(args.problem)(), args.init, args.iters, args.seed)
-    print(f"{res.algorithm} on {res.problem}: best feasible={res.best:.6g} after {len(res.best_history)} evals")
+    finalize(res, args)
 
 
 if __name__ == "__main__":

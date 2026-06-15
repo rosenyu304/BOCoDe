@@ -42,7 +42,10 @@ from .._bo_utils import (
     DatasetObjective,
     ProblemObjective,
     Result,
+    add_common_args,
+    finalize,
     fit_gp,
+    gp_stats,
     initial_design,  # noqa: E501
     set_seed,
 )
@@ -58,19 +61,18 @@ def optimize_problem(
     """Continuous Vanilla BO over the unit cube for a problem."""
     set_seed(seed)
     obj = ProblemObjective(problem)
-    res = Result("vanilla_highdim_bo", type(problem).__name__, seed)
+    res = Result("vanilla_highdim_bo", type(problem).__name__, seed, acquisition_function="LogEI")
 
     train_X = initial_design(n_init, obj.dim, seed)
     train_Y = obj(train_X)
 
     best = train_Y.max().item()
-    for _ in range(n_init):
-        res.log(best)
+    res.start(best)
 
     for _ in range(iters):
         model = fit_gp(train_X, train_Y)
         acqf = LogExpectedImprovement(model=model, best_f=train_Y.max())
-        candidate, _ = optimize_acqf(
+        candidate, acq_value = optimize_acqf(
             acqf,
             bounds=obj.bounds,
             q=1,
@@ -78,11 +80,12 @@ def optimize_problem(
             raw_samples=RAW_SAMPLES,
             options={"sample_around_best": True},
         )
+        mean, var = gp_stats(model, candidate)
         y = obj(candidate)
         train_X = torch.cat([train_X, candidate], dim=0)
         train_Y = torch.cat([train_Y, y], dim=0)
         best = max(best, y.item())
-        res.log(best)
+        res.record(best, mean=mean, variance=var, acq_value=acq_value.item())
     return res
 
 
@@ -92,13 +95,12 @@ def optimize_dataset(
     """Discrete Vanilla BO: maximize LogEI over the unobserved candidate pool."""
     set_seed(seed)
     data = DatasetObjective(dataset_problem)
-    res = Result("vanilla_highdim_bo", type(dataset_problem).__name__, seed)
+    res = Result("vanilla_highdim_bo", type(dataset_problem).__name__, seed, acquisition_function="LogEI")
 
     perm = torch.randperm(data.n_candidates)
     observed = perm[:n_init].tolist()
     best = data.select(torch.tensor(observed)).max().item()
-    for _ in range(n_init):
-        res.log(best)
+    res.start(best)
 
     for _ in range(iters):
         obs = torch.tensor(observed)
@@ -113,9 +115,10 @@ def optimize_dataset(
         with torch.no_grad():
             scores = acqf(data.X[pool_idx].unsqueeze(1))  # (m, 1, d) -> (m,)
         choice = pool_idx[scores.argmax()].item()
+        mean, var = gp_stats(model, data.X[choice].unsqueeze(0))
         observed.append(choice)
         best = max(best, data.select(torch.tensor(choice)).item())
-        res.log(best)
+        res.record(best, mean=mean, variance=var, acq_value=scores.max().item())
     return res
 
 
@@ -126,7 +129,7 @@ def main() -> None:
     group.add_argument("--dataset", help="dataset problem name, e.g. AgNP")
     parser.add_argument("--init", type=int, default=10)
     parser.add_argument("--iters", type=int, default=50)
-    parser.add_argument("--seed", type=int, default=0)
+    add_common_args(parser)
     args = parser.parse_args()
 
     if args.problem:
@@ -137,7 +140,7 @@ def main() -> None:
         res = optimize_dataset(
             bocode.get_problem(args.dataset)(), args.init, args.iters, args.seed
         )
-    print(f"{res.algorithm} on {res.problem}: best={res.best:.6g} after {len(res.best_history)} evals")
+    finalize(res, args)
 
 
 if __name__ == "__main__":

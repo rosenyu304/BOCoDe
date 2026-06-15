@@ -35,6 +35,8 @@ from .._bo_utils import (
     DatasetObjective,
     ProblemObjective,
     Result,
+    add_common_args,
+    finalize,
     fit_gp,
     initial_design,  # noqa: E501
     set_seed,
@@ -108,7 +110,7 @@ def optimize_problem(
     """Continuous TuRBO-1 over the unit cube for a problem."""
     set_seed(seed)
     obj = ProblemObjective(problem)
-    res = Result("turbo", type(problem).__name__, seed)
+    res = Result("turbo", type(problem).__name__, seed, acquisition_function="qEI")
 
     def restart_data():
         X = initial_design(n_init, obj.dim, seed)
@@ -116,8 +118,7 @@ def optimize_problem(
 
     train_X, train_Y = restart_data()
     best = train_Y.max().item()
-    for _ in range(n_init):
-        res.log(best)
+    res.start(best)
 
     tr = TrustRegion(dim=obj.dim)
     evals = 0
@@ -139,7 +140,7 @@ def optimize_problem(
 
         for j in range(cand.shape[0]):
             best = max(best, y[j].item())
-            res.log(best)
+            res.record(best)
             evals += 1
             if evals >= iters:
                 break
@@ -150,7 +151,7 @@ def optimize_problem(
             tr = TrustRegion(dim=obj.dim)
             for _ in range(min(n_init, iters - evals)):
                 best = max(best, new_Y.max().item())
-                res.log(best)
+                res.record(best)
                 evals += 1
     return res
 
@@ -161,13 +162,12 @@ def optimize_dataset(
     """Discrete TuRBO over a candidate pool: restrict EI to candidates in the region."""
     set_seed(seed)
     data = DatasetObjective(dataset_problem)
-    res = Result("turbo", type(dataset_problem).__name__, seed)
+    res = Result("turbo", type(dataset_problem).__name__, seed, acquisition_function="qEI")
 
     perm = torch.randperm(data.n_candidates)
     observed = perm[:n_init].tolist()
     best = data.select(torch.tensor(observed)).max().item()
-    for _ in range(n_init):
-        res.log(best)
+    res.start(best)
 
     tr = TrustRegion(dim=data.dim)
     for _ in range(iters):
@@ -195,7 +195,7 @@ def optimize_dataset(
         tr.update(y > best + 1e-9)
         observed.append(choice)
         best = max(best, y)
-        res.log(best)
+        res.record(best)
         if tr.restart:
             tr = TrustRegion(dim=data.dim)
     return res
@@ -208,14 +208,14 @@ def main() -> None:
     group.add_argument("--dataset")
     parser.add_argument("--init", type=int, default=20)
     parser.add_argument("--iters", type=int, default=100)
-    parser.add_argument("--seed", type=int, default=0)
+    add_common_args(parser)
     args = parser.parse_args()
 
     if args.problem:
         res = optimize_problem(bocode.get_problem(args.problem)(), args.init, args.iters, args.seed)
     else:
         res = optimize_dataset(bocode.get_problem(args.dataset)(), args.init, args.iters, args.seed)
-    print(f"{res.algorithm} on {res.problem}: best={res.best:.6g} after {len(res.best_history)} evals")
+    finalize(res, args)
 
 
 if __name__ == "__main__":

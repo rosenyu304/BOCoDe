@@ -41,6 +41,8 @@ from .._bo_utils import (
     DTYPE,
     MultiObjectiveProblem,
     Result,
+    add_common_args,
+    finalize,
     initial_design,
     set_seed,
 )
@@ -68,7 +70,7 @@ def optimize_problem(problem, n_init: int = 12, iters: int = 50, seed: int = 0) 
     obj = MultiObjectiveProblem(problem)
     m, nc = obj.num_objectives, obj.num_constraints
     assert nc > 0, "constrained_qparego requires a constrained problem"
-    res = Result("constrained_qparego", type(problem).__name__, seed)
+    res = Result("constrained_qparego", type(problem).__name__, seed, acquisition_function="qLogNEI")
 
     train_X = initial_design(n_init, obj.dim, seed)
     train_Y, train_C = obj.evaluate_raw(train_X)
@@ -86,8 +88,7 @@ def optimize_problem(problem, n_init: int = 12, iters: int = 50, seed: int = 0) 
             ref_point=ref_point, Y=Y[feas]
         ).compute_hypervolume().item()
 
-    for _ in range(n_init):
-        res.log(feasible_hv(train_Y, train_C))
+    res.start(feasible_hv(train_Y, train_C))
 
     for _ in range(iters):
         model = _fit(train_X, train_Y, train_C)
@@ -114,7 +115,7 @@ def optimize_problem(problem, n_init: int = 12, iters: int = 50, seed: int = 0) 
         train_X = torch.cat([train_X, candidate], dim=0)
         train_Y = torch.cat([train_Y, y], dim=0)
         train_C = torch.cat([train_C, c], dim=0)
-        res.log(feasible_hv(train_Y, train_C))
+        res.record(feasible_hv(train_Y, train_C))
     return res
 
 
@@ -123,10 +124,10 @@ def main() -> None:
     parser.add_argument("--problem", required=True)
     parser.add_argument("--init", type=int, default=12)
     parser.add_argument("--iters", type=int, default=50)
-    parser.add_argument("--seed", type=int, default=0)
+    add_common_args(parser)
     args = parser.parse_args()
     res = optimize_problem(bocode.get_problem(args.problem)(), args.init, args.iters, args.seed)
-    print(f"{res.algorithm} on {res.problem}: final feasible hypervolume={res.best:.6g} after {len(res.best_history)} evals")
+    finalize(res, args)
 
 
 if __name__ == "__main__":

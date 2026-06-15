@@ -40,6 +40,24 @@ def _monotone(history):
     return all(b <= a + 1e-9 for b, a in zip(history, history[1:], strict=False))
 
 
+def _check_trace(res):
+    """Every per-iteration list has the same length and the npz dict has all keys."""
+    n = len(res.per_iteration_value)
+    assert n >= 3
+    assert len(res.wall_time) == n
+    assert len(res.mean) == n
+    assert len(res.variance) == n
+    assert len(res.per_iteration_acquisition_function_value) == n
+    assert res.iterations == list(range(n))
+    assert res.wall_time[0] == 0.0  # trial clock starts at iteration 0
+    d = res.to_dict()
+    for key in (
+        "seed", "acquisition_function", "best", "iterations", "per_iteration_value",
+        "wall_time", "mean", "variance", "per_iteration_acquisition_function_value",
+    ):
+        assert key in d
+
+
 @pytest.mark.parametrize("modname", SINGLE_OBJ)
 def test_problem_optimization_runs(modname):
     mod = _mod(modname)
@@ -48,9 +66,9 @@ def test_problem_optimization_runs(modname):
         res = mod.optimize_problem(problem, iters=12, seed=0)
     else:
         res = mod.optimize_problem(problem, n_init=6, iters=4, seed=0)
-    assert len(res.best_history) >= 10
+    _check_trace(res)
     # best-so-far is monotonically non-decreasing
-    assert all(b <= a for b, a in zip(res.best_history, res.best_history[1:], strict=False))
+    assert _monotone(res.per_iteration_value)
 
 
 @pytest.mark.parametrize("modname", SINGLE_OBJ)
@@ -61,8 +79,8 @@ def test_dataset_optimization_runs(modname):
         res = mod.optimize_dataset(problem, iters=15, seed=0)
     else:
         res = mod.optimize_dataset(problem, n_init=6, iters=6, seed=0)
-    assert len(res.best_history) >= 10
-    assert all(b <= a for b, a in zip(res.best_history, res.best_history[1:], strict=False))
+    _check_trace(res)
+    assert _monotone(res.per_iteration_value)
     # final best cannot exceed the dataset's true maximum
     assert res.best <= problem.values.max().item() + 1e-6
 
@@ -76,8 +94,8 @@ def test_constrained_runs(modname):
         res = mod.optimize_problem(problem, iters=30, seed=0)
     else:
         res = mod.optimize_problem(problem, n_init=8, iters=4, seed=0)
-    assert len(res.best_history) >= 12
-    assert _monotone(res.best_history)  # best feasible objective never decreases
+    _check_trace(res)
+    assert _monotone(res.per_iteration_value)  # best feasible objective never decreases
 
 
 @pytest.mark.slow
@@ -89,8 +107,8 @@ def test_multi_obj_runs(modname):
         res = mod.optimize_problem(problem, iters=20, seed=0)
     else:
         res = mod.optimize_problem(problem, n_init=6, iters=2, seed=0)
-    assert len(res.best_history) >= 8
-    assert _monotone(res.best_history)  # hypervolume never decreases
+    _check_trace(res)
+    assert _monotone(res.per_iteration_value)  # hypervolume never decreases
 
 
 @pytest.mark.slow
@@ -104,5 +122,5 @@ def test_multi_obj_runs(modname):
 def test_constrained_multi_obj_runs(modname):
     mod = _mod(modname)
     res = mod.optimize_problem(bocode.WeldedBeam(), n_init=8, iters=2, seed=0)
-    assert len(res.best_history) >= 10
-    assert _monotone(res.best_history)
+    _check_trace(res)
+    assert _monotone(res.per_iteration_value)

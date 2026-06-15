@@ -18,13 +18,26 @@ python -m algorithms.single_obj_constrained.scbo --problem PressureVessel --iter
 python -m algorithms.multi_obj.qnehvi --problem Penicillin --init 10 --iters 50
 ```
 
+Common flags (every script):
+
+- `--seed` (default **42**) — seeds the RNGs, including the initial sample. The
+  10-seed experiment uses 0, 10, 20, …, 90.
+- `--show_progress` — print the best-so-far value (with wall-clock time) at each
+  iteration, then the summary line at the bottom.
+- `--saved_full_experiment [PATH]` — save the full per-iteration trace to a NumPy
+  `.npz` (default name `<algorithm>_<problem>_seed<seed>.npz`) with keys: `seed`,
+  `acquisition_function`, `best`, `iterations` (0…n, where 0 is the initial design),
+  `per_iteration_value` (best-so-far), `wall_time` (seconds from trial start, 0 at
+  iteration 0), `mean` and `variance` (GP posterior at the chosen point; `nan` for
+  random search and at iteration 0), and `per_iteration_acquisition_function_value`.
+
 | Folder | Implemented | Notes |
 |---|---|---|
-| `single_obj/` | ✅ `random_search`, `vanilla_highdim_bo`, `turbo`, `standard_gp` | problem + dataset variants |
+| `single_obj/` | ✅ `random_search`, `single_task_gp`, `vanilla_highdim_bo`, `turbo`, `standard_gp` | problem + dataset variants |
 | `single_obj_constrained/` | ✅ `random_search`, `constrained_ei`, `scbo` | problem variant (no constrained dataset problems yet) |
 | `multi_obj/` | ✅ `random_search`, `qnehvi`, `qnparego` | problem variant; hypervolume-tracked |
-| `multi_obj_constrained/` | ✅ `random_search` (via `multi_obj`), `constrained_qnehvi` | problem variant |
-| `single_obj_mixed_variable/` | ⏳ Push 3 | mixed-variable BO (with the firefly mixed-integer problems) |
+| `multi_obj_constrained/` | ✅ `constrained_qnehvi`, `constrained_qparego` | problem variant |
+| `single_obj_mixed_variable/` | ⏳ next | dedicated mixed-variable BO (current baselines already handle mixed problems via rounding) |
 
 Dataset-optimization variants are provided for the single-objective unconstrained
 algorithms, since BoCoDe's discrete dataset problems (the PV-Lab materials sets)

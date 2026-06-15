@@ -33,6 +33,8 @@ import bocode
 from .._bo_utils import (
     ProblemObjective,
     Result,
+    add_common_args,
+    finalize,
     initial_design,  # noqa: E501
     set_seed,
 )
@@ -64,7 +66,7 @@ def optimize_problem(problem, n_init: int = 10, iters: int = 50, seed: int = 0) 
     set_seed(seed)
     obj = ProblemObjective(problem)
     assert obj.num_constraints > 0, "constrained_ei requires a constrained problem"
-    res = Result("constrained_ei", type(problem).__name__, seed)
+    res = Result("constrained_ei", type(problem).__name__, seed, acquisition_function="LogCEI")
 
     train_X = initial_design(n_init, obj.dim, seed)
     train_obj, train_con = obj.evaluate_raw(train_X)
@@ -74,8 +76,7 @@ def optimize_problem(problem, n_init: int = 10, iters: int = 50, seed: int = 0) 
         return obj_v[feas].max().item() if feas.any() else -float("inf")
 
     best = best_feasible(train_obj, train_con)
-    for _ in range(n_init):
-        res.log(best)
+    res.start(best)
 
     # BoTorch's constraint dict maps each constraint model's output index to
     # (lower, upper) feasible bounds; here constraints are feasible when <= 0.
@@ -101,7 +102,7 @@ def optimize_problem(problem, n_init: int = 10, iters: int = 50, seed: int = 0) 
         train_obj = torch.cat([train_obj, o], dim=0)
         train_con = torch.cat([train_con, c], dim=0)
         best = max(best, best_feasible(o, c))
-        res.log(best)
+        res.record(best)
     return res
 
 
@@ -110,10 +111,10 @@ def main() -> None:
     parser.add_argument("--problem", required=True)
     parser.add_argument("--init", type=int, default=10)
     parser.add_argument("--iters", type=int, default=50)
-    parser.add_argument("--seed", type=int, default=0)
+    add_common_args(parser)
     args = parser.parse_args()
     res = optimize_problem(bocode.get_problem(args.problem)(), args.init, args.iters, args.seed)
-    print(f"{res.algorithm} on {res.problem}: best feasible={res.best:.6g} after {len(res.best_history)} evals")
+    finalize(res, args)
 
 
 if __name__ == "__main__":
