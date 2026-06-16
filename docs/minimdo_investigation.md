@@ -107,9 +107,29 @@ problems are genuinely coupled — each `x → (objective, constraints)` must ru
 inner fixed-point/Newton MDA to convergence (wrap `scipy.optimize.fsolve` around the
 discipline residuals and guard against non-convergence at extreme designs).
 
-## Status / next step
+## Status (ported + verified against reference optima)
 
-`SatelliteDesign` is implemented. **PEARL** is the recommended next port (clean
-`.py` source at `pearl/pearl_initial_formulation.py`, thesis ground-truth optimum,
-6 continuous vars + 4 constraints), followed by Sobieski/BLISS and the miniaero GP
-wing — pending go-ahead.
+Five minimdo-derived problems are now in `bocode/opt_problems/engineering/`, each
+verified to reproduce its published optimum:
+
+| Problem | Vars / constraints | Inner solve | Reference optimum | Verified |
+|---|---|---|---|---|
+| `SatelliteDesign` | 4 / 3 | closed-form mass coupling | — | ✅ (earlier) |
+| `PEARL` | 7 / 6 | 2-D MDA fixed point (`A_solar`, `t_d`) via `fsolve` | `m_tot` 585.3 kg (thesis Tbl 7.14) | ✅ 585.39 kg at reported design |
+| `Sellar` | 3 / 2 | 2-discipline fixed point | f* 3.1834 | ✅ 3.1834 at [1.978,0,0] |
+| `Allison` | 3 / 0 | linear 3×3 coupling solve | f* 0.5698 | ✅ 0.5698 at [-0.507,0.047,0.179] |
+| `MiniAeroWing` | 3 / 0 | weight fixed point (closed form) | D* 242.3 N | ✅ 242.27 N at [18.2,5.3,49.2] |
+
+**Deferred / skipped:**
+- **Sobieski SSBJ / BLISS** — the `bliss_gen4.ipynb` formulation is incomplete
+  (polynomial-surrogate coefficient tables not fully in the notebook, no design-
+  variable bounds). Port from the *canonical* Sobieski SSBJ definition instead of
+  this notebook if/when an aircraft MDO problem is wanted — flagged, not done.
+- **HVAC** (`dprohvac`) — checked numerically: the objective is monotone in both
+  variables, so the optimum sits on the corner (η=1, Q=max). Trivial for
+  optimization benchmarking (same reason the 1-D balloon was skipped) — skipped.
+- Tier-2 toys (satmini, miniaerostruct) and Tier-3 balloon remain skipped.
+
+Sellar and Allison are classic *coupled-MDA* test problems (synthetic couplings,
+standard in the MDO literature) rather than physical designs; they live in
+`engineering/` as MDO benchmarks and are valuable for testing MDA-aware BO.

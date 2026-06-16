@@ -3,6 +3,10 @@
     "opt_problems.materials.AgNP",
     null
   ],
+  "Allison": [
+    "opt_problems.engineering.Allison",
+    null
+  ],
   "AntPolicySearchProblem": [
     "opt_problems.control.mujoco.MujocoFuncs",
     "mujoco"
@@ -459,6 +463,10 @@
     "opt_problems.engineering.Mazda",
     "mazda"
   ],
+  "MiniAeroWing": [
+    "opt_problems.engineering.MiniAeroWing",
+    null
+  ],
   "P3HT": [
     "opt_problems.materials.P3HT",
     null
@@ -466,6 +474,10 @@
   "PD4CartPole": [
     "opt_problems.control.PD4CartPole",
     "control"
+  ],
+  "PEARL": [
+    "opt_problems.engineering.PEARL",
+    null
   ],
   "PID4Acrobot": [
     "opt_problems.control.PID4Acrobot",
@@ -581,6 +593,10 @@
   ],
   "SatelliteDesign": [
     "opt_problems.engineering.SatelliteDesign",
+    null
+  ],
+  "Sellar": [
+    "opt_problems.engineering.Sellar",
     null
   ],
   "SpeedReducer": [

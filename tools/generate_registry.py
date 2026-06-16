@@ -55,6 +55,7 @@ def main() -> None:
     for f in sorted(PROBLEMS.rglob("*.py")):
         if (
             "_vendor" in str(f)
+            or "/synthetic/" in str(f).replace("\\", "/")  # test functions: list_synthetic(), not the registry
             or f.name == "__init__.py"
             or f.name.startswith("_")
             or f.name == "helperFuncs.py"

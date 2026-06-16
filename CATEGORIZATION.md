@@ -197,85 +197,89 @@ problem count (currently **165**).
 | 83 | CRE31 | Engineering | CRE (Tanabe-Ishibuchi) | 7 | 3 | 10 | continuous | no | unknown | unknown |
 | 84 | CRE32 | Engineering | CRE (Tanabe-Ishibuchi) | 6 | 3 | 9 | continuous | no | unknown | unknown |
 | 85 | CRE51 | Engineering | CRE (Tanabe-Ishibuchi) | 3 | 5 | 7 | continuous | no | unknown | unknown |
-| 86 | BotorchCarSideImpact | Engineering | Engineering (standalone) | 7 | 4 | 0 | continuous | no | unknown | unknown |
-| 87 | CantileverBeam | Engineering | Engineering (standalone) | 10 | 1 | 11 | continuous | no | unknown | unknown |
-| 88 | Car | Engineering | Engineering (standalone) | 11 | 1 | 10 | mixed | no | unknown | unknown |
-| 89 | CarSideImpact | Engineering | Engineering (standalone) | 7 | 3 | 10 | continuous | no | unknown | unknown |
-| 90 | CompressionSpring | Engineering | Engineering (standalone) | 3 | 1 | 4 | continuous | no | unknown | unknown |
-| 91 | DiscBrake | Engineering | Engineering (standalone) | 4 | 2 | 4 | continuous | no | unknown | unknown |
-| 92 | EulerBernoulliBeamBending | Engineering | Engineering (standalone) | 3 | 1 | 0 | continuous | no | unknown | unknown |
-| 93 | GearTrain | Engineering | Engineering (standalone) | 4 | 1 | 0 | mixed | no | unknown | unknown |
-| 94 | HeatExchanger | Engineering | Engineering (standalone) | 8 | 1 | 6 | continuous | no | unknown | unknown |
-| 95 | MOPTA08Car | Engineering | Engineering (standalone) | 124 | 1 | 68 | continuous | no | no | unknown |
-| 96 | Mazda | Engineering | Engineering (standalone) | 222 | 5 | 54 | continuous | no | unknown | unknown |
-| 97 | Mazda_SCA | Engineering | Engineering (standalone) | 148 | 4 | 36 | continuous | no | unknown | unknown |
-| 98 | Penicillin | Engineering | Engineering (standalone) | 7 | 3 | 0 | continuous | no | unknown | unknown |
-| 99 | PressureVessel | Engineering | Engineering (standalone) | 4 | 1 | 4 | mixed | no | unknown | unknown |
-| 100 | QPowerModel | Engineering | Engineering (standalone) | 8 | 1 | 0 | continuous | no | unknown | unknown |
-| 101 | ReactivityModel | Engineering | Engineering (standalone) | 8 | 1 | 0 | continuous | no | unknown | unknown |
-| 102 | ReinforcedConcreteBeam | Engineering | Engineering (standalone) | 3 | 1 | 2 | continuous | no | unknown | unknown |
-| 103 | RobotPush | Engineering | Engineering (standalone) | 14 | 1 | 0 | continuous | no | no | unknown |
-| 104 | Rover | Engineering | Engineering (standalone) | 100 | 1 | 0 | continuous | no | unknown | unknown |
-| 105 | SatelliteDesign | Engineering | Engineering (standalone) | 4 | 1 | 3 | continuous | no | unknown | unknown |
-| 106 | SpeedReducer | Engineering | Engineering (standalone) | 7 | 1 | 9 | mixed | no | unknown | unknown |
-| 107 | ThreeTruss | Engineering | Engineering (standalone) | 2 | 1 | 3 | continuous | no | unknown | unknown |
-| 108 | Truss10D | Engineering | Engineering (standalone) | 10 | 1 | 14 | continuous | no | unknown | unknown |
-| 109 | Truss120D | Engineering | Engineering (standalone) | 120 | 1 | 121 | continuous | no | unknown | unknown |
-| 110 | Truss200D | Engineering | Engineering (standalone) | 200 | 1 | 200 | continuous | no | unknown | unknown |
-| 111 | Truss25D | Engineering | Engineering (standalone) | 25 | 1 | 31 | continuous | no | unknown | unknown |
-| 112 | Truss72D_FourForces | Engineering | Engineering (standalone) | 72 | 1 | 88 | continuous | no | unknown | unknown |
-| 113 | Truss72D_SingleForce | Engineering | Engineering (standalone) | 72 | 1 | 88 | continuous | no | unknown | unknown |
-| 114 | TwoBarTruss | Engineering | Engineering (standalone) | 2 | 2 | 5 | continuous | no | unknown | unknown |
-| 115 | VehicleSafety | Engineering | Engineering (standalone) | 5 | 3 | 0 | continuous | no | unknown | unknown |
-| 116 | WaterProblem | Engineering | Engineering (standalone) | 3 | 5 | 7 | continuous | no | unknown | unknown |
-| 117 | WaterResources | Engineering | Engineering (standalone) | 3 | 5 | 7 | continuous | no | unknown | unknown |
-| 118 | WeldedBeam | Engineering | Engineering (standalone) | 4 | 2 | 4 | continuous | no | unknown | unknown |
-| 119 | CS1 | Engineering | MODAct (actuator design) | 20 | 2 | 7 | continuous | no | unknown | unknown |
-| 120 | CS2 | Engineering | MODAct (actuator design) | 20 | 2 | 8 | continuous | no | unknown | unknown |
-| 121 | CS3 | Engineering | MODAct (actuator design) | 20 | 2 | 10 | continuous | no | unknown | unknown |
-| 122 | CS4 | Engineering | MODAct (actuator design) | 20 | 2 | 9 | continuous | no | unknown | unknown |
-| 123 | CT1 | Engineering | MODAct (actuator design) | 20 | 2 | 7 | continuous | no | unknown | unknown |
-| 124 | CT2 | Engineering | MODAct (actuator design) | 20 | 2 | 8 | continuous | no | unknown | unknown |
-| 125 | CT3 | Engineering | MODAct (actuator design) | 20 | 2 | 10 | continuous | no | unknown | unknown |
-| 126 | CT4 | Engineering | MODAct (actuator design) | 20 | 2 | 9 | continuous | no | unknown | unknown |
-| 127 | CTS1 | Engineering | MODAct (actuator design) | 20 | 3 | 7 | continuous | no | unknown | unknown |
-| 128 | CTS2 | Engineering | MODAct (actuator design) | 20 | 3 | 8 | continuous | no | unknown | unknown |
-| 129 | CTS3 | Engineering | MODAct (actuator design) | 20 | 3 | 10 | continuous | no | unknown | unknown |
-| 130 | CTS4 | Engineering | MODAct (actuator design) | 20 | 3 | 9 | continuous | no | unknown | unknown |
-| 131 | CTSE1 | Engineering | MODAct (actuator design) | 20 | 4 | 7 | continuous | no | unknown | unknown |
-| 132 | CTSE2 | Engineering | MODAct (actuator design) | 20 | 4 | 8 | continuous | no | unknown | unknown |
-| 133 | CTSE3 | Engineering | MODAct (actuator design) | 20 | 4 | 10 | continuous | no | unknown | unknown |
-| 134 | CTSE4 | Engineering | MODAct (actuator design) | 20 | 4 | 9 | continuous | no | unknown | unknown |
-| 135 | CTSEI1 | Engineering | MODAct (actuator design) | 20 | 5 | 7 | continuous | no | unknown | unknown |
-| 136 | CTSEI2 | Engineering | MODAct (actuator design) | 20 | 5 | 8 | continuous | no | unknown | unknown |
-| 137 | CTSEI3 | Engineering | MODAct (actuator design) | 20 | 5 | 10 | continuous | no | unknown | unknown |
-| 138 | CTSEI4 | Engineering | MODAct (actuator design) | 20 | 5 | 9 | continuous | no | unknown | unknown |
-| 139 | RE21 | Engineering | RE (Tanabe-Ishibuchi) | 4 | 2 | 0 | continuous | no | unknown | unknown |
-| 140 | RE22 | Engineering | RE (Tanabe-Ishibuchi) | 3 | 2 | 0 | continuous | no | unknown | unknown |
-| 141 | RE23 | Engineering | RE (Tanabe-Ishibuchi) | 4 | 2 | 0 | continuous | no | unknown | unknown |
-| 142 | RE24 | Engineering | RE (Tanabe-Ishibuchi) | 2 | 2 | 0 | continuous | no | unknown | unknown |
-| 143 | RE25 | Engineering | RE (Tanabe-Ishibuchi) | 3 | 2 | 0 | continuous | no | unknown | unknown |
-| 144 | RE31 | Engineering | RE (Tanabe-Ishibuchi) | 3 | 3 | 0 | continuous | no | unknown | unknown |
-| 145 | RE32 | Engineering | RE (Tanabe-Ishibuchi) | 4 | 3 | 0 | continuous | no | unknown | unknown |
-| 146 | RE33 | Engineering | RE (Tanabe-Ishibuchi) | 4 | 3 | 0 | continuous | no | unknown | unknown |
-| 147 | RE34 | Engineering | RE (Tanabe-Ishibuchi) | 5 | 3 | 0 | continuous | no | unknown | unknown |
-| 148 | RE35 | Engineering | RE (Tanabe-Ishibuchi) | 7 | 3 | 0 | continuous | no | unknown | unknown |
-| 149 | RE36 | Engineering | RE (Tanabe-Ishibuchi) | 4 | 3 | 0 | continuous | no | unknown | unknown |
-| 150 | RE37 | Engineering | RE (Tanabe-Ishibuchi) | 4 | 3 | 0 | continuous | no | unknown | unknown |
-| 151 | RE41 | Engineering | RE (Tanabe-Ishibuchi) | 7 | 4 | 0 | continuous | no | unknown | unknown |
-| 152 | RE42 | Engineering | RE (Tanabe-Ishibuchi) | 6 | 4 | 0 | continuous | no | unknown | unknown |
-| 153 | RE61 | Engineering | RE (Tanabe-Ishibuchi) | 3 | 6 | 0 | continuous | no | unknown | unknown |
-| 154 | RE91 | Engineering | RE (Tanabe-Ishibuchi) | 7 | 9 | 0 | continuous | no | unknown | unknown |
-| 155 | LassoBreastCancer | Hyperparameter Optimization | HPO (LassoBench / GP-HDBO) | 9 | 1 | 0 | continuous | no | unknown | unknown |
-| 156 | LassoDNA | Hyperparameter Optimization | HPO (LassoBench / GP-HDBO) | 180 | 1 | 0 | continuous | no | unknown | unknown |
-| 157 | LassoDiabetes | Hyperparameter Optimization | HPO (LassoBench / GP-HDBO) | 8 | 1 | 0 | continuous | no | unknown | unknown |
-| 158 | LassoLeukemia | Hyperparameter Optimization | HPO (LassoBench / GP-HDBO) | 7129 | 1 | 0 | continuous | no | unknown | unknown |
-| 159 | LassoRCV1 | Hyperparameter Optimization | HPO (LassoBench / GP-HDBO) | 47236 | 1 | 0 | continuous | no | unknown | unknown |
-| 160 | SVM | Hyperparameter Optimization | HPO (LassoBench / GP-HDBO) | 388 | 1 | 0 | continuous | no | no | unknown |
-| 161 | AgNP | Materials | PV-Lab materials | 5 | 1 | 0 | discrete | no | unknown | unknown |
-| 162 | AutoAM | Materials | PV-Lab materials | 4 | 1 | 0 | discrete | no | unknown | unknown |
-| 163 | CrossedBarrel | Materials | PV-Lab materials | 4 | 1 | 0 | discrete | no | unknown | unknown |
-| 164 | P3HT | Materials | PV-Lab materials | 5 | 1 | 0 | discrete | no | unknown | unknown |
-| 165 | Perovskite | Materials | PV-Lab materials | 3 | 1 | 0 | discrete | no | unknown | unknown |
+| 86 | Allison | Engineering | Engineering (standalone) | 3 | 1 | 0 | continuous | no | unknown | unknown |
+| 87 | BotorchCarSideImpact | Engineering | Engineering (standalone) | 7 | 4 | 0 | continuous | no | unknown | unknown |
+| 88 | CantileverBeam | Engineering | Engineering (standalone) | 10 | 1 | 11 | continuous | no | unknown | unknown |
+| 89 | Car | Engineering | Engineering (standalone) | 11 | 1 | 10 | mixed | no | unknown | unknown |
+| 90 | CarSideImpact | Engineering | Engineering (standalone) | 7 | 3 | 10 | continuous | no | unknown | unknown |
+| 91 | CompressionSpring | Engineering | Engineering (standalone) | 3 | 1 | 4 | continuous | no | unknown | unknown |
+| 92 | DiscBrake | Engineering | Engineering (standalone) | 4 | 2 | 4 | continuous | no | unknown | unknown |
+| 93 | EulerBernoulliBeamBending | Engineering | Engineering (standalone) | 3 | 1 | 0 | continuous | no | unknown | unknown |
+| 94 | GearTrain | Engineering | Engineering (standalone) | 4 | 1 | 0 | mixed | no | unknown | unknown |
+| 95 | HeatExchanger | Engineering | Engineering (standalone) | 8 | 1 | 6 | continuous | no | unknown | unknown |
+| 96 | MOPTA08Car | Engineering | Engineering (standalone) | 124 | 1 | 68 | continuous | no | no | unknown |
+| 97 | Mazda | Engineering | Engineering (standalone) | 222 | 5 | 54 | continuous | no | unknown | unknown |
+| 98 | Mazda_SCA | Engineering | Engineering (standalone) | 148 | 4 | 36 | continuous | no | unknown | unknown |
+| 99 | MiniAeroWing | Engineering | Engineering (standalone) | 3 | 1 | 0 | continuous | no | unknown | unknown |
+| 100 | PEARL | Engineering | Engineering (standalone) | 7 | 1 | 6 | continuous | no | unknown | unknown |
+| 101 | Penicillin | Engineering | Engineering (standalone) | 7 | 3 | 0 | continuous | no | unknown | unknown |
+| 102 | PressureVessel | Engineering | Engineering (standalone) | 4 | 1 | 4 | mixed | no | unknown | unknown |
+| 103 | QPowerModel | Engineering | Engineering (standalone) | 8 | 1 | 0 | continuous | no | unknown | unknown |
+| 104 | ReactivityModel | Engineering | Engineering (standalone) | 8 | 1 | 0 | continuous | no | unknown | unknown |
+| 105 | ReinforcedConcreteBeam | Engineering | Engineering (standalone) | 3 | 1 | 2 | continuous | no | unknown | unknown |
+| 106 | RobotPush | Engineering | Engineering (standalone) | 14 | 1 | 0 | continuous | no | no | unknown |
+| 107 | Rover | Engineering | Engineering (standalone) | 100 | 1 | 0 | continuous | no | unknown | unknown |
+| 108 | SatelliteDesign | Engineering | Engineering (standalone) | 4 | 1 | 3 | continuous | no | unknown | unknown |
+| 109 | Sellar | Engineering | Engineering (standalone) | 3 | 1 | 2 | continuous | no | unknown | unknown |
+| 110 | SpeedReducer | Engineering | Engineering (standalone) | 7 | 1 | 9 | mixed | no | unknown | unknown |
+| 111 | ThreeTruss | Engineering | Engineering (standalone) | 2 | 1 | 3 | continuous | no | unknown | unknown |
+| 112 | Truss10D | Engineering | Engineering (standalone) | 10 | 1 | 14 | continuous | no | unknown | unknown |
+| 113 | Truss120D | Engineering | Engineering (standalone) | 120 | 1 | 121 | continuous | no | unknown | unknown |
+| 114 | Truss200D | Engineering | Engineering (standalone) | 200 | 1 | 200 | continuous | no | unknown | unknown |
+| 115 | Truss25D | Engineering | Engineering (standalone) | 25 | 1 | 31 | continuous | no | unknown | unknown |
+| 116 | Truss72D_FourForces | Engineering | Engineering (standalone) | 72 | 1 | 88 | continuous | no | unknown | unknown |
+| 117 | Truss72D_SingleForce | Engineering | Engineering (standalone) | 72 | 1 | 88 | continuous | no | unknown | unknown |
+| 118 | TwoBarTruss | Engineering | Engineering (standalone) | 2 | 2 | 5 | continuous | no | unknown | unknown |
+| 119 | VehicleSafety | Engineering | Engineering (standalone) | 5 | 3 | 0 | continuous | no | unknown | unknown |
+| 120 | WaterProblem | Engineering | Engineering (standalone) | 3 | 5 | 7 | continuous | no | unknown | unknown |
+| 121 | WaterResources | Engineering | Engineering (standalone) | 3 | 5 | 7 | continuous | no | unknown | unknown |
+| 122 | WeldedBeam | Engineering | Engineering (standalone) | 4 | 2 | 4 | continuous | no | unknown | unknown |
+| 123 | CS1 | Engineering | MODAct (actuator design) | 20 | 2 | 7 | continuous | no | unknown | unknown |
+| 124 | CS2 | Engineering | MODAct (actuator design) | 20 | 2 | 8 | continuous | no | unknown | unknown |
+| 125 | CS3 | Engineering | MODAct (actuator design) | 20 | 2 | 10 | continuous | no | unknown | unknown |
+| 126 | CS4 | Engineering | MODAct (actuator design) | 20 | 2 | 9 | continuous | no | unknown | unknown |
+| 127 | CT1 | Engineering | MODAct (actuator design) | 20 | 2 | 7 | continuous | no | unknown | unknown |
+| 128 | CT2 | Engineering | MODAct (actuator design) | 20 | 2 | 8 | continuous | no | unknown | unknown |
+| 129 | CT3 | Engineering | MODAct (actuator design) | 20 | 2 | 10 | continuous | no | unknown | unknown |
+| 130 | CT4 | Engineering | MODAct (actuator design) | 20 | 2 | 9 | continuous | no | unknown | unknown |
+| 131 | CTS1 | Engineering | MODAct (actuator design) | 20 | 3 | 7 | continuous | no | unknown | unknown |
+| 132 | CTS2 | Engineering | MODAct (actuator design) | 20 | 3 | 8 | continuous | no | unknown | unknown |
+| 133 | CTS3 | Engineering | MODAct (actuator design) | 20 | 3 | 10 | continuous | no | unknown | unknown |
+| 134 | CTS4 | Engineering | MODAct (actuator design) | 20 | 3 | 9 | continuous | no | unknown | unknown |
+| 135 | CTSE1 | Engineering | MODAct (actuator design) | 20 | 4 | 7 | continuous | no | unknown | unknown |
+| 136 | CTSE2 | Engineering | MODAct (actuator design) | 20 | 4 | 8 | continuous | no | unknown | unknown |
+| 137 | CTSE3 | Engineering | MODAct (actuator design) | 20 | 4 | 10 | continuous | no | unknown | unknown |
+| 138 | CTSE4 | Engineering | MODAct (actuator design) | 20 | 4 | 9 | continuous | no | unknown | unknown |
+| 139 | CTSEI1 | Engineering | MODAct (actuator design) | 20 | 5 | 7 | continuous | no | unknown | unknown |
+| 140 | CTSEI2 | Engineering | MODAct (actuator design) | 20 | 5 | 8 | continuous | no | unknown | unknown |
+| 141 | CTSEI3 | Engineering | MODAct (actuator design) | 20 | 5 | 10 | continuous | no | unknown | unknown |
+| 142 | CTSEI4 | Engineering | MODAct (actuator design) | 20 | 5 | 9 | continuous | no | unknown | unknown |
+| 143 | RE21 | Engineering | RE (Tanabe-Ishibuchi) | 4 | 2 | 0 | continuous | no | unknown | unknown |
+| 144 | RE22 | Engineering | RE (Tanabe-Ishibuchi) | 3 | 2 | 0 | continuous | no | unknown | unknown |
+| 145 | RE23 | Engineering | RE (Tanabe-Ishibuchi) | 4 | 2 | 0 | continuous | no | unknown | unknown |
+| 146 | RE24 | Engineering | RE (Tanabe-Ishibuchi) | 2 | 2 | 0 | continuous | no | unknown | unknown |
+| 147 | RE25 | Engineering | RE (Tanabe-Ishibuchi) | 3 | 2 | 0 | continuous | no | unknown | unknown |
+| 148 | RE31 | Engineering | RE (Tanabe-Ishibuchi) | 3 | 3 | 0 | continuous | no | unknown | unknown |
+| 149 | RE32 | Engineering | RE (Tanabe-Ishibuchi) | 4 | 3 | 0 | continuous | no | unknown | unknown |
+| 150 | RE33 | Engineering | RE (Tanabe-Ishibuchi) | 4 | 3 | 0 | continuous | no | unknown | unknown |
+| 151 | RE34 | Engineering | RE (Tanabe-Ishibuchi) | 5 | 3 | 0 | continuous | no | unknown | unknown |
+| 152 | RE35 | Engineering | RE (Tanabe-Ishibuchi) | 7 | 3 | 0 | continuous | no | unknown | unknown |
+| 153 | RE36 | Engineering | RE (Tanabe-Ishibuchi) | 4 | 3 | 0 | continuous | no | unknown | unknown |
+| 154 | RE37 | Engineering | RE (Tanabe-Ishibuchi) | 4 | 3 | 0 | continuous | no | unknown | unknown |
+| 155 | RE41 | Engineering | RE (Tanabe-Ishibuchi) | 7 | 4 | 0 | continuous | no | unknown | unknown |
+| 156 | RE42 | Engineering | RE (Tanabe-Ishibuchi) | 6 | 4 | 0 | continuous | no | unknown | unknown |
+| 157 | RE61 | Engineering | RE (Tanabe-Ishibuchi) | 3 | 6 | 0 | continuous | no | unknown | unknown |
+| 158 | RE91 | Engineering | RE (Tanabe-Ishibuchi) | 7 | 9 | 0 | continuous | no | unknown | unknown |
+| 159 | LassoBreastCancer | Hyperparameter Optimization | HPO (LassoBench / GP-HDBO) | 9 | 1 | 0 | continuous | no | unknown | unknown |
+| 160 | LassoDNA | Hyperparameter Optimization | HPO (LassoBench / GP-HDBO) | 180 | 1 | 0 | continuous | no | unknown | unknown |
+| 161 | LassoDiabetes | Hyperparameter Optimization | HPO (LassoBench / GP-HDBO) | 8 | 1 | 0 | continuous | no | unknown | unknown |
+| 162 | LassoLeukemia | Hyperparameter Optimization | HPO (LassoBench / GP-HDBO) | 7129 | 1 | 0 | continuous | no | unknown | unknown |
+| 163 | LassoRCV1 | Hyperparameter Optimization | HPO (LassoBench / GP-HDBO) | 47236 | 1 | 0 | continuous | no | unknown | unknown |
+| 164 | SVM | Hyperparameter Optimization | HPO (LassoBench / GP-HDBO) | 388 | 1 | 0 | continuous | no | no | unknown |
+| 165 | AgNP | Materials | PV-Lab materials | 5 | 1 | 0 | discrete | no | unknown | unknown |
+| 166 | AutoAM | Materials | PV-Lab materials | 4 | 1 | 0 | discrete | no | unknown | unknown |
+| 167 | CrossedBarrel | Materials | PV-Lab materials | 4 | 1 | 0 | discrete | no | unknown | unknown |
+| 168 | P3HT | Materials | PV-Lab materials | 5 | 1 | 0 | discrete | no | unknown | unknown |
+| 169 | Perovskite | Materials | PV-Lab materials | 3 | 1 | 0 | discrete | no | unknown | unknown |
 
 <!-- TABLE:END -->

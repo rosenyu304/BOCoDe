@@ -1,0 +1,57 @@
+{
+  "name": "PEARL",
+  "module": "bocode.opt_problems.engineering.PEARL",
+  "extra": null,
+  "suite": "Engineering (standalone)",
+  "num_objectives": 1,
+  "num_constraints": 6,
+  "available_dimensions": 7,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 7,
+  "bounds": [
+    [
+      0.0,
+      2.0
+    ],
+    [
+      0.1,
+      100.0
+    ],
+    [
+      0.0,
+      5.0
+    ],
+    [
+      0.1,
+      10.0
+    ],
+    [
+      0.1,
+      10.0
+    ],
+    [
+      0.1,
+      10.0
+    ],
+    [
+      0.1,
+      10.0
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "source": "P. T. Norheim. A computational framework for systems engineering models (PhD thesis, MIT AeroAstro), 2022, Ch. 7 (PEARL platform). https://github.com/norheim/minimdo",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
+}

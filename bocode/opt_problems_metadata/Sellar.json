@@ -1,0 +1,37 @@
+{
+  "name": "Sellar",
+  "module": "bocode.opt_problems.engineering.Sellar",
+  "extra": null,
+  "suite": "Engineering (standalone)",
+  "num_objectives": 1,
+  "num_constraints": 2,
+  "available_dimensions": 3,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 3,
+  "bounds": [
+    [
+      -10.0,
+      10.0
+    ],
+    [
+      0.0,
+      10.0
+    ],
+    [
+      0.0,
+      10.0
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "source": "R. S. Sellar, S. M. Batill, J. E. Renaud. Response surface based, concurrent subspace optimization for multidisciplinary system design. AIAA 96-0714, 1996. P. Norheim, minimdo (sellar_opt application). https://github.com/norheim/minimdo",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
+}
