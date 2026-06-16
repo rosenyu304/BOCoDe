@@ -79,8 +79,19 @@ TwoBarTruss, QPowerModel, ReactivityModel, RobotPush, Rover, MOPTA08Car.
   a permutation of city indices), already `DataType.DISCRETE`; needs
   permutation-aware handling, not integer rounding.
 
-## Uncertain (need original source)
+## Trusses — RESOLVED (continuous in BoCoDe; discrete in the cited source)
 
-Trusses 10D/25D/72D/120D/200D: classic trusses exist in both continuous-area and
-discrete-AISC-catalog variants; the code uses continuous areas with no citation in
-those files. Left continuous pending a source.
+Trusses 10D/25D/72D/120D/200D evaluate **continuous** cross-section areas in
+BoCoDe: each `A[i]` is passed straight to the `slientruss3d` FEM solver as a float
+(`MemberType(A[i].item(), ...)`), with continuous interval bounds and no
+snapping. `slientruss3d` has an opt-in discrete `ga` module, but BoCoDe does not
+use it.
+
+Literature caveat: the docstrings of Truss25D/72D/120D/200D cite Le et al. (2019,
+Computers & Structures vol. 212), which formulates these as **discrete-AISC-catalog**
+sizing problems. BoCoDe has **relaxed them to continuous**. Truss10D (bounds
+0.1–35 in²) matches the classic *continuous* 10-bar variant and cites no discrete
+source. (BAT_algorithm.pdf is Yang & Gandomi 2012; its only truss is a continuous
+3-bar case, so it neither supports nor contradicts a discrete reading.) So: BoCoDe
+trusses are continuous as implemented; a future discrete-catalog variant of the
+25/72/120/200-bar problems would match their cited source.
