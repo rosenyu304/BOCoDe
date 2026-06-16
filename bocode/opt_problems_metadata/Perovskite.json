@@ -27,6 +27,7 @@
   "application": "Materials",
   "convex": "unknown",
   "np_hard": "unknown",
+  "f_opt": null,
   "source": "S. Sun, A. Tiihonen, F. Oviedo, et al. A data fusion approach to optimize compositional stability of halide perovskites. Matter 4(4):1305-1322, 2021. Dataset via the PV-Lab benchmarking suite: https://github.com/PV-Lab/Benchmarking",
   "variable_types": [
     "continuous",

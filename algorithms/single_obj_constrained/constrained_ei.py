@@ -45,15 +45,19 @@ def _fit_model_list(train_X, train_obj, train_con):
     dim = train_X.shape[-1]
     models = [
         SingleTaskGP(
-            train_X, train_obj,
-            input_transform=Normalize(d=dim), outcome_transform=Standardize(m=1),
+            train_X,
+            train_obj,
+            input_transform=Normalize(d=dim),
+            outcome_transform=Standardize(m=1),
         )
     ]
     for i in range(train_con.shape[-1]):
         models.append(
             SingleTaskGP(
-                train_X, train_con[:, i : i + 1],
-                input_transform=Normalize(d=dim), outcome_transform=Standardize(m=1),
+                train_X,
+                train_con[:, i : i + 1],
+                input_transform=Normalize(d=dim),
+                outcome_transform=Standardize(m=1),
             )
         )
     model = ModelListGP(*models)
@@ -62,11 +66,15 @@ def _fit_model_list(train_X, train_obj, train_con):
     return model
 
 
-def optimize_problem(problem, n_init: int = 10, iters: int = 50, seed: int = 0) -> Result:
+def optimize_problem(
+    problem, n_init: int = 10, iters: int = 50, seed: int = 0
+) -> Result:
     set_seed(seed)
     obj = ProblemObjective(problem)
     assert obj.num_constraints > 0, "constrained_ei requires a constrained problem"
-    res = Result("constrained_ei", type(problem).__name__, seed, acquisition_function="LogCEI")
+    res = Result(
+        "constrained_ei", type(problem).__name__, seed, acquisition_function="LogCEI"
+    )
 
     train_X = initial_design(n_init, obj.dim, seed)
     train_obj, train_con = obj.evaluate_raw(train_X)
@@ -113,7 +121,9 @@ def main() -> None:
     parser.add_argument("--iters", type=int, default=50)
     add_common_args(parser)
     args = parser.parse_args()
-    res = optimize_problem(bocode.get_problem(args.problem)(), args.init, args.iters, args.seed)
+    res = optimize_problem(
+        bocode.get_problem(args.problem)(), args.init, args.iters, args.seed
+    )
     finalize(res, args)
 
 

@@ -125,7 +125,9 @@ def optimize_problem(
     while evals < iters:
         model = fit_gp(train_X, train_Y)
         n_cand = min(5000, max(2000, 200 * obj.dim))
-        X_cand = _candidates_in_region(model, train_X, train_Y, tr.length, n_cand, seed + evals)
+        X_cand = _candidates_in_region(
+            model, train_X, train_Y, tr.length, n_cand, seed + evals
+        )
         sampler = SobolQMCNormalSampler(sample_shape=torch.Size([256]))
         acqf = qExpectedImprovement(model=model, best_f=train_Y.max(), sampler=sampler)
         with torch.no_grad():
@@ -133,7 +135,9 @@ def optimize_problem(
         cand = X_cand[scores.topk(batch).indices]
 
         y = obj(cand)
-        improved = y.max().item() > train_Y.max().item() + 1e-3 * abs(train_Y.max().item())
+        improved = y.max().item() > train_Y.max().item() + 1e-3 * abs(
+            train_Y.max().item()
+        )
         train_X = torch.cat([train_X, cand], dim=0)
         train_Y = torch.cat([train_Y, y], dim=0)
         tr.update(improved)
@@ -162,7 +166,9 @@ def optimize_dataset(
     """Discrete TuRBO over a candidate pool: restrict EI to candidates in the region."""
     set_seed(seed)
     data = DatasetObjective(dataset_problem)
-    res = Result("turbo", type(dataset_problem).__name__, seed, acquisition_function="qEI")
+    res = Result(
+        "turbo", type(dataset_problem).__name__, seed, acquisition_function="qEI"
+    )
 
     perm = torch.randperm(data.n_candidates)
     observed = perm[:n_init].tolist()
@@ -186,7 +192,9 @@ def optimize_dataset(
                 break
 
         sampler = SobolQMCNormalSampler(sample_shape=torch.Size([256]))
-        acqf = qExpectedImprovement(model=model, best_f=data.Y[obs].max(), sampler=sampler)
+        acqf = qExpectedImprovement(
+            model=model, best_f=data.Y[obs].max(), sampler=sampler
+        )
         with torch.no_grad():
             scores = acqf(data.X[pool_idx].unsqueeze(1))
         choice = pool_idx[scores.argmax()].item()
@@ -212,9 +220,13 @@ def main() -> None:
     args = parser.parse_args()
 
     if args.problem:
-        res = optimize_problem(bocode.get_problem(args.problem)(), args.init, args.iters, args.seed)
+        res = optimize_problem(
+            bocode.get_problem(args.problem)(), args.init, args.iters, args.seed
+        )
     else:
-        res = optimize_dataset(bocode.get_problem(args.dataset)(), args.init, args.iters, args.seed)
+        res = optimize_dataset(
+            bocode.get_problem(args.dataset)(), args.init, args.iters, args.seed
+        )
     finalize(res, args)
 
 

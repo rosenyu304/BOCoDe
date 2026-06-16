@@ -61,7 +61,9 @@ def optimize_problem(
     """Continuous Vanilla BO over the unit cube for a problem."""
     set_seed(seed)
     obj = ProblemObjective(problem)
-    res = Result("vanilla_highdim_bo", type(problem).__name__, seed, acquisition_function="LogEI")
+    res = Result(
+        "vanilla_highdim_bo", type(problem).__name__, seed, acquisition_function="LogEI"
+    )
 
     train_X = initial_design(n_init, obj.dim, seed)
     train_Y = obj(train_X)
@@ -95,7 +97,12 @@ def optimize_dataset(
     """Discrete Vanilla BO: maximize LogEI over the unobserved candidate pool."""
     set_seed(seed)
     data = DatasetObjective(dataset_problem)
-    res = Result("vanilla_highdim_bo", type(dataset_problem).__name__, seed, acquisition_function="LogEI")
+    res = Result(
+        "vanilla_highdim_bo",
+        type(dataset_problem).__name__,
+        seed,
+        acquisition_function="LogEI",
+    )
 
     perm = torch.randperm(data.n_candidates)
     observed = perm[:n_init].tolist()

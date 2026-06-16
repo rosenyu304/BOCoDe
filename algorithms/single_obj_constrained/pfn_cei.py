@@ -48,14 +48,17 @@ def _normal_cdf(z):
     return 0.5 * (1.0 + torch.erf(z / math.sqrt(2.0)))
 
 
-def optimize_problem(problem, n_init: int = 20, iters: int = 50, seed: int = 0,
-                     device: str = "auto") -> Result:
+def optimize_problem(
+    problem, n_init: int = 20, iters: int = 50, seed: int = 0, device: str = "auto"
+) -> Result:
     set_seed(seed)
     obj = ProblemObjective(problem)
     nc = obj.num_constraints
     assert nc > 0, "pfn_cei requires a constrained problem"
     dim = obj.dim
-    res = Result("pfn_cei", type(problem).__name__, seed, acquisition_function="Constrained-EI")
+    res = Result(
+        "pfn_cei", type(problem).__name__, seed, acquisition_function="Constrained-EI"
+    )
 
     surrogate = TabPFNSurrogate(device=device)
     sobol = SobolEngine(dim, scramble=True, seed=seed)
@@ -76,7 +79,12 @@ def optimize_problem(problem, n_init: int = 20, iters: int = 50, seed: int = 0,
         m = 1 + nc  # objective + constraints, as batch columns
 
         # X is the same for every column; Y differs per column (objective / each con).
-        X_full = torch.cat([train_X, cand], dim=0).unsqueeze(1).expand(-1, m, -1).contiguous()
+        X_full = (
+            torch.cat([train_X, cand], dim=0)
+            .unsqueeze(1)
+            .expand(-1, m, -1)
+            .contiguous()
+        )
         Y_cols = torch.cat([train_obj, train_con], dim=1)  # (n_ctx, m)
         Y_full = torch.cat(
             [Y_cols, torch.zeros(N_CANDIDATES, m, dtype=DTYPE)], dim=0
@@ -85,7 +93,9 @@ def optimize_problem(problem, n_init: int = 20, iters: int = 50, seed: int = 0,
         with torch.no_grad():
             logits = surrogate.forward(X_full, Y_full, single_eval_pos=n_ctx)
             feas_best = best if best != -float("inf") else train_obj.max().item()
-            ei = surrogate.predict_ei(logits, torch.tensor(feas_best))[n_ctx:, 0]  # objective column
+            ei = surrogate.predict_ei(logits, torch.tensor(feas_best))[
+                n_ctx:, 0
+            ]  # objective column
             mean = surrogate.predict_mean(logits)[n_ctx:]  # (n_cand, m)
             var = surrogate.predict_variance(logits)[n_ctx:].clamp_min(1e-9)
 
@@ -120,7 +130,11 @@ def main() -> None:
     add_common_args(parser)
     args = parser.parse_args()
     res = optimize_problem(
-        bocode.get_problem(args.problem)(), args.init, args.iters, args.seed, device=args.device
+        bocode.get_problem(args.problem)(),
+        args.init,
+        args.iters,
+        args.seed,
+        device=args.device,
     )
     finalize(res, args)
 

@@ -27,6 +27,7 @@
   "application": "Engineering",
   "convex": "unknown",
   "np_hard": "unknown",
+  "f_opt": 0.5698,
   "source": "J. T. Allison. Complex system optimization: a review of analytical target cascading, collaborative optimization, and other formulations. M.S. thesis, University of Michigan, 2004. P. Norheim, minimdo (thesis_allison application). https://github.com/norheim/minimdo",
   "variable_types": [
     "continuous",

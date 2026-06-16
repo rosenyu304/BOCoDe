@@ -25,8 +25,9 @@ assessment described below.
 - **Dim** — decision-space dimension; `a+` or `a–b` for scalable problems.
 - **#Obj / #Constr** — objective and (inequality + equality) constraint counts as
   declared by the problem class. See the caveat under *Known limitations*.
-- **Variables** — continuous, discrete, or mixed.
-- **Scalable** — whether the dimension can be chosen by the user.
+- **f_opt** — the known optimal objective value (natural minimization sense) where
+  the problem class records one; `?` when not known. Per-problem JSON metadata also
+  carries the full `variable_types`, `scalable`, and `input_type` fields.
 - **Convex / NP-hard** — see methodology below; `unknown` where not determined.
 
 ## Convexity assessment
@@ -110,176 +111,176 @@ problem count (currently **165**).
 
 <!-- TABLE:START -->
 
-| # | Problem | Application | Suite | Dim | #Obj | #Constr | Variables | Scalable | Convex | NP-hard |
-|---|---|---|---|---|---|---|---|---|---|---|
-| 1 | TSP_100Cities | Combinatorial | TSP / NEORL | 100 | 1 | 0 | discrete | no | no | yes |
-| 2 | TSP_51Cities | Combinatorial | TSP / NEORL | 51 | 1 | 0 | discrete | no | no | yes |
-| 3 | PD4CartPole | Control | Classic control | 4 | 1 | 0 | continuous | no | unknown | unknown |
-| 4 | PID4Acrobot | Control | Classic control | 3 | 1 | 0 | continuous | no | unknown | unknown |
-| 5 | AntPolicySearchProblem | Control | MuJoCo control | 840 | 1 | 0 | continuous | no | unknown | unknown |
-| 6 | AntProblem | Control | MuJoCo control | 8 | 1 | 0 | continuous | no | unknown | unknown |
-| 7 | HalfCheetahPolicySearchProblem | Control | MuJoCo control | 102 | 1 | 0 | continuous | no | unknown | unknown |
-| 8 | HalfCheetahProblem | Control | MuJoCo control | 6 | 1 | 0 | continuous | no | unknown | unknown |
-| 9 | HopperPolicySearchProblem | Control | MuJoCo control | 33 | 1 | 0 | continuous | no | unknown | unknown |
-| 10 | HopperProblem | Control | MuJoCo control | 3 | 1 | 0 | continuous | no | unknown | unknown |
-| 11 | HumanoidProblem | Control | MuJoCo control | 17 | 1 | 0 | continuous | no | unknown | unknown |
-| 12 | HumanoidStandupProblem | Control | MuJoCo control | 17 | 1 | 0 | continuous | no | unknown | unknown |
-| 13 | InvertedDoublePendulumProblem | Control | MuJoCo control | 1 | 1 | 0 | continuous | no | unknown | unknown |
-| 14 | InvertedPendulumProblem | Control | MuJoCo control | 1 | 1 | 0 | continuous | no | unknown | unknown |
-| 15 | PusherProblem | Control | MuJoCo control | 7 | 1 | 0 | continuous | no | unknown | unknown |
-| 16 | ReacherProblem | Control | MuJoCo control | 2 | 1 | 0 | continuous | no | unknown | unknown |
-| 17 | SwimmerPolicySearchProblem | Control | MuJoCo control | 16 | 1 | 0 | continuous | no | unknown | unknown |
-| 18 | SwimmerProblem | Control | MuJoCo control | 2 | 1 | 0 | continuous | no | unknown | unknown |
-| 19 | Walker2DPolicySearchProblem | Control | MuJoCo control | 102 | 1 | 0 | continuous | no | unknown | unknown |
-| 20 | Walker2DProblem | Control | MuJoCo control | 6 | 1 | 0 | continuous | no | unknown | unknown |
-| 21 | CEC2020_p1 | Engineering | CEC2020 RW-Constrained | 9 | 1 | 8 | continuous | no | unknown | unknown |
-| 22 | CEC2020_p10 | Engineering | CEC2020 RW-Constrained | 3 | 1 | 3 | continuous | no | unknown | unknown |
-| 23 | CEC2020_p11 | Engineering | CEC2020 RW-Constrained | 7 | 1 | 8 | continuous | no | unknown | unknown |
-| 24 | CEC2020_p12 | Engineering | CEC2020 RW-Constrained | 7 | 1 | 9 | continuous | no | unknown | unknown |
-| 25 | CEC2020_p13 | Engineering | CEC2020 RW-Constrained | 5 | 1 | 3 | continuous | no | unknown | unknown |
-| 26 | CEC2020_p14 | Engineering | CEC2020 RW-Constrained | 10 | 1 | 10 | continuous | no | unknown | unknown |
-| 27 | CEC2020_p15 | Engineering | CEC2020 RW-Constrained | 7 | 1 | 11 | continuous | no | unknown | unknown |
-| 28 | CEC2020_p16 | Engineering | CEC2020 RW-Constrained | 14 | 1 | 15 | continuous | no | unknown | unknown |
-| 29 | CEC2020_p17 | Engineering | CEC2020 RW-Constrained | 3 | 1 | 4 | continuous | no | unknown | unknown |
-| 30 | CEC2020_p18 | Engineering | CEC2020 RW-Constrained | 4 | 1 | 4 | continuous | no | unknown | unknown |
-| 31 | CEC2020_p19 | Engineering | CEC2020 RW-Constrained | 4 | 1 | 5 | continuous | no | unknown | unknown |
-| 32 | CEC2020_p2 | Engineering | CEC2020 RW-Constrained | 11 | 1 | 9 | continuous | no | unknown | unknown |
-| 33 | CEC2020_p20 | Engineering | CEC2020 RW-Constrained | 2 | 1 | 3 | continuous | no | unknown | unknown |
-| 34 | CEC2020_p21 | Engineering | CEC2020 RW-Constrained | 5 | 1 | 8 | continuous | no | unknown | unknown |
-| 35 | CEC2020_p22 | Engineering | CEC2020 RW-Constrained | 9 | 1 | 11 | continuous | no | unknown | unknown |
-| 36 | CEC2020_p23 | Engineering | CEC2020 RW-Constrained | 5 | 1 | 11 | continuous | no | unknown | unknown |
-| 37 | CEC2020_p24 | Engineering | CEC2020 RW-Constrained | 7 | 1 | 7 | continuous | no | unknown | unknown |
-| 38 | CEC2020_p25 | Engineering | CEC2020 RW-Constrained | 7 | 1 | 7 | continuous | no | unknown | unknown |
-| 39 | CEC2020_p26 | Engineering | CEC2020 RW-Constrained | 22 | 1 | 87 | continuous | no | unknown | unknown |
-| 40 | CEC2020_p27 | Engineering | CEC2020 RW-Constrained | 10 | 1 | 3 | continuous | no | unknown | unknown |
-| 41 | CEC2020_p28 | Engineering | CEC2020 RW-Constrained | 10 | 1 | 9 | continuous | no | unknown | unknown |
-| 42 | CEC2020_p29 | Engineering | CEC2020 RW-Constrained | 4 | 1 | 1 | continuous | no | unknown | unknown |
-| 43 | CEC2020_p3 | Engineering | CEC2020 RW-Constrained | 7 | 1 | 14 | continuous | no | unknown | unknown |
-| 44 | CEC2020_p30 | Engineering | CEC2020 RW-Constrained | 3 | 1 | 8 | continuous | no | unknown | unknown |
-| 45 | CEC2020_p31 | Engineering | CEC2020 RW-Constrained | 4 | 1 | 0 | continuous | no | unknown | unknown |
-| 46 | CEC2020_p32 | Engineering | CEC2020 RW-Constrained | 5 | 1 | 6 | continuous | no | unknown | unknown |
-| 47 | CEC2020_p33 | Engineering | CEC2020 RW-Constrained | 30 | 1 | 30 | continuous | no | unknown | unknown |
-| 48 | CEC2020_p34 | Engineering | CEC2020 RW-Constrained | 118 | 1 | 108 | continuous | no | unknown | unknown |
-| 49 | CEC2020_p35 | Engineering | CEC2020 RW-Constrained | 153 | 1 | 148 | continuous | no | unknown | unknown |
-| 50 | CEC2020_p36 | Engineering | CEC2020 RW-Constrained | 158 | 1 | 148 | continuous | no | unknown | unknown |
-| 51 | CEC2020_p37 | Engineering | CEC2020 RW-Constrained | 126 | 1 | 116 | continuous | no | unknown | unknown |
-| 52 | CEC2020_p38 | Engineering | CEC2020 RW-Constrained | 126 | 1 | 116 | continuous | no | unknown | unknown |
-| 53 | CEC2020_p39 | Engineering | CEC2020 RW-Constrained | 126 | 1 | 116 | continuous | no | unknown | unknown |
-| 54 | CEC2020_p4 | Engineering | CEC2020 RW-Constrained | 6 | 1 | 5 | continuous | no | unknown | unknown |
-| 55 | CEC2020_p40 | Engineering | CEC2020 RW-Constrained | 76 | 1 | 76 | continuous | no | unknown | unknown |
-| 56 | CEC2020_p41 | Engineering | CEC2020 RW-Constrained | 74 | 1 | 74 | continuous | no | unknown | unknown |
-| 57 | CEC2020_p42 | Engineering | CEC2020 RW-Constrained | 86 | 1 | 76 | continuous | no | unknown | unknown |
-| 58 | CEC2020_p43 | Engineering | CEC2020 RW-Constrained | 86 | 1 | 76 | continuous | no | unknown | unknown |
-| 59 | CEC2020_p44 | Engineering | CEC2020 RW-Constrained | 30 | 1 | 105 | continuous | no | unknown | unknown |
-| 60 | CEC2020_p45 | Engineering | CEC2020 RW-Constrained | 25 | 1 | 25 | continuous | no | unknown | unknown |
-| 61 | CEC2020_p46 | Engineering | CEC2020 RW-Constrained | 25 | 1 | 25 | continuous | no | unknown | unknown |
-| 62 | CEC2020_p47 | Engineering | CEC2020 RW-Constrained | 25 | 1 | 25 | continuous | no | unknown | unknown |
-| 63 | CEC2020_p48 | Engineering | CEC2020 RW-Constrained | 30 | 1 | 30 | continuous | no | unknown | unknown |
-| 64 | CEC2020_p49 | Engineering | CEC2020 RW-Constrained | 30 | 1 | 30 | continuous | no | unknown | unknown |
-| 65 | CEC2020_p5 | Engineering | CEC2020 RW-Constrained | 9 | 1 | 6 | continuous | no | unknown | unknown |
-| 66 | CEC2020_p50 | Engineering | CEC2020 RW-Constrained | 30 | 1 | 30 | continuous | no | unknown | unknown |
-| 67 | CEC2020_p51 | Engineering | CEC2020 RW-Constrained | 59 | 1 | 15 | continuous | no | unknown | unknown |
-| 68 | CEC2020_p52 | Engineering | CEC2020 RW-Constrained | 59 | 1 | 15 | continuous | no | unknown | unknown |
-| 69 | CEC2020_p53 | Engineering | CEC2020 RW-Constrained | 59 | 1 | 15 | continuous | no | unknown | unknown |
-| 70 | CEC2020_p54 | Engineering | CEC2020 RW-Constrained | 59 | 1 | 15 | continuous | no | unknown | unknown |
-| 71 | CEC2020_p55 | Engineering | CEC2020 RW-Constrained | 64 | 1 | 6 | continuous | no | unknown | unknown |
-| 72 | CEC2020_p56 | Engineering | CEC2020 RW-Constrained | 64 | 1 | 6 | continuous | no | unknown | unknown |
-| 73 | CEC2020_p57 | Engineering | CEC2020 RW-Constrained | 64 | 1 | 6 | continuous | no | unknown | unknown |
-| 74 | CEC2020_p6 | Engineering | CEC2020 RW-Constrained | 38 | 1 | 32 | continuous | no | unknown | unknown |
-| 75 | CEC2020_p7 | Engineering | CEC2020 RW-Constrained | 48 | 1 | 38 | continuous | no | unknown | unknown |
-| 76 | CEC2020_p8 | Engineering | CEC2020 RW-Constrained | 2 | 1 | 2 | continuous | no | unknown | unknown |
-| 77 | CEC2020_p9 | Engineering | CEC2020 RW-Constrained | 3 | 1 | 2 | continuous | no | unknown | unknown |
-| 78 | CRE21 | Engineering | CRE (Tanabe-Ishibuchi) | 3 | 2 | 3 | continuous | no | unknown | unknown |
-| 79 | CRE22 | Engineering | CRE (Tanabe-Ishibuchi) | 4 | 2 | 4 | continuous | no | unknown | unknown |
-| 80 | CRE23 | Engineering | CRE (Tanabe-Ishibuchi) | 4 | 2 | 4 | continuous | no | unknown | unknown |
-| 81 | CRE24 | Engineering | CRE (Tanabe-Ishibuchi) | 7 | 2 | 11 | continuous | no | unknown | unknown |
-| 82 | CRE25 | Engineering | CRE (Tanabe-Ishibuchi) | 4 | 2 | 1 | continuous | no | unknown | unknown |
-| 83 | CRE31 | Engineering | CRE (Tanabe-Ishibuchi) | 7 | 3 | 10 | continuous | no | unknown | unknown |
-| 84 | CRE32 | Engineering | CRE (Tanabe-Ishibuchi) | 6 | 3 | 9 | continuous | no | unknown | unknown |
-| 85 | CRE51 | Engineering | CRE (Tanabe-Ishibuchi) | 3 | 5 | 7 | continuous | no | unknown | unknown |
-| 86 | Allison | Engineering | Engineering (standalone) | 3 | 1 | 0 | continuous | no | unknown | unknown |
-| 87 | BotorchCarSideImpact | Engineering | Engineering (standalone) | 7 | 4 | 0 | continuous | no | unknown | unknown |
-| 88 | CantileverBeam | Engineering | Engineering (standalone) | 10 | 1 | 11 | continuous | no | unknown | unknown |
-| 89 | Car | Engineering | Engineering (standalone) | 11 | 1 | 10 | mixed | no | unknown | unknown |
-| 90 | CarSideImpact | Engineering | Engineering (standalone) | 7 | 3 | 10 | continuous | no | unknown | unknown |
-| 91 | CompressionSpring | Engineering | Engineering (standalone) | 3 | 1 | 4 | continuous | no | unknown | unknown |
-| 92 | DiscBrake | Engineering | Engineering (standalone) | 4 | 2 | 4 | continuous | no | unknown | unknown |
-| 93 | EulerBernoulliBeamBending | Engineering | Engineering (standalone) | 3 | 1 | 0 | continuous | no | unknown | unknown |
-| 94 | GearTrain | Engineering | Engineering (standalone) | 4 | 1 | 0 | mixed | no | unknown | unknown |
-| 95 | HeatExchanger | Engineering | Engineering (standalone) | 8 | 1 | 6 | continuous | no | unknown | unknown |
-| 96 | MOPTA08Car | Engineering | Engineering (standalone) | 124 | 1 | 68 | continuous | no | no | unknown |
-| 97 | Mazda | Engineering | Engineering (standalone) | 222 | 5 | 54 | continuous | no | unknown | unknown |
-| 98 | Mazda_SCA | Engineering | Engineering (standalone) | 148 | 4 | 36 | continuous | no | unknown | unknown |
-| 99 | MiniAeroWing | Engineering | Engineering (standalone) | 3 | 1 | 0 | continuous | no | unknown | unknown |
-| 100 | PEARL | Engineering | Engineering (standalone) | 7 | 1 | 6 | continuous | no | unknown | unknown |
-| 101 | Penicillin | Engineering | Engineering (standalone) | 7 | 3 | 0 | continuous | no | unknown | unknown |
-| 102 | PressureVessel | Engineering | Engineering (standalone) | 4 | 1 | 4 | mixed | no | unknown | unknown |
-| 103 | QPowerModel | Engineering | Engineering (standalone) | 8 | 1 | 0 | continuous | no | unknown | unknown |
-| 104 | ReactivityModel | Engineering | Engineering (standalone) | 8 | 1 | 0 | continuous | no | unknown | unknown |
-| 105 | ReinforcedConcreteBeam | Engineering | Engineering (standalone) | 3 | 1 | 2 | continuous | no | unknown | unknown |
-| 106 | RobotPush | Engineering | Engineering (standalone) | 14 | 1 | 0 | continuous | no | no | unknown |
-| 107 | Rover | Engineering | Engineering (standalone) | 100 | 1 | 0 | continuous | no | unknown | unknown |
-| 108 | SatelliteDesign | Engineering | Engineering (standalone) | 4 | 1 | 3 | continuous | no | unknown | unknown |
-| 109 | Sellar | Engineering | Engineering (standalone) | 3 | 1 | 2 | continuous | no | unknown | unknown |
-| 110 | SpeedReducer | Engineering | Engineering (standalone) | 7 | 1 | 9 | mixed | no | unknown | unknown |
-| 111 | ThreeTruss | Engineering | Engineering (standalone) | 2 | 1 | 3 | continuous | no | unknown | unknown |
-| 112 | Truss10D | Engineering | Engineering (standalone) | 10 | 1 | 14 | continuous | no | unknown | unknown |
-| 113 | Truss120D | Engineering | Engineering (standalone) | 120 | 1 | 121 | continuous | no | unknown | unknown |
-| 114 | Truss200D | Engineering | Engineering (standalone) | 200 | 1 | 200 | continuous | no | unknown | unknown |
-| 115 | Truss25D | Engineering | Engineering (standalone) | 25 | 1 | 31 | continuous | no | unknown | unknown |
-| 116 | Truss72D_FourForces | Engineering | Engineering (standalone) | 72 | 1 | 88 | continuous | no | unknown | unknown |
-| 117 | Truss72D_SingleForce | Engineering | Engineering (standalone) | 72 | 1 | 88 | continuous | no | unknown | unknown |
-| 118 | TwoBarTruss | Engineering | Engineering (standalone) | 2 | 2 | 5 | continuous | no | unknown | unknown |
-| 119 | VehicleSafety | Engineering | Engineering (standalone) | 5 | 3 | 0 | continuous | no | unknown | unknown |
-| 120 | WaterProblem | Engineering | Engineering (standalone) | 3 | 5 | 7 | continuous | no | unknown | unknown |
-| 121 | WaterResources | Engineering | Engineering (standalone) | 3 | 5 | 7 | continuous | no | unknown | unknown |
-| 122 | WeldedBeam | Engineering | Engineering (standalone) | 4 | 2 | 4 | continuous | no | unknown | unknown |
-| 123 | CS1 | Engineering | MODAct (actuator design) | 20 | 2 | 7 | continuous | no | unknown | unknown |
-| 124 | CS2 | Engineering | MODAct (actuator design) | 20 | 2 | 8 | continuous | no | unknown | unknown |
-| 125 | CS3 | Engineering | MODAct (actuator design) | 20 | 2 | 10 | continuous | no | unknown | unknown |
-| 126 | CS4 | Engineering | MODAct (actuator design) | 20 | 2 | 9 | continuous | no | unknown | unknown |
-| 127 | CT1 | Engineering | MODAct (actuator design) | 20 | 2 | 7 | continuous | no | unknown | unknown |
-| 128 | CT2 | Engineering | MODAct (actuator design) | 20 | 2 | 8 | continuous | no | unknown | unknown |
-| 129 | CT3 | Engineering | MODAct (actuator design) | 20 | 2 | 10 | continuous | no | unknown | unknown |
-| 130 | CT4 | Engineering | MODAct (actuator design) | 20 | 2 | 9 | continuous | no | unknown | unknown |
-| 131 | CTS1 | Engineering | MODAct (actuator design) | 20 | 3 | 7 | continuous | no | unknown | unknown |
-| 132 | CTS2 | Engineering | MODAct (actuator design) | 20 | 3 | 8 | continuous | no | unknown | unknown |
-| 133 | CTS3 | Engineering | MODAct (actuator design) | 20 | 3 | 10 | continuous | no | unknown | unknown |
-| 134 | CTS4 | Engineering | MODAct (actuator design) | 20 | 3 | 9 | continuous | no | unknown | unknown |
-| 135 | CTSE1 | Engineering | MODAct (actuator design) | 20 | 4 | 7 | continuous | no | unknown | unknown |
-| 136 | CTSE2 | Engineering | MODAct (actuator design) | 20 | 4 | 8 | continuous | no | unknown | unknown |
-| 137 | CTSE3 | Engineering | MODAct (actuator design) | 20 | 4 | 10 | continuous | no | unknown | unknown |
-| 138 | CTSE4 | Engineering | MODAct (actuator design) | 20 | 4 | 9 | continuous | no | unknown | unknown |
-| 139 | CTSEI1 | Engineering | MODAct (actuator design) | 20 | 5 | 7 | continuous | no | unknown | unknown |
-| 140 | CTSEI2 | Engineering | MODAct (actuator design) | 20 | 5 | 8 | continuous | no | unknown | unknown |
-| 141 | CTSEI3 | Engineering | MODAct (actuator design) | 20 | 5 | 10 | continuous | no | unknown | unknown |
-| 142 | CTSEI4 | Engineering | MODAct (actuator design) | 20 | 5 | 9 | continuous | no | unknown | unknown |
-| 143 | RE21 | Engineering | RE (Tanabe-Ishibuchi) | 4 | 2 | 0 | continuous | no | unknown | unknown |
-| 144 | RE22 | Engineering | RE (Tanabe-Ishibuchi) | 3 | 2 | 0 | continuous | no | unknown | unknown |
-| 145 | RE23 | Engineering | RE (Tanabe-Ishibuchi) | 4 | 2 | 0 | continuous | no | unknown | unknown |
-| 146 | RE24 | Engineering | RE (Tanabe-Ishibuchi) | 2 | 2 | 0 | continuous | no | unknown | unknown |
-| 147 | RE25 | Engineering | RE (Tanabe-Ishibuchi) | 3 | 2 | 0 | continuous | no | unknown | unknown |
-| 148 | RE31 | Engineering | RE (Tanabe-Ishibuchi) | 3 | 3 | 0 | continuous | no | unknown | unknown |
-| 149 | RE32 | Engineering | RE (Tanabe-Ishibuchi) | 4 | 3 | 0 | continuous | no | unknown | unknown |
-| 150 | RE33 | Engineering | RE (Tanabe-Ishibuchi) | 4 | 3 | 0 | continuous | no | unknown | unknown |
-| 151 | RE34 | Engineering | RE (Tanabe-Ishibuchi) | 5 | 3 | 0 | continuous | no | unknown | unknown |
-| 152 | RE35 | Engineering | RE (Tanabe-Ishibuchi) | 7 | 3 | 0 | continuous | no | unknown | unknown |
-| 153 | RE36 | Engineering | RE (Tanabe-Ishibuchi) | 4 | 3 | 0 | continuous | no | unknown | unknown |
-| 154 | RE37 | Engineering | RE (Tanabe-Ishibuchi) | 4 | 3 | 0 | continuous | no | unknown | unknown |
-| 155 | RE41 | Engineering | RE (Tanabe-Ishibuchi) | 7 | 4 | 0 | continuous | no | unknown | unknown |
-| 156 | RE42 | Engineering | RE (Tanabe-Ishibuchi) | 6 | 4 | 0 | continuous | no | unknown | unknown |
-| 157 | RE61 | Engineering | RE (Tanabe-Ishibuchi) | 3 | 6 | 0 | continuous | no | unknown | unknown |
-| 158 | RE91 | Engineering | RE (Tanabe-Ishibuchi) | 7 | 9 | 0 | continuous | no | unknown | unknown |
-| 159 | LassoBreastCancer | Hyperparameter Optimization | HPO (LassoBench / GP-HDBO) | 9 | 1 | 0 | continuous | no | unknown | unknown |
-| 160 | LassoDNA | Hyperparameter Optimization | HPO (LassoBench / GP-HDBO) | 180 | 1 | 0 | continuous | no | unknown | unknown |
-| 161 | LassoDiabetes | Hyperparameter Optimization | HPO (LassoBench / GP-HDBO) | 8 | 1 | 0 | continuous | no | unknown | unknown |
-| 162 | LassoLeukemia | Hyperparameter Optimization | HPO (LassoBench / GP-HDBO) | 7129 | 1 | 0 | continuous | no | unknown | unknown |
-| 163 | LassoRCV1 | Hyperparameter Optimization | HPO (LassoBench / GP-HDBO) | 47236 | 1 | 0 | continuous | no | unknown | unknown |
-| 164 | SVM | Hyperparameter Optimization | HPO (LassoBench / GP-HDBO) | 388 | 1 | 0 | continuous | no | no | unknown |
-| 165 | AgNP | Materials | PV-Lab materials | 5 | 1 | 0 | discrete | no | unknown | unknown |
-| 166 | AutoAM | Materials | PV-Lab materials | 4 | 1 | 0 | discrete | no | unknown | unknown |
-| 167 | CrossedBarrel | Materials | PV-Lab materials | 4 | 1 | 0 | discrete | no | unknown | unknown |
-| 168 | P3HT | Materials | PV-Lab materials | 5 | 1 | 0 | discrete | no | unknown | unknown |
-| 169 | Perovskite | Materials | PV-Lab materials | 3 | 1 | 0 | discrete | no | unknown | unknown |
+| # | Problem | Application | Suite | Dim | #Obj | #Constr | f_opt | Convex | NP-hard |
+|---|---|---|---|---|---|---|---|---|---|
+| 1 | TSP_100Cities | Combinatorial | TSP / NEORL | 100 | 1 | 0 | ? | no | yes |
+| 2 | TSP_51Cities | Combinatorial | TSP / NEORL | 51 | 1 | 0 | ? | no | yes |
+| 3 | PD4CartPole | Control | Classic control | 4 | 1 | 0 | ? | unknown | unknown |
+| 4 | PID4Acrobot | Control | Classic control | 3 | 1 | 0 | ? | unknown | unknown |
+| 5 | AntPolicySearchProblem | Control | MuJoCo control | 840 | 1 | 0 | ? | unknown | unknown |
+| 6 | AntProblem | Control | MuJoCo control | 8 | 1 | 0 | ? | unknown | unknown |
+| 7 | HalfCheetahPolicySearchProblem | Control | MuJoCo control | 102 | 1 | 0 | ? | unknown | unknown |
+| 8 | HalfCheetahProblem | Control | MuJoCo control | 6 | 1 | 0 | ? | unknown | unknown |
+| 9 | HopperPolicySearchProblem | Control | MuJoCo control | 33 | 1 | 0 | ? | unknown | unknown |
+| 10 | HopperProblem | Control | MuJoCo control | 3 | 1 | 0 | ? | unknown | unknown |
+| 11 | HumanoidProblem | Control | MuJoCo control | 17 | 1 | 0 | ? | unknown | unknown |
+| 12 | HumanoidStandupProblem | Control | MuJoCo control | 17 | 1 | 0 | ? | unknown | unknown |
+| 13 | InvertedDoublePendulumProblem | Control | MuJoCo control | 1 | 1 | 0 | ? | unknown | unknown |
+| 14 | InvertedPendulumProblem | Control | MuJoCo control | 1 | 1 | 0 | ? | unknown | unknown |
+| 15 | PusherProblem | Control | MuJoCo control | 7 | 1 | 0 | ? | unknown | unknown |
+| 16 | ReacherProblem | Control | MuJoCo control | 2 | 1 | 0 | ? | unknown | unknown |
+| 17 | SwimmerPolicySearchProblem | Control | MuJoCo control | 16 | 1 | 0 | ? | unknown | unknown |
+| 18 | SwimmerProblem | Control | MuJoCo control | 2 | 1 | 0 | ? | unknown | unknown |
+| 19 | Walker2DPolicySearchProblem | Control | MuJoCo control | 102 | 1 | 0 | ? | unknown | unknown |
+| 20 | Walker2DProblem | Control | MuJoCo control | 6 | 1 | 0 | ? | unknown | unknown |
+| 21 | CEC2020_p1 | Engineering | CEC2020 RW-Constrained | 9 | 1 | 8 | 189.31163 | unknown | unknown |
+| 22 | CEC2020_p10 | Engineering | CEC2020 RW-Constrained | 3 | 1 | 3 | 1.076543 | unknown | unknown |
+| 23 | CEC2020_p11 | Engineering | CEC2020 RW-Constrained | 7 | 1 | 8 | 99.238464 | unknown | unknown |
+| 24 | CEC2020_p12 | Engineering | CEC2020 RW-Constrained | 7 | 1 | 9 | 2.924831 | unknown | unknown |
+| 25 | CEC2020_p13 | Engineering | CEC2020 RW-Constrained | 5 | 1 | 3 | 26887.0 | unknown | unknown |
+| 26 | CEC2020_p14 | Engineering | CEC2020 RW-Constrained | 10 | 1 | 10 | 53638.942722 | unknown | unknown |
+| 27 | CEC2020_p15 | Engineering | CEC2020 RW-Constrained | 7 | 1 | 11 | 2994.424466 | unknown | unknown |
+| 28 | CEC2020_p16 | Engineering | CEC2020 RW-Constrained | 14 | 1 | 15 | 0.032213 | unknown | unknown |
+| 29 | CEC2020_p17 | Engineering | CEC2020 RW-Constrained | 3 | 1 | 4 | 0.012665 | unknown | unknown |
+| 30 | CEC2020_p18 | Engineering | CEC2020 RW-Constrained | 4 | 1 | 4 | ? | unknown | unknown |
+| 31 | CEC2020_p19 | Engineering | CEC2020 RW-Constrained | 4 | 1 | 5 | 1.670218 | unknown | unknown |
+| 32 | CEC2020_p2 | Engineering | CEC2020 RW-Constrained | 11 | 1 | 9 | 7049.036954 | unknown | unknown |
+| 33 | CEC2020_p20 | Engineering | CEC2020 RW-Constrained | 2 | 1 | 3 | 263.895843 | unknown | unknown |
+| 34 | CEC2020_p21 | Engineering | CEC2020 RW-Constrained | 5 | 1 | 8 | 0.235242 | unknown | unknown |
+| 35 | CEC2020_p22 | Engineering | CEC2020 RW-Constrained | 9 | 1 | 11 | 0.525769 | unknown | unknown |
+| 36 | CEC2020_p23 | Engineering | CEC2020 RW-Constrained | 5 | 1 | 11 | 16.069869 | unknown | unknown |
+| 37 | CEC2020_p24 | Engineering | CEC2020 RW-Constrained | 7 | 1 | 7 | 2.528792 | unknown | unknown |
+| 38 | CEC2020_p25 | Engineering | CEC2020 RW-Constrained | 7 | 1 | 7 | 1616.119765 | unknown | unknown |
+| 39 | CEC2020_p26 | Engineering | CEC2020 RW-Constrained | 22 | 1 | 87 | 35.359232 | unknown | unknown |
+| 40 | CEC2020_p27 | Engineering | CEC2020 RW-Constrained | 10 | 1 | 3 | 524.450761 | unknown | unknown |
+| 41 | CEC2020_p28 | Engineering | CEC2020 RW-Constrained | 10 | 1 | 9 | 14614.135715 | unknown | unknown |
+| 42 | CEC2020_p29 | Engineering | CEC2020 RW-Constrained | 4 | 1 | 1 | 2964895.4173 | unknown | unknown |
+| 43 | CEC2020_p3 | Engineering | CEC2020 RW-Constrained | 7 | 1 | 14 | -4529.119739 | unknown | unknown |
+| 44 | CEC2020_p30 | Engineering | CEC2020 RW-Constrained | 3 | 1 | 8 | 2.613884 | unknown | unknown |
+| 45 | CEC2020_p31 | Engineering | CEC2020 RW-Constrained | 4 | 1 | 0 | 0.0 | unknown | unknown |
+| 46 | CEC2020_p32 | Engineering | CEC2020 RW-Constrained | 5 | 1 | 6 | -30665.538672 | unknown | unknown |
+| 47 | CEC2020_p33 | Engineering | CEC2020 RW-Constrained | 30 | 1 | 30 | 2.639346 | unknown | unknown |
+| 48 | CEC2020_p34 | Engineering | CEC2020 RW-Constrained | 118 | 1 | 108 | 0.0 | unknown | unknown |
+| 49 | CEC2020_p35 | Engineering | CEC2020 RW-Constrained | 153 | 1 | 148 | 0.079964 | unknown | unknown |
+| 50 | CEC2020_p36 | Engineering | CEC2020 RW-Constrained | 158 | 1 | 148 | 0.047734 | unknown | unknown |
+| 51 | CEC2020_p37 | Engineering | CEC2020 RW-Constrained | 126 | 1 | 116 | 0.018594 | unknown | unknown |
+| 52 | CEC2020_p38 | Engineering | CEC2020 RW-Constrained | 126 | 1 | 116 | 2.713937 | unknown | unknown |
+| 53 | CEC2020_p39 | Engineering | CEC2020 RW-Constrained | 126 | 1 | 116 | 2.751591 | unknown | unknown |
+| 54 | CEC2020_p4 | Engineering | CEC2020 RW-Constrained | 6 | 1 | 5 | -0.38826 | unknown | unknown |
+| 55 | CEC2020_p40 | Engineering | CEC2020 RW-Constrained | 76 | 1 | 76 | 0.0 | unknown | unknown |
+| 56 | CEC2020_p41 | Engineering | CEC2020 RW-Constrained | 74 | 1 | 74 | 0.0 | unknown | unknown |
+| 57 | CEC2020_p42 | Engineering | CEC2020 RW-Constrained | 86 | 1 | 76 | 0.077027 | unknown | unknown |
+| 58 | CEC2020_p43 | Engineering | CEC2020 RW-Constrained | 86 | 1 | 76 | 0.079836 | unknown | unknown |
+| 59 | CEC2020_p44 | Engineering | CEC2020 RW-Constrained | 30 | 1 | 105 | -6273.1715 | unknown | unknown |
+| 60 | CEC2020_p45 | Engineering | CEC2020 RW-Constrained | 25 | 1 | 25 | 0.030739 | unknown | unknown |
+| 61 | CEC2020_p46 | Engineering | CEC2020 RW-Constrained | 25 | 1 | 25 | 0.02024 | unknown | unknown |
+| 62 | CEC2020_p47 | Engineering | CEC2020 RW-Constrained | 25 | 1 | 25 | 0.012783 | unknown | unknown |
+| 63 | CEC2020_p48 | Engineering | CEC2020 RW-Constrained | 30 | 1 | 30 | 0.016788 | unknown | unknown |
+| 64 | CEC2020_p49 | Engineering | CEC2020 RW-Constrained | 30 | 1 | 30 | 0.009312 | unknown | unknown |
+| 65 | CEC2020_p5 | Engineering | CEC2020 RW-Constrained | 9 | 1 | 6 | -400.0056 | unknown | unknown |
+| 66 | CEC2020_p50 | Engineering | CEC2020 RW-Constrained | 30 | 1 | 30 | 0.015051 | unknown | unknown |
+| 67 | CEC2020_p51 | Engineering | CEC2020 RW-Constrained | 59 | 1 | 15 | 4550.85115 | unknown | unknown |
+| 68 | CEC2020_p52 | Engineering | CEC2020 RW-Constrained | 59 | 1 | 15 | 3348.982149 | unknown | unknown |
+| 69 | CEC2020_p53 | Engineering | CEC2020 RW-Constrained | 59 | 1 | 15 | 4997.606929 | unknown | unknown |
+| 70 | CEC2020_p54 | Engineering | CEC2020 RW-Constrained | 59 | 1 | 15 | 4240.548254 | unknown | unknown |
+| 71 | CEC2020_p55 | Engineering | CEC2020 RW-Constrained | 64 | 1 | 6 | 6696.414513 | unknown | unknown |
+| 72 | CEC2020_p56 | Engineering | CEC2020 RW-Constrained | 64 | 1 | 6 | 14746.58 | unknown | unknown |
+| 73 | CEC2020_p57 | Engineering | CEC2020 RW-Constrained | 64 | 1 | 6 | 3213.291702 | unknown | unknown |
+| 74 | CEC2020_p6 | Engineering | CEC2020 RW-Constrained | 38 | 1 | 32 | 1.86383 | unknown | unknown |
+| 75 | CEC2020_p7 | Engineering | CEC2020 RW-Constrained | 48 | 1 | 38 | 1.567045 | unknown | unknown |
+| 76 | CEC2020_p8 | Engineering | CEC2020 RW-Constrained | 2 | 1 | 2 | 2.0 | unknown | unknown |
+| 77 | CEC2020_p9 | Engineering | CEC2020 RW-Constrained | 3 | 1 | 2 | 2.557655 | unknown | unknown |
+| 78 | CRE21 | Engineering | CRE (Tanabe-Ishibuchi) | 3 | 2 | 3 | ? | unknown | unknown |
+| 79 | CRE22 | Engineering | CRE (Tanabe-Ishibuchi) | 4 | 2 | 4 | ? | unknown | unknown |
+| 80 | CRE23 | Engineering | CRE (Tanabe-Ishibuchi) | 4 | 2 | 4 | ? | unknown | unknown |
+| 81 | CRE24 | Engineering | CRE (Tanabe-Ishibuchi) | 7 | 2 | 11 | ? | unknown | unknown |
+| 82 | CRE25 | Engineering | CRE (Tanabe-Ishibuchi) | 4 | 2 | 1 | ? | unknown | unknown |
+| 83 | CRE31 | Engineering | CRE (Tanabe-Ishibuchi) | 7 | 3 | 10 | ? | unknown | unknown |
+| 84 | CRE32 | Engineering | CRE (Tanabe-Ishibuchi) | 6 | 3 | 9 | ? | unknown | unknown |
+| 85 | CRE51 | Engineering | CRE (Tanabe-Ishibuchi) | 3 | 5 | 7 | ? | unknown | unknown |
+| 86 | Allison | Engineering | Engineering (standalone) | 3 | 1 | 0 | 0.5698 | unknown | unknown |
+| 87 | BotorchCarSideImpact | Engineering | Engineering (standalone) | 7 | 4 | 0 | ? | unknown | unknown |
+| 88 | CantileverBeam | Engineering | Engineering (standalone) | 10 | 1 | 11 | ? | unknown | unknown |
+| 89 | Car | Engineering | Engineering (standalone) | 11 | 1 | 10 | ? | unknown | unknown |
+| 90 | CarSideImpact | Engineering | Engineering (standalone) | 7 | 3 | 10 | ? | unknown | unknown |
+| 91 | CompressionSpring | Engineering | Engineering (standalone) | 3 | 1 | 4 | ? | unknown | unknown |
+| 92 | DiscBrake | Engineering | Engineering (standalone) | 4 | 2 | 4 | ? | unknown | unknown |
+| 93 | EulerBernoulliBeamBending | Engineering | Engineering (standalone) | 3 | 1 | 0 | -1287.385 | unknown | unknown |
+| 94 | GearTrain | Engineering | Engineering (standalone) | 4 | 1 | 0 | ? | unknown | unknown |
+| 95 | HeatExchanger | Engineering | Engineering (standalone) | 8 | 1 | 6 | ? | unknown | unknown |
+| 96 | MOPTA08Car | Engineering | Engineering (standalone) | 124 | 1 | 68 | ? | no | unknown |
+| 97 | Mazda | Engineering | Engineering (standalone) | 222 | 5 | 54 | ? | unknown | unknown |
+| 98 | Mazda_SCA | Engineering | Engineering (standalone) | 148 | 4 | 36 | ? | unknown | unknown |
+| 99 | MiniAeroWing | Engineering | Engineering (standalone) | 3 | 1 | 0 | 242.27 | unknown | unknown |
+| 100 | PEARL | Engineering | Engineering (standalone) | 7 | 1 | 6 | 585.3 | unknown | unknown |
+| 101 | Penicillin | Engineering | Engineering (standalone) | 7 | 3 | 0 | ? | unknown | unknown |
+| 102 | PressureVessel | Engineering | Engineering (standalone) | 4 | 1 | 4 | ? | unknown | unknown |
+| 103 | QPowerModel | Engineering | Engineering (standalone) | 8 | 1 | 0 | ? | unknown | unknown |
+| 104 | ReactivityModel | Engineering | Engineering (standalone) | 8 | 1 | 0 | ? | unknown | unknown |
+| 105 | ReinforcedConcreteBeam | Engineering | Engineering (standalone) | 3 | 1 | 2 | ? | unknown | unknown |
+| 106 | RobotPush | Engineering | Engineering (standalone) | 14 | 1 | 0 | ? | no | unknown |
+| 107 | Rover | Engineering | Engineering (standalone) | 100 | 1 | 0 | ? | unknown | unknown |
+| 108 | SatelliteDesign | Engineering | Engineering (standalone) | 4 | 1 | 3 | ? | unknown | unknown |
+| 109 | Sellar | Engineering | Engineering (standalone) | 3 | 1 | 2 | 3.18339 | unknown | unknown |
+| 110 | SpeedReducer | Engineering | Engineering (standalone) | 7 | 1 | 9 | ? | unknown | unknown |
+| 111 | ThreeTruss | Engineering | Engineering (standalone) | 2 | 1 | 3 | ? | unknown | unknown |
+| 112 | Truss10D | Engineering | Engineering (standalone) | 10 | 1 | 14 | ? | unknown | unknown |
+| 113 | Truss120D | Engineering | Engineering (standalone) | 120 | 1 | 121 | ? | unknown | unknown |
+| 114 | Truss200D | Engineering | Engineering (standalone) | 200 | 1 | 200 | ? | unknown | unknown |
+| 115 | Truss25D | Engineering | Engineering (standalone) | 25 | 1 | 31 | ? | unknown | unknown |
+| 116 | Truss72D_FourForces | Engineering | Engineering (standalone) | 72 | 1 | 88 | ? | unknown | unknown |
+| 117 | Truss72D_SingleForce | Engineering | Engineering (standalone) | 72 | 1 | 88 | ? | unknown | unknown |
+| 118 | TwoBarTruss | Engineering | Engineering (standalone) | 2 | 2 | 5 | ? | unknown | unknown |
+| 119 | VehicleSafety | Engineering | Engineering (standalone) | 5 | 3 | 0 | ? | unknown | unknown |
+| 120 | WaterProblem | Engineering | Engineering (standalone) | 3 | 5 | 7 | ? | unknown | unknown |
+| 121 | WaterResources | Engineering | Engineering (standalone) | 3 | 5 | 7 | ? | unknown | unknown |
+| 122 | WeldedBeam | Engineering | Engineering (standalone) | 4 | 2 | 4 | ? | unknown | unknown |
+| 123 | CS1 | Engineering | MODAct (actuator design) | 20 | 2 | 7 | ? | unknown | unknown |
+| 124 | CS2 | Engineering | MODAct (actuator design) | 20 | 2 | 8 | ? | unknown | unknown |
+| 125 | CS3 | Engineering | MODAct (actuator design) | 20 | 2 | 10 | ? | unknown | unknown |
+| 126 | CS4 | Engineering | MODAct (actuator design) | 20 | 2 | 9 | ? | unknown | unknown |
+| 127 | CT1 | Engineering | MODAct (actuator design) | 20 | 2 | 7 | ? | unknown | unknown |
+| 128 | CT2 | Engineering | MODAct (actuator design) | 20 | 2 | 8 | ? | unknown | unknown |
+| 129 | CT3 | Engineering | MODAct (actuator design) | 20 | 2 | 10 | ? | unknown | unknown |
+| 130 | CT4 | Engineering | MODAct (actuator design) | 20 | 2 | 9 | ? | unknown | unknown |
+| 131 | CTS1 | Engineering | MODAct (actuator design) | 20 | 3 | 7 | ? | unknown | unknown |
+| 132 | CTS2 | Engineering | MODAct (actuator design) | 20 | 3 | 8 | ? | unknown | unknown |
+| 133 | CTS3 | Engineering | MODAct (actuator design) | 20 | 3 | 10 | ? | unknown | unknown |
+| 134 | CTS4 | Engineering | MODAct (actuator design) | 20 | 3 | 9 | ? | unknown | unknown |
+| 135 | CTSE1 | Engineering | MODAct (actuator design) | 20 | 4 | 7 | ? | unknown | unknown |
+| 136 | CTSE2 | Engineering | MODAct (actuator design) | 20 | 4 | 8 | ? | unknown | unknown |
+| 137 | CTSE3 | Engineering | MODAct (actuator design) | 20 | 4 | 10 | ? | unknown | unknown |
+| 138 | CTSE4 | Engineering | MODAct (actuator design) | 20 | 4 | 9 | ? | unknown | unknown |
+| 139 | CTSEI1 | Engineering | MODAct (actuator design) | 20 | 5 | 7 | ? | unknown | unknown |
+| 140 | CTSEI2 | Engineering | MODAct (actuator design) | 20 | 5 | 8 | ? | unknown | unknown |
+| 141 | CTSEI3 | Engineering | MODAct (actuator design) | 20 | 5 | 10 | ? | unknown | unknown |
+| 142 | CTSEI4 | Engineering | MODAct (actuator design) | 20 | 5 | 9 | ? | unknown | unknown |
+| 143 | RE21 | Engineering | RE (Tanabe-Ishibuchi) | 4 | 2 | 0 | ? | unknown | unknown |
+| 144 | RE22 | Engineering | RE (Tanabe-Ishibuchi) | 3 | 2 | 0 | ? | unknown | unknown |
+| 145 | RE23 | Engineering | RE (Tanabe-Ishibuchi) | 4 | 2 | 0 | ? | unknown | unknown |
+| 146 | RE24 | Engineering | RE (Tanabe-Ishibuchi) | 2 | 2 | 0 | ? | unknown | unknown |
+| 147 | RE25 | Engineering | RE (Tanabe-Ishibuchi) | 3 | 2 | 0 | ? | unknown | unknown |
+| 148 | RE31 | Engineering | RE (Tanabe-Ishibuchi) | 3 | 3 | 0 | ? | unknown | unknown |
+| 149 | RE32 | Engineering | RE (Tanabe-Ishibuchi) | 4 | 3 | 0 | ? | unknown | unknown |
+| 150 | RE33 | Engineering | RE (Tanabe-Ishibuchi) | 4 | 3 | 0 | ? | unknown | unknown |
+| 151 | RE34 | Engineering | RE (Tanabe-Ishibuchi) | 5 | 3 | 0 | ? | unknown | unknown |
+| 152 | RE35 | Engineering | RE (Tanabe-Ishibuchi) | 7 | 3 | 0 | ? | unknown | unknown |
+| 153 | RE36 | Engineering | RE (Tanabe-Ishibuchi) | 4 | 3 | 0 | ? | unknown | unknown |
+| 154 | RE37 | Engineering | RE (Tanabe-Ishibuchi) | 4 | 3 | 0 | ? | unknown | unknown |
+| 155 | RE41 | Engineering | RE (Tanabe-Ishibuchi) | 7 | 4 | 0 | ? | unknown | unknown |
+| 156 | RE42 | Engineering | RE (Tanabe-Ishibuchi) | 6 | 4 | 0 | ? | unknown | unknown |
+| 157 | RE61 | Engineering | RE (Tanabe-Ishibuchi) | 3 | 6 | 0 | ? | unknown | unknown |
+| 158 | RE91 | Engineering | RE (Tanabe-Ishibuchi) | 7 | 9 | 0 | ? | unknown | unknown |
+| 159 | LassoBreastCancer | Hyperparameter Optimization | HPO (LassoBench / GP-HDBO) | 9 | 1 | 0 | ? | unknown | unknown |
+| 160 | LassoDNA | Hyperparameter Optimization | HPO (LassoBench / GP-HDBO) | 180 | 1 | 0 | ? | unknown | unknown |
+| 161 | LassoDiabetes | Hyperparameter Optimization | HPO (LassoBench / GP-HDBO) | 8 | 1 | 0 | ? | unknown | unknown |
+| 162 | LassoLeukemia | Hyperparameter Optimization | HPO (LassoBench / GP-HDBO) | 7129 | 1 | 0 | ? | unknown | unknown |
+| 163 | LassoRCV1 | Hyperparameter Optimization | HPO (LassoBench / GP-HDBO) | 47236 | 1 | 0 | ? | unknown | unknown |
+| 164 | SVM | Hyperparameter Optimization | HPO (LassoBench / GP-HDBO) | 388 | 1 | 0 | ? | no | unknown |
+| 165 | AgNP | Materials | PV-Lab materials | 5 | 1 | 0 | ? | unknown | unknown |
+| 166 | AutoAM | Materials | PV-Lab materials | 4 | 1 | 0 | ? | unknown | unknown |
+| 167 | CrossedBarrel | Materials | PV-Lab materials | 4 | 1 | 0 | ? | unknown | unknown |
+| 168 | P3HT | Materials | PV-Lab materials | 5 | 1 | 0 | ? | unknown | unknown |
+| 169 | Perovskite | Materials | PV-Lab materials | 3 | 1 | 0 | ? | unknown | unknown |
 
 <!-- TABLE:END -->

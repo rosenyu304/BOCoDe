@@ -179,14 +179,14 @@ class Truss200D(BenchmarkProblem):
                     [13, 18],
                 ]
             )
-            for row in range(5):
+            for _row in range(5):
                 # 38 each row
                 members.extend((row_members + j_idx).tolist())
                 j_idx += 14
             members.extend([[70 + i, 71 + i] for i in range(4)])
             members.extend([[70, 75], [71, 75], [72, 75], [72, 76], [73, 76], [74, 76]])
 
-            for joint, support in zip(joints, supports):
+            for joint, support in zip(joints, supports, strict=False):
                 truss.AddNewJoint(joint, support)
 
             for jointID, force in forces:

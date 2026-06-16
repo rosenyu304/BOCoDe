@@ -54,8 +54,10 @@ def _fit(train_X, train_Y, train_C):
     outs += [train_C[:, i : i + 1] for i in range(train_C.shape[-1])]
     models = [
         SingleTaskGP(
-            train_X, o,
-            input_transform=Normalize(d=dim), outcome_transform=Standardize(m=1),
+            train_X,
+            o,
+            input_transform=Normalize(d=dim),
+            outcome_transform=Standardize(m=1),
         )
         for o in outs
     ]
@@ -65,12 +67,19 @@ def _fit(train_X, train_Y, train_C):
     return model
 
 
-def optimize_problem(problem, n_init: int = 12, iters: int = 50, seed: int = 0) -> Result:
+def optimize_problem(
+    problem, n_init: int = 12, iters: int = 50, seed: int = 0
+) -> Result:
     set_seed(seed)
     obj = MultiObjectiveProblem(problem)
     m, nc = obj.num_objectives, obj.num_constraints
     assert nc > 0, "constrained_qparego requires a constrained problem"
-    res = Result("constrained_qparego", type(problem).__name__, seed, acquisition_function="qLogNEI")
+    res = Result(
+        "constrained_qparego",
+        type(problem).__name__,
+        seed,
+        acquisition_function="qLogNEI",
+    )
 
     train_X = initial_design(n_init, obj.dim, seed)
     train_Y, train_C = obj.evaluate_raw(train_X)
@@ -84,9 +93,11 @@ def optimize_problem(problem, n_init: int = 12, iters: int = 50, seed: int = 0) 
         feas = (C <= 0).all(dim=1)
         if not feas.any():
             return 0.0
-        return DominatedPartitioning(
-            ref_point=ref_point, Y=Y[feas]
-        ).compute_hypervolume().item()
+        return (
+            DominatedPartitioning(ref_point=ref_point, Y=Y[feas])
+            .compute_hypervolume()
+            .item()
+        )
 
     res.start(feasible_hv(train_Y, train_C))
 
@@ -126,7 +137,9 @@ def main() -> None:
     parser.add_argument("--iters", type=int, default=50)
     add_common_args(parser)
     args = parser.parse_args()
-    res = optimize_problem(bocode.get_problem(args.problem)(), args.init, args.iters, args.seed)
+    res = optimize_problem(
+        bocode.get_problem(args.problem)(), args.init, args.iters, args.seed
+    )
     finalize(res, args)
 
 

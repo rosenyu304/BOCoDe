@@ -58,7 +58,7 @@ class PD4CartPole(BenchmarkProblem):
 
             env = gym.make("CartPole-v1")
 
-            def pd_controller(state):
+            def pd_controller(state, Kp=Kp, Kd=Kd, Kpx=Kpx, Kdx=Kdx):
                 # Extract the state variables
                 x, x_dot, theta, theta_dot = state
 
@@ -73,11 +73,11 @@ class PD4CartPole(BenchmarkProblem):
             num_episodes = 5
             max_steps = 500
             total_reward_list = []
-            for episode in range(num_episodes):
+            for _episode in range(num_episodes):
                 state = env.reset()
                 state = state[0]
                 total_reward = 0
-                for t in range(max_steps):
+                for _t in range(max_steps):
                     # Get action from PD controller
                     action = pd_controller(state)
 

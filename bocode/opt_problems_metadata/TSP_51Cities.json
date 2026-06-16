@@ -2667,6 +2667,7 @@
   "application": "Combinatorial",
   "convex": false,
   "np_hard": true,
+  "f_opt": null,
   "source": "Travelling Salesman Problem (TSP) with 51 cities. https://neorl.readthedocs.io/en/latest/examples/ex1.html#problem-description",
   "variable_types": [
     "continuous",

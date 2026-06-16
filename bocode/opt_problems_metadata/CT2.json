@@ -95,6 +95,7 @@
   "application": "Engineering",
   "convex": "unknown",
   "np_hard": "unknown",
+  "f_opt": null,
   "source": "",
   "variable_types": [
     "continuous",

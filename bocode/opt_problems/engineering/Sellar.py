@@ -57,6 +57,7 @@ class Sellar(BenchmarkProblem):
             num_objectives=1,
             num_constraints=2,
             bounds=[(-10.0, 10.0), (0.0, 10.0), (0.0, 10.0)],
+            optimum=[3.18339],  # f* at (z1, z2, x) ~ (1.978, 0, 0)
         )
 
     def _evaluate_implementation(self, X, scaling: bool = False):

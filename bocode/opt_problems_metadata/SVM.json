@@ -14,5 +14,6 @@
   "application": "Hyperparameter Optimization",
   "convex": false,
   "np_hard": "unknown",
+  "f_opt": null,
   "source": ""
 }

@@ -27,6 +27,7 @@
   "application": "Engineering",
   "convex": "unknown",
   "np_hard": "unknown",
+  "f_opt": 242.27,
   "source": "W. Hoburg and P. Abbeel. Geometric programming for aircraft design optimization. AIAA Journal 52(11):2414-2426, 2014. P. Norheim, minimdo (miniaero application). https://github.com/norheim/minimdo",
   "variable_types": [
     "continuous",

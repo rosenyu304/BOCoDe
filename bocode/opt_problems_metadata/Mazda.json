@@ -14,5 +14,6 @@
   "application": "Engineering",
   "convex": "unknown",
   "np_hard": "unknown",
+  "f_opt": null,
   "source": "https://ladse.eng.isas.jaxa.jp/benchmark/ Meanings of each objective: - The first column is total weight of three vehicles. - The second column is number of common gauge parts. - The third column is weight of SUV. - The fourth column is weight of LV. - The fifth column is weight of SV."
 }

@@ -22,11 +22,25 @@ OUT = ROOT / "bocode" / "_registry_data.json"
 
 # Classes that are bases/helpers, not standalone benchmark problems.
 SKIP = {
-    "MultiObjBotorchProblem", "BaseModactProblem", "MaterialsDatasetProblem",
-    "ConstantOffsetFn", "NormalizedInputFn", "Trajectory", "PointBSpline",
-    "RoverDomain", "AABoxes", "NegGeom", "UnionGeom", "ConstObstacleCost",
-    "ConstCost", "AdditiveCosts", "GMCost", "PushReward", "guiWorld",
-    "b2WorldInterface", "end_effector",
+    "MultiObjBotorchProblem",
+    "BaseModactProblem",
+    "MaterialsDatasetProblem",
+    "ConstantOffsetFn",
+    "NormalizedInputFn",
+    "Trajectory",
+    "PointBSpline",
+    "RoverDomain",
+    "AABoxes",
+    "NegGeom",
+    "UnionGeom",
+    "ConstObstacleCost",
+    "ConstCost",
+    "AdditiveCosts",
+    "GMCost",
+    "PushReward",
+    "guiWorld",
+    "b2WorldInterface",
+    "end_effector",
 }
 
 
@@ -55,7 +69,10 @@ def main() -> None:
     for f in sorted(PROBLEMS.rglob("*.py")):
         if (
             "_vendor" in str(f)
-            or "/synthetic/" in str(f).replace("\\", "/")  # test functions: list_synthetic(), not the registry
+            or "/synthetic/"
+            in str(f).replace(
+                "\\", "/"
+            )  # test functions: list_synthetic(), not the registry
             or f.name == "__init__.py"
             or f.name.startswith("_")
             or f.name == "helperFuncs.py"

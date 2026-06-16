@@ -100,9 +100,9 @@ class ProblemObjective:
         self.problem = problem
         self.dim = problem.dim
         self.num_constraints = problem.num_constraints
-        self.bounds = torch.stack(
-            [torch.zeros(self.dim), torch.ones(self.dim)]
-        ).to(DTYPE)
+        self.bounds = torch.stack([torch.zeros(self.dim), torch.ones(self.dim)]).to(
+            DTYPE
+        )
 
     def evaluate_raw(self, X_unit: torch.Tensor):
         X = _scale_clamped(self.problem, X_unit)
@@ -151,14 +151,18 @@ class MultiObjectiveProblem:
         self.dim = problem.dim
         self.num_objectives = problem.num_objectives
         self.num_constraints = problem.num_constraints
-        self.bounds = torch.stack([torch.zeros(self.dim), torch.ones(self.dim)]).to(DTYPE)
+        self.bounds = torch.stack([torch.zeros(self.dim), torch.ones(self.dim)]).to(
+            DTYPE
+        )
         rp = getattr(problem, "ref_point", None)
         self.ref_point = None if rp is None else torch.as_tensor(rp, dtype=DTYPE)
 
     def evaluate_raw(self, X_unit: torch.Tensor):
         X = _scale_clamped(self.problem, X_unit)
         values, constraints = self.problem.evaluate(X)
-        return values.to(DTYPE), (None if constraints is None else constraints.to(DTYPE))
+        return values.to(DTYPE), (
+            None if constraints is None else constraints.to(DTYPE)
+        )
 
     def infer_ref_point(self, Y: torch.Tensor) -> torch.Tensor:
         """Reference point for hypervolume: the problem's, or slightly below the nadir."""
@@ -204,7 +208,9 @@ class Result:
 
     @property
     def best(self) -> float:
-        return self.per_iteration_value[-1] if self.per_iteration_value else float("nan")
+        return (
+            self.per_iteration_value[-1] if self.per_iteration_value else float("nan")
+        )
 
     @property
     def iterations(self) -> list:
@@ -280,8 +286,13 @@ class Result:
         }
 
     def to_npz(self, path: str) -> None:
+        import os
+
         import numpy as np
 
+        parent = os.path.dirname(path)
+        if parent:
+            os.makedirs(parent, exist_ok=True)
         np.savez(path, **self.to_dict())
 
 
@@ -316,7 +327,9 @@ def add_common_args(parser) -> None:
 def finalize(res: Result, args) -> None:
     """Handle --show_progress (per-iteration print) and --saved_full_experiment (.npz)."""
     if getattr(args, "show_progress", False):
-        for i, (v, t) in enumerate(zip(res.per_iteration_value, res.wall_time, strict=True)):
+        for i, (v, t) in enumerate(
+            zip(res.per_iteration_value, res.wall_time, strict=True)
+        ):
             print(f"  iter {i:3d}: best = {v:.6g}   (t = {t:.2f}s)")
     print(
         f"{res.algorithm} on {res.problem}: best={res.best:.6g} "

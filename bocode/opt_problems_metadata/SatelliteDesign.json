@@ -31,6 +31,7 @@
   "application": "Engineering",
   "convex": "unknown",
   "np_hard": "unknown",
+  "f_opt": null,
   "source": "J. R. Wertz and W. J. Larson (eds.). Space Mission Analysis and Design (SMAD), 3rd ed., Microcosm/Springer, 1999. P. Norheim, minimdo (satellite application). https://github.com/norheim/minimdo",
   "variable_types": [
     "continuous",

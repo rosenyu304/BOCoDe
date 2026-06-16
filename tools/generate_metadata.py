@@ -35,7 +35,8 @@ OVERRIDES_PATH = Path(__file__).resolve().parent / "metadata_overrides.json"
 # Problems that should not be instantiated during metadata generation.
 _NO_INSTANTIATE = {
     "SVM",  # loads a 78 MB dataset + trains an SVR
-    "Mazda", "Mazda_SCA",  # spawn a subprocess binary
+    "Mazda",
+    "Mazda_SCA",  # spawn a subprocess binary
     "MOPTA08Car",  # runs a native binary
     "RobotPush",  # opens a pygame/Box2D world
 }
@@ -140,6 +141,7 @@ def build_one(name: str, overrides: dict) -> dict:
         "application": _application(name, module, overrides),
         "convex": "unknown",
         "np_hard": "unknown",
+        "f_opt": None,
         "source": _source(cls),
     }
 
@@ -150,10 +152,20 @@ def build_one(name: str, overrides: dict) -> dict:
             bounds = getattr(inst, "bounds", None)
             if bounds is not None:
                 meta["bounds"] = [list(b) for b in bounds]
-            meta["num_objectives"] = getattr(inst, "num_objectives", meta["num_objectives"])
-            meta["num_constraints"] = getattr(inst, "num_constraints", meta["num_constraints"])
+            meta["num_objectives"] = getattr(
+                inst, "num_objectives", meta["num_objectives"]
+            )
+            meta["num_constraints"] = getattr(
+                inst, "num_constraints", meta["num_constraints"]
+            )
             # per-dimension variable types (all "continuous" unless the class
             # declares otherwise via variable_types); count the non-continuous ones.
+            # known optimum (natural minimization sense), if the class exposes one
+            opt = getattr(inst, "optimum", None)
+            if isinstance(opt, (list, tuple)) and len(opt) == 1:
+                opt = opt[0]
+            if isinstance(opt, (int, float)):
+                meta["f_opt"] = round(float(opt), 6)
             vtypes = inst.resolved_variable_types()
             meta["variable_types"] = vtypes
             meta["num_integer_variables"] = sum(1 for t in vtypes if t == "integer")
@@ -171,7 +183,9 @@ def build_one(name: str, overrides: dict) -> dict:
 
 
 def main() -> None:
-    overrides = json.loads(OVERRIDES_PATH.read_text()) if OVERRIDES_PATH.exists() else {}
+    overrides = (
+        json.loads(OVERRIDES_PATH.read_text()) if OVERRIDES_PATH.exists() else {}
+    )
     META_DIR.mkdir(parents=True, exist_ok=True)
     ok, failed = 0, []
     for name in sorted(PROBLEM_REGISTRY):

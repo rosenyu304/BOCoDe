@@ -96,8 +96,7 @@ class Mazda_SCA(BenchmarkProblem):
         # MUST BE ON A LINUX/UNIX MACHINE
         subprocess.run(
             [str(bin_path), str(input_dir)],
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
+            capture_output=True,
             start_new_session=True,
         )
 
@@ -221,8 +220,7 @@ class Mazda(BenchmarkProblem):
         # MUST BE ON A LINUX/UNIX MACHINE
         subprocess.run(
             [str(bin_path), str(input_dir)],
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
+            capture_output=True,
             start_new_session=True,
         )
 

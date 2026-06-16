@@ -14,5 +14,6 @@
   "application": "Engineering",
   "convex": false,
   "np_hard": "unknown",
+  "f_opt": null,
   "source": "https://leonard.papenmeier.io/2023/02/09/mopta08-executables.html"
 }

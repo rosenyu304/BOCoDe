@@ -77,11 +77,17 @@ def list_problems(
     names = []
     for name in PROBLEM_REGISTRY:
         meta = get_metadata(name)
-        if application is not None and str(meta.get("application", "")).lower() != application.lower():
+        if (
+            application is not None
+            and str(meta.get("application", "")).lower() != application.lower()
+        ):
             continue
         if num_objectives is not None and meta.get("num_objectives") != num_objectives:
             continue
-        if constrained is not None and (meta.get("num_constraints", 0) > 0) != constrained:
+        if (
+            constrained is not None
+            and (meta.get("num_constraints", 0) > 0) != constrained
+        ):
             continue
         if input_type is not None and meta.get("input_type") != input_type:
             continue
@@ -132,7 +138,11 @@ def get_metadata(name: str) -> dict:
     """Return the JSON metadata dict for ``name``."""
     if name not in PROBLEM_REGISTRY:
         raise KeyError(f"Unknown problem {name!r}.")
-    with resources.files("bocode.opt_problems_metadata").joinpath(f"{name}.json").open("r") as fh:
+    with (
+        resources.files("bocode.opt_problems_metadata")
+        .joinpath(f"{name}.json")
+        .open("r") as fh
+    ):
         return json.load(fh)
 
 

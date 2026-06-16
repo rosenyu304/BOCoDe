@@ -23,6 +23,7 @@
   "application": "Engineering",
   "convex": "unknown",
   "np_hard": "unknown",
+  "f_opt": null,
   "source": "S. S. Rao. Game theory approach for multiobjective structural optimization. Computers and Structures 26(1):119\u2013127, 1987",
   "variable_types": [
     "continuous",

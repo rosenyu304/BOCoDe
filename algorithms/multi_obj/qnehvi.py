@@ -49,8 +49,10 @@ def _fit(train_X, train_Y):
     dim = train_X.shape[-1]
     models = [
         SingleTaskGP(
-            train_X, train_Y[:, i : i + 1],
-            input_transform=Normalize(d=dim), outcome_transform=Standardize(m=1),
+            train_X,
+            train_Y[:, i : i + 1],
+            input_transform=Normalize(d=dim),
+            outcome_transform=Standardize(m=1),
         )
         for i in range(train_Y.shape[-1])
     ]
@@ -60,17 +62,23 @@ def _fit(train_X, train_Y):
     return model
 
 
-def optimize_problem(problem, n_init: int = 10, iters: int = 50, seed: int = 0) -> Result:
+def optimize_problem(
+    problem, n_init: int = 10, iters: int = 50, seed: int = 0
+) -> Result:
     set_seed(seed)
     obj = MultiObjectiveProblem(problem)
-    res = Result("qnehvi", type(problem).__name__, seed, acquisition_function="qLogNEHVI")
+    res = Result(
+        "qnehvi", type(problem).__name__, seed, acquisition_function="qLogNEHVI"
+    )
 
     train_X = initial_design(n_init, obj.dim, seed)
     train_Y, _ = obj.evaluate_raw(train_X)
     ref_point = obj.infer_ref_point(train_Y)
 
     def hv(Y):
-        return DominatedPartitioning(ref_point=ref_point, Y=Y).compute_hypervolume().item()
+        return (
+            DominatedPartitioning(ref_point=ref_point, Y=Y).compute_hypervolume().item()
+        )
 
     res.start(hv(train_Y))
 
@@ -101,7 +109,9 @@ def main() -> None:
     parser.add_argument("--iters", type=int, default=50)
     add_common_args(parser)
     args = parser.parse_args()
-    res = optimize_problem(bocode.get_problem(args.problem)(), args.init, args.iters, args.seed)
+    res = optimize_problem(
+        bocode.get_problem(args.problem)(), args.init, args.iters, args.seed
+    )
     finalize(res, args)
 
 

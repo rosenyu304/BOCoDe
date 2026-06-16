@@ -4,7 +4,6 @@ Sources:
 M. Balandat, B. Karrer, D. R. Jiang, S. Daulton, B. Letham, A. G. Wilson, and E. Bakshy. BoTorch: A Framework for Efficient Monte-Carlo Bayesian Optimization. Advances in Neural Information Processing Systems 33, 2020. http://arxiv.org/abs/1910.06403
 """
 
-
 import torch
 
 from ...base import BenchmarkProblem, DataType
@@ -33,7 +32,7 @@ class MultiObjBotorchProblem(BenchmarkProblem):
             dim = self.botorch_problem.dim
         else:
             self.botorch_problem = botorch_problem(dim=dim)
-        bounds = list(zip(*self.botorch_problem.bounds.numpy()))
+        bounds = list(zip(*self.botorch_problem.bounds.numpy(), strict=False))
         num_obj = self.botorch_problem.num_objectives
         num_cons = getattr(self.botorch_problem, "num_constraints", 0)
 

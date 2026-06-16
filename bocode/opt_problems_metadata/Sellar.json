@@ -27,6 +27,7 @@
   "application": "Engineering",
   "convex": "unknown",
   "np_hard": "unknown",
+  "f_opt": 3.18339,
   "source": "R. S. Sellar, S. M. Batill, J. E. Renaud. Response surface based, concurrent subspace optimization for multidisciplinary system design. AIAA 96-0714, 1996. P. Norheim, minimdo (sellar_opt application). https://github.com/norheim/minimdo",
   "variable_types": [
     "continuous",

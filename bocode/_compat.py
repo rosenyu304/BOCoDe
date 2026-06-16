@@ -25,6 +25,8 @@ def deprecated_getattr(old_namespace: str):
                 stacklevel=2,
             )
             return get_problem(name)
-        raise AttributeError(f"module 'bocode.{old_namespace}' has no attribute {name!r}")
+        raise AttributeError(
+            f"module 'bocode.{old_namespace}' has no attribute {name!r}"
+        )
 
     return __getattr__

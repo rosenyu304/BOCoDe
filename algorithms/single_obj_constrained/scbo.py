@@ -54,11 +54,15 @@ def _best_feasible(obj: torch.Tensor, con: torch.Tensor):
     return -float("inf"), int(violation.argmin())
 
 
-def optimize_problem(problem, n_init: int = 10, iters: int = 80, seed: int = 0) -> Result:
+def optimize_problem(
+    problem, n_init: int = 10, iters: int = 80, seed: int = 0
+) -> Result:
     set_seed(seed)
     obj = ProblemObjective(problem)
     assert obj.num_constraints > 0, "scbo requires a constrained problem"
-    res = Result("scbo", type(problem).__name__, seed, acquisition_function="Thompson sampling")
+    res = Result(
+        "scbo", type(problem).__name__, seed, acquisition_function="Thompson sampling"
+    )
 
     X = initial_design(n_init, obj.dim, seed)
     Yo, Yc = obj.evaluate_raw(X)
@@ -84,7 +88,10 @@ def optimize_problem(problem, n_init: int = 10, iters: int = 80, seed: int = 0) 
         with torch.no_grad():
             obj_s = obj_model.posterior(cand).rsample().squeeze(0).squeeze(-1)
             con_s = torch.stack(
-                [m.posterior(cand).rsample().squeeze(0).squeeze(-1) for m in con_models],
+                [
+                    m.posterior(cand).rsample().squeeze(0).squeeze(-1)
+                    for m in con_models
+                ],
                 dim=-1,
             )
         pred_feas = (con_s <= 0).all(dim=1)
@@ -102,7 +109,11 @@ def optimize_problem(problem, n_init: int = 10, iters: int = 80, seed: int = 0) 
         Yc = torch.cat([Yc, c], dim=0)
         best, _ = _best_feasible(Yo, Yc)
         # "success" = strictly improved the best feasible objective
-        improved = best > prev_best + 1e-9 if prev_best != -float("inf") else _feasible_mask(c).any().item()
+        improved = (
+            best > prev_best + 1e-9
+            if prev_best != -float("inf")
+            else _feasible_mask(c).any().item()
+        )
         tr.update(bool(improved))
         res.record(best)
         if tr.restart:
@@ -117,7 +128,9 @@ def main() -> None:
     parser.add_argument("--iters", type=int, default=80)
     add_common_args(parser)
     args = parser.parse_args()
-    res = optimize_problem(bocode.get_problem(args.problem)(), args.init, args.iters, args.seed)
+    res = optimize_problem(
+        bocode.get_problem(args.problem)(), args.init, args.iters, args.seed
+    )
     finalize(res, args)
 
 

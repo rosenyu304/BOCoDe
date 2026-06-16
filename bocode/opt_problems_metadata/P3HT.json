@@ -35,6 +35,7 @@
   "application": "Materials",
   "convex": "unknown",
   "np_hard": "unknown",
+  "f_opt": null,
   "source": "D. Bash, Y. Cai, V. Chellappan, et al. Multi-fidelity high-throughput optimization of electrical conductivity in P3HT-CNT composites. Advanced Functional Materials 31:2102606, 2021. Dataset via the PV-Lab benchmarking suite: https://github.com/PV-Lab/Benchmarking",
   "variable_types": [
     "continuous",

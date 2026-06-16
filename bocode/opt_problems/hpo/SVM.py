@@ -56,7 +56,9 @@ class SVM(BenchmarkProblem):
     def _load_data(self):
         dir_path = os.path.dirname(os.path.realpath(__file__))
         local_path = os.path.join(dir_path, "data", "slice_localization_data.csv")
-        data_path = fetch_data_file("slice_localization_data.csv", local_fallback=local_path)
+        data_path = fetch_data_file(
+            "slice_localization_data.csv", local_fallback=local_path
+        )
         data = pd.read_csv(data_path).to_numpy()
         X = data[:, :385]
         y = data[:, -1]

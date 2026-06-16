@@ -47,6 +47,7 @@
   "application": "Engineering",
   "convex": "unknown",
   "np_hard": "unknown",
+  "f_opt": null,
   "source": "Eight-drum reactivity insertion problem. Uses the ReactivityModel.eval(pert) to compute the total reactivity worth of 8 control-drum angles (in radians). https://neorl.readthedocs.io/en/latest/examples/ex11.html#problem-description",
   "variable_types": [
     "continuous",

@@ -43,6 +43,7 @@
   "application": "Engineering",
   "convex": "unknown",
   "np_hard": "unknown",
+  "f_opt": 585.3,
   "source": "P. T. Norheim. A computational framework for systems engineering models (PhD thesis, MIT AeroAstro), 2022, Ch. 7 (PEARL platform). https://github.com/norheim/minimdo",
   "variable_types": [
     "continuous",

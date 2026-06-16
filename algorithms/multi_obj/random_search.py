@@ -35,7 +35,9 @@ from .._bo_utils import (
 def optimize_problem(problem, iters: int = 200, seed: int = 0) -> Result:
     set_seed(seed)
     obj = MultiObjectiveProblem(problem)
-    res = Result("random_search", type(problem).__name__, seed, acquisition_function="none")
+    res = Result(
+        "random_search", type(problem).__name__, seed, acquisition_function="none"
+    )
 
     X = initial_design(iters, obj.dim, seed)
     Y, _ = obj.evaluate_raw(X)

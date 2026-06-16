@@ -41,7 +41,7 @@ def test_pressure_vessel_gauge_grid():
     p = bocode.PressureVessel()
     s = p.sample(6, seed=1)
     # first two dims snap to multiples of 0.0625
-    grid = (s[:, :2] / 0.0625)
+    grid = s[:, :2] / 0.0625
     assert torch.allclose(grid, grid.round(), atol=1e-6)
 
 

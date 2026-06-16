@@ -52,8 +52,15 @@ def _check_trace(res):
     assert res.wall_time[0] == 0.0  # trial clock starts at iteration 0
     d = res.to_dict()
     for key in (
-        "seed", "acquisition_function", "best", "iterations", "per_iteration_value",
-        "wall_time", "mean", "variance", "per_iteration_acquisition_function_value",
+        "seed",
+        "acquisition_function",
+        "best",
+        "iterations",
+        "per_iteration_value",
+        "wall_time",
+        "mean",
+        "variance",
+        "per_iteration_acquisition_function_value",
     ):
         assert key in d
 

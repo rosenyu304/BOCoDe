@@ -88,8 +88,14 @@ def optimize_problem(
         else:
             center = train_X[train_Y.argmax()].cpu().numpy()
             samples, _r = sample_in_subspace(
-                center, grad_est, N_CANDIDATES, rank_mode, fixed_rank,
-                eps=0.05, scale=scale, rng=rng,
+                center,
+                grad_est,
+                N_CANDIDATES,
+                rank_mode,
+                fixed_rank,
+                eps=0.05,
+                scale=scale,
+                rng=rng,
             )
             cand = torch.from_numpy(samples).to(DTYPE)
 
@@ -103,7 +109,9 @@ def optimize_problem(
         ).unsqueeze(1)  # (n_ctx+n_cand, 1, 1)
 
         logits = surrogate.forward(X_full, Y_full, single_eval_pos=n_ctx)
-        ucb = surrogate.predict_ucb(logits, train_Y.max(), UCB_REST_PROB)[n_ctx:].reshape(-1)
+        ucb = surrogate.predict_ucb(logits, train_Y.max(), UCB_REST_PROB)[
+            n_ctx:
+        ].reshape(-1)
         mean = surrogate.predict_mean(logits)[n_ctx:].reshape(-1)
 
         # gradient of posterior mean wrt the candidates -> next subspace
@@ -119,7 +127,9 @@ def optimize_problem(
         res.record(
             best,
             mean=mean[choice].item(),
-            variance=surrogate.predict_variance(logits)[n_ctx:].reshape(-1)[choice].item(),
+            variance=surrogate.predict_variance(logits)[n_ctx:]
+            .reshape(-1)[choice]
+            .item(),
             acq_value=ucb[choice].item(),
         )
     return res
@@ -131,14 +141,20 @@ def main() -> None:
     parser.add_argument("--init", type=int, default=20)
     parser.add_argument("--iters", type=int, default=50)
     parser.add_argument(
-        "--rank", default="5", help="active-subspace rank: an integer (e.g. 5) or 'marzouk'"
+        "--rank",
+        default="5",
+        help="active-subspace rank: an integer (e.g. 5) or 'marzouk'",
     )
     parser.add_argument("--device", default="auto")
     add_common_args(parser)
     args = parser.parse_args()
     res = optimize_problem(
-        bocode.get_problem(args.problem)(), args.init, args.iters, args.seed,
-        rank=args.rank, device=args.device,
+        bocode.get_problem(args.problem)(),
+        args.init,
+        args.iters,
+        args.seed,
+        rank=args.rank,
+        device=args.device,
     )
     finalize(res, args)
 

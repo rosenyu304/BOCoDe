@@ -31,6 +31,7 @@
   "application": "Materials",
   "convex": "unknown",
   "np_hard": "unknown",
+  "f_opt": null,
   "source": "J. R. Deneault, J. Chang, J. Myung, et al. Toward autonomous additive manufacturing: Bayesian optimization on a 3D printer. MRS Bulletin 46:566-575, 2021. Dataset via the PV-Lab benchmarking suite: https://github.com/PV-Lab/Benchmarking",
   "variable_types": [
     "continuous",

@@ -190,3 +190,5 @@ bocode/opt_problems/engineering/Mazda_Data/pop_*.txt
 .ruff_cache/
 # Local data cache for download-on-demand assets (if placed in-tree)
 .cache/
+examples/results/
+*.npz

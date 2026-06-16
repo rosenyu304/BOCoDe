@@ -251,6 +251,7 @@
   "application": "Engineering",
   "convex": "unknown",
   "np_hard": "unknown",
+  "f_opt": 3348.982149,
   "source": "CEC2020 Problem 52",
   "variable_types": [
     "continuous",

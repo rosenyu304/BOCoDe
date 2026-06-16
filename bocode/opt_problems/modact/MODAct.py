@@ -1,4 +1,3 @@
-
 import torch
 
 try:
@@ -24,7 +23,7 @@ class BaseModactProblem(BenchmarkProblem):
         subcls.num_constraints = len(subcls.problem.c_weights)
 
     def __init__(self, optimum=None, x_opt=None):
-        bounds = list(zip(*self.problem.bounds()))
+        bounds = list(zip(*self.problem.bounds(), strict=False))
         dim = len(self.problem.bounds()[0])
         num_obj = len(self.problem.weights)
         num_cons = len(self.problem.c_weights)

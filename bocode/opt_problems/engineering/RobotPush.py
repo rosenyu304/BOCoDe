@@ -334,7 +334,7 @@ class end_effector:
         elif hand_shape == "polygon":
             rshape = b2PolygonShape(vertices=hand_size)
         else:
-            raise Exception("%s is not a correct shape" % hand_shape)
+            raise Exception(f"{hand_shape} is not a correct shape")
 
         self.hand.CreateFixture(shape=rshape, density=0.1, friction=0.1)
         self.hand.userData = "hand"
@@ -370,11 +370,12 @@ class end_effector:
             + [self.hand.angularVelocity]
         )
         if verbose:
-            print_state = ["%.3f" % x for x in state]
-            print
-            "position, velocity: (%s), (%s) " % (
-                (", ").join(print_state[:3]),
-                (", ").join(print_state[3:]),
+            print_state = [f"{x:.3f}" for x in state]
+            print(
+                "position, velocity: ({}), ({}) ".format(
+                    (", ").join(print_state[:3]),
+                    (", ").join(print_state[3:]),
+                )
             )
 
         return state
@@ -393,7 +394,7 @@ def create_body(
     elif body_shape == "polygon":
         linkshape = b2PolygonShape(vertices=body_size)
     else:
-        raise Exception("%s is not a correct shape" % body_shape)
+        raise Exception(f"{body_shape} is not a correct shape")
 
     link.CreateFixture(
         shape=linkshape,

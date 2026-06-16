@@ -31,6 +31,7 @@
   "application": "Engineering",
   "convex": "unknown",
   "np_hard": "unknown",
+  "f_opt": null,
   "source": "Sandgren, E. (1990). Nonlinear Integer and Discrete Programming in Mechanical Design Optimization.\" ASME. J. Mech. Des. June 1990; 112(2): 223\u2013229. Gandomi AH, Yang XS, Alavi AH (2011) Mixed variable structural optimization using firefly algorithm. Computers & Structures 89(23-24):2325\u20132336. Minimize the gear-ratio error of a compound gear train; the four variables are gear-teeth counts in [12, 60]. ``is_discrete=True`` (default) gives the original mixed-integer formulation (teeth are integers);",
   "variable_types": [
     "integer",

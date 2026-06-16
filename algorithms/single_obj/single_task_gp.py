@@ -39,11 +39,15 @@ from .._bo_utils import (
 )
 
 
-def optimize_problem(problem, n_init: int = 10, iters: int = 40, seed: int = 0) -> Result:
+def optimize_problem(
+    problem, n_init: int = 10, iters: int = 40, seed: int = 0
+) -> Result:
     """Continuous SingleTaskGP + LogEI BO over the unit cube."""
     set_seed(seed)
     obj = ProblemObjective(problem)
-    res = Result("single_task_gp", type(problem).__name__, seed, acquisition_function="LogEI")
+    res = Result(
+        "single_task_gp", type(problem).__name__, seed, acquisition_function="LogEI"
+    )
 
     train_X = initial_design(n_init, obj.dim, seed)
     train_Y = obj(train_X)
@@ -65,11 +69,18 @@ def optimize_problem(problem, n_init: int = 10, iters: int = 40, seed: int = 0) 
     return res
 
 
-def optimize_dataset(dataset_problem, n_init: int = 10, iters: int = 40, seed: int = 0) -> Result:
+def optimize_dataset(
+    dataset_problem, n_init: int = 10, iters: int = 40, seed: int = 0
+) -> Result:
     """Discrete SingleTaskGP + LogEI BO over a candidate pool."""
     set_seed(seed)
     data = DatasetObjective(dataset_problem)
-    res = Result("single_task_gp", type(dataset_problem).__name__, seed, acquisition_function="LogEI")
+    res = Result(
+        "single_task_gp",
+        type(dataset_problem).__name__,
+        seed,
+        acquisition_function="LogEI",
+    )
 
     perm = torch.randperm(data.n_candidates)
     observed = perm[:n_init].tolist()
@@ -106,9 +117,13 @@ def main() -> None:
     args = parser.parse_args()
 
     if args.problem:
-        res = optimize_problem(bocode.get_problem(args.problem)(), args.init, args.iters, args.seed)
+        res = optimize_problem(
+            bocode.get_problem(args.problem)(), args.init, args.iters, args.seed
+        )
     else:
-        res = optimize_dataset(bocode.get_problem(args.dataset)(), args.init, args.iters, args.seed)
+        res = optimize_dataset(
+            bocode.get_problem(args.dataset)(), args.init, args.iters, args.seed
+        )
     finalize(res, args)
 
 

@@ -63,6 +63,7 @@ class Allison(BenchmarkProblem):
             num_objectives=1,
             num_constraints=0,
             bounds=[(-1.0, 1.0), (-1.0, 1.0), (-1.0, 1.0)],
+            optimum=[0.5698],  # f* at x ~ (-0.507, 0.047, 0.179)
         )
 
     def _evaluate_implementation(self, X, scaling: bool = False):

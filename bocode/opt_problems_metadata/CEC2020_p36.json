@@ -647,6 +647,7 @@
   "application": "Engineering",
   "convex": "unknown",
   "np_hard": "unknown",
+  "f_opt": 0.047734,
   "source": "CEC2020_36 problem 36",
   "variable_types": [
     "continuous",

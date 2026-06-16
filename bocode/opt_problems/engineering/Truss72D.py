@@ -193,7 +193,7 @@ class Truss72D_FourForces(BenchmarkProblem):
             # 3) density of this member.
 
             # Read data in this [.py]:
-            for joint, support in zip(joints, supports):
+            for joint, support in zip(joints, supports, strict=False):
                 truss.AddNewJoint(joint, support)
 
             for jointID, force in forces:
@@ -476,7 +476,7 @@ class Truss72D_SingleForce(BenchmarkProblem):
             # 3) density of this member.
 
             # Read data in this [.py]:
-            for joint, support in zip(joints, supports):
+            for joint, support in zip(joints, supports, strict=False):
                 truss.AddNewJoint(joint, support)
 
             for jointID, force in forces:

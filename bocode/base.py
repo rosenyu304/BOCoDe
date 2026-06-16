@@ -152,7 +152,9 @@ class BenchmarkProblem:
                 X[:, j] = torch.round(X[:, j])
             else:  # list/tuple of allowed values: snap to nearest
                 allowed = torch.tensor(list(t), dtype=X.dtype, device=X.device)
-                idx = torch.argmin((X[:, j].unsqueeze(1) - allowed.unsqueeze(0)).abs(), dim=1)
+                idx = torch.argmin(
+                    (X[:, j].unsqueeze(1) - allowed.unsqueeze(0)).abs(), dim=1
+                )
                 X[:, j] = allowed[idx]
         return X
 

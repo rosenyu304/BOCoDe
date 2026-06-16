@@ -229,7 +229,7 @@ def visualize_function(prob: BenchmarkProblem, sampling_density: int = 50) -> No
 
         # start from mids, overwrite with slider settings
         x_fixed = mids.copy()
-        for val, id_dict in zip(slider_vals, slider_ids):
+        for val, id_dict in zip(slider_vals, slider_ids, strict=False):
             x_fixed[id_dict["index"]] = val
 
         # do grid

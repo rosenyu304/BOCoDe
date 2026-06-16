@@ -104,19 +104,28 @@ def _disciplines(A_s, td, v, EN, hf, tf, ts, Ds, Dd):
 
     # power / energy budget (Wh)
     E_required = (
-        _P_HOTEL * _T_MISSION + P_move * _T_MOVE + _E_AUV_WH * _GAMMA + Pcomms * _T_COMMS
+        _P_HOTEL * _T_MISSION
+        + P_move * _T_MOVE
+        + _E_AUV_WH * _GAMMA
+        + Pcomms * _T_COMMS
     )
     P_recharge = E_required / _T_RECHARGE
-    A_s_new = P_recharge / (_ETA_S * _PHI_S * np.cos(_THETA) * _I_DEG * (1 - _D_DEG) ** _L_SOLAR)
+    A_s_new = P_recharge / (
+        _ETA_S * _PHI_S * np.cos(_THETA) * _I_DEG * (1 - _D_DEG) ** _L_SOLAR
+    )
     cap = E_required / (_DOD * _N_BATT * _ETA_BATT)
     mbatt = cap / _MU_BATT + _M_BATT0
 
     # mass balance closes the damper-plate thickness
     msolar = _ETA_SOLAR * A_s
     mstruct = mtot - mbatt - msolar - _M_COMMS - _M_PROP
-    td_new = (4 / np.pi * mstruct - Df**2 * tf * _RHO - Ds**2 * ts * _RHO) / (Dd**2 * _RHOH)
+    td_new = (4 / np.pi * mstruct - Df**2 * tf * _RHO - Ds**2 * ts * _RHO) / (
+        Dd**2 * _RHOH
+    )
 
-    return dict(Df=Df, mtot=mtot, P_move=P_move, Pcomms=Pcomms, A_s_new=A_s_new, td_new=td_new)
+    return dict(
+        Df=Df, mtot=mtot, P_move=P_move, Pcomms=Pcomms, A_s_new=A_s_new, td_new=td_new
+    )
 
 
 def _solve_one(v, EN, hf, tf, ts, Ds, Dd):
@@ -157,6 +166,7 @@ class PEARL(BenchmarkProblem):
                 (0.1, 10.0),
                 (0.1, 10.0),
             ],
+            optimum=[585.3],  # platform mass [kg], thesis Table 7.14
         )
 
     def _evaluate_implementation(self, X, scaling: bool = False):

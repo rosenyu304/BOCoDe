@@ -188959,6 +188959,7 @@
   "application": "Hyperparameter Optimization",
   "convex": "unknown",
   "np_hard": "unknown",
+  "f_opt": null,
   "source": "Kenan \u0160ehi\u0107, Alexandre Gramfort, Joseph Salmon, and Luigi Nardi. LassoBench: A High-Dimensional Hyperparameter Optimization Benchmark Suite for Lasso. Proceedings of the 1st International Conference on Automated Machine Learning (AutoML), 2022.",
   "variable_types": [
     "continuous",

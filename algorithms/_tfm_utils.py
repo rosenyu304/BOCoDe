@@ -60,7 +60,10 @@ class TabPFNSurrogate:
             device = "cuda" if torch.cuda.is_available() else "cpu"
         self.device = torch.device(device)
         self.model, self.config, self.bardist = initialize_tabpfn_model(
-            model_path="auto", which="regression", fit_mode="fit_preprocessors", static_seed=0
+            model_path="auto",
+            which="regression",
+            fit_mode="fit_preprocessors",
+            static_seed=0,
         )
         self.model.to(self.device).eval()
         self.bardist.borders = self.bardist.borders.to(self.device)
@@ -77,7 +80,11 @@ class TabPFNSurrogate:
         Y_std = Y.clone()
         Y_std[:single_eval_pos] = (Y[:single_eval_pos] - self._y_mean) / self._y_std
         out = self.model(
-            None, X, Y_std, single_eval_pos=single_eval_pos, only_return_standard_out=False
+            None,
+            X,
+            Y_std,
+            single_eval_pos=single_eval_pos,
+            only_return_standard_out=False,
         )
         return out["standard"]
 
@@ -104,8 +111,13 @@ def gradient_information_matrix(grads: np.ndarray) -> np.ndarray:
     return (grads.T @ grads) / n
 
 
-def select_rank(eigenvalues: np.ndarray, mode: str = "fixed", rank: int = 5,
-                eps: float = 0.05, kappa: float = 1.0) -> int:
+def select_rank(
+    eigenvalues: np.ndarray,
+    mode: str = "fixed",
+    rank: int = 5,
+    eps: float = 0.05,
+    kappa: float = 1.0,
+) -> int:
     """Choose the active-subspace rank from the (descending) eigenvalue spectrum.
 
     mode='fixed'   -> return ``rank`` (capped at the dimension); the default GIT-BO.
@@ -131,9 +143,16 @@ def select_rank(eigenvalues: np.ndarray, mode: str = "fixed", rank: int = 5,
     raise ValueError(f"unknown rank mode {mode!r}")
 
 
-def sample_in_subspace(center: np.ndarray, grads: np.ndarray, n_samples: int,
-                       rank_mode: str, rank: int, eps: float, scale: float,
-                       rng: np.random.Generator) -> tuple[np.ndarray, int]:
+def sample_in_subspace(
+    center: np.ndarray,
+    grads: np.ndarray,
+    n_samples: int,
+    rank_mode: str,
+    rank: int,
+    eps: float,
+    scale: float,
+    rng: np.random.Generator,
+) -> tuple[np.ndarray, int]:
     """Sample ``n_samples`` candidates in the top-``r`` gradient-information subspace.
 
     Returns ``(candidates, r)`` where candidates are clamped to the unit cube and

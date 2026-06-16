@@ -26,7 +26,11 @@ XFAIL_CLASSES: set[str] = set()
 # Problems whose evaluation downloads a dataset (network) and/or is heavy; skipped
 # in the smoke test. The LassoBench problems fetch from OpenML / fetch_rcv1.
 NETWORK_CLASSES = {
-    "LassoDiabetes", "LassoBreastCancer", "LassoDNA", "LassoLeukemia", "LassoRCV1",
+    "LassoDiabetes",
+    "LassoBreastCancer",
+    "LassoDNA",
+    "LassoLeukemia",
+    "LassoRCV1",
 }
 
 
@@ -56,7 +60,9 @@ def test_smoke(name):
     if not _extra_available(extra):
         pytest.skip(f"{name}: optional dependency '{extra}' not installed")
     if name in NETWORK_CLASSES:
-        pytest.skip(f"{name}: evaluation downloads a dataset (network); skipped in smoke")
+        pytest.skip(
+            f"{name}: evaluation downloads a dataset (network); skipped in smoke"
+        )
     if name in XFAIL_CLASSES:
         pytest.xfail(f"{name}: known upstream issue (see AUDIT_findings)")
 
@@ -67,9 +73,7 @@ def test_smoke(name):
     dim = problem.dim
 
     if name in PERMUTATION_CLASSES:
-        X = torch.stack(
-            [torch.randperm(dim).float() + 1 for _ in range(n_samples)]
-        )
+        X = torch.stack([torch.randperm(dim).float() + 1 for _ in range(n_samples)])
     elif name in DATASET_CLASSES:
         idx = torch.randint(0, problem.candidates.shape[0], (n_samples,))
         X = problem.candidates[idx]

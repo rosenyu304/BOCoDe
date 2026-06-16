@@ -373,11 +373,11 @@ class PointBSpline(Trajectory):
         self.tck, u = si.splprep(points, k=3)
 
         if start is not None:
-            for a, sv in zip(self.tck[1], start):
+            for a, sv in zip(self.tck[1], start, strict=False):
                 a[0] = sv
 
         if goal is not None:
-            for a, gv in zip(self.tck[1], goal):
+            for a, gv in zip(self.tck[1], goal, strict=False):
                 a[-1] = gv
 
     def get_points(self, t):
@@ -571,7 +571,7 @@ def plot_2d_rover(
     # get a grid of points over the state space
     points = [
         np.linspace(mi, ma, ngrid_points, endpoint=True)
-        for mi, ma in zip(*roverdomain.s_range)
+        for mi, ma in zip(*roverdomain.s_range, strict=False)
     ]
     grid_points = np.meshgrid(*points)
     points = np.hstack([g.reshape((-1, 1)) for g in grid_points])
@@ -612,7 +612,7 @@ def generate_verts(rectangles):
     poly3d = []
     all_faces = []
     vertices = []
-    for l, h in zip(rectangles.l, rectangles.h):
+    for l, h in zip(rectangles.l, rectangles.h, strict=False):
         verts = [
             [l[0], l[1], l[2]],
             [l[0], h[1], l[2]],
@@ -690,7 +690,7 @@ def plot_3d_forest_rover(roverdomain, rectangles, ntraj_points=100):
     )
 
     # plot traj
-    seg = zip(traj_points[:-1, :], traj_points[1:, :])
+    seg = zip(traj_points[:-1, :], traj_points[1:, :], strict=False)
     ax.add_collection3d(Line3DCollection(seg, colors=[(0, 1.0, 0, 1.0)] * len(seg)))
 
     # plot rectangles

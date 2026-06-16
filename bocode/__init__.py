@@ -21,13 +21,15 @@ try:
 except PackageNotFoundError:  # package is not installed
     __version__ = "unknown"
 
-from .opt_problems import synthetic  # noqa: F401  (bocode.synthetic.<Name> test functions)
 from .base import DataType  # noqa: F401  (re-exported as public API)
 from .exceptions import (  # noqa: F401  (re-exported as public API)
     DimensionException,
     FunctionDefinitionAssertionError,
     RangeException,
     TypeException,
+)
+from .opt_problems import (
+    synthetic,  # noqa: F401  (bocode.synthetic.<Name> test functions)
 )
 from .registry import (  # noqa: F401  (re-exported as public API)
     PROBLEM_REGISTRY,

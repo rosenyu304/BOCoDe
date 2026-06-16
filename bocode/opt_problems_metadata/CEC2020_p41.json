@@ -311,6 +311,7 @@
   "application": "Engineering",
   "convex": "unknown",
   "np_hard": "unknown",
+  "f_opt": 0.0,
   "source": "CEC2020 Problem 41",
   "variable_types": [
     "continuous",

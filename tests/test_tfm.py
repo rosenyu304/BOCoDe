@@ -56,7 +56,14 @@ def test_sample_in_subspace_in_unit_cube():
     center = np.full(6, 0.5)
     grads = rng.standard_normal((40, 6))
     samples, r = sample_in_subspace(
-        center, grads, n_samples=32, rank_mode="marzouk", rank=5, eps=0.05, scale=0.3, rng=rng
+        center,
+        grads,
+        n_samples=32,
+        rank_mode="marzouk",
+        rank=5,
+        eps=0.05,
+        scale=0.3,
+        rng=rng,
     )
     assert samples.shape == (32, 6)
     assert (samples >= 0.0).all() and (samples <= 1.0).all()
@@ -64,18 +71,24 @@ def test_sample_in_subspace_in_unit_cube():
 
 
 @pytest.mark.slow
-@pytest.mark.skipif(not HAS_TABPFN, reason="TabPFN fork not installed (see docs/tfm_setup.md)")
+@pytest.mark.skipif(
+    not HAS_TABPFN, reason="TabPFN fork not installed (see docs/tfm_setup.md)"
+)
 @pytest.mark.parametrize("rank", ["5", "marzouk"])
 def test_git_bo_runs(rank):
     import bocode
     from algorithms.single_obj import git_bo
 
-    res = git_bo.optimize_problem(bocode.get_problem("Branin")(), n_init=6, iters=2, seed=42, rank=rank)
+    res = git_bo.optimize_problem(
+        bocode.get_problem("Branin")(), n_init=6, iters=2, seed=42, rank=rank
+    )
     assert len(res.per_iteration_value) == 3
 
 
 @pytest.mark.slow
-@pytest.mark.skipif(not HAS_TABPFN, reason="TabPFN fork not installed (see docs/tfm_setup.md)")
+@pytest.mark.skipif(
+    not HAS_TABPFN, reason="TabPFN fork not installed (see docs/tfm_setup.md)"
+)
 def test_pfn_cei_runs():
     import bocode
     from algorithms.single_obj_constrained import pfn_cei

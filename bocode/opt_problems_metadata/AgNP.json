@@ -35,6 +35,7 @@
   "application": "Materials",
   "convex": "unknown",
   "np_hard": "unknown",
+  "f_opt": null,
   "source": "F. Mekki-Berrada, Z. Ren, T. Huang, et al. Two-step machine learning enables optimized nanoparticle synthesis. npj Computational Materials 7:55, 2021. Dataset via the PV-Lab benchmarking suite: https://github.com/PV-Lab/Benchmarking",
   "variable_types": [
     "continuous",

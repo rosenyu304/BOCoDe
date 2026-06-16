@@ -519,6 +519,7 @@
   "application": "Engineering",
   "convex": "unknown",
   "np_hard": "unknown",
+  "f_opt": 0.018594,
   "source": "CEC2020_p37",
   "variable_types": [
     "continuous",

@@ -60,6 +60,7 @@ class MiniAeroWing(BenchmarkProblem):
             num_objectives=1,
             num_constraints=0,
             bounds=[(1.0, 40.0), (1.0, 40.0), (15.0, 100.0)],
+            optimum=[242.27],  # D* [N] at (A, S, V) ~ (18.2, 5.3, 49.2)
         )
 
     def _evaluate_implementation(self, X, scaling: bool = False):

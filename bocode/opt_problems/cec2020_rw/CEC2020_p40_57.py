@@ -391,7 +391,9 @@ class CEC2020_p44(BenchmarkProblem):
 
         n_samples = X.shape[0]
 
-        D = X.shape[1]  # problem dimension (fixes a bug where D was set to the batch size)
+        D = X.shape[
+            1
+        ]  # problem dimension (fixes a bug where D was set to the batch size)
         f = np.zeros((n_samples, 1))
 
         interval = 15
@@ -536,7 +538,9 @@ class CEC2020_p45(BenchmarkProblem):
 
         n_samples = X.shape[0]
 
-        D = X.shape[1]  # problem dimension (fixes a bug where D was set to the batch size)
+        D = X.shape[
+            1
+        ]  # problem dimension (fixes a bug where D was set to the batch size)
         f = np.zeros((n_samples, 1))
 
         m = 0.32
@@ -631,7 +635,9 @@ class CEC2020_p46(BenchmarkProblem):
 
         n_samples = X.shape[0]
 
-        D = X.shape[1]  # problem dimension (fixes a bug where D was set to the batch size)
+        D = X.shape[
+            1
+        ]  # problem dimension (fixes a bug where D was set to the batch size)
         f = np.zeros((n_samples, 1))
 
         m = 0.32
@@ -750,7 +756,9 @@ class CEC2020_p47(BenchmarkProblem):
 
         n_samples = X.shape[0]
 
-        D = X.shape[1]  # problem dimension (fixes a bug where D was set to the batch size)
+        D = X.shape[
+            1
+        ]  # problem dimension (fixes a bug where D was set to the batch size)
         f = np.zeros((n_samples, 1))
 
         m = 0.36
@@ -869,7 +877,9 @@ class CEC2020_p48(BenchmarkProblem):
 
         n_samples = X.shape[0]
 
-        D = X.shape[1]  # problem dimension (fixes a bug where D was set to the batch size)
+        D = X.shape[
+            1
+        ]  # problem dimension (fixes a bug where D was set to the batch size)
         f = np.zeros((n_samples, 1))
 
         m = 0.32
@@ -993,7 +1003,9 @@ class CEC2020_p49(BenchmarkProblem):
 
         n_samples = X.shape[0]
 
-        D = X.shape[1]  # problem dimension (fixes a bug where D was set to the batch size)
+        D = X.shape[
+            1
+        ]  # problem dimension (fixes a bug where D was set to the batch size)
         f = np.zeros((n_samples, 1))
 
         m = 0.3333
@@ -1117,7 +1129,9 @@ class CEC2020_p50(BenchmarkProblem):
 
         n_samples = X.shape[0]
 
-        D = X.shape[1]  # problem dimension (fixes a bug where D was set to the batch size)
+        D = X.shape[
+            1
+        ]  # problem dimension (fixes a bug where D was set to the batch size)
         f = np.zeros((n_samples, 1))
 
         m = 0.32

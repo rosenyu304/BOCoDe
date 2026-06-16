@@ -37,7 +37,9 @@ def optimize_problem(problem, iters: int = 100, seed: int = 0) -> Result:
     """Random (Sobol) search over the unit cube for a continuous problem."""
     set_seed(seed)
     obj = ProblemObjective(problem)
-    res = Result("random_search", type(problem).__name__, seed, acquisition_function="none")
+    res = Result(
+        "random_search", type(problem).__name__, seed, acquisition_function="none"
+    )
 
     X = initial_design(iters, obj.dim, seed)
     Y = obj(X)
@@ -53,7 +55,12 @@ def optimize_dataset(dataset_problem, iters: int = 100, seed: int = 0) -> Result
     """Random selection (without replacement) from a discrete candidate pool."""
     set_seed(seed)
     data = DatasetObjective(dataset_problem)
-    res = Result("random_search", type(dataset_problem).__name__, seed, acquisition_function="none")
+    res = Result(
+        "random_search",
+        type(dataset_problem).__name__,
+        seed,
+        acquisition_function="none",
+    )
 
     iters = min(iters, data.n_candidates)
     perm = torch.randperm(data.n_candidates)[:iters]
@@ -75,9 +82,13 @@ def main() -> None:
     args = parser.parse_args()
 
     if args.problem:
-        res = optimize_problem(bocode.get_problem(args.problem)(), args.iters, args.seed)
+        res = optimize_problem(
+            bocode.get_problem(args.problem)(), args.iters, args.seed
+        )
     else:
-        res = optimize_dataset(bocode.get_problem(args.dataset)(), args.iters, args.seed)
+        res = optimize_dataset(
+            bocode.get_problem(args.dataset)(), args.iters, args.seed
+        )
     finalize(res, args)
 
 

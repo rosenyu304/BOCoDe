@@ -29,6 +29,7 @@ class AntProblem(BenchmarkProblem):
                 zip(
                     gym.make("Ant-v5").action_space.low.tolist(),
                     gym.make("Ant-v5").action_space.high.tolist(),
+                    strict=False,
                 )
             ),
         )
@@ -62,6 +63,7 @@ class HalfCheetahProblem(BenchmarkProblem):
                 zip(
                     gym.make("HalfCheetah-v5").action_space.low.tolist(),
                     gym.make("HalfCheetah-v5").action_space.high.tolist(),
+                    strict=False,
                 )
             ),
         )
@@ -95,6 +97,7 @@ class HopperProblem(BenchmarkProblem):
                 zip(
                     gym.make("Hopper-v5").action_space.low.tolist(),
                     gym.make("Hopper-v5").action_space.high.tolist(),
+                    strict=False,
                 )
             ),
         )
@@ -128,6 +131,7 @@ class HumanoidProblem(BenchmarkProblem):
                 zip(
                     gym.make("Humanoid-v5").action_space.low.tolist(),
                     gym.make("Humanoid-v5").action_space.high.tolist(),
+                    strict=False,
                 )
             ),
         )
@@ -161,6 +165,7 @@ class HumanoidStandupProblem(BenchmarkProblem):
                 zip(
                     gym.make("HumanoidStandup-v5").action_space.low.tolist(),
                     gym.make("HumanoidStandup-v5").action_space.high.tolist(),
+                    strict=False,
                 )
             ),
         )
@@ -194,6 +199,7 @@ class InvertedDoublePendulumProblem(BenchmarkProblem):
                 zip(
                     gym.make("InvertedDoublePendulum-v5").action_space.low.tolist(),
                     gym.make("InvertedDoublePendulum-v5").action_space.high.tolist(),
+                    strict=False,
                 )
             ),
         )
@@ -227,6 +233,7 @@ class InvertedPendulumProblem(BenchmarkProblem):
                 zip(
                     gym.make("InvertedPendulum-v5").action_space.low.tolist(),
                     gym.make("InvertedPendulum-v5").action_space.high.tolist(),
+                    strict=False,
                 )
             ),
         )
@@ -260,6 +267,7 @@ class PusherProblem(BenchmarkProblem):
                 zip(
                     gym.make("Pusher-v5").action_space.low.tolist(),
                     gym.make("Pusher-v5").action_space.high.tolist(),
+                    strict=False,
                 )
             ),
         )
@@ -293,6 +301,7 @@ class ReacherProblem(BenchmarkProblem):
                 zip(
                     gym.make("Reacher-v5").action_space.low.tolist(),
                     gym.make("Reacher-v5").action_space.high.tolist(),
+                    strict=False,
                 )
             ),
         )
@@ -326,6 +335,7 @@ class Walker2DProblem(BenchmarkProblem):
                 zip(
                     gym.make("Walker2d-v5").action_space.low.tolist(),
                     gym.make("Walker2d-v5").action_space.high.tolist(),
+                    strict=False,
                 )
             ),
         )
@@ -359,6 +369,7 @@ class SwimmerProblem(BenchmarkProblem):
                 zip(
                     gym.make("Swimmer-v5").action_space.low.tolist(),
                     gym.make("Swimmer-v5").action_space.high.tolist(),
+                    strict=False,
                 )
             ),
         )

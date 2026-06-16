@@ -57,8 +57,7 @@ def build_table() -> str:
                 _dim(m),
                 _fmt(m.get("num_objectives")),
                 _fmt(m.get("num_constraints")),
-                _fmt(m.get("input_type")),
-                _fmt(m.get("scalable")),
+                _fmt(m.get("f_opt")),
                 _fmt(m.get("convex")),
                 _fmt(m.get("np_hard")),
             )
@@ -67,9 +66,9 @@ def build_table() -> str:
     rows.sort(key=lambda r: (r[1], r[2], r[0]))
 
     header = (
-        "| # | Problem | Application | Suite | Dim | #Obj | #Constr | Variables | "
-        "Scalable | Convex | NP-hard |\n"
-        "|---|---|---|---|---|---|---|---|---|---|---|\n"
+        "| # | Problem | Application | Suite | Dim | #Obj | #Constr | f_opt | "
+        "Convex | NP-hard |\n"
+        "|---|---|---|---|---|---|---|---|---|---|\n"
     )
     body = "\n".join(
         "| " + " | ".join((str(i),) + r) + " |" for i, r in enumerate(rows, start=1)
