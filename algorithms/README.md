@@ -43,6 +43,20 @@ Dataset-optimization variants are provided for the single-objective unconstraine
 algorithms, since BoCoDe's discrete dataset problems (the PV-Lab materials sets)
 are single-objective and unconstrained.
 
+### TFM (transformer-foundation-model) algorithms
+
+These use a pretrained TabPFN surrogate instead of a GP and need a **separate
+environment** (the TabPFN fork pins scikit-learn and Python <3.12) — see
+[docs/tfm_setup.md](../docs/tfm_setup.md).
+
+| Algorithm | Notes |
+|---|---|
+| `single_obj/git_bo.py` | GIT-BO with a gradient-informed active subspace; `--rank 5` (fixed, original) or `--rank marzouk` (Zahm–Marzouk certified rank) |
+| `single_obj_constrained/pfn_cei.py` | constrained EI with the TabPFN regressor; objective + all constraints scored in one parallel forward |
+
+The rank-selection logic is pure NumPy and is unit-tested (`tests/test_tfm.py`);
+the TabPFN runs are skipped unless the fork is installed.
+
 ## Conventions
 
 - **One algorithm per script.** Every step lives in the file; the shared

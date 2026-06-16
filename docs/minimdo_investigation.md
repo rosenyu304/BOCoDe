@@ -70,9 +70,46 @@ maps design variables to outputs (so it can become a BoCoDe `evaluate(x) -> y`).
 clean `.py`, ports like satellite; (3) **BLISS/SSBJ** — recognized aircraft MDO
 benchmark, worth the notebook extraction if an aircraft problem is wanted.
 
+## Full inventory (notebooks × Norheim PhD thesis, 2022)
+
+Cross-referencing every `applications/*.ipynb` with Norheim's thesis (Ch. 7 case
+studies). **Already in BoCoDe:** `SatelliteDesign` (= thesis §7.1 spacecraft) and
+`SpeedReducer` (= Golinski, `speedreducer/`) — do not re-port.
+
+**Tier 1 — strong new real-engineering black boxes (each needs an inner MDA solve):**
+- **PEARL marine platform** (`pearl/`, thesis §7.4): offshore autonomous surface
+  platform; 6 continuous geometry vars (Df, Ds, Dd, tf, ts, td ∈ [0.1, 10] m);
+  minimize platform mass (thesis optimum ≈585 kg); 4 inequality constraints; inner
+  Newton solve over feedback vars. **The flagship next port.**
+- **Sobieski SSBJ / BLISS** (`bliss/`): supersonic business jet, 10 vars
+  (aero/struct/prop), maximize range, ~8–10 stress/pressure/temp/ESF constraints;
+  Gauss–Seidel MDA per eval. (Bounds not in the notebook — use the canonical
+  Sobieski bounds.)
+- **miniaero GP wing** (`miniaero/cvxaircraft.ipynb`): cleanest — convex geometric
+  program, 3 vars (aspect ratio, wing area, speed), minimize drag.
+
+**Tier 2 — academic MDO benchmarks (low-dim, fully posed):** Sellar (`sellar_opt/`,
+3+2 vars), Allison (`thesis_allison/`, 3-var coupled quadratic, 3 equality
+couplings), HVAC air-quality (`dprohvac/`, 2 vars min infection probability),
+satmini and miniaerostruct (small synthetic coupled toys).
+
+**Tier 3 — high-altitude balloon** (`balloon/`, thesis §7.2–7.3): portable but the
+posed 1-D version's optimum sits on the lower bound (thesis calls it trivial);
+worth it only with extra design variables exposed.
+
+**Skip:** rocket staging, cold-gas thruster, the "coffee"/space-telescope model
+(coupled analyses with no objective/constraints declared); pump and beam
+(incomplete stubs); the `synthetic/` and `random_presolve/` random-polynomial
+systems (regenerated each run — not fixed benchmarks).
+
+**Porter note:** unlike `SatelliteDesign` (closed-form mass coupling), the Tier-1/2
+problems are genuinely coupled — each `x → (objective, constraints)` must run an
+inner fixed-point/Newton MDA to convergence (wrap `scipy.optimize.fsolve` around the
+discipline residuals and guard against non-convergence at extreme designs).
+
 ## Status / next step
 
-`SatelliteDesign` is implemented (`bocode/opt_problems/engineering/SatelliteDesign.py`,
-SMAD citation, closed-form mass coupling, lifetime/link-budget/power constraints).
-PEARL and BLISS are recommended follow-ups, pending go-ahead — both would be
-continuous-variable constrained problems with an inner discipline solve.
+`SatelliteDesign` is implemented. **PEARL** is the recommended next port (clean
+`.py` source at `pearl/pearl_initial_formulation.py`, thesis ground-truth optimum,
+6 continuous vars + 4 constraints), followed by Sobieski/BLISS and the miniaero GP
+wing — pending go-ahead.
