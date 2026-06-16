@@ -10,6 +10,10 @@ on a cluster. Every run can save its complete per-iteration trace to a `.npz`
 - `run_experiments.py` — the batch runner: `(algorithm × problem × seed)`, saves
   every trace and a summary CSV, computes the gap to the known optimum where one is
   recorded, and shards for cluster array jobs.
+- `convergence_validation.py` — the validation harness: runs the single-objective
+  baselines against problems with a known optimum over several seeds and reports the
+  mean ± std gap to the optimum and the improvement over random search, so you can
+  certify which algorithm/problem combinations actually *converge*.
 
 ## 1. Set up the environment (mamba)
 
@@ -107,3 +111,21 @@ print(d.files)                      # seed, acquisition_function, best, iteratio
                                     # per_iteration_value, wall_time, mean, variance, ...
 print(d["per_iteration_value"])     # best-so-far per iteration (0 = initial design)
 ```
+
+## 6. Validate convergence (not just "it runs")
+
+`convergence_validation.py` runs the single-objective baselines against problems
+whose optimum is known, over several seeds, and writes `convergence_report.md` (and
+`.csv`) summarizing, per `(problem, algorithm)`, the mean ± std best objective, the
+gap to the optimum, and the improvement over random search:
+
+```bash
+python examples/convergence_validation.py --seeds 0 1 2 3 4 --iters 40
+# override the problem set (default: Branin, Sellar, Allison, MiniAeroWing, PEARL, PressureVessel):
+python examples/convergence_validation.py --problems Sellar MiniAeroWing --seeds 0 1 2
+```
+
+Use it to certify that an algorithm actually converges on a problem (the unit tests
+only check that runs are monotone on tiny budgets). A committed `convergence_report.md`
+shows an example result.
+
