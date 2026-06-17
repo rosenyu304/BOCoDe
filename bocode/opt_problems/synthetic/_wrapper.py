@@ -63,6 +63,41 @@ class SingleObjSyntheticProblem(BenchmarkProblem):
         return None, self._fn(X.to(torch.double)).unsqueeze(-1)
 
 
+class ConstrainedSingleObjSyntheticProblem(BenchmarkProblem):
+    """Wrap a constrained single-objective BoTorch synthetic function.
+
+    The objective is negated to maximize. BoTorch reports constraint *slack* that is
+    feasible when ``>= 0``; here it is negated to BoCoDe's convention (feasible when
+    ``<= 0``). Subclasses set ``num_constraints`` (a class attribute, so the algorithm
+    harness can categorize the problem without instantiating it).
+    """
+
+    input_type = DataType.CONTINUOUS
+    num_objectives = 1
+    num_constraints = 0
+
+    botorch_cls = None
+    botorch_kwargs: dict = {}
+
+    def __init__(self) -> None:
+        self._fn = self.botorch_cls(negate=True, **self.botorch_kwargs)
+        bounds = list(zip(*self._fn.bounds.numpy(), strict=True))
+        super().__init__(
+            dim=self._fn.dim,
+            num_objectives=1,
+            num_constraints=self.num_constraints,
+            bounds=bounds,
+        )
+
+    def _evaluate_implementation(self, X: torch.Tensor, scaling: bool = False):
+        if scaling:
+            X = _scale_clamped(self, X)
+        Xd = X.to(torch.double)
+        obj = self._fn(Xd).unsqueeze(-1)
+        gx = -self._fn.evaluate_slack(Xd)  # BoTorch slack >= 0 feasible -> gx <= 0
+        return gx, obj
+
+
 class MultiObjSyntheticProblem(BenchmarkProblem):
     """Wrap a multi-objective BoTorch synthetic function (negated to maximize)."""
 
