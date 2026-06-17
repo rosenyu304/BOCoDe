@@ -107,7 +107,7 @@ tracked in `docs/AUDIT_findings_2026_06.md`:
 ## Problem table
 
 The leading `#` column numbers the problems 1…N, so the last row shows the total
-problem count (currently **165**).
+problem count (currently **169**).
 
 <!-- TABLE:START -->
 
@@ -284,3 +284,54 @@ problem count (currently **165**).
 | 169 | Perovskite | Materials | PV-Lab materials | 3 | 1 | 0 | ? | unknown | unknown |
 
 <!-- TABLE:END -->
+
+## Problems by category
+
+The same problems grouped by the filters used in `bocode.list_problems(...)`. Each
+heading shows the exact call. (Generated; rerun `python tools/render_categorization.py`.)
+
+<!-- CATEGORIES:START -->
+
+### Single-objective, unconstrained, continuous (32)
+
+`list_problems(num_objectives=1, constrained=False, input_type='continuous')`
+
+`Allison`, `AntPolicySearchProblem`, `AntProblem`, `CEC2020_p31`, `EulerBernoulliBeamBending`, `HalfCheetahPolicySearchProblem`, `HalfCheetahProblem`, `HopperPolicySearchProblem`, `HopperProblem`, `HumanoidProblem`, `HumanoidStandupProblem`, `InvertedDoublePendulumProblem`, `InvertedPendulumProblem`, `LassoBreastCancer`, `LassoDNA`, `LassoDiabetes`, `LassoLeukemia`, `LassoRCV1`, `MiniAeroWing`, `PD4CartPole`, `PID4Acrobot`, `PusherProblem`, `QPowerModel`, `ReacherProblem`, `ReactivityModel`, `RobotPush`, `Rover`, `SVM`, `SwimmerPolicySearchProblem`, `SwimmerProblem`, `Walker2DPolicySearchProblem`, `Walker2DProblem`
+
+### Single-objective, unconstrained, mixed-variable (1)
+
+`list_problems(num_objectives=1, constrained=False, input_type='mixed')`
+
+`GearTrain`
+
+### Single-objective, constrained, continuous (71)
+
+`list_problems(num_objectives=1, constrained=True, input_type='continuous')`
+
+`CEC2020_p1`, `CEC2020_p10`, `CEC2020_p11`, `CEC2020_p12`, `CEC2020_p13`, `CEC2020_p14`, `CEC2020_p15`, `CEC2020_p16`, `CEC2020_p17`, `CEC2020_p18`, `CEC2020_p19`, `CEC2020_p2`, `CEC2020_p20`, `CEC2020_p21`, `CEC2020_p22`, `CEC2020_p23`, `CEC2020_p24`, `CEC2020_p25`, `CEC2020_p26`, `CEC2020_p27`, `CEC2020_p28`, `CEC2020_p29`, `CEC2020_p3`, `CEC2020_p30`, `CEC2020_p32`, `CEC2020_p33`, `CEC2020_p34`, `CEC2020_p35`, `CEC2020_p36`, `CEC2020_p37`, `CEC2020_p38`, `CEC2020_p39`, `CEC2020_p4`, `CEC2020_p40`, `CEC2020_p41`, `CEC2020_p42`, `CEC2020_p43`, `CEC2020_p44`, `CEC2020_p45`, `CEC2020_p46`, `CEC2020_p47`, `CEC2020_p48`, `CEC2020_p49`, `CEC2020_p5`, `CEC2020_p50`, `CEC2020_p51`, `CEC2020_p52`, `CEC2020_p53`, `CEC2020_p54`, `CEC2020_p55`, `CEC2020_p56`, `CEC2020_p57`, `CEC2020_p6`, `CEC2020_p7`, `CEC2020_p8`, `CEC2020_p9`, `CantileverBeam`, `CompressionSpring`, `HeatExchanger`, `MOPTA08Car`, `PEARL`, `ReinforcedConcreteBeam`, `SatelliteDesign`, `Sellar`, `ThreeTruss`, `Truss10D`, `Truss120D`, `Truss200D`, `Truss25D`, `Truss72D_FourForces`, `Truss72D_SingleForce`
+
+### Single-objective, constrained, mixed-variable (3)
+
+`list_problems(num_objectives=1, constrained=True, input_type='mixed')`
+
+`Car`, `PressureVessel`, `SpeedReducer`
+
+### Multi-objective, unconstrained, continuous (19)
+
+`list_problems(constrained=False, input_type='continuous')  # >=2 objectives`
+
+`BotorchCarSideImpact`, `Penicillin`, `RE21`, `RE22`, `RE23`, `RE24`, `RE25`, `RE31`, `RE32`, `RE33`, `RE34`, `RE35`, `RE36`, `RE37`, `RE41`, `RE42`, `RE61`, `RE91`, `VehicleSafety`
+
+### Multi-objective, constrained, continuous (36)
+
+`list_problems(constrained=True, input_type='continuous')  # >=2 objectives`
+
+`CRE21`, `CRE22`, `CRE23`, `CRE24`, `CRE25`, `CRE31`, `CRE32`, `CRE51`, `CS1`, `CS2`, `CS3`, `CS4`, `CT1`, `CT2`, `CT3`, `CT4`, `CTS1`, `CTS2`, `CTS3`, `CTS4`, `CTSE1`, `CTSE2`, `CTSE3`, `CTSE4`, `CTSEI1`, `CTSEI2`, `CTSEI3`, `CTSEI4`, `CarSideImpact`, `DiscBrake`, `Mazda`, `Mazda_SCA`, `TwoBarTruss`, `WaterProblem`, `WaterResources`, `WeldedBeam`
+
+### Multi-objective, mixed-variable (any constraints) (0)
+
+`list_problems(input_type='mixed')  # >=2 objectives`
+
+_(none)_
+
+<!-- CATEGORIES:END -->

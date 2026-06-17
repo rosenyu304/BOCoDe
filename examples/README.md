@@ -65,7 +65,19 @@ python examples/run_experiments.py --problems Branin Sellar PressureVessel \
 # the full suite (every registered problem), five seeds:
 python examples/run_experiments.py --problems all --seeds 0 10 20 30 40 \
     --n-init 20 --iters 100 --outdir results
+
+# one algorithm on a filtered slice — e.g. SingleTaskGP on every single-objective,
+# unconstrained, continuous problem:
+python examples/run_experiments.py --problems all \
+    --objectives 1 --unconstrained --input-type continuous \
+    --algorithms single_task_gp --seeds 0 10 20
 ```
+
+`--algorithms` restricts to specific algorithm labels (default = the standard
+per-category baselines); it also unlocks the opt-in mixed-variable methods
+(`single_task_gp_mixed`, `random_search_mixed`) on single-objective problems. When
+`--problems all`, `--objectives/--constrained/--unconstrained/--input-type` narrow
+the set via `bocode.list_problems(...)`.
 
 Each line of the summary CSV is `algorithm,problem,seed,best,gap,npz`, where `gap`
 is `best_found − f_opt` for single-objective problems whose optimum is recorded in

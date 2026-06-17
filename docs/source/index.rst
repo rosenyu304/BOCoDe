@@ -55,6 +55,7 @@ Contents
    :glob:
 
    getting_started
+   benchmark_table
    basic_user_guide/index
    benchmarks/index
 
