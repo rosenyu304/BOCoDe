@@ -77,8 +77,9 @@ def integrate(x, y, lbnd, ubnd):
         ) + y[idx - 1]
         return (ubnd - lbnd) * (y_ubnd_approx + y_lbnd_approx) / 2
 
-    # integrate fully-inclosed blocks
-    full_blocks_integral = np.trapz(y[compl_ind], x[compl_ind])
+    # integrate fully-inclosed blocks (np.trapz was renamed to np.trapezoid in numpy 2.0)
+    _trapz = np.trapezoid if hasattr(np, "trapezoid") else np.trapz
+    full_blocks_integral = _trapz(y[compl_ind], x[compl_ind])
 
     # integrate lower hanging partial block
     lidx = compl_ind.min()

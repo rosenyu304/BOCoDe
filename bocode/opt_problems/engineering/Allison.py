@@ -41,8 +41,11 @@ def _solve_coupling(x1, x2, x3):
     A[:, 2, 0] = -0.1 * x3
     A[:, 2, 1] = -0.8 * x3
     A[:, 2, 2] = 1.0
-    b = np.tile(np.array([2.0, 2.5, 3.0]), (n, 1))
-    y = np.linalg.solve(A, b)
+    # b as an explicit (n, 3, 1) stack so np.linalg.solve treats it as a batch of
+    # right-hand-side vectors on both numpy 1.x and numpy 2.x (2.0 changed how a
+    # 2-D b is broadcast against a stacked a).
+    b = np.tile(np.array([2.0, 2.5, 3.0]), (n, 1))[:, :, None]
+    y = np.linalg.solve(A, b)[:, :, 0]
     return y[:, 0], y[:, 1], y[:, 2]
 
 
