@@ -36,14 +36,13 @@ from botorch.utils.multi_objective.box_decompositions.dominated import (
 )
 from gpytorch.mlls import SumMarginalLogLikelihood
 
-import bocode
-
 from .._bo_utils import (
     MultiObjectiveProblem,
     Result,
     add_common_args,
     finalize,
     initial_design,  # noqa: E501
+    make_problem,
     set_seed,
 )
 
@@ -135,7 +134,7 @@ def main() -> None:
     add_common_args(parser)
     args = parser.parse_args()
     res = optimize_problem(
-        bocode.get_problem(args.problem)(), args.init, args.iters, args.seed
+        make_problem(args.problem, args), args.init, args.iters, args.seed
     )
     finalize(res, args)
 

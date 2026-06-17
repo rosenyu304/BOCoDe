@@ -31,6 +31,11 @@ MULTI_OBJ = [
     "algorithms.multi_obj.qnparego",
 ]
 
+SINGLE_OBJ_MIXED = [
+    "algorithms.single_obj_mixed_variable.random_search",
+    "algorithms.single_obj_mixed_variable.single_task_gp",
+]
+
 
 def _mod(name):
     return importlib.import_module(name)
@@ -103,6 +108,18 @@ def test_constrained_runs(modname):
         res = mod.optimize_problem(problem, n_init=8, iters=4, seed=0)
     _check_trace(res)
     assert _monotone(res.per_iteration_value)  # best feasible objective never decreases
+
+
+@pytest.mark.parametrize("modname", SINGLE_OBJ_MIXED)
+def test_mixed_variable_runs(modname):
+    mod = _mod(modname)
+    problem = bocode.SpeedReducer(is_discrete=True)  # mixed: integer number of teeth
+    if modname.endswith("random_search"):
+        res = mod.optimize_problem(problem, iters=12, seed=0)
+    else:
+        res = mod.optimize_problem(problem, n_init=6, iters=4, seed=0)
+    _check_trace(res)
+    assert _monotone(res.per_iteration_value)
 
 
 @pytest.mark.slow

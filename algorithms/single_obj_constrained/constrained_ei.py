@@ -28,14 +28,13 @@ from botorch.models.transforms import Normalize, Standardize
 from botorch.optim import optimize_acqf
 from gpytorch.mlls import SumMarginalLogLikelihood
 
-import bocode
-
 from .._bo_utils import (
     ProblemObjective,
     Result,
     add_common_args,
     finalize,
     initial_design,  # noqa: E501
+    make_problem,
     set_seed,
 )
 
@@ -122,7 +121,7 @@ def main() -> None:
     add_common_args(parser)
     args = parser.parse_args()
     res = optimize_problem(
-        bocode.get_problem(args.problem)(), args.init, args.iters, args.seed
+        make_problem(args.problem, args), args.init, args.iters, args.seed
     )
     finalize(res, args)
 

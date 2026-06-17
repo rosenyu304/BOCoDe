@@ -21,6 +21,7 @@ M. Balandat, B. Karrer, D. R. Jiang, S. Daulton, B. Letham, A. G. Wilson, and E.
 
 from __future__ import annotations
 
+import inspect
 import random
 from dataclasses import dataclass, field
 
@@ -31,6 +32,8 @@ from botorch.models import SingleTaskGP
 from botorch.models.transforms import Normalize, Standardize
 from gpytorch.mlls import ExactMarginalLogLikelihood
 from scipy.stats import qmc
+
+import bocode
 
 DTYPE = torch.double
 
@@ -63,7 +66,10 @@ def _scale_clamped(problem, X_unit: torch.Tensor) -> torch.Tensor:
     X_unit = X_unit.clamp(0.0, 1.0).to(DTYPE)
     X = problem.scale(X_unit)
     bounds = problem.torch_bounds.to(X)
-    lo, hi = bounds[:, 0], bounds[:, 1]
+    # Some problems store bounds as (upper, lower); take the true low/high so the
+    # inset clamp below doesn't collapse every value to one corner.
+    lo = torch.minimum(bounds[:, 0], bounds[:, 1])
+    hi = torch.maximum(bounds[:, 0], bounds[:, 1])
     # Inset by a tiny relative epsilon so the point stays strictly inside the
     # bounds even after the float32 cast inside evaluate() (BoTorch test problems
     # validate their input bounds strictly).
@@ -305,9 +311,43 @@ def gp_stats(model, X) -> tuple[float, float]:
     return mean, var
 
 
+def make_problem(name: str, args=None):
+    """Instantiate a registered problem, honoring a ``--discrete/--continuous`` flag.
+
+    Problems that expose an ``is_discrete`` constructor argument (e.g. PressureVessel,
+    SpeedReducer, Car, GearTrain) can be switched between their fully-continuous and
+    mixed-variable formulations at launch. ``args.discrete`` is ``True`` (``--discrete``),
+    ``False`` (``--continuous``), or ``None`` (use the problem's own default).
+    """
+    cls = bocode.get_problem(name)
+    discrete = getattr(args, "discrete", None) if args is not None else None
+    if (
+        discrete is not None
+        and "is_discrete" in inspect.signature(cls.__init__).parameters
+    ):
+        return cls(is_discrete=discrete)
+    return cls()
+
+
 def add_common_args(parser) -> None:
-    """Add --seed (default 42), --show_progress, and --saved_full_experiment."""
+    """Add --seed, --show_progress, --saved_full_experiment, and --discrete/--continuous."""
     parser.add_argument("--seed", type=int, default=42)
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument(
+        "--discrete",
+        dest="discrete",
+        action="store_const",
+        const=True,
+        default=None,
+        help="force mixed/discrete-variable mode (is_discrete=True) where the problem supports it",
+    )
+    mode.add_argument(
+        "--continuous",
+        dest="discrete",
+        action="store_const",
+        const=False,
+        help="force fully-continuous mode (is_discrete=False) where the problem supports it",
+    )
     parser.add_argument(
         "--show_progress",
         action="store_true",

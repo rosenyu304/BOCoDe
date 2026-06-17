@@ -20,8 +20,6 @@ import argparse
 
 import torch
 
-import bocode
-
 from .._bo_utils import (
     DatasetObjective,
     ProblemObjective,
@@ -29,6 +27,7 @@ from .._bo_utils import (
     add_common_args,
     finalize,
     initial_design,  # noqa: E501
+    make_problem,
     set_seed,
 )
 
@@ -82,13 +81,9 @@ def main() -> None:
     args = parser.parse_args()
 
     if args.problem:
-        res = optimize_problem(
-            bocode.get_problem(args.problem)(), args.iters, args.seed
-        )
+        res = optimize_problem(make_problem(args.problem, args), args.iters, args.seed)
     else:
-        res = optimize_dataset(
-            bocode.get_problem(args.dataset)(), args.iters, args.seed
-        )
+        res = optimize_dataset(make_problem(args.dataset, args), args.iters, args.seed)
     finalize(res, args)
 
 

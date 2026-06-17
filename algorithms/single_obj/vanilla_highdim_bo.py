@@ -36,8 +36,6 @@ import torch
 from botorch.acquisition import LogExpectedImprovement
 from botorch.optim import optimize_acqf
 
-import bocode
-
 from .._bo_utils import (
     DatasetObjective,
     ProblemObjective,
@@ -47,6 +45,7 @@ from .._bo_utils import (
     fit_gp,
     gp_stats,
     initial_design,  # noqa: E501
+    make_problem,
     set_seed,
 )
 
@@ -141,11 +140,11 @@ def main() -> None:
 
     if args.problem:
         res = optimize_problem(
-            bocode.get_problem(args.problem)(), args.init, args.iters, args.seed
+            make_problem(args.problem, args), args.init, args.iters, args.seed
         )
     else:
         res = optimize_dataset(
-            bocode.get_problem(args.dataset)(), args.init, args.iters, args.seed
+            make_problem(args.dataset, args), args.init, args.iters, args.seed
         )
     finalize(res, args)
 

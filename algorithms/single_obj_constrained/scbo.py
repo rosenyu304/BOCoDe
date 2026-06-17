@@ -24,8 +24,6 @@ import argparse
 import torch
 from torch.quasirandom import SobolEngine
 
-import bocode
-
 from .._bo_utils import (
     DTYPE,
     ProblemObjective,
@@ -34,6 +32,7 @@ from .._bo_utils import (
     finalize,
     fit_gp,
     initial_design,  # noqa: E501
+    make_problem,
     set_seed,
 )
 from ..single_obj.turbo import TrustRegion
@@ -129,7 +128,7 @@ def main() -> None:
     add_common_args(parser)
     args = parser.parse_args()
     res = optimize_problem(
-        bocode.get_problem(args.problem)(), args.init, args.iters, args.seed
+        make_problem(args.problem, args), args.init, args.iters, args.seed
     )
     finalize(res, args)
 

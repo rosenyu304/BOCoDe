@@ -28,8 +28,6 @@ import math
 import torch
 from torch.quasirandom import SobolEngine
 
-import bocode
-
 from .._bo_utils import (
     DTYPE,
     ProblemObjective,
@@ -37,6 +35,7 @@ from .._bo_utils import (
     add_common_args,
     finalize,
     initial_design,
+    make_problem,
     set_seed,
 )
 from .._tfm_utils import TabPFNSurrogate
@@ -130,7 +129,7 @@ def main() -> None:
     add_common_args(parser)
     args = parser.parse_args()
     res = optimize_problem(
-        bocode.get_problem(args.problem)(),
+        make_problem(args.problem, args),
         args.init,
         args.iters,
         args.seed,

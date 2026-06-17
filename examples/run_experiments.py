@@ -67,6 +67,12 @@ _TFM = {  # module name -> sub-package (need the TabPFN env)
     "git_bo": "algorithms.single_obj",
     "pfn_cei": "algorithms.single_obj_constrained",
 }
+# Mixed-variable algorithms (opt-in): available for any single-objective problem
+# (they fold constraints into a penalty). Distinct labels so traces don't collide.
+_MIXED = {
+    "single_task_gp_mixed": "algorithms.single_obj_mixed_variable.single_task_gp",
+    "random_search_mixed": "algorithms.single_obj_mixed_variable.random_search",
+}
 
 
 def _category(name: str):
@@ -92,16 +98,32 @@ def _known_optimum(name: str, problem) -> float | None:
     return opt if isinstance(opt, (int, float)) else None
 
 
-def _algos_for(name: str, include_tfm: bool):
-    """List of (module_path, algo_name) compatible with this problem."""
+def _algos_for(name: str, include_tfm: bool, selected: list[str] | None = None):
+    """(module_path, label) pairs to run for this problem.
+
+    By default this is the standard per-category baseline set (plus the TFM methods
+    if ``include_tfm``). If ``selected`` is given, it restricts/extends to those
+    labels, drawn from everything compatible with the problem's category — including
+    the opt-in mixed-variable algorithms (single-objective only).
+    """
     cat = _category(name)
-    out = [(f"{_PKG[cat]}.{a}", a) for a in _ALGOS[cat]]
-    if include_tfm:
-        if cat == ("single", False):
-            out.append(("algorithms.single_obj.git_bo", "git_bo"))
-        if cat == ("single", True):
-            out.append(("algorithms.single_obj_constrained.pfn_cei", "pfn_cei"))
-    return out
+    available = {a: f"{_PKG[cat]}.{a}" for a in _ALGOS[cat]}
+    if cat[0] == "single":
+        available.update(_MIXED)
+    if cat == ("single", False):
+        available["git_bo"] = "algorithms.single_obj.git_bo"
+    if cat == ("single", True):
+        available["pfn_cei"] = "algorithms.single_obj_constrained.pfn_cei"
+
+    if selected is not None:
+        labels = [a for a in selected if a in available]
+    else:
+        labels = list(_ALGOS[cat])
+        if include_tfm and cat == ("single", False):
+            labels.append("git_bo")
+        if include_tfm and cat == ("single", True):
+            labels.append("pfn_cei")
+    return [(available[a], a) for a in labels]
 
 
 def _run_one(modpath, algo, problem_name, seed, n_init, iters, outdir):
@@ -140,6 +162,31 @@ def main() -> None:
     p.add_argument(
         "--problems", nargs="+", required=True, help="problem names, or 'all'"
     )
+    p.add_argument(
+        "--algorithms",
+        nargs="+",
+        default=None,
+        help="restrict to these algorithm labels (e.g. single_task_gp turbo "
+        "single_task_gp_mixed); default = the standard per-category baselines",
+    )
+    # When --problems is 'all', these narrow the set via bocode.list_problems(...).
+    p.add_argument(
+        "--objectives", type=int, default=None, help="filter 'all' by #objectives"
+    )
+    mode = p.add_mutually_exclusive_group()
+    mode.add_argument(
+        "--constrained",
+        dest="constrained",
+        action="store_const",
+        const=True,
+        default=None,
+    )
+    mode.add_argument(
+        "--unconstrained", dest="constrained", action="store_const", const=False
+    )
+    p.add_argument(
+        "--input-type", choices=["continuous", "mixed", "discrete"], default=None
+    )
     p.add_argument("--seeds", nargs="+", type=int, default=[0])
     p.add_argument("--n-init", type=int, default=10)
     p.add_argument("--iters", type=int, default=50)
@@ -159,12 +206,19 @@ def main() -> None:
     args = p.parse_args()
 
     Path(args.outdir).mkdir(parents=True, exist_ok=True)
-    problems = bocode.list_problems() if args.problems == ["all"] else args.problems
+    if args.problems == ["all"]:
+        problems = bocode.list_problems(
+            num_objectives=args.objectives,
+            constrained=args.constrained,
+            input_type=args.input_type,
+        )
+    else:
+        problems = args.problems
 
     # build the full (algorithm x problem x seed) job list, then take this shard
     jobs = []
     for name in problems:
-        for modpath, algo in _algos_for(name, args.include_tfm):
+        for modpath, algo in _algos_for(name, args.include_tfm, args.algorithms):
             for seed in args.seeds:
                 jobs.append((modpath, algo, name, seed))
     jobs = jobs[args.task_id :: args.num_tasks]

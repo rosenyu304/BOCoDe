@@ -18,14 +18,13 @@ import argparse
 
 import torch
 
-import bocode
-
 from .._bo_utils import (
     ProblemObjective,
     Result,
     add_common_args,
     finalize,
     initial_design,  # noqa: E501
+    make_problem,
     set_seed,
 )
 
@@ -59,7 +58,7 @@ def main() -> None:
     parser.add_argument("--iters", type=int, default=200)
     add_common_args(parser)
     args = parser.parse_args()
-    res = optimize_problem(bocode.get_problem(args.problem)(), args.iters, args.seed)
+    res = optimize_problem(make_problem(args.problem, args), args.iters, args.seed)
     finalize(res, args)
 
 
