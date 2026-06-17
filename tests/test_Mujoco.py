@@ -1,24 +1,27 @@
 import pytest
 import torch
 
-from bocode import (
-    AntPolicySearchProblem,
-    AntProblem,
-    HalfCheetahPolicySearchProblem,
-    HalfCheetahProblem,
-    HopperPolicySearchProblem,
-    HopperProblem,
-    HumanoidProblem,
-    HumanoidStandupProblem,
-    InvertedDoublePendulumProblem,
-    InvertedPendulumProblem,
-    PusherProblem,
-    ReacherProblem,
-    SwimmerPolicySearchProblem,
-    SwimmerProblem,
-    Walker2DPolicySearchProblem,
-    Walker2DProblem,
-)
+try:
+    from bocode import (
+        AntPolicySearchProblem,
+        AntProblem,
+        HalfCheetahPolicySearchProblem,
+        HalfCheetahProblem,
+        HopperPolicySearchProblem,
+        HopperProblem,
+        HumanoidProblem,
+        HumanoidStandupProblem,
+        InvertedDoublePendulumProblem,
+        InvertedPendulumProblem,
+        PusherProblem,
+        ReacherProblem,
+        SwimmerPolicySearchProblem,
+        SwimmerProblem,
+        Walker2DPolicySearchProblem,
+        Walker2DProblem,
+    )
+except ImportError as exc:  # optional-dependency extra not installed
+    pytest.skip(f"requires an optional dependency: {exc}", allow_module_level=True)
 
 benchmark_classes = [
     AntProblem,

@@ -1,6 +1,10 @@
+import pytest
 import torch
 
-from bocode import QPowerModel
+try:
+    from bocode import QPowerModel
+except ImportError as exc:  # optional-dependency extra not installed
+    pytest.skip(f"requires an optional dependency: {exc}", allow_module_level=True)
 
 
 def test_qpower_evaluate():

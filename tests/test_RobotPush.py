@@ -1,6 +1,10 @@
+import pytest
 import torch
 
-from bocode import RobotPush
+try:
+    from bocode import RobotPush
+except ImportError as exc:  # optional-dependency extra not installed
+    pytest.skip(f"requires an optional dependency: {exc}", allow_module_level=True)
 
 
 def test_robotPush_evaluate():

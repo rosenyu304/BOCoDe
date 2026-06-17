@@ -1,28 +1,31 @@
 import pytest
 import torch
 
-from bocode.opt_problems.modact.MODAct import (
-    CS1,
-    CS2,
-    CS3,
-    CS4,
-    CT1,
-    CT2,
-    CT3,
-    CT4,
-    CTS1,
-    CTS2,
-    CTS3,
-    CTS4,
-    CTSE1,
-    CTSE2,
-    CTSE3,
-    CTSE4,
-    CTSEI1,
-    CTSEI2,
-    CTSEI3,
-    CTSEI4,
-)
+try:
+    from bocode.opt_problems.modact.MODAct import (
+        CS1,
+        CS2,
+        CS3,
+        CS4,
+        CT1,
+        CT2,
+        CT3,
+        CT4,
+        CTS1,
+        CTS2,
+        CTS3,
+        CTS4,
+        CTSE1,
+        CTSE2,
+        CTSE3,
+        CTSE4,
+        CTSEI1,
+        CTSEI2,
+        CTSEI3,
+        CTSEI4,
+    )
+except ImportError as exc:  # optional-dependency extra not installed
+    pytest.skip(f"requires an optional dependency: {exc}", allow_module_level=True)
 
 
 def general_test(func, dim=None):

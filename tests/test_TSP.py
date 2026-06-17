@@ -1,6 +1,10 @@
+import pytest
 import torch
 
-from bocode import TSP_51Cities, TSP_100Cities
+try:
+    from bocode import TSP_51Cities, TSP_100Cities
+except ImportError as exc:  # optional-dependency extra not installed
+    pytest.skip(f"requires an optional dependency: {exc}", allow_module_level=True)
 
 
 def test_TSP51_evaluate():
