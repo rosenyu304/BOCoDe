@@ -475,6 +475,10 @@
     "opt_problems.engineering.MOPTA08Car",
     null
   ],
+  "MaxSAT": [
+    "opt_problems.combinatorial.MaxSAT",
+    null
+  ],
   "Mazda": [
     "opt_problems.engineering.Mazda",
     "mazda"
