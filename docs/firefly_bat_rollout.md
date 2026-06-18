@@ -17,7 +17,7 @@ paper optimum (differential-evolution + penalty) before it lands.
 | Problem | Variants | Reference optimum | Status |
 |---|---|---|---|
 | **WeldedBeamSO** | SO continuous / SO mixed (`is_discrete`) | cont 1.7249 ✓ / mixed 1.7312 | **done + verified** (continuous f*=1.7249); complements existing MO `WeldedBeam` |
-| **HelicalSpring** | SO mixed (D cont, n int, d 42-discrete) | 2.6586 | next |
+| **HelicalSpring** | SO mixed (D cont, n int, d 42-discrete) | 2.6586 | **done + verified** (f*=2.6586, all 8 constraints match Table 9) |
 | **SteppedCantileverBeam** | SO continuous / SO mixed (`is_discrete`) | cont 61915 / mixed 63894 | next |
 | **ReinforcedConcreteBeamSO** | SO mixed (As discrete, b int, h cont) | 359.208 | next (existing `ReinforcedConcreteBeam` is continuous) |
 | CarSideImpact | already in BoCoDe (x8,x9 discrete) | 22.84 | check existing matches Firefly Case VI |

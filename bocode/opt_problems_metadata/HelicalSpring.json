@@ -1,0 +1,81 @@
+{
+  "name": "HelicalSpring",
+  "module": "bocode.opt_problems.engineering.HelicalSpring",
+  "extra": null,
+  "suite": "Engineering (standalone)",
+  "num_objectives": 1,
+  "num_constraints": 8,
+  "available_dimensions": 3,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 3,
+  "bounds": [
+    [
+      0.6,
+      3.0
+    ],
+    [
+      0.009,
+      0.5
+    ],
+    [
+      1.0,
+      70.0
+    ]
+  ],
+  "num_integer_variables": 1,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": 2.6586,
+  "source": "A. H. Gandomi, X.-S. Yang, A. H. Alavi. Mixed variable structural optimization using Firefly Algorithm. Computers & Structures 89(23-24):2325-2336, 2011. E. Sandgren. Nonlinear integer and discrete programming in mechanical design optimization. Journal of Mechanical Design 112(2):223-229, 1990.",
+  "variable_types": [
+    "continuous",
+    [
+      0.009,
+      0.0095,
+      0.0104,
+      0.0118,
+      0.0128,
+      0.0132,
+      0.014,
+      0.015,
+      0.0162,
+      0.0173,
+      0.018,
+      0.02,
+      0.023,
+      0.025,
+      0.028,
+      0.032,
+      0.035,
+      0.041,
+      0.047,
+      0.054,
+      0.063,
+      0.072,
+      0.08,
+      0.092,
+      0.105,
+      0.12,
+      0.135,
+      0.148,
+      0.162,
+      0.177,
+      0.192,
+      0.207,
+      0.225,
+      0.244,
+      0.263,
+      0.283,
+      0.307,
+      0.331,
+      0.362,
+      0.394,
+      0.4375,
+      0.5
+    ],
+    "integer"
+  ],
+  "num_categorical_variables": 1
+}

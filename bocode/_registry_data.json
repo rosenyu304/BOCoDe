@@ -407,6 +407,10 @@
     "opt_problems.engineering.HeatExchanger",
     null
   ],
+  "HelicalSpring": [
+    "opt_problems.engineering.HelicalSpring",
+    null
+  ],
   "HopperPolicySearchProblem": [
     "opt_problems.control.mujoco.MujocoFuncs",
     "mujoco"
