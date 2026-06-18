@@ -25,7 +25,7 @@ from pathlib import Path
 # Hugging Face dataset that hosts the large assets. The resolve/main path serves
 # raw files over HTTPS. Override with BOCODE_DATA_BASE_URL (must end with '/').
 DEFAULT_BASE_URL = (
-    "https://huggingface.co/datasets/rosenyu304/bocode-data/resolve/main/"
+    "https://huggingface.co/datasets/rosenyu/bocode-data/resolve/main/"
 )
 
 # filename -> sha256 of the expected file. Fill in once assets are uploaded;

@@ -98,6 +98,29 @@ def _known_optimum(name: str, problem) -> float | None:
     return opt if isinstance(opt, (int, float)) else None
 
 
+def _dim_of(name: str) -> int | None:
+    """Problem dimension from metadata (registered) or the class attribute."""
+    if name in bocode.registry.PROBLEM_REGISTRY:
+        d = bocode.get_metadata(name).get("dim")
+        if d is not None:
+            return d
+    return (
+        getattr(bocode.get_problem(name), "available_dimensions", None)
+        if not isinstance(
+            getattr(bocode.get_problem(name), "available_dimensions", None),
+            (list, tuple),
+        )
+        else None
+    )
+
+
+def _in_dim_range(name: str, lo: int | None, hi: int | None) -> bool:
+    d = _dim_of(name)
+    if d is None:
+        return False  # unknown dim -> exclude when a dim filter is active
+    return (lo is None or d >= lo) and (hi is None or d <= hi)
+
+
 def _algos_for(name: str, include_tfm: bool, selected: list[str] | None = None):
     """(module_path, label) pairs to run for this problem.
 
@@ -187,6 +210,12 @@ def main() -> None:
     p.add_argument(
         "--input-type", choices=["continuous", "mixed", "discrete"], default=None
     )
+    p.add_argument(
+        "--max-dim", type=int, default=None, help="keep problems with dim <= this"
+    )
+    p.add_argument(
+        "--min-dim", type=int, default=None, help="keep problems with dim >= this"
+    )
     p.add_argument("--seeds", nargs="+", type=int, default=[0])
     p.add_argument("--n-init", type=int, default=10)
     p.add_argument("--iters", type=int, default=50)
@@ -214,6 +243,9 @@ def main() -> None:
         )
     else:
         problems = args.problems
+
+    if args.max_dim is not None or args.min_dim is not None:
+        problems = [p for p in problems if _in_dim_range(p, args.min_dim, args.max_dim)]
 
     # build the full (algorithm x problem x seed) job list, then take this shard
     jobs = []
