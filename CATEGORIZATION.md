@@ -107,7 +107,7 @@ tracked in `docs/AUDIT_findings_2026_06.md`:
 ## Problem table
 
 The leading `#` column numbers the problems 1…N, so the last row shows the total
-problem count (currently **169**).
+problem count (currently **170**).
 
 <!-- TABLE:START -->
 
@@ -235,53 +235,54 @@ problem count (currently **169**).
 | 120 | WaterProblem | Engineering | Engineering (standalone) | 3 | 5 | 7 | ? | unknown | unknown |
 | 121 | WaterResources | Engineering | Engineering (standalone) | 3 | 5 | 7 | ? | unknown | unknown |
 | 122 | WeldedBeam | Engineering | Engineering (standalone) | 4 | 2 | 4 | ? | unknown | unknown |
-| 123 | CS1 | Engineering | MODAct (actuator design) | 20 | 2 | 7 | ? | unknown | unknown |
-| 124 | CS2 | Engineering | MODAct (actuator design) | 20 | 2 | 8 | ? | unknown | unknown |
-| 125 | CS3 | Engineering | MODAct (actuator design) | 20 | 2 | 10 | ? | unknown | unknown |
-| 126 | CS4 | Engineering | MODAct (actuator design) | 20 | 2 | 9 | ? | unknown | unknown |
-| 127 | CT1 | Engineering | MODAct (actuator design) | 20 | 2 | 7 | ? | unknown | unknown |
-| 128 | CT2 | Engineering | MODAct (actuator design) | 20 | 2 | 8 | ? | unknown | unknown |
-| 129 | CT3 | Engineering | MODAct (actuator design) | 20 | 2 | 10 | ? | unknown | unknown |
-| 130 | CT4 | Engineering | MODAct (actuator design) | 20 | 2 | 9 | ? | unknown | unknown |
-| 131 | CTS1 | Engineering | MODAct (actuator design) | 20 | 3 | 7 | ? | unknown | unknown |
-| 132 | CTS2 | Engineering | MODAct (actuator design) | 20 | 3 | 8 | ? | unknown | unknown |
-| 133 | CTS3 | Engineering | MODAct (actuator design) | 20 | 3 | 10 | ? | unknown | unknown |
-| 134 | CTS4 | Engineering | MODAct (actuator design) | 20 | 3 | 9 | ? | unknown | unknown |
-| 135 | CTSE1 | Engineering | MODAct (actuator design) | 20 | 4 | 7 | ? | unknown | unknown |
-| 136 | CTSE2 | Engineering | MODAct (actuator design) | 20 | 4 | 8 | ? | unknown | unknown |
-| 137 | CTSE3 | Engineering | MODAct (actuator design) | 20 | 4 | 10 | ? | unknown | unknown |
-| 138 | CTSE4 | Engineering | MODAct (actuator design) | 20 | 4 | 9 | ? | unknown | unknown |
-| 139 | CTSEI1 | Engineering | MODAct (actuator design) | 20 | 5 | 7 | ? | unknown | unknown |
-| 140 | CTSEI2 | Engineering | MODAct (actuator design) | 20 | 5 | 8 | ? | unknown | unknown |
-| 141 | CTSEI3 | Engineering | MODAct (actuator design) | 20 | 5 | 10 | ? | unknown | unknown |
-| 142 | CTSEI4 | Engineering | MODAct (actuator design) | 20 | 5 | 9 | ? | unknown | unknown |
-| 143 | RE21 | Engineering | RE (Tanabe-Ishibuchi) | 4 | 2 | 0 | ? | unknown | unknown |
-| 144 | RE22 | Engineering | RE (Tanabe-Ishibuchi) | 3 | 2 | 0 | ? | unknown | unknown |
-| 145 | RE23 | Engineering | RE (Tanabe-Ishibuchi) | 4 | 2 | 0 | ? | unknown | unknown |
-| 146 | RE24 | Engineering | RE (Tanabe-Ishibuchi) | 2 | 2 | 0 | ? | unknown | unknown |
-| 147 | RE25 | Engineering | RE (Tanabe-Ishibuchi) | 3 | 2 | 0 | ? | unknown | unknown |
-| 148 | RE31 | Engineering | RE (Tanabe-Ishibuchi) | 3 | 3 | 0 | ? | unknown | unknown |
-| 149 | RE32 | Engineering | RE (Tanabe-Ishibuchi) | 4 | 3 | 0 | ? | unknown | unknown |
-| 150 | RE33 | Engineering | RE (Tanabe-Ishibuchi) | 4 | 3 | 0 | ? | unknown | unknown |
-| 151 | RE34 | Engineering | RE (Tanabe-Ishibuchi) | 5 | 3 | 0 | ? | unknown | unknown |
-| 152 | RE35 | Engineering | RE (Tanabe-Ishibuchi) | 7 | 3 | 0 | ? | unknown | unknown |
-| 153 | RE36 | Engineering | RE (Tanabe-Ishibuchi) | 4 | 3 | 0 | ? | unknown | unknown |
-| 154 | RE37 | Engineering | RE (Tanabe-Ishibuchi) | 4 | 3 | 0 | ? | unknown | unknown |
-| 155 | RE41 | Engineering | RE (Tanabe-Ishibuchi) | 7 | 4 | 0 | ? | unknown | unknown |
-| 156 | RE42 | Engineering | RE (Tanabe-Ishibuchi) | 6 | 4 | 0 | ? | unknown | unknown |
-| 157 | RE61 | Engineering | RE (Tanabe-Ishibuchi) | 3 | 6 | 0 | ? | unknown | unknown |
-| 158 | RE91 | Engineering | RE (Tanabe-Ishibuchi) | 7 | 9 | 0 | ? | unknown | unknown |
-| 159 | LassoBreastCancer | Hyperparameter Optimization | HPO (LassoBench / GP-HDBO) | 9 | 1 | 0 | ? | unknown | unknown |
-| 160 | LassoDNA | Hyperparameter Optimization | HPO (LassoBench / GP-HDBO) | 180 | 1 | 0 | ? | unknown | unknown |
-| 161 | LassoDiabetes | Hyperparameter Optimization | HPO (LassoBench / GP-HDBO) | 8 | 1 | 0 | ? | unknown | unknown |
-| 162 | LassoLeukemia | Hyperparameter Optimization | HPO (LassoBench / GP-HDBO) | 7129 | 1 | 0 | ? | unknown | unknown |
-| 163 | LassoRCV1 | Hyperparameter Optimization | HPO (LassoBench / GP-HDBO) | 47236 | 1 | 0 | ? | unknown | unknown |
-| 164 | SVM | Hyperparameter Optimization | HPO (LassoBench / GP-HDBO) | 388 | 1 | 0 | ? | no | unknown |
-| 165 | AgNP | Materials | PV-Lab materials | 5 | 1 | 0 | ? | unknown | unknown |
-| 166 | AutoAM | Materials | PV-Lab materials | 4 | 1 | 0 | ? | unknown | unknown |
-| 167 | CrossedBarrel | Materials | PV-Lab materials | 4 | 1 | 0 | ? | unknown | unknown |
-| 168 | P3HT | Materials | PV-Lab materials | 5 | 1 | 0 | ? | unknown | unknown |
-| 169 | Perovskite | Materials | PV-Lab materials | 3 | 1 | 0 | ? | unknown | unknown |
+| 123 | WeldedBeamSO | Engineering | Engineering (standalone) | 4 | 1 | 7 | ? | unknown | unknown |
+| 124 | CS1 | Engineering | MODAct (actuator design) | 20 | 2 | 7 | ? | unknown | unknown |
+| 125 | CS2 | Engineering | MODAct (actuator design) | 20 | 2 | 8 | ? | unknown | unknown |
+| 126 | CS3 | Engineering | MODAct (actuator design) | 20 | 2 | 10 | ? | unknown | unknown |
+| 127 | CS4 | Engineering | MODAct (actuator design) | 20 | 2 | 9 | ? | unknown | unknown |
+| 128 | CT1 | Engineering | MODAct (actuator design) | 20 | 2 | 7 | ? | unknown | unknown |
+| 129 | CT2 | Engineering | MODAct (actuator design) | 20 | 2 | 8 | ? | unknown | unknown |
+| 130 | CT3 | Engineering | MODAct (actuator design) | 20 | 2 | 10 | ? | unknown | unknown |
+| 131 | CT4 | Engineering | MODAct (actuator design) | 20 | 2 | 9 | ? | unknown | unknown |
+| 132 | CTS1 | Engineering | MODAct (actuator design) | 20 | 3 | 7 | ? | unknown | unknown |
+| 133 | CTS2 | Engineering | MODAct (actuator design) | 20 | 3 | 8 | ? | unknown | unknown |
+| 134 | CTS3 | Engineering | MODAct (actuator design) | 20 | 3 | 10 | ? | unknown | unknown |
+| 135 | CTS4 | Engineering | MODAct (actuator design) | 20 | 3 | 9 | ? | unknown | unknown |
+| 136 | CTSE1 | Engineering | MODAct (actuator design) | 20 | 4 | 7 | ? | unknown | unknown |
+| 137 | CTSE2 | Engineering | MODAct (actuator design) | 20 | 4 | 8 | ? | unknown | unknown |
+| 138 | CTSE3 | Engineering | MODAct (actuator design) | 20 | 4 | 10 | ? | unknown | unknown |
+| 139 | CTSE4 | Engineering | MODAct (actuator design) | 20 | 4 | 9 | ? | unknown | unknown |
+| 140 | CTSEI1 | Engineering | MODAct (actuator design) | 20 | 5 | 7 | ? | unknown | unknown |
+| 141 | CTSEI2 | Engineering | MODAct (actuator design) | 20 | 5 | 8 | ? | unknown | unknown |
+| 142 | CTSEI3 | Engineering | MODAct (actuator design) | 20 | 5 | 10 | ? | unknown | unknown |
+| 143 | CTSEI4 | Engineering | MODAct (actuator design) | 20 | 5 | 9 | ? | unknown | unknown |
+| 144 | RE21 | Engineering | RE (Tanabe-Ishibuchi) | 4 | 2 | 0 | ? | unknown | unknown |
+| 145 | RE22 | Engineering | RE (Tanabe-Ishibuchi) | 3 | 2 | 0 | ? | unknown | unknown |
+| 146 | RE23 | Engineering | RE (Tanabe-Ishibuchi) | 4 | 2 | 0 | ? | unknown | unknown |
+| 147 | RE24 | Engineering | RE (Tanabe-Ishibuchi) | 2 | 2 | 0 | ? | unknown | unknown |
+| 148 | RE25 | Engineering | RE (Tanabe-Ishibuchi) | 3 | 2 | 0 | ? | unknown | unknown |
+| 149 | RE31 | Engineering | RE (Tanabe-Ishibuchi) | 3 | 3 | 0 | ? | unknown | unknown |
+| 150 | RE32 | Engineering | RE (Tanabe-Ishibuchi) | 4 | 3 | 0 | ? | unknown | unknown |
+| 151 | RE33 | Engineering | RE (Tanabe-Ishibuchi) | 4 | 3 | 0 | ? | unknown | unknown |
+| 152 | RE34 | Engineering | RE (Tanabe-Ishibuchi) | 5 | 3 | 0 | ? | unknown | unknown |
+| 153 | RE35 | Engineering | RE (Tanabe-Ishibuchi) | 7 | 3 | 0 | ? | unknown | unknown |
+| 154 | RE36 | Engineering | RE (Tanabe-Ishibuchi) | 4 | 3 | 0 | ? | unknown | unknown |
+| 155 | RE37 | Engineering | RE (Tanabe-Ishibuchi) | 4 | 3 | 0 | ? | unknown | unknown |
+| 156 | RE41 | Engineering | RE (Tanabe-Ishibuchi) | 7 | 4 | 0 | ? | unknown | unknown |
+| 157 | RE42 | Engineering | RE (Tanabe-Ishibuchi) | 6 | 4 | 0 | ? | unknown | unknown |
+| 158 | RE61 | Engineering | RE (Tanabe-Ishibuchi) | 3 | 6 | 0 | ? | unknown | unknown |
+| 159 | RE91 | Engineering | RE (Tanabe-Ishibuchi) | 7 | 9 | 0 | ? | unknown | unknown |
+| 160 | LassoBreastCancer | Hyperparameter Optimization | HPO (LassoBench / GP-HDBO) | 9 | 1 | 0 | ? | unknown | unknown |
+| 161 | LassoDNA | Hyperparameter Optimization | HPO (LassoBench / GP-HDBO) | 180 | 1 | 0 | ? | unknown | unknown |
+| 162 | LassoDiabetes | Hyperparameter Optimization | HPO (LassoBench / GP-HDBO) | 8 | 1 | 0 | ? | unknown | unknown |
+| 163 | LassoLeukemia | Hyperparameter Optimization | HPO (LassoBench / GP-HDBO) | 7129 | 1 | 0 | ? | unknown | unknown |
+| 164 | LassoRCV1 | Hyperparameter Optimization | HPO (LassoBench / GP-HDBO) | 47236 | 1 | 0 | ? | unknown | unknown |
+| 165 | SVM | Hyperparameter Optimization | HPO (LassoBench / GP-HDBO) | 388 | 1 | 0 | ? | no | unknown |
+| 166 | AgNP | Materials | PV-Lab materials | 5 | 1 | 0 | ? | unknown | unknown |
+| 167 | AutoAM | Materials | PV-Lab materials | 4 | 1 | 0 | ? | unknown | unknown |
+| 168 | CrossedBarrel | Materials | PV-Lab materials | 4 | 1 | 0 | ? | unknown | unknown |
+| 169 | P3HT | Materials | PV-Lab materials | 5 | 1 | 0 | ? | unknown | unknown |
+| 170 | Perovskite | Materials | PV-Lab materials | 3 | 1 | 0 | ? | unknown | unknown |
 
 <!-- TABLE:END -->
 
@@ -304,11 +305,11 @@ heading shows the exact call. (Generated; rerun `python tools/render_categorizat
 
 `GearTrain`
 
-### Single-objective, constrained, continuous (71)
+### Single-objective, constrained, continuous (72)
 
 `list_problems(num_objectives=1, constrained=True, input_type='continuous')`
 
-`CEC2020_p1`, `CEC2020_p10`, `CEC2020_p11`, `CEC2020_p12`, `CEC2020_p13`, `CEC2020_p14`, `CEC2020_p15`, `CEC2020_p16`, `CEC2020_p17`, `CEC2020_p18`, `CEC2020_p19`, `CEC2020_p2`, `CEC2020_p20`, `CEC2020_p21`, `CEC2020_p22`, `CEC2020_p23`, `CEC2020_p24`, `CEC2020_p25`, `CEC2020_p26`, `CEC2020_p27`, `CEC2020_p28`, `CEC2020_p29`, `CEC2020_p3`, `CEC2020_p30`, `CEC2020_p32`, `CEC2020_p33`, `CEC2020_p34`, `CEC2020_p35`, `CEC2020_p36`, `CEC2020_p37`, `CEC2020_p38`, `CEC2020_p39`, `CEC2020_p4`, `CEC2020_p40`, `CEC2020_p41`, `CEC2020_p42`, `CEC2020_p43`, `CEC2020_p44`, `CEC2020_p45`, `CEC2020_p46`, `CEC2020_p47`, `CEC2020_p48`, `CEC2020_p49`, `CEC2020_p5`, `CEC2020_p50`, `CEC2020_p51`, `CEC2020_p52`, `CEC2020_p53`, `CEC2020_p54`, `CEC2020_p55`, `CEC2020_p56`, `CEC2020_p57`, `CEC2020_p6`, `CEC2020_p7`, `CEC2020_p8`, `CEC2020_p9`, `CantileverBeam`, `CompressionSpring`, `HeatExchanger`, `MOPTA08Car`, `PEARL`, `ReinforcedConcreteBeam`, `SatelliteDesign`, `Sellar`, `ThreeTruss`, `Truss10D`, `Truss120D`, `Truss200D`, `Truss25D`, `Truss72D_FourForces`, `Truss72D_SingleForce`
+`CEC2020_p1`, `CEC2020_p10`, `CEC2020_p11`, `CEC2020_p12`, `CEC2020_p13`, `CEC2020_p14`, `CEC2020_p15`, `CEC2020_p16`, `CEC2020_p17`, `CEC2020_p18`, `CEC2020_p19`, `CEC2020_p2`, `CEC2020_p20`, `CEC2020_p21`, `CEC2020_p22`, `CEC2020_p23`, `CEC2020_p24`, `CEC2020_p25`, `CEC2020_p26`, `CEC2020_p27`, `CEC2020_p28`, `CEC2020_p29`, `CEC2020_p3`, `CEC2020_p30`, `CEC2020_p32`, `CEC2020_p33`, `CEC2020_p34`, `CEC2020_p35`, `CEC2020_p36`, `CEC2020_p37`, `CEC2020_p38`, `CEC2020_p39`, `CEC2020_p4`, `CEC2020_p40`, `CEC2020_p41`, `CEC2020_p42`, `CEC2020_p43`, `CEC2020_p44`, `CEC2020_p45`, `CEC2020_p46`, `CEC2020_p47`, `CEC2020_p48`, `CEC2020_p49`, `CEC2020_p5`, `CEC2020_p50`, `CEC2020_p51`, `CEC2020_p52`, `CEC2020_p53`, `CEC2020_p54`, `CEC2020_p55`, `CEC2020_p56`, `CEC2020_p57`, `CEC2020_p6`, `CEC2020_p7`, `CEC2020_p8`, `CEC2020_p9`, `CantileverBeam`, `CompressionSpring`, `HeatExchanger`, `MOPTA08Car`, `PEARL`, `ReinforcedConcreteBeam`, `SatelliteDesign`, `Sellar`, `ThreeTruss`, `Truss10D`, `Truss120D`, `Truss200D`, `Truss25D`, `Truss72D_FourForces`, `Truss72D_SingleForce`, `WeldedBeamSO`
 
 ### Single-objective, constrained, mixed-variable (3)
 

@@ -674,5 +674,9 @@
   "WeldedBeam": [
     "opt_problems.engineering.WeldedBeam",
     null
+  ],
+  "WeldedBeamSO": [
+    "opt_problems.engineering.WeldedBeamSO",
+    null
   ]
 }

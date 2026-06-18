@@ -210,6 +210,12 @@ class Result:
     mean: list = field(default_factory=list)  # GP posterior mean at the chosen point
     variance: list = field(default_factory=list)  # GP posterior var at the chosen point
     per_iteration_acquisition_function_value: list = field(default_factory=list)
+    # full evaluation history: X are the queried points (unit cube [0,1]^d, the
+    # first n_init rows are the initial design), y the corresponding objective in
+    # the maximized convention (same as `best`); n_init is the initial-design size.
+    X: object = None
+    y: object = None
+    n_init: int = 0
     _t0: float = field(default=0.0, repr=False)
 
     @property
@@ -265,6 +271,22 @@ class Result:
         self.variance.append(float(variance))
         self.per_iteration_acquisition_function_value.append(float(acq_value))
 
+    def set_history(self, X, y, n_init: int) -> None:
+        """Store the full evaluation history: queried points ``X`` (n, dim), their
+        objective ``y`` (n,), and the initial-design size ``n_init`` (so ``X[:n_init]``
+        / ``y[:n_init]`` are the initial sample and the rest are the BO queries).
+        """
+        import numpy as np
+
+        def _arr(a):
+            if hasattr(a, "detach"):
+                a = a.detach().cpu().numpy()
+            return np.asarray(a, dtype=float)
+
+        self.X = _arr(X)
+        self.y = _arr(y).reshape(-1)
+        self.n_init = int(n_init)
+
     # Backwards-compatible single-argument logger (records best only).
     def log(self, current_best: float) -> None:
         if not self.per_iteration_value:
@@ -275,12 +297,13 @@ class Result:
     def to_dict(self) -> dict:
         import numpy as np
 
-        return {
+        d = {
             "algorithm": self.algorithm,
             "problem": self.problem,
             "seed": self.seed,
             "acquisition_function": self.acquisition_function,
             "best": self.best,
+            "n_init": self.n_init,
             "iterations": np.asarray(self.iterations),
             "per_iteration_value": np.asarray(self.per_iteration_value),
             "wall_time": np.asarray(self.wall_time),
@@ -290,6 +313,10 @@ class Result:
                 self.per_iteration_acquisition_function_value
             ),
         }
+        # full evaluation history (queried points + objectives), when recorded
+        d["X"] = np.asarray(self.X) if self.X is not None else np.empty((0, 0))
+        d["y"] = np.asarray(self.y) if self.y is not None else np.empty((0,))
+        return d
 
     def to_npz(self, path: str) -> None:
         import os

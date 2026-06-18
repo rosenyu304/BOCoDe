@@ -142,6 +142,7 @@ def optimize_problem(
         train_Y = torch.cat([train_Y, y], dim=0)
         best = max(best, y.item())
         res.record(best, mean=mean, variance=var, acq_value=acq_value.item())
+    res.set_history(train_X, train_Y, n_init)
     return res
 
 

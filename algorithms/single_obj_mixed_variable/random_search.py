@@ -45,6 +45,7 @@ def optimize_problem(problem, iters: int = 100, seed: int = 0) -> Result:
     for i in range(iters):
         best = max(best, Y[i].item())
         res.record(best)
+    res.set_history(X, Y, 0)
     return res
 
 

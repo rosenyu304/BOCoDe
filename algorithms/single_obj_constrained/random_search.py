@@ -49,6 +49,7 @@ def optimize_problem(problem, iters: int = 200, seed: int = 0) -> Result:
         if feasible[i]:
             best = max(best, values[i].item())
         res.record(best)
+    res.set_history(X, values, 0)
     return res
 
 

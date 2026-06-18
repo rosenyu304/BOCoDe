@@ -110,6 +110,7 @@ def optimize_problem(
         train_con = torch.cat([train_con, c], dim=0)
         best = max(best, best_feasible(o, c))
         res.record(best)
+    res.set_history(train_X, train_obj, n_init)
     return res
 
 
