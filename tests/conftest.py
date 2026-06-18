@@ -21,10 +21,12 @@ import pytest
 
 def _skip_reason(exc: BaseException) -> str | None:
     msg = str(exc)
-    if isinstance(exc, ModuleNotFoundError):
-        return f"optional dependency not installed: {exc}"
-    if isinstance(exc, ImportError) and "requires the optional" in msg:
-        return f"optional extra not installed: {msg[:160]}"
+    # Any runtime ImportError means an optional dependency isn't installed:
+    # ModuleNotFoundError (slientruss3d, gym), the registry's "requires the optional
+    # ..." error, or pandas-style "Import openpyxl failed". (Real import bugs surface
+    # at collection, which this does not touch.)
+    if isinstance(exc, ImportError):
+        return f"optional dependency unavailable: {msg[:160]}"
     if isinstance(exc, RuntimeError) and (
         "Failed to download" in msg or "BOCODE_DATA_BASE_URL" in msg
     ):
