@@ -1,0 +1,63 @@
+{
+  "name": "Borehole",
+  "module": "bocode.opt_problems.engineering.Borehole",
+  "extra": null,
+  "suite": "Engineering (standalone)",
+  "num_objectives": 1,
+  "num_constraints": 0,
+  "available_dimensions": 8,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 8,
+  "bounds": [
+    [
+      0.05,
+      0.15
+    ],
+    [
+      100.0,
+      50000.0
+    ],
+    [
+      63070.0,
+      115600.0
+    ],
+    [
+      990.0,
+      1110.0
+    ],
+    [
+      63.1,
+      116.0
+    ],
+    [
+      700.0,
+      820.0
+    ],
+    [
+      1120.0,
+      1680.0
+    ],
+    [
+      9855.0,
+      12045.0
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": null,
+  "source": "A. Yousefpour, Z. Zanjani Foumani, M. Shishehbor, C. Mora, R. Bostanabad. GP+: a Python library for kernel-based learning via Gaussian processes. Advances in Engineering Software, 2024. https://github.com/Bostanabad-Research-Group/GP-Plus Borehole function: https://www.sfu.ca/~ssurjano/borehole.html",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
+}

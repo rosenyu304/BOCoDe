@@ -20,10 +20,32 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
-from bocode import list_problems  # noqa: E402
+from bocode import get_problem, list_problems, list_synthetic  # noqa: E402
 from bocode.registry import get_metadata  # noqa: E402
 
 OUT = ROOT / "docs" / "source" / "_generated" / "benchmark_table.html"
+
+
+def _synthetic_meta(name: str) -> dict:
+    """Build a metadata-like dict for a synthetic test function (not in the registry)."""
+    inst = get_problem(name)()
+    opt = getattr(inst, "optimum", None)
+    if isinstance(opt, (list, tuple)) and len(opt) == 1:
+        opt = opt[0]
+    itype = getattr(getattr(inst, "input_type", None), "value", None) or "continuous"
+    return {
+        "name": name,
+        "application": "Synthetic",
+        "suite": "Synthetic test function",
+        "dim": getattr(inst, "dim", None),
+        "num_objectives": getattr(inst, "num_objectives", 1),
+        "num_constraints": getattr(inst, "num_constraints", 0),
+        "input_type": itype,
+        "f_opt": round(float(opt), 6) if isinstance(opt, (int, float)) else None,
+        "convex": "unknown",
+        "np_hard": "unknown",
+    }
+
 
 # Facets rendered as toggle-button groups (label -> per-row value accessor).
 _FACETS = [
@@ -50,7 +72,10 @@ def _fmt(v) -> str:
 
 
 def build_html() -> str:
+    # Real-world problems from the registry + the synthetic test functions, the
+    # latter tagged Application = "Synthetic" so they can be filtered/toggled.
     rows = [(n, get_metadata(n)) for n in list_problems()]
+    rows += [(n, _synthetic_meta(n)) for n in list_synthetic()]
     data = [(n, m, _row_facets(m)) for n, m in rows]
 
     # distinct values per facet (for the toggle buttons)

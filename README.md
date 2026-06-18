@@ -1,4 +1,8 @@
-# BOCoDe: Benchmarks for Optimization and Computational Design
+<p align="center">
+  <img src="docs/source/_static/bocode_logo.png" alt="BoCoDe" width="320"/>
+</p>
+
+<h1 align="center">BOCoDe: Benchmarks for Optimization and Computational Design</h1>
 
 [![Python](https://img.shields.io/pypi/pyversions/bocode.svg)](https://badge.fury.io/py/bocode)
 ![tests](https://github.com/rosenyu304/bocode/workflows/Python%20Tests/badge.svg)

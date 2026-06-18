@@ -19,6 +19,10 @@
     "opt_problems.materials.AutoAM",
     null
   ],
+  "Borehole": [
+    "opt_problems.engineering.Borehole",
+    null
+  ],
   "BotorchCarSideImpact": [
     "opt_problems.engineering.BotorchCarSideImpact",
     null
@@ -375,6 +379,10 @@
     "opt_problems.engineering.CarSideImpact",
     null
   ],
+  "ColumnBuckling": [
+    "opt_problems.engineering.ColumnBuckling",
+    null
+  ],
   "CompressionSpring": [
     "opt_problems.engineering.CompressionSpring",
     null
@@ -385,6 +393,10 @@
   ],
   "DiscBrake": [
     "opt_problems.engineering.DiscBrake",
+    null
+  ],
+  "EulerBeamMixed": [
+    "opt_problems.engineering.EulerBeamMixed",
     null
   ],
   "EulerBernoulliBeamBending": [
@@ -681,6 +693,10 @@
   ],
   "WeldedBeamSO": [
     "opt_problems.engineering.WeldedBeamSO",
+    null
+  ],
+  "Wing": [
+    "opt_problems.engineering.Wing",
     null
   ]
 }

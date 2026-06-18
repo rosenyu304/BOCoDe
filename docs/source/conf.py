@@ -38,6 +38,8 @@ exclude_patterns = []
 # html_theme = 'alabaster'
 html_theme = "furo"
 html_static_path = ["_static"]
+html_logo = "_static/bocode_logo.png"
+html_favicon = "_static/bocode_logo.png"
 
 # Basic theme options
 html_theme_options = {
