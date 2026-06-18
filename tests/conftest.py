@@ -42,4 +42,7 @@ def pytest_runtest_makereport(item, call):
         reason = _skip_reason(call.excinfo.value)
         if reason:
             report.outcome = "skipped"
-            report.longrepr = reason
+            # pytest's terminal reporter expects a (path, lineno, message) tuple
+            # for skipped reports, not a bare string.
+            relpath, lineno, _ = item.location
+            report.longrepr = (relpath, (lineno or 0) + 1, f"Skipped: {reason}")
