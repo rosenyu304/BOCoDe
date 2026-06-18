@@ -22,7 +22,7 @@ except ImportError as _exc:  # pragma: no cover - exercised only without the ext
     ) from _exc
 
 
-from ...base import BenchmarkProblem, DataType
+from ...base import BenchmarkProblem
 
 
 class RobotPush(BenchmarkProblem):
@@ -31,7 +31,6 @@ class RobotPush(BenchmarkProblem):
     """
 
     available_dimensions = 14
-    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 0
 

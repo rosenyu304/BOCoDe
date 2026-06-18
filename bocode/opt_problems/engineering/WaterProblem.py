@@ -1,6 +1,6 @@
 import torch
 
-from ...base import BenchmarkProblem, DataType
+from ...base import BenchmarkProblem
 
 
 class WaterProblem(BenchmarkProblem):
@@ -12,7 +12,6 @@ class WaterProblem(BenchmarkProblem):
     """
 
     available_dimensions = 3
-    input_type = DataType.CONTINUOUS
     num_objectives = 5
     num_constraints = 7
 

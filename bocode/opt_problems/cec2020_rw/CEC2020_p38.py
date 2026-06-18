@@ -7,7 +7,7 @@ from pathlib import Path
 import numpy as np
 import torch
 
-from ...base import BenchmarkProblem, DataType
+from ...base import BenchmarkProblem
 
 
 class CEC2020_p38(BenchmarkProblem):
@@ -16,7 +16,6 @@ class CEC2020_p38(BenchmarkProblem):
     """
 
     num_objectives = 1
-    input_type = DataType.CONTINUOUS
     available_dimensions = 126
     num_constraints = 116
 

@@ -1,6 +1,6 @@
 import torch
 
-from ...base import BenchmarkProblem, DataType
+from ...base import BenchmarkProblem
 
 
 class SpeedReducer(BenchmarkProblem):
@@ -10,7 +10,6 @@ class SpeedReducer(BenchmarkProblem):
     """
 
     available_dimensions = 7
-    input_type = DataType.MIXED
     num_objectives = 1
     num_constraints = 9
 
@@ -27,8 +26,6 @@ class SpeedReducer(BenchmarkProblem):
             if is_discrete
             else None
         )
-        if not is_discrete:
-            self.input_type = DataType.CONTINUOUS
         super().__init__(
             dim=7,
             num_objectives=1,

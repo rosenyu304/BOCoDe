@@ -27,7 +27,7 @@ from __future__ import annotations
 import numpy as np
 import torch
 
-from ...base import BenchmarkProblem, DataType
+from ...base import BenchmarkProblem
 
 # Constants (inch / pound / psi).
 _PMAX = 1000.0  # maximum working load [lb]
@@ -96,7 +96,6 @@ class HelicalSpring(BenchmarkProblem):
     """
 
     available_dimensions = 3
-    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 8
 
@@ -104,7 +103,6 @@ class HelicalSpring(BenchmarkProblem):
         bounds = [(0.6, 3.0), (0.009, 0.5), (1.0, 70.0)]
         if is_discrete:
             self.variable_types = ["continuous", list(_WIRE_GAUGES), "integer"]
-            self.input_type = DataType.MIXED
         else:
             self.variable_types = None
         super().__init__(

@@ -33,7 +33,7 @@ import numpy as np
 import torch
 from scipy.optimize import fsolve
 
-from ...base import BenchmarkProblem, DataType
+from ...base import BenchmarkProblem
 
 # Physical constants / parameters (from minimdo pearl_initial_formulation.py).
 _RHOW = 1023.6  # seawater density [kg/m^3]
@@ -148,7 +148,6 @@ class PEARL(BenchmarkProblem):
     """
 
     available_dimensions = 7
-    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 6
 

@@ -56,6 +56,18 @@ _CATEGORIES = [
         False,
     ),
     (
+        "Single-objective, unconstrained, discrete",
+        "list_problems(num_objectives=1, constrained=False, input_type='discrete')",
+        {"num_objectives": 1, "constrained": False, "input_type": "discrete"},
+        False,
+    ),
+    (
+        "Single-objective, constrained, discrete",
+        "list_problems(num_objectives=1, constrained=True, input_type='discrete')",
+        {"num_objectives": 1, "constrained": True, "input_type": "discrete"},
+        False,
+    ),
+    (
         "Multi-objective, unconstrained, continuous",
         "list_problems(constrained=False, input_type='continuous')  # >=2 objectives",
         {"constrained": False, "input_type": "continuous"},

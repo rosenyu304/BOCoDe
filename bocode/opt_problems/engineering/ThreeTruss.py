@@ -1,6 +1,6 @@
 import torch
 
-from ...base import BenchmarkProblem, DataType
+from ...base import BenchmarkProblem
 
 
 class ThreeTruss(BenchmarkProblem):
@@ -12,7 +12,6 @@ class ThreeTruss(BenchmarkProblem):
     # 2D objective, 3 constraints, X = n-by-2
 
     available_dimensions = 2
-    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 3
 

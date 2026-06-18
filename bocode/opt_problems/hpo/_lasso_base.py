@@ -28,7 +28,7 @@ from __future__ import annotations
 import numpy as np
 import torch
 
-from ...base import BenchmarkProblem, DataType
+from ...base import BenchmarkProblem
 
 # Per-feature penalty range: input -1 -> 10**-PENALTY_DECADES, +1 -> 10**+PENALTY_DECADES.
 PENALTY_DECADES = 3.0
@@ -79,7 +79,6 @@ class WeightedLassoHPO(BenchmarkProblem):
     feature count). The dataset is loaded lazily on first evaluation.
     """
 
-    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 0
 

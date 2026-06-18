@@ -26,7 +26,7 @@ from __future__ import annotations
 
 import torch
 
-from ...base import BenchmarkProblem, DataType
+from ...base import BenchmarkProblem
 
 _P = 600.0  # vertical load [N]
 _E = 600.0  # Young's modulus (normalized units of the source)
@@ -57,7 +57,6 @@ class EulerBeamMixed(BenchmarkProblem):
     """
 
     available_dimensions = 3
-    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 0
 
@@ -65,7 +64,6 @@ class EulerBeamMixed(BenchmarkProblem):
         bounds = [(0.0, 1.0), (0.0, 1.0), (min(_INERTIA), max(_INERTIA))]
         if is_discrete:
             self.variable_types = ["continuous", "continuous", list(_INERTIA)]
-            self.input_type = DataType.MIXED
         else:
             self.variable_types = None
         super().__init__(

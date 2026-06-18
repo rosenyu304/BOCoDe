@@ -2,7 +2,7 @@ import math
 
 import torch
 
-from ...base import BenchmarkProblem, DataType
+from ...base import BenchmarkProblem
 from .._vendor.neorl_lib.qpower_model import QPowerModel as Q_Power_Model
 
 
@@ -14,7 +14,6 @@ class QPowerModel(BenchmarkProblem):
     """
 
     available_dimensions = 8
-    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 0
 

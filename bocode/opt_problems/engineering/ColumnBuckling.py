@@ -19,7 +19,7 @@ from __future__ import annotations
 
 import torch
 
-from ...base import BenchmarkProblem, DataType
+from ...base import BenchmarkProblem
 
 _E_LEVELS = [73.1, 200.0]
 _K_LEVELS = [0.5, 0.7, 1.0, 2.0]
@@ -33,7 +33,6 @@ class ColumnBuckling(BenchmarkProblem):
     """
 
     available_dimensions = 4
-    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 0
 
@@ -46,7 +45,6 @@ class ColumnBuckling(BenchmarkProblem):
         ]
         if is_discrete:
             self.variable_types = ["continuous", _E_LEVELS, _K_LEVELS, _I_LEVELS]
-            self.input_type = DataType.MIXED
         else:
             self.variable_types = None
         super().__init__(dim=4, num_objectives=1, num_constraints=0, bounds=bounds)

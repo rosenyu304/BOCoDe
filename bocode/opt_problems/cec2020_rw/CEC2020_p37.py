@@ -5,7 +5,7 @@ https://github.com/P-N-Suganthan/2020-RW-Constrained-Optimisation/
 import numpy as np
 import torch
 
-from ...base import BenchmarkProblem, DataType
+from ...base import BenchmarkProblem
 
 
 class CEC2020_p37(BenchmarkProblem):
@@ -14,7 +14,6 @@ class CEC2020_p37(BenchmarkProblem):
     """
 
     num_objectives = 1
-    input_type = DataType.CONTINUOUS
     available_dimensions = 126
     num_constraints = 116
 

@@ -1,6 +1,6 @@
 import torch
 
-from ...base import BenchmarkProblem, DataType
+from ...base import BenchmarkProblem
 
 
 class CompressionSpring(BenchmarkProblem):
@@ -12,7 +12,6 @@ class CompressionSpring(BenchmarkProblem):
     # 3D objective, 4 constraints, X = n-by-3
 
     available_dimensions = 3
-    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 4
 

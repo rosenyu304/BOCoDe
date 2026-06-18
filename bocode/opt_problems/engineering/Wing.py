@@ -20,7 +20,7 @@ from __future__ import annotations
 import numpy as np
 import torch
 
-from ...base import BenchmarkProblem, DataType
+from ...base import BenchmarkProblem
 
 _BOUNDS = [
     (150.0, 200.0),  # Sw
@@ -42,7 +42,6 @@ class Wing(BenchmarkProblem):
     """Minimize wing weight (10 vars). ``is_discrete`` -> mixed (Sw, tc categorical)."""
 
     available_dimensions = 10
-    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 0
 
@@ -51,7 +50,6 @@ class Wing(BenchmarkProblem):
             self.variable_types = ["continuous"] * 10
             self.variable_types[0] = _SW_LEVELS
             self.variable_types[6] = _TC_LEVELS
-            self.input_type = DataType.MIXED
         else:
             self.variable_types = None
         super().__init__(dim=10, num_objectives=1, num_constraints=0, bounds=_BOUNDS)

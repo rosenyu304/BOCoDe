@@ -29,7 +29,7 @@ from __future__ import annotations
 import numpy as np
 import torch
 
-from ...base import BenchmarkProblem, DataType
+from ...base import BenchmarkProblem
 
 # Constants (psi, inches, pounds).
 _P = 6000.0
@@ -57,7 +57,6 @@ class WeldedBeamSO(BenchmarkProblem):
     """
 
     available_dimensions = 4
-    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 7
 
@@ -70,7 +69,6 @@ class WeldedBeamSO(BenchmarkProblem):
                 "continuous",
                 "continuous",
             ]
-            self.input_type = DataType.MIXED
         else:
             self.variable_types = None
         super().__init__(dim=4, num_objectives=1, num_constraints=7, bounds=bounds)

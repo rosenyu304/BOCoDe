@@ -2,7 +2,7 @@ import numpy as np
 import scipy.interpolate as si
 import torch
 
-from ...base import BenchmarkProblem, DataType
+from ...base import BenchmarkProblem
 
 
 class Rover(BenchmarkProblem):
@@ -11,7 +11,6 @@ class Rover(BenchmarkProblem):
     """
 
     available_dimensions = 100
-    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 0
 

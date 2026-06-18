@@ -9,7 +9,7 @@ except ImportError as _exc:  # pragma: no cover - exercised only without the ext
         "Install it with: pip install 'bocode[control]'"
     ) from _exc
 
-from ...base import BenchmarkProblem, DataType
+from ...base import BenchmarkProblem
 
 
 class PD4CartPole(BenchmarkProblem):
@@ -19,7 +19,6 @@ class PD4CartPole(BenchmarkProblem):
     """
 
     available_dimensions = 4
-    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 0
 

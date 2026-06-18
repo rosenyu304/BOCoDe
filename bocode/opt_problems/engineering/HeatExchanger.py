@@ -1,6 +1,6 @@
 import torch
 
-from ...base import BenchmarkProblem, DataType
+from ...base import BenchmarkProblem
 
 
 class HeatExchanger(BenchmarkProblem):
@@ -10,7 +10,6 @@ class HeatExchanger(BenchmarkProblem):
     """
 
     available_dimensions = 8
-    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 6
 

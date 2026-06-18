@@ -1,6 +1,6 @@
 import torch
 
-from ...base import BenchmarkProblem, DataType
+from ...base import BenchmarkProblem
 
 
 class CarSideImpact(BenchmarkProblem):
@@ -12,7 +12,6 @@ class CarSideImpact(BenchmarkProblem):
     """
 
     available_dimensions = 7
-    input_type = DataType.CONTINUOUS
     num_objectives = 3
     num_constraints = 10
 

@@ -2,7 +2,7 @@ import math
 
 import torch
 
-from ...base import BenchmarkProblem, DataType
+from ...base import BenchmarkProblem
 from .._vendor.neorl_lib.reactivity_model import ReactivityModel as Reactivity_Model
 
 
@@ -15,7 +15,6 @@ class ReactivityModel(BenchmarkProblem):
     """
 
     available_dimensions = 8
-    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 0
 

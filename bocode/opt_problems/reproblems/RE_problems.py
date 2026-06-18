@@ -13,12 +13,11 @@ import math
 
 import torch
 
-from ...base import BenchmarkProblem, DataType
+from ...base import BenchmarkProblem
 
 
 class RE21(BenchmarkProblem):
     available_dimensions = 4
-    input_type = DataType.CONTINUOUS
     num_objectives = 2
     num_constraints = 0
 
@@ -67,7 +66,6 @@ class RE21(BenchmarkProblem):
 
 class RE22(BenchmarkProblem):
     available_dimensions = 3
-    input_type = DataType.CONTINUOUS
     num_objectives = 2
     num_constraints = 0
 
@@ -191,7 +189,6 @@ class RE22(BenchmarkProblem):
 
 class RE23(BenchmarkProblem):
     available_dimensions = 4
-    input_type = DataType.CONTINUOUS
     num_objectives = 2
     num_constraints = 0
 
@@ -245,7 +242,6 @@ class RE23(BenchmarkProblem):
 
 class RE24(BenchmarkProblem):
     available_dimensions = 2
-    input_type = DataType.CONTINUOUS
     num_objectives = 2
     num_constraints = 0
 
@@ -297,7 +293,6 @@ class RE24(BenchmarkProblem):
 
 class RE25(BenchmarkProblem):
     available_dimensions = 3
-    input_type = DataType.CONTINUOUS
     num_objectives = 2
     num_constraints = 0
 
@@ -405,7 +400,6 @@ class RE25(BenchmarkProblem):
 
 class RE31(BenchmarkProblem):
     available_dimensions = 3
-    input_type = DataType.CONTINUOUS
     num_objectives = 3
     num_constraints = 0
 
@@ -449,7 +443,6 @@ class RE31(BenchmarkProblem):
 
 class RE32(BenchmarkProblem):
     available_dimensions = 4
-    input_type = DataType.CONTINUOUS
     num_objectives = 3
     num_constraints = 0
 
@@ -529,7 +522,6 @@ class RE32(BenchmarkProblem):
 
 class RE33(BenchmarkProblem):
     available_dimensions = 4
-    input_type = DataType.CONTINUOUS
     num_objectives = 3
     num_constraints = 0
 
@@ -584,7 +576,6 @@ class RE33(BenchmarkProblem):
 
 class RE34(BenchmarkProblem):
     available_dimensions = 5
-    input_type = DataType.CONTINUOUS
     num_objectives = 3
     num_constraints = 0
 
@@ -650,7 +641,6 @@ class RE34(BenchmarkProblem):
 
 class RE35(BenchmarkProblem):
     available_dimensions = 7
-    input_type = DataType.CONTINUOUS
     num_objectives = 3
     num_constraints = 0
 
@@ -723,7 +713,6 @@ class RE35(BenchmarkProblem):
 
 class RE36(BenchmarkProblem):
     available_dimensions = 4
-    input_type = DataType.CONTINUOUS
     num_objectives = 3
     num_constraints = 0
 
@@ -760,7 +749,6 @@ class RE36(BenchmarkProblem):
 
 class RE37(BenchmarkProblem):
     available_dimensions = 4
-    input_type = DataType.CONTINUOUS
     num_objectives = 3
     num_constraints = 0
 
@@ -848,7 +836,6 @@ class RE37(BenchmarkProblem):
 
 class RE41(BenchmarkProblem):
     available_dimensions = 7
-    input_type = DataType.CONTINUOUS
     num_objectives = 4
     num_constraints = 0
 
@@ -942,7 +929,6 @@ class RE41(BenchmarkProblem):
 
 class RE42(BenchmarkProblem):
     available_dimensions = 6
-    input_type = DataType.CONTINUOUS
     num_objectives = 4
     num_constraints = 0
 
@@ -1063,7 +1049,6 @@ class RE42(BenchmarkProblem):
 
 class RE61(BenchmarkProblem):
     available_dimensions = 3
-    input_type = DataType.CONTINUOUS
     num_objectives = 6
     num_constraints = 0
 
@@ -1116,7 +1101,6 @@ class RE61(BenchmarkProblem):
 
 class RE91(BenchmarkProblem):
     available_dimensions = 7
-    input_type = DataType.CONTINUOUS
     num_objectives = 9
     num_constraints = 0
 

@@ -20,7 +20,7 @@ from __future__ import annotations
 import numpy as np
 import torch
 
-from ...base import BenchmarkProblem, DataType
+from ...base import BenchmarkProblem
 
 # (lower, upper) per variable, in order rw, r, Tu, Hu, Tl, Hl, L, Kw.
 _BOUNDS = [
@@ -42,7 +42,6 @@ class Borehole(BenchmarkProblem):
     """Maximize borehole water flow rate (8 vars). ``is_discrete`` -> mixed (rw, L)."""
 
     available_dimensions = 8
-    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 0
 
@@ -51,7 +50,6 @@ class Borehole(BenchmarkProblem):
             self.variable_types = ["continuous"] * 8
             self.variable_types[0] = _RW_LEVELS
             self.variable_types[6] = _L_LEVELS
-            self.input_type = DataType.MIXED
         else:
             self.variable_types = None
         super().__init__(dim=8, num_objectives=1, num_constraints=0, bounds=_BOUNDS)

@@ -2,7 +2,7 @@ import math
 
 import torch
 
-from ...base import BenchmarkProblem, DataType
+from ...base import BenchmarkProblem
 
 
 class PressureVessel(BenchmarkProblem):
@@ -14,7 +14,6 @@ class PressureVessel(BenchmarkProblem):
     # 4D objective, 4 constraints, X = n-by-4
 
     available_dimensions = 4
-    input_type = DataType.MIXED
     num_objectives = 1
     num_constraints = 4
     # x1, x2 (shell/head thickness, indices 0,1) are integer multiples of 0.0625
@@ -33,8 +32,6 @@ class PressureVessel(BenchmarkProblem):
             if is_discrete
             else None
         )
-        if not is_discrete:
-            self.input_type = DataType.CONTINUOUS
         super().__init__(
             dim=4,
             num_objectives=1,

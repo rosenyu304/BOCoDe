@@ -1,4 +1,4 @@
-from ...base import BenchmarkProblem, DataType
+from ...base import BenchmarkProblem
 
 
 class GearTrain(BenchmarkProblem):
@@ -15,7 +15,6 @@ class GearTrain(BenchmarkProblem):
     """
 
     available_dimensions = 4
-    input_type = DataType.MIXED
     num_objectives = 1
     num_constraints = 0
 
@@ -28,8 +27,6 @@ class GearTrain(BenchmarkProblem):
         # Teeth counts live in [12, 60]; the integer/continuous distinction is
         # carried by variable_types, not by the bounds (so scale()/sample() work).
         self.variable_types = ["integer"] * 4 if is_discrete else None
-        if not is_discrete:
-            self.input_type = DataType.CONTINUOUS
 
         super().__init__(
             dim=4,

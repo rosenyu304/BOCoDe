@@ -1,6 +1,6 @@
 import torch
 
-from ...base import BenchmarkProblem, DataType
+from ...base import BenchmarkProblem
 
 
 class TwoBarTruss(BenchmarkProblem):
@@ -10,7 +10,6 @@ class TwoBarTruss(BenchmarkProblem):
     """
 
     available_dimensions = 2
-    input_type = DataType.CONTINUOUS
     num_objectives = 2
     num_constraints = 5
 

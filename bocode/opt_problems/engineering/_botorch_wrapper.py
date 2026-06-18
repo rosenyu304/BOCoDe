@@ -6,7 +6,7 @@ M. Balandat, B. Karrer, D. R. Jiang, S. Daulton, B. Letham, A. G. Wilson, and E.
 
 import torch
 
-from ...base import BenchmarkProblem, DataType
+from ...base import BenchmarkProblem
 
 
 class MultiObjBotorchProblem(BenchmarkProblem):
@@ -17,8 +17,6 @@ class MultiObjBotorchProblem(BenchmarkProblem):
     class to ``__init__``; the BoTorch problem is only instantiated at
     construction time.
     """
-
-    input_type = DataType.CONTINUOUS
 
     def __init__(
         self,

@@ -26,7 +26,7 @@ from __future__ import annotations
 import numpy as np
 import torch
 
-from ...base import BenchmarkProblem, DataType
+from ...base import BenchmarkProblem
 
 
 def _solve_coupling(x1, x2, x3):
@@ -56,7 +56,6 @@ class Allison(BenchmarkProblem):
     """
 
     available_dimensions = 3
-    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 0
 

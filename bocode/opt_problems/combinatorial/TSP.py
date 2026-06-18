@@ -1,7 +1,7 @@
 import numpy as np
 import torch
 
-from ...base import BenchmarkProblem, DataType
+from ...base import BenchmarkProblem
 from .._vendor.neorl_lib.tsp import TSP
 
 
@@ -14,7 +14,6 @@ class TSP_51Cities(BenchmarkProblem):
     tags = {"single_objective", "unconstrained", "discrete", "TSP"}
 
     available_dimensions = 51
-    input_type = DataType.DISCRETE
     num_objectives = 1
     num_constraints = 0
 
@@ -176,7 +175,6 @@ class TSP_100Cities(BenchmarkProblem):
     tags = {"single_objective", "unconstrained", "discrete", "TSP"}
 
     available_dimensions = 100
-    input_type = DataType.DISCRETE
     num_objectives = 1
     num_constraints = 0
 

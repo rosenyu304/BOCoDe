@@ -8,7 +8,7 @@ import pandas as pd
 import torch
 
 from ..._fetch import fetch_data_file
-from ...base import BenchmarkProblem, DataType
+from ...base import BenchmarkProblem
 
 
 class Mazda_SCA(BenchmarkProblem):
@@ -17,7 +17,6 @@ class Mazda_SCA(BenchmarkProblem):
     """
 
     available_dimensions = 148
-    input_type = DataType.CONTINUOUS
     num_objectives = 4
     num_constraints = 36
 
@@ -143,7 +142,6 @@ class Mazda(BenchmarkProblem):
     """
 
     available_dimensions = 222
-    input_type = DataType.CONTINUOUS
     num_objectives = 5
     num_constraints = 54
 

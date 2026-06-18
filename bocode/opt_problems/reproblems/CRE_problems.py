@@ -15,12 +15,11 @@ import math
 
 import torch
 
-from ...base import BenchmarkProblem, DataType
+from ...base import BenchmarkProblem
 
 
 class CRE21(BenchmarkProblem):
     available_dimensions = 3
-    input_type = DataType.CONTINUOUS
     num_objectives = 2
     num_constraints = 3
 
@@ -61,7 +60,6 @@ class CRE21(BenchmarkProblem):
 
 class CRE22(BenchmarkProblem):
     available_dimensions = 4
-    input_type = DataType.CONTINUOUS
     num_objectives = 2
     num_constraints = 4
 
@@ -136,7 +134,6 @@ class CRE22(BenchmarkProblem):
 
 class CRE23(BenchmarkProblem):
     available_dimensions = 4
-    input_type = DataType.CONTINUOUS
     num_objectives = 2
     num_constraints = 4
 
@@ -190,7 +187,6 @@ class CRE23(BenchmarkProblem):
 
 class CRE24(BenchmarkProblem):
     available_dimensions = 7
-    input_type = DataType.CONTINUOUS
     num_objectives = 2
     num_constraints = 11
 
@@ -258,7 +254,6 @@ class CRE24(BenchmarkProblem):
 
 class CRE25(BenchmarkProblem):
     available_dimensions = 4
-    input_type = DataType.CONTINUOUS
     num_objectives = 2
     num_constraints = 1
 
@@ -294,7 +289,6 @@ class CRE25(BenchmarkProblem):
 
 class CRE31(BenchmarkProblem):
     available_dimensions = 7
-    input_type = DataType.CONTINUOUS
     num_objectives = 3
     num_constraints = 10
 
@@ -394,7 +388,6 @@ class CRE31(BenchmarkProblem):
 
 class CRE32(BenchmarkProblem):
     available_dimensions = 6
-    input_type = DataType.CONTINUOUS
     num_objectives = 3
     num_constraints = 9
 
@@ -510,7 +503,6 @@ class CRE32(BenchmarkProblem):
 
 class CRE51(BenchmarkProblem):
     available_dimensions = 3
-    input_type = DataType.CONTINUOUS
     num_objectives = 5
     num_constraints = 7
 

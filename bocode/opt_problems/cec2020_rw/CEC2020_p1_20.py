@@ -4,7 +4,7 @@ https://github.com/P-N-Suganthan/2020-RW-Constrained-Optimisation/
 
 import torch
 
-from ...base import BenchmarkProblem, DataType
+from ...base import BenchmarkProblem
 
 
 class CEC2020_p1(BenchmarkProblem):
@@ -13,7 +13,6 @@ class CEC2020_p1(BenchmarkProblem):
     """
 
     num_objectives = 1
-    input_type = DataType.CONTINUOUS
     available_dimensions = 9
     num_constraints = 8
 
@@ -88,7 +87,6 @@ class CEC2020_p2(BenchmarkProblem):
     """
 
     num_objectives = 1
-    input_type = DataType.CONTINUOUS
     available_dimensions = 11
     num_constraints = 9
 
@@ -177,7 +175,6 @@ class CEC2020_p3(BenchmarkProblem):
     """
 
     num_objectives = 1
-    input_type = DataType.CONTINUOUS
     available_dimensions = 7
     num_constraints = 14
 
@@ -288,7 +285,6 @@ class CEC2020_p4(BenchmarkProblem):
     """
 
     num_objectives = 1
-    input_type = DataType.CONTINUOUS
     available_dimensions = 6
     num_constraints = 5
 
@@ -344,7 +340,6 @@ class CEC2020_p5(BenchmarkProblem):
     """
 
     num_objectives = 1
-    input_type = DataType.CONTINUOUS
     available_dimensions = 9
     num_constraints = 6
 
@@ -411,7 +406,6 @@ class CEC2020_p6(BenchmarkProblem):
     """
 
     num_objectives = 1
-    input_type = DataType.CONTINUOUS
     available_dimensions = 38
     num_constraints = 32
 
@@ -548,7 +542,6 @@ class CEC2020_p7(BenchmarkProblem):
     """
 
     num_objectives = 1
-    input_type = DataType.CONTINUOUS
     available_dimensions = 48
     num_constraints = 38
 
@@ -731,7 +724,6 @@ class CEC2020_p8(BenchmarkProblem):
     """
 
     num_objectives = 1
-    input_type = DataType.CONTINUOUS
     available_dimensions = 2
     num_constraints = 2
 
@@ -780,7 +772,6 @@ class CEC2020_p9(BenchmarkProblem):
     """
 
     num_objectives = 1
-    input_type = DataType.CONTINUOUS
     available_dimensions = 3
     num_constraints = 2
 
@@ -825,7 +816,6 @@ class CEC2020_p10(BenchmarkProblem):
     """
 
     num_objectives = 1
-    input_type = DataType.CONTINUOUS
     available_dimensions = 3
     num_constraints = 3
 
@@ -875,7 +865,6 @@ class CEC2020_p11(BenchmarkProblem):
     """
 
     num_objectives = 1
-    input_type = DataType.CONTINUOUS
     available_dimensions = 7
     num_constraints = 8
 
@@ -947,7 +936,6 @@ class CEC2020_p12(BenchmarkProblem):
     """
 
     num_objectives = 1
-    input_type = DataType.CONTINUOUS
     available_dimensions = 7
     num_constraints = 9
 
@@ -1025,7 +1013,6 @@ class CEC2020_p13(BenchmarkProblem):
     """
 
     num_objectives = 1
-    input_type = DataType.CONTINUOUS
     available_dimensions = 5
     num_constraints = 3
 
@@ -1096,7 +1083,6 @@ class CEC2020_p14(BenchmarkProblem):
     """
 
     num_objectives = 1
-    input_type = DataType.CONTINUOUS
     available_dimensions = 10
     num_constraints = 10
 
@@ -1183,7 +1169,6 @@ class CEC2020_p15(BenchmarkProblem):
     """
 
     num_objectives = 1
-    input_type = DataType.CONTINUOUS
     available_dimensions = 7
     num_constraints = 11
 
@@ -1265,7 +1250,6 @@ class CEC2020_p16(BenchmarkProblem):
     """
 
     num_objectives = 1
-    input_type = DataType.CONTINUOUS
     available_dimensions = 14
     num_constraints = 15
 
@@ -1362,7 +1346,6 @@ class CEC2020_p17(BenchmarkProblem):
     """
 
     num_objectives = 1
-    input_type = DataType.CONTINUOUS
     available_dimensions = 3
     num_constraints = 4
 
@@ -1416,7 +1399,6 @@ class CEC2020_p18(BenchmarkProblem):
     """
 
     num_objectives = 1
-    input_type = DataType.CONTINUOUS
     available_dimensions = 4
     num_constraints = 4
 
@@ -1475,7 +1457,6 @@ class CEC2020_p19(BenchmarkProblem):
     """
 
     num_objectives = 1
-    input_type = DataType.CONTINUOUS
     available_dimensions = 4
     num_constraints = 5
 
@@ -1563,7 +1544,6 @@ class CEC2020_p20(BenchmarkProblem):
     """
 
     num_objectives = 1
-    input_type = DataType.CONTINUOUS
     available_dimensions = 2
     num_constraints = 3
 

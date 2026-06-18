@@ -23,7 +23,7 @@ from __future__ import annotations
 import numpy as np
 import torch
 
-from ...base import BenchmarkProblem, DataType
+from ...base import BenchmarkProblem
 
 # Physical constants (SI).
 _MU = 3.986005e14  # Earth gravitational parameter [m^3/s^2]
@@ -138,7 +138,6 @@ class SatelliteDesign(BenchmarkProblem):
     """
 
     available_dimensions = 4
-    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 3
 

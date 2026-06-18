@@ -1,6 +1,6 @@
 import torch
 
-from ...base import BenchmarkProblem, DataType
+from ...base import BenchmarkProblem
 
 
 class Car(BenchmarkProblem):
@@ -12,7 +12,6 @@ class Car(BenchmarkProblem):
     # 11D objective, 10 constraints, X = n-by-11
 
     available_dimensions = 11
-    input_type = DataType.MIXED
     num_objectives = 1
     num_constraints = 10
 
@@ -27,8 +26,6 @@ class Car(BenchmarkProblem):
             if is_discrete
             else None
         )
-        if not is_discrete:
-            self.input_type = DataType.CONTINUOUS
         super().__init__(
             dim=11,
             num_objectives=1,

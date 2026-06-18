@@ -6,7 +6,7 @@
   "num_objectives": 1,
   "num_constraints": 0,
   "available_dimensions": 5,
-  "input_type": "discrete",
+  "input_type": "continuous",
   "scalable": false,
   "dim": 5,
   "bounds": [

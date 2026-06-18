@@ -17,7 +17,7 @@ from pathlib import Path
 import pandas as pd
 import torch
 
-from ...base import BenchmarkProblem, DataType
+from ...base import BenchmarkProblem
 
 _DATA_DIR = Path(__file__).resolve().parent / "data"
 
@@ -31,7 +31,6 @@ class MaterialsDatasetProblem(BenchmarkProblem):
     negated internally, a quantity to be maximized is returned as-is.
     """
 
-    input_type = DataType.DISCRETE
     num_objectives = 1
     num_constraints = 0
 

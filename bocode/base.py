@@ -8,20 +8,6 @@ from .exceptions import DimensionException, RangeException, TypeException
 warnings.filterwarnings("ignore")  # Ignore all warnings
 
 
-class DataType:
-    """
-    Data types for the decision variables.
-    Available DataTypes:
-        - DataType.CONTINUOUS
-        - DataType.DISCRETE
-        - DataType.CATEGORICAL
-    """
-
-    CONTINUOUS = "continuous"
-    DISCRETE = "discrete"
-    MIXED = "mixed"
-
-
 class BenchmarkProblem:
     available_dimensions = None
     num_objectives = None
@@ -37,7 +23,6 @@ class BenchmarkProblem:
                 "available_dimensions",
                 "num_objectives",
                 "num_constraints",
-                "input_type",
             ]
         ):
             raise NotImplementedError(

@@ -8,12 +8,10 @@ except ImportError as _exc:  # pragma: no cover - exercised only without the ext
         "Install it with: pip install 'bocode[modact]'"
     ) from _exc
 
-from ...base import BenchmarkProblem, DataType
+from ...base import BenchmarkProblem
 
 
 class BaseModactProblem(BenchmarkProblem):
-    input_type = DataType.CONTINUOUS
-
     def __init_subclass__(subcls, *args, **kwargs):
         super().__init_subclass__(*args, **kwargs)
         subcls.problem_name = subcls.__name__.lower()

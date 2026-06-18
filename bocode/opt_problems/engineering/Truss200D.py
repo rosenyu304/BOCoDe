@@ -1,7 +1,7 @@
 import numpy as np
 import torch
 
-from ...base import BenchmarkProblem, DataType
+from ...base import BenchmarkProblem
 
 
 class Truss200D(BenchmarkProblem):
@@ -15,7 +15,6 @@ class Truss200D(BenchmarkProblem):
     # 200D objective, 200 constraints, X = n-by-200
 
     available_dimensions = 200
-    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 200
 

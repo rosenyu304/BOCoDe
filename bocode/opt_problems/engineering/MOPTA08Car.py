@@ -9,7 +9,7 @@ import numpy as np
 import torch
 
 from ..._fetch import fetch_data_file
-from ...base import BenchmarkProblem, DataType
+from ...base import BenchmarkProblem
 
 
 class MOPTA08Car(BenchmarkProblem):
@@ -18,7 +18,6 @@ class MOPTA08Car(BenchmarkProblem):
     """
 
     available_dimensions = 124
-    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 68
 

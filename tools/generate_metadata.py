@@ -132,8 +132,8 @@ def build_one(name: str, overrides: dict) -> dict:
         "num_objectives": getattr(cls, "num_objectives", None),
         "num_constraints": getattr(cls, "num_constraints", None),
         "available_dimensions": _jsonify(getattr(cls, "available_dimensions", None)),
-        "input_type": getattr(getattr(cls, "input_type", None), "value", None)
-        or getattr(cls, "input_type", None),
+        # default; overridden from the instance's variable_types when instantiated.
+        "input_type": "continuous",
         "scalable": _scalable(getattr(cls, "available_dimensions", None)),
         "dim": None,
         "bounds": None,
@@ -172,6 +172,17 @@ def build_one(name: str, overrides: dict) -> dict:
             meta["num_categorical_variables"] = sum(
                 1 for t in vtypes if not isinstance(t, str)
             )
+            # Derive input_type from the *instance's* actual variables (the class-level
+            # input_type attribute is unreliable for is_discrete-toggled problems whose
+            # default differs from the class default): all-continuous -> continuous,
+            # all-non-continuous -> discrete, otherwise mixed.
+            n_disc = sum(1 for t in vtypes if t != "continuous")
+            if n_disc == 0:
+                meta["input_type"] = "continuous"
+            elif n_disc == len(vtypes):
+                meta["input_type"] = "discrete"
+            else:
+                meta["input_type"] = "mixed"
         except Exception as exc:  # noqa: BLE001 - record and continue
             meta["_instantiation_error"] = f"{type(exc).__name__}: {exc}"
 

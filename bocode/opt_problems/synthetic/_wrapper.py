@@ -20,7 +20,7 @@ from __future__ import annotations
 
 import torch
 
-from ...base import BenchmarkProblem, DataType
+from ...base import BenchmarkProblem
 
 
 def _scale_clamped(problem: BenchmarkProblem, X: torch.Tensor) -> torch.Tensor:
@@ -39,7 +39,6 @@ def _scale_clamped(problem: BenchmarkProblem, X: torch.Tensor) -> torch.Tensor:
 class SingleObjSyntheticProblem(BenchmarkProblem):
     """Wrap a single-objective BoTorch synthetic function (negated to maximize)."""
 
-    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 0
 
@@ -72,7 +71,6 @@ class ConstrainedSingleObjSyntheticProblem(BenchmarkProblem):
     harness can categorize the problem without instantiating it).
     """
 
-    input_type = DataType.CONTINUOUS
     num_objectives = 1
     num_constraints = 0
 
@@ -101,7 +99,6 @@ class ConstrainedSingleObjSyntheticProblem(BenchmarkProblem):
 class MultiObjSyntheticProblem(BenchmarkProblem):
     """Wrap a multi-objective BoTorch synthetic function (negated to maximize)."""
 
-    input_type = DataType.CONTINUOUS
     num_constraints = 0
 
     botorch_cls = None

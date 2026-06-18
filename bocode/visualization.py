@@ -6,7 +6,7 @@ import torch
 from dash import dcc, html
 from dash.dependencies import ALL, Input, Output, State
 
-from bocode.base import BenchmarkProblem, DataType
+from bocode.base import BenchmarkProblem
 
 
 def visualize_function(prob: BenchmarkProblem, sampling_density: int = 50) -> None:
@@ -23,11 +23,8 @@ def visualize_function(prob: BenchmarkProblem, sampling_density: int = 50) -> No
 
     bounds = prob.bounds
 
-    if (
-        prob.__class__.input_type == DataType.DISCRETE
-        or prob.__class__.input_type == DataType.MIXED
-    ):
-        print("Visualization is not supported for discrete functions.")
+    if prob.is_mixed_variable:
+        print("Visualization is not supported for discrete/mixed functions.")
         return
 
     if prob.dim > 15:
