@@ -1,0 +1,70 @@
+{
+  "name": "HOIP",
+  "module": "bocode.opt_problems.materials.HOIP",
+  "extra": null,
+  "suite": "PV-Lab materials",
+  "num_objectives": 1,
+  "num_constraints": 0,
+  "available_dimensions": 3,
+  "input_type": "discrete",
+  "scalable": false,
+  "dim": 3,
+  "bounds": [
+    [
+      0.0,
+      9.0
+    ],
+    [
+      0.0,
+      2.0
+    ],
+    [
+      0.0,
+      15.0
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Materials",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": null,
+  "source": "A. Yousefpour, Z. Zanjani Foumani, M. Shishehbor, C. Mora, R. Bostanabad. GP+: a Python library for kernel-based learning via Gaussian processes. Advances in Engineering Software, 2024. https://github.com/Bostanabad-Research-Group/GP-Plus C. Kim, T. D. Huan, S. Krishnan, R. Ramprasad. A hybrid organic-inorganic perovskite dataset. Scientific Data 4:170057, 2017.",
+  "variable_types": [
+    [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    [
+      0,
+      1,
+      2
+    ],
+    [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ]
+  ],
+  "num_categorical_variables": 3
+}

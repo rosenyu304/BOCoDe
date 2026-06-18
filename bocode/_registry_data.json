@@ -407,6 +407,10 @@
     "opt_problems.engineering.GearTrain",
     null
   ],
+  "HOIP": [
+    "opt_problems.materials.HOIP",
+    null
+  ],
   "HalfCheetahPolicySearchProblem": [
     "opt_problems.control.mujoco.MujocoFuncs",
     "mujoco"
@@ -505,6 +509,10 @@
   ],
   "Perovskite": [
     "opt_problems.materials.Perovskite",
+    null
+  ],
+  "PestControl": [
+    "opt_problems.combinatorial.PestControl",
     null
   ],
   "PressureVessel": [
@@ -617,6 +625,10 @@
   ],
   "SpeedReducer": [
     "opt_problems.engineering.SpeedReducer",
+    null
+  ],
+  "SteppedCantileverBeam": [
+    "opt_problems.engineering.SteppedCantileverBeam",
     null
   ],
   "SwimmerPolicySearchProblem": [

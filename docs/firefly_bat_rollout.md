@@ -18,8 +18,8 @@ paper optimum (differential-evolution + penalty) before it lands.
 |---|---|---|---|
 | **WeldedBeamSO** | SO continuous / SO mixed (`is_discrete`) | cont 1.7249 ✓ / mixed 1.7312 | **done + verified** (continuous f*=1.7249); complements existing MO `WeldedBeam` |
 | **HelicalSpring** | SO mixed (D cont, n int, d 42-discrete) | 2.6586 | **done + verified** (f*=2.6586, all 8 constraints match Table 9) |
-| **SteppedCantileverBeam** | SO continuous / SO mixed (`is_discrete`) | cont 61915 / mixed 63894 | next |
-| **ReinforcedConcreteBeamSO** | SO mixed (As discrete, b int, h cont) | 359.208 | next (existing `ReinforcedConcreteBeam` is continuous) |
+| **SteppedCantileverBeam** | SO continuous / SO mixed (`is_discrete`) | cont 61915 / mixed 63894 | **done + verified** (cont 61914.8 gap 0.05; mixed 63896 gap 2.7 from reported-design rounding; 11 constraints from both papers) |
+| **ReinforcedConcreteBeam** | SO continuous / SO mixed (`is_discrete`) | 359.208 | **done + verified** (f*=359.208 exact at As=6.32,b=34,h=8.5; added `is_discrete` to the existing class — As from Table 10, b integer) |
 | CarSideImpact | already in BoCoDe (x8,x9 discrete) | 22.84 | check existing matches Firefly Case VI |
 | PressureVessel / SpeedReducer | already have `is_discrete` (cont + mixed) | PV 5850.4 / SR 2994.5 | done earlier |
 | ThreeTruss | already in BoCoDe (BAT three-bar truss) | 263.90 | done |
