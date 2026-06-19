@@ -107,7 +107,7 @@ tracked in `docs/AUDIT_findings_2026_06.md`:
 ## Problem table
 
 The leading `#` column numbers the problems 1…N, so the last row shows the total
-problem count (currently **184**).
+problem count (currently **188**).
 
 <!-- TABLE:START -->
 
@@ -284,19 +284,23 @@ problem count (currently **184**).
 | 169 | HPOBRpart | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 6 | 1 | 0 | ? | unknown | unknown |
 | 170 | HPOBSvm | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 8 | 1 | 0 | ? | unknown | unknown |
 | 171 | HPOBXgboost | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 16 | 1 | 0 | ? | unknown | unknown |
-| 172 | LassoBreastCancer | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 9 | 1 | 0 | ? | unknown | unknown |
-| 173 | LassoDNA | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 180 | 1 | 0 | ? | unknown | unknown |
-| 174 | LassoDiabetes | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 8 | 1 | 0 | ? | unknown | unknown |
-| 175 | LassoLeukemia | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7129 | 1 | 0 | ? | unknown | unknown |
-| 176 | LassoRCV1 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 47236 | 1 | 0 | ? | unknown | unknown |
-| 177 | SVM | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 388 | 1 | 0 | ? | no | unknown |
-| 178 | NASBench201 | Hyperparameter Optimization | NAS-Bench-201 | 6 | 1 | 0 | ? | unknown | unknown |
-| 179 | AgNP | Materials | PV-Lab materials | 5 | 1 | 0 | ? | unknown | unknown |
-| 180 | AutoAM | Materials | PV-Lab materials | 4 | 1 | 0 | ? | unknown | unknown |
-| 181 | CrossedBarrel | Materials | PV-Lab materials | 4 | 1 | 0 | ? | unknown | unknown |
-| 182 | HOIP | Materials | PV-Lab materials | 3 | 1 | 0 | ? | unknown | unknown |
-| 183 | P3HT | Materials | PV-Lab materials | 5 | 1 | 0 | ? | unknown | unknown |
-| 184 | Perovskite | Materials | PV-Lab materials | 3 | 1 | 0 | ? | unknown | unknown |
+| 172 | LCBenchAlbert | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
+| 173 | LCBenchCreditG | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
+| 174 | LCBenchFashionMNIST | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
+| 175 | LCBenchHiggs | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
+| 176 | LassoBreastCancer | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 9 | 1 | 0 | ? | unknown | unknown |
+| 177 | LassoDNA | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 180 | 1 | 0 | ? | unknown | unknown |
+| 178 | LassoDiabetes | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 8 | 1 | 0 | ? | unknown | unknown |
+| 179 | LassoLeukemia | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7129 | 1 | 0 | ? | unknown | unknown |
+| 180 | LassoRCV1 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 47236 | 1 | 0 | ? | unknown | unknown |
+| 181 | SVM | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 388 | 1 | 0 | ? | no | unknown |
+| 182 | NASBench201 | Hyperparameter Optimization | NAS-Bench-201 | 6 | 1 | 0 | ? | unknown | unknown |
+| 183 | AgNP | Materials | PV-Lab materials | 5 | 1 | 0 | ? | unknown | unknown |
+| 184 | AutoAM | Materials | PV-Lab materials | 4 | 1 | 0 | ? | unknown | unknown |
+| 185 | CrossedBarrel | Materials | PV-Lab materials | 4 | 1 | 0 | ? | unknown | unknown |
+| 186 | HOIP | Materials | PV-Lab materials | 3 | 1 | 0 | ? | unknown | unknown |
+| 187 | P3HT | Materials | PV-Lab materials | 5 | 1 | 0 | ? | unknown | unknown |
+| 188 | Perovskite | Materials | PV-Lab materials | 3 | 1 | 0 | ? | unknown | unknown |
 
 <!-- TABLE:END -->
 
@@ -313,11 +317,11 @@ heading shows the exact call. (Generated; rerun `python tools/render_categorizat
 
 `AgNP`, `Allison`, `AntPolicySearchProblem`, `AntProblem`, `AutoAM`, `Borehole`, `CEC2020_p31`, `CrossedBarrel`, `EulerBernoulliBeamBending`, `HPOBRanger`, `HPOBRpart`, `HPOBSvm`, `HPOBXgboost`, `HalfCheetahPolicySearchProblem`, `HalfCheetahProblem`, `HopperPolicySearchProblem`, `HopperProblem`, `HumanoidProblem`, `HumanoidStandupProblem`, `InvertedDoublePendulumProblem`, `InvertedPendulumProblem`, `LassoBreastCancer`, `LassoDNA`, `LassoDiabetes`, `LassoLeukemia`, `LassoRCV1`, `MiniAeroWing`, `P3HT`, `PD4CartPole`, `PID4Acrobot`, `Perovskite`, `PusherProblem`, `QPowerModel`, `ReacherProblem`, `ReactivityModel`, `RobotPush`, `Rover`, `SVM`, `SwimmerPolicySearchProblem`, `SwimmerProblem`, `TSP_100Cities`, `TSP_51Cities`, `Walker2DPolicySearchProblem`, `Walker2DProblem`, `Wing`
 
-### Single-objective, unconstrained, mixed-variable (2)
+### Single-objective, unconstrained, mixed-variable (6)
 
 `list_problems(num_objectives=1, constrained=False, input_type='mixed')`
 
-`ColumnBuckling`, `EulerBeamMixed`
+`ColumnBuckling`, `EulerBeamMixed`, `LCBenchAlbert`, `LCBenchCreditG`, `LCBenchFashionMNIST`, `LCBenchHiggs`
 
 ### Single-objective, constrained, continuous (71)
 

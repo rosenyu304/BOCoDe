@@ -467,6 +467,22 @@
     "opt_problems.control.mujoco.MujocoFuncs",
     "mujoco"
   ],
+  "LCBenchAlbert": [
+    "opt_problems.hpo.LCBench",
+    null
+  ],
+  "LCBenchCreditG": [
+    "opt_problems.hpo.LCBench",
+    null
+  ],
+  "LCBenchFashionMNIST": [
+    "opt_problems.hpo.LCBench",
+    null
+  ],
+  "LCBenchHiggs": [
+    "opt_problems.hpo.LCBench",
+    null
+  ],
   "LassoBreastCancer": [
     "opt_problems.hpo.LassoBreastCancer",
     "hpo"

@@ -1,0 +1,58 @@
+{
+  "name": "LCBenchHiggs",
+  "module": "bocode.opt_problems.hpo.LCBench",
+  "extra": null,
+  "suite": "HPO (LassoBench / HPO-B)",
+  "num_objectives": 1,
+  "num_constraints": 0,
+  "available_dimensions": 7,
+  "input_type": "mixed",
+  "scalable": false,
+  "dim": 7,
+  "bounds": [
+    [
+      16.0,
+      511.0
+    ],
+    [
+      0.0001001029660418,
+      0.099029601984878
+    ],
+    [
+      0.000535753265869,
+      0.999947787100388
+    ],
+    [
+      64.0,
+      1024.0
+    ],
+    [
+      0.1000038630234607,
+      0.9822552926224636
+    ],
+    [
+      1.0,
+      4.0
+    ],
+    [
+      4.9355776046293136e-05,
+      0.099997451975429
+    ]
+  ],
+  "num_integer_variables": 3,
+  "application": "Hyperparameter Optimization",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": null,
+  "source": "L. Zimmer, M. Lindauer, F. Hutter. Auto-PyTorch: Multi-Fidelity MetaLearning for Efficient and Robust AutoDL. IEEE Transactions on Pattern Analysis and Machine Intelligence 43(9):3079-3090, 2021. https://github.com/automl/LCBench",
+  "variable_types": [
+    "integer",
+    "continuous",
+    "continuous",
+    "integer",
+    "continuous",
+    "integer",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
+}
