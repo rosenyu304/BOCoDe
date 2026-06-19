@@ -63,6 +63,7 @@ Contents
    benchmark_table
    basic_user_guide/index
    benchmarks/index
+   api
 
 .. Indices and tables
 .. ==================

@@ -23,10 +23,14 @@ version: str = ".".join(release.split(".")[:2])
 extensions = [
     "sphinx.ext.duration",
     "sphinx.ext.autodoc",  # For automatically including docstrings
+    "sphinx.ext.autosummary",  # For the API-reference summary tables
     "sphinx.ext.napoleon",  # For NumPy and Google style docstrings
     "sphinx.ext.viewcode",  # For source code links
     "sphinx_copybutton",
 ]
+
+# Generate stub pages for the autosummary entries in api.rst.
+autosummary_generate = True
 
 templates_path = ["_templates"]
 exclude_patterns = []

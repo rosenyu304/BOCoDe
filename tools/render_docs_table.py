@@ -105,13 +105,21 @@ def build_html() -> str:
         f'<p class="bc-count"><span id="bc-shown">{len(data)}</span> of {len(data)} problems shown</p>'
     )
 
-    # table
-    parts.append(
-        "<table id='bc-table'><thead><tr>"
-        "<th>Problem</th><th>Application</th><th>Suite</th><th>Dim</th>"
-        "<th>#Obj</th><th>#Constr</th><th>f_opt</th><th>Variables</th>"
-        "<th>Convex</th><th>NP-hard</th></tr></thead><tbody>"
+    # table (each header carries a sort indicator so users see columns are sortable)
+    headers = [
+        "Problem",
+        "Application",
+        "Suite",
+        "Dim",
+        "#Obj",
+        "#Constr",
+        "f_opt",
+        "Variables",
+    ]
+    header_html = "".join(
+        f"<th>{html.escape(h)}<span class='bc-sort'>⇅</span></th>" for h in headers
     )
+    parts.append(f"<table id='bc-table'><thead><tr>{header_html}</tr></thead><tbody>")
     for n, m, f in data:
         attrs = " ".join(f"data-{k}='{html.escape(v)}'" for k, v in f.items())
         parts.append(
@@ -123,9 +131,7 @@ def build_html() -> str:
             f"<td>{_fmt(m.get('num_objectives'))}</td>"
             f"<td>{_fmt(m.get('num_constraints'))}</td>"
             f"<td>{_fmt(m.get('f_opt'))}</td>"
-            f"<td>{html.escape(_fmt(m.get('input_type')))}</td>"
-            f"<td>{html.escape(_fmt(m.get('convex')))}</td>"
-            f"<td>{html.escape(_fmt(m.get('np_hard')))}</td></tr>"
+            f"<td>{html.escape(_fmt(m.get('input_type')))}</td></tr>"
         )
     parts.append("</tbody></table></div>")
     parts.append(_JS)
@@ -138,16 +144,22 @@ _CSS = """<style>
   border: 1px solid var(--color-background-border, #ccc); border-radius: 6px; background: inherit; color: inherit; }
 .bocode-table .bc-facet { margin: 4px 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
 .bocode-table .bc-facet-label { font-weight: 600; min-width: 92px; }
-.bocode-table .bc-btn { padding: 3px 10px; border: 1px solid var(--color-background-border, #ccc);
-  border-radius: 14px; background: transparent; color: inherit; cursor: pointer; font-size: 0.85em; }
-.bocode-table .bc-btn:hover { border-color: var(--color-brand-primary, #2980b9); }
+.bocode-table .bc-btn { padding: 6px 14px; border: 1px solid var(--color-background-border, #ccc);
+  border-radius: 16px; background: var(--color-background-primary, #fff); color: inherit; cursor: pointer;
+  font-size: 0.9em; font-weight: 500; line-height: 1.2; transition: background 0.15s, border-color 0.15s; }
+.bocode-table .bc-btn:hover { border-color: var(--color-brand-primary, #2980b9);
+  background: var(--color-background-secondary, #f0f0f0); }
 .bocode-table .bc-btn.active { background: var(--color-brand-primary, #2980b9); color: #fff;
   border-color: var(--color-brand-primary, #2980b9); }
 .bocode-table .bc-count { margin: 10px 0; opacity: 0.8; }
 .bocode-table table { border-collapse: collapse; width: 100%; }
 .bocode-table th, .bocode-table td { border: 1px solid var(--color-background-border, #ddd);
   padding: 4px 8px; text-align: left; }
-.bocode-table th { cursor: pointer; position: sticky; top: 0; background: var(--color-background-secondary, #f5f5f5); }
+.bocode-table th { cursor: pointer; position: sticky; top: 0; white-space: nowrap;
+  background: var(--color-background-secondary, #f5f5f5); }
+.bocode-table th:hover { background: var(--color-background-hover, #ececec); }
+.bocode-table .bc-sort { margin-left: 5px; opacity: 0.45; font-size: 0.8em; }
+.bocode-table th.bc-sorted .bc-sort { opacity: 0.95; color: var(--color-brand-primary, #2980b9); }
 .bocode-table tr.bc-hidden { display: none; }
 </style>"""
 
@@ -186,7 +198,7 @@ _JS = """<script>
   });
   search.addEventListener('input', apply);
 
-  // click a header to sort by that column
+  // click a header to sort by that column (with ▲/▼ direction indicators)
   var headers = root.querySelectorAll('#bc-table th');
   headers.forEach(function (h, idx) {
     var asc = true;
@@ -198,8 +210,16 @@ _JS = """<script>
         if (!isNaN(nx) && !isNaN(ny)) return asc ? nx - ny : ny - nx;
         return asc ? x.localeCompare(y) : y.localeCompare(x);
       });
-      asc = !asc;
       rows.forEach(function (r) { tbody.appendChild(r); });
+      headers.forEach(function (hh) {
+        hh.classList.remove('bc-sorted');
+        var s = hh.querySelector('.bc-sort');
+        if (s) s.textContent = '⇅';
+      });
+      h.classList.add('bc-sorted');
+      var ind = h.querySelector('.bc-sort');
+      if (ind) ind.textContent = asc ? '▲' : '▼';
+      asc = !asc;
     });
   });
 })();
