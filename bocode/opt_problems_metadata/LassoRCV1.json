@@ -2,7 +2,7 @@
   "name": "LassoRCV1",
   "module": "bocode.opt_problems.hpo.LassoRCV1",
   "extra": "hpo",
-  "suite": "HPO (LassoBench / GP-HDBO)",
+  "suite": "HPO (LassoBench / HPO-B)",
   "num_objectives": 1,
   "num_constraints": 0,
   "available_dimensions": 47236,

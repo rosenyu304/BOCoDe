@@ -1,7 +1,7 @@
 {
-  "name": "LassoDiabetes",
-  "module": "bocode.opt_problems.hpo.LassoDiabetes",
-  "extra": "hpo",
+  "name": "HPOBSvm",
+  "module": "bocode.opt_problems.hpo.HPOB",
+  "extra": null,
   "suite": "HPO (LassoBench / HPO-B)",
   "num_objectives": 1,
   "num_constraints": 0,
@@ -11,36 +11,36 @@
   "dim": 8,
   "bounds": [
     [
-      -1,
-      1
+      0.0,
+      1.0
     ],
     [
-      -1,
-      1
+      0.0,
+      1.0
     ],
     [
-      -1,
-      1
+      0.0,
+      1.0
     ],
     [
-      -1,
-      1
+      0.0,
+      1.0
     ],
     [
-      -1,
-      1
+      0.0,
+      1.0
     ],
     [
-      -1,
-      1
+      0.0,
+      1.0
     ],
     [
-      -1,
-      1
+      0.0,
+      1.0
     ],
     [
-      -1,
-      1
+      0.0,
+      1.0
     ]
   ],
   "num_integer_variables": 0,
@@ -48,7 +48,7 @@
   "convex": "unknown",
   "np_hard": "unknown",
   "f_opt": null,
-  "source": "Kenan \u0160ehi\u0107, Alexandre Gramfort, Joseph Salmon, and Luigi Nardi. LassoBench: A High-Dimensional Hyperparameter Optimization Benchmark Suite for Lasso. Proceedings of the 1st International Conference on Automated Machine Learning (AutoML), 2022.",
+  "source": "S. Pineda-Arango, H. S. Jomaa, M. Wistuba, J. Grabocka. HPO-B: A Large-Scale Reproducible Benchmark for Black-Box HPO based on OpenML. Advances in Neural Information Processing Systems Datasets and Benchmarks, 2021. https://github.com/releaunifreiburg/HPO-B S. Gabriel. Fixed HPO-B. https://github.com/SamuelGabriel/FixedHPO-B",
   "variable_types": [
     "continuous",
     "continuous",

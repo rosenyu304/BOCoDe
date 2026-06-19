@@ -20,6 +20,8 @@ X. Dong, Y. Yang. NAS-Bench-201: Extending the Scope of Reproducible Neural Arch
 
 from __future__ import annotations
 
+from pathlib import Path
+
 import numpy as np
 import torch
 
@@ -60,7 +62,14 @@ class NASBench201(BenchmarkProblem):
 
     def _accuracies(self) -> np.ndarray:
         if self._table is None:
-            path = fetch_data_file("nasbench201_accuracy.npz")
+            # The table is small (~0.3 MB), so an in-repo copy (if committed) is
+            # used directly; otherwise it is fetched from the bocode data host.
+            local = (
+                Path(__file__).resolve().parent / "data" / "nasbench201_accuracy.npz"
+            )
+            path = fetch_data_file(
+                "nasbench201_accuracy.npz", local_fallback=str(local)
+            )
             self._table = np.load(path)[_DATASET_KEYS[self._dataset]]
         return self._table
 

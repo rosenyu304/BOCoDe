@@ -411,6 +411,22 @@
     "opt_problems.materials.HOIP",
     null
   ],
+  "HPOBRanger": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOBRpart": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOBSvm": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOBXgboost": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
   "HalfCheetahPolicySearchProblem": [
     "opt_problems.control.mujoco.MujocoFuncs",
     "mujoco"

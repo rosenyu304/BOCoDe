@@ -77,7 +77,7 @@ _SUITE_BY_MODULE = (
     ("opt_problems.control", "Classic control"),
     ("opt_problems.combinatorial", "TSP / NEORL"),
     ("opt_problems.nas", "NAS-Bench-201"),
-    ("opt_problems.hpo", "HPO (LassoBench / GP-HDBO)"),
+    ("opt_problems.hpo", "HPO (LassoBench / HPO-B)"),
 )
 
 
