@@ -52,9 +52,10 @@ _ALGOS = {
         "standard_gp",
         "vanilla_highdim_bo",
         "turbo",
+        "baxus",
     ],
     ("single", True): ["random_search", "constrained_ei", "scbo"],
-    ("multi", False): ["random_search", "qnehvi", "qnparego"],
+    ("multi", False): ["random_search", "qnehvi", "qnparego", "mesmo"],
     ("multi", True): ["constrained_qnehvi", "constrained_qparego"],
 }
 _PKG = {
