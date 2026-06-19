@@ -24,10 +24,22 @@ MAX_POOL = 2000
 
 # HPO-B search-space id -> model family (standard HPO-B mapping; for the docstring).
 SPACE_MODEL = {
-    "4796": "rpart.preproc", "5527": "svm", "5636": "rpart", "5859": "rpart",
-    "5860": "glmnet", "5889": "rpart", "5891": "svm", "5906": "xgboost",
-    "5965": "ranger", "5970": "xgboost", "5971": "xgboost", "6766": "ranger",
-    "6767": "xgboost", "6794": "ranger", "7607": "ranger", "7609": "ranger",
+    "4796": "rpart.preproc",
+    "5527": "svm",
+    "5636": "rpart",
+    "5859": "rpart",
+    "5860": "glmnet",
+    "5889": "rpart",
+    "5891": "svm",
+    "5906": "xgboost",
+    "5965": "ranger",
+    "5970": "xgboost",
+    "5971": "xgboost",
+    "6766": "ranger",
+    "6767": "xgboost",
+    "6794": "ranger",
+    "7607": "ranger",
+    "7609": "ranger",
 }
 
 _MODULE_HEADER = '''"""FixedHPO-B benchmarks — discrete HPO-B configuration pools (one per task).
