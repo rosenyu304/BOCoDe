@@ -12,6 +12,6 @@ from ._wrapper import SingleObjSyntheticProblem
 class Levy(SingleObjSyntheticProblem):
     """Levy function fixed to 10 dimensions (multimodal)."""
 
-    available_dimensions = 10
+    available_dimensions = (2, 100)
     botorch_cls = _syn.Levy
     botorch_kwargs = {"dim": 10}

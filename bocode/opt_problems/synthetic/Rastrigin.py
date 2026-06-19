@@ -12,6 +12,6 @@ from ._wrapper import SingleObjSyntheticProblem
 class Rastrigin(SingleObjSyntheticProblem):
     """Rastrigin function fixed to 10 dimensions (regular highly multimodal lattice)."""
 
-    available_dimensions = 10
+    available_dimensions = (2, 100)
     botorch_cls = _syn.Rastrigin
     botorch_kwargs = {"dim": 10}

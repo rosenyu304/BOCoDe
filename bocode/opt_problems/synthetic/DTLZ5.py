@@ -12,7 +12,7 @@ from ._wrapper import MultiObjSyntheticProblem
 class DTLZ5(MultiObjSyntheticProblem):
     """DTLZ5 (7-D inputs, 3 objectives; degenerate front), negated to maximize."""
 
-    available_dimensions = 7
+    available_dimensions = (4, 100)
     num_objectives = 3
     botorch_cls = _mo.DTLZ5
     botorch_kwargs = {"dim": 7, "num_objectives": 3}

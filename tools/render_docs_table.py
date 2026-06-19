@@ -42,6 +42,10 @@ def _synthetic_meta(name: str) -> dict:
         "num_constraints": getattr(inst, "num_constraints", 0),
         "input_type": itype,
         "f_opt": round(float(opt), 6) if isinstance(opt, (int, float)) else None,
+        # scalable when the class declares a dimension range (tuple/list), e.g. Ackley
+        "scalable": isinstance(
+            getattr(type(inst), "available_dimensions", None), (tuple, list, set)
+        ),
         "convex": "unknown",
         "np_hard": "unknown",
     }
@@ -54,19 +58,20 @@ _FACETS = [
     ("Constraints", "constraints"),
     ("Variables", "variables"),
     ("Dimension", "dimension"),
+    ("Scalable", "scalable"),
 ]
 
 # Dimension buckets (low / mid / high) and the order their buttons appear in.
-_DIM_ORDER = ["<10", "10–100", ">100"]
+_DIM_ORDER = ["<=10", "11-100", ">100"]
 
 
 def _dim_bucket(dim) -> str:
     if not isinstance(dim, (int, float)):
         return "unknown"
-    if dim < 10:
-        return "<10"
+    if dim <= 10:
+        return "<=10"
     if dim <= 100:
-        return "10–100"
+        return "11-100"
     return ">100"
 
 
@@ -79,6 +84,7 @@ def _row_facets(m: dict) -> dict:
         else "unconstrained",
         "variables": str(m.get("input_type") or "continuous"),
         "dimension": _dim_bucket(m.get("dim")),
+        "scalable": "Yes" if m.get("scalable") else "No",
     }
 
 
@@ -105,6 +111,12 @@ def build_html() -> str:
     parts: list[str] = []
     parts.append(_CSS)
     parts.append('<div class="bocode-table">')
+    parts.append(
+        "<p class='bc-intro'>An interactive, filterable table of every problem in BoCoDe. "
+        "Toggle the buttons to filter by application, objectives, constraints, variable "
+        "type, dimension, and scalability (one selection per category); type to search by "
+        "name; click a column header to sort.</p>"
+    )
     parts.append(
         '<input type="text" id="bc-search" placeholder="Search by problem name…" />'
     )
@@ -134,6 +146,7 @@ def build_html() -> str:
         "#Constr",
         "f_opt",
         "Variables",
+        "Scalable",
     ]
     header_html = "".join(
         f"<th>{html.escape(h)}<span class='bc-sort'>⇅</span></th>" for h in headers
@@ -150,7 +163,8 @@ def build_html() -> str:
             f"<td>{_fmt(m.get('num_objectives'))}</td>"
             f"<td>{_fmt(m.get('num_constraints'))}</td>"
             f"<td>{_fmt(m.get('f_opt'))}</td>"
-            f"<td>{html.escape(_fmt(m.get('input_type')))}</td></tr>"
+            f"<td>{html.escape(_fmt(m.get('input_type')))}</td>"
+            f"<td>{'Yes' if m.get('scalable') else 'No'}</td></tr>"
         )
     parts.append("</tbody></table></div>")
     parts.append(_JS)
@@ -159,11 +173,16 @@ def build_html() -> str:
 
 _CSS = """<style>
 .bocode-table { font-size: 0.9em; }
+/* On wide screens, break the whole block (intro, buttons, table) out of furo's
+   narrow content column so the text/buttons are as wide as the table. */
+@media (min-width: 1200px) {
+  .bocode-table { width: 88vw; position: relative; left: 50%; transform: translateX(-50%); }
+}
 .bocode-table #bc-search { width: 100%; max-width: 420px; padding: 6px 10px; margin: 0 0 12px;
   border: 1px solid var(--color-background-border, #ccc); border-radius: 6px; background: inherit; color: inherit; }
-.bocode-table .bc-facet { margin: 4px 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.bocode-table .bc-facet { margin: 6px 0; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
 .bocode-table .bc-facet-label { font-weight: 600; min-width: 92px; }
-.bocode-table .bc-btn { padding: 6px 14px; border: 1px solid var(--color-background-border, #ccc);
+.bocode-table .bc-btn { padding: 6px 14px; border: 2px solid var(--color-background-border, #bbb);
   border-radius: 16px; background: var(--color-background-primary, #fff); color: inherit; cursor: pointer;
   font-size: 0.9em; font-weight: 500; line-height: 1.2; transition: background 0.15s, border-color 0.15s; }
 .bocode-table .bc-btn:hover { border-color: var(--color-brand-primary, #2980b9);

@@ -12,7 +12,7 @@ from ._wrapper import MultiObjSyntheticProblem
 class DTLZ4(MultiObjSyntheticProblem):
     """DTLZ4 (7-D inputs, 3 objectives; biased density), negated to maximize."""
 
-    available_dimensions = 7
+    available_dimensions = (4, 100)
     num_objectives = 3
     botorch_cls = _mo.DTLZ4
     botorch_kwargs = {"dim": 7, "num_objectives": 3}

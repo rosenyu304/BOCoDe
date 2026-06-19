@@ -12,6 +12,6 @@ from ._wrapper import SingleObjSyntheticProblem
 class StyblinskiTang(SingleObjSyntheticProblem):
     """Styblinski-Tang function fixed to 10 dimensions (separable, multimodal)."""
 
-    available_dimensions = 10
+    available_dimensions = (2, 100)
     botorch_cls = _syn.StyblinskiTang
     botorch_kwargs = {"dim": 10}

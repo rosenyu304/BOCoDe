@@ -46,8 +46,13 @@ class SingleObjSyntheticProblem(BenchmarkProblem):
     botorch_cls = None
     botorch_kwargs: dict = {}
 
-    def __init__(self) -> None:
-        self._fn = self.botorch_cls(negate=True, **self.botorch_kwargs)
+    def __init__(self, dim: int | None = None) -> None:
+        # ``dim`` overrides the default for scalable functions (Ackley, Levy, …);
+        # ignored by fixed-dimension functions whose constructor takes no ``dim``.
+        kwargs = dict(self.botorch_kwargs)
+        if dim is not None:
+            kwargs["dim"] = dim
+        self._fn = self.botorch_cls(negate=True, **kwargs)
         bounds = list(zip(*self._fn.bounds.numpy(), strict=True))
         super().__init__(
             dim=self._fn.dim,
@@ -104,8 +109,11 @@ class MultiObjSyntheticProblem(BenchmarkProblem):
     botorch_cls = None
     botorch_kwargs: dict = {}
 
-    def __init__(self) -> None:
-        self._fn = self.botorch_cls(negate=True, **self.botorch_kwargs)
+    def __init__(self, dim: int | None = None) -> None:
+        kwargs = dict(self.botorch_kwargs)
+        if dim is not None:
+            kwargs["dim"] = dim
+        self._fn = self.botorch_cls(negate=True, **kwargs)
         bounds = list(zip(*self._fn.bounds.numpy(), strict=True))
         ref = getattr(self._fn, "ref_point", None)
         # ref_point is in the (negated) maximization frame already when negate=True.

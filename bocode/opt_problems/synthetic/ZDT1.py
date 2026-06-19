@@ -12,7 +12,7 @@ from ._wrapper import MultiObjSyntheticProblem
 class ZDT1(MultiObjSyntheticProblem):
     """ZDT1 (6-D inputs, 2 objectives; convex front), negated to maximize."""
 
-    available_dimensions = 6
+    available_dimensions = (2, 100)
     num_objectives = 2
     botorch_cls = _mo.ZDT1
     botorch_kwargs = {"dim": 6, "num_objectives": 2}

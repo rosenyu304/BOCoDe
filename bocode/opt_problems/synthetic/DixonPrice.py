@@ -12,6 +12,6 @@ from ._wrapper import SingleObjSyntheticProblem
 class DixonPrice(SingleObjSyntheticProblem):
     """Dixon-Price function fixed to 10 dimensions (curved valley, ill-conditioned)."""
 
-    available_dimensions = 10
+    available_dimensions = (2, 100)
     botorch_cls = _syn.DixonPrice
     botorch_kwargs = {"dim": 10}

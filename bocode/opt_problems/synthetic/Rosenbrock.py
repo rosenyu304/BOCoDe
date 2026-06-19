@@ -12,6 +12,6 @@ from ._wrapper import SingleObjSyntheticProblem
 class Rosenbrock(SingleObjSyntheticProblem):
     """Rosenbrock function fixed to 10 dimensions (narrow curved valley)."""
 
-    available_dimensions = 10
+    available_dimensions = (2, 100)
     botorch_cls = _syn.Rosenbrock
     botorch_kwargs = {"dim": 10}
