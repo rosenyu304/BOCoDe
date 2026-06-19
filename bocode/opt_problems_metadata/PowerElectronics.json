@@ -1,0 +1,19 @@
+{
+  "name": "PowerElectronics",
+  "module": "bocode.opt_problems.engibench.PowerElectronics",
+  "extra": "engibench",
+  "suite": "EngiBench",
+  "num_objectives": 2,
+  "num_constraints": 0,
+  "available_dimensions": 20,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 20,
+  "bounds": null,
+  "num_integer_variables": null,
+  "application": "EngiBench",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": null,
+  "source": "EngiBench: A Framework for Engineering Design Optimization Benchmarks. arXiv:2509.17677, 2025. https://github.com/IDEALLab/EngiBench"
+}

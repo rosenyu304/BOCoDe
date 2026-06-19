@@ -39,6 +39,7 @@ _NO_INSTANTIATE = {
     "Mazda_SCA",  # spawn a subprocess binary
     "MOPTA08Car",  # runs a native binary
     "RobotPush",  # opens a pygame/Box2D world
+    "PowerElectronics",  # needs the engibench extra + native ngspice
 }
 
 # Application area by registry module prefix (fallback when not in overrides).
@@ -52,6 +53,7 @@ _APPLICATION_BY_PREFIX = (
     ("opt_problems.modact", "Engineering"),
     ("opt_problems.cec2020_rw", "Engineering"),
     ("opt_problems.reproblems", "Engineering"),
+    ("opt_problems.engibench", "EngiBench"),
     ("opt_problems.engineering", "Engineering"),
 )
 
@@ -77,6 +79,7 @@ _SUITE_BY_MODULE = (
     ("opt_problems.control", "Classic control"),
     ("opt_problems.combinatorial", "TSP / NEORL"),
     ("opt_problems.nas", "NAS-Bench-201"),
+    ("opt_problems.engibench", "EngiBench"),
     ("opt_problems.hpo", "HPO (LassoBench / HPO-B)"),
 )
 

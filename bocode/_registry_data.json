@@ -555,6 +555,10 @@
     "opt_problems.combinatorial.PestControl",
     null
   ],
+  "PowerElectronics": [
+    "opt_problems.engibench.PowerElectronics",
+    "engibench"
+  ],
   "PressureVessel": [
     "opt_problems.engineering.PressureVessel",
     null

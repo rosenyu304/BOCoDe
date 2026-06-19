@@ -51,6 +51,8 @@ def extra_for(modpath: str, cls: str):
         return "control"
     if "/modact/" in modpath:
         return "modact"
+    if "/engibench/" in modpath:
+        return "engibench"
     if cls.startswith("Lasso") or cls == "SVM":
         return "hpo"  # clean-room weighted-Lasso / SVM problems use scikit-learn
     if cls in ("Mazda", "Mazda_SCA"):
