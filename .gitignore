@@ -196,3 +196,6 @@ examples/results/
 !bocode/opt_problems/hpo/data/hpob_data.npz
 !bocode/opt_problems/hpo/data/lcbench_data.npz
 !bocode/opt_problems/nas/data/nasbench201_accuracy.npz
+
+# Experiment matrix doc (kept outside the repo; never push)
+Experiment_problems.md
