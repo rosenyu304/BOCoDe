@@ -491,6 +491,10 @@
     "opt_problems.engineering.MiniAeroWing",
     null
   ],
+  "NASBench201": [
+    "opt_problems.nas.NASBench201",
+    null
+  ],
   "P3HT": [
     "opt_problems.materials.P3HT",
     null

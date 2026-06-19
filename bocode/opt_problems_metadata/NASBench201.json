@@ -1,0 +1,89 @@
+{
+  "name": "NASBench201",
+  "module": "bocode.opt_problems.nas.NASBench201",
+  "extra": null,
+  "suite": "NAS-Bench-201",
+  "num_objectives": 1,
+  "num_constraints": 0,
+  "available_dimensions": 6,
+  "input_type": "discrete",
+  "scalable": false,
+  "dim": 6,
+  "bounds": [
+    [
+      0,
+      4
+    ],
+    [
+      0,
+      4
+    ],
+    [
+      0,
+      4
+    ],
+    [
+      0,
+      4
+    ],
+    [
+      0,
+      4
+    ],
+    [
+      0,
+      4
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Hyperparameter Optimization",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": null,
+  "source": "X. Dong, Y. Yang. NAS-Bench-201: Extending the Scope of Reproducible Neural Architecture Search. International Conference on Learning Representations, 2020. https://github.com/D-X-Y/NAS-Bench-201",
+  "variable_types": [
+    [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    [
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  ],
+  "num_categorical_variables": 6
+}

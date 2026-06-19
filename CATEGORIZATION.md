@@ -107,7 +107,7 @@ tracked in `docs/AUDIT_findings_2026_06.md`:
 ## Problem table
 
 The leading `#` column numbers the problems 1…N, so the last row shows the total
-problem count (currently **179**).
+problem count (currently **180**).
 
 <!-- TABLE:START -->
 
@@ -286,12 +286,13 @@ problem count (currently **179**).
 | 171 | LassoLeukemia | Hyperparameter Optimization | HPO (LassoBench / GP-HDBO) | 7129 | 1 | 0 | ? | unknown | unknown |
 | 172 | LassoRCV1 | Hyperparameter Optimization | HPO (LassoBench / GP-HDBO) | 47236 | 1 | 0 | ? | unknown | unknown |
 | 173 | SVM | Hyperparameter Optimization | HPO (LassoBench / GP-HDBO) | 388 | 1 | 0 | ? | no | unknown |
-| 174 | AgNP | Materials | PV-Lab materials | 5 | 1 | 0 | ? | unknown | unknown |
-| 175 | AutoAM | Materials | PV-Lab materials | 4 | 1 | 0 | ? | unknown | unknown |
-| 176 | CrossedBarrel | Materials | PV-Lab materials | 4 | 1 | 0 | ? | unknown | unknown |
-| 177 | HOIP | Materials | PV-Lab materials | 3 | 1 | 0 | ? | unknown | unknown |
-| 178 | P3HT | Materials | PV-Lab materials | 5 | 1 | 0 | ? | unknown | unknown |
-| 179 | Perovskite | Materials | PV-Lab materials | 3 | 1 | 0 | ? | unknown | unknown |
+| 174 | NASBench201 | Hyperparameter Optimization | NAS-Bench-201 | 6 | 1 | 0 | ? | unknown | unknown |
+| 175 | AgNP | Materials | PV-Lab materials | 5 | 1 | 0 | ? | unknown | unknown |
+| 176 | AutoAM | Materials | PV-Lab materials | 4 | 1 | 0 | ? | unknown | unknown |
+| 177 | CrossedBarrel | Materials | PV-Lab materials | 4 | 1 | 0 | ? | unknown | unknown |
+| 178 | HOIP | Materials | PV-Lab materials | 3 | 1 | 0 | ? | unknown | unknown |
+| 179 | P3HT | Materials | PV-Lab materials | 5 | 1 | 0 | ? | unknown | unknown |
+| 180 | Perovskite | Materials | PV-Lab materials | 3 | 1 | 0 | ? | unknown | unknown |
 
 <!-- TABLE:END -->
 
@@ -326,11 +327,11 @@ heading shows the exact call. (Generated; rerun `python tools/render_categorizat
 
 `Car`, `HelicalSpring`, `PressureVessel`, `ReinforcedConcreteBeam`, `SpeedReducer`, `SteppedCantileverBeam`
 
-### Single-objective, unconstrained, discrete (4)
+### Single-objective, unconstrained, discrete (5)
 
 `list_problems(num_objectives=1, constrained=False, input_type='discrete')`
 
-`GearTrain`, `HOIP`, `MaxSAT`, `PestControl`
+`GearTrain`, `HOIP`, `MaxSAT`, `NASBench201`, `PestControl`
 
 ### Single-objective, constrained, discrete (0)
 

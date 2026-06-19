@@ -46,6 +46,7 @@ _APPLICATION_BY_PREFIX = (
     ("opt_problems.control.mujoco", "Control"),
     ("opt_problems.control", "Control"),
     ("opt_problems.hpo", "Hyperparameter Optimization"),
+    ("opt_problems.nas", "Hyperparameter Optimization"),
     ("opt_problems.materials", "Materials"),
     ("opt_problems.combinatorial", "Combinatorial"),
     ("opt_problems.modact", "Engineering"),
@@ -75,6 +76,7 @@ _SUITE_BY_MODULE = (
     ("opt_problems.control.mujoco", "MuJoCo control"),
     ("opt_problems.control", "Classic control"),
     ("opt_problems.combinatorial", "TSP / NEORL"),
+    ("opt_problems.nas", "NAS-Bench-201"),
     ("opt_problems.hpo", "HPO (LassoBench / GP-HDBO)"),
 )
 

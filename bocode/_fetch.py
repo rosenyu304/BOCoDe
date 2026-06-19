@@ -35,6 +35,7 @@ _CHECKSUMS = {
     "mopta08_elf64.bin": None,
     "mazda_mop_sca": None,
     "mazda_mop": None,
+    "nasbench201_accuracy.npz": None,
 }
 
 
