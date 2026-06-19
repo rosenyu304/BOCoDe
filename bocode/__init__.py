@@ -43,6 +43,11 @@ from .registry import (  # noqa: F401  (re-exported as public API)
     list_problems,
     list_synthetic,
 )
+from .transforms import (  # noqa: F401  (re-exported as public API)
+    ContinuousRelaxation,
+    PenalizedProblem,
+    ScalarizedProblem,
+)
 
 _API = {
     "__version__",
@@ -58,6 +63,9 @@ _API = {
     "list_problems",
     "list_synthetic",
     "synthetic",
+    "PenalizedProblem",
+    "ScalarizedProblem",
+    "ContinuousRelaxation",
     "get_multi_objective_constrained",
     "get_multi_objective_unconstrained",
     "get_single_objective_constrained",
