@@ -8,8 +8,8 @@ the pool, with distances computed in per-dimension min-max-normalized space so t
 very different hyperparameter scales (e.g. ``batch_size`` 16-512 vs ``max_dropout``
 0-1) are comparable.
 
-The compact per-dataset tables (seven hyperparameters + accuracy) are bundled in
-``hpo/data/`` and committed directly (small).
+All tasks live in a single compact ``lcbench_data.npz`` in ``hpo/data/`` (each key is
+the dataset name; the array is ``(2000, 8)`` = seven hyperparameters then accuracy).
 
 Sources:
 L. Zimmer, M. Lindauer, F. Hutter. Auto-PyTorch: Multi-Fidelity MetaLearning for Efficient and Robust AutoDL. IEEE Transactions on Pattern Analysis and Machine Intelligence 43(9):3079-3090, 2021. https://github.com/automl/LCBench
@@ -19,14 +19,14 @@ from __future__ import annotations
 
 from pathlib import Path
 
-import pandas as pd
+import numpy as np
 import torch
 
 from ...base import BenchmarkProblem
 
 _DATA_DIR = Path(__file__).resolve().parent / "data"
 
-# The seven tunable LCBench hyperparameters (order matters); three are integers.
+# The seven tunable LCBench hyperparameters (column order); three are integers.
 _HP = [
     "batch_size",
     "learning_rate",
@@ -36,7 +36,15 @@ _HP = [
     "num_layers",
     "weight_decay",
 ]
-_INTEGER = {"batch_size", "max_units", "num_layers"}
+_INTEGER_IDX = [0, 3, 5]  # batch_size, max_units, num_layers
+_TABLES = None
+
+
+def _tables():
+    global _TABLES
+    if _TABLES is None:
+        _TABLES = np.load(_DATA_DIR / "lcbench_data.npz")
+    return _TABLES
 
 
 class LCBenchProblem(BenchmarkProblem):
@@ -45,19 +53,17 @@ class LCBenchProblem(BenchmarkProblem):
     available_dimensions = 7
     num_objectives = 1
     num_constraints = 0
-    csv_name: str = ""
+    task_key: str = ""
 
     def __init__(self) -> None:
-        df = pd.read_csv(_DATA_DIR / self.csv_name)
-        self._X = torch.tensor(df[_HP].to_numpy(dtype=float), dtype=torch.float64)
-        self._y = torch.tensor(
-            df["accuracy"].to_numpy(dtype=float), dtype=torch.float64
-        )
+        arr = _tables()[self.task_key]
+        self._X = torch.tensor(arr[:, :-1], dtype=torch.float64)
+        self._y = torch.tensor(arr[:, -1], dtype=torch.float64)
         lo = self._X.amin(dim=0)
         hi = self._X.amax(dim=0)
         self._range = (hi - lo).clamp_min(1e-9)
         self.variable_types = [
-            "integer" if h in _INTEGER else "continuous" for h in _HP
+            "integer" if i in _INTEGER_IDX else "continuous" for i in range(len(_HP))
         ]
         super().__init__(
             dim=len(_HP),

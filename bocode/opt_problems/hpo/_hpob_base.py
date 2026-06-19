@@ -7,8 +7,10 @@ optimization benchmark via the FixedHPO-B framing (Gabriel). The search space is
 accuracy, which is *maximized*. ``evaluate`` returns the accuracy of the nearest
 configuration in the pool (a discrete lookup).
 
-The per-task tables (a fixed 2000-configuration subsample where the source pool is
-larger) are bundled in ``hpo/data/`` and committed directly — they are small.
+All tasks live in a single compact ``hpob_data.npz`` in ``hpo/data/`` (each key
+``"<space>_<dataset>"`` maps to a ``(n, d+1)`` float array: the ``d`` features then
+the accuracy). A fixed 2000-configuration subsample is used where the source pool is
+larger.
 
 Sources:
 S. Pineda-Arango, H. S. Jomaa, M. Wistuba, J. Grabocka. HPO-B: A Large-Scale Reproducible Benchmark for Black-Box HPO based on OpenML. Advances in Neural Information Processing Systems Datasets and Benchmarks, 2021. https://github.com/releaunifreiburg/HPO-B
@@ -19,12 +21,20 @@ from __future__ import annotations
 
 from pathlib import Path
 
-import pandas as pd
+import numpy as np
 import torch
 
 from ...base import BenchmarkProblem
 
 _DATA_DIR = Path(__file__).resolve().parent / "data"
+_TABLES = None
+
+
+def _tables():
+    global _TABLES
+    if _TABLES is None:
+        _TABLES = np.load(_DATA_DIR / "hpob_data.npz")
+    return _TABLES
 
 
 class HPOBProblem(BenchmarkProblem):
@@ -32,18 +42,17 @@ class HPOBProblem(BenchmarkProblem):
 
     num_objectives = 1
     num_constraints = 0
-    csv_name: str = ""
+    task_key: str = ""
 
     def __init__(self) -> None:
-        df = pd.read_csv(_DATA_DIR / self.csv_name)
-        feats = [c for c in df.columns if c != "accuracy"]
-        self._X = torch.tensor(df[feats].to_numpy(), dtype=torch.float64)
-        self._y = torch.tensor(df["accuracy"].to_numpy(), dtype=torch.float64)
+        arr = _tables()[self.task_key]
+        self._X = torch.tensor(arr[:, :-1], dtype=torch.float64)
+        self._y = torch.tensor(arr[:, -1], dtype=torch.float64)
         super().__init__(
-            dim=len(feats),
+            dim=self._X.shape[1],
             num_objectives=1,
             num_constraints=0,
-            bounds=[(0.0, 1.0)] * len(feats),  # HPO-B search space is [0, 1]^d
+            bounds=[(0.0, 1.0)] * self._X.shape[1],  # HPO-B search space is [0, 1]^d
         )
 
     @property

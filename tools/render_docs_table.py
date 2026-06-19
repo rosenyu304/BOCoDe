@@ -53,7 +53,21 @@ _FACETS = [
     ("Objectives", "objectives"),
     ("Constraints", "constraints"),
     ("Variables", "variables"),
+    ("Dimension", "dimension"),
 ]
+
+# Dimension buckets (low / mid / high) and the order their buttons appear in.
+_DIM_ORDER = ["<10", "10–100", ">100"]
+
+
+def _dim_bucket(dim) -> str:
+    if not isinstance(dim, (int, float)):
+        return "unknown"
+    if dim < 10:
+        return "<10"
+    if dim <= 100:
+        return "10–100"
+    return ">100"
 
 
 def _row_facets(m: dict) -> dict:
@@ -64,6 +78,7 @@ def _row_facets(m: dict) -> dict:
         if (m.get("num_constraints") or 0) > 0
         else "unconstrained",
         "variables": str(m.get("input_type") or "continuous"),
+        "dimension": _dim_bucket(m.get("dim")),
     }
 
 
@@ -81,7 +96,11 @@ def build_html() -> str:
     # distinct values per facet (for the toggle buttons)
     facet_values: dict[str, list[str]] = {}
     for _, key in _FACETS:
-        facet_values[key] = sorted({f[key] for _, _, f in data})
+        vals = {f[key] for _, _, f in data}
+        if key == "dimension":
+            facet_values[key] = [v for v in _DIM_ORDER if v in vals]
+        else:
+            facet_values[key] = sorted(vals)
 
     parts: list[str] = []
     parts.append(_CSS)
@@ -171,7 +190,7 @@ _JS = """<script>
   var buttons = root.querySelectorAll('.bc-btn');
   var rows = Array.prototype.slice.call(root.querySelectorAll('#bc-table tbody tr'));
   var shown = root.querySelector('#bc-shown');
-  var active = {};  // facet -> Set of active values
+  var active = {};  // facet -> single active value (radio: one per category)
 
   function apply() {
     var q = (search.value || '').toLowerCase();
@@ -179,7 +198,7 @@ _JS = """<script>
     rows.forEach(function (r) {
       var ok = r.getAttribute('data-name').indexOf(q) !== -1;
       Object.keys(active).forEach(function (facet) {
-        if (active[facet].size && !active[facet].has(r.getAttribute('data-' + facet))) ok = false;
+        if (active[facet] && r.getAttribute('data-' + facet) !== active[facet]) ok = false;
       });
       r.classList.toggle('bc-hidden', !ok);
       if (ok) n++;
@@ -189,10 +208,19 @@ _JS = """<script>
 
   buttons.forEach(function (b) {
     var facet = b.getAttribute('data-facet'), val = b.getAttribute('data-value');
-    active[facet] = active[facet] || new Set();
     b.addEventListener('click', function () {
-      b.classList.toggle('active');
-      if (active[facet].has(val)) active[facet].delete(val); else active[facet].add(val);
+      if (active[facet] === val) {
+        // clicking the active button again clears this category's filter
+        active[facet] = null;
+        b.classList.remove('active');
+      } else {
+        // single-select: deselect the others in this category, select this one
+        active[facet] = val;
+        buttons.forEach(function (o) {
+          if (o.getAttribute('data-facet') === facet) o.classList.remove('active');
+        });
+        b.classList.add('active');
+      }
       apply();
     });
   });

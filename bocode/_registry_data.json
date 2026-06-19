@@ -411,19 +411,275 @@
     "opt_problems.materials.HOIP",
     null
   ],
-  "HPOBRanger": [
+  "HPOB_5527_10101": [
     "opt_problems.hpo.HPOB",
     null
   ],
-  "HPOBRpart": [
+  "HPOB_5527_145804": [
     "opt_problems.hpo.HPOB",
     null
   ],
-  "HPOBSvm": [
+  "HPOB_5527_146064": [
     "opt_problems.hpo.HPOB",
     null
   ],
-  "HPOBXgboost": [
+  "HPOB_5527_146065": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_5527_31": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_5527_9914": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_5636_10101": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_5636_145804": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_5636_146064": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_5636_146065": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_5636_31": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_5636_9914": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_5859_125923": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_5859_31": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_5859_37": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_5859_3902": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_5859_9977": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_5859_9983": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_5891_3492": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_5891_3891": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_5891_3899": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_5891_6566": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_5891_9889": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_5891_9980": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_5965_10101": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_5965_145836": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_5965_3903": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_5965_49": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_5965_9889": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_5965_9914": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_5965_9946": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_5970_14951": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_5970_34536": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_5970_3492": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_5970_37": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_5970_49": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_5970_9952": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_5971_10093": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_5971_34536": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_5971_3954": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_5971_43": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_5971_6566": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_5971_9970": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_6766_10101": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_6766_145804": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_6766_145953": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_6766_146064": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_6766_31": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_6766_3903": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_6767_145804": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_6767_146064": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_6767_146065": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_6767_31": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_6767_9914": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_6767_9967": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_6794_10101": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_6794_145804": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_6794_146065": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_6794_3": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_6794_31": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_6794_9914": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_7609_125923": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_7609_145853": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_7609_145854": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_7609_145878": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_7609_34537": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_7609_3903": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_7609_9967": [
     "opt_problems.hpo.HPOB",
     null
   ],
@@ -467,7 +723,55 @@
     "opt_problems.control.mujoco.MujocoFuncs",
     "mujoco"
   ],
+  "LCBenchAPSFailure": [
+    "opt_problems.hpo.LCBench",
+    null
+  ],
+  "LCBenchAdult": [
+    "opt_problems.hpo.LCBench",
+    null
+  ],
+  "LCBenchAirlines": [
+    "opt_problems.hpo.LCBench",
+    null
+  ],
   "LCBenchAlbert": [
+    "opt_problems.hpo.LCBench",
+    null
+  ],
+  "LCBenchAmazonEmployeeAccess": [
+    "opt_problems.hpo.LCBench",
+    null
+  ],
+  "LCBenchAustralian": [
+    "opt_problems.hpo.LCBench",
+    null
+  ],
+  "LCBenchBankMarketing": [
+    "opt_problems.hpo.LCBench",
+    null
+  ],
+  "LCBenchBloodTransfusionServiceCenter": [
+    "opt_problems.hpo.LCBench",
+    null
+  ],
+  "LCBenchCar": [
+    "opt_problems.hpo.LCBench",
+    null
+  ],
+  "LCBenchChristine": [
+    "opt_problems.hpo.LCBench",
+    null
+  ],
+  "LCBenchCnae9": [
+    "opt_problems.hpo.LCBench",
+    null
+  ],
+  "LCBenchConnect4": [
+    "opt_problems.hpo.LCBench",
+    null
+  ],
+  "LCBenchCovertype": [
     "opt_problems.hpo.LCBench",
     null
   ],
@@ -475,11 +779,87 @@
     "opt_problems.hpo.LCBench",
     null
   ],
+  "LCBenchDionis": [
+    "opt_problems.hpo.LCBench",
+    null
+  ],
+  "LCBenchFabert": [
+    "opt_problems.hpo.LCBench",
+    null
+  ],
   "LCBenchFashionMNIST": [
     "opt_problems.hpo.LCBench",
     null
   ],
+  "LCBenchHelena": [
+    "opt_problems.hpo.LCBench",
+    null
+  ],
   "LCBenchHiggs": [
+    "opt_problems.hpo.LCBench",
+    null
+  ],
+  "LCBenchJannis": [
+    "opt_problems.hpo.LCBench",
+    null
+  ],
+  "LCBenchJasmine": [
+    "opt_problems.hpo.LCBench",
+    null
+  ],
+  "LCBenchJungleChess2pcsRawEndgameComplete": [
+    "opt_problems.hpo.LCBench",
+    null
+  ],
+  "LCBenchKDDCup09Appetency": [
+    "opt_problems.hpo.LCBench",
+    null
+  ],
+  "LCBenchKc1": [
+    "opt_problems.hpo.LCBench",
+    null
+  ],
+  "LCBenchKrVsKp": [
+    "opt_problems.hpo.LCBench",
+    null
+  ],
+  "LCBenchMfeatFactors": [
+    "opt_problems.hpo.LCBench",
+    null
+  ],
+  "LCBenchMiniBooNE": [
+    "opt_problems.hpo.LCBench",
+    null
+  ],
+  "LCBenchNomao": [
+    "opt_problems.hpo.LCBench",
+    null
+  ],
+  "LCBenchNumerai286": [
+    "opt_problems.hpo.LCBench",
+    null
+  ],
+  "LCBenchPhoneme": [
+    "opt_problems.hpo.LCBench",
+    null
+  ],
+  "LCBenchSegment": [
+    "opt_problems.hpo.LCBench",
+    null
+  ],
+  "LCBenchShuttle": [
+    "opt_problems.hpo.LCBench",
+    null
+  ],
+  "LCBenchSylvine": [
+    "opt_problems.hpo.LCBench",
+    null
+  ],
+  "LCBenchVehicle": [
+    "opt_problems.hpo.LCBench",
+    null
+  ],
+  "LCBenchVolkert": [
     "opt_problems.hpo.LCBench",
     null
   ],

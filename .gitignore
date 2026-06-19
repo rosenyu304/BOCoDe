@@ -192,3 +192,7 @@ bocode/opt_problems/engineering/Mazda_Data/pop_*.txt
 .cache/
 examples/results/
 *.npz
+# ...but the small in-repo benchmark data tables ARE committed (not result files):
+!bocode/opt_problems/hpo/data/hpob_data.npz
+!bocode/opt_problems/hpo/data/lcbench_data.npz
+!bocode/opt_problems/nas/data/nasbench201_accuracy.npz
