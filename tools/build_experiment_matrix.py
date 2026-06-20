@@ -102,6 +102,23 @@ def main() -> None:
             mixed_rows.append(line)
             mixed_total += r
 
+    # Synthetic test functions: all continuous -> Table 1. Scalable ones (Ackley, Levy,
+    # ZDT, DTLZ, ...) are fixed at dim 10 for the campaign.
+    for name in bocode.list_synthetic():
+        cls = bocode.get_problem(name)
+        inst = cls()
+        scalable = isinstance(getattr(cls, "available_dimensions", None), (tuple, list, set))
+        dim = 10 if scalable else inst.dim
+        M, C = inst.num_objectives, inst.num_constraints
+        line, r = _row(
+            "[ ]", name, "Synthetic", M, C, dim, None, continuous_algos(M, C, dim), seeds
+        )
+        cont_rows.append(line)
+        cont_total += r
+
+    cont_rows.sort()
+    mixed_rows.sort()
+
     legend = (
         "## Algorithm assignment\n\n"
         "- single-obj, unconstrained, **dim <= 10**: `random_search, single_task_gp, turbo`\n"

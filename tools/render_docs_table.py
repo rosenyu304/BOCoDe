@@ -176,7 +176,7 @@ _CSS = """<style>
 /* Widen furo's fixed 46em content column for THIS page only (via :has) so the intro
    text and filter buttons are as wide as the table. This expands rightward into the
    margin/ToC space; it never shifts left under the sidebar. */
-.content:has(.bocode-table) { width: min(70em, 92vw); }
+.content:has(.bocode-table) { width: min(65em, 92vw); }
 .bocode-table #bc-search { width: 100%; max-width: 420px; padding: 6px 10px; margin: 0 0 12px;
   border: 1px solid var(--color-background-border, #ccc); border-radius: 6px; background: inherit; color: inherit; }
 .bocode-table .bc-facet { margin: 6px 0; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
