@@ -173,11 +173,10 @@ def build_html() -> str:
 
 _CSS = """<style>
 .bocode-table { font-size: 0.9em; }
-/* On wide screens, break the whole block (intro, buttons, table) out of furo's
-   narrow content column so the text/buttons are as wide as the table. */
-@media (min-width: 1200px) {
-  .bocode-table { width: 88vw; position: relative; left: 50%; transform: translateX(-50%); }
-}
+/* Widen furo's fixed 46em content column for THIS page only (via :has) so the intro
+   text and filter buttons are as wide as the table. This expands rightward into the
+   margin/ToC space; it never shifts left under the sidebar. */
+.content:has(.bocode-table) { width: min(74em, 92vw); }
 .bocode-table #bc-search { width: 100%; max-width: 420px; padding: 6px 10px; margin: 0 0 12px;
   border: 1px solid var(--color-background-border, #ccc); border-radius: 6px; background: inherit; color: inherit; }
 .bocode-table .bc-facet { margin: 6px 0; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
