@@ -1,15 +1,18 @@
-"""Enumerate every problem x runnable variant to size a BO experiment campaign.
-
-For each problem (real + synthetic) this lists the base problem and the variants that
-the transforms in ``bocode/transforms.py`` make runnable:
-- constrained  -> ``+penalty``    (unconstrained), via PenalizedProblem
-- multi-objective -> ``+scalarized`` (single-objective), via ScalarizedProblem
-- mixed (non-dataset) -> ``+continuous``, via ContinuousRelaxation
-Variants compose. Each row's estimated run count = (#algorithms for that variant's
-category) x SEEDS.
+"""Enumerate the BO experiment campaign over all problems, as two checklists.
 
 Writes ``Experiment_problems.md`` to the PARENT folder (outside the git repo, so it is
-never pushed). Run::
+never pushed). Two tables:
+
+  Table 1 — Continuous: every problem in continuous form. Natively-continuous problems
+            as-is; mixed/discrete non-dataset problems via ContinuousRelaxation. Discrete
+            candidate-pool datasets (which have no continuous relaxation) are not here.
+  Table 2 — Mixed/discrete: every natively mixed/discrete problem in its original form
+            (run with the mixed-variable / candidate-pool algorithms).
+
+Each row has a ``[ ]`` checkbox to track what has been run, the explicit list of
+algorithms to run for that problem, and an estimated run count (= #algorithms x seeds).
+
+Run::
 
     python tools/build_experiment_matrix.py [--seeds 5]
 """
@@ -18,7 +21,6 @@ from __future__ import annotations
 
 import argparse
 import sys
-from itertools import product
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -26,45 +28,44 @@ sys.path.insert(0, str(ROOT))
 
 import bocode  # noqa: E402
 
-# Algorithm counts per (objective-kind, constrained) category, mirroring
-# examples/run_experiments.py _ALGOS (single-objective also gets the 2 mixed-variable
-# algorithms). Update if the algorithm roster changes.
-_N_ALGOS = {
-    ("single", False): 6 + 2,
-    ("single", True): 3 + 2,
-    ("multi", False): 4,
-    ("multi", True): 2,
-}
 
-
-def _n_algos(num_obj: int, num_con: int) -> int:
-    kind = "multi" if num_obj >= 2 else "single"
-    return _N_ALGOS[(kind, num_con > 0)]
-
-
-def _variants(num_obj, num_con, input_type, is_dataset):
-    """All (label, M, C, V) variants: base + every combination of applicable transforms."""
-    transforms = []
-    if num_con > 0:
-        transforms.append("penalty")
+def continuous_algos(num_obj: int, num_con: int, dim: int) -> list[str]:
+    """Continuous-BO algorithms for a problem's category (dim-dependent when SO/uncon)."""
     if num_obj >= 2:
-        transforms.append("scalarized")
-    if input_type in ("mixed", "discrete") and not is_dataset:
-        transforms.append("continuous")
+        if num_con > 0:
+            return ["random_search", "constrained_qnehvi", "constrained_qparego"]
+        return ["random_search", "qnehvi", "qnparego", "mesmo"]
+    if num_con > 0:
+        return ["random_search", "constrained_ei", "scbo"]
+    # single-objective, unconstrained: small set for low-dim, the full HD set otherwise
+    if dim is not None and dim <= 10:
+        return ["random_search", "single_task_gp", "turbo"]
+    return [
+        "random_search",
+        "single_task_gp",
+        "standard_gp",
+        "vanilla_highdim_bo",
+        "turbo",
+        "baxus",
+    ]
 
-    rows = []
-    for combo in product([False, True], repeat=len(transforms)):
-        applied = [t for t, on in zip(transforms, combo, strict=True) if on]
-        m, c, v = num_obj, num_con, input_type
-        if "penalty" in applied:
-            c = 0
-        if "scalarized" in applied:
-            m = 1
-        if "continuous" in applied:
-            v = "continuous"
-        label = "base" if not applied else "+" + "+".join(applied)
-        rows.append((label, m, c, v))
-    return rows
+
+def mixed_algos(num_obj: int) -> list[str]:
+    """Mixed-variable algorithms (single-objective only have dedicated ones today)."""
+    if num_obj >= 2:
+        return [
+            "random_search_mixed"
+        ]  # no dedicated mixed multi-objective algorithm yet
+    return ["random_search_mixed", "single_task_gp_mixed"]
+
+
+def _row(check, name, app, m, c, dim, extra, algos, seeds):
+    runs = len(algos) * seeds
+    cells = [check, name, app, str(m), str(c), str(dim)]
+    if extra is not None:
+        cells.append(extra)
+    cells += [", ".join(algos), str(runs)]
+    return "| " + " | ".join(cells) + " |", runs
 
 
 def main() -> None:
@@ -73,63 +74,84 @@ def main() -> None:
     args = ap.parse_args()
     seeds = args.seeds
 
-    names = list(bocode.list_problems()) + list(bocode.list_synthetic())
-    lines = [
-        "# Experiment problem matrix",
-        "",
-        f"Every problem and the variants made runnable by `bocode/transforms.py`, with an "
-        f"estimated run count = (#algorithms for the variant's category) x **{seeds} seeds**. "
-        "Constrained -> +penalty, multi-objective -> +scalarized, mixed/discrete (non-dataset) "
-        "-> +continuous; variants compose. (Generated by `tools/build_experiment_matrix.py`; "
-        "gitignored.)",
-        "",
-        "| Problem | Application | Variant | #Obj | #Constr | Dim | Variables | Scalable | est. runs |",
-        "|---|---|---|---|---|---|---|---|---|",
-    ]
-    total = 0
-    synthetic = set(bocode.list_synthetic())
-    for name in names:
-        if name in synthetic:
-            cls = bocode.get_problem(name)
-            inst = cls()
+    cont_rows, mixed_rows, cont_total, mixed_total = [], [], 0, 0
+    for name in bocode.list_problems():
+        m = bocode.get_metadata(name)
+        try:
+            is_dataset = hasattr(bocode.get_problem(name), "candidates")
+        except Exception:  # noqa: BLE001 - optional extra missing -> not a dataset
             is_dataset = False
-            m = {
-                "application": "Synthetic",
-                "num_objectives": inst.num_objectives,
-                "num_constraints": inst.num_constraints,
-                "dim": inst.dim,
-                "input_type": "continuous",
-                "scalable": isinstance(
-                    getattr(cls, "available_dimensions", None), (tuple, list, set)
-                ),
-            }
-        else:
-            m = bocode.get_metadata(name)  # from JSON; no import needed
-            try:
-                is_dataset = hasattr(bocode.get_problem(name), "candidates")
-            except Exception:  # noqa: BLE001 - optional extra not installed -> not a dataset
-                is_dataset = False
-
         M = m.get("num_objectives") or 1
         C = m.get("num_constraints") or 0
+        dim = m.get("dim")
         V = m.get("input_type") or "continuous"
-        scal = "Yes" if m.get("scalable") else "No"
-        for label, vm, vc, vv in _variants(M, C, V, is_dataset):
-            runs = _n_algos(vm, vc) * seeds
-            total += runs
-            lines.append(
-                f"| {name} | {m.get('application', '—')} | {label} | {vm} | {vc} | "
-                f"{m.get('dim', '—')} | {vv} | {scal} | {runs} |"
-            )
+        app = m.get("application", "—")
+        is_mixed = V in ("mixed", "discrete")
 
-    lines += [
+        # Table 1: continuous form (continuous as-is, or non-dataset mixed relaxed).
+        if not is_mixed or not is_dataset:
+            line, r = _row(
+                "[ ]", name, app, M, C, dim, None, continuous_algos(M, C, dim), seeds
+            )
+            cont_rows.append(line)
+            cont_total += r
+
+        # Table 2: native mixed/discrete form.
+        if is_mixed:
+            line, r = _row("[ ]", name, app, M, C, dim, V, mixed_algos(M), seeds)
+            mixed_rows.append(line)
+            mixed_total += r
+
+    legend = (
+        "## Algorithm assignment\n\n"
+        "- single-obj, unconstrained, **dim <= 10**: `random_search, single_task_gp, turbo`\n"
+        "- single-obj, unconstrained, **dim > 10**: `random_search, single_task_gp, "
+        "standard_gp, vanilla_highdim_bo, turbo, baxus`\n"
+        "- single-obj, constrained: `random_search, constrained_ei, scbo`\n"
+        "- multi-obj, unconstrained: `random_search, qnehvi, qnparego, mesmo`\n"
+        "- multi-obj, constrained: `random_search, constrained_qnehvi, constrained_qparego`\n"
+        "- mixed (Table 2), single-obj: `random_search_mixed, single_task_gp_mixed`\n"
+        "- mixed (Table 2), multi-obj: `random_search_mixed` (no dedicated mixed multi-objective algorithm yet)\n"
+        f"\nEstimated run count per row = (#algorithms) x **{seeds} seeds**. "
+        "Check the `[ ]` box once a row's runs are complete. "
+        "(Generated by `tools/build_experiment_matrix.py`; kept outside the repo.)\n"
+    )
+
+    out = [
+        "# Experiment problem matrix",
         "",
-        f"**Total estimated runs: {total:,}** ({len(names)} problems, {seeds} seeds).",
+        legend,
+        "## Table 1 — Continuous experiments",
+        "",
+        "Every problem in continuous form (mixed/discrete non-dataset problems via "
+        "`ContinuousRelaxation`). Discrete candidate-pool datasets are in Table 2 only.",
+        "",
+        "| Run? | Problem | Application | #Obj | #Constr | Dim | Algorithms | est. runs |",
+        "|---|---|---|---|---|---|---|---|",
+        *cont_rows,
+        "",
+        f"**Table 1 subtotal: {cont_total:,} runs ({len(cont_rows)} problems).**",
+        "",
+        "## Table 2 — Mixed / discrete experiments",
+        "",
+        "The natively mixed/discrete problems in their original form (run with the "
+        "mixed-variable / candidate-pool algorithms).",
+        "",
+        "| Run? | Problem | Application | #Obj | #Constr | Dim | Variables | Algorithms | est. runs |",
+        "|---|---|---|---|---|---|---|---|---|",
+        *mixed_rows,
+        "",
+        f"**Table 2 subtotal: {mixed_total:,} runs ({len(mixed_rows)} problems).**",
+        "",
+        f"**Grand total: {cont_total + mixed_total:,} runs** at {seeds} seeds.",
         "",
     ]
-    out = ROOT.parent / "Experiment_problems.md"
-    out.write_text("\n".join(lines))
-    print(f"wrote {out} ({total:,} estimated runs)")
+    dest = ROOT.parent / "Experiment_problems.md"
+    dest.write_text("\n".join(out))
+    print(
+        f"wrote {dest} (Table 1: {cont_total:,} | Table 2: {mixed_total:,} | "
+        f"total {cont_total + mixed_total:,})"
+    )
 
 
 if __name__ == "__main__":
