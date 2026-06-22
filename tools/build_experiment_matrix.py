@@ -107,11 +107,21 @@ def main() -> None:
     for name in bocode.list_synthetic():
         cls = bocode.get_problem(name)
         inst = cls()
-        scalable = isinstance(getattr(cls, "available_dimensions", None), (tuple, list, set))
+        scalable = isinstance(
+            getattr(cls, "available_dimensions", None), (tuple, list, set)
+        )
         dim = 10 if scalable else inst.dim
         M, C = inst.num_objectives, inst.num_constraints
         line, r = _row(
-            "[ ]", name, "Synthetic", M, C, dim, None, continuous_algos(M, C, dim), seeds
+            "[ ]",
+            name,
+            "Synthetic",
+            M,
+            C,
+            dim,
+            None,
+            continuous_algos(M, C, dim),
+            seeds,
         )
         cont_rows.append(line)
         cont_total += r
