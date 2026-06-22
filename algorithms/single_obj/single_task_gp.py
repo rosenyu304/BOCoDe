@@ -19,12 +19,14 @@ M. Balandat, B. Karrer, D. R. Jiang, S. Daulton, B. Letham, A. G. Wilson, and E.
 from __future__ import annotations
 
 import argparse
+from pathlib import Path
 
 import torch
 from botorch.acquisition import LogExpectedImprovement
 from botorch.optim import optimize_acqf
 
 from .._bo_utils import (
+    DTYPE,
     DatasetObjective,
     ProblemObjective,
     Result,
@@ -33,38 +35,64 @@ from .._bo_utils import (
     fit_gp,
     gp_stats,
     initial_design,
+    load_checkpoint,
     make_problem,
+    resolve_device,
+    save_checkpoint,
     set_seed,
 )
 
 
 def optimize_problem(
-    problem, n_init: int = 10, iters: int = 40, seed: int = 0
+    problem,
+    n_init: int = 10,
+    iters: int = 40,
+    seed: int = 0,
+    checkpoint: str | None = None,
+    device: str | None = None,
 ) -> Result:
-    """Continuous SingleTaskGP + LogEI BO over the unit cube."""
+    """Continuous SingleTaskGP + LogEI BO over the unit cube.
+
+    The GP fit and acquisition optimization run on ``device`` (default: cuda if
+    available, else cpu); the objective is evaluated on CPU. With ``checkpoint`` set,
+    the run is resumable: it loads ``(X, y, completed_iters, RNG)`` from the checkpoint
+    if present and saves it after every iteration (so a killed/preempted job resumes
+    where it stopped and runs through to ``iters``).
+    """
     set_seed(seed)
+    dev = resolve_device(device)
     obj = ProblemObjective(problem)
     res = Result(
         "single_task_gp", type(problem).__name__, seed, acquisition_function="LogEI"
     )
 
-    train_X = initial_design(n_init, obj.dim, seed)
-    train_Y = obj(train_X)
-    best = train_Y.max().item()
-    res.start(best)
+    if checkpoint and Path(checkpoint).exists():
+        train_X, train_Y, start_it = load_checkpoint(checkpoint, res)
+        best = train_Y.max().item()
+    else:
+        train_X = initial_design(n_init, obj.dim, seed)
+        train_Y = obj(train_X)
+        best = train_Y.max().item()
+        res.start(best)
+        start_it = 0
 
-    for _ in range(iters):
-        model = fit_gp(train_X, train_Y)  # SingleTaskGP with Normalize + Standardize
-        acqf = LogExpectedImprovement(model=model, best_f=train_Y.max())
+    bounds_dev = obj.bounds.to(dev)
+    for it in range(start_it, iters):
+        model = fit_gp(train_X.to(dev), train_Y.to(dev))
+        acqf = LogExpectedImprovement(model=model, best_f=train_Y.to(dev).max())
         candidate, acq_value = optimize_acqf(
-            acqf, bounds=obj.bounds, q=1, num_restarts=10, raw_samples=512
+            acqf, bounds=bounds_dev, q=1, num_restarts=10, raw_samples=512
         )
         mean, var = gp_stats(model, candidate)
+        candidate = candidate.detach().to(device="cpu", dtype=DTYPE)
         y = obj(candidate)
         train_X = torch.cat([train_X, candidate], dim=0)
         train_Y = torch.cat([train_Y, y], dim=0)
         best = max(best, y.item())
         res.record(best, mean=mean, variance=var, acq_value=acq_value.item())
+        if checkpoint:
+            res.set_history(train_X, train_Y, n_init)
+            save_checkpoint(checkpoint, train_X, train_Y, res, it + 1)
     res.set_history(train_X, train_Y, n_init)
     return res
 
@@ -113,12 +141,21 @@ def main() -> None:
     group.add_argument("--dataset")
     parser.add_argument("--init", type=int, default=10)
     parser.add_argument("--iters", type=int, default=40)
+    parser.add_argument(
+        "--checkpoint", default=None, help="resumable checkpoint .npz path"
+    )
+    parser.add_argument("--device", default=None, help="cuda / cpu (default: auto)")
     add_common_args(parser)
     args = parser.parse_args()
 
     if args.problem:
         res = optimize_problem(
-            make_problem(args.problem, args), args.init, args.iters, args.seed
+            make_problem(args.problem, args),
+            args.init,
+            args.iters,
+            args.seed,
+            checkpoint=args.checkpoint,
+            device=args.device,
         )
     else:
         res = optimize_dataset(

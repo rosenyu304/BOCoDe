@@ -338,6 +338,60 @@ def gp_stats(model, X) -> tuple[float, float]:
     return mean, var
 
 
+def resolve_device(device: str | None = None) -> torch.device:
+    """Compute device: explicit name, else cuda when available, else cpu."""
+    if device in (None, "auto"):
+        device = "cuda" if torch.cuda.is_available() else "cpu"
+    return torch.device(device)
+
+
+def save_checkpoint(path: str, train_X, train_Y, res, completed_iters: int) -> None:
+    """Atomically write a resumable checkpoint: BO data + torch RNG + Result trace."""
+    import os
+
+    import numpy as np
+
+    parent = os.path.dirname(path)
+    if parent:
+        os.makedirs(parent, exist_ok=True)
+    tmp = path + ".tmp"
+    with open(tmp, "wb") as f:
+        np.savez(
+            f,
+            X=train_X.detach().cpu().numpy(),
+            Y=train_Y.detach().cpu().numpy(),
+            completed_iters=int(completed_iters),
+            per_iteration_value=np.asarray(res.per_iteration_value),
+            wall_time=np.asarray(res.wall_time),
+            mean=np.asarray(res.mean),
+            variance=np.asarray(res.variance),
+            acq=np.asarray(res.per_iteration_acquisition_function_value),
+            torch_rng=torch.get_rng_state().numpy(),
+        )
+    os.replace(tmp, path)  # atomic: a half-written checkpoint never replaces a good one
+
+
+def load_checkpoint(path: str, res):
+    """Restore a checkpoint into ``res`` in place; return (train_X, train_Y, completed)."""
+    import time
+
+    import numpy as np
+
+    d = np.load(path)
+    res.per_iteration_value = [float(v) for v in d["per_iteration_value"]]
+    res.wall_time = [float(v) for v in d["wall_time"]]
+    res.mean = [float(v) for v in d["mean"]]
+    res.variance = [float(v) for v in d["variance"]]
+    res.per_iteration_acquisition_function_value = [float(v) for v in d["acq"]]
+    res._t0 = time.time() - (res.wall_time[-1] if res.wall_time else 0.0)
+    torch.set_rng_state(torch.from_numpy(d["torch_rng"]))
+    return (
+        torch.tensor(d["X"], dtype=DTYPE),
+        torch.tensor(d["Y"], dtype=DTYPE),
+        int(d["completed_iters"]),
+    )
+
+
 def make_problem(name: str, args=None):
     """Instantiate a registered problem, honoring a ``--discrete/--continuous`` flag.
 
