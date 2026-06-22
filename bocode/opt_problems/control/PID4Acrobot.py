@@ -130,7 +130,7 @@ class PID4Acrobot(BenchmarkProblem):
                 total_reward_list.append(total_reward)
 
             env.close()
-            rewards[i] = np.mean(total_reward_list)
+            rewards[i] = float(np.mean(total_reward_list))
 
         fx = rewards.reshape(n, self.num_objectives)
 

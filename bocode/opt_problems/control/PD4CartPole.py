@@ -93,7 +93,7 @@ class PD4CartPole(BenchmarkProblem):
                 # print(f"Episode {episode + 1}: Total Reward = {total_reward}")
                 total_reward_list.append(total_reward)
             env.close()
-            rewards[i] = np.min(total_reward_list)
+            rewards[i] = float(np.min(total_reward_list))
 
         fx = rewards.reshape(n, 1)
         return None, fx
