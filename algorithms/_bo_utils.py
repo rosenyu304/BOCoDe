@@ -345,8 +345,29 @@ def resolve_device(device: str | None = None) -> torch.device:
     return torch.device(device)
 
 
-def save_checkpoint(path: str, train_X, train_Y, res, completed_iters: int) -> None:
-    """Atomically write a resumable checkpoint: BO data + torch RNG + Result trace."""
+def default_n_init(dim: int) -> int:
+    """BoCoDe default initial-design size, scaled by problem dimension.
+
+    20 for ``dim < 10``, 50 for ``10 <= dim < 20``, 100 for ``20 <= dim < 100``,
+    200 for ``dim >= 100``.
+    """
+    if dim < 10:
+        return 20
+    if dim < 20:
+        return 50
+    if dim < 100:
+        return 100
+    return 200
+
+
+def save_checkpoint(
+    path: str, train_X, train_Y, res, completed_iters: int, extra: dict | None = None
+) -> None:
+    """Atomically write a resumable checkpoint: BO data + torch RNG + Result trace.
+
+    ``extra`` adds named arrays to persist alongside (e.g. qNEHVI's ``ref_point``,
+    which must be restored rather than recomputed from the resumed data).
+    """
     import os
 
     import numpy as np
@@ -354,25 +375,31 @@ def save_checkpoint(path: str, train_X, train_Y, res, completed_iters: int) -> N
     parent = os.path.dirname(path)
     if parent:
         os.makedirs(parent, exist_ok=True)
+    payload = dict(
+        X=train_X.detach().cpu().numpy(),
+        Y=train_Y.detach().cpu().numpy(),
+        completed_iters=int(completed_iters),
+        per_iteration_value=np.asarray(res.per_iteration_value),
+        wall_time=np.asarray(res.wall_time),
+        mean=np.asarray(res.mean),
+        variance=np.asarray(res.variance),
+        acq=np.asarray(res.per_iteration_acquisition_function_value),
+        torch_rng=torch.get_rng_state().numpy(),
+    )
+    if extra:
+        payload.update(extra)
     tmp = path + ".tmp"
     with open(tmp, "wb") as f:
-        np.savez(
-            f,
-            X=train_X.detach().cpu().numpy(),
-            Y=train_Y.detach().cpu().numpy(),
-            completed_iters=int(completed_iters),
-            per_iteration_value=np.asarray(res.per_iteration_value),
-            wall_time=np.asarray(res.wall_time),
-            mean=np.asarray(res.mean),
-            variance=np.asarray(res.variance),
-            acq=np.asarray(res.per_iteration_acquisition_function_value),
-            torch_rng=torch.get_rng_state().numpy(),
-        )
+        np.savez(f, **payload)
     os.replace(tmp, path)  # atomic: a half-written checkpoint never replaces a good one
 
 
 def load_checkpoint(path: str, res):
-    """Restore a checkpoint into ``res`` in place; return (train_X, train_Y, completed)."""
+    """Restore a checkpoint into ``res`` in place.
+
+    Returns ``(train_X, train_Y, completed_iters, data)`` where ``data`` is the loaded
+    npz (so callers can read any ``extra`` arrays, e.g. ``data["ref_point"]``).
+    """
     import time
 
     import numpy as np
@@ -389,6 +416,7 @@ def load_checkpoint(path: str, res):
         torch.tensor(d["X"], dtype=DTYPE),
         torch.tensor(d["Y"], dtype=DTYPE),
         int(d["completed_iters"]),
+        d,
     )
 
 

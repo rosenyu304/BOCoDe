@@ -31,6 +31,7 @@ from .._bo_utils import (
     ProblemObjective,
     Result,
     add_common_args,
+    default_n_init,
     finalize,
     fit_gp,
     gp_stats,
@@ -45,7 +46,7 @@ from .._bo_utils import (
 
 def optimize_problem(
     problem,
-    n_init: int = 10,
+    n_init: int | None = None,
     iters: int = 40,
     seed: int = 0,
     checkpoint: str | None = None,
@@ -53,6 +54,7 @@ def optimize_problem(
 ) -> Result:
     """Continuous SingleTaskGP + LogEI BO over the unit cube.
 
+    ``n_init`` defaults to the dimension-scaled BoCoDe default (:func:`default_n_init`).
     The GP fit and acquisition optimization run on ``device`` (default: cuda if
     available, else cpu); the objective is evaluated on CPU. With ``checkpoint`` set,
     the run is resumable: it loads ``(X, y, completed_iters, RNG)`` from the checkpoint
@@ -62,12 +64,14 @@ def optimize_problem(
     set_seed(seed)
     dev = resolve_device(device)
     obj = ProblemObjective(problem)
+    if n_init is None:
+        n_init = default_n_init(obj.dim)
     res = Result(
         "single_task_gp", type(problem).__name__, seed, acquisition_function="LogEI"
     )
 
     if checkpoint and Path(checkpoint).exists():
-        train_X, train_Y, start_it = load_checkpoint(checkpoint, res)
+        train_X, train_Y, start_it, _ = load_checkpoint(checkpoint, res)
         best = train_Y.max().item()
     else:
         train_X = initial_design(n_init, obj.dim, seed)
@@ -139,7 +143,12 @@ def main() -> None:
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument("--problem")
     group.add_argument("--dataset")
-    parser.add_argument("--init", type=int, default=10)
+    parser.add_argument(
+        "--init",
+        type=int,
+        default=None,
+        help="initial design size (default: dim-scaled)",
+    )
     parser.add_argument("--iters", type=int, default=40)
     parser.add_argument(
         "--checkpoint", default=None, help="resumable checkpoint .npz path"
@@ -159,7 +168,10 @@ def main() -> None:
         )
     else:
         res = optimize_dataset(
-            make_problem(args.dataset, args), args.init, args.iters, args.seed
+            make_problem(args.dataset, args),
+            args.init if args.init is not None else 10,
+            args.iters,
+            args.seed,
         )
     finalize(res, args)
 
