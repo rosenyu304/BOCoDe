@@ -19,6 +19,7 @@ BoTorch closed-loop tutorial: https://botorch.org/docs/tutorials/closed_loop_bot
 from __future__ import annotations
 
 import argparse
+from pathlib import Path
 
 import torch
 from botorch.acquisition.analytic import LogConstrainedExpectedImprovement
@@ -29,12 +30,17 @@ from botorch.optim import optimize_acqf
 from gpytorch.mlls import SumMarginalLogLikelihood
 
 from .._bo_utils import (
+    DTYPE,
     ProblemObjective,
     Result,
     add_common_args,
+    default_n_init,
     finalize,
-    initial_design,  # noqa: E501
+    initial_design,
+    load_checkpoint,
     make_problem,
+    resolve_device,
+    save_checkpoint,
     set_seed,
 )
 
@@ -66,35 +72,56 @@ def _fit_model_list(train_X, train_obj, train_con):
 
 
 def optimize_problem(
-    problem, n_init: int = 10, iters: int = 50, seed: int = 0
+    problem,
+    n_init: int | None = None,
+    iters: int = 50,
+    seed: int = 0,
+    checkpoint: str | None = None,
+    device: str | None = None,
 ) -> Result:
+    """Constrained EI BO. ``n_init`` defaults to the dim-scaled BoCoDe default.
+
+    GP fits + acquisition optimization run on ``device`` (default cuda when available);
+    the objective/constraints are evaluated on CPU. With ``checkpoint`` set the run is
+    resumable: it restores ``(X, obj, constraints, completed_iters, RNG)`` and saves
+    after every iteration.
+    """
     set_seed(seed)
+    dev = resolve_device(device)
     obj = ProblemObjective(problem)
     assert obj.num_constraints > 0, "constrained_ei requires a constrained problem"
+    if n_init is None:
+        n_init = default_n_init(obj.dim)
     res = Result(
         "constrained_ei", type(problem).__name__, seed, acquisition_function="LogCEI"
     )
-
-    train_X = initial_design(n_init, obj.dim, seed)
-    train_obj, train_con = obj.evaluate_raw(train_X)
 
     def best_feasible(obj_v, con_v):
         feas = (con_v <= 0).all(dim=1)
         return obj_v[feas].max().item() if feas.any() else -float("inf")
 
-    best = best_feasible(train_obj, train_con)
-    res.start(best)
+    if checkpoint and Path(checkpoint).exists():
+        train_X, train_obj, start_it, data = load_checkpoint(checkpoint, res)
+        train_con = torch.tensor(data["con"], dtype=DTYPE)
+        best = best_feasible(train_obj, train_con)
+    else:
+        train_X = initial_design(n_init, obj.dim, seed)
+        train_obj, train_con = obj.evaluate_raw(train_X)
+        best = best_feasible(train_obj, train_con)
+        res.start(best)
+        start_it = 0
 
     # BoTorch's constraint dict maps each constraint model's output index to
     # (lower, upper) feasible bounds; here constraints are feasible when <= 0.
     constraint_dict = {i + 1: (None, 0.0) for i in range(obj.num_constraints)}
+    bounds_dev = obj.bounds.to(dev)
 
-    for _ in range(iters):
-        model = _fit_model_list(train_X, train_obj, train_con)
-        # best_f must be in the model's standardized objective space; use a safe
-        # value (0.0) when no feasible point exists yet so EI still explores.
+    for it in range(start_it, iters):
+        model = _fit_model_list(train_X.to(dev), train_obj.to(dev), train_con.to(dev))
+        # best_f must be in the model's objective space; fall back to the overall max
+        # when no feasible point exists yet so EI still explores.
         feas = (train_con <= 0).all(dim=1)
-        best_f = train_obj[feas].max() if feas.any() else train_obj.max()
+        best_f = (train_obj[feas].max() if feas.any() else train_obj.max()).to(dev)
         acqf = LogConstrainedExpectedImprovement(
             model=model,
             best_f=best_f,
@@ -102,14 +129,25 @@ def optimize_problem(
             constraints=constraint_dict,
         )
         candidate, _ = optimize_acqf(
-            acqf, bounds=obj.bounds, q=1, num_restarts=10, raw_samples=512
+            acqf, bounds=bounds_dev, q=1, num_restarts=10, raw_samples=512
         )
+        candidate = candidate.detach().to(device="cpu", dtype=DTYPE)
         o, c = obj.evaluate_raw(candidate)
         train_X = torch.cat([train_X, candidate], dim=0)
         train_obj = torch.cat([train_obj, o], dim=0)
         train_con = torch.cat([train_con, c], dim=0)
         best = max(best, best_feasible(o, c))
         res.record(best)
+        if checkpoint:
+            res.set_history(train_X, train_obj, n_init)
+            save_checkpoint(
+                checkpoint,
+                train_X,
+                train_obj,
+                res,
+                it + 1,
+                extra={"con": train_con.cpu().numpy()},
+            )
     res.set_history(train_X, train_obj, n_init)
     return res
 
@@ -117,12 +155,26 @@ def optimize_problem(
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--problem", required=True)
-    parser.add_argument("--init", type=int, default=10)
+    parser.add_argument(
+        "--init",
+        type=int,
+        default=None,
+        help="initial design size (default: dim-scaled)",
+    )
     parser.add_argument("--iters", type=int, default=50)
+    parser.add_argument(
+        "--checkpoint", default=None, help="resumable checkpoint .npz path"
+    )
+    parser.add_argument("--device", default=None, help="cuda / cpu (default: auto)")
     add_common_args(parser)
     args = parser.parse_args()
     res = optimize_problem(
-        make_problem(args.problem, args), args.init, args.iters, args.seed
+        make_problem(args.problem, args),
+        args.init,
+        args.iters,
+        args.seed,
+        checkpoint=args.checkpoint,
+        device=args.device,
     )
     finalize(res, args)
 
