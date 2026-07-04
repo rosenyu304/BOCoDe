@@ -281,122 +281,146 @@ problem count (currently **284**).
 | 166 | RE42 | Engineering | RE (Tanabe-Ishibuchi) | 6 | 4 | 0 | ? | unknown | unknown |
 | 167 | RE61 | Engineering | RE (Tanabe-Ishibuchi) | 3 | 6 | 0 | ? | unknown | unknown |
 | 168 | RE91 | Engineering | RE (Tanabe-Ishibuchi) | 7 | 9 | 0 | ? | unknown | unknown |
-| 169 | HPOB_5527_10101 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 8 | 1 | 0 | ? | unknown | unknown |
-| 170 | HPOB_5527_145804 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 8 | 1 | 0 | ? | unknown | unknown |
-| 171 | HPOB_5527_146064 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 8 | 1 | 0 | ? | unknown | unknown |
-| 172 | HPOB_5527_146065 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 8 | 1 | 0 | ? | unknown | unknown |
-| 173 | HPOB_5527_31 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 8 | 1 | 0 | ? | unknown | unknown |
-| 174 | HPOB_5527_9914 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 8 | 1 | 0 | ? | unknown | unknown |
-| 175 | HPOB_5636_10101 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 6 | 1 | 0 | ? | unknown | unknown |
-| 176 | HPOB_5636_145804 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 6 | 1 | 0 | ? | unknown | unknown |
-| 177 | HPOB_5636_146064 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 6 | 1 | 0 | ? | unknown | unknown |
-| 178 | HPOB_5636_146065 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 6 | 1 | 0 | ? | unknown | unknown |
-| 179 | HPOB_5636_31 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 6 | 1 | 0 | ? | unknown | unknown |
-| 180 | HPOB_5636_9914 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 6 | 1 | 0 | ? | unknown | unknown |
-| 181 | HPOB_5859_125923 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 6 | 1 | 0 | ? | unknown | unknown |
-| 182 | HPOB_5859_31 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 6 | 1 | 0 | ? | unknown | unknown |
-| 183 | HPOB_5859_37 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 6 | 1 | 0 | ? | unknown | unknown |
-| 184 | HPOB_5859_3902 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 6 | 1 | 0 | ? | unknown | unknown |
-| 185 | HPOB_5859_9977 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 6 | 1 | 0 | ? | unknown | unknown |
-| 186 | HPOB_5859_9983 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 6 | 1 | 0 | ? | unknown | unknown |
-| 187 | HPOB_5891_3492 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 8 | 1 | 0 | ? | unknown | unknown |
-| 188 | HPOB_5891_3891 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 8 | 1 | 0 | ? | unknown | unknown |
-| 189 | HPOB_5891_3899 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 8 | 1 | 0 | ? | unknown | unknown |
-| 190 | HPOB_5891_6566 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 8 | 1 | 0 | ? | unknown | unknown |
-| 191 | HPOB_5891_9889 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 8 | 1 | 0 | ? | unknown | unknown |
-| 192 | HPOB_5891_9980 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 8 | 1 | 0 | ? | unknown | unknown |
-| 193 | HPOB_5965_10101 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 10 | 1 | 0 | ? | unknown | unknown |
-| 194 | HPOB_5965_145836 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 10 | 1 | 0 | ? | unknown | unknown |
-| 195 | HPOB_5965_3903 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 10 | 1 | 0 | ? | unknown | unknown |
-| 196 | HPOB_5965_49 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 10 | 1 | 0 | ? | unknown | unknown |
-| 197 | HPOB_5965_9889 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 10 | 1 | 0 | ? | unknown | unknown |
-| 198 | HPOB_5965_9914 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 10 | 1 | 0 | ? | unknown | unknown |
-| 199 | HPOB_5965_9946 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 10 | 1 | 0 | ? | unknown | unknown |
-| 200 | HPOB_5970_14951 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 2 | 1 | 0 | ? | unknown | unknown |
-| 201 | HPOB_5970_34536 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 2 | 1 | 0 | ? | unknown | unknown |
-| 202 | HPOB_5970_3492 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 2 | 1 | 0 | ? | unknown | unknown |
-| 203 | HPOB_5970_37 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 2 | 1 | 0 | ? | unknown | unknown |
-| 204 | HPOB_5970_49 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 2 | 1 | 0 | ? | unknown | unknown |
-| 205 | HPOB_5970_9952 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 2 | 1 | 0 | ? | unknown | unknown |
-| 206 | HPOB_5971_10093 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 16 | 1 | 0 | ? | unknown | unknown |
-| 207 | HPOB_5971_34536 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 16 | 1 | 0 | ? | unknown | unknown |
-| 208 | HPOB_5971_3954 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 16 | 1 | 0 | ? | unknown | unknown |
-| 209 | HPOB_5971_43 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 16 | 1 | 0 | ? | unknown | unknown |
-| 210 | HPOB_5971_6566 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 16 | 1 | 0 | ? | unknown | unknown |
-| 211 | HPOB_5971_9970 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 16 | 1 | 0 | ? | unknown | unknown |
-| 212 | HPOB_6766_10101 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 2 | 1 | 0 | ? | unknown | unknown |
-| 213 | HPOB_6766_145804 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 2 | 1 | 0 | ? | unknown | unknown |
-| 214 | HPOB_6766_145953 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 2 | 1 | 0 | ? | unknown | unknown |
-| 215 | HPOB_6766_146064 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 2 | 1 | 0 | ? | unknown | unknown |
-| 216 | HPOB_6766_31 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 2 | 1 | 0 | ? | unknown | unknown |
-| 217 | HPOB_6766_3903 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 2 | 1 | 0 | ? | unknown | unknown |
-| 218 | HPOB_6767_145804 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 18 | 1 | 0 | ? | unknown | unknown |
-| 219 | HPOB_6767_146064 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 18 | 1 | 0 | ? | unknown | unknown |
-| 220 | HPOB_6767_146065 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 18 | 1 | 0 | ? | unknown | unknown |
-| 221 | HPOB_6767_31 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 18 | 1 | 0 | ? | unknown | unknown |
-| 222 | HPOB_6767_9914 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 18 | 1 | 0 | ? | unknown | unknown |
-| 223 | HPOB_6767_9967 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 18 | 1 | 0 | ? | unknown | unknown |
-| 224 | HPOB_6794_10101 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 10 | 1 | 0 | ? | unknown | unknown |
-| 225 | HPOB_6794_145804 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 10 | 1 | 0 | ? | unknown | unknown |
-| 226 | HPOB_6794_146065 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 10 | 1 | 0 | ? | unknown | unknown |
-| 227 | HPOB_6794_3 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 10 | 1 | 0 | ? | unknown | unknown |
-| 228 | HPOB_6794_31 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 10 | 1 | 0 | ? | unknown | unknown |
-| 229 | HPOB_6794_9914 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 10 | 1 | 0 | ? | unknown | unknown |
-| 230 | HPOB_7609_125923 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 9 | 1 | 0 | ? | unknown | unknown |
-| 231 | HPOB_7609_145853 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 9 | 1 | 0 | ? | unknown | unknown |
-| 232 | HPOB_7609_145854 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 9 | 1 | 0 | ? | unknown | unknown |
-| 233 | HPOB_7609_145878 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 9 | 1 | 0 | ? | unknown | unknown |
-| 234 | HPOB_7609_34537 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 9 | 1 | 0 | ? | unknown | unknown |
-| 235 | HPOB_7609_3903 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 9 | 1 | 0 | ? | unknown | unknown |
-| 236 | HPOB_7609_9967 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 9 | 1 | 0 | ? | unknown | unknown |
-| 237 | LCBenchAPSFailure | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
-| 238 | LCBenchAdult | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
-| 239 | LCBenchAirlines | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
-| 240 | LCBenchAlbert | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
-| 241 | LCBenchAmazonEmployeeAccess | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
-| 242 | LCBenchAustralian | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
-| 243 | LCBenchBankMarketing | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
-| 244 | LCBenchBloodTransfusionServiceCenter | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
-| 245 | LCBenchCar | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
-| 246 | LCBenchChristine | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
-| 247 | LCBenchCnae9 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
-| 248 | LCBenchConnect4 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
-| 249 | LCBenchCovertype | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
-| 250 | LCBenchCreditG | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
-| 251 | LCBenchDionis | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
-| 252 | LCBenchFabert | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
-| 253 | LCBenchFashionMNIST | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
-| 254 | LCBenchHelena | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
-| 255 | LCBenchHiggs | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
-| 256 | LCBenchJannis | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
-| 257 | LCBenchJasmine | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
-| 258 | LCBenchJungleChess2pcsRawEndgameComplete | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
-| 259 | LCBenchKDDCup09Appetency | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
-| 260 | LCBenchKc1 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
-| 261 | LCBenchKrVsKp | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
-| 262 | LCBenchMfeatFactors | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
-| 263 | LCBenchMiniBooNE | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
-| 264 | LCBenchNomao | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
-| 265 | LCBenchNumerai286 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
-| 266 | LCBenchPhoneme | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
-| 267 | LCBenchSegment | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
-| 268 | LCBenchShuttle | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
-| 269 | LCBenchSylvine | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
-| 270 | LCBenchVehicle | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
-| 271 | LCBenchVolkert | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
-| 272 | LassoBreastCancer | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 9 | 1 | 0 | ? | unknown | unknown |
-| 273 | LassoDNA | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 180 | 1 | 0 | ? | unknown | unknown |
-| 274 | LassoDiabetes | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 8 | 1 | 0 | ? | unknown | unknown |
-| 275 | LassoLeukemia | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7129 | 1 | 0 | ? | unknown | unknown |
-| 276 | LassoRCV1 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 47236 | 1 | 0 | ? | unknown | unknown |
-| 277 | SVM | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 388 | 1 | 0 | ? | no | unknown |
-| 278 | NASBench201 | Hyperparameter Optimization | NAS-Bench-201 | 6 | 1 | 0 | ? | unknown | unknown |
-| 279 | AgNP | Materials | PV-Lab materials | 5 | 1 | 0 | ? | unknown | unknown |
-| 280 | AutoAM | Materials | PV-Lab materials | 4 | 1 | 0 | ? | unknown | unknown |
-| 281 | CrossedBarrel | Materials | PV-Lab materials | 4 | 1 | 0 | ? | unknown | unknown |
-| 282 | HOIP | Materials | PV-Lab materials | 3 | 1 | 0 | ? | unknown | unknown |
-| 283 | P3HT | Materials | PV-Lab materials | 5 | 1 | 0 | ? | unknown | unknown |
-| 284 | Perovskite | Materials | PV-Lab materials | 3 | 1 | 0 | ? | unknown | unknown |
+| 169 | HPOB_4796_23 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 3 | 1 | 0 | ? | unknown | unknown |
+| 170 | HPOB_4796_3549 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 3 | 1 | 0 | ? | unknown | unknown |
+| 171 | HPOB_4796_3918 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 3 | 1 | 0 | ? | unknown | unknown |
+| 172 | HPOB_4796_9903 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 3 | 1 | 0 | ? | unknown | unknown |
+| 173 | HPOB_4796_9906 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 3 | 1 | 0 | ? | unknown | unknown |
+| 174 | HPOB_4796_9946 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 3 | 1 | 0 | ? | unknown | unknown |
+| 175 | HPOB_5527_10101 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 8 | 1 | 0 | ? | unknown | unknown |
+| 176 | HPOB_5527_145804 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 8 | 1 | 0 | ? | unknown | unknown |
+| 177 | HPOB_5527_146064 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 8 | 1 | 0 | ? | unknown | unknown |
+| 178 | HPOB_5527_146065 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 8 | 1 | 0 | ? | unknown | unknown |
+| 179 | HPOB_5527_31 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 8 | 1 | 0 | ? | unknown | unknown |
+| 180 | HPOB_5527_9914 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 8 | 1 | 0 | ? | unknown | unknown |
+| 181 | HPOB_5636_10101 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 6 | 1 | 0 | ? | unknown | unknown |
+| 182 | HPOB_5636_145804 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 6 | 1 | 0 | ? | unknown | unknown |
+| 183 | HPOB_5636_146064 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 6 | 1 | 0 | ? | unknown | unknown |
+| 184 | HPOB_5636_146065 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 6 | 1 | 0 | ? | unknown | unknown |
+| 185 | HPOB_5636_31 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 6 | 1 | 0 | ? | unknown | unknown |
+| 186 | HPOB_5636_9914 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 6 | 1 | 0 | ? | unknown | unknown |
+| 187 | HPOB_5859_125923 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 6 | 1 | 0 | ? | unknown | unknown |
+| 188 | HPOB_5859_31 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 6 | 1 | 0 | ? | unknown | unknown |
+| 189 | HPOB_5859_37 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 6 | 1 | 0 | ? | unknown | unknown |
+| 190 | HPOB_5859_3902 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 6 | 1 | 0 | ? | unknown | unknown |
+| 191 | HPOB_5859_9977 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 6 | 1 | 0 | ? | unknown | unknown |
+| 192 | HPOB_5859_9983 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 6 | 1 | 0 | ? | unknown | unknown |
+| 193 | HPOB_5889_31 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 6 | 1 | 0 | ? | unknown | unknown |
+| 194 | HPOB_5889_3493 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 6 | 1 | 0 | ? | unknown | unknown |
+| 195 | HPOB_5889_3918 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 6 | 1 | 0 | ? | unknown | unknown |
+| 196 | HPOB_5889_3950 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 6 | 1 | 0 | ? | unknown | unknown |
+| 197 | HPOB_5889_49 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 6 | 1 | 0 | ? | unknown | unknown |
+| 198 | HPOB_5889_9971 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 6 | 1 | 0 | ? | unknown | unknown |
+| 199 | HPOB_5891_3492 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 8 | 1 | 0 | ? | unknown | unknown |
+| 200 | HPOB_5891_3891 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 8 | 1 | 0 | ? | unknown | unknown |
+| 201 | HPOB_5891_3899 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 8 | 1 | 0 | ? | unknown | unknown |
+| 202 | HPOB_5891_6566 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 8 | 1 | 0 | ? | unknown | unknown |
+| 203 | HPOB_5891_9889 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 8 | 1 | 0 | ? | unknown | unknown |
+| 204 | HPOB_5891_9980 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 8 | 1 | 0 | ? | unknown | unknown |
+| 205 | HPOB_5906_3889 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 16 | 1 | 0 | ? | unknown | unknown |
+| 206 | HPOB_5906_3896 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 16 | 1 | 0 | ? | unknown | unknown |
+| 207 | HPOB_5906_3918 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 16 | 1 | 0 | ? | unknown | unknown |
+| 208 | HPOB_5906_9970 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 16 | 1 | 0 | ? | unknown | unknown |
+| 209 | HPOB_5906_9971 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 16 | 1 | 0 | ? | unknown | unknown |
+| 210 | HPOB_5906_9977 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 16 | 1 | 0 | ? | unknown | unknown |
+| 211 | HPOB_5965_10101 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 10 | 1 | 0 | ? | unknown | unknown |
+| 212 | HPOB_5965_145836 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 10 | 1 | 0 | ? | unknown | unknown |
+| 213 | HPOB_5965_3903 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 10 | 1 | 0 | ? | unknown | unknown |
+| 214 | HPOB_5965_49 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 10 | 1 | 0 | ? | unknown | unknown |
+| 215 | HPOB_5965_9889 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 10 | 1 | 0 | ? | unknown | unknown |
+| 216 | HPOB_5965_9914 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 10 | 1 | 0 | ? | unknown | unknown |
+| 217 | HPOB_5965_9946 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 10 | 1 | 0 | ? | unknown | unknown |
+| 218 | HPOB_5970_14951 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 2 | 1 | 0 | ? | unknown | unknown |
+| 219 | HPOB_5970_34536 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 2 | 1 | 0 | ? | unknown | unknown |
+| 220 | HPOB_5970_3492 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 2 | 1 | 0 | ? | unknown | unknown |
+| 221 | HPOB_5970_37 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 2 | 1 | 0 | ? | unknown | unknown |
+| 222 | HPOB_5970_49 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 2 | 1 | 0 | ? | unknown | unknown |
+| 223 | HPOB_5970_9952 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 2 | 1 | 0 | ? | unknown | unknown |
+| 224 | HPOB_5971_10093 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 16 | 1 | 0 | ? | unknown | unknown |
+| 225 | HPOB_5971_34536 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 16 | 1 | 0 | ? | unknown | unknown |
+| 226 | HPOB_5971_3954 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 16 | 1 | 0 | ? | unknown | unknown |
+| 227 | HPOB_5971_43 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 16 | 1 | 0 | ? | unknown | unknown |
+| 228 | HPOB_5971_6566 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 16 | 1 | 0 | ? | unknown | unknown |
+| 229 | HPOB_5971_9970 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 16 | 1 | 0 | ? | unknown | unknown |
+| 230 | HPOB_6766_10101 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 2 | 1 | 0 | ? | unknown | unknown |
+| 231 | HPOB_6766_145804 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 2 | 1 | 0 | ? | unknown | unknown |
+| 232 | HPOB_6766_145953 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 2 | 1 | 0 | ? | unknown | unknown |
+| 233 | HPOB_6766_146064 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 2 | 1 | 0 | ? | unknown | unknown |
+| 234 | HPOB_6766_31 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 2 | 1 | 0 | ? | unknown | unknown |
+| 235 | HPOB_6766_3903 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 2 | 1 | 0 | ? | unknown | unknown |
+| 236 | HPOB_6767_145804 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 18 | 1 | 0 | ? | unknown | unknown |
+| 237 | HPOB_6767_146064 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 18 | 1 | 0 | ? | unknown | unknown |
+| 238 | HPOB_6767_146065 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 18 | 1 | 0 | ? | unknown | unknown |
+| 239 | HPOB_6767_31 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 18 | 1 | 0 | ? | unknown | unknown |
+| 240 | HPOB_6767_9914 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 18 | 1 | 0 | ? | unknown | unknown |
+| 241 | HPOB_6767_9967 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 18 | 1 | 0 | ? | unknown | unknown |
+| 242 | HPOB_6794_10101 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 10 | 1 | 0 | ? | unknown | unknown |
+| 243 | HPOB_6794_145804 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 10 | 1 | 0 | ? | unknown | unknown |
+| 244 | HPOB_6794_146065 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 10 | 1 | 0 | ? | unknown | unknown |
+| 245 | HPOB_6794_3 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 10 | 1 | 0 | ? | unknown | unknown |
+| 246 | HPOB_6794_31 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 10 | 1 | 0 | ? | unknown | unknown |
+| 247 | HPOB_6794_9914 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 10 | 1 | 0 | ? | unknown | unknown |
+| 248 | HPOB_7607_145976 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 9 | 1 | 0 | ? | unknown | unknown |
+| 249 | HPOB_7607_3896 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 9 | 1 | 0 | ? | unknown | unknown |
+| 250 | HPOB_7607_3903 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 9 | 1 | 0 | ? | unknown | unknown |
+| 251 | HPOB_7607_3913 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 9 | 1 | 0 | ? | unknown | unknown |
+| 252 | HPOB_7607_9946 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 9 | 1 | 0 | ? | unknown | unknown |
+| 253 | HPOB_7607_9967 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 9 | 1 | 0 | ? | unknown | unknown |
+| 254 | HPOB_7609_125923 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 9 | 1 | 0 | ? | unknown | unknown |
+| 255 | HPOB_7609_145853 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 9 | 1 | 0 | ? | unknown | unknown |
+| 256 | HPOB_7609_145854 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 9 | 1 | 0 | ? | unknown | unknown |
+| 257 | HPOB_7609_145878 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 9 | 1 | 0 | ? | unknown | unknown |
+| 258 | HPOB_7609_34537 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 9 | 1 | 0 | ? | unknown | unknown |
+| 259 | HPOB_7609_3903 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 9 | 1 | 0 | ? | unknown | unknown |
+| 260 | HPOB_7609_9967 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 9 | 1 | 0 | ? | unknown | unknown |
+| 261 | LCBenchAPSFailure | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
+| 262 | LCBenchAdult | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
+| 263 | LCBenchAirlines | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
+| 264 | LCBenchAlbert | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
+| 265 | LCBenchAmazonEmployeeAccess | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
+| 266 | LCBenchAustralian | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
+| 267 | LCBenchBankMarketing | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
+| 268 | LCBenchBloodTransfusionServiceCenter | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
+| 269 | LCBenchCar | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
+| 270 | LCBenchChristine | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
+| 271 | LCBenchCnae9 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
+| 272 | LCBenchConnect4 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
+| 273 | LCBenchCovertype | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
+| 274 | LCBenchCreditG | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
+| 275 | LCBenchDionis | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
+| 276 | LCBenchFabert | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
+| 277 | LCBenchFashionMNIST | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
+| 278 | LCBenchHelena | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
+| 279 | LCBenchHiggs | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
+| 280 | LCBenchJannis | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
+| 281 | LCBenchJasmine | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
+| 282 | LCBenchJungleChess2pcsRawEndgameComplete | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
+| 283 | LCBenchKDDCup09Appetency | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
+| 284 | LCBenchKc1 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
+| 285 | LCBenchKrVsKp | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
+| 286 | LCBenchMfeatFactors | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
+| 287 | LCBenchMiniBooNE | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
+| 288 | LCBenchNomao | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
+| 289 | LCBenchNumerai286 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
+| 290 | LCBenchPhoneme | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
+| 291 | LCBenchSegment | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
+| 292 | LCBenchShuttle | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
+| 293 | LCBenchSylvine | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
+| 294 | LCBenchVehicle | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
+| 295 | LCBenchVolkert | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7 | 1 | 0 | ? | unknown | unknown |
+| 296 | LassoBreastCancer | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 9 | 1 | 0 | ? | unknown | unknown |
+| 297 | LassoDNA | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 180 | 1 | 0 | ? | unknown | unknown |
+| 298 | LassoDiabetes | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 8 | 1 | 0 | ? | unknown | unknown |
+| 299 | LassoLeukemia | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 7129 | 1 | 0 | ? | unknown | unknown |
+| 300 | LassoRCV1 | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 47236 | 1 | 0 | ? | unknown | unknown |
+| 301 | SVM | Hyperparameter Optimization | HPO (LassoBench / HPO-B) | 388 | 1 | 0 | ? | no | unknown |
+| 302 | NASBench201 | Hyperparameter Optimization | NAS-Bench-201 | 6 | 1 | 0 | ? | unknown | unknown |
+| 303 | AgNP | Materials | PV-Lab materials | 5 | 1 | 0 | ? | unknown | unknown |
+| 304 | AutoAM | Materials | PV-Lab materials | 4 | 1 | 0 | ? | unknown | unknown |
+| 305 | CrossedBarrel | Materials | PV-Lab materials | 4 | 1 | 0 | ? | unknown | unknown |
+| 306 | HOIP | Materials | PV-Lab materials | 3 | 1 | 0 | ? | unknown | unknown |
+| 307 | P3HT | Materials | PV-Lab materials | 5 | 1 | 0 | ? | unknown | unknown |
+| 308 | Perovskite | Materials | PV-Lab materials | 3 | 1 | 0 | ? | unknown | unknown |
 
 <!-- TABLE:END -->
 
@@ -407,17 +431,17 @@ heading shows the exact call. (Generated; rerun `python tools/render_categorizat
 
 <!-- CATEGORIES:START -->
 
-### Single-objective, unconstrained, continuous (109)
+### Single-objective, unconstrained, continuous (53)
 
 `list_problems(num_objectives=1, constrained=False, input_type='continuous')`
 
-`AgNP`, `Allison`, `AntPolicySearchProblem`, `AntProblem`, `AutoAM`, `Borehole`, `CEC2020_p31`, `CrossedBarrel`, `EulerBernoulliBeamBending`, `HPOB_5527_10101`, `HPOB_5527_145804`, `HPOB_5527_146064`, `HPOB_5527_146065`, `HPOB_5527_31`, `HPOB_5527_9914`, `HPOB_5636_10101`, `HPOB_5636_145804`, `HPOB_5636_146064`, `HPOB_5636_146065`, `HPOB_5636_31`, `HPOB_5636_9914`, `HPOB_5859_125923`, `HPOB_5859_31`, `HPOB_5859_37`, `HPOB_5859_3902`, `HPOB_5859_9977`, `HPOB_5859_9983`, `HPOB_5891_3492`, `HPOB_5891_3891`, `HPOB_5891_3899`, `HPOB_5891_6566`, `HPOB_5891_9889`, `HPOB_5891_9980`, `HPOB_5965_10101`, `HPOB_5965_145836`, `HPOB_5965_3903`, `HPOB_5965_49`, `HPOB_5965_9889`, `HPOB_5965_9914`, `HPOB_5965_9946`, `HPOB_5970_14951`, `HPOB_5970_34536`, `HPOB_5970_3492`, `HPOB_5970_37`, `HPOB_5970_49`, `HPOB_5970_9952`, `HPOB_5971_10093`, `HPOB_5971_34536`, `HPOB_5971_3954`, `HPOB_5971_43`, `HPOB_5971_6566`, `HPOB_5971_9970`, `HPOB_6766_10101`, `HPOB_6766_145804`, `HPOB_6766_145953`, `HPOB_6766_146064`, `HPOB_6766_31`, `HPOB_6766_3903`, `HPOB_6767_145804`, `HPOB_6767_146064`, `HPOB_6767_146065`, `HPOB_6767_31`, `HPOB_6767_9914`, `HPOB_6767_9967`, `HPOB_6794_10101`, `HPOB_6794_145804`, `HPOB_6794_146065`, `HPOB_6794_3`, `HPOB_6794_31`, `HPOB_6794_9914`, `HPOB_7609_125923`, `HPOB_7609_145853`, `HPOB_7609_145854`, `HPOB_7609_145878`, `HPOB_7609_34537`, `HPOB_7609_3903`, `HPOB_7609_9967`, `HalfCheetahPolicySearchProblem`, `HalfCheetahProblem`, `HopperPolicySearchProblem`, `HopperProblem`, `HumanoidProblem`, `HumanoidStandupProblem`, `InvertedDoublePendulumProblem`, `InvertedPendulumProblem`, `LassoBreastCancer`, `LassoDNA`, `LassoDiabetes`, `LassoLeukemia`, `LassoRCV1`, `MiniAeroWing`, `P3HT`, `PD4CartPole`, `PID4Acrobot`, `Perovskite`, `PusherProblem`, `QPowerModel`, `ReacherProblem`, `ReactivityModel`, `RobotPush`, `Rover`, `SVM`, `SwimmerPolicySearchProblem`, `SwimmerProblem`, `TSP_100Cities`, `TSP_51Cities`, `Walker2DPolicySearchProblem`, `Walker2DProblem`, `Wing`
+`AgNP`, `Allison`, `AntPolicySearchProblem`, `AntProblem`, `AutoAM`, `Borehole`, `CEC2020_p31`, `CrossedBarrel`, `EulerBernoulliBeamBending`, `HPOB_5970_14951`, `HPOB_5970_34536`, `HPOB_5970_3492`, `HPOB_5970_37`, `HPOB_5970_49`, `HPOB_5970_9952`, `HPOB_6766_10101`, `HPOB_6766_145804`, `HPOB_6766_145953`, `HPOB_6766_146064`, `HPOB_6766_31`, `HPOB_6766_3903`, `HalfCheetahPolicySearchProblem`, `HalfCheetahProblem`, `HopperPolicySearchProblem`, `HopperProblem`, `HumanoidProblem`, `HumanoidStandupProblem`, `InvertedDoublePendulumProblem`, `InvertedPendulumProblem`, `LassoBreastCancer`, `LassoDNA`, `LassoDiabetes`, `LassoLeukemia`, `LassoRCV1`, `MiniAeroWing`, `P3HT`, `PD4CartPole`, `PID4Acrobot`, `Perovskite`, `PusherProblem`, `QPowerModel`, `ReacherProblem`, `ReactivityModel`, `RobotPush`, `Rover`, `SVM`, `SwimmerPolicySearchProblem`, `SwimmerProblem`, `TSP_100Cities`, `TSP_51Cities`, `Walker2DPolicySearchProblem`, `Walker2DProblem`, `Wing`
 
-### Single-objective, unconstrained, mixed-variable (37)
+### Single-objective, unconstrained, mixed-variable (117)
 
 `list_problems(num_objectives=1, constrained=False, input_type='mixed')`
 
-`ColumnBuckling`, `EulerBeamMixed`, `LCBenchAPSFailure`, `LCBenchAdult`, `LCBenchAirlines`, `LCBenchAlbert`, `LCBenchAmazonEmployeeAccess`, `LCBenchAustralian`, `LCBenchBankMarketing`, `LCBenchBloodTransfusionServiceCenter`, `LCBenchCar`, `LCBenchChristine`, `LCBenchCnae9`, `LCBenchConnect4`, `LCBenchCovertype`, `LCBenchCreditG`, `LCBenchDionis`, `LCBenchFabert`, `LCBenchFashionMNIST`, `LCBenchHelena`, `LCBenchHiggs`, `LCBenchJannis`, `LCBenchJasmine`, `LCBenchJungleChess2pcsRawEndgameComplete`, `LCBenchKDDCup09Appetency`, `LCBenchKc1`, `LCBenchKrVsKp`, `LCBenchMfeatFactors`, `LCBenchMiniBooNE`, `LCBenchNomao`, `LCBenchNumerai286`, `LCBenchPhoneme`, `LCBenchSegment`, `LCBenchShuttle`, `LCBenchSylvine`, `LCBenchVehicle`, `LCBenchVolkert`
+`ColumnBuckling`, `EulerBeamMixed`, `HPOB_4796_23`, `HPOB_4796_3549`, `HPOB_4796_3918`, `HPOB_4796_9903`, `HPOB_4796_9906`, `HPOB_4796_9946`, `HPOB_5527_10101`, `HPOB_5527_145804`, `HPOB_5527_146064`, `HPOB_5527_146065`, `HPOB_5527_31`, `HPOB_5527_9914`, `HPOB_5636_10101`, `HPOB_5636_145804`, `HPOB_5636_146064`, `HPOB_5636_146065`, `HPOB_5636_31`, `HPOB_5636_9914`, `HPOB_5859_125923`, `HPOB_5859_31`, `HPOB_5859_37`, `HPOB_5859_3902`, `HPOB_5859_9977`, `HPOB_5859_9983`, `HPOB_5889_31`, `HPOB_5889_3493`, `HPOB_5889_3918`, `HPOB_5889_3950`, `HPOB_5889_49`, `HPOB_5889_9971`, `HPOB_5891_3492`, `HPOB_5891_3891`, `HPOB_5891_3899`, `HPOB_5891_6566`, `HPOB_5891_9889`, `HPOB_5891_9980`, `HPOB_5906_3889`, `HPOB_5906_3896`, `HPOB_5906_3918`, `HPOB_5906_9970`, `HPOB_5906_9971`, `HPOB_5906_9977`, `HPOB_5965_10101`, `HPOB_5965_145836`, `HPOB_5965_3903`, `HPOB_5965_49`, `HPOB_5965_9889`, `HPOB_5965_9914`, `HPOB_5965_9946`, `HPOB_5971_10093`, `HPOB_5971_34536`, `HPOB_5971_3954`, `HPOB_5971_43`, `HPOB_5971_6566`, `HPOB_5971_9970`, `HPOB_6767_145804`, `HPOB_6767_146064`, `HPOB_6767_146065`, `HPOB_6767_31`, `HPOB_6767_9914`, `HPOB_6767_9967`, `HPOB_6794_10101`, `HPOB_6794_145804`, `HPOB_6794_146065`, `HPOB_6794_3`, `HPOB_6794_31`, `HPOB_6794_9914`, `HPOB_7607_145976`, `HPOB_7607_3896`, `HPOB_7607_3903`, `HPOB_7607_3913`, `HPOB_7607_9946`, `HPOB_7607_9967`, `HPOB_7609_125923`, `HPOB_7609_145853`, `HPOB_7609_145854`, `HPOB_7609_145878`, `HPOB_7609_34537`, `HPOB_7609_3903`, `HPOB_7609_9967`, `LCBenchAPSFailure`, `LCBenchAdult`, `LCBenchAirlines`, `LCBenchAlbert`, `LCBenchAmazonEmployeeAccess`, `LCBenchAustralian`, `LCBenchBankMarketing`, `LCBenchBloodTransfusionServiceCenter`, `LCBenchCar`, `LCBenchChristine`, `LCBenchCnae9`, `LCBenchConnect4`, `LCBenchCovertype`, `LCBenchCreditG`, `LCBenchDionis`, `LCBenchFabert`, `LCBenchFashionMNIST`, `LCBenchHelena`, `LCBenchHiggs`, `LCBenchJannis`, `LCBenchJasmine`, `LCBenchJungleChess2pcsRawEndgameComplete`, `LCBenchKDDCup09Appetency`, `LCBenchKc1`, `LCBenchKrVsKp`, `LCBenchMfeatFactors`, `LCBenchMiniBooNE`, `LCBenchNomao`, `LCBenchNumerai286`, `LCBenchPhoneme`, `LCBenchSegment`, `LCBenchShuttle`, `LCBenchSylvine`, `LCBenchVehicle`, `LCBenchVolkert`
 
 ### Single-objective, constrained, continuous (71)
 

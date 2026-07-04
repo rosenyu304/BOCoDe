@@ -411,6 +411,30 @@
     "opt_problems.materials.HOIP",
     null
   ],
+  "HPOB_4796_23": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_4796_3549": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_4796_3918": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_4796_9903": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_4796_9906": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_4796_9946": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
   "HPOB_5527_10101": [
     "opt_problems.hpo.HPOB",
     null
@@ -483,6 +507,30 @@
     "opt_problems.hpo.HPOB",
     null
   ],
+  "HPOB_5889_31": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_5889_3493": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_5889_3918": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_5889_3950": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_5889_49": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_5889_9971": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
   "HPOB_5891_3492": [
     "opt_problems.hpo.HPOB",
     null
@@ -504,6 +552,30 @@
     null
   ],
   "HPOB_5891_9980": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_5906_3889": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_5906_3896": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_5906_3918": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_5906_9970": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_5906_9971": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_5906_9977": [
     "opt_problems.hpo.HPOB",
     null
   ],
@@ -652,6 +724,30 @@
     null
   ],
   "HPOB_6794_9914": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_7607_145976": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_7607_3896": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_7607_3903": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_7607_3913": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_7607_9946": [
+    "opt_problems.hpo.HPOB",
+    null
+  ],
+  "HPOB_7607_9967": [
     "opt_problems.hpo.HPOB",
     null
   ],

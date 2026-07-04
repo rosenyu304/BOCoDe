@@ -6,7 +6,7 @@
   "num_objectives": 1,
   "num_constraints": 0,
   "available_dimensions": 10,
-  "input_type": "continuous",
+  "input_type": "mixed",
   "scalable": false,
   "dim": 10,
   "bounds": [
@@ -59,15 +59,71 @@
   "source": "S. Pineda-Arango, H. S. Jomaa, M. Wistuba, J. Grabocka. HPO-B: A Large-Scale Reproducible Benchmark for Black-Box HPO based on OpenML. Advances in Neural Information Processing Systems Datasets and Benchmarks, 2021. https://github.com/releaunifreiburg/HPO-B S. Gabriel. Fixed HPO-B. https://github.com/SamuelGabriel/FixedHPO-B",
   "variable_types": [
     "continuous",
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      0.09263505041599274,
+      0.14682476222515106,
+      0.1852734386920929,
+      0.21509674191474915,
+      0.23946425318717957,
+      0.2600667476654053,
+      0.27791348099708557,
+      0.2936554551124573,
+      0.3077371418476105,
+      0.32047557830810547,
+      0.3321048617362976,
+      0.3428027927875519,
+      0.35270753502845764,
+      0.36192864179611206,
+      0.3705543875694275,
+      0.3786570429801941,
+      0.38629645109176636,
+      0.3935226798057556,
+      0.40037819743156433,
+      0.4068991541862488,
+      0.4131166934967041,
+      0.41905781626701355,
+      0.424746036529541,
+      0.43020203709602356,
+      0.43544402718544006,
+      0.44048812985420227,
+      0.4453487992286682,
+      0.4500388503074646,
+      0.45456990599632263,
+      0.4589523673057556,
+      0.46319571137428284,
+      0.4673084318637848,
+      0.4712983965873718,
+      0.47517266869544983,
+      0.4789378046989441,
+      0.48259976506233215
+    ],
     "continuous",
     "continuous",
-    "continuous",
-    "continuous",
-    "continuous",
-    "continuous",
-    "continuous",
-    "continuous",
-    "continuous"
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ]
   ],
-  "num_categorical_variables": 0
+  "num_categorical_variables": 7
 }

@@ -6,7 +6,7 @@
   "num_objectives": 1,
   "num_constraints": 0,
   "available_dimensions": 10,
-  "input_type": "continuous",
+  "input_type": "mixed",
   "scalable": false,
   "dim": 10,
   "bounds": [
@@ -59,15 +59,60 @@
   "source": "S. Pineda-Arango, H. S. Jomaa, M. Wistuba, J. Grabocka. HPO-B: A Large-Scale Reproducible Benchmark for Black-Box HPO based on OpenML. Advances in Neural Information Processing Systems Datasets and Benchmarks, 2021. https://github.com/releaunifreiburg/HPO-B S. Gabriel. Fixed HPO-B. https://github.com/SamuelGabriel/FixedHPO-B",
   "variable_types": [
     "continuous",
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      0.6650673747062683,
+      0.7362757325172424,
+      0.7779500484466553,
+      0.8075240254402161,
+      0.8304657340049744,
+      0.8492116928100586,
+      0.86506187915802,
+      0.8787923455238342,
+      0.8909037709236145,
+      0.9017380475997925,
+      0.9115390181541443,
+      0.9204866886138916,
+      0.928717851638794,
+      0.9363387823104858,
+      0.9434337019920349,
+      0.9500706791877747,
+      0.9563051462173462,
+      0.9621832370758057,
+      0.967743456363678,
+      0.9730184078216553,
+      0.9780359268188477,
+      0.9828200340270996,
+      0.9917683601379395,
+      0.9959664940834045,
+      1.0
+    ],
     "continuous",
     "continuous",
-    "continuous",
-    "continuous",
-    "continuous",
-    "continuous",
-    "continuous",
-    "continuous",
-    "continuous"
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ]
   ],
-  "num_categorical_variables": 0
+  "num_categorical_variables": 7
 }

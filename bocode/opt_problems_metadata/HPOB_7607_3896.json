@@ -1,0 +1,130 @@
+{
+  "name": "HPOB_7607_3896",
+  "module": "bocode.opt_problems.hpo.HPOB",
+  "extra": null,
+  "suite": "HPO (LassoBench / HPO-B)",
+  "num_objectives": 1,
+  "num_constraints": 0,
+  "available_dimensions": 9,
+  "input_type": "mixed",
+  "scalable": false,
+  "dim": 9,
+  "bounds": [
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Hyperparameter Optimization",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": null,
+  "source": "S. Pineda-Arango, H. S. Jomaa, M. Wistuba, J. Grabocka. HPO-B: A Large-Scale Reproducible Benchmark for Black-Box HPO based on OpenML. Advances in Neural Information Processing Systems Datasets and Benchmarks, 2021. https://github.com/releaunifreiburg/HPO-B S. Gabriel. Fixed HPO-B. https://github.com/SamuelGabriel/FixedHPO-B",
+  "variable_types": [
+    "continuous",
+    [
+      0.0
+    ],
+    [
+      0.0,
+      0.6234543919563293,
+      0.691568911075592,
+      0.7314352989196777,
+      0.7597270011901855,
+      0.781674325466156,
+      0.7996078729629517,
+      0.8147712349891663,
+      0.8279068470001221,
+      0.8394936323165894,
+      0.8498585224151611,
+      0.8592349290847778,
+      0.8677949905395508,
+      0.8756696581840515,
+      0.8829604983329773,
+      0.8897481560707092,
+      0.8960976600646973,
+      0.9020621180534363,
+      0.9076855778694153,
+      0.913004994392395,
+      0.9180514812469482,
+      0.9228517413139343,
+      0.927428662776947,
+      0.9318020939826965,
+      0.9359894394874573,
+      0.9400057792663574,
+      0.9438645839691162,
+      0.9475777745246887,
+      0.9511559009552002,
+      0.9546085000038147,
+      0.9579439759254456,
+      0.9611701369285583,
+      0.9642938375473022,
+      0.9673214554786682,
+      0.9702586531639099,
+      0.9731107354164124,
+      0.9758824110031128,
+      0.9785782098770142,
+      0.9812020659446716,
+      0.9837577939033508,
+      0.986248791217804,
+      0.9886782765388489,
+      0.9910492897033691,
+      0.9933644533157349,
+      0.9956263899803162,
+      0.997837483882904,
+      1.0
+    ],
+    "continuous",
+    "continuous",
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ]
+  ],
+  "num_categorical_variables": 6
+}
