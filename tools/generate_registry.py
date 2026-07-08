@@ -53,6 +53,8 @@ def extra_for(modpath: str, cls: str):
         return "modact"
     if "/engibench/" in modpath:
         return "engibench"
+    if cls.startswith("HPOBSurr"):
+        return "hpobsurr"  # HPO-B continuous-surrogate pools fit an xgboost surrogate
     if cls.startswith("Lasso") or cls == "SVM":
         return "hpo"  # clean-room weighted-Lasso / SVM problems use scikit-learn
     if cls in ("Mazda", "Mazda_SCA"):

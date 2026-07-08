@@ -411,6 +411,374 @@
     "opt_problems.materials.HOIP",
     null
   ],
+  "HPOBSurr_4796_23": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_4796_3549": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_4796_3918": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_4796_9903": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_4796_9906": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_4796_9946": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5527_10101": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5527_145804": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5527_146064": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5527_146065": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5527_31": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5527_9914": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5636_10101": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5636_145804": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5636_146064": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5636_146065": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5636_31": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5636_9914": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5859_125923": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5859_31": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5859_37": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5859_3902": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5859_9977": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5859_9983": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5889_31": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5889_3493": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5889_3918": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5889_3950": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5889_49": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5889_9971": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5891_3492": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5891_3891": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5891_3899": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5891_6566": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5891_9889": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5891_9980": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5906_3889": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5906_3896": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5906_3918": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5906_9970": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5906_9971": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5906_9977": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5965_10101": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5965_145836": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5965_3903": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5965_49": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5965_9889": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5965_9914": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5965_9946": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5970_14951": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5970_34536": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5970_3492": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5970_37": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5970_49": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5970_9952": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5971_10093": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5971_34536": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5971_3954": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5971_43": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5971_6566": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_5971_9970": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_6766_10101": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_6766_145804": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_6766_145953": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_6766_146064": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_6766_31": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_6766_3903": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_6767_145804": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_6767_146064": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_6767_146065": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_6767_31": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_6767_9914": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_6767_9967": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_6794_10101": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_6794_145804": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_6794_146065": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_6794_3": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_6794_31": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_6794_9914": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_7607_145976": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_7607_3896": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_7607_3903": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_7607_3913": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_7607_9946": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_7607_9967": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_7609_125923": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_7609_145853": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_7609_145854": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_7609_145878": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_7609_34537": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_7609_3903": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
+  "HPOBSurr_7609_9967": [
+    "opt_problems.hpo.HPOBSurrogate",
+    "hpobsurr"
+  ],
   "HPOB_4796_23": [
     "opt_problems.hpo.HPOB",
     null

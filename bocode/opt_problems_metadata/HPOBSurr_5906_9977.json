@@ -1,0 +1,139 @@
+{
+  "name": "HPOBSurr_5906_9977",
+  "module": "bocode.opt_problems.hpo.HPOBSurrogate",
+  "extra": null,
+  "suite": "HPO (LassoBench / HPO-B)",
+  "num_objectives": 1,
+  "num_constraints": 0,
+  "available_dimensions": 16,
+  "input_type": "mixed",
+  "scalable": false,
+  "dim": 16,
+  "bounds": [
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Hyperparameter Optimization",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": null,
+  "source": "S. Pineda-Arango, H. S. Jomaa, M. Wistuba, J. Grabocka. HPO-B: A Large-Scale Reproducible Benchmark for Black-Box HPO based on OpenML. NeurIPS Datasets and Benchmarks, 2021. https://github.com/releaunifreiburg/HPO-B Muller et al. PFNs4BO: In-Context Learning for Bayesian Optimization. ICML 2023.",
+  "variable_types": [
+    "continuous",
+    [
+      0.0,
+      0.06666667014360428,
+      0.13333334028720856,
+      0.20000000298023224,
+      0.2666666805744171,
+      0.3333333432674408,
+      0.46666666865348816,
+      0.5333333611488342,
+      0.6000000238418579,
+      0.6666666865348816,
+      0.7333333492279053,
+      0.800000011920929,
+      0.8666666746139526,
+      0.9333333373069763,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    "continuous",
+    [
+      0.0,
+      1.0
+    ],
+    "continuous",
+    "continuous",
+    [
+      0.0,
+      1.0
+    ],
+    "continuous",
+    [
+      0.0,
+      1.0
+    ],
+    "continuous",
+    "continuous",
+    "continuous",
+    [
+      0.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ]
+  ],
+  "num_categorical_variables": 8
+}

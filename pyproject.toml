@@ -45,6 +45,7 @@ box2d = ["Box2D", "pygame", "joblib"]    # RobotPush
 truss = ["slientruss3d"]                 # Truss10D..Truss200D
 mazda = ["openpyxl"]                     # Mazda (reads the .xlsx design table)
 hpo = ["scikit-learn"]                   # SVM + weighted-Lasso (LassoBench) problems
+hpobsurr = ["xgboost"]                   # HPO-B continuous-surrogate pools (HPOBSurr_*)
 engibench = ["engibench[electronics]"]   # EngiBench PowerElectronics (also needs native ngspice)
 viz = [
     "dash",
@@ -62,6 +63,7 @@ all = [
     "slientruss3d",
     "openpyxl",
     "scikit-learn",
+    "xgboost",
     "dash",
     "plotly",
     "matplotlib",

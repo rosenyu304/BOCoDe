@@ -1,0 +1,120 @@
+{
+  "name": "HPOBSurr_7607_3903",
+  "module": "bocode.opt_problems.hpo.HPOBSurrogate",
+  "extra": null,
+  "suite": "HPO (LassoBench / HPO-B)",
+  "num_objectives": 1,
+  "num_constraints": 0,
+  "available_dimensions": 9,
+  "input_type": "mixed",
+  "scalable": false,
+  "dim": 9,
+  "bounds": [
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Hyperparameter Optimization",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": null,
+  "source": "S. Pineda-Arango, H. S. Jomaa, M. Wistuba, J. Grabocka. HPO-B: A Large-Scale Reproducible Benchmark for Black-Box HPO based on OpenML. NeurIPS Datasets and Benchmarks, 2021. https://github.com/releaunifreiburg/HPO-B Muller et al. PFNs4BO: In-Context Learning for Bayesian Optimization. ICML 2023.",
+  "variable_types": [
+    "continuous",
+    [
+      0.0
+    ],
+    [
+      0.0,
+      0.6388621926307678,
+      0.7086600661277771,
+      0.7495116591453552,
+      0.7785025835037231,
+      0.8009923100471497,
+      0.8193690776824951,
+      0.8349071741104126,
+      0.84836745262146,
+      0.8602405190467834,
+      0.8708615899085999,
+      0.8804697394371033,
+      0.8892413377761841,
+      0.8973106145858765,
+      0.9047816395759583,
+      0.9117370247840881,
+      0.9182434678077698,
+      0.9243553280830383,
+      0.9301177859306335,
+      0.935568630695343,
+      0.9407398700714111,
+      0.9456587433815002,
+      0.9503487944602966,
+      0.9548302888870239,
+      0.9591211080551147,
+      0.9632366895675659,
+      0.9671909213066101,
+      0.9709958434104919,
+      0.9746624231338501,
+      0.9782003164291382,
+      0.9816182851791382,
+      0.9849241375923157,
+      0.9881250262260437,
+      0.9912274479866028,
+      0.9942372441291809,
+      0.9971597790718079,
+      1.0
+    ],
+    "continuous",
+    "continuous",
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ]
+  ],
+  "num_categorical_variables": 6
+}

@@ -50,6 +50,7 @@ _EXTRA_HINT = {
     "control": "pip install 'bocode[control]'",
     "modact": "pip install 'bocode[modact]'",
     "hpo": "pip install 'bocode[hpo]'",
+    "hpobsurr": "pip install 'bocode[hpobsurr]'",
     "mazda": "pip install 'bocode[mazda]'",
     "neorl": "pip install 'bocode[neorl]'",
     "box2d": "pip install 'bocode[box2d]'",
