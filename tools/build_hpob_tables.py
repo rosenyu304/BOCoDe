@@ -111,8 +111,18 @@ def main() -> None:
         required=True,
         help="path to the hpob-data directory (containing meta-*-dataset.json)",
     )
+    ap.add_argument(
+        "--max-pool",
+        type=int,
+        default=0,
+        help="cap each task's pool to this many configs (random subsample, seed 0). "
+        "0 (default) = use the FULL recorded pool per task (FixedHPO-B uses the full pools; "
+        "the old 2000 cap was a bocode size/speed choice, not the protocol).",
+    )
     args = ap.parse_args()
     data_dir = Path(args.data)
+    global MAX_POOL
+    MAX_POOL = args.max_pool
 
     splits = {
         split: json.load(open(data_dir / f"meta-{split}-dataset.json"))
@@ -173,7 +183,7 @@ def main() -> None:
         X, y = pools[(space, dataset)]
         X = _apply_log_fix(space, X)
         dim = X.shape[1]
-        if len(X) > MAX_POOL:
+        if MAX_POOL and len(X) > MAX_POOL:          # 0 => keep the FULL pool (default)
             rng = np.random.RandomState(0)
             idx = rng.choice(len(X), MAX_POOL, replace=False)
             X, y = X[idx], y[idx]
