@@ -17,7 +17,10 @@ authors = [
 # needing heavy/native libraries declare an optional extra below and import it
 # lazily with an actionable error message (see bocode/registry.py).
 dependencies = [
-    "botorch",
+    # >=0.12: SingleTaskGP's default covar module became Hvarfner's dimension-scaled
+    # LogNormal lengthscale prior. vanilla_highdim_bo's headline claim IS that prior, so
+    # an older botorch would silently turn it into the Gamma(3,6) baseline it argues against.
+    "botorch>=0.12",
     "torch",
     "numpy",
     "scipy",

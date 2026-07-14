@@ -9,6 +9,17 @@ class CarSideImpact(BenchmarkProblem):
     using reference-point based nondominated sorting approach,
     part II: Handling constraints and extending to an adaptive approach,
     IEEE Transactions on Evolutionary Computation 18(4):602–622, 2014
+
+    Reference point (DERIVED from published RE data, not published for this exact
+    formulation): this problem is numerically identical to ``CRE31``, the
+    constrained car side-impact problem of Tanabe & Ishibuchi, with the objectives
+    already negated into BoCoDe's maximization frame (verified: ``CarSideImpact(x)
+    == -CRE31(x)`` to machine precision). Its objectives are in turn the first
+    three objectives of ``RE41``, whose approximated ideal/nadir points are
+    published at
+    https://github.com/ryojitanabe/reproblems/tree/master/ideal_nadir_points.
+    Following the paper's convention ``r = z_ideal + 1.1 * (z_nadir - z_ideal)``
+    (minimization frame), then negated for maximization.
     """
 
     available_dimensions = 7
@@ -33,6 +44,7 @@ class CarSideImpact(BenchmarkProblem):
                 (0.4, 1.2),
                 (0.4, 1.2),
             ],
+            ref_point=[-41.661963, -4.51145, -13.339455],
         )
 
     def _evaluate_implementation(self, X, scaling=False):

@@ -1,16 +1,33 @@
 """SCBO: Scalable Constrained Bayesian Optimization (Eriksson & Poloczek, 2021).
 
-Constrained TuRBO: a trust region is maintained around the best *feasible* point
-(or the least-infeasible point before any feasible one is found). The objective
-and each constraint are modeled with independent GPs; candidates inside the trust
-region are scored by Thompson sampling, picking the candidate with the best
-posterior objective sample among those predicted feasible (falling back to the
-smallest total predicted violation when none are feasible). Trust-region lengths
-adapt on success/failure as in TuRBO.
+Constrained TuRBO: a trust region is maintained around the best *feasible* point (or,
+before any feasible point is found, around the point of minimum total violation). The
+objective and each constraint get their own GP; candidates inside the trust region are
+scored by *constrained* Thompson sampling -- draw one posterior realization of the
+objective and of every constraint, then take the candidate with the best objective draw
+among those whose draws are feasible, falling back to the smallest total predicted
+violation when no candidate is predicted feasible.
+
+The trust-region constants follow the paper's Appendix C ("Details on SCBO") --
+``L_min = 2^-7``, ``L_max = 1.6``, ``L_init = 0.8``, perturbation probability
+``p_perturb = min(1, 20/d)`` -- **except the two tolerances, where we follow the BoTorch
+SCBO tutorial** (Rosen's call, 2026-07-13): ``tau_s = 10`` (the paper says 3) and
+``tau_f = ceil(max(4/q, d/q))`` (the paper says ``ceil(d/q)``; the two differ only for
+``d < 4``). The candidate set is a scrambled Sobol sequence inside the trust region, with
+each coordinate taken from Sobol with probability ``p_perturb`` and from the
+trust-region center otherwise.
+
+The paper's two output warpings (Sec. 3, "Transformations of Objective and Constraints")
+are applied: a **Gaussian copula** on the objective (rank -> empirical CDF -> inverse
+Gaussian CDF, which magnifies differences at the ends of the observed range where the
+optima live) and the **bilog** transform ``sgn(y) log(1 + |y|)`` on each constraint
+(which magnifies the range around zero, where the change of sign decides feasibility).
+The paper notes these are "advantageous over a naive standardization of each function as
+the latter is insensitive to the areas of interest".
 
 Run::
 
-    python -m algorithms.single_obj_constrained.scbo --problem PressureVessel --init 10 --iters 80
+    python -m algorithms.single_obj_constrained.scbo --problem PressureVessel --iters 80
 
 Sources:
 D. Eriksson and M. Poloczek. Scalable Constrained Bayesian Optimization. AISTATS 2021. https://arxiv.org/abs/2002.08526
@@ -20,8 +37,18 @@ BoTorch SCBO tutorial: https://botorch.org/docs/tutorials/scalable_constrained_b
 from __future__ import annotations
 
 import argparse
+import math
+from pathlib import Path
 
 import torch
+from botorch.fit import fit_gpytorch_mll
+from botorch.generation.sampling import ConstrainedMaxPosteriorSampling
+from botorch.models import ModelListGP, SingleTaskGP
+from botorch.models.transforms import Bilog
+from gpytorch.constraints import Interval
+from gpytorch.kernels import MaternKernel, ScaleKernel
+from gpytorch.likelihoods import GaussianLikelihood
+from gpytorch.mlls import ExactMarginalLogLikelihood
 from torch.quasirandom import SobolEngine
 
 from .._bo_utils import (
@@ -29,106 +56,251 @@ from .._bo_utils import (
     ProblemObjective,
     Result,
     add_common_args,
+    default_n_init,
     finalize,
-    fit_gp,
-    initial_design,  # noqa: E501
+    initial_design,
+    load_checkpoint,
     make_problem,
+    resolve_device,
+    save_checkpoint,
     set_seed,
 )
 from ..single_obj.turbo import TrustRegion
 
+SUCCESS_TOLERANCE = (
+    10  # BoTorch SCBO tutorial's ScboState (the paper's Appendix C says 3)
+)
 
-def _feasible_mask(con: torch.Tensor) -> torch.Tensor:
-    return (con <= 0).all(dim=1)
+
+def _tr(dim: int) -> TrustRegion:
+    """SCBO's trust region: TuRBO's, but with the BoTorch SCBO tutorial's tolerances.
+
+    ``failure_tolerance = ceil(max(4/q, dim/q))`` comes from ``TrustRegion`` itself and
+    already matches the tutorial's ``ScboState.__post_init__``. ``success_tolerance`` is
+    the tutorial's **10**, not TuRBO's / the SCBO paper's 3 (Rosen's call, 2026-07-13).
+    """
+    return TrustRegion(dim=dim, success_tolerance=SUCCESS_TOLERANCE)
 
 
-def _best_feasible(obj: torch.Tensor, con: torch.Tensor):
-    """Return (best feasible objective, index) or (-inf, least-violating index)."""
-    feas = _feasible_mask(con)
+def _gaussian_copula(Y: torch.Tensor) -> torch.Tensor:
+    """Gaussian copula transform of the objective (SCBO Sec. 3, Fig. 1 right).
+
+    Maps observations to quantiles through the empirical CDF, then through the inverse
+    Gaussian CDF. Strictly monotone, so it preserves the ordering Thompson sampling
+    needs while magnifying differences at the ends of the observed range.
+    """
+    n = Y.shape[0]
+    ranks = torch.argsort(torch.argsort(Y, dim=0), dim=0).to(Y) + 1.0
+    q = (ranks - 0.5) / n  # plotting position; keeps the inverse CDF finite
+    return torch.erfinv(2.0 * q - 1.0) * math.sqrt(2.0)
+
+
+def _fit_gp(X: torch.Tensor, Y: torch.Tensor, bilog: bool) -> SingleTaskGP:
+    """Fit SCBO's GP: the TuRBO Matern-5/2 ARD prior with SCBO's output warping.
+
+    Lengthscale and noise constraints are the ones the reference SCBO implementation
+    uses (BoTorch tutorial ``get_fitted_model``). ``bilog=True`` fits a constraint model
+    in bilog space; its posterior is untransformed back to the original scale, so
+    ``c <= 0`` keeps its meaning for the feasibility test.
+    """
+    likelihood = GaussianLikelihood(noise_constraint=Interval(1e-8, 1e-3))
+    covar_module = ScaleKernel(
+        MaternKernel(
+            nu=2.5,
+            ard_num_dims=X.shape[-1],
+            lengthscale_constraint=Interval(0.005, 4.0),
+        )
+    )
+    model = SingleTaskGP(
+        X,
+        Y,
+        covar_module=covar_module,
+        likelihood=likelihood,
+        outcome_transform=Bilog() if bilog else None,
+    )
+    mll = ExactMarginalLogLikelihood(model.likelihood, model)
+    fit_gpytorch_mll(mll)
+    return model
+
+
+def _best_index(Yo: torch.Tensor, Yc: torch.Tensor) -> int:
+    """Index of the trust-region center: best feasible point, else least-violating."""
+    feas = (Yc <= 0).all(dim=-1)
     if feas.any():
-        idx = torch.where(feas)[0]
-        best = idx[obj[idx].argmax()]
-        return obj[best].item(), best.item()
-    violation = con.clamp(min=0).sum(dim=1)
-    return -float("inf"), int(violation.argmin())
+        score = Yo.clone().reshape(-1)
+        score[~feas] = -float("inf")
+        return int(score.argmax())
+    return int(Yc.clamp(min=0).sum(dim=-1).argmin())
+
+
+def _is_success(y_next, c_next, best_value: float, best_con: torch.Tensor) -> bool:
+    """SCBO's constrained improvement rule (BoTorch tutorial ``update_state``).
+
+    Points are compared by objective only when both are feasible; a feasible point
+    always beats an infeasible one; two infeasible points are compared by total
+    violation -- so *reducing* the violation counts as a success and grows the region.
+    """
+    if (c_next <= 0).all():
+        if (best_con > 0).any():
+            return True  # first feasible point beats any infeasible incumbent
+        return bool(y_next > best_value + 1e-3 * math.fabs(best_value))
+    return bool(c_next.clamp(min=0).sum() < best_con.clamp(min=0).sum())
 
 
 def optimize_problem(
-    problem, n_init: int = 10, iters: int = 80, seed: int = 0
+    problem,
+    n_init: int | None = None,
+    iters: int = 80,
+    seed: int = 0,
+    checkpoint: str | None = None,
+    device: str | None = None,
 ) -> Result:
+    """SCBO. ``n_init`` defaults to the dim-scaled BoCoDe default.
+
+    GP fits + Thompson sampling run on ``device`` (default cuda when available); the
+    objective/constraints are evaluated on CPU. With ``checkpoint`` set the run is
+    resumable: it restores the data, the trust-region state and the RNG, and saves
+    after every iteration.
+    """
     set_seed(seed)
+    dev = resolve_device(device)
     obj = ProblemObjective(problem)
     assert obj.num_constraints > 0, "scbo requires a constrained problem"
+    dim = obj.dim
+    if n_init is None:
+        n_init = default_n_init(dim)
     res = Result(
         "scbo", type(problem).__name__, seed, acquisition_function="Thompson sampling"
     )
+    # SCBO Appendix C: candidate set size follows TuRBO.
+    n_cand = min(5000, max(2000, 200 * dim))
 
-    X = initial_design(n_init, obj.dim, seed)
-    Yo, Yc = obj.evaluate_raw(X)
-    best, _ = _best_feasible(Yo, Yc)
-    res.start(best)
+    def start_region(offset: int):
+        """Fresh trust region on a fresh initial design (TuRBO/SCBO restart)."""
+        X = initial_design(n_init, dim, seed + offset)
+        Yo, Yc = obj.evaluate_raw(X)
+        i = _best_index(Yo, Yc)
+        return X, Yo, Yc, _tr(dim), Yo[i].item(), Yc[i].clone()
 
-    tr = TrustRegion(dim=obj.dim)
-    for it in range(iters):
-        obj_model = fit_gp(X, Yo)
-        con_models = [fit_gp(X, Yc[:, i : i + 1]) for i in range(obj.num_constraints)]
+    def best_feasible(Yo, Yc):
+        feas = (Yc <= 0).all(dim=-1)
+        return Yo[feas].max().item() if feas.any() else -float("inf")
 
-        # center on best feasible (or least-violating) point
-        _, center_idx = _best_feasible(Yo, Yc)
-        x_center = X[center_idx]
-        lb = torch.clamp(x_center - tr.length / 2.0, 0.0, 1.0)
-        ub = torch.clamp(x_center + tr.length / 2.0, 0.0, 1.0)
+    if checkpoint and Path(checkpoint).exists():
+        X, Yo, start_it, data = load_checkpoint(checkpoint, res)
+        Yc = torch.tensor(data["con"], dtype=DTYPE)
+        tr = _tr(dim)
+        tr.length = float(data["tr_length"])
+        tr.success_counter = int(data["tr_success"])
+        tr.failure_counter = int(data["tr_failure"])
+        best_value = float(data["best_value"])
+        best_con = torch.tensor(data["best_con"], dtype=DTYPE)
+        n_restarts = int(data["n_restarts"])
+        best = float(data["best"])
+    else:
+        X, Yo, Yc, tr, best_value, best_con = start_region(0)
+        n_restarts = 0
+        best = best_feasible(Yo, Yc)
+        res.start(best)
+        start_it = 0
 
-        n_cand = min(5000, max(2000, 200 * obj.dim))
-        sobol = SobolEngine(obj.dim, scramble=True, seed=seed + it)
-        cand = lb + (ub - lb) * sobol.draw(n_cand).to(DTYPE)
+    for it in range(start_it, iters):
+        # SCBO applies the copula to the objective and bilog to every constraint.
+        obj_model = _fit_gp(X.to(dev), _gaussian_copula(Yo).to(dev), bilog=False)
+        con_model = ModelListGP(
+            *[
+                _fit_gp(X.to(dev), Yc[:, i : i + 1].to(dev), bilog=True)
+                for i in range(obj.num_constraints)
+            ]
+        )
 
-        # Thompson sampling: one posterior sample of objective and each constraint
+        # Trust region around the best feasible (or least-violating) point.
+        x_center = X[_best_index(Yo, Yc)].clone()
+        tr_lb = torch.clamp(x_center - tr.length / 2.0, 0.0, 1.0)
+        tr_ub = torch.clamp(x_center + tr.length / 2.0, 0.0, 1.0)
+
+        sobol = SobolEngine(dim, scramble=True, seed=seed + it)
+        pert = tr_lb + (tr_ub - tr_lb) * sobol.draw(n_cand).to(DTYPE)
+        # Perturbation mask: take the Sobol value with probability p_perturb, the
+        # center's value otherwise (SCBO Appendix C).
+        prob_perturb = min(20.0 / dim, 1.0)
+        mask = torch.rand(n_cand, dim, dtype=DTYPE) <= prob_perturb
+        empty = torch.where(mask.sum(dim=1) == 0)[0]
+        mask[empty, torch.randint(0, dim, (len(empty),))] = True
+        cand = x_center.expand(n_cand, dim).clone()
+        cand[mask] = pert[mask]
+
+        ts = ConstrainedMaxPosteriorSampling(
+            model=obj_model, constraint_model=con_model, replacement=False
+        )
         with torch.no_grad():
-            obj_s = obj_model.posterior(cand).rsample().squeeze(0).squeeze(-1)
-            con_s = torch.stack(
-                [
-                    m.posterior(cand).rsample().squeeze(0).squeeze(-1)
-                    for m in con_models
-                ],
-                dim=-1,
-            )
-        pred_feas = (con_s <= 0).all(dim=1)
-        if pred_feas.any():
-            pool = torch.where(pred_feas)[0]
-            choice = pool[obj_s[pool].argmax()]
-        else:
-            choice = con_s.clamp(min=0).sum(dim=1).argmin()
-        x_new = cand[choice : choice + 1]
+            x_new = ts(cand.to(dev), num_samples=1).detach().to("cpu", DTYPE)
 
         o, c = obj.evaluate_raw(x_new)
-        prev_best = best
+        improved = _is_success(o.reshape(-1)[0].item(), c[0], best_value, best_con)
+        if improved:  # the incumbent moves only on a success
+            best_value, best_con = o.reshape(-1)[0].item(), c[0].clone()
+        tr.update(improved)
+
         X = torch.cat([X, x_new], dim=0)
         Yo = torch.cat([Yo, o], dim=0)
         Yc = torch.cat([Yc, c], dim=0)
-        best, _ = _best_feasible(Yo, Yc)
-        # "success" = strictly improved the best feasible objective
-        improved = (
-            best > prev_best + 1e-9
-            if prev_best != -float("inf")
-            else _feasible_mask(c).any().item()
-        )
-        tr.update(bool(improved))
+        best = max(best, best_feasible(o, c))
         res.record(best)
+
         if tr.restart:
-            tr = TrustRegion(dim=obj.dim)
+            # L < L_min: discard the local data and initialize a new trust region on a
+            # fresh initial design (SCBO Sec. 3.1 step 2d / Theorem 1).
+            n_restarts += 1
+            X, Yo, Yc, tr, best_value, best_con = start_region(n_restarts * 1000)
+            best = max(best, best_feasible(Yo, Yc))
+
+        if checkpoint:
+            res.set_history(X, Yo, n_init)
+            save_checkpoint(
+                checkpoint,
+                X,
+                Yo,
+                res,
+                it + 1,
+                extra={
+                    "con": Yc.cpu().numpy(),
+                    "tr_length": tr.length,
+                    "tr_success": tr.success_counter,
+                    "tr_failure": tr.failure_counter,
+                    "best_value": best_value,
+                    "best_con": best_con.cpu().numpy(),
+                    "n_restarts": n_restarts,
+                    "best": best,
+                },
+            )
+    res.set_history(X, Yo, n_init)
     return res
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--problem", required=True)
-    parser.add_argument("--init", type=int, default=10)
+    parser.add_argument(
+        "--init",
+        type=int,
+        default=None,
+        help="initial design size (default: dim-scaled)",
+    )
     parser.add_argument("--iters", type=int, default=80)
+    parser.add_argument(
+        "--checkpoint", default=None, help="resumable checkpoint .npz path"
+    )
+    parser.add_argument("--device", default=None, help="cuda / cpu (default: auto)")
     add_common_args(parser)
     args = parser.parse_args()
     res = optimize_problem(
-        make_problem(args.problem, args), args.init, args.iters, args.seed
+        make_problem(args.problem, args),
+        args.init,
+        args.iters,
+        args.seed,
+        checkpoint=args.checkpoint,
+        device=args.device,
     )
     finalize(res, args)
 

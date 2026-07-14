@@ -23,6 +23,7 @@ from __future__ import annotations
 
 import inspect
 import random
+import warnings
 from dataclasses import dataclass, field
 
 import numpy as np
@@ -148,8 +149,14 @@ class MultiObjectiveProblem:
     """Continuous multi-objective maximization over the unit cube ``[0, 1]^d``.
 
     Exposes the full objective vector (shape ``(n, m)``, maximized) plus the
-    constraints, and a reference point for hypervolume computations (the problem's
-    ``ref_point`` if it provides one, otherwise inferred from observed data).
+    constraints, and the hypervolume reference point.
+
+    The reference point **must** be a fixed property of the problem, never of the
+    run: if it were derived from the data a given algorithm happened to observe,
+    every algorithm would be scored against a different reference point and the
+    hypervolumes would not be comparable — which is the whole point of the metric.
+    Every multi-objective problem in BoCoDe therefore defines ``ref_point``; see
+    :meth:`hv_ref_point`.
     """
 
     def __init__(self, problem):
@@ -170,13 +177,32 @@ class MultiObjectiveProblem:
             None if constraints is None else constraints.to(DTYPE)
         )
 
-    def infer_ref_point(self, Y: torch.Tensor) -> torch.Tensor:
-        """Reference point for hypervolume: the problem's, or slightly below the nadir."""
+    def hv_ref_point(self, Y: torch.Tensor) -> torch.Tensor:
+        """The problem's fixed hypervolume reference point.
+
+        ``Y`` is only used for the *fallback*: if the problem does not define a
+        ``ref_point``, one is inferred from the observed data (slightly below the
+        nadir) and a loud warning is emitted, because a data-dependent reference
+        point makes the resulting hypervolumes incomparable across algorithms.
+        """
         if self.ref_point is not None:
             return self.ref_point
+        warnings.warn(
+            f"{type(self.problem).__name__} defines no ref_point: inferring one "
+            "from this run's observed data. The resulting hypervolume is NOT "
+            "COMPARABLE with any other algorithm's — every algorithm sees "
+            "different data and so gets a different reference point. Give the "
+            "problem a fixed ref_point before reporting its hypervolume.",
+            RuntimeWarning,
+            stacklevel=2,
+        )
         nadir = Y.min(dim=0).values
         span = (Y.max(dim=0).values - nadir).clamp_min(1e-9)
         return nadir - 0.1 * span
+
+    # Backwards-compatible alias for the pre-fix name. The method no longer
+    # "infers" anything unless the problem is missing its ref_point.
+    infer_ref_point = hv_ref_point
 
 
 def fit_gp(train_X: torch.Tensor, train_Y: torch.Tensor) -> SingleTaskGP:
@@ -212,9 +238,12 @@ class Result:
     per_iteration_acquisition_function_value: list = field(default_factory=list)
     # full evaluation history: X are the queried points (unit cube [0,1]^d, the
     # first n_init rows are the initial design), y the corresponding objective in
-    # the maximized convention (same as `best`); n_init is the initial-design size.
+    # the maximized convention (same as `best`), c the constraint values at those
+    # points (feasible when <= 0), None for unconstrained problems; n_init is the
+    # initial-design size.
     X: object = None
     y: object = None
+    c: object = None
     n_init: int = 0
     _t0: float = field(default=0.0, repr=False)
 
@@ -271,10 +300,16 @@ class Result:
         self.variance.append(float(variance))
         self.per_iteration_acquisition_function_value.append(float(acq_value))
 
-    def set_history(self, X, y, n_init: int) -> None:
+    def set_history(self, X, y, n_init: int, c=None) -> None:
         """Store the full evaluation history: queried points ``X`` (n, dim), their
-        objective ``y`` (n,), and the initial-design size ``n_init`` (so ``X[:n_init]``
-        / ``y[:n_init]`` are the initial sample and the rest are the BO queries).
+        objective ``y`` -- (n,) single-objective, (n, m) multi-objective -- their
+        constraint values ``c`` (n, n_constraints; feasible when ``<= 0``, ``None``
+        for unconstrained problems) and the initial-design size ``n_init`` (so
+        ``X[:n_init]`` / ``y[:n_init]`` are the initial sample and the rest are the
+        BO queries).
+
+        Recording ``c`` is what makes the *feasible* hypervolume of a constrained
+        multi-objective run recomputable offline from the saved ``.npz``.
         """
         import numpy as np
 
@@ -284,7 +319,11 @@ class Result:
             return np.asarray(a, dtype=float)
 
         self.X = _arr(X)
-        self.y = _arr(y).reshape(-1)
+        y = _arr(y)
+        # Flatten only single-objective histories; flattening an (n, m) multi-objective
+        # y would interleave the objectives into one unusable vector.
+        self.y = y.reshape(-1) if y.ndim < 2 or y.shape[1] == 1 else y
+        self.c = None if c is None else _arr(c).reshape(len(self.X), -1)
         self.n_init = int(n_init)
 
     # Backwards-compatible single-argument logger (records best only).
@@ -313,9 +352,16 @@ class Result:
                 self.per_iteration_acquisition_function_value
             ),
         }
-        # full evaluation history (queried points + objectives), when recorded
+        # full evaluation history (queried points + objectives + constraints), when
+        # recorded. ``c`` is an (n, n_constraints) block, feasible when <= 0; it is
+        # (n, 0) for unconstrained problems. Saving it is what lets the *feasible*
+        # hypervolume of a constrained multi-objective run be recomputed offline.
+        # Backwards compatibility: .npz files written before this key existed simply
+        # have no "c" entry, so readers should check ``"c" in data.files``.
         d["X"] = np.asarray(self.X) if self.X is not None else np.empty((0, 0))
         d["y"] = np.asarray(self.y) if self.y is not None else np.empty((0,))
+        n = len(d["X"])
+        d["c"] = np.asarray(self.c) if self.c is not None else np.empty((n, 0))
         return d
 
     def to_npz(self, path: str) -> None:
@@ -421,21 +467,32 @@ def load_checkpoint(path: str, res):
 
 
 def make_problem(name: str, args=None):
-    """Instantiate a registered problem, honoring a ``--discrete/--continuous`` flag.
+    """Instantiate a registered problem, honoring ``--discrete/--continuous`` and ``--seed``.
 
     Problems that expose an ``is_discrete`` constructor argument (e.g. PressureVessel,
     SpeedReducer, Car, GearTrain) can be switched between their fully-continuous and
     mixed-variable formulations at launch. ``args.discrete`` is ``True`` (``--discrete``),
     ``False`` (``--continuous``), or ``None`` (use the problem's own default).
+
+    Problems that expose a ``seed`` constructor argument are handed the RUN's seed
+    (``args.seed``). A problem needs this when its objective is *defined* by a random
+    draw -- e.g. SVM subsamples a 10,000-row train/test split, and a different split is
+    a different objective. Seeding it from the run seed makes the whole run
+    reproducible, and keeps the objective identical across algorithms at the same seed.
     """
     cls = bocode.get_problem(name)
+    params = inspect.signature(cls.__init__).parameters
+    kwargs = {}
+
     discrete = getattr(args, "discrete", None) if args is not None else None
-    if (
-        discrete is not None
-        and "is_discrete" in inspect.signature(cls.__init__).parameters
-    ):
-        return cls(is_discrete=discrete)
-    return cls()
+    if discrete is not None and "is_discrete" in params:
+        kwargs["is_discrete"] = discrete
+
+    seed = getattr(args, "seed", None) if args is not None else None
+    if seed is not None and "seed" in params:
+        kwargs["seed"] = int(seed)
+
+    return cls(**kwargs)
 
 
 def add_common_args(parser) -> None:

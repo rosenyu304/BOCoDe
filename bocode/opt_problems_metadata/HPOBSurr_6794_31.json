@@ -1,7 +1,7 @@
 {
   "name": "HPOBSurr_6794_31",
   "module": "bocode.opt_problems.hpo.HPOBSurrogate",
-  "extra": null,
+  "extra": "hpobsurr",
   "suite": "HPO (LassoBench / HPO-B)",
   "num_objectives": 1,
   "num_constraints": 0,
@@ -56,7 +56,7 @@
   "convex": "unknown",
   "np_hard": "unknown",
   "f_opt": null,
-  "source": "S. Pineda-Arango, H. S. Jomaa, M. Wistuba, J. Grabocka. HPO-B: A Large-Scale Reproducible Benchmark for Black-Box HPO based on OpenML. NeurIPS Datasets and Benchmarks, 2021. https://github.com/releaunifreiburg/HPO-B Muller et al. PFNs4BO: In-Context Learning for Bayesian Optimization. ICML 2023.",
+  "source": "S. Pineda-Arango, H. S. Jomaa, M. Wistuba, J. Grabocka. HPO-B: A Large-Scale Reproducible Benchmark for Black-Box HPO based on OpenML. NeurIPS Datasets and Benchmarks, 2021. https://github.com/releaunifreiburg/HPO-B S. Muller, M. Feurer, N. Hollmann, F. Hutter. PFNs4BO: In-Context Learning for Bayesian Optimization. ICML 2023.",
   "variable_types": [
     "continuous",
     [
@@ -84,7 +84,21 @@
       0.9279381632804871,
       0.9336418509483337,
       0.9390371441841125,
-      0.9741029739379883
+      0.9441556334495544,
+      0.9490243196487427,
+      0.9536665081977844,
+      0.9581023454666138,
+      0.9664230346679688,
+      0.9703368544578552,
+      0.9741029739379883,
+      0.9777321815490723,
+      0.9812339544296265,
+      0.9846170544624329,
+      0.9878891706466675,
+      0.9910574555397034,
+      0.9941281676292419,
+      0.9971072673797607,
+      1.0
     ],
     "continuous",
     "continuous",

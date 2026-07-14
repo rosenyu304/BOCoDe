@@ -3,9 +3,39 @@ CRE benchmark problems (Tanabe & Ishibuchi, 2020).
 
 8 constrained multi-objective problems with explicit constraints.
 
+Sign convention
+---------------
+The CRE problems are defined for **minimization**. BoCoDe **maximizes**, so every
+``_evaluate_implementation`` here returns ``-fx`` (the negated original
+objectives) and ``ref_point`` is the negated reference point.
+
+Reference points (DERIVED, not published for CRE)
+-------------------------------------------------
+Tanabe & Ishibuchi publish approximated ideal/nadir points -- and hence
+hypervolume reference points -- only for the 16 *RE* problems; the paper
+explicitly does not analyze the eight CRE problems, and
+https://github.com/ryojitanabe/reproblems/tree/master/ideal_nadir_points
+contains no CRE files.
+
+Each CRE problem is, however, the constrained original of one RE problem, and its
+objectives are *exactly* the leading objectives of that RE problem (the RE variant
+appends the total constraint violation as one extra objective). This is verified
+numerically: ``CRE_k(x) == RE_j(x)[:m]`` to machine precision on random inputs.
+
+The reference point of each CRE problem is therefore taken as the leading ``m``
+components of the corresponding RE problem's published reference point
+(``RE_problems._REF_POINT_MIN``, i.e. ``z_ideal + 1.1 * (z_nadir - z_ideal)``).
+This is a **derivation from published RE data, not a published CRE reference
+point**. Caveat: the RE ideal/nadir points are approximated over the RE problem's
+*unconstrained* domain, so relative to the CRE feasible region this reference
+point is somewhat pessimistic (it can only make the hypervolume larger by a fixed
+offset -- it stays identical across algorithms, which is what matters for a fair
+comparison).
+
 Reference:
     Ryoji Tanabe, Hisao Ishibuchi, "An Easy-to-use Real-world Multi-objective
     Problem Suite" Applied Soft Computing. 89: 106078 (2020)
+    https://arxiv.org/pdf/2009.12867
 
 Note: Original reproblems use g >= 0 = satisfied.
       BOCoDe uses g <= 0 = satisfied. Constraints are negated accordingly.
@@ -16,9 +46,35 @@ import math
 import torch
 
 from ...base import BenchmarkProblem
+from .RE_problems import _REF_POINT_MIN
+
+#: CRE problem -> (RE problem it is the constrained original of, number of objectives).
+_CRE_TO_RE = {
+    "CRE21": ("RE31", 2),
+    "CRE22": ("RE32", 2),
+    "CRE23": ("RE33", 2),
+    "CRE24": ("RE35", 2),
+    "CRE25": ("RE36", 2),
+    "CRE31": ("RE41", 3),
+    "CRE32": ("RE42", 3),
+    "CRE51": ("RE61", 5),
+}
 
 
-class CRE21(BenchmarkProblem):
+class _CREProblem(BenchmarkProblem):
+    """Base for the CRE suite: attaches the reference point derived from RE.
+
+    Stored in BoCoDe's maximization frame (negated from the minimization-frame
+    value), matching the negated objectives returned by
+    ``_evaluate_implementation``.
+    """
+
+    def __init__(self, **kwargs) -> None:
+        re_name, m = _CRE_TO_RE[type(self).__name__]
+        super().__init__(ref_point=[-r for r in _REF_POINT_MIN[re_name][:m]], **kwargs)
+
+
+class CRE21(_CREProblem):
     available_dimensions = 3
     num_objectives = 2
     num_constraints = 3
@@ -55,10 +111,10 @@ class CRE21(BenchmarkProblem):
         gx[:, 1] = -(100000.0 - fx[:, 1])
         gx[:, 2] = -(100000 - ((80.0 * torch.sqrt(1.0 + x3 * x3)) / (x3 * x2)))
 
-        return gx, fx
+        return gx, -fx  # CRE is minimization; BoCoDe maximizes
 
 
-class CRE22(BenchmarkProblem):
+class CRE22(_CREProblem):
     available_dimensions = 4
     num_objectives = 2
     num_constraints = 4
@@ -129,10 +185,10 @@ class CRE22(BenchmarkProblem):
         gx[:, 2] = -(x4 - x1)
         gx[:, 3] = -(PC - P)
 
-        return gx, fx
+        return gx, -fx  # CRE is minimization; BoCoDe maximizes
 
 
-class CRE23(BenchmarkProblem):
+class CRE23(_CREProblem):
     available_dimensions = 4
     num_objectives = 2
     num_constraints = 4
@@ -182,10 +238,10 @@ class CRE23(BenchmarkProblem):
             - 900.0
         )
 
-        return gx, fx
+        return gx, -fx  # CRE is minimization; BoCoDe maximizes
 
 
-class CRE24(BenchmarkProblem):
+class CRE24(_CREProblem):
     available_dimensions = 7
     num_objectives = 2
     num_constraints = 11
@@ -249,10 +305,10 @@ class CRE24(BenchmarkProblem):
         tmpVar = torch.pow((745.0 * x5) / (x2 * x3), 2.0) + 1.575 * 1e8
         gx[:, 10] = -(-torch.sqrt(tmpVar) / (0.1 * x7 * x7 * x7) + 1100.0)
 
-        return gx, fx
+        return gx, -fx  # CRE is minimization; BoCoDe maximizes
 
 
-class CRE25(BenchmarkProblem):
+class CRE25(_CREProblem):
     available_dimensions = 4
     num_objectives = 2
     num_constraints = 1
@@ -284,10 +340,10 @@ class CRE25(BenchmarkProblem):
         # Negate for BOCoDe convention (g <= 0 = satisfied)
         gx[:, 0] = -(0.5 - (fx[:, 0] / 6.931))
 
-        return gx, fx
+        return gx, -fx  # CRE is minimization; BoCoDe maximizes
 
 
-class CRE31(BenchmarkProblem):
+class CRE31(_CREProblem):
     available_dimensions = 7
     num_objectives = 3
     num_constraints = 10
@@ -383,10 +439,10 @@ class CRE31(BenchmarkProblem):
         gx[:, 8] = -(9.9 - Vmbp)
         gx[:, 9] = -(15.7 - Vfd)
 
-        return gx, fx
+        return gx, -fx  # CRE is minimization; BoCoDe maximizes
 
 
-class CRE32(BenchmarkProblem):
+class CRE32(_CREProblem):
     available_dimensions = 6
     num_objectives = 3
     num_constraints = 9
@@ -498,10 +554,10 @@ class CRE32(BenchmarkProblem):
         KG = 1.0 + 0.52 * x_D
         gx[:, 8] = -((KB + BMT - KG) - (0.07 * x_B))
 
-        return gx, fx
+        return gx, -fx  # CRE is minimization; BoCoDe maximizes
 
 
-class CRE51(BenchmarkProblem):
+class CRE51(_CREProblem):
     available_dimensions = 3
     num_objectives = 5
     num_constraints = 7
@@ -545,4 +601,4 @@ class CRE51(BenchmarkProblem):
         gx[:, 5] = -(2000 - (0.417 * x1 * x2 + 1721.26 * x3 - 136.54))
         gx[:, 6] = -(550 - (0.164 / (x1 * x2) + 631.13 * x3 - 54.48))
 
-        return gx, fx
+        return gx, -fx  # CRE is minimization; BoCoDe maximizes

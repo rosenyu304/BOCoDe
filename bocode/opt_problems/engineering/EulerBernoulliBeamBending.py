@@ -21,7 +21,13 @@ class EulerBernoulliBeamBending(BenchmarkProblem):
             dim=3,
             num_objectives=1,
             num_constraints=0,
-            optimum=[-1.287385e3],
+            # ``optimum`` is stored in the ORIGINAL (minimization) sense: y* ~ 1287.385
+            # (``evaluate`` returns -y, so the best attainable value is -1287.385).
+            # NOTE: this is the optimum of the *mixed* source problem, where x3 is one
+            # of 12 catalog inertias (max 0.380) -- see ``EulerBeamMixed``. Here x3 is
+            # relaxed to [0, 1], so the box admits y < y*; this f* is therefore not a
+            # bound for this continuous relaxation.
+            optimum=[1287.385],
             x_opt=[[0.0, 0.43, 0.380]],
             bounds=[(0, 1)] * 3,
             #  MIXED = MixIntConfig(is_mixed: True,

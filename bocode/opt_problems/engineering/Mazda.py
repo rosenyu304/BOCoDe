@@ -14,6 +14,16 @@ from ...base import BenchmarkProblem
 class Mazda_SCA(BenchmarkProblem):
     """
     https://ladse.eng.isas.jaxa.jp/benchmark/
+
+    Reference point (DERIVED, not published): the Mazda benchmark publishes no
+    hypervolume reference point and no approximated ideal/nadir point. Derived with
+    the standard convention (Tanabe & Ishibuchi, Sec. 3.1; Picard & Schiffmann,
+    Sec. V-A) ``r = z_ideal + 1.1 * (z_nadir - z_ideal)`` in the minimization
+    frame, where ``z_ideal`` / ``z_nadir`` are the min / max over the non-dominated
+    set of a fixed Latin-hypercube sample (``problem.sample(2048, seed=0)``, all
+    points, feasible or not), then negated for BoCoDe's maximization frame. Derived
+    values (minimization frame): ``z_ideal = (1.90409, -20.0, 0.89946, 0.92375)``,
+    ``z_nadir = (2.02548, -6.0, 0.98033, 1.05704)``.
     """
 
     available_dimensions = 148
@@ -38,6 +48,7 @@ class Mazda_SCA(BenchmarkProblem):
             num_objectives=4,
             num_constraints=36,
             bounds=[(0, 1)] * 148,  # Scaled upon evaluation
+            ref_point=[-2.03762237, 4.6, -0.98841721, -1.07037097],
         )
 
     def _evaluate_implementation(self, X):
@@ -139,6 +150,16 @@ class Mazda(BenchmarkProblem):
     - The third column is weight of SUV.
     - The fourth column is weight of LV.
     - The fifth column is weight of SV.
+
+    Reference point (DERIVED, not published): the Mazda benchmark publishes no
+    hypervolume reference point and no approximated ideal/nadir point. Derived with
+    the standard convention (Tanabe & Ishibuchi, Sec. 3.1; Picard & Schiffmann,
+    Sec. V-A) ``r = z_ideal + 1.1 * (z_nadir - z_ideal)`` in the minimization
+    frame, where ``z_ideal`` / ``z_nadir`` are the min / max over the non-dominated
+    set of a fixed Latin-hypercube sample (``problem.sample(2048, seed=0)``, all
+    points, feasible or not), then negated for BoCoDe's maximization frame. Derived
+    values (minimization frame): ``z_ideal = (2.83845, -5.0, 0.90134, 0.90752,
+    0.94304)``, ``z_nadir = (2.99307, 0.0, 1.01610, 1.02938, 1.07776)``.
     """
 
     available_dimensions = 222
@@ -163,6 +184,7 @@ class Mazda(BenchmarkProblem):
             num_objectives=5,
             num_constraints=54,
             bounds=[(0, 1)] * 222,  # Scaled upon evaluation
+            ref_point=[-3.008535, -0.5, -1.02757455, -1.04156956, -1.09123624],
         )
 
     def _evaluate_implementation(self, X):

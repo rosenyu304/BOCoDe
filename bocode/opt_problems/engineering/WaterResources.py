@@ -7,6 +7,16 @@ class WaterResources(BenchmarkProblem):
     """
     K. Musselman and J. Talavage. A trade-off cut approach to multiple objective optimization.
     Operations Research 28(6):1424–1435, 1980
+
+    Reference point (DERIVED from published RE data, not published for this exact
+    formulation): the objectives are numerically identical to ``CRE51``, the
+    constrained water-resource planning problem of Tanabe & Ishibuchi, negated
+    into BoCoDe's maximization frame (verified: ``WaterResources(x) == -CRE51(x)``
+    to machine precision). CRE51's objectives are the first five of ``RE61``, whose
+    approximated ideal/nadir points are published at
+    https://github.com/ryojitanabe/reproblems/tree/master/ideal_nadir_points.
+    Following the paper's convention ``r = z_ideal + 1.1 * (z_nadir - z_ideal)``
+    (minimization frame), then negated for maximization.
     """
 
     available_dimensions = 3
@@ -23,6 +33,13 @@ class WaterResources(BenchmarkProblem):
             num_objectives=5,
             num_constraints=7,
             bounds=[(0.01, 0.45), (0.01, 0.10), (0.01, 0.10)],
+            ref_point=[
+                -82602.57638,
+                -1482.0,
+                -3110281.172,
+                -7766172.841,
+                -96522.77513,
+            ],
         )
 
     def _evaluate_implementation(self, X, scaling=False):

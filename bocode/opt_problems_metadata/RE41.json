@@ -2,7 +2,7 @@
   "name": "RE41",
   "module": "bocode.opt_problems.reproblems.RE_problems",
   "extra": null,
-  "suite": "RE (Tanabe-Ishibuchi)",
+  "suite": "Engineering (standalone)",
   "num_objectives": 4,
   "num_constraints": 0,
   "available_dimensions": 7,

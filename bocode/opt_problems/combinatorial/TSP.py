@@ -1,3 +1,30 @@
+"""Travelling Salesman Problem (51 / 100 cities), from NEORL example 1.
+
+WAS DEGENERATE -- READ BEFORE USING. Both classes used to pass the *candidate city list*
+``[list(range(1, 51))] * 51`` in the ``bounds`` slot. ``bounds`` must hold ``(lo, hi)``
+pairs, so ``torch_bounds`` came out as a (51, 50) matrix and ``scale()`` mapped every
+input to the interval [1, 2] -- i.e. every tour collapsed to "city 1, 51 times" and the
+objective was identically 0.0. The candidate list belongs in ``variable_types`` (BoCoDe's
+per-dimension categorical slot); it now lives there, and ``bounds`` holds real intervals.
+The list was also off by one (``range(1, 51)`` = 1..50 for 51 cities, so the last city
+was unreachable); it now covers every city.
+
+STILL NOT A TRUE TSP. Each dimension is an INDEPENDENT categorical draw over the cities,
+so nothing forbids a "tour" from visiting the same city twice and skipping others -- the
+permutation constraint that defines the TSP is not enforced anywhere. The fix above makes
+the objective vary (rather than being a constant 0.0) and gives it the right sign, but
+these problems remain unsuitable for the campaign until they are reformulated over
+permutations. They are DROPPED from the campaign; do not re-enable them on the strength of
+this fix alone.
+
+SIGN: NEORL's ``TSP.Compute_tour_cost`` is a gym RL *reward* -- it returns ``-cost``, the
+negated tour length -- which is already BoCoDe's maximization frame. It is therefore
+passed through UNNEGATED. (Verified: the optimal eil51 tour scores -426, matching the
+published optimal tour length of 426, while random tours score around -1500.)
+
+Source: NEORL example 1: https://neorl.readthedocs.io/en/latest/examples/ex1.html
+"""
+
 import numpy as np
 import torch
 
@@ -127,11 +154,16 @@ class TSP_51Cities(BenchmarkProblem):
         ]
         self.optimum_cities = optimum
 
+        # 51 cities, 1-indexed. Each dimension picks one city: a categorical variable
+        # over 1..51, NOT a (lo, hi) bound. See the module docstring.
+        cities = list(range(1, 52))
+        self.variable_types = [cities] * 51
+
         super().__init__(
             dim=51,
             num_objectives=1,
             num_constraints=0,
-            bounds=[list(range(1, 51))] * 51,
+            bounds=[(1, 51)] * 51,
             x_opt=[optimum],
         )
 
@@ -161,6 +193,9 @@ class TSP_51Cities(BenchmarkProblem):
                 coords = env.city_library[str(city_idx)]
                 tour_map[j][0] = coords[0]
                 tour_map[j][1] = coords[1]
+            # NEORL's Compute_tour_cost is an RL *reward*: it returns ``-cost``, the
+            # NEGATED tour length. That is already BoCoDe's maximization frame, so it
+            # must NOT be negated again (doing so would point BO at the longest tour).
             fx[i] = env.Compute_tour_cost(tour=tour_map)
 
         return None, fx.unsqueeze(-1)
@@ -387,11 +422,16 @@ class TSP_100Cities(BenchmarkProblem):
         ]
         self.optimum_cities = optimum
 
+        # 100 cities, 1-indexed. Each dimension picks one city: a categorical variable
+        # over 1..100, NOT a (lo, hi) bound. See the module docstring.
+        cities = list(range(1, 101))
+        self.variable_types = [cities] * 100
+
         super().__init__(
             dim=100,
             num_objectives=1,
             num_constraints=0,
-            bounds=[list(range(1, 100))] * 100,
+            bounds=[(1, 100)] * 100,
             x_opt=[optimum],
         )
 
@@ -421,6 +461,9 @@ class TSP_100Cities(BenchmarkProblem):
                 coords = env.city_library[str(city_idx)]
                 tour_map[j][0] = coords[0]
                 tour_map[j][1] = coords[1]
+            # NEORL's Compute_tour_cost is an RL *reward*: it returns ``-cost``, the
+            # NEGATED tour length. That is already BoCoDe's maximization frame, so it
+            # must NOT be negated again (doing so would point BO at the longest tour).
             fx[i] = env.Compute_tour_cost(tour=tour_map)
 
         return None, fx.unsqueeze(-1)

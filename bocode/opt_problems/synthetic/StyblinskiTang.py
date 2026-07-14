@@ -6,7 +6,7 @@ BoTorch synthetic test functions: https://github.com/meta-pytorch/botorch/blob/m
 
 import botorch.test_functions.synthetic as _syn
 
-from ._wrapper import SingleObjSyntheticProblem
+from ._wrapper import ShiftedSingleObjSyntheticProblem, SingleObjSyntheticProblem
 
 
 class StyblinskiTang(SingleObjSyntheticProblem):
@@ -15,3 +15,11 @@ class StyblinskiTang(SingleObjSyntheticProblem):
     available_dimensions = (2, 100)
     botorch_cls = _syn.StyblinskiTang
     botorch_kwargs = {"dim": 10}
+
+
+class StyblinskiTangShifted(StyblinskiTang, ShiftedSingleObjSyntheticProblem):
+    """Styblinski-Tang with the optimum at the 2/3 (even dims) / 1/3 (odd dims) point.
+
+    Same landscape and optimal value as ``StyblinskiTang``. See
+    :class:`~._wrapper.ShiftedSingleObjSyntheticProblem` for the exact offset.
+    """

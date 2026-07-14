@@ -6,12 +6,24 @@ BoTorch synthetic test functions: https://github.com/meta-pytorch/botorch/blob/m
 
 import botorch.test_functions.synthetic as _syn
 
-from ._wrapper import SingleObjSyntheticProblem
+from ._wrapper import ShiftedSingleObjSyntheticProblem, SingleObjSyntheticProblem
 
 
 class Powell(SingleObjSyntheticProblem):
-    """Powell function fixed to 10 dimensions."""
+    """Powell function fixed to 10 dimensions.
+
+    NOTE: the box center beats 20k random samples here; see ``PowellShifted``.
+    """
 
     available_dimensions = (2, 100)
     botorch_cls = _syn.Powell
     botorch_kwargs = {"dim": 10}
+
+
+class PowellShifted(Powell, ShiftedSingleObjSyntheticProblem):
+    """Powell with the optimum shifted (2/3 point on even dims, 1/3 point on odd dims).
+
+    Same landscape and optimal value as ``Powell``, translated so a center-biased initial
+    design no longer starts near the answer. See
+    :class:`~._wrapper.ShiftedSingleObjSyntheticProblem` for the exact offset.
+    """

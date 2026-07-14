@@ -4,10 +4,27 @@ High-dimensional BO that optimizes in a low-dimensional random subspace embedded
 input space, and grows the subspace (splitting bins of input dimensions) whenever the
 trust region collapses, carrying all observations forward. Combines a HeSBO-style sign
 embedding with a TuRBO trust region + Thompson sampling. Ported from the BoTorch BAxUS
-tutorial.
+tutorial, which mirrors Papenmeier et al. (2022) Alg. 1-2.
+
+Reference constants (BoTorch ``tutorials/baxus``; LeoIV/BAxUS ``baxus/baxus.py``):
+
+* ``new_bins_on_split = 3``, initial target dim ``d_init`` chosen so that
+  ``n_splits = round(log_{b+1}(D))`` splits land as close as possible to ``D``
+* ``length_init = 0.8``, ``length_min = 0.5 ** 7``, ``length_max = 1.6``,
+  ``success_tolerance = 3``
+* failure tolerance ``max(1, min(ceil(split_budget / gamma), max(4, target_dim)))`` with
+  ``gamma = 2 * log_0.5(length_min / length_init)`` and the split budget of Eq. (4) --
+  the **official repo's** rule (``LeoIV/BAxUS``, ``baxus/baxus.py::failtol``), which
+  floors the tolerance at 4; the BoTorch tutorial caps it at ``target_dim`` instead
+* GP fit on standardized targets with noise constrained to ``[1e-8, 1e-3]``;
+  candidates by Thompson sampling in a lengthscale-scaled trust region.
 
 Internally BAxUS works in ``[-1, 1]`` (target and embedded input space); points are
 mapped to the unit cube before the BoCoDe objective is evaluated.
+
+``n_init`` defaults to BoCoDe's dimension-scaled :func:`default_n_init` so the method
+gets the same initial-design budget as the rest of the suite (the reference uses
+``target_dim + 1`` and the BoTorch tutorial 10; pass ``--init`` to reproduce those).
 
 Run::
 
@@ -15,7 +32,8 @@ Run::
 
 Sources:
 L. Papenmeier, L. Nardi, M. Poloczek. Increasing the Scope as You Learn: Adaptive Bayesian Optimization in Nested Subspaces. NeurIPS 2022. https://arxiv.org/abs/2304.11468
-BoTorch BAxUS tutorial: https://botorch.org/docs/tutorials/baxus
+Official implementation: https://github.com/LeoIV/BAxUS
+BoTorch BAxUS tutorial: https://github.com/pytorch/botorch/blob/main/tutorials/baxus/baxus.ipynb
 """
 
 from __future__ import annotations
@@ -23,6 +41,7 @@ from __future__ import annotations
 import argparse
 import math
 from dataclasses import dataclass, field
+from pathlib import Path
 
 import botorch
 import gpytorch
@@ -42,8 +61,12 @@ from .._bo_utils import (
     ProblemObjective,
     Result,
     add_common_args,
+    default_n_init,
     finalize,
+    load_checkpoint,
     make_problem,
+    resolve_device,
+    save_checkpoint,
     set_seed,
 )
 
@@ -81,8 +104,8 @@ class BaxusState:
         self.n_splits = n_splits
 
     @property
-    def split_budget(self) -> int:
-        return round(
+    def split_budget(self) -> float:
+        return (
             -1
             * (self.new_bins_on_split * self.eval_budget * self.target_dim)
             / (self.d_init * (1 - (self.new_bins_on_split + 1) ** (self.n_splits + 1)))
@@ -90,22 +113,33 @@ class BaxusState:
 
     @property
     def failure_tolerance(self) -> int:
+        """The **official** BAxUS failure tolerance (LeoIV/BAxUS ``baxus/baxus.py::failtol``).
+
+        The tolerance is *floored* at 4 through ``ft_max = max(4, target_dim)``. The
+        BoTorch tutorial instead *caps* at ``target_dim`` and so can return 1 -- which
+        halves the trust region after a single failed evaluation, and BAxUS starts at
+        ``d_init in {1, 2, 3}``. Rosen's call (2026-07-13): follow the official repo.
+        """
+        ft_max = max(4.0, float(self.target_dim))
         if self.target_dim == self.dim:
-            return self.target_dim
-        k = math.floor(math.log(self.length_min / self.length_init, 0.5))
-        return min(self.target_dim, max(1, math.floor(self.split_budget / k)))
+            return int(ft_max)
+        gamma = 2 * math.log(self.length_min / self.length_init, 0.5)
+        ft = math.ceil(self.split_budget / gamma)
+        return int(max(1, min(ft, ft_max)))
 
 
-def _embedding_matrix(input_dim: int, target_dim: int) -> torch.Tensor:
+def _embedding_matrix(input_dim: int, target_dim: int, device) -> torch.Tensor:
     if target_dim >= input_dim:
-        return torch.eye(input_dim, dtype=DTYPE)
-    perm = torch.randperm(input_dim) + 1
+        return torch.eye(input_dim, dtype=DTYPE, device=device)
+    perm = torch.randperm(input_dim, device=device) + 1
     bins = torch.nn.utils.rnn.pad_sequence(
         list(torch.tensor_split(perm, target_dim)), batch_first=True
     )
-    mtrx = torch.zeros((target_dim, input_dim + 1), dtype=DTYPE)
+    mtrx = torch.zeros((target_dim, input_dim + 1), dtype=DTYPE, device=device)
     mtrx = mtrx.scatter_(
-        1, bins, 2 * torch.randint(2, (target_dim, input_dim), dtype=DTYPE) - 1
+        1,
+        bins,
+        2 * torch.randint(2, (target_dim, input_dim), dtype=DTYPE, device=device) - 1,
     )
     return mtrx[:, 1:]
 
@@ -116,7 +150,7 @@ def _increase_embedding(S: torch.Tensor, X: torch.Tensor, n_new_bins: int):
     for row_idx in range(len(S)):
         row = S[row_idx]
         idxs = torch.nonzero(row)
-        idxs = idxs[torch.randperm(len(idxs))].reshape(-1)
+        idxs = idxs[torch.randperm(len(idxs), device=S.device)].reshape(-1)
         if len(idxs) <= 1:
             continue
         non_zero = row[idxs].reshape(-1)
@@ -125,7 +159,9 @@ def _increase_embedding(S: torch.Tensor, X: torch.Tensor, n_new_bins: int):
         els = torch.tensor_split(non_zero, n_row_bins)[1:]
         new_bins_p = torch.nn.utils.rnn.pad_sequence(list(new_bins), batch_first=True)
         els_p = torch.nn.utils.rnn.pad_sequence(list(els), batch_first=True)
-        S_stack = torch.zeros((n_row_bins - 1, len(row) + 1), dtype=DTYPE)
+        S_stack = torch.zeros(
+            (n_row_bins - 1, len(row) + 1), dtype=DTYPE, device=S.device
+        )
         S_stack = S_stack.scatter_(1, new_bins_p, els_p)
         S_update[row_idx, torch.hstack(new_bins) - 1] = 0
         X_update = torch.hstack(
@@ -165,11 +201,11 @@ def _create_candidate(state, model, X, Y, seed) -> torch.Tensor:
     dim = X.shape[-1]
     n_candidates = min(5000, max(2000, 200 * dim))
     sobol = SobolEngine(dim, scramble=True, seed=seed)
-    pert = tr_lb + (tr_ub - tr_lb) * sobol.draw(n_candidates).to(DTYPE)
+    pert = tr_lb + (tr_ub - tr_lb) * sobol.draw(n_candidates).to(X)
     prob_perturb = min(20.0 / dim, 1.0)
-    mask = torch.rand(n_candidates, dim, dtype=DTYPE) <= prob_perturb
+    mask = torch.rand(n_candidates, dim, dtype=X.dtype, device=X.device) <= prob_perturb
     ind = torch.where(mask.sum(dim=1) == 0)[0]
-    mask[ind, torch.randint(0, dim, size=(len(ind),))] = True
+    mask[ind, torch.randint(0, dim, size=(len(ind),), device=X.device)] = True
     X_cand = x_center.expand(n_candidates, dim).clone()
     X_cand[mask] = pert[mask]
 
@@ -179,30 +215,50 @@ def _create_candidate(state, model, X, Y, seed) -> torch.Tensor:
 
 
 def optimize_problem(
-    problem, n_init: int = 10, iters: int = 100, seed: int = 0
+    problem,
+    n_init: int | None = None,
+    iters: int = 100,
+    seed: int = 0,
+    checkpoint: str | None = None,
+    device: str | None = None,
 ) -> Result:
     """BAxUS over the unit cube for a (high-dimensional) problem."""
     set_seed(seed)
+    dev = resolve_device(device)
     obj = ProblemObjective(problem)
+    if n_init is None:
+        n_init = default_n_init(obj.dim)
     res = Result("baxus", type(problem).__name__, seed, acquisition_function="ts")
 
     def evaluate(X_input: torch.Tensor) -> torch.Tensor:
-        # BAxUS works in [-1, 1]; map to the unit cube for the objective.
-        return obj((X_input.clamp(-1.0, 1.0) + 1.0) / 2.0)
+        # BAxUS works in [-1, 1]; map to the unit cube for the objective (on CPU).
+        X_unit = (X_input.detach().cpu().to(DTYPE).clamp(-1.0, 1.0) + 1.0) / 2.0
+        return obj(X_unit).to(dev)
 
     state = BaxusState(dim=obj.dim, eval_budget=iters)
-    S = _embedding_matrix(obj.dim, state.d_init)
 
-    sobol = SobolEngine(state.d_init, scramble=True, seed=seed)
-    X_target = 2.0 * sobol.draw(n_init).to(DTYPE) - 1.0
-    Y = evaluate(X_target @ S)
-    state.best_value = Y.max().item()
-    res.start(state.best_value)
+    if checkpoint and Path(checkpoint).exists():
+        X_target, Y, start_it, data = load_checkpoint(checkpoint, res)
+        X_target, Y = X_target.to(dev), Y.to(dev)
+        S = torch.tensor(data["S"], dtype=DTYPE, device=dev)
+        state.target_dim = int(data["target_dim"])
+        state.length = float(data["length"])
+        state.success_counter = int(data["success_counter"])
+        state.failure_counter = int(data["failure_counter"])
+        state.best_value = float(data["best_value"])
+    else:
+        S = _embedding_matrix(obj.dim, state.d_init, dev)
+        sobol = SobolEngine(state.d_init, scramble=True, seed=seed)
+        X_target = 2.0 * sobol.draw(n_init).to(dtype=DTYPE, device=dev) - 1.0
+        Y = evaluate(X_target @ S)
+        state.best_value = Y.max().item()
+        res.start(state.best_value)
+        start_it = 0
 
-    for it in range(iters):
+    for it in range(start_it, iters):
         train_Y = (Y - Y.mean()) / (Y.std() + 1e-9)
-        likelihood = GaussianLikelihood(noise_constraint=Interval(1e-8, 1e-3))
-        model = SingleTaskGP(X_target, train_Y, likelihood=likelihood)
+        likelihood = GaussianLikelihood(noise_constraint=Interval(1e-8, 1e-3)).to(dev)
+        model = SingleTaskGP(X_target, train_Y, likelihood=likelihood).to(dev)
         mll = ExactMarginalLogLikelihood(model.likelihood, model)
         with (
             botorch.settings.validate_input_scaling(False),
@@ -211,6 +267,7 @@ def optimize_problem(
             try:
                 fit_gpytorch_mll(mll)
             except ModelFittingError:
+                # Right after a split the covariance can be indefinite: fall back to Adam.
                 opt = torch.optim.Adam(model.parameters(), lr=0.1)
                 for _ in range(100):
                     opt.zero_grad()
@@ -235,19 +292,56 @@ def optimize_problem(
             state.failure_counter = 0
             state.success_counter = 0
 
-    res.set_history((X_target @ S).clamp(-1, 1).add(1).div(2), Y, n_init)
+        if checkpoint:
+            res.set_history(_to_input(X_target, S), Y, n_init)
+            save_checkpoint(
+                checkpoint,
+                X_target,
+                Y,
+                res,
+                it + 1,
+                extra=dict(
+                    S=S.detach().cpu().numpy(),
+                    target_dim=state.target_dim,
+                    length=state.length,
+                    success_counter=state.success_counter,
+                    failure_counter=state.failure_counter,
+                    best_value=state.best_value,
+                ),
+            )
+
+    res.set_history(_to_input(X_target, S), Y, n_init)
     return res
+
+
+def _to_input(X_target: torch.Tensor, S: torch.Tensor) -> torch.Tensor:
+    """Map target-space points through the embedding back to the unit cube."""
+    return (X_target @ S).clamp(-1, 1).add(1).div(2)
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--problem", required=True)
-    parser.add_argument("--init", type=int, default=10)
+    parser.add_argument(
+        "--init",
+        type=int,
+        default=None,
+        help="initial design size (default: dim-scaled)",
+    )
     parser.add_argument("--iters", type=int, default=100)
+    parser.add_argument(
+        "--checkpoint", default=None, help="resumable checkpoint .npz path"
+    )
+    parser.add_argument("--device", default=None, help="cuda / cpu (default: auto)")
     add_common_args(parser)
     args = parser.parse_args()
     res = optimize_problem(
-        make_problem(args.problem, args), args.init, args.iters, args.seed
+        make_problem(args.problem, args),
+        args.init,
+        args.iters,
+        args.seed,
+        checkpoint=args.checkpoint,
+        device=args.device,
     )
     finalize(res, args)
 

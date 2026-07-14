@@ -98,7 +98,7 @@ def optimize_problem(
     else:
         train_X = initial_design(n_init, obj.dim, seed)
         train_Y, _ = obj.evaluate_raw(train_X)
-        ref_point = obj.infer_ref_point(train_Y)
+        ref_point = obj.hv_ref_point(train_Y)
         start_it = 0
 
     def hv(Y):
@@ -124,7 +124,12 @@ def optimize_problem(
             prune_baseline=True,
         )
         candidate, _ = optimize_acqf(
-            acqf, bounds=bounds_dev, q=1, num_restarts=10, raw_samples=256
+            acqf,
+            bounds=bounds_dev,
+            q=1,
+            num_restarts=10,  # tutorial's NUM_RESTARTS
+            raw_samples=512,  # tutorial's RAW_SAMPLES
+            options={"batch_limit": 5, "maxiter": 200},
         )
         candidate = candidate.detach().to(device="cpu", dtype=DTYPE)
         y, _ = obj.evaluate_raw(candidate)

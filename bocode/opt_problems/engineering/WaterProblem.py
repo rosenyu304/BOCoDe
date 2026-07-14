@@ -9,6 +9,20 @@ class WaterProblem(BenchmarkProblem):
     using reference-point based nondominated sorting approach,
     part II: Handling constraints and extending to an adaptive approach,
     IEEE Transactions on Evolutionary Computation 18(4):602–622, 2014
+
+    Reference point (DERIVED from published RE data, not published for this exact
+    formulation): same problem as ``CRE51`` / ``RE61[:5]`` (Tanabe & Ishibuchi),
+    negated into BoCoDe's maximization frame, so the reference point is
+    ``-(z_ideal + 1.1 * (z_nadir - z_ideal))`` built from the ideal/nadir points at
+    https://github.com/ryojitanabe/reproblems/tree/master/ideal_nadir_points.
+
+    KNOWN IMPLEMENTATION BUG (pre-existing, not fixed here): the third objective
+    below is ``30570 * 0.02289 * x2 / ...`` where the reference formulation has
+    ``305700 * 2289 * x2 / ...``, i.e. this implementation's ``f3`` is exactly
+    ``1e-6`` times the reference ``f3`` (verified numerically against
+    ``WaterResources`` / ``CRE51``). The third component of the reference point is
+    scaled by the same ``1e-6`` so that it stays consistent with what this class
+    actually returns.
     """
 
     available_dimensions = 3
@@ -25,6 +39,13 @@ class WaterProblem(BenchmarkProblem):
             num_objectives=5,
             num_constraints=7,
             bounds=[(0.01, 0.45), (0.01, 0.10), (0.01, 0.10)],
+            ref_point=[
+                -82602.57638,
+                -1482.0,
+                -3.110281172,  # 1e-6 * CRE51's, matching the f3 bug documented above
+                -7766172.841,
+                -96522.77513,
+            ],
         )
 
     def _evaluate_implementation(self, X, scaling=False):

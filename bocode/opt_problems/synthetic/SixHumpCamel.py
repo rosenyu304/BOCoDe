@@ -6,7 +6,7 @@ BoTorch synthetic test functions: https://github.com/meta-pytorch/botorch/blob/m
 
 import botorch.test_functions.synthetic as _syn
 
-from ._wrapper import SingleObjSyntheticProblem
+from ._wrapper import ShiftedSingleObjSyntheticProblem, SingleObjSyntheticProblem
 
 
 class SixHumpCamel(SingleObjSyntheticProblem):
@@ -15,3 +15,11 @@ class SixHumpCamel(SingleObjSyntheticProblem):
     available_dimensions = 2
     botorch_cls = _syn.SixHumpCamel
     botorch_kwargs: dict = {}
+
+
+class SixHumpCamelShifted(SixHumpCamel, ShiftedSingleObjSyntheticProblem):
+    """Six-Hump Camel with its first global optimum at the (2/3, 1/3) point of the box.
+
+    Same landscape and optimal value as ``SixHumpCamel``; both global optima stay inside
+    the box. See :class:`~._wrapper.ShiftedSingleObjSyntheticProblem` for the offset.
+    """

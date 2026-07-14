@@ -68,10 +68,10 @@ class PID4Acrobot(BenchmarkProblem):
             scaling (bool): If True, scales the input X.
 
         Returns:
-            A tuple (gx, fx) where gx is for constraints (empty here) and
-            fx is the objective value. Since the original problem maximizes
-            reward, this function returns the negative of the mean reward
-            to frame it as a minimization problem.
+            A tuple (gx, fx) where gx is for constraints (empty here) and fx is
+            the objective value: the mean episode reward, returned as-is. The
+            Acrobot reward is already a quantity to be MAXIMIZED, which matches
+            BoCoDe's convention, so it is *not* negated.
         """
         if scaling:
             # Assumes base class handles scaling from [0,1] to parameter bounds

@@ -1,4 +1,16 @@
 {
+  "Ackley53": [
+    "opt_problems.synthetic_mixed.Ackley53",
+    null
+  ],
+  "Ackley5Mixed": [
+    "opt_problems.synthetic_mixed.Ackley5Mixed",
+    null
+  ],
+  "AckleyCat": [
+    "opt_problems.synthetic_mixed.AckleyCat",
+    null
+  ],
   "AgNP": [
     "opt_problems.materials.AgNP",
     null
@@ -25,6 +37,14 @@
   ],
   "BotorchCarSideImpact": [
     "opt_problems.engineering.BotorchCarSideImpact",
+    null
+  ],
+  "BraninCategorical": [
+    "opt_problems.synthetic_mixed.BraninCategorical",
+    null
+  ],
+  "BraninLVGP": [
+    "opt_problems.synthetic_mixed.BraninLVGP",
     null
   ],
   "CEC2020_p1": [
@@ -379,6 +399,14 @@
     "opt_problems.engineering.CarSideImpact",
     null
   ],
+  "CoCaBOFunc2C": [
+    "opt_problems.synthetic_mixed.CoCaBOFunc2C",
+    null
+  ],
+  "CoCaBOFunc3C": [
+    "opt_problems.synthetic_mixed.CoCaBOFunc3C",
+    null
+  ],
   "ColumnBuckling": [
     "opt_problems.engineering.ColumnBuckling",
     null
@@ -405,6 +433,14 @@
   ],
   "GearTrain": [
     "opt_problems.engineering.GearTrain",
+    null
+  ],
+  "GoldsteinLVGP": [
+    "opt_problems.synthetic_mixed.GoldsteinLVGP",
+    null
+  ],
+  "GoldsteinMixed": [
+    "opt_problems.synthetic_mixed.GoldsteinMixed",
     null
   ],
   "HOIP": [
@@ -1155,6 +1191,10 @@
     "opt_problems.control.mujoco.MujocoFuncs",
     "mujoco"
   ],
+  "HartmannCat": [
+    "opt_problems.synthetic_mixed.HartmannCat",
+    null
+  ],
   "HeatExchanger": [
     "opt_problems.engineering.HeatExchanger",
     null
@@ -1367,6 +1407,10 @@
     "opt_problems.engineering.MiniAeroWing",
     null
   ],
+  "MixedAckley": [
+    "opt_problems.synthetic_mixed.MixedAckley",
+    null
+  ],
   "NASBench201": [
     "opt_problems.nas.NASBench201",
     null
@@ -1479,6 +1523,10 @@
     "opt_problems.reproblems.RE_problems",
     null
   ],
+  "RastriginCat": [
+    "opt_problems.synthetic_mixed.RastriginCat",
+    null
+  ],
   "ReacherProblem": [
     "opt_problems.control.mujoco.MujocoFuncs",
     "mujoco"
@@ -1495,6 +1543,10 @@
     "opt_problems.engineering.RobotPush",
     "box2d"
   ],
+  "Rosenbrock5Mixed": [
+    "opt_problems.synthetic_mixed.Rosenbrock5Mixed",
+    null
+  ],
   "Rover": [
     "opt_problems.engineering.Rover",
     null
@@ -1507,8 +1559,16 @@
     "opt_problems.engineering.SatelliteDesign",
     null
   ],
+  "SchwefelCat": [
+    "opt_problems.synthetic_mixed.SchwefelCat",
+    null
+  ],
   "Sellar": [
     "opt_problems.engineering.Sellar",
+    null
+  ],
+  "ShekelMixed": [
+    "opt_problems.synthetic_mixed.ShekelMixed",
     null
   ],
   "SpeedReducer": [
@@ -1517,6 +1577,14 @@
   ],
   "SteppedCantileverBeam": [
     "opt_problems.engineering.SteppedCantileverBeam",
+    null
+  ],
+  "StyblinskiTangCat": [
+    "opt_problems.synthetic_mixed.StyblinskiTangCat",
+    null
+  ],
+  "StyblinskiTangMixed": [
+    "opt_problems.synthetic_mixed.StyblinskiTangMixed",
     null
   ],
   "SwimmerPolicySearchProblem": [
@@ -1589,6 +1657,10 @@
   ],
   "WeldedBeam": [
     "opt_problems.engineering.WeldedBeam",
+    null
+  ],
+  "WeldedBeamCategorical": [
+    "opt_problems.synthetic_mixed.WeldedBeamCategorical",
     null
   ],
   "WeldedBeamSO": [

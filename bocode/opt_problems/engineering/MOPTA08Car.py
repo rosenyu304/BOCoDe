@@ -13,7 +13,12 @@ from ...base import BenchmarkProblem
 
 
 class MOPTA08Car(BenchmarkProblem):
-    """
+    """Minimize the mass of a vehicle design (124 vars, 68 constraints).
+
+    The MOPTA08 car problem: the executable returns the vehicle *mass* (to be
+    minimized, ``optimum`` ~ 222.74) followed by 68 constraint values that are
+    feasible when ``<= 0``. BoCoDe maximizes, so the mass is negated.
+
     https://leonard.papenmeier.io/2023/02/09/mopta08-executables.html
     """
 
@@ -102,4 +107,6 @@ class MOPTA08Car(BenchmarkProblem):
             # Get objectives and constraints for each row
             gx[i], fx[i] = MOPTA08_Car_single(X[i, :].numpy())
 
-        return torch.from_numpy(gx), torch.from_numpy(fx)
+        # MOPTA08 minimizes mass; BoCoDe maximizes, so negate. Constraints are
+        # already in BoCoDe's convention (feasible when <= 0).
+        return torch.from_numpy(gx), -torch.from_numpy(fx)

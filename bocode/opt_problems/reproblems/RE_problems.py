@@ -4,9 +4,53 @@ RE benchmark problems (Tanabe & Ishibuchi, 2020).
 16 unconstrained multi-objective problems where original constraints are
 reformulated as penalty objectives.
 
+Sign convention
+---------------
+The RE problems are defined for **minimization**. BoCoDe **maximizes**, so every
+``_evaluate_implementation`` here returns ``-fx`` (the negated original
+objectives) and ``ref_point`` is the negated published reference point.
+
+Reference points
+----------------
+Tanabe & Ishibuchi compute the hypervolume in the normalized objective space
+using the reference vector ``(1.1, ..., 1.1)``, after normalizing with the
+approximated ideal point ``z_ideal`` and approximated nadir point ``z_nadir``
+(Section 3.1 of the paper). In the *un-normalized* minimization frame that is
+exactly
+
+    r_i = z_ideal_i + 1.1 * (z_nadir_i - z_ideal_i)
+
+which is what ``_REF_POINT_MIN`` below stores. ``z_ideal`` / ``z_nadir`` are the
+published values from
+https://github.com/ryojitanabe/reproblems/tree/master/ideal_nadir_points
+(files ``ideal_point_<RE>.dat`` / ``nadir_point_<RE>.dat``).
+
+RE21 exception (published nadir corrected)
+------------------------------------------
+``nadir_point_RE21.dat`` is inconsistent with the RE21 formula that upstream (and
+this file) actually implement, so RE21's z_nadir is derived analytically instead.
+RE21 has two closed-form, separable objectives, so its exact per-objective
+minimizers -- and hence its exact ideal and nadir -- can just be computed:
+
+* f1 is increasing in every variable  -> minimized at x = (1, sqrt2, sqrt2, 1),
+  giving f = (1237.8414230, 0.0400000000).
+* f2 is minimized at x = (3, 3, sqrt2, 3), giving f = (2886.3696963, 0.0027614252).
+
+For two objectives the nadir is (f1 at the f2-minimizer, f2 at the f1-minimizer),
+so z_ideal = (1237.8414230, 0.0027614237) and z_nadir = (2886.3695604, 0.0400000).
+The computed z_ideal matches ``ideal_point_RE21.dat`` to all published digits, but
+the computed z_nadir matches ``bug_nadir_point_RE21.dat``
+(``[2886.3695604236013, 0.039999999999998245]``) to all published digits, *not*
+``nadir_point_RE21.dat`` (``[2086.36956042, 0.00341421356237]``) -- whose first
+component differs from the correct one by exactly 800 and looks like a typo. Using
+the ``nadir_point_RE21.dat`` value would place the reference point beyond the
+attainable objective region (no point in the box dominates it: 0 out of 100 000
+uniform samples), making RE21's hypervolume identically 0 for every algorithm.
+
 Reference:
     Ryoji Tanabe, Hisao Ishibuchi, "An Easy-to-use Real-world Multi-objective
     Problem Suite" Applied Soft Computing. 89: 106078 (2020)
+    https://arxiv.org/pdf/2009.12867
 """
 
 import math
@@ -15,8 +59,46 @@ import torch
 
 from ...base import BenchmarkProblem
 
+#: Published HV reference points in the ORIGINAL MINIMIZATION frame; see the
+#: module docstring for the derivation and the source of z_ideal / z_nadir.
+_REF_POINT_MIN = {
+    "RE21": [3051.222374, 0.04372385763],  # analytic z_nadir; see the docstring
+    "RE22": [396.8012391, 198.017017],
+    "RE23": [6435.674686, 1417536.759],
+    "RE24": [523.7188974, 48.71009524],
+    "RE25": [0.4406083331, 2447136.147],
+    "RE31": [550.0029297, 9070832.343, 21295911.73],
+    "RE32": [41.56044632, 19317.75996, 467569274.3],
+    "RE33": [5.9095225, 3.327260537, 27.5],
+    "RE34": [1698.549442, 11.20566, 0.2864599996],
+    "RE35": [7062.783677, 1796.136906, 437.09482],
+    "RE36": [6.524092105, 60.4, 0.3912927427],
+    "RE37": [1.08755098, 1.051758717, 1.129434043],
+    "RE41": [41.661963, 4.51145, 13.339455, 10.44342123],
+    "RE42": [-835.9493515, 14813.59652, 2678.375406, 13.68143692],
+    "RE61": [82602.57638, 1482.0, 3110281.172, 7766172.841, 96522.77513, 2.760939894],
+    "RE91": [
+        42.00758218, 1.10206938, 123.7366743, 0.8601148463, 1.528605404,
+        1.141609491, 1.160128447, 1.031021434, 1.045666592,
+    ],
+}  # fmt: skip
 
-class RE21(BenchmarkProblem):
+
+class _REProblem(BenchmarkProblem):
+    """Base for the RE suite: attaches the published reference point.
+
+    The reference point is stored in BoCoDe's maximization frame, i.e. negated
+    from the published minimization-frame value in :data:`_REF_POINT_MIN`, to
+    match the negated objectives returned by ``_evaluate_implementation``.
+    """
+
+    def __init__(self, **kwargs) -> None:
+        super().__init__(
+            ref_point=[-r for r in _REF_POINT_MIN[type(self).__name__]], **kwargs
+        )
+
+
+class RE21(_REProblem):
     available_dimensions = 4
     num_objectives = 2
     num_constraints = 0
@@ -61,10 +143,10 @@ class RE21(BenchmarkProblem):
             + (2.0 / x4)
         )
 
-        return gx, fx
+        return gx, -fx  # RE is minimization; BoCoDe maximizes
 
 
-class RE22(BenchmarkProblem):
+class RE22(_REProblem):
     available_dimensions = 3
     num_objectives = 2
     num_constraints = 0
@@ -184,10 +266,10 @@ class RE22(BenchmarkProblem):
         g1 = torch.where(g1 < 0, -g1, torch.zeros_like(g1))
         fx[:, 1] = g0 + g1
 
-        return gx, fx
+        return gx, -fx  # RE is minimization; BoCoDe maximizes
 
 
-class RE23(BenchmarkProblem):
+class RE23(_REProblem):
     available_dimensions = 4
     num_objectives = 2
     num_constraints = 0
@@ -237,10 +319,10 @@ class RE23(BenchmarkProblem):
         g2 = torch.where(g2 < 0, -g2, torch.zeros_like(g2))
         fx[:, 1] = g0 + g1 + g2
 
-        return gx, fx
+        return gx, -fx  # RE is minimization; BoCoDe maximizes
 
 
-class RE24(BenchmarkProblem):
+class RE24(_REProblem):
     available_dimensions = 2
     num_objectives = 2
     num_constraints = 0
@@ -288,10 +370,10 @@ class RE24(BenchmarkProblem):
         g3 = torch.where(g3 < 0, -g3, torch.zeros_like(g3))
         fx[:, 1] = g0 + g1 + g2 + g3
 
-        return gx, fx
+        return gx, -fx  # RE is minimization; BoCoDe maximizes
 
 
-class RE25(BenchmarkProblem):
+class RE25(_REProblem):
     available_dimensions = 3
     num_objectives = 2
     num_constraints = 0
@@ -395,10 +477,10 @@ class RE25(BenchmarkProblem):
             penalty = penalty + torch.where(g < 0, -g, torch.zeros_like(g))
         fx[:, 1] = penalty
 
-        return gx, fx
+        return gx, -fx  # RE is minimization; BoCoDe maximizes
 
 
-class RE31(BenchmarkProblem):
+class RE31(_REProblem):
     available_dimensions = 3
     num_objectives = 3
     num_constraints = 0
@@ -438,10 +520,10 @@ class RE31(BenchmarkProblem):
         g2 = torch.where(g2 < 0, -g2, torch.zeros_like(g2))
         fx[:, 2] = g0 + g1 + g2
 
-        return gx, fx
+        return gx, -fx  # RE is minimization; BoCoDe maximizes
 
 
-class RE32(BenchmarkProblem):
+class RE32(_REProblem):
     available_dimensions = 4
     num_objectives = 3
     num_constraints = 0
@@ -517,10 +599,10 @@ class RE32(BenchmarkProblem):
             penalty = penalty + torch.where(g < 0, -g, torch.zeros_like(g))
         fx[:, 2] = penalty
 
-        return gx, fx
+        return gx, -fx  # RE is minimization; BoCoDe maximizes
 
 
-class RE33(BenchmarkProblem):
+class RE33(_REProblem):
     available_dimensions = 4
     num_objectives = 3
     num_constraints = 0
@@ -571,10 +653,10 @@ class RE33(BenchmarkProblem):
             penalty = penalty + torch.where(g < 0, -g, torch.zeros_like(g))
         fx[:, 2] = penalty
 
-        return gx, fx
+        return gx, -fx  # RE is minimization; BoCoDe maximizes
 
 
-class RE34(BenchmarkProblem):
+class RE34(_REProblem):
     available_dimensions = 5
     num_objectives = 3
     num_constraints = 0
@@ -636,10 +718,10 @@ class RE34(BenchmarkProblem):
             + (0.0109 * x4 * x4)
         )
 
-        return gx, fx
+        return gx, -fx  # RE is minimization; BoCoDe maximizes
 
 
-class RE35(BenchmarkProblem):
+class RE35(_REProblem):
     available_dimensions = 7
     num_objectives = 3
     num_constraints = 0
@@ -708,10 +790,10 @@ class RE35(BenchmarkProblem):
             penalty = penalty + torch.where(g < 0, -g, torch.zeros_like(g))
         fx[:, 2] = penalty
 
-        return gx, fx
+        return gx, -fx  # RE is minimization; BoCoDe maximizes
 
 
-class RE36(BenchmarkProblem):
+class RE36(_REProblem):
     available_dimensions = 4
     num_objectives = 3
     num_constraints = 0
@@ -744,10 +826,10 @@ class RE36(BenchmarkProblem):
         g0 = torch.where(g0 < 0, -g0, torch.zeros_like(g0))
         fx[:, 2] = g0
 
-        return gx, fx
+        return gx, -fx  # RE is minimization; BoCoDe maximizes
 
 
-class RE37(BenchmarkProblem):
+class RE37(_REProblem):
     available_dimensions = 4
     num_objectives = 3
     num_constraints = 0
@@ -831,10 +913,10 @@ class RE37(BenchmarkProblem):
             - (0.281 * xHA * xAlpha * xOA)
         )
 
-        return gx, fx
+        return gx, -fx  # RE is minimization; BoCoDe maximizes
 
 
-class RE41(BenchmarkProblem):
+class RE41(_REProblem):
     available_dimensions = 7
     num_objectives = 4
     num_constraints = 0
@@ -924,10 +1006,10 @@ class RE41(BenchmarkProblem):
             penalty = penalty + torch.where(g < 0, -g, torch.zeros_like(g))
         fx[:, 3] = penalty
 
-        return gx, fx
+        return gx, -fx  # RE is minimization; BoCoDe maximizes
 
 
-class RE42(BenchmarkProblem):
+class RE42(_REProblem):
     available_dimensions = 6
     num_objectives = 4
     num_constraints = 0
@@ -1044,10 +1126,10 @@ class RE42(BenchmarkProblem):
             penalty = penalty + torch.where(cf < 0, -cf, torch.zeros_like(cf))
         fx[:, 3] = penalty
 
-        return gx, fx
+        return gx, -fx  # RE is minimization; BoCoDe maximizes
 
 
-class RE61(BenchmarkProblem):
+class RE61(_REProblem):
     available_dimensions = 3
     num_objectives = 6
     num_constraints = 0
@@ -1096,10 +1178,10 @@ class RE61(BenchmarkProblem):
             penalty = penalty + torch.where(g < 0, -g, torch.zeros_like(g))
         fx[:, 5] = penalty
 
-        return gx, fx
+        return gx, -fx  # RE is minimization; BoCoDe maximizes
 
 
-class RE91(BenchmarkProblem):
+class RE91(_REProblem):
     available_dimensions = 7
     num_objectives = 9
     num_constraints = 0
@@ -1278,4 +1360,4 @@ class RE91(BenchmarkProblem):
             min=0.0,
         )
 
-        return gx, fx
+        return gx, -fx  # RE is minimization; BoCoDe maximizes

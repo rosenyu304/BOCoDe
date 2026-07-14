@@ -47,8 +47,8 @@
   "application": "Engineering",
   "convex": "unknown",
   "np_hard": "unknown",
-  "f_opt": null,
-  "source": "A. Yousefpour, Z. Zanjani Foumani, M. Shishehbor, C. Mora, R. Bostanabad. GP+: a Python library for kernel-based learning via Gaussian processes. Advances in Engineering Software, 2024. https://github.com/Bostanabad-Research-Group/GP-Plus Borehole function: https://www.sfu.ca/~ssurjano/borehole.html",
+  "f_opt": 7.819676,
+  "source": "Surjanovic & Bingham file the borehole function under *Emulation & Prediction* test functions, not optimization test problems (https://www.sfu.ca/~ssurjano/emulat.html), and GP+ likewise uses it only as a regression testbed. The tie-breakers, in order: 1. The one use of borehole as a Bayesian-optimization *objective* that we could find in the literature MINIMIZES it: Marmin, Chevalier & Ginsbourger report a unique global minimum at ``x* = (0, 1, 0, 0, 0, 1, 1, 0)`` in the unit cube. Evaluating t",
   "variable_types": [
     "continuous",
     "continuous",

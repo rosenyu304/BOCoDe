@@ -1,0 +1,64 @@
+{
+  "name": "HartmannCat",
+  "module": "bocode.opt_problems.synthetic_mixed.HartmannCat",
+  "extra": null,
+  "suite": "Mixed-variable synthetic",
+  "num_objectives": 1,
+  "num_constraints": 0,
+  "available_dimensions": 6,
+  "input_type": "mixed",
+  "scalable": false,
+  "dim": 6,
+  "bounds": [
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Synthetic",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": -3.32237,
+  "source": "L. C. W. Dixon, G. P. Szego. The global optimisation problem: an introduction. Towards Global Optimisation 2:1-15, 1978 (the Hartmann-6 function). Y. Zhang, D. W. Apley, W. Chen. Bayesian Optimization for Materials Design with Mixed Quantitative and Qualitative Variables. Scientific Reports 10:4924, 2020 (the quantitative-to-qualitative construction).",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    [
+      0.35,
+      0.257,
+      0.477,
+      0.312,
+      0.657
+    ],
+    [
+      0.15,
+      0.657,
+      0.512,
+      0.741
+    ]
+  ],
+  "num_categorical_variables": 2
+}

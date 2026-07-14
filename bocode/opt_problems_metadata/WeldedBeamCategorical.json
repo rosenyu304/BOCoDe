@@ -1,0 +1,52 @@
+{
+  "name": "WeldedBeamCategorical",
+  "module": "bocode.opt_problems.synthetic_mixed.WeldedBeamCategorical",
+  "extra": null,
+  "suite": "Mixed-variable synthetic",
+  "num_objectives": 1,
+  "num_constraints": 5,
+  "available_dimensions": 5,
+  "input_type": "mixed",
+  "scalable": false,
+  "dim": 5,
+  "bounds": [
+    [
+      0.125,
+      5.0
+    ],
+    [
+      0.1,
+      10.0
+    ],
+    [
+      0.1,
+      10.0
+    ],
+    [
+      0.125,
+      5.0
+    ],
+    [
+      0.0,
+      2.0
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Synthetic",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": 1.7249,
+  "source": "C. A. Coello Coello, E. Mezura Montes. Constraint-handling in genetic algorithms through the use of dominance-based tournament selection. Advanced Engineering Informatics 16(3):193-203, 2002. A. H. Gandomi, X.-S. Yang, A. H. Alavi. Mixed variable structural optimization using Firefly Algorithm. Computers & Structures 89(23-24):2325-2336, 2011.",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    [
+      0.0,
+      1.0,
+      2.0
+    ]
+  ],
+  "num_categorical_variables": 1
+}

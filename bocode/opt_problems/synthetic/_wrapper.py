@@ -67,6 +67,91 @@ class SingleObjSyntheticProblem(BenchmarkProblem):
         return None, self._fn(X.to(torch.double)).unsqueeze(-1)
 
 
+class ShiftedSingleObjSyntheticProblem(SingleObjSyntheticProblem):
+    """A single-objective synthetic whose optimum is moved off the box center.
+
+    Six of the centered synthetics (Ackley, Griewank, Rastrigin, DixonPrice, Levy,
+    Powell) have their global optimum *exactly at the center* of the search box, so
+    any method with a center-biased initial design -- or a linear embedding whose
+    origin maps to the box center -- gets the optimum for free. This is a known
+    high-dimensional-BO pitfall; the Vanilla-BO paper (Hvarfner et al., 2024) shifts
+    its test functions for exactly this reason.
+
+    The shift is a fixed input OFFSET, applied before evaluating::
+
+        f_shifted(x) = f(x - delta)
+
+    so the optimum moves from ``x*`` to ``x* + delta`` and the optimal VALUE is
+    unchanged. ``delta`` places the optimum at a fixed fraction of each dimension's
+    range -- the 2/3 point along even-indexed dims and the 1/3 point along odd-indexed
+    dims ("2/3 to the right, 1/3 down")::
+
+        R_j      = hi_j - lo_j
+        target_j = lo_j + (2/3) * R_j        for even j (0, 2, 4, ...)
+        target_j = lo_j + (1/3) * R_j        for odd  j (1, 3, 5, ...)
+        delta_j  = target_j - x*_j
+
+    For a problem whose optimum is already centered (``x*_j = lo_j + R_j / 2``) this is
+    exactly ``delta_j = +(2/3 - 1/2) * R_j`` on even dims and ``-(1/2 - 1/3) * R_j`` on
+    odd dims. Anchoring on ``x*`` rather than assuming a centered optimum keeps the
+    shifted optimum strictly inside the bounds (and away from both the center and the
+    corners) for the problems whose optimum is *not* centered -- Rosenbrock,
+    StyblinskiTang, Hartmann, Branin, SixHumpCamel.
+
+    The search bounds are unchanged. The underlying BoTorch function is therefore
+    evaluated on the translated box ``[lo - delta, hi - delta]``, which reaches outside
+    the bounds BoTorch validates against, so those validation bounds are widened here.
+    The analytic formulas are defined everywhere, and for every problem shifted in this
+    module the global optimum value is still attained on the translated box (verified by
+    random search in ``tests/test_shifted_synthetics.py``). EggHolder and HolderTable are
+    deliberately NOT shifted: their optima sit on the boundary of the box and their
+    formulas are unbounded below outside it, so no translation can move the optimum
+    inside without breaking the reference optimal value.
+
+    Problems with several global optima (Branin, SixHumpCamel) are anchored on the first
+    one; the others translate by the same delta and may fall outside the box.
+
+    Subclasses inherit ``botorch_cls`` / ``botorch_kwargs`` / ``available_dimensions``
+    from their centered counterpart, e.g.
+    ``class AckleyShifted(Ackley, ShiftedSingleObjSyntheticProblem)``.
+    """
+
+    def __init__(self, dim: int | None = None) -> None:
+        super().__init__(dim=dim)
+        bounds = self.torch_bounds.to(torch.double)
+        lo, hi = bounds[:, 0], bounds[:, 1]
+        x_opt = torch.tensor(self._fn._optimizers[0], dtype=torch.double)
+        fractions = torch.tensor(
+            [2 / 3 if j % 2 == 0 else 1 / 3 for j in range(self.dim)],
+            dtype=torch.double,
+        )
+        target = lo + fractions * (hi - lo)
+        if not bool(((target > lo) & (target < hi)).all()):
+            raise ValueError(
+                f"{type(self).__name__}: shifted optimum is not inside the bounds."
+            )
+        self._delta = target - x_opt
+        # The translated box reaches outside the bounds BoTorch validates its inputs
+        # against; widen them (with a small pad against float32 rounding at the edge).
+        pad = 1e-6 * (hi - lo)
+        self._fn.bounds = torch.stack(
+            [
+                torch.minimum(lo - self._delta, lo) - pad,
+                torch.maximum(hi - self._delta, hi) + pad,
+            ]
+        ).to(self._fn.bounds)
+        self.x_opt = target
+        # BoCoDe convention: ``optimum`` is the literature f* in the MINIMIZATION frame,
+        # so ``evaluate(x_opt) == -optimum`` (the wrapper negates to maximize).
+        self.optimum = self._fn._optimal_value
+
+    def _evaluate_implementation(self, X: torch.Tensor, scaling: bool = False):
+        if scaling:
+            X = _scale_clamped(self, X)
+        X = X.to(torch.double) - self._delta.to(X.device)
+        return None, self._fn(X).unsqueeze(-1)
+
+
 class ConstrainedSingleObjSyntheticProblem(BenchmarkProblem):
     """Wrap a constrained single-objective BoTorch synthetic function.
 

@@ -1,15 +1,24 @@
 """Standard GP BO for single-objective problems (Xu et al., 2025).
 
 "Standard Gaussian Process is All You Need for High-Dimensional Bayesian
-Optimization" argues that a *standard* GP — with a sensible, dimension-aware
-lengthscale prior — matched with LogEI is competitive with specialized
-high-dimensional BO methods. This script implements that baseline: a
-``SingleTaskGP`` whose RBF lengthscale prior is scaled so the prior mean
-lengthscale grows with ``sqrt(dim)`` (keeping the effective signal variance
-roughly dimension-invariant), optimized with LogExpectedImprovement.
+Optimization" argues that a *standard* ARD Matern-5/2 GP is competitive with
+specialized high-dimensional BO methods once its hyperparameter optimization is
+started sensibly. The load-bearing choice is **Robust Initialization**: begin the
+lengthscale optimization at ``l0 = sqrt(d)`` (Sec. 6.1; Lemma 5.1 shows the default
+start of ``softplus(0) = 0.6931`` makes the marginal-likelihood gradient vanish in
+high dimensions). The paper's main results use UCB with ``beta = 1.5``.
 
-The difference from ``vanilla_highdim_bo`` is the modeling choice (the dimension-scaled
-prior) rather than the acquisition-optimization tricks.
+Note the paper's other finding: an RBF/SE kernel *fails* here — Matern is what makes
+the standard GP work. The difference from ``vanilla_highdim_bo`` is the modeling choice
+(initialization + Matern) rather than the acquisition-optimization tricks.
+
+The reference implementation is ``XZT008/Standard-GP-is-all-you-need-for-HDBO``: the
+paper's method is the ``GP_ARD_setls`` configuration, i.e. ``BO_loop_GP_MAP`` with
+``set_ls=True, if_matern=True, ls_prior_type="Uniform", optim_type="LBFGS",
+acqf_type="UCB", beta=1.5`` (``baselines/run_script.py``), whose model is
+``GP_MAP_Wrapper`` in ``baselines/GP.py``. ``n_init`` there is 20 LHS points; BoCoDe
+defaults to the dimension-scaled :func:`default_n_init` so every algorithm in the
+suite gets the same initial-design budget (pass ``--init 20`` to reproduce the paper).
 
 Run::
 
@@ -18,7 +27,7 @@ Run::
 
 Sources:
 Z. Xu, H. Wang, J. M. Phillips, and S. Zhe. Standard Gaussian Process is All You Need for High-Dimensional Bayesian Optimization. ICLR 2025. https://openreview.net/forum?id=kX8h23UG6v
-S. Ament, S. Daulton, D. Eriksson, M. Balandat, and E. Bakshy. Unexpected Improvements to Expected Improvement for Bayesian Optimization. NeurIPS 2023. https://arxiv.org/abs/2310.20708
+Official implementation: https://github.com/XZT008/Standard-GP-is-all-you-need-for-HDBO
 M. Balandat et al. BoTorch: A Framework for Efficient Monte-Carlo Bayesian Optimization. NeurIPS 33, 2020. http://arxiv.org/abs/1910.06403
 """
 
@@ -26,16 +35,18 @@ from __future__ import annotations
 
 import argparse
 import math
+from pathlib import Path
 
 import torch
-from botorch.acquisition import LogExpectedImprovement
+from botorch.acquisition import UpperConfidenceBound
 from botorch.fit import fit_gpytorch_mll
 from botorch.models import SingleTaskGP
 from botorch.models.transforms import Normalize, Standardize
 from botorch.optim import optimize_acqf
+from gpytorch.constraints import Interval
 from gpytorch.kernels import MaternKernel, ScaleKernel
 from gpytorch.mlls import ExactMarginalLogLikelihood
-from gpytorch.priors import GammaPrior
+from gpytorch.priors import GammaPrior, UniformPrior
 
 from .._bo_utils import (
     DTYPE,
@@ -43,36 +54,53 @@ from .._bo_utils import (
     ProblemObjective,
     Result,
     add_common_args,
+    default_n_init,
     finalize,
     gp_stats,
     initial_design,  # noqa: E501
+    load_checkpoint,
     make_problem,
+    resolve_device,
+    save_checkpoint,
     set_seed,
 )
 
+# Reference implementation (Xu et al., BO_loop.py:BO_loop_GP_MAP): UCB with beta=1.5,
+# optimize_acqf(num_restarts=10, raw_samples=1000).
+UCB_BETA = 1.5
+NUM_RESTARTS = 10
+RAW_SAMPLES = 1000
+
 
 def _standard_gp(train_X: torch.Tensor, train_Y: torch.Tensor) -> SingleTaskGP:
-    """A standard GP with a dimension-scaled Matern-5/2 lengthscale prior.
+    """A standard ARD Matern-5/2 GP with the paper's Robust Initialization.
 
-    The lengthscale prior mean is scaled by ``sqrt(dim)`` so that, after input
-    normalization to the unit cube, the prior expects smoother functions in higher
-    dimensions — the modeling choice highlighted by Xu et al. (2025).
+    The method of Xu et al. (2025) is a lengthscale *initialization*, not a prior:
+    hyperparameter optimization starts from ``l0 = sqrt(dim)`` (Sec. 6.1, Lemma 5.1).
+    GPyTorch otherwise starts at ``softplus(0) = 0.6931``, which is exactly the
+    gradient-vanishing regime the paper diagnoses in high dimensions. The prior is a
+    flat box (= MLE inside the box), widened for ``dim >= 100``, matching the reference
+    implementation's ``GP_MAP_Wrapper``.
     """
     dim = train_X.shape[-1]
-    ls_scale = math.sqrt(dim)
-    kernel = ScaleKernel(
-        MaternKernel(
-            nu=2.5,
-            ard_num_dims=dim,
-            lengthscale_prior=GammaPrior(3.0, 6.0 / ls_scale),
-        ),
-        outputscale_prior=GammaPrior(2.0, 0.15),
-    )
+    ub = 30.0 if dim >= 100 else 10.0
+    base = MaternKernel(
+        nu=2.5,
+        ard_num_dims=dim,
+        lengthscale_prior=UniformPrior(1e-10, ub),
+        lengthscale_constraint=Interval(lower_bound=1e-10, upper_bound=ub),
+    ).to(train_X)
+    # *** the method: start the optimizer at l0 = sqrt(d) ***
+    base._set_lengthscale(torch.full_like(base.lengthscale, math.sqrt(dim)))
+    kernel = ScaleKernel(base, outputscale_prior=GammaPrior(2.0, 0.15)).to(train_X)
+    unit_cube = torch.stack([torch.zeros(dim), torch.ones(dim)]).to(train_X)
     model = SingleTaskGP(
         train_X=train_X.to(DTYPE),
         train_Y=train_Y.to(DTYPE),
         covar_module=kernel,
-        input_transform=Normalize(d=dim),
+        # inputs already live in [0, 1]^d; do not re-learn the bounds from the data,
+        # which would rescale the cube the sqrt(d) initialization is calibrated to.
+        input_transform=Normalize(d=dim, bounds=unit_cube),
         outcome_transform=Standardize(m=1),
     )
     mll = ExactMarginalLogLikelihood(model.likelihood, model)
@@ -81,32 +109,59 @@ def _standard_gp(train_X: torch.Tensor, train_Y: torch.Tensor) -> SingleTaskGP:
 
 
 def optimize_problem(
-    problem, n_init: int = 20, iters: int = 100, seed: int = 0
+    problem,
+    n_init: int | None = None,
+    iters: int = 100,
+    seed: int = 0,
+    checkpoint: str | None = None,
+    device: str | None = None,
 ) -> Result:
-    """Continuous standard-GP BO over the unit cube."""
+    """Continuous standard-GP BO over the unit cube.
+
+    ``n_init`` defaults to the dimension-scaled BoCoDe default (:func:`default_n_init`).
+    The GP fit and acquisition optimization run on ``device``; with ``checkpoint`` set
+    the run is resumable per iteration.
+    """
     set_seed(seed)
+    dev = resolve_device(device)
     obj = ProblemObjective(problem)
+    if n_init is None:
+        n_init = default_n_init(obj.dim)
     res = Result(
-        "standard_gp", type(problem).__name__, seed, acquisition_function="LogEI"
+        "standard_gp", type(problem).__name__, seed, acquisition_function="UCB"
     )
 
-    train_X = initial_design(n_init, obj.dim, seed)
-    train_Y = obj(train_X)
-    best = train_Y.max().item()
-    res.start(best)
+    if checkpoint and Path(checkpoint).exists():
+        train_X, train_Y, start_it, _ = load_checkpoint(checkpoint, res)
+        best = train_Y.max().item()
+    else:
+        train_X = initial_design(n_init, obj.dim, seed)
+        train_Y = obj(train_X)
+        best = train_Y.max().item()
+        res.start(best)
+        start_it = 0
 
-    for _ in range(iters):
-        model = _standard_gp(train_X, train_Y)
-        acqf = LogExpectedImprovement(model=model, best_f=train_Y.max())
+    bounds_dev = obj.bounds.to(dev)
+    for it in range(start_it, iters):
+        model = _standard_gp(train_X.to(dev), train_Y.to(dev))
+        acqf = UpperConfidenceBound(model=model, beta=UCB_BETA)
         candidate, acq_value = optimize_acqf(
-            acqf, bounds=obj.bounds, q=1, num_restarts=10, raw_samples=512
+            acqf,
+            bounds=bounds_dev,
+            q=1,
+            num_restarts=NUM_RESTARTS,
+            raw_samples=RAW_SAMPLES,
         )
         mean, var = gp_stats(model, candidate)
+        candidate = candidate.detach().to(device="cpu", dtype=DTYPE)
         y = obj(candidate)
         train_X = torch.cat([train_X, candidate], dim=0)
         train_Y = torch.cat([train_Y, y], dim=0)
         best = max(best, y.item())
         res.record(best, mean=mean, variance=var, acq_value=acq_value.item())
+        if checkpoint:
+            res.set_history(train_X, train_Y, n_init)
+            save_checkpoint(checkpoint, train_X, train_Y, res, it + 1)
     res.set_history(train_X, train_Y, n_init)
     return res
 
@@ -121,7 +176,7 @@ def optimize_dataset(
         "standard_gp",
         type(dataset_problem).__name__,
         seed,
-        acquisition_function="LogEI",
+        acquisition_function="UCB",
     )
 
     perm = torch.randperm(data.n_candidates)
@@ -137,7 +192,7 @@ def optimize_dataset(
         pool_idx = mask.nonzero(as_tuple=True)[0]
         if pool_idx.numel() == 0:
             break
-        acqf = LogExpectedImprovement(model=model, best_f=data.Y[obs].max())
+        acqf = UpperConfidenceBound(model=model, beta=UCB_BETA)
         with torch.no_grad():
             scores = acqf(data.X[pool_idx].unsqueeze(1))
         choice = pool_idx[scores.argmax()].item()
@@ -153,18 +208,35 @@ def main() -> None:
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument("--problem")
     group.add_argument("--dataset")
-    parser.add_argument("--init", type=int, default=20)
+    parser.add_argument(
+        "--init",
+        type=int,
+        default=None,
+        help="initial design size (default: dim-scaled)",
+    )
     parser.add_argument("--iters", type=int, default=100)
+    parser.add_argument(
+        "--checkpoint", default=None, help="resumable checkpoint .npz path"
+    )
+    parser.add_argument("--device", default=None, help="cuda / cpu (default: auto)")
     add_common_args(parser)
     args = parser.parse_args()
 
     if args.problem:
         res = optimize_problem(
-            make_problem(args.problem, args), args.init, args.iters, args.seed
+            make_problem(args.problem, args),
+            args.init,
+            args.iters,
+            args.seed,
+            checkpoint=args.checkpoint,
+            device=args.device,
         )
     else:
         res = optimize_dataset(
-            make_problem(args.dataset, args), args.init, args.iters, args.seed
+            make_problem(args.dataset, args),
+            args.init if args.init is not None else 10,
+            args.iters,
+            args.seed,
         )
     finalize(res, args)
 

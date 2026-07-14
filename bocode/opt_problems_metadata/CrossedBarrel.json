@@ -6,7 +6,7 @@
   "num_objectives": 1,
   "num_constraints": 0,
   "available_dimensions": 4,
-  "input_type": "continuous",
+  "input_type": "discrete",
   "scalable": false,
   "dim": 4,
   "bounds": [
@@ -34,10 +34,41 @@
   "f_opt": null,
   "source": "A. E. Gongora, B. Xu, W. Perry, et al. A Bayesian experimental autonomous researcher for mechanical design. Science Advances 6(15):eaaz1708, 2020. Dataset via the PV-Lab benchmarking suite: https://github.com/PV-Lab/Benchmarking",
   "variable_types": [
-    "continuous",
-    "continuous",
-    "continuous",
-    "continuous"
+    [
+      6.0,
+      8.0,
+      10.0,
+      12.0
+    ],
+    [
+      0.0,
+      25.0,
+      50.0,
+      75.0,
+      100.0,
+      125.0,
+      150.0,
+      175.0,
+      200.0
+    ],
+    [
+      1.5,
+      1.6,
+      1.7,
+      1.8,
+      1.9,
+      2.0,
+      2.1,
+      2.2,
+      2.3,
+      2.4,
+      2.5
+    ],
+    [
+      0.7,
+      1.05,
+      1.4
+    ]
   ],
-  "num_categorical_variables": 0
+  "num_categorical_variables": 4
 }

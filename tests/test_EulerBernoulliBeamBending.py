@@ -24,7 +24,10 @@ def test_eulerBernoulliBeamBending_evaluate():
     assert torch.isfinite(fx).all(), "fx contains NaN or Inf values"
 
     if problem.x_opt is not None and problem.optimum is not None:
+        # ``optimum`` is the literature f* in the ORIGINAL (minimization) sense,
+        # while ``evaluate`` returns the MAXIMIZATION-frame value, so the value at
+        # x_opt must be -optimum.
         eval_opt = problem._evaluate_implementation(torch.Tensor(problem.x_opt))[1]
-        assert torch.allclose(eval_opt, torch.Tensor(problem.optimum), rtol=1e-3), (
-            f"X_opt ({problem.x_opt}) evaluation ({eval_opt}) does not match optimum ({problem.optimum})"
+        assert torch.allclose(eval_opt, -torch.Tensor(problem.optimum), rtol=1e-3), (
+            f"X_opt ({problem.x_opt}) evaluation ({eval_opt}) does not match -optimum ({problem.optimum})"
         )

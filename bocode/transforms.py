@@ -103,13 +103,23 @@ class PenalizedProblem(_Wrapper):
             bounds=base.bounds,
         )
 
-    def _evaluate_implementation(self, X: torch.Tensor):
-        values, constraints = self._base_eval(X)
+    def penalize(self, values: torch.Tensor, constraints: torch.Tensor) -> torch.Tensor:
+        """Penalize an *already evaluated* ``(values, constraints)`` pair of the base problem.
+
+        Split out of :meth:`_evaluate_implementation` so a solver that has already called the
+        base problem — the Penalty baseline needs the raw objective and constraints for its
+        best-*feasible* metric — can get the penalized scalar without paying for a second
+        evaluation. Same formula, same normalization constants.
+        """
         obj = values[:, :1]
         viol = constraints.clamp(min=0).sum(dim=1, keepdim=True)
         obj_n = (obj - self._obj_lo) / (self._obj_hi - self._obj_lo + _EPS)
         viol_n = viol / (self._viol_hi + _EPS)
-        return None, obj_n - self.weight * viol_n
+        return obj_n - self.weight * viol_n
+
+    def _evaluate_implementation(self, X: torch.Tensor):
+        values, constraints = self._base_eval(X)
+        return None, self.penalize(values, constraints)
 
 
 class ScalarizedProblem(_Wrapper):

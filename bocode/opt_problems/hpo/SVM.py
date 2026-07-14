@@ -27,8 +27,20 @@ class SVM(BenchmarkProblem):
     num_objectives = 1
     num_constraints = 0
 
-    def __init__(self):
+    def __init__(self, seed: int = 0):
+        """Weighted-SVR hyperparameter tuning on a 10,000-row slice of the data.
+
+        Args:
+            seed: seeds the 10,000-row train/test split. The split DEFINES the
+                objective (a different split is a different function), so it must be
+                reproducible: an unseeded split made every instantiation optimize a
+                different objective and made runs incomparable across seeds. The
+                experiment harness (``algorithms._bo_utils.make_problem``) passes the
+                RUN's seed here, so a run is reproducible end-to-end; constructing
+                ``SVM(seed=k)`` twice always yields the identical split.
+        """
         self.dims = 388
+        self.seed = seed
         self.lb = np.zeros(
             388,
         )
@@ -37,7 +49,9 @@ class SVM(BenchmarkProblem):
         )
         self.X, self.y = self._load_data()
 
-        idxs = np.random.choice(
+        # Seeded, instance-local RNG: does not touch (or depend on) global numpy state.
+        rng = np.random.default_rng(seed)
+        idxs = rng.choice(
             np.arange(len(self.X)), min(10000, len(self.X)), replace=False
         )
         half = len(idxs) // 2

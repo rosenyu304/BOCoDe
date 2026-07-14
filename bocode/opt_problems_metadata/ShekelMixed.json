@@ -1,0 +1,43 @@
+{
+  "name": "ShekelMixed",
+  "module": "bocode.opt_problems.synthetic_mixed.ShekelMixed",
+  "extra": null,
+  "suite": "Mixed-variable synthetic",
+  "num_objectives": 1,
+  "num_constraints": 0,
+  "available_dimensions": 4,
+  "input_type": "mixed",
+  "scalable": false,
+  "dim": 4,
+  "bounds": [
+    [
+      0.0,
+      10.0
+    ],
+    [
+      0.0,
+      10.0
+    ],
+    [
+      0.0,
+      10.0
+    ],
+    [
+      0.0,
+      10.0
+    ]
+  ],
+  "num_integer_variables": 2,
+  "application": "Synthetic",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": -10.536363,
+  "source": "J. Shekel. Test functions for multimodal search techniques. Proc. 5th Annual Princeton Conf. on Information Science and Systems, 1971. BoTorch synthetic test functions: https://github.com/meta-pytorch/botorch/blob/main/botorch/test_functions/synthetic.py J. Qian. Discretised mixed-variable benchmark suite, MIT MEng thesis (Fig. 3.2 benchmarks).",
+  "variable_types": [
+    "integer",
+    "integer",
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
+}

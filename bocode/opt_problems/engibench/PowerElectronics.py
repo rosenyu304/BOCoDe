@@ -37,7 +37,26 @@ _HIGH = [2e-5] * 6 + [1e-3] * 3 + [0.9] + [1.0] * 10
 
 
 class PowerElectronics(BenchmarkProblem):
-    """Minimize DcGain and maximize Voltage_Ripple of a DC-DC converter (20-D, 2 obj)."""
+    """Minimize DcGain and maximize Voltage_Ripple of a DC-DC converter (20-D, 2 obj).
+
+    .. warning::
+       **No hypervolume reference point is defined for this problem.** It is the
+       only multi-objective problem in BoCoDe without one, so the algorithm harness
+       falls back to inferring one from observed data, which makes its hypervolume
+       numbers **not comparable across algorithms**. Do not report them.
+
+       Nothing is published: EngiBench gives no reference point, ideal/nadir point
+       or Pareto front for ``power_electronics``, and one could not be derived here
+       because the problem cannot be evaluated without the optional ``engibench``
+       extra plus a native ngspice v42-v45. Two things must be checked before a
+       reference point is fixed: (1) EngiBench declares
+       ``("Voltage_Ripple", ObjectiveDirection.MAXIMIZE)`` while its own docs state
+       the ripple should be *minimized*, and its reference simulate() output is
+       negative for both objectives -- so the sign handling in
+       ``_evaluate_implementation`` below is unverified; (2) EngiBench's current
+       docs describe a 10-D design space (6 caps, 3 inductors, 1 duty cycle) while
+       this wrapper uses 20-D.
+    """
 
     available_dimensions = 20
     num_objectives = 2

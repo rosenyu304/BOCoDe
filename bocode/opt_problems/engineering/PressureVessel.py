@@ -36,7 +36,15 @@ class PressureVessel(BenchmarkProblem):
             dim=4,
             num_objectives=1,
             num_constraints=4,
-            bounds=[(99 * 0.0625, 0.0625), (99 * 0.0625, 0.0625), (200, 10), (200, 10)],
+            # L ranges to 240 (not 200): Gandomi et al. widen it so the reported
+            # optimum (L = 221.37) is inside the box, and g4 = L - 240 is the
+            # constraint that bounds it.
+            bounds=[
+                (0.0625, 99 * 0.0625),
+                (0.0625, 99 * 0.0625),
+                (10, 200),
+                (10, 240),
+            ],
         )
 
     def _evaluate_implementation(self, X, scaling=False):

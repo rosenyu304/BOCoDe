@@ -6,7 +6,7 @@ BoTorch synthetic test functions: https://github.com/meta-pytorch/botorch/blob/m
 
 import botorch.test_functions.synthetic as _syn
 
-from ._wrapper import SingleObjSyntheticProblem
+from ._wrapper import ShiftedSingleObjSyntheticProblem, SingleObjSyntheticProblem
 
 
 class Hartmann(SingleObjSyntheticProblem):
@@ -15,3 +15,11 @@ class Hartmann(SingleObjSyntheticProblem):
     available_dimensions = 6
     botorch_cls = _syn.Hartmann
     botorch_kwargs = {"dim": 6}
+
+
+class HartmannShifted(Hartmann, ShiftedSingleObjSyntheticProblem):
+    """Hartmann with the optimum moved to the 2/3 (even dims) / 1/3 (odd dims) point.
+
+    Same landscape and optimal value as ``Hartmann``. See
+    :class:`~._wrapper.ShiftedSingleObjSyntheticProblem` for the exact offset.
+    """

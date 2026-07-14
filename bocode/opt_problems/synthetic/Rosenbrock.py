@@ -6,7 +6,7 @@ BoTorch synthetic test functions: https://github.com/meta-pytorch/botorch/blob/m
 
 import botorch.test_functions.synthetic as _syn
 
-from ._wrapper import SingleObjSyntheticProblem
+from ._wrapper import ShiftedSingleObjSyntheticProblem, SingleObjSyntheticProblem
 
 
 class Rosenbrock(SingleObjSyntheticProblem):
@@ -15,3 +15,11 @@ class Rosenbrock(SingleObjSyntheticProblem):
     available_dimensions = (2, 100)
     botorch_cls = _syn.Rosenbrock
     botorch_kwargs = {"dim": 10}
+
+
+class RosenbrockShifted(Rosenbrock, ShiftedSingleObjSyntheticProblem):
+    """Rosenbrock with the optimum moved to the 2/3 (even dims) / 1/3 (odd dims) point.
+
+    Same landscape and optimal value as ``Rosenbrock``. See
+    :class:`~._wrapper.ShiftedSingleObjSyntheticProblem` for the exact offset.
+    """

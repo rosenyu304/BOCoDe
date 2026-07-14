@@ -43,7 +43,9 @@ class AntProblem(BenchmarkProblem):
             obs, _ = self.env.reset()
             action = x[i].cpu().numpy()
             obs, reward, done, truncated, info = self.env.step(action)
-            rewards[i, 0] = -reward
+            # Gymnasium MuJoCo rewards are to be MAXIMIZED, which is already
+            # BoCoDe's convention -- return the reward as-is (do not negate).
+            rewards[i, 0] = reward
         return None, rewards
 
 
@@ -76,7 +78,9 @@ class HalfCheetahProblem(BenchmarkProblem):
             obs, _ = self.env.reset()
             action = x[i].cpu().numpy()
             obs, reward, done, truncated, info = self.env.step(action)
-            rewards[i, 0] = -reward
+            # Gymnasium MuJoCo rewards are to be MAXIMIZED, which is already
+            # BoCoDe's convention -- return the reward as-is (do not negate).
+            rewards[i, 0] = reward
         return None, rewards
 
 
@@ -109,7 +113,9 @@ class HopperProblem(BenchmarkProblem):
             obs, _ = self.env.reset()
             action = x[i].cpu().numpy()
             obs, reward, done, truncated, info = self.env.step(action)
-            rewards[i, 0] = -reward
+            # Gymnasium MuJoCo rewards are to be MAXIMIZED, which is already
+            # BoCoDe's convention -- return the reward as-is (do not negate).
+            rewards[i, 0] = reward
         return None, rewards
 
 
@@ -142,7 +148,9 @@ class HumanoidProblem(BenchmarkProblem):
             obs, _ = self.env.reset()
             action = x[i].cpu().numpy()
             obs, reward, done, truncated, info = self.env.step(action)
-            rewards[i, 0] = -reward
+            # Gymnasium MuJoCo rewards are to be MAXIMIZED, which is already
+            # BoCoDe's convention -- return the reward as-is (do not negate).
+            rewards[i, 0] = reward
         return None, rewards
 
 
@@ -175,7 +183,9 @@ class HumanoidStandupProblem(BenchmarkProblem):
             obs, _ = self.env.reset()
             action = x[i].cpu().numpy()
             obs, reward, done, truncated, info = self.env.step(action)
-            rewards[i, 0] = -reward
+            # Gymnasium MuJoCo rewards are to be MAXIMIZED, which is already
+            # BoCoDe's convention -- return the reward as-is (do not negate).
+            rewards[i, 0] = reward
         return None, rewards
 
 
@@ -208,7 +218,9 @@ class InvertedDoublePendulumProblem(BenchmarkProblem):
             obs, _ = self.env.reset()
             action = x[i].cpu().numpy()
             obs, reward, done, truncated, info = self.env.step(action)
-            rewards[i, 0] = -reward
+            # Gymnasium MuJoCo rewards are to be MAXIMIZED, which is already
+            # BoCoDe's convention -- return the reward as-is (do not negate).
+            rewards[i, 0] = reward
         return None, rewards
 
 
@@ -241,7 +253,9 @@ class InvertedPendulumProblem(BenchmarkProblem):
             obs, _ = self.env.reset()
             action = x[i].cpu().numpy()
             obs, reward, done, truncated, info = self.env.step(action)
-            rewards[i, 0] = -reward
+            # Gymnasium MuJoCo rewards are to be MAXIMIZED, which is already
+            # BoCoDe's convention -- return the reward as-is (do not negate).
+            rewards[i, 0] = reward
         return None, rewards
 
 
@@ -274,7 +288,9 @@ class PusherProblem(BenchmarkProblem):
             obs, _ = self.env.reset()
             action = x[i].cpu().numpy()
             obs, reward, done, truncated, info = self.env.step(action)
-            rewards[i, 0] = -reward
+            # Gymnasium MuJoCo rewards are to be MAXIMIZED, which is already
+            # BoCoDe's convention -- return the reward as-is (do not negate).
+            rewards[i, 0] = reward
         return None, rewards
 
 
@@ -307,7 +323,9 @@ class ReacherProblem(BenchmarkProblem):
             obs, _ = self.env.reset()
             action = x[i].cpu().numpy()
             obs, reward, done, truncated, info = self.env.step(action)
-            rewards[i, 0] = -reward
+            # Gymnasium MuJoCo rewards are to be MAXIMIZED, which is already
+            # BoCoDe's convention -- return the reward as-is (do not negate).
+            rewards[i, 0] = reward
         return None, rewards
 
 
@@ -340,7 +358,9 @@ class Walker2DProblem(BenchmarkProblem):
             obs, _ = self.env.reset()
             action = x[i].cpu().numpy()
             obs, reward, done, truncated, info = self.env.step(action)
-            rewards[i, 0] = -reward
+            # Gymnasium MuJoCo rewards are to be MAXIMIZED, which is already
+            # BoCoDe's convention -- return the reward as-is (do not negate).
+            rewards[i, 0] = reward
         return None, rewards
 
 
@@ -373,7 +393,9 @@ class SwimmerProblem(BenchmarkProblem):
             obs, _ = self.env.reset()
             action = x[i].cpu().numpy()
             obs, reward, done, truncated, info = self.env.step(action)
-            rewards[i, 0] = -reward
+            # Gymnasium MuJoCo rewards are to be MAXIMIZED, which is already
+            # BoCoDe's convention -- return the reward as-is (do not negate).
+            rewards[i, 0] = reward
         return None, rewards
 
 

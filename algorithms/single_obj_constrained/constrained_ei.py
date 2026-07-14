@@ -6,11 +6,18 @@ objective weighted by the probability that every constraint is satisfied
 (``c <= 0``). This is the analytic constrained-BO baseline from the BoTorch
 closed-loop tutorial, using the numerically stable log form.
 
+Before any feasible point has been observed the EI target (the best *feasible*
+value) does not exist, so -- following Gelbart et al. (2014), Sec. 3.2 "Finding the
+feasible region", Eq. (9) -- the acquisition drops the EI factor and maximizes the
+probability of feasibility alone, ``prod_k P(c_k(x) <= 0)``, until the feasible
+region is found.
+
 Run::
 
     python -m algorithms.single_obj_constrained.constrained_ei --problem PressureVessel --init 10 --iters 50
 
 Sources:
+J. R. Gardner, M. J. Kusner, Z. Xu, K. Q. Weinberger, and J. P. Cunningham. Bayesian Optimization with Inequality Constraints. ICML 2014.
 M. Gelbart, J. Snoek, and R. P. Adams. Bayesian Optimization with Unknown Constraints. UAI 2014. https://arxiv.org/abs/1403.5607
 S. Ament, S. Daulton, D. Eriksson, M. Balandat, and E. Bakshy. Unexpected Improvements to Expected Improvement for Bayesian Optimization. NeurIPS 2023. https://arxiv.org/abs/2310.20708
 BoTorch closed-loop tutorial: https://botorch.org/docs/tutorials/closed_loop_botorch_only
@@ -22,7 +29,10 @@ import argparse
 from pathlib import Path
 
 import torch
-from botorch.acquisition.analytic import LogConstrainedExpectedImprovement
+from botorch.acquisition.analytic import (
+    LogConstrainedExpectedImprovement,
+    LogProbabilityOfFeasibility,
+)
 from botorch.fit import fit_gpytorch_mll
 from botorch.models import ModelListGP, SingleTaskGP
 from botorch.models.transforms import Normalize, Standardize
@@ -118,16 +128,19 @@ def optimize_problem(
 
     for it in range(start_it, iters):
         model = _fit_model_list(train_X.to(dev), train_obj.to(dev), train_con.to(dev))
-        # best_f must be in the model's objective space; fall back to the overall max
-        # when no feasible point exists yet so EI still explores.
+        # With no feasible observation the EI target does not exist, so the acquisition
+        # reduces to the probability of feasibility alone (Gelbart et al. 2014, Eq. 9);
+        # once a feasible point exists, best_f is the best *feasible* objective.
         feas = (train_con <= 0).all(dim=1)
-        best_f = (train_obj[feas].max() if feas.any() else train_obj.max()).to(dev)
-        acqf = LogConstrainedExpectedImprovement(
-            model=model,
-            best_f=best_f,
-            objective_index=0,
-            constraints=constraint_dict,
-        )
+        if feas.any():
+            acqf = LogConstrainedExpectedImprovement(
+                model=model,
+                best_f=train_obj[feas].max().to(dev),
+                objective_index=0,
+                constraints=constraint_dict,
+            )
+        else:
+            acqf = LogProbabilityOfFeasibility(model=model, constraints=constraint_dict)
         candidate, _ = optimize_acqf(
             acqf, bounds=bounds_dev, q=1, num_restarts=10, raw_samples=512
         )

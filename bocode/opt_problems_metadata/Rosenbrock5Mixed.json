@@ -1,0 +1,58 @@
+{
+  "name": "Rosenbrock5Mixed",
+  "module": "bocode.opt_problems.synthetic_mixed.Rosenbrock5Mixed",
+  "extra": null,
+  "suite": "Mixed-variable synthetic",
+  "num_objectives": 1,
+  "num_constraints": 0,
+  "available_dimensions": 5,
+  "input_type": "mixed",
+  "scalable": false,
+  "dim": 5,
+  "bounds": [
+    [
+      -2.0,
+      2.0
+    ],
+    [
+      -2.0,
+      2.0
+    ],
+    [
+      -2.0,
+      2.0
+    ],
+    [
+      0.0,
+      3.0
+    ],
+    [
+      0.0,
+      3.0
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Synthetic",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": 0.0,
+  "source": "H. H. Rosenbrock. An automatic method for finding the greatest or least value of a function. The Computer Journal 3(3):175-184, 1960. Mixed-variable offset-categorical construction after the mixed-variable BO benchmark suites; see B. Ru et al., ICML 2020.",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    "continuous",
+    [
+      0.0,
+      1.0,
+      2.0,
+      3.0
+    ],
+    [
+      0.0,
+      1.0,
+      2.0,
+      3.0
+    ]
+  ],
+  "num_categorical_variables": 2
+}

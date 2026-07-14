@@ -1,0 +1,52 @@
+{
+  "name": "StyblinskiTangMixed",
+  "module": "bocode.opt_problems.synthetic_mixed.StyblinskiTangMixed",
+  "extra": null,
+  "suite": "Mixed-variable synthetic",
+  "num_objectives": 1,
+  "num_constraints": 0,
+  "available_dimensions": 5,
+  "input_type": "mixed",
+  "scalable": false,
+  "dim": 5,
+  "bounds": [
+    [
+      -5.0,
+      5.0
+    ],
+    [
+      -5.0,
+      5.0
+    ],
+    [
+      -5.0,
+      5.0
+    ],
+    [
+      -5.0,
+      5.0
+    ],
+    [
+      0.0,
+      2.0
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Synthetic",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": -156.66464,
+  "source": "M. Styblinski, T.-S. Tang. Experiments in nonconvex optimization: Stochastic approximation with function smoothing and simulated annealing. Neural Networks 3(4):467-483, 1990. Additive-offset categorical construction after the mixed-variable synthetic suites; see B. Ru et al., ICML 2020.",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    [
+      0.0,
+      1.0,
+      2.0
+    ]
+  ],
+  "num_categorical_variables": 1
+}

@@ -1,25 +1,38 @@
 """GIT-BO: Gradient-Informed Bayesian Optimization with a tabular foundation model.
 
-Uses a frozen, pretrained TabPFN as the surrogate (no GP training): at each step the
-observed data are the model's in-context "training" rows and the candidates are query
-rows scored by a bar-distribution acquisition (quantile-UCB by default). Candidates
-are drawn inside the **gradient-informed active subspace** — the top eigenvectors of
-the surrogate-gradient information matrix ``H = (1/n) sum_i (d mu/d x)(d mu/d x)^T`` —
-which makes the method scale to high dimensions.
+Uses a frozen, pretrained TabPFN as the surrogate (no GP training): the observed data
+are the model's in-context "training" rows and candidates are query rows. Each iteration
+follows the paper's Algorithm 1:
 
-Two rank-selection rules for that subspace (``--rank``):
-- ``5``      — fixed rank (the original GIT-BO default).
-- ``marzouk`` — the **certified rank** r* = min{r : sum_{i>r} lambda_i <= 2*eps/kappa}
-               on the trace-normalised spectrum (Zahm, Cui, Law, Spantini & Marzouk,
-               Math. Comp. 2022), an error-bounded auto-selection of the rank.
+1. Draw a Sobol candidate set over the domain and run TabPFN in-context on it.
+2. Backprop through TabPFN's predictive mean to get ``g(x) = d mu / d x`` on those points.
+3. Form the empirical Fisher / gradient-information matrix ``H = E[g(x) g(x)^T]`` and take
+   its top-``r`` eigenvectors as the gradient-informed subspace ``V_r``.
+4. Generate candidates ``X_GI = x_ref + V_r z`` with ``z ~ U([-1, 1]^r)``, centered on the
+   **centroid of the observed data** ``x_ref = mean(X_obs)`` (the paper ablates this against
+   centering on ``argmax y`` and finds the centroid better, Appendix B.6).
+5. Pick ``argmax`` of **TabPFN's own** ``BarDistribution.ucb`` -- the ``1 - rest_prob``
+   quantile of the model's non-Gaussian predictive distribution -- at the exploration
+   level of the paper's ``beta = 2.33`` (Sec. 3.3), i.e. ``rest_prob = 1 - Phi(2.33)``.
+   Deliberately *not* a hand-rolled ``mu + beta * sigma``, which would Gaussianize away
+   the predictive shape the tabular foundation model exists to provide.
 
-Requires the TabPFN fork (see docs/tfm_setup.md). Run::
+Note the gradients are computed on the *Sobol* set and the acquisition on the *subspace*
+set, so an iteration costs two TabPFN forward passes.
 
-    python -m algorithms.single_obj.git_bo --problem Ackley --iters 50 --rank 5
+``--rank`` selects the subspace rank:
+- ``10``      — fixed rank, the GIT-BO default used for every experiment in the paper.
+- ``marzouk`` — a BoCoDe extension: the **certified rank** r* = min{r : sum_{i>r} lambda_i
+               <= 2*eps/kappa} on the trace-normalised spectrum (Zahm, Cui, Law, Spantini &
+               Marzouk, Math. Comp. 2022). Not part of the paper.
+
+Needs TabPFN >= v3 (see docs/tfm_setup.md). Run::
+
+    python -m algorithms.single_obj.git_bo --problem Ackley --iters 50
     python -m algorithms.single_obj.git_bo --problem Ackley --iters 50 --rank marzouk
 
 Sources:
-S. Jiang et al. GIT-BO: high-dimensional Bayesian optimization with tabular foundation models. https://openreview.net/forum?id=9iTdKS4SRQ
+R. T.-Y. Yu, C. Picard, F. Ahmed. GIT-BO: High-Dimensional Bayesian Optimization with Tabular Foundation Models. https://arxiv.org/abs/2505.20685
 N. Hollmann, S. Müller, et al. TabPFN: accurate predictions on small data with a tabular foundation model. Nature, 2025.
 O. Zahm, T. Cui, K. Law, A. Spantini, Y. Marzouk. Certified dimension reduction in nonlinear Bayesian inverse problems. Mathematics of Computation 91:1789-1835, 2022.
 """
@@ -27,6 +40,8 @@ O. Zahm, T. Cui, K. Law, A. Spantini, Y. Marzouk. Certified dimension reduction 
 from __future__ import annotations
 
 import argparse
+import math
+from pathlib import Path
 
 import numpy as np
 import torch
@@ -37,85 +52,113 @@ from .._bo_utils import (
     ProblemObjective,
     Result,
     add_common_args,
+    default_n_init,
     finalize,
     initial_design,
+    load_checkpoint,
     make_problem,
+    save_checkpoint,
     set_seed,
 )
 from .._tfm_utils import TabPFNSurrogate, sample_in_subspace
 
-N_CANDIDATES = 2000  # candidate pool scored per iteration
-UCB_REST_PROB = 0.05  # quantile-UCB upper-tail mass (95% quantile)
+N_CANDIDATES = 2000  # candidate pool scored per iteration ("m" in the paper)
+BETA = 2.33  # UCB exploration level (paper Sec. 3.3)
+DEFAULT_RANK = 10  # fixed subspace rank used for every paper experiment (Appendix G)
+
+# The acquisition is TabPFN's **built-in** ``BarDistribution.ucb`` -- a quantile UCB that
+# returns the ``1 - rest_prob`` quantile of the model's own non-Gaussian predictive
+# distribution -- not a hand-rolled ``mu + beta * sigma``. TabPFN's docstring gives the
+# Gaussian-equivalent level as ``beta = sqrt(2) * erfinv(2 * (1 - rest_prob) - 1)``;
+# inverting it at the paper's ``beta = 2.33`` gives ``rest_prob = 1 - Phi(2.33) ~ 0.0099``.
+REST_PROB = 0.5 * math.erfc(BETA / math.sqrt(2.0))
 
 
 def optimize_problem(
     problem,
-    n_init: int = 20,
+    n_init: int | None = None,
     iters: int = 50,
     seed: int = 0,
-    rank: str = "5",
+    rank: str = str(DEFAULT_RANK),
     scale: float = 1.0,
     device: str = "auto",
+    checkpoint: str | None = None,
 ) -> Result:
-    """GIT-BO over the unit cube. ``rank`` is '5' (fixed) or 'marzouk' (certified)."""
+    """GIT-BO over the unit cube. ``n_init`` defaults to the dim-scaled BoCoDe default.
+
+    ``rank`` is an integer (fixed rank, paper default 10) or 'marzouk' (certified rank).
+    ``scale`` is the half-width of the subspace sampling box: 1.0 reproduces the paper's
+    ``z ~ U([-1, 1]^r)``.
+    """
     set_seed(seed)
     obj = ProblemObjective(problem)
     dim = obj.dim
+    if n_init is None:
+        n_init = default_n_init(dim)
     rank_mode = "marzouk" if str(rank).lower() == "marzouk" else "fixed"
-    fixed_rank = 5 if rank_mode == "marzouk" else int(rank)
+    fixed_rank = DEFAULT_RANK if rank_mode == "marzouk" else int(rank)
     res = Result(
         f"git_bo_{rank_mode if rank_mode == 'marzouk' else 'rank' + str(fixed_rank)}",
         type(problem).__name__,
         seed,
-        acquisition_function="Quantile-UCB-95",
+        acquisition_function=f"BarDistribution.ucb(rest_prob={REST_PROB:.4g}, beta={BETA})",
     )
 
     surrogate = TabPFNSurrogate(device=device)
     rng = np.random.default_rng(seed)
     sobol = SobolEngine(dim, scramble=True, seed=seed)
 
-    train_X = initial_design(n_init, dim, seed)
-    train_Y = obj(train_X)
-    best = train_Y.max().item()
-    res.start(best)
+    if checkpoint and Path(checkpoint).exists():
+        train_X, train_Y, start_it, _ = load_checkpoint(checkpoint, res)
+        best = train_Y.max().item()
+    else:
+        train_X = initial_design(n_init, dim, seed)
+        train_Y = obj(train_X)
+        best = train_Y.max().item()
+        res.start(best)
+        start_it = 0
 
-    grad_est = None
-    for _it in range(iters):
-        # candidate pool: gradient-informed subspace once we have a gradient estimate
-        if grad_est is None:
-            cand = sobol.draw(N_CANDIDATES).to(DTYPE)
-        else:
-            center = train_X[train_Y.argmax()].cpu().numpy()
-            samples, _r = sample_in_subspace(
-                center,
-                grad_est,
-                N_CANDIDATES,
-                rank_mode,
-                fixed_rank,
-                eps=0.05,
-                scale=scale,
-                rng=rng,
-            )
-            cand = torch.from_numpy(samples).to(DTYPE)
-
-        # build TabPFN inputs: context = observed, query = candidates (one batch col)
+    def _forward(cand: torch.Tensor, grad: bool):
+        """One TabPFN pass: observed rows as context, ``cand`` as queries."""
         n_ctx = train_X.shape[0]
-        X_ctx = train_X.unsqueeze(1)  # (n_ctx, 1, dim)
-        X_q = cand.unsqueeze(1).clone().requires_grad_(True)  # (n_cand, 1, dim)
-        X_full = torch.cat([X_ctx.detach(), X_q], dim=0)
+        X_q = cand.unsqueeze(1)
+        if grad:
+            X_q = X_q.clone().requires_grad_(True)
+        X_full = torch.cat([train_X.unsqueeze(1).detach(), X_q], dim=0)
         Y_full = torch.cat(
-            [train_Y, torch.zeros(N_CANDIDATES, 1, dtype=DTYPE)], dim=0
-        ).unsqueeze(1)  # (n_ctx+n_cand, 1, 1)
+            [train_Y, torch.zeros(cand.shape[0], 1, dtype=DTYPE)], dim=0
+        ).unsqueeze(1)
+        return surrogate.forward(X_full, Y_full, single_eval_pos=n_ctx), X_q
 
-        logits = surrogate.forward(X_full, Y_full, single_eval_pos=n_ctx)
-        ucb = surrogate.predict_ucb(logits, train_Y.max(), UCB_REST_PROB)[
-            n_ctx:
-        ].reshape(-1)
-        mean = surrogate.predict_mean(logits)[n_ctx:].reshape(-1)
+    for it in range(start_it, iters):
+        # (1-2) Sobol pool -> TabPFN -> gradients of the predictive mean.
+        pool = sobol.draw(N_CANDIDATES).to(DTYPE)
+        logits, X_q = _forward(pool, grad=True)
+        mean_pool = surrogate.predict_mean(logits).reshape(-1)
+        (grad_pool,) = torch.autograd.grad(mean_pool.sum(), X_q)
+        grads = grad_pool.reshape(N_CANDIDATES, dim).detach().cpu().numpy()
 
-        # gradient of posterior mean wrt the candidates -> next subspace
-        (grad_cand,) = torch.autograd.grad(mean.sum(), X_q, retain_graph=False)
-        grad_est = -grad_cand.reshape(N_CANDIDATES, dim).detach().cpu().numpy()
+        # (3-4) H = E[g g^T] -> top-r eigenvectors -> candidates in that subspace,
+        # centered on the centroid of the observed data (x_ref = mean(X_obs)).
+        x_ref = train_X.mean(dim=0).cpu().numpy()
+        samples, _r = sample_in_subspace(
+            x_ref,
+            grads,
+            N_CANDIDATES,
+            rank_mode,
+            fixed_rank,
+            eps=0.05,
+            scale=scale,
+            rng=rng,
+        )
+        cand = torch.from_numpy(samples).to(DTYPE)
+
+        # (5) TabPFN's built-in bar-distribution UCB on the subspace candidates.
+        with torch.no_grad():
+            logits_gi, _ = _forward(cand, grad=False)
+            mean = surrogate.predict_mean(logits_gi).reshape(-1)
+            var = surrogate.predict_variance(logits_gi).reshape(-1).clamp_min(0.0)
+            ucb = surrogate.predict_ucb(logits_gi, rest_prob=REST_PROB).reshape(-1)
 
         choice = int(torch.argmax(ucb).item())
         x_new = cand[choice : choice + 1]
@@ -126,23 +169,39 @@ def optimize_problem(
         res.record(
             best,
             mean=mean[choice].item(),
-            variance=surrogate.predict_variance(logits)[n_ctx:]
-            .reshape(-1)[choice]
-            .item(),
+            variance=var[choice].item(),
             acq_value=ucb[choice].item(),
         )
+        if checkpoint:
+            res.set_history(train_X, train_Y, n_init)
+            save_checkpoint(checkpoint, train_X, train_Y, res, it + 1)
+    res.set_history(train_X, train_Y, n_init)
     return res
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--problem", required=True)
-    parser.add_argument("--init", type=int, default=20)
+    parser.add_argument(
+        "--init",
+        type=int,
+        default=None,
+        help="initial design size (default: dim-scaled)",
+    )
     parser.add_argument("--iters", type=int, default=50)
     parser.add_argument(
         "--rank",
-        default="5",
-        help="active-subspace rank: an integer (e.g. 5) or 'marzouk'",
+        default=str(DEFAULT_RANK),
+        help="active-subspace rank: an integer (paper default 10) or 'marzouk'",
+    )
+    parser.add_argument(
+        "--scale",
+        type=float,
+        default=1.0,
+        help="half-width of the subspace sampling box (paper: 1.0, i.e. z ~ U([-1,1]^r))",
+    )
+    parser.add_argument(
+        "--checkpoint", default=None, help="resumable checkpoint .npz path"
     )
     parser.add_argument("--device", default="auto")
     add_common_args(parser)
@@ -153,7 +212,9 @@ def main() -> None:
         args.iters,
         args.seed,
         rank=args.rank,
+        scale=args.scale,
         device=args.device,
+        checkpoint=args.checkpoint,
     )
     finalize(res, args)
 

@@ -1,0 +1,39 @@
+{
+  "name": "GoldsteinLVGP",
+  "module": "bocode.opt_problems.synthetic_mixed.GoldsteinLVGP",
+  "extra": null,
+  "suite": "Mixed-variable synthetic",
+  "num_objectives": 1,
+  "num_constraints": 0,
+  "available_dimensions": 2,
+  "input_type": "mixed",
+  "scalable": false,
+  "dim": 2,
+  "bounds": [
+    [
+      -2.0,
+      2.0
+    ],
+    [
+      -2.0,
+      2.0
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Synthetic",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": 3.0,
+  "source": "Y. Zhang, D. W. Apley, W. Chen. Bayesian Optimization for Materials Design with Mixed Quantitative and Qualitative Variables. Scientific Reports 10:4924, 2020 (arXiv:1910.01688).",
+  "variable_types": [
+    "continuous",
+    [
+      -2.0,
+      -1.0,
+      0.0,
+      1.0,
+      2.0
+    ]
+  ],
+  "num_categorical_variables": 1
+}

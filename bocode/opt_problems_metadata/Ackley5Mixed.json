@@ -1,0 +1,54 @@
+{
+  "name": "Ackley5Mixed",
+  "module": "bocode.opt_problems.synthetic_mixed.Ackley5Mixed",
+  "extra": null,
+  "suite": "Mixed-variable synthetic",
+  "num_objectives": 1,
+  "num_constraints": 0,
+  "available_dimensions": 5,
+  "input_type": "mixed",
+  "scalable": false,
+  "dim": 5,
+  "bounds": [
+    [
+      -1.0,
+      1.0
+    ],
+    [
+      -1.0,
+      1.0
+    ],
+    [
+      -1.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Synthetic",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": 0.0,
+  "source": "D. H. Ackley. A Connectionist Machine for Genetic Hillclimbing. Kluwer Academic Publishers, 1987 (the Ackley function). Mixed-variable sign-flip construction after the mixed-variable BO benchmark suites; see B. Ru et al., ICML 2020.",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    "continuous",
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ]
+  ],
+  "num_categorical_variables": 2
+}

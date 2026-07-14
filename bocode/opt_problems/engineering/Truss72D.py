@@ -282,7 +282,7 @@ class Truss72D_FourForces(BenchmarkProblem):
                     max(abs(displace[dd][0]), abs(displace[dd][1])) - 0.25
                 )
 
-            return gx, fx
+        return gx, fx
 
 
 class Truss72D_SingleForce(BenchmarkProblem):
@@ -564,4 +564,4 @@ class Truss72D_SingleForce(BenchmarkProblem):
                     max(abs(displace[dd][0]), abs(displace[dd][1])) - 0.25
                 )
 
-            return gx, fx
+        return gx, fx

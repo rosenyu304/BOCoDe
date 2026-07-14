@@ -29,16 +29,18 @@ class QPowerModel:
         self.raw_model = ort.InferenceSession(str(model_file))
 
     def eval(self, pert):
-        pert2 = pert.copy()
-        # Reshape to 3D input as expected by the model: (batch_size, time_steps, features)
-        pertn = np.array(
-            [
-                pert2,
-            ]
-        ).reshape(1, -1)
-        unorm = self.raw_model.run(["dense_77"], {"input": pertn})[0]
-        # Return a scalar objective value (sum of normalized power distribution)
-        return float(unorm.sum())
+        """Return the 4 quadrant power fractions (they sum to 1) for a drum config.
+
+        This mirrors upstream NEORL's ``QPowerModel.eval``, which returns
+        ``unorm / unorm.sum()`` -- a length-4 vector, NOT a scalar. (Upstream calls
+        Keras' ``predict``; this vendored copy runs the same network through ONNX
+        Runtime, whose ``dense_77`` output has shape ``(batch, 4)``.)
+        https://github.com/aims-umich/neorl/blob/master/neorl/benchmarks/qpower_model.py
+        """
+        pert2 = np.asarray(pert, dtype=np.float32).copy()
+        pertn = pert2.reshape(1, -1)
+        unorm = self.raw_model.run(["dense_77"], {"input": pertn})[0].flatten()
+        return unorm / unorm.sum()
 
 
 def qPowerModel(pert):

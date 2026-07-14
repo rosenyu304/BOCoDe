@@ -55,6 +55,7 @@ _APPLICATION_BY_PREFIX = (
     ("opt_problems.reproblems", "Engineering"),
     ("opt_problems.engibench", "EngiBench"),
     ("opt_problems.engineering", "Engineering"),
+    ("opt_problems.synthetic_mixed", "Synthetic"),
 )
 
 
@@ -72,7 +73,9 @@ def _application(name: str, module: str, overrides: dict) -> str:
 _SUITE_BY_MODULE = (
     ("opt_problems.modact", "MODAct (actuator design)"),
     ("opt_problems.cec2020_rw", "CEC2020 RW-Constrained"),
-    ("opt_problems.reproblems.RE_problems", "RE (Tanabe-Ishibuchi)"),
+    # The unconstrained RE problems are real-world engineering designs; group them with
+    # the other multi-objective engineering problems (Penicillin, VehicleSafety, ...).
+    ("opt_problems.reproblems.RE_problems", "Engineering (standalone)"),
     ("opt_problems.reproblems.CRE_problems", "CRE (Tanabe-Ishibuchi)"),
     ("opt_problems.materials", "PV-Lab materials"),
     ("opt_problems.control.mujoco", "MuJoCo control"),
@@ -81,6 +84,7 @@ _SUITE_BY_MODULE = (
     ("opt_problems.nas", "NAS-Bench-201"),
     ("opt_problems.engibench", "EngiBench"),
     ("opt_problems.hpo", "HPO (LassoBench / HPO-B)"),
+    ("opt_problems.synthetic_mixed", "Mixed-variable synthetic"),
 )
 
 
