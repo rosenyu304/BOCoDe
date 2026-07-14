@@ -195,6 +195,12 @@ examples/results/
 # ...but the small in-repo benchmark data tables ARE committed (not result files):
 !bocode/opt_problems/hpo/data/hpob_data.npz
 !bocode/opt_problems/hpo/data/lcbench_data.npz
+# Pre-trained HPO-B boosters. MUST be committed: the surrogate used to be fitted at RUNTIME, which
+# made the objective depend on the local xgboost build (3.3.0 vs 3.2.0 -> 4e-3 apart on the initial
+# design). Shipping the booster is what makes it machine-independent, so this is benchmark DATA,
+# not a result artifact. (The HPOBSurr benchmark itself is withdrawn -- see _hpob_surrogate_base.py
+# -- but the class must still load reproducibly.)
+!bocode/opt_problems/hpo/data/hpob_surrogates.npz
 !bocode/opt_problems/nas/data/nasbench201_accuracy.npz
 
 # Experiment matrix doc (kept outside the repo; never push)

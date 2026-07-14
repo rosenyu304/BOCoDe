@@ -4,6 +4,10 @@ import torch
 
 from ...base import BenchmarkProblem
 
+# Fixed seed for the rover's internal sampling: the objective must be deterministic, or
+# the same design returns a different value on every call.
+_ROVER_SEED = 0
+
 
 class Rover(BenchmarkProblem):
     """
@@ -438,7 +442,10 @@ class RoverDomain:
             self.goal_miss_cost = simple_rbf
 
         if self.rnd_stream is None:
-            self.rnd_stream = np.random.RandomState(np.random.randint(0, 2**32 - 1))
+            # A random seed here made the objective non-deterministic: the same design
+            # returned a different value on every call, so runs were irreproducible and
+            # could not be validated by re-evaluation. Fixed seed instead.
+            self.rnd_stream = np.random.RandomState(_ROVER_SEED)
 
     # return the negative cost which need to be optimized
     def __call__(self, params, n_samples=1000):

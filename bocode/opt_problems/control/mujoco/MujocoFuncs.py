@@ -693,8 +693,12 @@ class SwimmerPolicySearchProblem(BenchmarkProblem):
 
             # average return over N roll-outs (like the Facebook code)
             total_return = 0.0
-            for _ in range(self.num_rollouts):
-                obs, _ = self.env.reset()
+            for r in range(self.num_rollouts):
+                # Seed every reset: MuJoCo perturbs the initial state on reset, so an
+                # unseeded rollout makes the objective non-deterministic (the same design
+                # returns a different value each call). Offset by the rollout index so the
+                # N rollouts still differ from one another, but reproducibly.
+                obs, _ = self.env.reset(seed=self._rollout_seed + r)
                 done = truncated = False
                 episode_return = 0.0
 
@@ -779,8 +783,12 @@ class AntPolicySearchProblem(BenchmarkProblem):
 
             # average return over N roll-outs (like the Facebook code)
             total_return = 0.0
-            for _ in range(self.num_rollouts):
-                obs, _ = self.env.reset()
+            for r in range(self.num_rollouts):
+                # Seed every reset: MuJoCo perturbs the initial state on reset, so an
+                # unseeded rollout makes the objective non-deterministic (the same design
+                # returns a different value each call). Offset by the rollout index so the
+                # N rollouts still differ from one another, but reproducibly.
+                obs, _ = self.env.reset(seed=self._rollout_seed + r)
                 done = truncated = False
                 episode_return = 0.0
 
@@ -865,8 +873,12 @@ class HalfCheetahPolicySearchProblem(BenchmarkProblem):
 
             # average return over N roll-outs (like the Facebook code)
             total_return = 0.0
-            for _ in range(self.num_rollouts):
-                obs, _ = self.env.reset()
+            for r in range(self.num_rollouts):
+                # Seed every reset: MuJoCo perturbs the initial state on reset, so an
+                # unseeded rollout makes the objective non-deterministic (the same design
+                # returns a different value each call). Offset by the rollout index so the
+                # N rollouts still differ from one another, but reproducibly.
+                obs, _ = self.env.reset(seed=self._rollout_seed + r)
                 done = truncated = False
                 episode_return = 0.0
 
@@ -951,8 +963,12 @@ class HopperPolicySearchProblem(BenchmarkProblem):
 
             # average return over N roll-outs (like the Facebook code)
             total_return = 0.0
-            for _ in range(self.num_rollouts):
-                obs, _ = self.env.reset()
+            for r in range(self.num_rollouts):
+                # Seed every reset: MuJoCo perturbs the initial state on reset, so an
+                # unseeded rollout makes the objective non-deterministic (the same design
+                # returns a different value each call). Offset by the rollout index so the
+                # N rollouts still differ from one another, but reproducibly.
+                obs, _ = self.env.reset(seed=self._rollout_seed + r)
                 done = truncated = False
                 episode_return = 0.0
 
@@ -1037,8 +1053,12 @@ class Walker2DPolicySearchProblem(BenchmarkProblem):
 
             # average return over N roll-outs (like the Facebook code)
             total_return = 0.0
-            for _ in range(self.num_rollouts):
-                obs, _ = self.env.reset()
+            for r in range(self.num_rollouts):
+                # Seed every reset: MuJoCo perturbs the initial state on reset, so an
+                # unseeded rollout makes the objective non-deterministic (the same design
+                # returns a different value each call). Offset by the rollout index so the
+                # N rollouts still differ from one another, but reproducibly.
+                obs, _ = self.env.reset(seed=self._rollout_seed + r)
                 done = truncated = False
                 episode_return = 0.0
 
