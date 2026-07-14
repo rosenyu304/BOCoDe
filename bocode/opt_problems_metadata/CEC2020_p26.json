@@ -4,7 +4,7 @@
   "extra": null,
   "suite": "CEC2020 RW-Constrained",
   "num_objectives": 1,
-  "num_constraints": 87,
+  "num_constraints": 86,
   "available_dimensions": 22,
   "input_type": "continuous",
   "scalable": false,

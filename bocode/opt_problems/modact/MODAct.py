@@ -9,36 +9,60 @@ objectives are negated here. (This is the mirror image of MODAct's own pymoo
 adapter, which negates the maximization objectives to get an all-minimization
 problem.)
 
-Reference points (DERIVED, not published)
------------------------------------------
-Picard & Schiffmann compute the hypervolume the same way Tanabe & Ishibuchi do:
-the front is normalized with the estimated ideal ``z*`` and nadir ``z_nad`` of the
-best-known Pareto front and the HV is then taken against ``r = (1.1, ..., 1.1)``
-(Section V-A of the paper). But neither the paper nor
-https://github.com/epfl-lamd/modact publishes the ``z*`` / ``z_nad`` vectors or the
-best-known fronts, so the un-normalized reference point cannot be reconstructed
-from the source.
+Reference points (derived from the OFFICIAL best-known Pareto fronts)
+--------------------------------------------------------------------
+Picard & Schiffmann compute the hypervolume as follows (Section V-A): the front
+is transformed to a minimization-only problem, normalized with the estimated
+ideal ``z*`` and nadir ``z_nad`` collected "to provide per-problem front
+normalization", and the HV is then taken against ``r = (1.1, ..., 1.1)``.
 
-The reference points below are therefore **derived, not published**. The same
-recipe is applied to an approximated front obtained from a fixed, seeded
-Latin-hypercube sample instead of from EMOA runs:
+The paper does not print ``z*`` / ``z_nad``, but it does publish the best-known
+Pareto fronts they are computed from (reference [42] of the paper):
 
-    A            = non-dominated set of ``problem.sample(2048, seed=0)``
-                   (minimization frame, all sampled points, feasible or not)
-    z*_i         = min_{x in A} f_i(x)
-    z_nad_i      = max_{x in A} f_i(x)
+    C. Picard and J. Schiffmann. Multi-Objective Design of Actuators: Pareto
+    Fronts. Zenodo, version 1.1.0, May 2020. https://doi.org/10.5281/zenodo.3824302
+
+The reference points below are therefore reconstructed from the official fronts,
+using the paper's own recipe:
+
+    A            = official ``<name>_PF.dat`` (natural frame, as ``problem(x)``
+                   returns it), mapped to the minimization frame via ``-1 * w``
+    z*_i         = min_{f in A} f_i
+    z_nad_i      = max_{f in A} f_i
     r_i          = z*_i + 1.1 * (z_nad_i - z*_i)
 
-The 20 MODAct problems share only five distinct objective functions (CS, CT, CTS,
-CTSE, CTSEI); the numbered variants differ only in their constraint set. The
-reference point is therefore keyed on the objective family, so e.g. CS1..CS4 are
-scored against the same reference point.
+``r`` is the un-normalized image of ``(1.1, ..., 1.1)``, so scoring against it
+reproduces the paper's normalized HV up to the constant factor prod(z_nad - z*).
+
+Keyed PER PROBLEM, not per objective family: the best-known front depends on the
+constraint level as well as the objectives (the paper says the normalization is
+"per-problem"), so e.g. CS1 and CS4 have different reference points.
 
 Sources:
 C. Picard and J. Schiffmann. Realistic Constrained Multi-Objective Optimization
 Benchmark Problems from Design. IEEE Transactions on Evolutionary Computation
 25(2):234-246, 2021. https://ieeexplore.ieee.org/document/9179777
 https://github.com/epfl-lamd/modact
+
+Search space (continuous, but piecewise-continuous response)
+-----------------------------------------------------------
+All 20 variables are continuous doubles, exactly as in the official pymoo adapter
+(``vtype=np.double``). Do NOT declare any of them integer: MODAct packs a discrete
+and a continuous quantity into a single variable via ``math.modf`` (see
+``modact.util.create_actuator_from_x``). ``x0`` carries the motor index in its
+integer part and the coil fill factor in its fractional part; each stage's first
+two variables carry a gear tooth count (integer part) and a profile-shift
+coefficient (fractional part). Rounding them would destroy the profile-shift
+dimension and silently change the benchmark. The consequence is that objectives
+and constraints are discontinuous across integer boundaries of 7 of the 20
+variables -- this is inherent to the source, not an artefact of this wrapper.
+
+Likewise, constraint index 7 (the 3-D collision constraint, present at constraint
+levels 2/3/4, i.e. problems ``*2``/``*3``/``*4``) is quasi-discrete by
+construction: ``modact.actuator.Actuator.internal_collisions`` returns
+``(number of colliding mesh pairs) / (number of faces)``, a ratio of integer
+counts that is 0 exactly when the design has no internal collision. It is a
+step-like function in the source, not a rounding introduced here.
 """
 
 import torch
@@ -53,14 +77,30 @@ except ImportError as _exc:  # pragma: no cover - exercised only without the ext
 
 from ...base import BenchmarkProblem
 
-#: Objective-family -> derived HV reference point, in the ORIGINAL MINIMIZATION
-#: frame. See the module docstring for the derivation. DERIVED, NOT PUBLISHED.
+#: Problem -> HV reference point, in the ORIGINAL MINIMIZATION frame, computed
+#: from the official best-known Pareto fronts (Zenodo 10.5281/zenodo.3824302) as
+#: ``z* + 1.1 * (z_nad - z*)``. See the module docstring for the derivation.
 _REF_POINT_MIN = {
-    "CS": [0.41829938, -144.54084625],
-    "CT": [1.11193959, 1.20777957],
-    "CTS": [1.17214278, 1.25492908, 219.06426423],
-    "CTSE": [1.17214278, 1.25492908, 219.06426423, 0.01632634],
-    "CTSEI": [1.17214278, 1.25925277, 219.06426423, 0.01707531, 227.20479530],
+    "CS1": [1.05958393, -8.47810402],
+    "CS2": [1.40440601, -5.99616879],
+    "CS3": [0.45454181, -12.59592776],
+    "CS4": [0.90131334, -18.67311177],
+    "CT1": [1.05089426, 0.85545936],
+    "CT2": [1.06567993, 0.85709077],
+    "CT3": [0.48475323, 0.76631995],
+    "CT4": [1.02587117, 0.85740007],
+    "CTS1": [1.88265842, 0.85810407, 42.23955453],
+    "CTS2": [1.91544973, 0.85808384, 42.34471998],
+    "CTS3": [1.06353849, 0.82486893, 10.31520340],
+    "CTS4": [1.70041478, 0.85799142, 38.15696404],
+    "CTSE1": [1.93059612, 0.85790543, 40.24526584, 0.01987067],
+    "CTSE2": [2.00514792, 0.85796001, 40.19966872, 0.01775356],
+    "CTSE3": [1.01650380, 0.79007123, 10.98092948, 0.01288903],
+    "CTSE4": [1.67414955, 0.85628818, 26.46193406, 0.01428249],
+    "CTSEI1": [2.10500194, 0.85792421, 45.00040889, 0.02435908, 487.58523267],
+    "CTSEI2": [2.13799550, 0.85783628, 44.22073412, 0.02354771, 507.96320712],
+    "CTSEI3": [1.08149921, 0.78571464, 11.15206796, 0.01398496, 289.53359505],
+    "CTSEI4": [1.54361994, 0.85712121, 36.51275660, 0.01536087, 273.31055290],
 }
 
 
@@ -79,9 +119,6 @@ class BaseModactProblem(BenchmarkProblem):
         num_obj = len(self.problem.weights)
         num_cons = len(self.problem.c_weights)
 
-        # "CTSE3" -> family "CTSE"; the trailing digit only selects the constraints.
-        family = type(self).__name__.rstrip("0123456789")
-
         super().__init__(
             dim=dim,
             num_objectives=num_obj,
@@ -90,7 +127,7 @@ class BaseModactProblem(BenchmarkProblem):
             x_opt=x_opt,
             optimum=optimum,
             # Negated: BoCoDe maximizes, the reference point above is minimization.
-            ref_point=[-r for r in _REF_POINT_MIN[family]],
+            ref_point=[-r for r in _REF_POINT_MIN[type(self).__name__]],
         )
 
     def _evaluate_implementation(

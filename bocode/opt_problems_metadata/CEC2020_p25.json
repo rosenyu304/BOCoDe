@@ -5,38 +5,26 @@
   "suite": "CEC2020 RW-Constrained",
   "num_objectives": 1,
   "num_constraints": 7,
-  "available_dimensions": 7,
+  "available_dimensions": 4,
   "input_type": "continuous",
   "scalable": false,
-  "dim": 7,
+  "dim": 4,
   "bounds": [
     [
-      10,
-      150
-    ],
-    [
-      10,
-      150
-    ],
-    [
-      100,
-      200
-    ],
-    [
-      0,
-      50
-    ],
-    [
-      10,
-      150
-    ],
-    [
-      100,
-      300
+      1,
+      16
     ],
     [
       1,
-      3.14
+      16
+    ],
+    [
+      1e-06,
+      1.6e-05
+    ],
+    [
+      1,
+      16
     ]
   ],
   "num_integer_variables": 0,
@@ -46,9 +34,6 @@
   "f_opt": 1616.119765,
   "source": "CEC2020 Problem 25",
   "variable_types": [
-    "continuous",
-    "continuous",
-    "continuous",
     "continuous",
     "continuous",
     "continuous",
