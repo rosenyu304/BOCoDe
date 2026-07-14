@@ -33,3 +33,42 @@
 # An exclusion is a scientific claim: it removes a benchmark from the paper. Meet the same
 # evidentiary bar as a result — root cause identified, fix derived from the source, published
 # optimum reproduced. 'It crashes' is a reason to investigate, not to exclude.
+
+# ===========================================================================
+# THE TWO EXCLUSIONS — and their causes, which are NOT the same.
+# The recorded CAUSE is part of the claim: get the exclusion right but the reason
+# wrong, and a FIXABLE BUG becomes permanent because a future reader believes the
+# benchmark is inherently useless.
+
+InvertedPendulumProblem
+# DEGENERATE BY CONSTRUCTION — not a bug, and not repairable.
+# These MuJoCo *Problem variants optimise a single CONSTANT ACTION. No constant torque
+# can balance a pole, so the episode always terminates after one step and the reward is
+# always exactly 1.0. There is nothing to optimise and nothing to fix: the only "fix"
+# would be adding a policy-search variant, which is a NEW problem, not a repair.
+# (Checked all 9 constant-action MuJoCo problems — this is the ONLY affected one.
+#  InvertedDoublePendulumProblem is also dim-1 but varies normally.)
+
+LassoRCV1
+# 🐛 BUG — NOT a "constant objective" problem. The DESIGN VECTOR NEVER REACHES THE MODEL.
+# Measured: f(all-0) = f(all-mid) = f(all-1) = -0.0262927778 exactly (spread 0.0), while
+# every sibling responds normally (LassoDNA 5.3e-1, LassoLeukemia 2.3e-1,
+# LassoBreastCancer 1.9e-1, LassoDiabetes 7.2e-2). So the LassoBench integration works;
+# the RCV1 instance specifically does not.
+#
+# ROOT CAUSE (proven): _lasso_base.py:128 hard-codes `Lasso(alpha=1.0)`. RCV1's targets
+# have std 0.175 and its TF-IDF features are tiny, so alpha=1.0 is **1258x alpha_max**
+# (the penalty above which EVERY coefficient is shrunk to exactly zero). All 47,236
+# coefficients die, the prediction collapses to the intercept, and the objective is then
+# mathematically independent of the design vector. Coefficients only survive below
+# alpha ~ 1e-4.
+#   alpha=1e0..1e-3 -> 0 nonzero coefs, val MSE 0.0262927778 (the observed constant)
+#   alpha=1e-4      -> 131 nonzero coefs, val MSE 0.0237598784
+#
+# THE FIX (ready, NOT applied — it is a science decision for Rosen):
+#   make the penalty DATASET-RELATIVE, alpha = frac * alpha_max (what LassoBench itself
+#   does), instead of a hard-coded 1.0. NB alpha=1.0 is above alpha_max for the OTHER
+#   datasets too (Diabetes 4.6x, BreastCancer 2.5x) -- they only escape because the
+#   feature rescaling has enough leverage there. So the fix CHANGES THE OBJECTIVE FOR ALL
+#   5 LASSO PROBLEMS and their existing results would have to be re-run. That is why it
+#   was not applied unilaterally.
