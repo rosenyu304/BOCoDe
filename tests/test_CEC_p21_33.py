@@ -47,6 +47,10 @@ def test_CEC21_33_evaluate(benchmark):
 
     if problem.x_opt is not None and problem.optimum is not None:
         eval_opt = problem.evaluate(torch.Tensor(problem.x_opt))[0].float()
-        assert torch.allclose(eval_opt, torch.Tensor(problem.optimum), atol=1e-4), (
+        # BoCoDe MAXIMISES: evaluate() returns -f, while `optimum` stores the literature f* in the
+        # ORIGINAL (minimisation) sense. The comparison must therefore be against -optimum.
+        # This boilerplate previously compared against +optimum; it was dead code only because
+        # every CEC problem had x_opt=None, and it misfired the moment p18 got a real x_opt.
+        assert torch.allclose(eval_opt, -torch.Tensor(problem.optimum), atol=1e-4), (
             f"X_opt ({problem.x_opt}) evaluation ({eval_opt}) does not match optimum ({problem.optimum})"
         )
