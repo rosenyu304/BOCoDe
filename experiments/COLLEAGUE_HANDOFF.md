@@ -1,5 +1,72 @@
 # Running your half of the BoCoDe campaign (for Rosen's colleague)
 
+## STEP-BY-STEP (start here)
+
+### Step 1 — get the code
+```bash
+ssh orcd-login
+export ROOT=/orcd/data/faez/001/$USER/bocode     # YOUR dir, not Rosen's
+mkdir -p $ROOT && cd $ROOT
+git clone --branch dev/2026_06 https://github.com/rosenyu304/BOCoDe.git BOCoDe
+git -C BOCoDe checkout --detach <CAMPAIGN_SHA>   # Rosen gives you this. It must match exactly.
+git -C BOCoDe rev-parse --short HEAD             # verify
+echo <CAMPAIGN_SHA> > CAMPAIGN_SHA
+```
+
+### Step 2 — environment (use `uv`, not conda)
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | env UV_INSTALL_DIR=$ROOT/bin sh
+export UV_CACHE_DIR=$ROOT/.uv_cache              # keep it OUT of your HOME quota
+$ROOT/bin/uv venv $ROOT/venv --python 3.12
+$ROOT/bin/uv pip install --python $ROOT/venv/bin/python torch --index-url https://download.pytorch.org/whl/cu130
+$ROOT/bin/uv pip install --python $ROOT/venv/bin/python 'numpy==1.26.4' botorch pymoo xgboost tabpfn
+$ROOT/bin/uv pip install --python $ROOT/venv/bin/python 'gymnasium[mujoco]' mujoco
+$ROOT/bin/uv pip install --python $ROOT/venv/bin/python -e $ROOT/BOCoDe
+$ROOT/venv/bin/python -c "import torch;print(torch.__version__, torch.cuda.is_available())"
+```
+> ⚠️ **Do NOT pin torch.** ORCD's driver is 590, so the default **cu130** is correct (verified on a
+> real GPU node). Only the *workstations* need cu128.
+> ⚠️ **DO pin `numpy==1.26.4`.** An unpinned install gives numpy 2.5.1 on the cluster and 1.26.4
+> elsewhere. Different numpy = silently different results.
+> Why `uv` and not conda: `conda activate` does not work in non-interactive shells (jobs die with
+> `python: command not found`), conda is what is filling the HOME **inode** quota, and unpinned conda
+> resolved a different numpy on the cluster than on the workstations.
+
+### Step 3 — copy the launcher and point it at your dir
+```bash
+cp $ROOT/BOCoDe/experiments/orcd/* $ROOT/
+# edit ROOT= at the top of submit_job.sbatch, watchdog.sh, move_jobs.sh to YOUR $ROOT
+```
+
+### Step 4 — build YOUR shard (seeds 5–9; Rosen runs 0–4)
+```bash
+$ROOT/venv/bin/python make_joblist.py --seeds 5-9 --iters 1000 \
+    --gpu-partition mit_preemptable --cpu-partition mit_normal --out joblist.tsv
+```
+
+### Step 5 — launch (the watchdog does the rest)
+```bash
+tmux new -d -s watchdog "$ROOT/watchdog.sh"
+tmux attach -t watchdog     # Ctrl-B D to detach
+```
+Expect **many** preemptions on `mit_preemptable` — you are the lowest priority there. That is normal:
+the watchdog resubmits, and every run **resumes from its checkpoint**, not from zero.
+
+### Step 6 — send results back
+```bash
+rsync -az $ROOT/Results/ orcd-login:/orcd/data/faez/001/rosen/bocode/Results/
+```
+Disjoint paths — this cannot clobber Rosen's work.
+
+### The two rules that matter more than anything else
+1. **If you hit a bug, push it to the repo and tell Rosen — never fix it locally.** Otherwise the two
+   of you are silently running different science.
+2. **A job that exits with code 90** means your repo is not on the campaign SHA. It *refuses* to run
+   on the wrong code. That is deliberate.
+
+---
+
+
 You have MIT's public ORCD partitions (`mit_normal_gpu`, `mit_preemptable`, `mit_normal`) but
 **not** `pi_faez`. That's fine — your half never needs it.
 
@@ -70,10 +137,10 @@ Results/<problem>/<algorithm>/seed<N>.npz
 So the work partitions cleanly and **cannot collide**: the output path is a pure function of the
 tuple. Merging our halves is a plain `rsync` of disjoint paths.
 
-**You take seeds 3–4. Rosen takes seeds 0–2.**
+**You take seeds 5–9. Rosen takes seeds 0–4.** (5 seeds each, 10 total.)
 
 ```bash
-python make_joblist.py --seeds 3-4 --iters 1000 \
+python make_joblist.py --seeds 5-9 --iters 1000 \
     --gpu-partition mit_preemptable --cpu-partition mit_normal \
     --out joblist.tsv
 ```

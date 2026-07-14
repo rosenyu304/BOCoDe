@@ -38,9 +38,11 @@ from __future__ import annotations
 
 import argparse
 import math
+import warnings
 from pathlib import Path
 
 import torch
+from botorch.exceptions.errors import ModelFittingError
 from botorch.fit import fit_gpytorch_mll
 from botorch.generation.sampling import ConstrainedMaxPosteriorSampling
 from botorch.models import ModelListGP, SingleTaskGP
@@ -119,7 +121,28 @@ def _fit_gp(X: torch.Tensor, Y: torch.Tensor, bilog: bool) -> SingleTaskGP:
         outcome_transform=Bilog() if bilog else None,
     )
     mll = ExactMarginalLogLikelihood(model.likelihood, model)
-    fit_gpytorch_mll(mll)
+    try:
+        fit_gpytorch_mll(mll)
+    except ModelFittingError:
+        # A GP fit can genuinely fail on a pathological output -- e.g. a constraint that is
+        # (nearly) a step function, which no smooth GP can represent. Crashing the whole run
+        # loses every iteration already computed, and on a cluster it looks like an
+        # infrastructure failure when it is really a property of the data.
+        #
+        # Fall back to the model's PRIOR hyperparameters (an un-optimised but perfectly valid
+        # GP). SCBO's trust region then keeps shrinking on that output, which is the correct
+        # behaviour for a coordinate it cannot model.
+        #
+        # NB: this is a robustness guard, NOT a fix for a broken benchmark. The real cause of
+        # such an output is almost always a defect in the PROBLEM (see the 0.0625 gauge-snap bug
+        # that turned CEC2020_p20's constraints into 3-valued step functions). Use
+        # experiments/problem_audit.py to find those; do not let this guard hide them.
+        warnings.warn(
+            "scbo: GP fit failed (likely a near-discrete output); "
+            "falling back to prior hyperparameters for this model.",
+            RuntimeWarning,
+            stacklevel=2,
+        )
     return model
 
 
