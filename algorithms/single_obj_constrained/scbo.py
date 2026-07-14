@@ -256,7 +256,7 @@ def optimize_problem(
             best = max(best, best_feasible(Yo, Yc))
 
         if checkpoint:
-            res.set_history(X, Yo, n_init)
+            res.set_history(X, Yo, n_init, c=Yc)
             save_checkpoint(
                 checkpoint,
                 X,
@@ -274,7 +274,7 @@ def optimize_problem(
                     "best": best,
                 },
             )
-    res.set_history(X, Yo, n_init)
+    res.set_history(X, Yo, n_init, c=Yc)
     return res
 
 

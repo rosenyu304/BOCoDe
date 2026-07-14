@@ -170,7 +170,7 @@ def optimize_problem(
             acq_value=cei[choice].item(),
         )
         if checkpoint:
-            res.set_history(train_X, train_obj, n_init)
+            res.set_history(train_X, train_obj, n_init, c=train_con)
             save_checkpoint(
                 checkpoint,
                 train_X,
@@ -179,7 +179,7 @@ def optimize_problem(
                 it + 1,
                 extra={"con": train_con.cpu().numpy()},
             )
-    res.set_history(train_X, train_obj, n_init)
+    res.set_history(train_X, train_obj, n_init, c=train_con)
     return res
 
 
