@@ -962,7 +962,21 @@ class CEC2020_p12(BenchmarkProblem):
 
         if scaling:
             X = super().scale(X)
-        X = X.numpy()
+        # FLOAT64, deliberately. base.py casts every X to float32, but this objective contains
+        # (x1-1)**22 and x1 ranges to 100: (100-1)**22 = 8.0e43, which is FINITE in float64 (as in the
+        # official MATLAB, which computes in double) but OVERFLOWS float32 (max 3.4e38) to -inf. That
+        # overflow -- not the formula -- made 43% of evaluations non-finite.
+        #
+        # The exponent 22 is NOT our typo: the official CEC2020 cec20_func.m, prob_k == 12, reads
+        #     f = (y1-1).^2 + (y2-1).^2 + (y3-1).^2 - log(y4+1) + (x1-1).^22 + (x2-2).^2 + (x3-3).^2;
+        # It is very likely a typo in the OFFICIAL suite for Kocis & Grossmann's (x1-1)^2, but we
+        # reproduce the official benchmark verbatim -- deviating would make our numbers incomparable
+        # to every published CEC2020 result.
+        #
+        # Likewise the integer bounds stay at -0.51 (official: xmin12 = [0,0,0,-0.51,-0.51,-0.51,-0.51]).
+        # They are NOT changed to -0.49: round(-0.51) = -1 -> log(y4+1) = log(0) = -inf occurs in the
+        # official MATLAB too, so that sliver is a property of the published problem, not a defect here.
+        X = X.numpy().astype(np.float64)
 
         n_samples = X.shape[0]
 
