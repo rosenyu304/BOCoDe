@@ -44,6 +44,21 @@ $ROOT/venv/bin/python make_joblist.py --seeds 5-9 --iters 1000 \
     --gpu-partition mit_preemptable --cpu-partition mit_normal --out joblist.tsv
 ```
 
+> ### ⚠️ GPU PARTITION — read this or your queue will just sit there
+> `mit_preemptable` has a **hard cap of 4 GPUs per user** (`gres/gpu=4`). Queue more than 4 GPU jobs
+> and every one after the 4th sits in `PD` forever with reason **`QOSMaxGRESPerUser`** — it looks
+> like the cluster is busy, but it is *your own quota* blocking you. `mit_normal_gpu` caps at **2**.
+>
+> Rosen's lab owns **`pi_faez`** (16x H100/H200, 100 h, no preemption), and **you do not have access
+> to it** — so you are stuck with the 4-GPU cap. Two consequences:
+>   1. Keep at most ~4 GPU jobs in flight; the watchdog's `MAX_QUEUED` should be small for you.
+>   2. Push everything that does NOT need a GPU to `mit_normal` (96 CPUs, far easier to get):
+>      `random_search`, `scbo`, `penalty` — anything that fits one GP PER CONSTRAINT is
+>      **2x FASTER on CPU anyway** (measured), because dozens of tiny sequential GP fits are
+>      launch-latency bound and never fill a GPU.
+>
+> Rosen runs the GPU-heavy half on `pi_faez`; your half should lean on `mit_normal`.
+
 ### Step 5 — launch (the watchdog does the rest)
 ```bash
 tmux new -d -s watchdog "$ROOT/watchdog.sh"
