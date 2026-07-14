@@ -40,8 +40,7 @@
 # wrong, and a FIXABLE BUG becomes permanent because a future reader believes the
 # benchmark is inherently useless.
 
-InvertedPendulumProblem
-# DEGENERATE BY CONSTRUCTION — not a bug, and not repairable.
+# ✅ FIXED 2026-07-14. I was WRONG to call this 'degenerate by construction'. It was a BUG.
 # These MuJoCo *Problem variants optimise a single CONSTANT ACTION. No constant torque
 # can balance a pole, so the episode always terminates after one step and the reward is
 # always exactly 1.0. There is nothing to optimise and nothing to fix: the only "fix"
@@ -76,3 +75,20 @@ InvertedPendulumProblem
 # (ALPHA_FRAC * alpha_max, LassoBench's scheme). Verified: f(all-0)/f(all-mid)/f(all-1) now
 # span 1.8e-02 (was exactly 0.0). All 5 Lasso problems respond to the design vector.
 # NB this CHANGES the objective for all 5 Lasso problems -- their old results are invalid.
+
+# ===========================================================================
+# THE EXCLUSION LIST IS NOW EMPTY. Every excluded problem was FIXED, not dropped.
+#
+# InvertedPendulumProblem was the last one. I recorded it as 'degenerate by construction:
+# a constant action cannot balance a pole, so the reward is always 1.0'. That was WRONG.
+# The real cause: all 11 MuJoCo *Problem variants took a SINGLE env.step() -- they never
+# rolled out an episode. InvertedPendulum's reward is +1 per timestep alive, so one step
+# always returns exactly 1.0. Roll the episode out under the constant action and it is a
+# perfectly good benchmark:
+#     action swept lo->hi, 1 step  : [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]   spread 0.0
+#     action swept lo->hi, episode : [2.0, 2.0, 3.0, 23.0, 3.0, 2.0, 2.0]  spread 21.0
+# with a clear optimum at a = 0 (balance with near-zero torque, survive longest).
+#
+# LESSON: 'degenerate by construction' is a claim that STOPS INVESTIGATION. It needs the same
+# evidentiary bar as any other result. It was accepted here on a plausible physical story, and
+# the story was wrong.

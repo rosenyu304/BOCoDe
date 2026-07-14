@@ -13,11 +13,25 @@ except ImportError as _exc:  # pragma: no cover - exercised only without the ext
 
 from ....base import BenchmarkProblem
 
+# Constant-action rollout settings, shared by every MuJoCo *Problem variant.
+#
+# The episode is rolled out from a FIXED reset seed so the benchmark is DETERMINISTIC: MuJoCo's
+# reset applies a small random perturbation, and without a fixed seed the same action would score
+# differently on every call, which turns the objective into a noisy one and makes the BO
+# comparison meaningless.
+#
+# _MAX_STEPS caps the rollout so a good action cannot run forever (Gymnasium's own time limits are
+# 1000 steps for these environments).
+_ROLLOUT_SEED = 0
+_MAX_STEPS = 1000
+
 
 class AntProblem(BenchmarkProblem):
     available_dimensions = 8
     num_objectives = 1
     num_constraints = 0
+    _rollout_seed = _ROLLOUT_SEED
+    _max_steps = _MAX_STEPS
 
     def __init__(self):
         super().__init__(
@@ -40,12 +54,30 @@ class AntProblem(BenchmarkProblem):
         batch_size = x.shape[0]
         rewards = torch.zeros(batch_size, self.__class__.num_objectives)
         for i in range(batch_size):
-            obs, _ = self.env.reset()
             action = x[i].cpu().numpy()
-            obs, reward, done, truncated, info = self.env.step(action)
-            # Gymnasium MuJoCo rewards are to be MAXIMIZED, which is already
-            # BoCoDe's convention -- return the reward as-is (do not negate).
-            rewards[i, 0] = reward
+            # Roll the EPISODE out under this constant action and return the episode
+            # return. Previously this took a SINGLE env.step(), which is not a control
+            # task at all -- it scored one timestep from the reset state.
+            #
+            # It made InvertedPendulum literally constant: its reward is +1 per timestep
+            # alive, so one step always returns exactly 1.0. The other ten were not caught
+            # only because their per-step rewards happen to be state-dependent -- they were
+            # measuring the wrong thing just as badly.
+            #   InvertedPendulum, action swept lo->hi:
+            #     1 step  : [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]   spread 0.0
+            #     episode : [2.0, 2.0, 3.0, 23.0, 3.0, 2.0, 2.0]  spread 21.0  (optimum at a=0)
+            #
+            # Gymnasium MuJoCo returns are to be MAXIMIZED, which is already BoCoDe's
+            # convention -- return the episode return as-is (do not negate).
+            self.env.reset(seed=self._rollout_seed)
+            done = truncated = False
+            episode_return = 0.0
+            steps = 0
+            while not (done or truncated) and steps < self._max_steps:
+                _, reward, done, truncated, _ = self.env.step(action)
+                episode_return += float(reward)
+                steps += 1
+            rewards[i, 0] = episode_return
         return None, rewards
 
 
@@ -53,6 +85,8 @@ class HalfCheetahProblem(BenchmarkProblem):
     available_dimensions = 6
     num_objectives = 1
     num_constraints = 0
+    _rollout_seed = _ROLLOUT_SEED
+    _max_steps = _MAX_STEPS
 
     def __init__(self):
         super().__init__(
@@ -75,12 +109,30 @@ class HalfCheetahProblem(BenchmarkProblem):
         batch_size = x.shape[0]
         rewards = torch.zeros(batch_size, self.__class__.num_objectives)
         for i in range(batch_size):
-            obs, _ = self.env.reset()
             action = x[i].cpu().numpy()
-            obs, reward, done, truncated, info = self.env.step(action)
-            # Gymnasium MuJoCo rewards are to be MAXIMIZED, which is already
-            # BoCoDe's convention -- return the reward as-is (do not negate).
-            rewards[i, 0] = reward
+            # Roll the EPISODE out under this constant action and return the episode
+            # return. Previously this took a SINGLE env.step(), which is not a control
+            # task at all -- it scored one timestep from the reset state.
+            #
+            # It made InvertedPendulum literally constant: its reward is +1 per timestep
+            # alive, so one step always returns exactly 1.0. The other ten were not caught
+            # only because their per-step rewards happen to be state-dependent -- they were
+            # measuring the wrong thing just as badly.
+            #   InvertedPendulum, action swept lo->hi:
+            #     1 step  : [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]   spread 0.0
+            #     episode : [2.0, 2.0, 3.0, 23.0, 3.0, 2.0, 2.0]  spread 21.0  (optimum at a=0)
+            #
+            # Gymnasium MuJoCo returns are to be MAXIMIZED, which is already BoCoDe's
+            # convention -- return the episode return as-is (do not negate).
+            self.env.reset(seed=self._rollout_seed)
+            done = truncated = False
+            episode_return = 0.0
+            steps = 0
+            while not (done or truncated) and steps < self._max_steps:
+                _, reward, done, truncated, _ = self.env.step(action)
+                episode_return += float(reward)
+                steps += 1
+            rewards[i, 0] = episode_return
         return None, rewards
 
 
@@ -88,6 +140,8 @@ class HopperProblem(BenchmarkProblem):
     available_dimensions = 3
     num_objectives = 1
     num_constraints = 0
+    _rollout_seed = _ROLLOUT_SEED
+    _max_steps = _MAX_STEPS
 
     def __init__(self):
         super().__init__(
@@ -110,12 +164,30 @@ class HopperProblem(BenchmarkProblem):
         batch_size = x.shape[0]
         rewards = torch.zeros(batch_size, self.__class__.num_objectives)
         for i in range(batch_size):
-            obs, _ = self.env.reset()
             action = x[i].cpu().numpy()
-            obs, reward, done, truncated, info = self.env.step(action)
-            # Gymnasium MuJoCo rewards are to be MAXIMIZED, which is already
-            # BoCoDe's convention -- return the reward as-is (do not negate).
-            rewards[i, 0] = reward
+            # Roll the EPISODE out under this constant action and return the episode
+            # return. Previously this took a SINGLE env.step(), which is not a control
+            # task at all -- it scored one timestep from the reset state.
+            #
+            # It made InvertedPendulum literally constant: its reward is +1 per timestep
+            # alive, so one step always returns exactly 1.0. The other ten were not caught
+            # only because their per-step rewards happen to be state-dependent -- they were
+            # measuring the wrong thing just as badly.
+            #   InvertedPendulum, action swept lo->hi:
+            #     1 step  : [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]   spread 0.0
+            #     episode : [2.0, 2.0, 3.0, 23.0, 3.0, 2.0, 2.0]  spread 21.0  (optimum at a=0)
+            #
+            # Gymnasium MuJoCo returns are to be MAXIMIZED, which is already BoCoDe's
+            # convention -- return the episode return as-is (do not negate).
+            self.env.reset(seed=self._rollout_seed)
+            done = truncated = False
+            episode_return = 0.0
+            steps = 0
+            while not (done or truncated) and steps < self._max_steps:
+                _, reward, done, truncated, _ = self.env.step(action)
+                episode_return += float(reward)
+                steps += 1
+            rewards[i, 0] = episode_return
         return None, rewards
 
 
@@ -123,6 +195,8 @@ class HumanoidProblem(BenchmarkProblem):
     available_dimensions = 17
     num_objectives = 1
     num_constraints = 0
+    _rollout_seed = _ROLLOUT_SEED
+    _max_steps = _MAX_STEPS
 
     def __init__(self):
         super().__init__(
@@ -145,12 +219,30 @@ class HumanoidProblem(BenchmarkProblem):
         batch_size = x.shape[0]
         rewards = torch.zeros(batch_size, self.__class__.num_objectives)
         for i in range(batch_size):
-            obs, _ = self.env.reset()
             action = x[i].cpu().numpy()
-            obs, reward, done, truncated, info = self.env.step(action)
-            # Gymnasium MuJoCo rewards are to be MAXIMIZED, which is already
-            # BoCoDe's convention -- return the reward as-is (do not negate).
-            rewards[i, 0] = reward
+            # Roll the EPISODE out under this constant action and return the episode
+            # return. Previously this took a SINGLE env.step(), which is not a control
+            # task at all -- it scored one timestep from the reset state.
+            #
+            # It made InvertedPendulum literally constant: its reward is +1 per timestep
+            # alive, so one step always returns exactly 1.0. The other ten were not caught
+            # only because their per-step rewards happen to be state-dependent -- they were
+            # measuring the wrong thing just as badly.
+            #   InvertedPendulum, action swept lo->hi:
+            #     1 step  : [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]   spread 0.0
+            #     episode : [2.0, 2.0, 3.0, 23.0, 3.0, 2.0, 2.0]  spread 21.0  (optimum at a=0)
+            #
+            # Gymnasium MuJoCo returns are to be MAXIMIZED, which is already BoCoDe's
+            # convention -- return the episode return as-is (do not negate).
+            self.env.reset(seed=self._rollout_seed)
+            done = truncated = False
+            episode_return = 0.0
+            steps = 0
+            while not (done or truncated) and steps < self._max_steps:
+                _, reward, done, truncated, _ = self.env.step(action)
+                episode_return += float(reward)
+                steps += 1
+            rewards[i, 0] = episode_return
         return None, rewards
 
 
@@ -158,6 +250,8 @@ class HumanoidStandupProblem(BenchmarkProblem):
     available_dimensions = 17
     num_objectives = 1
     num_constraints = 0
+    _rollout_seed = _ROLLOUT_SEED
+    _max_steps = _MAX_STEPS
 
     def __init__(self):
         super().__init__(
@@ -180,12 +274,30 @@ class HumanoidStandupProblem(BenchmarkProblem):
         batch_size = x.shape[0]
         rewards = torch.zeros(batch_size, self.__class__.num_objectives)
         for i in range(batch_size):
-            obs, _ = self.env.reset()
             action = x[i].cpu().numpy()
-            obs, reward, done, truncated, info = self.env.step(action)
-            # Gymnasium MuJoCo rewards are to be MAXIMIZED, which is already
-            # BoCoDe's convention -- return the reward as-is (do not negate).
-            rewards[i, 0] = reward
+            # Roll the EPISODE out under this constant action and return the episode
+            # return. Previously this took a SINGLE env.step(), which is not a control
+            # task at all -- it scored one timestep from the reset state.
+            #
+            # It made InvertedPendulum literally constant: its reward is +1 per timestep
+            # alive, so one step always returns exactly 1.0. The other ten were not caught
+            # only because their per-step rewards happen to be state-dependent -- they were
+            # measuring the wrong thing just as badly.
+            #   InvertedPendulum, action swept lo->hi:
+            #     1 step  : [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]   spread 0.0
+            #     episode : [2.0, 2.0, 3.0, 23.0, 3.0, 2.0, 2.0]  spread 21.0  (optimum at a=0)
+            #
+            # Gymnasium MuJoCo returns are to be MAXIMIZED, which is already BoCoDe's
+            # convention -- return the episode return as-is (do not negate).
+            self.env.reset(seed=self._rollout_seed)
+            done = truncated = False
+            episode_return = 0.0
+            steps = 0
+            while not (done or truncated) and steps < self._max_steps:
+                _, reward, done, truncated, _ = self.env.step(action)
+                episode_return += float(reward)
+                steps += 1
+            rewards[i, 0] = episode_return
         return None, rewards
 
 
@@ -193,6 +305,8 @@ class InvertedDoublePendulumProblem(BenchmarkProblem):
     available_dimensions = 1
     num_objectives = 1
     num_constraints = 0
+    _rollout_seed = _ROLLOUT_SEED
+    _max_steps = _MAX_STEPS
 
     def __init__(self):
         super().__init__(
@@ -215,12 +329,30 @@ class InvertedDoublePendulumProblem(BenchmarkProblem):
         batch_size = x.shape[0]
         rewards = torch.zeros(batch_size, self.__class__.num_objectives)
         for i in range(batch_size):
-            obs, _ = self.env.reset()
             action = x[i].cpu().numpy()
-            obs, reward, done, truncated, info = self.env.step(action)
-            # Gymnasium MuJoCo rewards are to be MAXIMIZED, which is already
-            # BoCoDe's convention -- return the reward as-is (do not negate).
-            rewards[i, 0] = reward
+            # Roll the EPISODE out under this constant action and return the episode
+            # return. Previously this took a SINGLE env.step(), which is not a control
+            # task at all -- it scored one timestep from the reset state.
+            #
+            # It made InvertedPendulum literally constant: its reward is +1 per timestep
+            # alive, so one step always returns exactly 1.0. The other ten were not caught
+            # only because their per-step rewards happen to be state-dependent -- they were
+            # measuring the wrong thing just as badly.
+            #   InvertedPendulum, action swept lo->hi:
+            #     1 step  : [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]   spread 0.0
+            #     episode : [2.0, 2.0, 3.0, 23.0, 3.0, 2.0, 2.0]  spread 21.0  (optimum at a=0)
+            #
+            # Gymnasium MuJoCo returns are to be MAXIMIZED, which is already BoCoDe's
+            # convention -- return the episode return as-is (do not negate).
+            self.env.reset(seed=self._rollout_seed)
+            done = truncated = False
+            episode_return = 0.0
+            steps = 0
+            while not (done or truncated) and steps < self._max_steps:
+                _, reward, done, truncated, _ = self.env.step(action)
+                episode_return += float(reward)
+                steps += 1
+            rewards[i, 0] = episode_return
         return None, rewards
 
 
@@ -228,6 +360,8 @@ class InvertedPendulumProblem(BenchmarkProblem):
     available_dimensions = 1
     num_objectives = 1
     num_constraints = 0
+    _rollout_seed = _ROLLOUT_SEED
+    _max_steps = _MAX_STEPS
 
     def __init__(self):
         super().__init__(
@@ -250,12 +384,30 @@ class InvertedPendulumProblem(BenchmarkProblem):
         batch_size = x.shape[0]
         rewards = torch.zeros(batch_size, self.__class__.num_objectives)
         for i in range(batch_size):
-            obs, _ = self.env.reset()
             action = x[i].cpu().numpy()
-            obs, reward, done, truncated, info = self.env.step(action)
-            # Gymnasium MuJoCo rewards are to be MAXIMIZED, which is already
-            # BoCoDe's convention -- return the reward as-is (do not negate).
-            rewards[i, 0] = reward
+            # Roll the EPISODE out under this constant action and return the episode
+            # return. Previously this took a SINGLE env.step(), which is not a control
+            # task at all -- it scored one timestep from the reset state.
+            #
+            # It made InvertedPendulum literally constant: its reward is +1 per timestep
+            # alive, so one step always returns exactly 1.0. The other ten were not caught
+            # only because their per-step rewards happen to be state-dependent -- they were
+            # measuring the wrong thing just as badly.
+            #   InvertedPendulum, action swept lo->hi:
+            #     1 step  : [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]   spread 0.0
+            #     episode : [2.0, 2.0, 3.0, 23.0, 3.0, 2.0, 2.0]  spread 21.0  (optimum at a=0)
+            #
+            # Gymnasium MuJoCo returns are to be MAXIMIZED, which is already BoCoDe's
+            # convention -- return the episode return as-is (do not negate).
+            self.env.reset(seed=self._rollout_seed)
+            done = truncated = False
+            episode_return = 0.0
+            steps = 0
+            while not (done or truncated) and steps < self._max_steps:
+                _, reward, done, truncated, _ = self.env.step(action)
+                episode_return += float(reward)
+                steps += 1
+            rewards[i, 0] = episode_return
         return None, rewards
 
 
@@ -263,6 +415,8 @@ class PusherProblem(BenchmarkProblem):
     available_dimensions = 7
     num_objectives = 1
     num_constraints = 0
+    _rollout_seed = _ROLLOUT_SEED
+    _max_steps = _MAX_STEPS
 
     def __init__(self):
         super().__init__(
@@ -285,12 +439,30 @@ class PusherProblem(BenchmarkProblem):
         batch_size = x.shape[0]
         rewards = torch.zeros(batch_size, self.__class__.num_objectives)
         for i in range(batch_size):
-            obs, _ = self.env.reset()
             action = x[i].cpu().numpy()
-            obs, reward, done, truncated, info = self.env.step(action)
-            # Gymnasium MuJoCo rewards are to be MAXIMIZED, which is already
-            # BoCoDe's convention -- return the reward as-is (do not negate).
-            rewards[i, 0] = reward
+            # Roll the EPISODE out under this constant action and return the episode
+            # return. Previously this took a SINGLE env.step(), which is not a control
+            # task at all -- it scored one timestep from the reset state.
+            #
+            # It made InvertedPendulum literally constant: its reward is +1 per timestep
+            # alive, so one step always returns exactly 1.0. The other ten were not caught
+            # only because their per-step rewards happen to be state-dependent -- they were
+            # measuring the wrong thing just as badly.
+            #   InvertedPendulum, action swept lo->hi:
+            #     1 step  : [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]   spread 0.0
+            #     episode : [2.0, 2.0, 3.0, 23.0, 3.0, 2.0, 2.0]  spread 21.0  (optimum at a=0)
+            #
+            # Gymnasium MuJoCo returns are to be MAXIMIZED, which is already BoCoDe's
+            # convention -- return the episode return as-is (do not negate).
+            self.env.reset(seed=self._rollout_seed)
+            done = truncated = False
+            episode_return = 0.0
+            steps = 0
+            while not (done or truncated) and steps < self._max_steps:
+                _, reward, done, truncated, _ = self.env.step(action)
+                episode_return += float(reward)
+                steps += 1
+            rewards[i, 0] = episode_return
         return None, rewards
 
 
@@ -298,6 +470,8 @@ class ReacherProblem(BenchmarkProblem):
     available_dimensions = 2
     num_objectives = 1
     num_constraints = 0
+    _rollout_seed = _ROLLOUT_SEED
+    _max_steps = _MAX_STEPS
 
     def __init__(self):
         super().__init__(
@@ -320,12 +494,30 @@ class ReacherProblem(BenchmarkProblem):
         batch_size = x.shape[0]
         rewards = torch.zeros(batch_size, self.__class__.num_objectives)
         for i in range(batch_size):
-            obs, _ = self.env.reset()
             action = x[i].cpu().numpy()
-            obs, reward, done, truncated, info = self.env.step(action)
-            # Gymnasium MuJoCo rewards are to be MAXIMIZED, which is already
-            # BoCoDe's convention -- return the reward as-is (do not negate).
-            rewards[i, 0] = reward
+            # Roll the EPISODE out under this constant action and return the episode
+            # return. Previously this took a SINGLE env.step(), which is not a control
+            # task at all -- it scored one timestep from the reset state.
+            #
+            # It made InvertedPendulum literally constant: its reward is +1 per timestep
+            # alive, so one step always returns exactly 1.0. The other ten were not caught
+            # only because their per-step rewards happen to be state-dependent -- they were
+            # measuring the wrong thing just as badly.
+            #   InvertedPendulum, action swept lo->hi:
+            #     1 step  : [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]   spread 0.0
+            #     episode : [2.0, 2.0, 3.0, 23.0, 3.0, 2.0, 2.0]  spread 21.0  (optimum at a=0)
+            #
+            # Gymnasium MuJoCo returns are to be MAXIMIZED, which is already BoCoDe's
+            # convention -- return the episode return as-is (do not negate).
+            self.env.reset(seed=self._rollout_seed)
+            done = truncated = False
+            episode_return = 0.0
+            steps = 0
+            while not (done or truncated) and steps < self._max_steps:
+                _, reward, done, truncated, _ = self.env.step(action)
+                episode_return += float(reward)
+                steps += 1
+            rewards[i, 0] = episode_return
         return None, rewards
 
 
@@ -333,6 +525,8 @@ class Walker2DProblem(BenchmarkProblem):
     available_dimensions = 6
     num_objectives = 1
     num_constraints = 0
+    _rollout_seed = _ROLLOUT_SEED
+    _max_steps = _MAX_STEPS
 
     def __init__(self):
         super().__init__(
@@ -355,12 +549,30 @@ class Walker2DProblem(BenchmarkProblem):
         batch_size = x.shape[0]
         rewards = torch.zeros(batch_size, self.__class__.num_objectives)
         for i in range(batch_size):
-            obs, _ = self.env.reset()
             action = x[i].cpu().numpy()
-            obs, reward, done, truncated, info = self.env.step(action)
-            # Gymnasium MuJoCo rewards are to be MAXIMIZED, which is already
-            # BoCoDe's convention -- return the reward as-is (do not negate).
-            rewards[i, 0] = reward
+            # Roll the EPISODE out under this constant action and return the episode
+            # return. Previously this took a SINGLE env.step(), which is not a control
+            # task at all -- it scored one timestep from the reset state.
+            #
+            # It made InvertedPendulum literally constant: its reward is +1 per timestep
+            # alive, so one step always returns exactly 1.0. The other ten were not caught
+            # only because their per-step rewards happen to be state-dependent -- they were
+            # measuring the wrong thing just as badly.
+            #   InvertedPendulum, action swept lo->hi:
+            #     1 step  : [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]   spread 0.0
+            #     episode : [2.0, 2.0, 3.0, 23.0, 3.0, 2.0, 2.0]  spread 21.0  (optimum at a=0)
+            #
+            # Gymnasium MuJoCo returns are to be MAXIMIZED, which is already BoCoDe's
+            # convention -- return the episode return as-is (do not negate).
+            self.env.reset(seed=self._rollout_seed)
+            done = truncated = False
+            episode_return = 0.0
+            steps = 0
+            while not (done or truncated) and steps < self._max_steps:
+                _, reward, done, truncated, _ = self.env.step(action)
+                episode_return += float(reward)
+                steps += 1
+            rewards[i, 0] = episode_return
         return None, rewards
 
 
@@ -368,6 +580,8 @@ class SwimmerProblem(BenchmarkProblem):
     available_dimensions = 2
     num_objectives = 1
     num_constraints = 0
+    _rollout_seed = _ROLLOUT_SEED
+    _max_steps = _MAX_STEPS
 
     def __init__(self):
         super().__init__(
@@ -390,12 +604,30 @@ class SwimmerProblem(BenchmarkProblem):
         batch_size = x.shape[0]
         rewards = torch.zeros(batch_size, self.__class__.num_objectives)
         for i in range(batch_size):
-            obs, _ = self.env.reset()
             action = x[i].cpu().numpy()
-            obs, reward, done, truncated, info = self.env.step(action)
-            # Gymnasium MuJoCo rewards are to be MAXIMIZED, which is already
-            # BoCoDe's convention -- return the reward as-is (do not negate).
-            rewards[i, 0] = reward
+            # Roll the EPISODE out under this constant action and return the episode
+            # return. Previously this took a SINGLE env.step(), which is not a control
+            # task at all -- it scored one timestep from the reset state.
+            #
+            # It made InvertedPendulum literally constant: its reward is +1 per timestep
+            # alive, so one step always returns exactly 1.0. The other ten were not caught
+            # only because their per-step rewards happen to be state-dependent -- they were
+            # measuring the wrong thing just as badly.
+            #   InvertedPendulum, action swept lo->hi:
+            #     1 step  : [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]   spread 0.0
+            #     episode : [2.0, 2.0, 3.0, 23.0, 3.0, 2.0, 2.0]  spread 21.0  (optimum at a=0)
+            #
+            # Gymnasium MuJoCo returns are to be MAXIMIZED, which is already BoCoDe's
+            # convention -- return the episode return as-is (do not negate).
+            self.env.reset(seed=self._rollout_seed)
+            done = truncated = False
+            episode_return = 0.0
+            steps = 0
+            while not (done or truncated) and steps < self._max_steps:
+                _, reward, done, truncated, _ = self.env.step(action)
+                episode_return += float(reward)
+                steps += 1
+            rewards[i, 0] = episode_return
         return None, rewards
 
 
@@ -403,6 +635,8 @@ class SwimmerPolicySearchProblem(BenchmarkProblem):
     available_dimensions = 16  # <-- matches D above
     num_objectives = 1
     num_constraints = 0
+    _rollout_seed = _ROLLOUT_SEED
+    _max_steps = _MAX_STEPS
 
     def __init__(
         self,
@@ -487,6 +721,8 @@ class AntPolicySearchProblem(BenchmarkProblem):
     available_dimensions = 840  # <-- matches D above
     num_objectives = 1
     num_constraints = 0
+    _rollout_seed = _ROLLOUT_SEED
+    _max_steps = _MAX_STEPS
 
     def __init__(
         self,
@@ -571,6 +807,8 @@ class HalfCheetahPolicySearchProblem(BenchmarkProblem):
     available_dimensions = 102  # <-- matches D above
     num_objectives = 1
     num_constraints = 0
+    _rollout_seed = _ROLLOUT_SEED
+    _max_steps = _MAX_STEPS
 
     def __init__(
         self,
@@ -655,6 +893,8 @@ class HopperPolicySearchProblem(BenchmarkProblem):
     available_dimensions = 102  # <-- matches D above
     num_objectives = 1
     num_constraints = 0
+    _rollout_seed = _ROLLOUT_SEED
+    _max_steps = _MAX_STEPS
 
     def __init__(
         self,
@@ -739,6 +979,8 @@ class Walker2DPolicySearchProblem(BenchmarkProblem):
     available_dimensions = 102  # <-- matches D above
     num_objectives = 1
     num_constraints = 0
+    _rollout_seed = _ROLLOUT_SEED
+    _max_steps = _MAX_STEPS
 
     def __init__(
         self,
