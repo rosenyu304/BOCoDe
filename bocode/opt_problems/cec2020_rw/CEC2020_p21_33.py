@@ -461,24 +461,21 @@ class CEC2020_p25(BenchmarkProblem):
     """
 
     num_objectives = 1
-    available_dimensions = 7
+    available_dimensions = 4
     num_constraints = 7
 
     def __init__(self):
         super().__init__(
-            dim=7,
+            dim=4,
             num_objectives=1,
             num_constraints=7,
-            #  X_opt=[[0] * 7],
+            #  X_opt=[[0] * 4],
             optimum=[1616.1197651],
             bounds=[
-                (10, 150),
-                (10, 150),
-                (100, 200),
-                (0, 50),
-                (10, 150),
-                (100, 300),
-                (1, 3.14),
+                (1, 16),
+                (1, 16),
+                (1e-6, 16e-6),
+                (1, 16),
             ],
         )
 
@@ -547,13 +544,13 @@ class CEC2020_p26(BenchmarkProblem):
 
     num_objectives = 1
     available_dimensions = 22
-    num_constraints = 87
+    num_constraints = 86
 
     def __init__(self):
         super().__init__(
             dim=22,
             num_objectives=1,
-            num_constraints=87,
+            num_constraints=86,
             #  X_opt=[[0] * 22],
             optimum=[35.359231973],
             bounds=[
@@ -656,7 +653,7 @@ class CEC2020_p26(BenchmarkProblem):
         )
 
         # Inequality constraints
-        g = np.zeros((n_samples, 87))
+        g = np.zeros((n_samples, 86))
         g[:, 0] = (366000 / (np.pi * w1) + 2 * c1 * Np1 / (Np1 + Ng1)) * (
             ((Np1 + Ng1) ** 2) / (4 * b1 * c1**2 * Np1)
         ) - sigma_N * JR / (0.0167 * W * Ko * Km)
@@ -859,35 +856,34 @@ class CEC2020_p26(BenchmarkProblem):
             * (b4 - 12.70)
             * (+1)
         )
+        # NOTE: `Np2` in g[:, 78] and `Np3` in g[:, 79] are NOT typos on our side --
+        # they reproduce the official cec20_func.m (g(:,79) / g(:,80)) verbatim.
         g[:, 76] = (
-            (-0.945 * c4 + Np4 + Ng4) * (b4 - 3.175) * (b4 - 8.255) * (b4 - 12.70) * 1
-        )
-        g[:, 77] = (
             (-0.646 * c1 + Np1 + Ng1) * (b1 - 3.175) * (b1 - 5.715) * (b1 - 12.70) * -1
         )
-        g[:, 78] = (
+        g[:, 77] = (
             (-0.646 * c2 + Np2 + Ng2) * (b2 - 3.175) * (b2 - 5.715) * (b2 - 12.70) * -1
         )
-        g[:, 79] = (
+        g[:, 78] = (
             (-0.646 * c3 + Np2 + Ng3) * (b3 - 3.175) * (b3 - 5.715) * (b3 - 12.70) * -1
         )
-        g[:, 80] = (
+        g[:, 79] = (
             (-0.646 * c4 + Np3 + Ng4) * (b4 - 3.175) * (b4 - 5.715) * (b4 - 12.70) * -1
         )
-        g[:, 81] = (
+        g[:, 80] = (
             (-0.504 * c1 + Np1 + Ng1) * (b1 - 3.175) * (b1 - 5.715) * (b1 - 8.255) * 1
         )
-        g[:, 82] = (
+        g[:, 81] = (
             (-0.504 * c2 + Np2 + Ng2) * (b2 - 3.175) * (b2 - 5.715) * (b2 - 8.255) * 1
         )
-        g[:, 83] = (
+        g[:, 82] = (
             (-0.504 * c3 + Np3 + Ng3) * (b3 - 3.175) * (b3 - 5.715) * (b3 - 8.255) * 1
         )
-        g[:, 84] = (
+        g[:, 83] = (
             (-0.504 * c4 + Np4 + Ng4) * (b4 - 3.175) * (b4 - 5.715) * (b4 - 8.255) * 1
         )
-        g[:, 85] = wmin - w1 * (Np1 * Np2 * Np3 * Np4) / (Ng1 * Ng2 * Ng3 * Ng4)
-        g[:, 86] = -wmax + w1 * (Np1 * Np2 * Np3 * Np4) / (Ng1 * Ng2 * Ng3 * Ng4)
+        g[:, 84] = wmin - w1 * (Np1 * Np2 * Np3 * Np4) / (Ng1 * Ng2 * Ng3 * Ng4)
+        g[:, 85] = -wmax + w1 * (Np1 * Np2 * Np3 * Np4) / (Ng1 * Ng2 * Ng3 * Ng4)
         g[np.isinf(g)] = 1e6
         g[np.isnan(g)] = 1e6
         f[np.isinf(f)] = 1e6
@@ -1203,7 +1199,8 @@ class CEC2020_p30(BenchmarkProblem):
             ]
         )
 
-        x3 = d[np.clip(np.round(X[:, 2]).astype(int), 0, len(d) - 1)]
+        # MATLAB `d(round(x3))` is 1-based; bounds [0.51, 42.49] -> round in {1..42}.
+        x3 = d[np.clip(np.round(X[:, 2]).astype(int), 1, len(d)) - 1]
         x3 = x3.reshape(-1)
 
         # Objective function
@@ -1404,18 +1401,21 @@ class CEC2020_p33(BenchmarkProblem):
 
             for ely in range(nely):
                 for elx in range(nelx):
-                    n1 = (nely + 1) * (elx - 1) + ely
-                    n2 = (nely + 1) * elx + ely
+                    # 0-based transcription of MATLAB
+                    #   n1 = (nely+1)*(elx-1)+ely; n2 = (nely+1)*elx+ely;
+                    #   Ue = U([2n1-1; 2n1; 2n2-1; 2n2; 2n2+1; 2n2+2; 2n1+1; 2n1+2])
+                    n1 = (nely + 1) * elx + ely
+                    n2 = (nely + 1) * (elx + 1) + ely
                     Ue = U[
                         [
-                            2 * n1 - 1,
                             2 * n1,
-                            2 * n2 - 1,
+                            2 * n1 + 1,
                             2 * n2,
                             2 * n2 + 1,
                             2 * n2 + 2,
-                            2 * n1 + 1,
+                            2 * n2 + 3,
                             2 * n1 + 2,
+                            2 * n1 + 3,
                         ],
                         0,
                     ]
@@ -1429,13 +1429,14 @@ class CEC2020_p33(BenchmarkProblem):
             # Filtering of sensitivities
             dc = check(3, 10, 1.5, Xsplice, dc)
             f[i, 0] = c
-            g[i, :] = dc.flatten()
+            # MATLAB `g(i,:) = dc(1:end)` linearises column-major.
+            g[i, :] = dc.flatten(order="F")
 
         # No equality constraints
         h = np.zeros((n_samples, 0))
 
         return (
             torch.from_numpy(np.abs(h) - 1e-4),
-            torch.from_numpy(g).unsqueeze(-1),
+            torch.from_numpy(g),
             -torch.from_numpy(f),
         )

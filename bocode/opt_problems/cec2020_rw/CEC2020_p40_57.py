@@ -27,7 +27,8 @@ class CEC2020_p40(BenchmarkProblem):
             num_constraints=76,
             #  X_opt=[[0] * 76],
             optimum=[0.0],
-            bounds=[(-1.0, 1.0)] * 76,
+            # official xmin40/xmax40: vars 75,76 (1-based) are in [0, 2]
+            bounds=[(-1.0, 1.0)] * 74 + [(0.0, 2.0)] * 2,
         )
         self.initialized = False
         self.P = None
@@ -203,7 +204,8 @@ class CEC2020_p42(BenchmarkProblem):
             num_constraints=76,
             #  X_opt=[[0] * 86],
             optimum=[0.077027102],
-            bounds=[(-1.0, 1.0)] * 86,
+            # official: vars 75,76 in [0, 2]; vars 77..86 in [0, 500]
+            bounds=[(-1.0, 1.0)] * 74 + [(0.0, 2.0)] * 2 + [(0.0, 500.0)] * 10,
         )
         self.initialized = False
         self.P = None
@@ -290,7 +292,8 @@ class CEC2020_p43(BenchmarkProblem):
             num_constraints=76,
             #  X_opt=[[0] * 86],
             optimum=[0.07983597],
-            bounds=[(-1.0, 1.0)] * 86,
+            # official: vars 75,76 in [0, 2]; vars 77..86 in [0, 500]
+            bounds=[(-1.0, 1.0)] * 74 + [(0.0, 2.0)] * 2 + [(0.0, 500.0)] * 10,
         )
         self.initialized = False
         self.P = None
@@ -367,13 +370,13 @@ class CEC2020_p44(BenchmarkProblem):
 
     num_objectives = 1
     available_dimensions = 30
-    num_constraints = 105
+    num_constraints = 91
 
     def __init__(self):
         super().__init__(
             dim=30,
             num_objectives=1,
-            num_constraints=105,
+            num_constraints=91,
             #  X_opt=[[0] * 30],
             optimum=[-6273.1715],
             bounds=[(40.0, 1960.0)] * 30,
@@ -485,10 +488,15 @@ class CEC2020_p44(BenchmarkProblem):
             XX[:, i] = X[:, 2 * i]
             YY[:, i] = X[:, 2 * i + 1]
 
+        # MATLAB: for i = 1:(0.5*D), for j = (i+1):(0.5*D)-1  -- the inner loop stops
+        # one short of the last turbine, giving 91 (not 105) pair constraints. Both
+        # official implementations (cec20_func.m and the C++ port) do this, and the
+        # problem definitions table reports g = 91 for RC44.
+        n_turb = D // 2
         k = 0
-        g = np.zeros((n_samples, (D // 2) * ((D // 2) - 1) // 2))
-        for i in range(D // 2):
-            for j in range(i + 1, D // 2):
+        g = np.zeros((n_samples, (n_turb - 1) * (n_turb - 2) // 2))
+        for i in range(n_turb):
+            for j in range(i + 1, n_turb - 1):
                 g[:, k] = 5 * R - np.sqrt(
                     (XX[:, i] - XX[:, j]) ** 2 + (YY[:, i] - YY[:, j]) ** 2
                 )
@@ -1282,7 +1290,7 @@ class CEC2020_p51(BenchmarkProblem):
 
         return (
             torch.from_numpy(np.abs(h) - 1e-4).unsqueeze(-1),
-            torch.from_numpy(g).unsqueeze(-1),
+            torch.from_numpy(g),
             -torch.from_numpy(f).unsqueeze(-1),
         )
 
@@ -1354,7 +1362,7 @@ class CEC2020_p52(BenchmarkProblem):
 
         return (
             torch.from_numpy(np.abs(h) - 1e-4).unsqueeze(-1),
-            torch.from_numpy(g).unsqueeze(-1),
+            torch.from_numpy(g),
             -torch.from_numpy(f).unsqueeze(-1),
         )
 
@@ -1427,7 +1435,7 @@ class CEC2020_p53(BenchmarkProblem):
 
         return (
             torch.from_numpy(np.abs(h) - 1e-4).unsqueeze(-1),
-            torch.from_numpy(g).unsqueeze(-1),
+            torch.from_numpy(g),
             -torch.from_numpy(f).unsqueeze(-1),
         )
 
@@ -1499,7 +1507,7 @@ class CEC2020_p54(BenchmarkProblem):
 
         return (
             torch.from_numpy(np.abs(h) - 1e-4).unsqueeze(-1),
-            torch.from_numpy(g).unsqueeze(-1),
+            torch.from_numpy(g),
             -torch.from_numpy(f).unsqueeze(-1),
         )
 

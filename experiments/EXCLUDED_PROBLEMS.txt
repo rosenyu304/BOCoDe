@@ -20,5 +20,16 @@
 # have deleted all 15 MODAct problems (7 of their 8 constraints are smooth and they DO have
 # feasible points) -- i.e. more than half of Table 4, silently. Caught and reverted.
 
-Truss120D
-Truss200D
+# ===========================================================================
+# THE EXCLUSION LIST IS NOW EMPTY. Every problem previously excluded was FIXED:
+#   CEC2020_p20  — was 'unsolvable'. It was CORRUPTED by a mis-applied 0.0625 gauge snap
+#                  (areas collapsed to {0, 0.0625}; area 0 -> divide-by-zero -> inf -> the
+#                  1e6 sentinel -> step-function constraints). Snap removed; it now
+#                  reproduces its published optimum 263.895843.
+#   Truss120D    — called super().scale(X) UNCONDITIONALLY, so it rejected the already-scaled
+#   Truss200D      X that every other problem receives -> RangeException on every evaluation.
+#                  Scaling is now opt-in, matching the working sibling Truss72D.
+#
+# An exclusion is a scientific claim: it removes a benchmark from the paper. Meet the same
+# evidentiary bar as a result — root cause identified, fix derived from the source, published
+# optimum reproduced. 'It crashes' is a reason to investigate, not to exclude.

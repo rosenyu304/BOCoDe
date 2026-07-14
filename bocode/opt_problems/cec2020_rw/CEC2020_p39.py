@@ -67,7 +67,8 @@ class CEC2020_p39(BenchmarkProblem):
         Qsp = np.zeros((n_samples, 30))
 
         # Generator locations and fuel cost coefficients
-        gen_idx = [1, 2, 13, 22, 23, 27]
+        # MATLAB ng = [1,2,13,22,23,27] (1-based) -> 0-based
+        gen_idx = [0, 1, 12, 21, 22, 26]
         a1 = np.zeros(6)  # No constant terms
         b1 = np.array([2, 1.75, 1, 3.25, 3, 3])  # Linear coefficients
         c1 = np.array(

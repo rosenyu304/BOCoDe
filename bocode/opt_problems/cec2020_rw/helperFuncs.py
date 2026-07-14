@@ -11,6 +11,9 @@ h = None
 
 
 def ybus(linedata, f):
+    # MATLAB passes `linedata` by value; mutating the caller's array here would
+    # rescale the cached line data on every call (p40/p42/p43 evaluate in a loop).
+    linedata = linedata.copy()
     linedata[:, 3] = linedata[:, 3] * f
 
     fb = linedata[:, 0].astype(int)

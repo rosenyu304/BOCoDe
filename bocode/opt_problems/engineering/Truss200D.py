@@ -25,7 +25,7 @@ class Truss200D(BenchmarkProblem):
             dim=200, num_objectives=1, num_constraints=200, bounds=[(0.1, 33.7)] * 200
         )
 
-    def _evaluate_implementation(self, X, scaling=True, version=1):
+    def _evaluate_implementation(self, X, scaling=False, version=1):
         """
         Version [int]: 1, 2, or 3 for different loading conditions:
             (1) 11 nodes with 1e3 N in x direction

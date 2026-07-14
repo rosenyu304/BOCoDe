@@ -24,8 +24,14 @@ class Truss120D(BenchmarkProblem):
             dim=120, num_objectives=1, num_constraints=121, bounds=[(0.775, 20)] * 120
         )
 
-    def _evaluate_implementation(self, X, version="4_forces"):
-        X = super().scale(X)
+    def _evaluate_implementation(self, X, version="4_forces", scaling=False):
+        # Every problem in the suite receives X ALREADY IN ITS BOUNDS (that is what
+        # problem.sample() and the algorithms produce). Scaling unconditionally re-mapped an
+        # already-scaled X and raised RangeException, so this problem could never be evaluated.
+        # `scaling=True` is kept for the [0,1]-cube callers (e.g. the smoke test), matching the
+        # working sibling Truss72D.
+        if scaling:
+            X = super().scale(X)
 
         # import slientruss3d
         from slientruss3d.truss import Truss
