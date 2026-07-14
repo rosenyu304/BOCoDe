@@ -198,9 +198,15 @@ def optimize_problem(
     # SCBO Appendix C: candidate set size follows TuRBO.
     n_cand = min(5000, max(2000, 200 * dim))
 
-    def start_region(offset: int):
-        """Fresh trust region on a fresh initial design (TuRBO/SCBO restart)."""
-        X = initial_design(n_init, dim, seed + offset)
+    def start_region(offset: int, budget: int | None = None):
+        """Fresh trust region on a fresh initial design (TuRBO/SCBO restart).
+
+        ``budget`` caps how many points may be EVALUATED, so a restart can never spend more
+        objective evaluations than the run has left. Without this cap the final restart still
+        overran the budget (it evaluated all n_init points before the caller could stop it).
+        """
+        n = n_init if budget is None else max(0, min(n_init, budget))
+        X = initial_design(n_init, dim, seed + offset)[:n]
         Yo, Yc = obj.evaluate_raw(X)
         i = _best_index(Yo, Yc)
         return X, Yo, Yc, _tr(dim), Yo[i].item(), Yc[i].clone()
@@ -226,6 +232,16 @@ def optimize_problem(
         best = best_feasible(Yo, Yc)
         res.start(best)
         start_it = 0
+    # X/Yo/Yc are the TRUST-REGION-LOCAL training data: SCBO Sec. 3.1 step 2d says to DISCARD
+    # them on a restart, and that is correct. But the EVALUATION HISTORY must never be discarded,
+    # and restart designs must be CHARGED to the budget. Keeping only the TR data caused scbo to
+    # (a) spend n_restarts * n_init objective evaluations for FREE -- 100 evaluations against a
+    # budget of 80 on PressureVessel, a 25% larger budget than every method it is compared with --
+    # and (b) save only the LAST region's rows (33 of 100), which silently defeats the
+    # total-evaluation axis in _eval_utils (it would read 33 evaluations, not 100). Mirror
+    # turbo.py, which gets this right.
+    hist_X, hist_Yo, hist_Yc = X.clone(), Yo.clone(), Yc.clone()
+    evals = 0  # BO evaluations charged against `iters` (the initial design is separate)
 
     for it in range(start_it, iters):
         # SCBO applies the copula to the objective and bilog to every constraint.
@@ -268,18 +284,40 @@ def optimize_problem(
         X = torch.cat([X, x_new], dim=0)
         Yo = torch.cat([Yo, o], dim=0)
         Yc = torch.cat([Yc, c], dim=0)
+        hist_X = torch.cat([hist_X, x_new], dim=0)
+        hist_Yo = torch.cat([hist_Yo, o], dim=0)
+        hist_Yc = torch.cat([hist_Yc, c], dim=0)
         best = max(best, best_feasible(o, c))
         res.record(best)
+        evals += 1
+        if evals >= iters:
+            break
 
         if tr.restart:
-            # L < L_min: discard the local data and initialize a new trust region on a
-            # fresh initial design (SCBO Sec. 3.1 step 2d / Theorem 1).
+            # L < L_min: DISCARD THE LOCAL DATA and start a new trust region on a fresh initial
+            # design (SCBO Sec. 3.1 step 2d / Theorem 1). The local data is discarded -- the
+            # EVALUATION HISTORY is not, and the fresh design is CHARGED to the budget.
             n_restarts += 1
-            X, Yo, Yc, tr, best_value, best_con = start_region(n_restarts * 1000)
-            best = max(best, best_feasible(Yo, Yc))
+            remaining = iters - evals
+            if remaining <= 0:
+                break
+            X, Yo, Yc, tr, best_value, best_con = start_region(
+                n_restarts * 1000, budget=remaining
+            )
+            hist_X = torch.cat([hist_X, X], dim=0)
+            hist_Yo = torch.cat([hist_Yo, Yo], dim=0)
+            hist_Yc = torch.cat([hist_Yc, Yc], dim=0)
+            for j in range(X.shape[0]):
+                best = max(best, best_feasible(Yo[j : j + 1], Yc[j : j + 1]))
+                res.record(best)
+                evals += 1
+                if evals >= iters:
+                    break
+            if evals >= iters:
+                break
 
         if checkpoint:
-            res.set_history(X, Yo, n_init, c=Yc)
+            res.set_history(hist_X, hist_Yo, n_init, c=hist_Yc)
             save_checkpoint(
                 checkpoint,
                 X,
@@ -297,7 +335,7 @@ def optimize_problem(
                     "best": best,
                 },
             )
-    res.set_history(X, Yo, n_init, c=Yc)
+    res.set_history(hist_X, hist_Yo, n_init, c=hist_Yc)
     return res
 
 

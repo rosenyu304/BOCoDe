@@ -126,9 +126,15 @@ def optimize_problem(
         acquisition_function=f"LogEI on penalized objective (rho={rho})",
     )
 
-    # The penalty transform itself (normalization constants fixed at construction, from its
-    # own 256-point sample -- independent of this run's data and seed).
-    pen = PenalizedProblem(problem, weight=rho)
+    # The penalty transform's min-max normalisation is calibrated on the INITIAL DESIGN, which the
+    # run has already paid for. It used to be calibrated on a private 256-point sample drawn inside
+    # PenalizedProblem.__init__ -- 256 REAL objective evaluations, entirely OFF-BUDGET. A penalty
+    # run given 25 iterations therefore spent 281 evaluations: an 11x larger budget than every
+    # method it was compared against. (That is a comparison-invalidating bug, not a tuning choice.)
+    # Calibrating on the initial design costs nothing extra and keeps every method on the same
+    # n_init + iters budget. It does make the transform depend on the seed's initial design, which
+    # the previous scheme deliberately avoided -- an acceptable price for a valid comparison.
+    pen: PenalizedProblem | None = None
 
     def evaluate(X_unit: torch.Tensor):
         """Raw objective + constraints (for the metric) and the penalized scalar (for the GP).
@@ -146,10 +152,21 @@ def optimize_problem(
         train_X, train_P, start_it, data = load_checkpoint(checkpoint, res)
         train_obj = torch.tensor(data["obj"], dtype=DTYPE)
         train_con = torch.tensor(data["con"], dtype=DTYPE)
+        # rebuild the transform from the SAME initial design, so a resumed run is identical
+        pen = PenalizedProblem(
+            problem,
+            weight=rho,
+            calibration=(train_obj[:n_init], train_con[:n_init]),
+        )
         best = best_feasible(train_obj, train_con)
     else:
         train_X = initial_design(n_init, obj.dim, seed)
-        train_obj, train_con, train_P = evaluate(train_X)
+        # evaluate the initial design ONCE (this is the budgeted n_init), then calibrate the
+        # penalty transform on it -- no extra objective evaluations are spent.
+        init_vals, init_cons = obj.evaluate_raw(train_X)
+        pen = PenalizedProblem(problem, weight=rho, calibration=(init_vals, init_cons))
+        train_obj, train_con = init_vals, init_cons
+        train_P = pen.penalize(init_vals, init_cons).to(DTYPE)
         best = best_feasible(train_obj, train_con)
         res.start(best)
         start_it = 0

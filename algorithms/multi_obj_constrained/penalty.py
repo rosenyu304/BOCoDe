@@ -92,10 +92,19 @@ class _Penalty:
     depend on the run.
     """
 
-    def __init__(self, problem, weight: float):
+    def __init__(self, problem, weight: float, calibration=None):
+        # ⚠️ BUDGET: calibrate on data the run has ALREADY PAID FOR. Drawing a private
+        # N_SAMPLE=256 design here evaluates the real objective 256 times OFF-BUDGET, so a run
+        # given 25 iterations actually spent 281 evaluations -- an 11x larger budget than every
+        # method it is compared against. That invalidates the comparison; it is not a tuning
+        # choice. ``calibration`` is the already-evaluated (values, constraints) of the initial
+        # design, which every method pays for anyway.
         self.weight = float(weight)
-        X = problem.sample(N_SAMPLE, seed=0)
-        values, constraints = problem.evaluate(X)
+        if calibration is not None:
+            values, constraints = calibration
+        else:
+            X = problem.sample(N_SAMPLE, seed=0)
+            values, constraints = problem.evaluate(X)
         values = values.to(DTYPE)
         viol = constraints.to(DTYPE).clamp(min=0).sum(dim=1, keepdim=True)
         finite = torch.isfinite(values).all(dim=1)
@@ -139,15 +148,21 @@ def optimize_problem(
         seed,
         acquisition_function=f"qLogNEHVI on penalized objectives (rho={rho})",
     )
-    penalty = _Penalty(problem, rho)
+    penalty: _Penalty | None = None
 
     if checkpoint and Path(checkpoint).exists():
         train_X, train_Y, start_it, data = load_checkpoint(checkpoint, res)
         train_C = torch.tensor(data["C"], dtype=DTYPE)
         ref_point = torch.tensor(data["ref_point"], dtype=DTYPE)
+        # rebuild the transform from the SAME initial design so a resumed run is identical
+        penalty = _Penalty(
+            problem, rho, calibration=(train_Y[:n_init], train_C[:n_init])
+        )
     else:
         train_X = initial_design(n_init, obj.dim, seed)
         train_Y, train_C = obj.evaluate_raw(train_X)
+        # calibrate on the initial design -- costs no extra objective evaluations
+        penalty = _Penalty(problem, rho, calibration=(train_Y, train_C))
         ref_point = obj.hv_ref_point(train_Y)
         start_it = 0
 

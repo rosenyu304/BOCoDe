@@ -80,6 +80,7 @@ class PenalizedProblem(_Wrapper):
         weight: float = 1.0,
         n_sample: int = 256,
         seed: int = 0,
+        calibration: tuple[torch.Tensor, torch.Tensor] | None = None,
     ) -> None:
         if base.num_constraints == 0:
             raise ValueError("PenalizedProblem needs a constrained base problem.")
@@ -89,8 +90,17 @@ class PenalizedProblem(_Wrapper):
         self.weight = float(weight)
         self.variable_types = base.variable_types
 
-        X = base.sample(n_sample, seed=seed)
-        values, constraints = base.evaluate(X)
+        # ⚠️ BUDGET: the min-max normalisation must be calibrated on data the CALLER HAS ALREADY
+        # PAID FOR. Drawing a fresh `n_sample` design here evaluates the real objective 256 times
+        # OFF-BUDGET, so a penalty baseline given 25 iterations actually spent 281 evaluations --
+        # an 11x larger budget than every method it is compared against. Pass ``calibration``
+        # (the already-evaluated ``(values, constraints)`` of the initial design) to avoid that.
+        # The un-calibrated path is kept for interactive/standalone use, where no budget applies.
+        if calibration is not None:
+            values, constraints = calibration
+        else:
+            X = base.sample(n_sample, seed=seed)
+            values, constraints = base.evaluate(X)
         obj = values[:, :1]
         viol = constraints.clamp(min=0).sum(dim=1, keepdim=True)
         self._obj_lo, self._obj_hi = _finite_range(obj)

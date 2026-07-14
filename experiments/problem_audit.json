@@ -1,5 +1,61 @@
 [
  {
+  "problem": "AgNP",
+  "dim": 5,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 105
+ },
+ {
+  "problem": "Allison",
+  "dim": 3,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 500
+ },
+ {
+  "problem": "AntPolicySearchProblem",
+  "dim": 840,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 500
+ },
+ {
+  "problem": "AntProblem",
+  "dim": 8,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 500
+ },
+ {
+  "problem": "AutoAM",
+  "dim": 4,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 49
+ },
+ {
+  "problem": "Borehole",
+  "dim": 8,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 500
+ },
+ {
+  "problem": "BotorchCarSideImpact",
+  "dim": 7,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 500
+ },
+ {
   "problem": "CEC2020_p1",
   "dim": 9,
   "n_con": 8,
@@ -269,6 +325,14 @@
   "issues": [],
   "obj_distinct": 500,
   "feasible": "6/500"
+ },
+ {
+  "problem": "CEC2020_p31",
+  "dim": 4,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 500
  },
  {
   "problem": "CEC2020_p32",
@@ -2119,6 +2183,226 @@
   "feasible": "323/500"
  },
  {
+  "problem": "EulerBernoulliBeamBending",
+  "dim": 3,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 500
+ },
+ {
+  "problem": "HPOBSurr_5970_14951",
+  "dim": 2,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 498
+ },
+ {
+  "problem": "HPOBSurr_5970_34536",
+  "dim": 2,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 498
+ },
+ {
+  "problem": "HPOBSurr_5970_3492",
+  "dim": 2,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 500
+ },
+ {
+  "problem": "HPOBSurr_5970_37",
+  "dim": 2,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 500
+ },
+ {
+  "problem": "HPOBSurr_5970_49",
+  "dim": 2,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 500
+ },
+ {
+  "problem": "HPOBSurr_5970_9952",
+  "dim": 2,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 496
+ },
+ {
+  "problem": "HPOBSurr_6766_10101",
+  "dim": 2,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 419
+ },
+ {
+  "problem": "HPOBSurr_6766_145804",
+  "dim": 2,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 498
+ },
+ {
+  "problem": "HPOBSurr_6766_145953",
+  "dim": 2,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 499
+ },
+ {
+  "problem": "HPOBSurr_6766_146064",
+  "dim": 2,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 499
+ },
+ {
+  "problem": "HPOBSurr_6766_31",
+  "dim": 2,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 500
+ },
+ {
+  "problem": "HPOBSurr_6766_3903",
+  "dim": 2,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 367
+ },
+ {
+  "problem": "HPOB_5970_14951",
+  "dim": 2,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 115
+ },
+ {
+  "problem": "HPOB_5970_34536",
+  "dim": 2,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 169
+ },
+ {
+  "problem": "HPOB_5970_3492",
+  "dim": 2,
+  "n_con": 0,
+  "verdict": "DEGENERATE",
+  "issues": [
+   "objective is a STEP FUNCTION (2 distinct values) \u2014 GP cannot fit it"
+  ],
+  "obj_distinct": 2
+ },
+ {
+  "problem": "HPOB_5970_37",
+  "dim": 2,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 58
+ },
+ {
+  "problem": "HPOB_5970_49",
+  "dim": 2,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 78
+ },
+ {
+  "problem": "HPOB_5970_9952",
+  "dim": 2,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 89
+ },
+ {
+  "problem": "HPOB_6766_10101",
+  "dim": 2,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 12
+ },
+ {
+  "problem": "HPOB_6766_145804",
+  "dim": 2,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 83
+ },
+ {
+  "problem": "HPOB_6766_145953",
+  "dim": 2,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 98
+ },
+ {
+  "problem": "HPOB_6766_146064",
+  "dim": 2,
+  "n_con": 0,
+  "verdict": "DEGENERATE",
+  "issues": [
+   "objective is a STEP FUNCTION (3 distinct values) \u2014 GP cannot fit it"
+  ],
+  "obj_distinct": 3
+ },
+ {
+  "problem": "HPOB_6766_31",
+  "dim": 2,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 47
+ },
+ {
+  "problem": "HPOB_6766_3903",
+  "dim": 2,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 14
+ },
+ {
+  "problem": "HalfCheetahPolicySearchProblem",
+  "dim": 102,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 500
+ },
+ {
+  "problem": "HalfCheetahProblem",
+  "dim": 6,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 500
+ },
+ {
   "problem": "HeatExchanger",
   "dim": 8,
   "n_con": 6,
@@ -2126,6 +2410,98 @@
   "issues": [],
   "obj_distinct": 500,
   "feasible": "1/500"
+ },
+ {
+  "problem": "HopperPolicySearchProblem",
+  "dim": 33,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 500
+ },
+ {
+  "problem": "HopperProblem",
+  "dim": 3,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 500
+ },
+ {
+  "problem": "HumanoidProblem",
+  "dim": 17,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 499
+ },
+ {
+  "problem": "HumanoidStandupProblem",
+  "dim": 17,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 500
+ },
+ {
+  "problem": "InvertedDoublePendulumProblem",
+  "dim": 1,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 499
+ },
+ {
+  "problem": "InvertedPendulumProblem",
+  "dim": 1,
+  "n_con": 0,
+  "verdict": "UNSOLVABLE",
+  "issues": [
+   "objective is CONSTANT \u2014 nothing to optimize"
+  ],
+  "obj_distinct": 1
+ },
+ {
+  "problem": "LassoBreastCancer",
+  "dim": 9,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 498
+ },
+ {
+  "problem": "LassoDNA",
+  "dim": 180,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 500
+ },
+ {
+  "problem": "LassoDiabetes",
+  "dim": 8,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 480
+ },
+ {
+  "problem": "LassoLeukemia",
+  "dim": 7129,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 500
+ },
+ {
+  "problem": "LassoRCV1",
+  "dim": 47236,
+  "n_con": 0,
+  "verdict": "UNSOLVABLE",
+  "issues": [
+   "objective is CONSTANT \u2014 nothing to optimize"
+  ],
+  "obj_distinct": 1
  },
  {
   "problem": "MOPTA08Car",
@@ -2179,6 +2555,30 @@
   "feasible": "0/500"
  },
  {
+  "problem": "MiniAeroWing",
+  "dim": 3,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 500
+ },
+ {
+  "problem": "P3HT",
+  "dim": 5,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 57
+ },
+ {
+  "problem": "PD4CartPole",
+  "dim": 4,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 31
+ },
+ {
   "problem": "PEARL",
   "dim": 7,
   "n_con": 6,
@@ -2186,6 +2586,221 @@
   "issues": [],
   "obj_distinct": 500,
   "feasible": "2/500"
+ },
+ {
+  "problem": "PID4Acrobot",
+  "dim": 3,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 196
+ },
+ {
+  "problem": "Penicillin",
+  "dim": 7,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 499
+ },
+ {
+  "problem": "Perovskite",
+  "dim": 3,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 63
+ },
+ {
+  "problem": "PowerElectronics",
+  "verdict": "ERROR",
+  "issues": [
+   "ImportError: PowerElectronics requires the optional 'engibench' extra and a native ngspice (v42-v45). Install with: pip install 'bocode[engibench]' and a recent ngspice (conda-forge's v41 is too old for engibench)."
+  ]
+ },
+ {
+  "problem": "PusherProblem",
+  "dim": 7,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 500
+ },
+ {
+  "problem": "QPowerModel",
+  "dim": 8,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 499
+ },
+ {
+  "problem": "RE21",
+  "dim": 4,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 500
+ },
+ {
+  "problem": "RE22",
+  "dim": 3,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 500
+ },
+ {
+  "problem": "RE23",
+  "dim": 4,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 500
+ },
+ {
+  "problem": "RE24",
+  "dim": 2,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 500
+ },
+ {
+  "problem": "RE25",
+  "dim": 3,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 500
+ },
+ {
+  "problem": "RE31",
+  "dim": 3,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 500
+ },
+ {
+  "problem": "RE32",
+  "dim": 4,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 500
+ },
+ {
+  "problem": "RE33",
+  "dim": 4,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 500
+ },
+ {
+  "problem": "RE34",
+  "dim": 5,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 498
+ },
+ {
+  "problem": "RE35",
+  "dim": 7,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 500
+ },
+ {
+  "problem": "RE36",
+  "dim": 4,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 494
+ },
+ {
+  "problem": "RE37",
+  "dim": 4,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 500
+ },
+ {
+  "problem": "RE41",
+  "dim": 7,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 500
+ },
+ {
+  "problem": "RE42",
+  "dim": 6,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 500
+ },
+ {
+  "problem": "RE61",
+  "dim": 3,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 500
+ },
+ {
+  "problem": "RE91",
+  "dim": 7,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 500
+ },
+ {
+  "problem": "ReacherProblem",
+  "dim": 2,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 500
+ },
+ {
+  "problem": "ReactivityModel",
+  "dim": 8,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 500
+ },
+ {
+  "problem": "RobotPush",
+  "dim": 14,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 261
+ },
+ {
+  "problem": "Rover",
+  "dim": 100,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 500
+ },
+ {
+  "problem": "SVM",
+  "dim": 388,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 460
  },
  {
   "problem": "SatelliteDesign",
@@ -2204,6 +2819,22 @@
   "issues": [],
   "obj_distinct": 500,
   "feasible": "471/500"
+ },
+ {
+  "problem": "SwimmerPolicySearchProblem",
+  "dim": 16,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 500
+ },
+ {
+  "problem": "SwimmerProblem",
+  "dim": 2,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 500
  },
  {
   "problem": "ThreeTruss",
@@ -2288,6 +2919,30 @@
   "feasible": "0/500"
  },
  {
+  "problem": "VehicleSafety",
+  "dim": 5,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 498
+ },
+ {
+  "problem": "Walker2DPolicySearchProblem",
+  "dim": 102,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 500
+ },
+ {
+  "problem": "Walker2DProblem",
+  "dim": 6,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 500
+ },
+ {
   "problem": "WaterProblem",
   "dim": 3,
   "n_con": 7,
@@ -2324,5 +2979,13 @@
   ],
   "obj_distinct": 500,
   "feasible": "0/500"
+ },
+ {
+  "problem": "Wing",
+  "dim": 10,
+  "n_con": 0,
+  "verdict": "ok",
+  "issues": [],
+  "obj_distinct": 500
  }
 ]

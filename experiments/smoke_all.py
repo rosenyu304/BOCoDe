@@ -24,7 +24,6 @@ import traceback
 from pathlib import Path
 
 import numpy as np
-import torch
 
 _here = Path(__file__).resolve().parent
 for _cand in (_here / "BOCoDe", _here.parent / "BOCoDe", _here):
@@ -37,7 +36,7 @@ sys.path.insert(0, str(BOCODE))
 
 import bocode  # noqa: E402
 
-N_INIT, ITERS = 20, 5   # big enough that a constrained problem can find a feasible point
+N_INIT, ITERS = 20, 5  # big enough that a constrained problem can find a feasible point
 
 # (module, problem, class) — one small, fast problem per class.
 MATRIX = [
@@ -78,6 +77,28 @@ MATRIX = [
 # Cost/weight problems: the MAXIMIZATION value must be NEGATIVE. This is the check
 # that would have caught the 63 inverted problems (MOPTA08Car was maximizing mass).
 COST_PROBLEMS = {"ThreeTruss", "Allison"}
+
+
+class _CountingProblem:
+    """Wrap a problem and COUNT REAL OBJECTIVE EVALUATIONS.
+
+    A budget check that reads ``res.X`` cannot catch a budget bug: scbo silently spent 100
+    evaluations against a budget of 80 (restart designs were free) while saving only 33 rows,
+    so ``res.X`` reported 33. It therefore competed against every other method with a 25%
+    larger budget, AND its curve was plotted ~20 evaluations to the left of where it belonged.
+    The only way to catch that is to count the evaluations the problem actually served.
+    """
+
+    def __init__(self, p):
+        self.p = p
+        self.n_evals = 0
+
+    def __getattr__(self, k):
+        return getattr(self.p, k)
+
+    def evaluate(self, X):
+        self.n_evals += X.shape[0]
+        return self.p.evaluate(X)
 
 
 def check(res, problem, cls) -> list[str]:
@@ -128,7 +149,7 @@ def main() -> None:
         t0 = time.perf_counter()
         try:
             m = importlib.import_module(mod_name)
-            problem = bocode.get_problem(prob_name)()
+            problem = _CountingProblem(bocode.get_problem(prob_name)())
             kw = {}
             if "device" in m.optimize_problem.__code__.co_varnames:
                 kw["device"] = a.device
@@ -136,6 +157,22 @@ def main() -> None:
                 kw["n_init"] = N_INIT
             res = m.optimize_problem(problem, iters=ITERS, seed=0, **kw)
             bad = check(res, prob_name, cls)
+            # BUDGET PARITY, measured not inferred: a method may not spend more objective
+            # evaluations than n_init + iters, and must retain all of them in its history.
+            n_init_used = kw.get("n_init", N_INIT)
+            budget = n_init_used + ITERS
+            if problem.n_evals > budget:
+                bad.append(
+                    f"BUDGET OVERSPEND: used {problem.n_evals} objective evaluations "
+                    f"against a budget of {budget} (+{problem.n_evals - budget}) — it is "
+                    f"competing with a larger budget than every other method"
+                )
+            n_rows = res.X.shape[0] if getattr(res, "X", None) is not None else 0
+            if n_rows < problem.n_evals:
+                bad.append(
+                    f"HISTORY LOST: {problem.n_evals} evaluations made but only {n_rows} rows "
+                    f"saved — the total-evaluation axis will be wrong for this method"
+                )
             dt = time.perf_counter() - t0
             if bad:
                 failures += 1
@@ -144,8 +181,16 @@ def main() -> None:
                 rows.append((cls, algo, prob_name, "ok", f"best={res.best:.6g}", dt))
         except Exception as exc:  # noqa: BLE001
             failures += 1
-            rows.append((cls, algo, prob_name, "ERROR",
-                         f"{type(exc).__name__}: {str(exc)[:70]}", time.perf_counter() - t0))
+            rows.append(
+                (
+                    cls,
+                    algo,
+                    prob_name,
+                    "ERROR",
+                    f"{type(exc).__name__}: {str(exc)[:70]}",
+                    time.perf_counter() - t0,
+                )
+            )
             if __debug__ and "-v" in sys.argv:
                 traceback.print_exc()
 
