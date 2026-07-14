@@ -4,6 +4,7 @@ Same tasks / mixed-integer search spaces as the discrete ``HPOB_*`` pools, but `
 XGBoost surrogate over the pool instead of nearest-config lookup — a smooth, non-flat landscape
 for continuous-relaxation / mixed-integer BO. Requires ``xgboost``.
 """
+
 import numpy as np
 import pytest
 import torch
@@ -18,8 +19,8 @@ SURR_NAMES = sorted(n for n in PROBLEM_REGISTRY if n.startswith("HPOBSurr_"))
 
 def test_all_surrogate_tasks_registered():
     # one surrogate class per discrete HPOB_* task
-    disc = {n[len("HPOB_"):] for n in PROBLEM_REGISTRY if n.startswith("HPOB_")}
-    surr = {n[len("HPOBSurr_"):] for n in SURR_NAMES}
+    disc = {n[len("HPOB_") :] for n in PROBLEM_REGISTRY if n.startswith("HPOB_")}
+    surr = {n[len("HPOBSurr_") :] for n in SURR_NAMES}
     assert surr == disc and len(surr) == 92
 
 
@@ -37,7 +38,7 @@ def test_surrogate_evaluate_deterministic():
     X = torch.tensor(np.random.RandomState(0).rand(64, p.dim))
     y1, _ = p.evaluate(X)
     y2, _ = p.evaluate(X)
-    assert torch.allclose(y1, y2)                     # fixed-seed surrogate, cached
+    assert torch.allclose(y1, y2)  # fixed-seed surrogate, cached
     assert y1.shape == (64, 1)
 
 
@@ -56,7 +57,8 @@ def test_surrogate_snaps_discrete_dims():
     types = p.resolved_variable_types()
     disc = next(j for j, t in enumerate(types) if t != "continuous")
     base = torch.tensor(np.random.RandomState(2).rand(1, p.dim))
-    a = base.clone(); b = base.clone()
+    a = base.clone()
+    b = base.clone()
     allowed = sorted(float(v) for v in types[disc])
     a[0, disc] = allowed[0] + 1e-4
     b[0, disc] = allowed[0] - 1e-4 if allowed[0] > 1e-4 else allowed[0] + 1e-4

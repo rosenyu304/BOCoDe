@@ -13,6 +13,7 @@ predicts the true LOW-accuracy regions, giving a smooth **mixed-integer** landsc
 non-flat convergence — matching HPO-B's own continuous-surrogate mode and the PFNs4BO protocol.
 Deterministic (fixed xgboost seed); same search space / variable types as the discrete pool.
 """
+
 from __future__ import annotations
 
 import numpy as np
@@ -23,8 +24,13 @@ from ._hpob_base import HPOBProblem
 # Same recipe used to (re)build the HPO-B continuous surrogates; modest depth generalizes the
 # discrete pool smoothly. Deterministic.
 _XGB_PARAMS = {
-    "objective": "reg:squarederror", "max_depth": 6, "eta": 0.1,
-    "subsample": 0.9, "colsample_bytree": 0.9, "min_child_weight": 1, "seed": 0,
+    "objective": "reg:squarederror",
+    "max_depth": 6,
+    "eta": 0.1,
+    "subsample": 0.9,
+    "colsample_bytree": 0.9,
+    "min_child_weight": 1,
+    "seed": 0,
 }
 _NUM_ROUND = 200
 
@@ -43,14 +49,21 @@ class HPOBSurrogateProblem(HPOBProblem):
     def _surrogate(self):
         if self._bst is None:
             import xgboost as xgb
-            dtrain = xgb.DMatrix(self._X.detach().cpu().numpy(),
-                                 label=self._y.detach().cpu().numpy())
+
+            dtrain = xgb.DMatrix(
+                self._X.detach().cpu().numpy(), label=self._y.detach().cpu().numpy()
+            )
             self._bst = xgb.train(_XGB_PARAMS, dtrain, num_boost_round=_NUM_ROUND)
         return self._bst
 
     def _evaluate_implementation(self, X: torch.Tensor) -> tuple:
         import xgboost as xgb
-        Xs = self.enforce_variable_types(X.to(self._X.dtype))  # snap integer/discrete dims
+
+        Xs = self.enforce_variable_types(
+            X.to(self._X.dtype)
+        )  # snap integer/discrete dims
         pred = self._surrogate().predict(xgb.DMatrix(Xs.detach().cpu().numpy()))
-        y = torch.tensor(np.asarray(pred, dtype=np.float64), dtype=torch.float64).reshape(-1, 1)
+        y = torch.tensor(
+            np.asarray(pred, dtype=np.float64), dtype=torch.float64
+        ).reshape(-1, 1)
         return None, y
