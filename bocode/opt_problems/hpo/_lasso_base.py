@@ -33,6 +33,14 @@ from ...base import BenchmarkProblem
 # Per-feature penalty range: input -1 -> 10**-PENALTY_DECADES, +1 -> 10**+PENALTY_DECADES.
 PENALTY_DECADES = 3.0
 
+# Penalty as a FRACTION of alpha_max (the penalty above which EVERY coefficient is zeroed).
+# 0.1 keeps the fit well inside the regime where coefficients survive on every dataset, so the
+# design vector always has leverage. This is LassoBench's scheme. The previous hard-coded
+# alpha=1.0 was SUPERCRITICAL on every dataset here -- 1258x alpha_max on RCV1 -- which zeroed all
+# 47,236 coefficients, collapsed the prediction to the intercept, and made LassoRCV1
+# mathematically constant: f(all-0) = f(all-mid) = f(all-1) = -0.0262927778 exactly.
+ALPHA_FRAC = 0.1
+
 
 def _load_openml(data_id: int):
     """Fetch a (standardized X, centered y) regression dataset from OpenML, cached."""
@@ -120,12 +128,37 @@ class WeightedLassoHPO(BenchmarkProblem):
             return X.multiply(1.0 / weights).tocsr()
         return X / weights
 
+    def _alpha_max(self) -> float:
+        """Smallest penalty at which the Lasso zeroes EVERY coefficient.
+
+        ``alpha_max = max_j |x_j . (y - mean(y))| / n``. Above it the fit is the intercept
+        alone, so the design vector cannot influence the objective at all.
+        """
+        if getattr(self, "_amax", None) is None:
+            X_tr, _, y_tr, _ = self._ensure_data()
+            yc = y_tr - y_tr.mean()
+            self._amax = float(np.max(np.abs(X_tr.T @ yc)) / X_tr.shape[0])
+        return self._amax
+
     def _val_mse(self, alpha_vec: np.ndarray) -> float:
         from sklearn.linear_model import Lasso
 
         X_tr, X_val, y_tr, y_val = self._ensure_data()
         weights = 10.0 ** (np.clip(alpha_vec, -1.0, 1.0) * PENALTY_DECADES)
-        model = Lasso(alpha=1.0, max_iter=5000).fit(self._rescale(X_tr, weights), y_tr)
+        # The penalty must be DATASET-RELATIVE (LassoBench's own scheme), not a hard-coded 1.0.
+        #
+        # A fixed alpha=1.0 is ABOVE alpha_max for every dataset here -- RCV1 by a factor of
+        # 1258 -- and above alpha_max the Lasso shrinks EVERY coefficient to exactly zero. The
+        # prediction collapses to the intercept and the objective becomes MATHEMATICALLY
+        # INDEPENDENT of the design vector. On RCV1 that made the benchmark constant:
+        #     f(all-0) = f(all-mid) = f(all-1) = -0.0262927778 exactly.
+        # The smaller datasets escaped only because their feature rescaling had enough leverage
+        # to claw coefficients back -- an accident, not a design.
+        #
+        # alpha = ALPHA_FRAC * alpha_max keeps the fit in the regime where coefficients survive
+        # and the design vector actually matters, for every dataset.
+        alpha = ALPHA_FRAC * self._alpha_max()
+        model = Lasso(alpha=alpha, max_iter=5000).fit(self._rescale(X_tr, weights), y_tr)
         pred = self._rescale(X_val, weights) @ model.coef_ + model.intercept_
         pred = np.asarray(pred).ravel()
         return float(np.mean((y_val - pred) ** 2))

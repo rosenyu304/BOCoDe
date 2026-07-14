@@ -49,8 +49,7 @@ InvertedPendulumProblem
 # (Checked all 9 constant-action MuJoCo problems — this is the ONLY affected one.
 #  InvertedDoublePendulumProblem is also dim-1 but varies normally.)
 
-LassoRCV1
-# 🐛 BUG — NOT a "constant objective" problem. The DESIGN VECTOR NEVER REACHES THE MODEL.
+# ✅ FIXED 2026-07-14 (was: 🐛 BUG, NOT a "constant objective" problem). The DESIGN VECTOR NEVER REACHES THE MODEL.
 # Measured: f(all-0) = f(all-mid) = f(all-1) = -0.0262927778 exactly (spread 0.0), while
 # every sibling responds normally (LassoDNA 5.3e-1, LassoLeukemia 2.3e-1,
 # LassoBreastCancer 1.9e-1, LassoDiabetes 7.2e-2). So the LassoBench integration works;
@@ -65,10 +64,15 @@ LassoRCV1
 #   alpha=1e0..1e-3 -> 0 nonzero coefs, val MSE 0.0262927778 (the observed constant)
 #   alpha=1e-4      -> 131 nonzero coefs, val MSE 0.0237598784
 #
-# THE FIX (ready, NOT applied — it is a science decision for Rosen):
+# THE FIX (APPLIED 2026-07-14, Rosen's call):
 #   make the penalty DATASET-RELATIVE, alpha = frac * alpha_max (what LassoBench itself
 #   does), instead of a hard-coded 1.0. NB alpha=1.0 is above alpha_max for the OTHER
 #   datasets too (Diabetes 4.6x, BreastCancer 2.5x) -- they only escape because the
 #   feature rescaling has enough leverage there. So the fix CHANGES THE OBJECTIVE FOR ALL
 #   5 LASSO PROBLEMS and their existing results would have to be re-run. That is why it
 #   was not applied unilaterally.
+
+# LassoRCV1 was FIXED and removed from this list on 2026-07-14: alpha is now dataset-relative
+# (ALPHA_FRAC * alpha_max, LassoBench's scheme). Verified: f(all-0)/f(all-mid)/f(all-1) now
+# span 1.8e-02 (was exactly 0.0). All 5 Lasso problems respond to the design vector.
+# NB this CHANGES the objective for all 5 Lasso problems -- their old results are invalid.

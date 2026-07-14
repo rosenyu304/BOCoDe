@@ -69,17 +69,20 @@ from .._bo_utils import (
 )
 from ..single_obj.turbo import TrustRegion
 
-SUCCESS_TOLERANCE = (
-    10  # BoTorch SCBO tutorial's ScboState (the paper's Appendix C says 3)
-)
+SUCCESS_TOLERANCE = 3  # SCBO paper, Appendix C (Rosen's call, 2026-07-14)
 
 
 def _tr(dim: int) -> TrustRegion:
-    """SCBO's trust region: TuRBO's, but with the BoTorch SCBO tutorial's tolerances.
+    """SCBO's trust region: TuRBO's, with the SCBO PAPER's tolerances.
 
     ``failure_tolerance = ceil(max(4/q, dim/q))`` comes from ``TrustRegion`` itself and
-    already matches the tutorial's ``ScboState.__post_init__``. ``success_tolerance`` is
-    the tutorial's **10**, not TuRBO's / the SCBO paper's 3 (Rosen's call, 2026-07-13).
+    matches the BoTorch tutorial's ``ScboState.__post_init__``.
+
+    ``success_tolerance = 3`` is the SCBO **paper's** value (Appendix C, and TuRBO's), NOT
+    the BoTorch tutorial's 10. The tutorial and the paper disagree here; Rosen chose the
+    paper (2026-07-14). A larger success tolerance makes the trust region slower to EXPAND,
+    so the tutorial's 10 is the more conservative/exploitative setting -- the difference is
+    real, not cosmetic, which is why it is pinned here rather than left to a default.
     """
     return TrustRegion(dim=dim, success_tolerance=SUCCESS_TOLERANCE)
 
