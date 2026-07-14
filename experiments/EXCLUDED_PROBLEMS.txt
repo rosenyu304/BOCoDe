@@ -1,0 +1,24 @@
+# Problems excluded from the campaign — from experiments/problem_audit.py.
+# EXCLUDE ONLY on structural evidence that the problem cannot be optimized:
+#   (a) a constraint is CONSTANT;
+#   (b) a constraint is PROVABLY never satisfiable (few distinct values, none <= 0)
+#       -> the feasible set is EMPTY;
+#   (c) the OBJECTIVE is near-discrete -> nothing for a GP to model;
+#   (d) the problem ERRORS on evaluation.
+#
+# DO NOT exclude for:
+#   * a single COARSE constraint among smooth ones -- that is HARD, not broken;
+#   * 'no feasible point found by random sampling' -- that is a TINY feasible region, and
+#     finding it is the entire point of constrained BO.
+#
+# CEC2020_p20 was REMOVED from this list on 2026-07-14: it was never unsolvable, it was
+# CORRUPTED by a mis-applied 0.0625 gauge snap that collapsed both truss areas to {0, 0.0625}
+# (an area of 0 -> divide-by-zero -> inf -> the 1e6 sentinel -> step-function constraints).
+# With the snap removed it reproduces its published optimum 263.895843 exactly.
+#
+# An earlier version of this rule fired on any single low-cardinality constraint and would
+# have deleted all 15 MODAct problems (7 of their 8 constraints are smooth and they DO have
+# feasible points) -- i.e. more than half of Table 4, silently. Caught and reverted.
+
+Truss120D
+Truss200D

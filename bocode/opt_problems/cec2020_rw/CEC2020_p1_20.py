@@ -1408,7 +1408,7 @@ class CEC2020_p18(BenchmarkProblem):
             num_objectives=1,
             num_constraints=4,
             x_opt=[[0.8125, 0.4375, 42.0984455958549, 176.6365958424394]],
-            #  optimum=[6059.714335048436],
+            optimum=[6059.714335048436],
             bounds=[(0.0625, 99 * 0.0625), (0.0625, 99 * 0.0625), (10, 200), (10, 200)],
         )
 
@@ -1421,8 +1421,10 @@ class CEC2020_p18(BenchmarkProblem):
 
         n_samples = X.shape[0]
 
-        X[:, 0] = 0.0625 * np.round(X[:, 0])
-        X[:, 1] = 0.0625 * np.round(X[:, 1])
+        # Ts, Th are thicknesses that must be integer multiples of the 0.0625 in gauge.
+        # Snap to the gauge GRID; `0.0625 * round(x)` would divide the thickness by ~16.
+        X[:, 0] = 0.0625 * np.round(X[:, 0] / 0.0625)
+        X[:, 1] = 0.0625 * np.round(X[:, 1] / 0.0625)
 
         # Objective function
         f = (
@@ -1479,8 +1481,11 @@ class CEC2020_p19(BenchmarkProblem):
 
         n_samples = X.shape[0]
 
-        X[:, 0] = 0.0625 * np.round(X[:, 0])
-        X[:, 1] = 0.0625 * np.round(X[:, 1])
+        # NOTE: no gauge discretisation here — this is a CONTINUOUS problem.
+        # A `0.0625 * np.round(x)` snap (present until 2026-07-14) collapsed the
+        # design variables onto {0, 0.0625, ...} and, where a variable reached 0,
+        # produced a divide-by-zero -> inf -> the 1e6 sentinel -> step-function
+        # constraints that no GP can be fit to.
 
         # Objective function
         f = 1.10471 * X[:, 0] ** 2 * X[:, 1] + 0.04811 * X[:, 2] * X[:, 3] * (
@@ -1564,8 +1569,11 @@ class CEC2020_p20(BenchmarkProblem):
 
         n_samples = X.shape[0]
 
-        X[:, 0] = 0.0625 * np.round(X[:, 0])
-        X[:, 1] = 0.0625 * np.round(X[:, 1])
+        # NOTE: no gauge discretisation here — this is a CONTINUOUS problem.
+        # A `0.0625 * np.round(x)` snap (present until 2026-07-14) collapsed the
+        # design variables onto {0, 0.0625, ...} and, where a variable reached 0,
+        # produced a divide-by-zero -> inf -> the 1e6 sentinel -> step-function
+        # constraints that no GP can be fit to.
 
         # Objective function
         f = (2 * np.sqrt(2) * X[:, 0] + X[:, 1]) * 100
