@@ -7,13 +7,27 @@ If either differs, the numbers are not comparable.
 
 | package | version | why pinned |
 |---|---|---|
-| torch | **2.11.0+cu128** | 2.13 (plain PyPI) ships a `libtorch_cuda.so` whose NCCL symbols don't match the wheel it pulls (`undefined symbol: ncclCommResume`). The cu130 wheels need driver >= 580; our machines run 535-595. cu128 covers sm_86 (3090 Ti), sm_89 (4090), sm_90 (H100) and sm_120 (RTX 5090 Blackwell) — cu126 would NOT support the 5090. |
+| torch | **2.11.0+cu128** *(workstations only)* | See the per-machine note below. NOT pinned in `pyproject.toml` — a library ceiling would downgrade a working cluster env. |
 | botorch | 0.18.1 | dimension-scaled priors (needs >= 0.12) |
 | gpytorch | 1.15.2 | matches botorch |
 | pymoo | 0.6.2 | exact hypervolume (compiled WFG) — 10-220x faster than BoTorch's box decomposition, identical to ~1e-16 |
 | xgboost | 3.3.0 | HPO-B surrogates (`HPOBSurr_*`) crash without it |
 
-## Install
+## ⚠️ The torch build is PER-MACHINE. There is no single right answer.
+
+| Where | GPU | Driver | Use | Why |
+|---|---|---|---|---|
+| **ORCD cluster** | H100 / H200 | 590.48.01 | **torch 2.12+cu130** (what is already there) | driver 590 >= the 580 that cu130 needs. **This is the stack the completed 240-job GPU campaign ran on — do not change it.** |
+| **Workstations** | 3090 Ti / 4090 / 5090 | 535-595 | **torch 2.11+cu128** | drivers < 580 cannot run cu130, so `torch.cuda.is_available()` was silently False. cu128 covers sm_86 / sm_89 / sm_90 / sm_120 — cu126 would NOT support the RTX 5090 (Blackwell). |
+
+Pitfall: plain-PyPI **torch 2.13** ships a `libtorch_cuda.so` whose NCCL symbols do not match
+the wheel it pulls (`undefined symbol: ncclCommResume`). Install torch from the CUDA-specific
+index, never bare `pip install torch`.
+
+Because the right build differs by machine, `pyproject.toml` keeps `torch` **unpinned**; the
+exact build lives in `requirements-lock.txt` (workstations) and is left alone on ORCD.
+
+## Install (workstations)
 
 ```bash
 conda create -n bocode python=3.12 -y && conda activate bocode
