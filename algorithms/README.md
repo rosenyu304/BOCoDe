@@ -35,8 +35,8 @@ Common flags (every script):
 |---|---|---|
 | `single_obj/` | ✅ `random_search`, `single_task_gp`, `vanilla_highdim_bo`, `turbo`, `standard_gp` | problem + dataset variants |
 | `single_obj_constrained/` | ✅ `random_search`, `constrained_ei`, `scbo` | problem variant (no constrained dataset problems yet) |
-| `multi_obj/` | ✅ `random_search`, `qnehvi`, `qnparego` | problem variant; hypervolume-tracked |
-| `multi_obj_constrained/` | ✅ `constrained_qnehvi`, `constrained_qparego` | problem variant |
+| `multi_obj/` | ✅ `random_search`, `qnehvi`, `qnparego`, `tfm_qnehvi`, `tfm_qnparego` | problem variant; hypervolume-tracked |
+| `multi_obj_constrained/` | ✅ `constrained_qnehvi`, `constrained_qparego`, `tfm_cqnehvi`, `tfm_cqnparego` | problem variant |
 | `single_obj_mixed_variable/` | ⏳ next | dedicated mixed-variable BO (current baselines already handle mixed problems via rounding) |
 
 Dataset-optimization variants are provided for the single-objective unconstrained
@@ -53,6 +53,17 @@ environment** (the TabPFN fork pins scikit-learn and Python <3.12) — see
 |---|---|
 | `single_obj/git_bo.py` | GIT-BO with a gradient-informed active subspace; `--rank 5` (fixed, original) or `--rank marzouk` (Zahm–Marzouk certified rank) |
 | `single_obj_constrained/pfn_cei.py` | constrained EI with the TabPFN regressor; objective + all constraints scored in one parallel forward |
+| `multi_obj/tfm_qnehvi.py` | qNEHVI on TabPFN |
+| `multi_obj/tfm_qnparego.py` | qNParEGO on TabPFN |
+| `multi_obj_constrained/tfm_cqnehvi.py` | constrained qNEHVI on TabPFN |
+| `multi_obj_constrained/tfm_cqnparego.py` | constrained qNParEGO on TabPFN |
+
+The four multi-objective TFM algorithms share `_tfm_utils.TabPFNModel`, which wraps
+TabPFN as a BoTorch multi-output `Model` (posterior mean/variance from its bar
+distribution, diagonal covariance) so BoTorch's stock acquisitions run on it unchanged.
+One TabPFN output per objective (and per constraint), all scored in one forward pass via
+the model's batch dimension. See the `TabPFNModel` docstring for the two approximations
+this makes.
 
 The rank-selection logic is pure NumPy and is unit-tested (`tests/test_tfm.py`);
 the TabPFN runs are skipped unless the fork is installed.
