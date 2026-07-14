@@ -21,7 +21,16 @@ dependencies = [
     # LogNormal lengthscale prior. vanilla_highdim_bo's headline claim IS that prior, so
     # an older botorch would silently turn it into the Gamma(3,6) baseline it argues against.
     "botorch>=0.12",
-    "torch",
+    # PIN: torch 2.13 (plain PyPI) ships a libtorch_cuda.so whose NCCL symbols do not
+    # match the nvidia-nccl wheel it pulls (undefined symbol: ncclCommResume), and the
+    # cu130 wheels need an NVIDIA driver >= 580 while our machines run 535-595.
+    # 2.11.x + cu128 is the stack validated on all six machines (sm_86 / sm_89 / sm_90 /
+    # sm_120, i.e. 3090 Ti, 4090, H100, RTX 5090). Install with:
+    #   pip install torch --index-url https://download.pytorch.org/whl/cu128
+    "torch>=2.11,<2.12",
+    # exact hypervolume: pymoo's compiled WFG kernel is 10-220x faster than BoTorch's
+    # box decomposition and numerically identical (~1e-16).
+    "pymoo>=0.6",
     "numpy",
     "scipy",
     "pandas",
