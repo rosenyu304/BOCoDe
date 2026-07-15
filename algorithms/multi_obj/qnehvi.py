@@ -114,11 +114,26 @@ def optimize_problem(
     bounds_dev = obj.bounds.to(dev)
     ref_dev = ref_point.to(dev)
     for it in range(start_it, iters):
-        model = _fit(train_X.to(dev), train_Y.to(dev))
+        # qLogNEHVI computes hypervolume improvement in the model's OUTPUT units. When the
+        # objectives differ by orders of magnitude (RE25 spans ~1e2 and ~1e6; RE22/RE24 are
+        # milder but still ~10-1000x), the large objective swamps the small one and the log
+        # box-decomposition underflows -> optimize_acqf reports "gradf are NaN" and the tuple
+        # is parked. Run the model + acquisition in a per-objective STANDARDIZED frame: an
+        # affine, strictly-increasing, per-objective transform, so which point dominates which
+        # is unchanged, but every objective is O(1). The REPORTED hypervolume (hv(), below)
+        # stays in the RAW frame so it remains comparable across methods and runs. This is the
+        # BoTorch MOO tutorial's own standardization; here it is also what keeps qLogNEHVI
+        # finite. NB: fit on the standardized targets directly (Standardize(m=1) inside _fit
+        # then acts as ~identity), and give the acquisition the ref point in the same frame.
+        Y_dev = train_Y.to(dev)
+        mu = Y_dev.mean(dim=0, keepdim=True)
+        sigma = Y_dev.std(dim=0, keepdim=True).clamp_min(1e-9)
+        model = _fit(train_X.to(dev), (Y_dev - mu) / sigma)
+        ref_std = (ref_dev - mu.squeeze(0)) / sigma.squeeze(0)
         sampler = SobolQMCNormalSampler(sample_shape=torch.Size([128]))
         acqf = qLogNoisyExpectedHypervolumeImprovement(
             model=model,
-            ref_point=ref_dev,
+            ref_point=ref_std,
             X_baseline=train_X.to(dev),
             sampler=sampler,
             prune_baseline=True,
