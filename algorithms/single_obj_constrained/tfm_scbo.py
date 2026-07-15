@@ -10,10 +10,11 @@ two infeasibles compared by total violation), restart on collapse, the **Gaussia
 on the objective and the **bilog** warp on each constraint -- but with the objective GP and
 the ``n_constraints`` constraint GPs all replaced by **one frozen, pretrained TabPFN**.
 
-Objective and constraints are scored in a **single forward pass**: the same candidate inputs
-are paired with the objective and with each constraint as separate columns of TabPFN's batch
-dimension (the trick :mod:`algorithms.single_obj_constrained.pfn_cei` uses). No surrogate is
-trained; one TabPFN call per iteration replaces ``1 + n_constraints`` GP fits.
+Objective and constraints are each scored by their **own zero-shot in-context pass** --
+``1 + n_constraints`` TabPFN forwards per iteration, one output column each, rather than
+stacked into the batch dimension (Rosen's instruction: ICL is cheap for TabPFN, so loop the
+forward and keep peak memory O(1) in the constraint count). No surrogate is trained; these
+forwards replace ``1 + n_constraints`` GP fits.
 
 The trust-region state machine, the copula, the trust-region center rule and the success rule
 are all imported from :mod:`algorithms.single_obj_constrained.scbo` / ``turbo``, so the two
@@ -99,20 +100,29 @@ def _constrained_thompson_sample(
     feasible -- the one with the smallest total sampled violation (SCBO's fallback).
     """
     n_ctx, n_cand = train_X.shape[0], cand.shape[0]
-    m = 1 + Yc_t.shape[1]  # objective + constraints, as TabPFN batch columns
+    m = 1 + Yc_t.shape[1]  # objective + constraints
 
-    # Same X for every column; one target column per output.
-    X_full = (
-        torch.cat([train_X, cand], dim=0).unsqueeze(1).expand(-1, m, -1).contiguous()
-    )
+    # Run each output (objective, then each constraint) through TabPFN as its OWN zero-shot
+    # in-context regression -- m separate forwards, one column each -- rather than stacking
+    # them in the batch dimension. This is Rosen's instruction: ICL is cheap for TabPFN, so
+    # handle the constraints by looping the forward, keeping peak memory O(1) in the
+    # constraint count instead of the O(1 + nc) of a single stacked pass. TabPFN's surrogate
+    # is stateful (``forward`` stores that column's target mean/std, which ``predict_sample``
+    # then consumes), so the draw must be read immediately after each forward.
+    #
+    # The draws are independent marginals either way (this method's design choice, see the
+    # module docstring -- TabPFN has no joint posterior), so one-per-column is the same
+    # estimator as the stacked pass, not an approximation of it.
+    X_col = torch.cat([train_X, cand], dim=0).unsqueeze(1)  # (n_ctx + n_cand, 1, dim)
     Y_cols = torch.cat([Yo_t, Yc_t], dim=1)  # (n_ctx, m)
-    Y_full = torch.cat([Y_cols, torch.zeros(n_cand, m, dtype=DTYPE)], dim=0).unsqueeze(
-        -1
-    )  # (n_ctx + n_cand, m, 1)
-
+    pad = torch.zeros(n_cand, 1, dtype=DTYPE)
+    draws = []
     with torch.no_grad():
-        logits = surrogate.forward(X_full, Y_full, single_eval_pos=n_ctx)
-        draw = surrogate.predict_sample(logits).to("cpu")  # (n_cand, m)
+        for j in range(m):
+            Y_j = torch.cat([Y_cols[:, j : j + 1], pad], dim=0).unsqueeze(-1)  # (N, 1, 1)
+            logits = surrogate.forward(X_col, Y_j, single_eval_pos=n_ctx)
+            draws.append(surrogate.predict_sample(logits).reshape(n_cand).to("cpu"))
+    draw = torch.stack(draws, dim=1)  # (n_cand, m)
 
     obj_s, con_s = draw[:, 0], draw[:, 1:]
     feas = (con_s <= 0).all(dim=1)  # bilog is sign-preserving: <= 0 means feasible

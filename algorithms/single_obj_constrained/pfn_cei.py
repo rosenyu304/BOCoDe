@@ -7,11 +7,13 @@ columns of the model's batch dimension -- so one in-context pass returns the obj
 EI and every constraint's feasibility probability together. That single-surrogate design
 is the method's contribution (no per-constraint GP to fit).
 
-The columns are scored in CHUNKS of the batch dimension rather than all at once (see
-``MAX_COLS_PER_PASS``). A transformer's batch dimension does not mix its items, so this
-returns the same numbers; it exists because a single pass over ``1 + num_constraints``
-columns is O(num_constraints) in activation memory and OOMed on every high-constraint
-problem in the suite.
+The objective and each constraint are scored as SEPARATE zero-shot in-context passes --
+``1 + num_constraints`` forwards per iteration, one output column each -- rather than
+stacked into the batch dimension all at once. A transformer's batch dimension does not
+mix its items, so looping returns the same numbers; it is done this way because a single
+pass over ``1 + num_constraints`` columns is O(num_constraints) in activation memory and
+OOMed on every high-constraint problem in the suite, whereas one-at-a-time is O(1) in the
+constraint count. ICL is cheap for TabPFN, so the extra forwards cost little.
 
 The acquisition is the classic constrained EI ``EI(f) * prod_i P(c_i <= 0)``, evaluated
 as ``log EI(f) + sum_i log P(c_i <= 0)`` -- the same function (log is monotone, so the
@@ -71,25 +73,24 @@ N_CANDIDATES = 1000  # reference draws 1000 uniform random candidates per iterat
 
 # How many output columns (objective + constraints) to push through TabPFN per forward.
 #
-# The columns are stacked into TabPFN's BATCH dimension, and a transformer's batch
-# dimension does not mix its items: every column is an independent in-context regression
-# whose attention runs only over its own rows. Scoring them in groups is therefore an
-# EXACT reordering of the same arithmetic, not an approximation -- the returned logits are
-# the same (see _score_columns).
+# ONE. Each objective/constraint is run through TabPFN as its own zero-shot in-context
+# regression -- ``1 + num_constraints`` separate forward passes per iteration -- rather
+# than stacked into TabPFN's batch dimension. This is Rosen's instruction: ICL is cheap
+# for TabPFN, so handle the constraints by looping the forward, not by widening the batch.
 #
-# It has to be chunked because the un-chunked version's activation memory is O(1 + nc):
-# CEC2020_p35 has 148 constraints -> 149 columns x (n_ctx + 1000) candidate rows, which
-# asked CUDA for 7.09 GiB in a single allocation and died. Nine CEC2020 problems and both
-# Truss72D variants OOMed this way. With chunking, peak memory depends on the chunk size
-# and NOT on the constraint count, so the method runs on any card.
+# It is also the only thing that makes peak memory independent of the constraint count.
+# A single stacked pass is O(1 + nc) in activation memory: CEC2020_p35 (148 constraints)
+# -> 149 columns x (n_ctx + 1000) candidate rows asked CUDA for 7.09 GiB in one allocation
+# and died; nine CEC2020 problems and both Truss72D variants OOMed the same way. At one
+# column per pass, peak memory is O(1) in nc, so the method runs on any card.
 #
-# 8 is chosen on measurement, not taste. Peak memory and s/iter on CEC2020_p35 (148
-# constraints), 1000 candidates, one RTX 4090:
-#     chunk=32 -> 21.87 GiB, 15.7 s/iter      chunk=8 -> 6.46 GiB,  8.4 s/iter
-#     chunk=16 -> 12.67 GiB, 15.1 s/iter      chunk=4 -> 3.35 GiB,  7.7 s/iter
-# Wider chunks are not faster: the 1000-candidate ROW dimension already saturates the GPU,
-# so stacking columns on top of it buys no throughput and only costs memory.
-MAX_COLS_PER_PASS = 8
+# A transformer's batch dimension does not mix its items -- attention runs only over a
+# column's own rows -- so one-at-a-time returns the SAME logits a stacked pass would (see
+# _score_columns); the only thing that changes is peak activation memory. Measured cost on
+# CEC2020_p35 (148 constraints), 1000 candidates, one RTX 4090: chunk=1 -> ~2 GiB, and the
+# extra forwards are cheap because the 1000-candidate ROW dimension already saturates the
+# GPU, so a wider column batch buys no throughput and only costs memory.
+MAX_COLS_PER_PASS = 1
 
 
 def _power_transform(train: torch.Tensor, apply: torch.Tensor) -> torch.Tensor:
