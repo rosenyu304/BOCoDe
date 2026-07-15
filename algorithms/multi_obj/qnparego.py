@@ -121,9 +121,21 @@ def optimize_problem(
     bounds_dev = obj.bounds.to(dev)
     for it in range(start_it, iters):
         X_dev = train_X.to(dev)
-        model = _fit(X_dev, train_Y.to(dev))
-        # BoTorch normalizes the Chebyshev scalarization with the posterior mean at
-        # the observed inputs, not the (noisy) observations themselves.
+        # Standardized objective frame (same rationale as qnehvi). The Chebyshev
+        # scalarization range-normalizes by the posterior mean and qLogNEI then optimizes
+        # it; on raw, badly-scaled objectives (RE22's two objectives span ~819 and ~7295)
+        # both steps go numerically fragile and optimize_acqf reports "gradf are NaN" --
+        # RE22 x qnparego parked on 4 of 5 seeds for exactly this. Fit (and hence scalarize,
+        # since ``pred`` is now in the fitted frame) on per-objective STANDARDIZED targets:
+        # an affine, strictly-increasing per-objective transform, so the Pareto ranking the
+        # scalarization sees is unchanged, but every objective is O(1). Reported hypervolume
+        # (hv(), on raw train_Y) is untouched, so it stays comparable across methods.
+        Y_dev = train_Y.to(dev)
+        mu = Y_dev.mean(dim=0, keepdim=True)
+        sigma = Y_dev.std(dim=0, keepdim=True).clamp_min(1e-9)
+        model = _fit(X_dev, (Y_dev - mu) / sigma)
+        # Chebyshev is normalized by the posterior mean at the observed inputs (now in the
+        # standardized frame), not the (noisy) observations themselves.
         with torch.no_grad():
             pred = model.posterior(X_dev).mean
         weights = sample_simplex(m, dtype=DTYPE, device=dev).squeeze()
