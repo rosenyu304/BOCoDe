@@ -66,14 +66,30 @@ from .._bo_utils import (
 from .._tfm_utils import TabPFNSurrogate
 from .turbo import TrustRegion
 
+# Chunk the candidate rows through TabPFN so activation memory -- the gelu over
+# (n_cand x dim) -- stays bounded. TuRBO draws up to 5000 candidates; on LassoLeukemia
+# (7129-dim) the whole pool in one forward asked for 45 GiB on top of ~47 GiB resident and
+# OOM'd even an 80 GB H100 (the same unchunked-candidate-pool bug git_bo had). Query rows
+# attend only to the context block, not to each other, so scoring them in chunks returns
+# the SAME per-row logits -- and the context (hence TabPFN's per-column target mean/std) is
+# identical for every chunk, so the concatenated logits share one de-standardization.
+# 512 x 7129 peaks ~5 GiB, far under an 80 GB card.
+MAX_CAND_PER_PASS = 512
+
+
 def _tabpfn_forward(surrogate, train_X, train_Y, cand):
-    """One TabPFN pass: the trust region's data as context, ``cand`` as queries."""
+    """TabPFN over ``cand`` (chunked): trust-region data as context, cand as queries."""
     n_ctx = train_X.shape[0]
-    X_full = torch.cat([train_X.unsqueeze(1), cand.unsqueeze(1)], dim=0)
-    Y_full = torch.cat(
-        [train_Y, torch.zeros(cand.shape[0], 1, dtype=DTYPE)], dim=0
-    ).unsqueeze(1)
-    return surrogate.forward(X_full, Y_full, single_eval_pos=n_ctx)
+    ctx_X = train_X.unsqueeze(1)
+    outs = []
+    for i in range(0, cand.shape[0], MAX_CAND_PER_PASS):
+        c = cand[i : i + MAX_CAND_PER_PASS]
+        X_full = torch.cat([ctx_X, c.unsqueeze(1)], dim=0)
+        Y_full = torch.cat(
+            [train_Y, torch.zeros(c.shape[0], 1, dtype=DTYPE)], dim=0
+        ).unsqueeze(1)
+        outs.append(surrogate.forward(X_full, Y_full, single_eval_pos=n_ctx))
+    return torch.cat(outs, dim=0)
 
 
 def _generate_batch(
