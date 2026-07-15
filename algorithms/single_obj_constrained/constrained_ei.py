@@ -37,6 +37,7 @@ from botorch.fit import fit_gpytorch_mll
 from botorch.models import ModelListGP, SingleTaskGP
 from botorch.models.transforms import Normalize, Standardize
 from botorch.optim import optimize_acqf
+from botorch.utils.sampling import draw_sobol_samples
 from gpytorch.mlls import SumMarginalLogLikelihood
 
 from .._bo_utils import (
@@ -56,25 +57,28 @@ from .._bo_utils import (
 
 
 def _fit_model_list(train_X, train_obj, train_con):
-    """Fit one GP for the objective and one per constraint."""
+    """Fit one GP for the objective and one per constraint.
+
+    Some benchmark objectives are non-finite on a sliver of the domain -- e.g. CEC2020_p12's
+    ``-log(y4+1)`` at ``y4 = round(x7) = -1`` is ``-inf``, a verbatim property of the official
+    suite (see the problem's own comment), not a defect. A GP cannot be fit to a NaN/inf target
+    (BoTorch raises ``InputDataError``), so each output is fit on the rows where THAT output is
+    finite. The non-finite evaluations are still recorded in the run history at their true value;
+    they are only withheld from the surrogate.
+    """
     dim = train_X.shape[-1]
-    models = [
-        SingleTaskGP(
-            train_X,
-            train_obj,
+
+    def _gp(Y):
+        m = torch.isfinite(Y).all(dim=1)
+        return SingleTaskGP(
+            train_X[m],
+            Y[m],
             input_transform=Normalize(d=dim),
             outcome_transform=Standardize(m=1),
         )
-    ]
-    for i in range(train_con.shape[-1]):
-        models.append(
-            SingleTaskGP(
-                train_X,
-                train_con[:, i : i + 1],
-                input_transform=Normalize(d=dim),
-                outcome_transform=Standardize(m=1),
-            )
-        )
+
+    models = [_gp(train_obj)]
+    models += [_gp(train_con[:, i : i + 1]) for i in range(train_con.shape[-1])]
     model = ModelListGP(*models)
     mll = SumMarginalLogLikelihood(model.likelihood, model)
     fit_gpytorch_mll(mll)
@@ -141,9 +145,44 @@ def optimize_problem(
             )
         else:
             acqf = LogProbabilityOfFeasibility(model=model, constraints=constraint_dict)
-        candidate, _ = optimize_acqf(
-            acqf, bounds=bounds_dev, q=1, num_restarts=10, raw_samples=512
-        )
+        # On a hard-feasibility / extreme-scale problem (e.g. CEC2020_p12) either acquisition can
+        # evaluate to non-finite values across the random samples optimize_acqf draws for its default
+        # Boltzmann initial-condition sampling, which then throws "probability tensor contains nan"
+        # (inside torch.multinomial). Seed the optimizer with explicit Sobol initial conditions so it
+        # stays well-defined; the acquisition being optimized is unchanged -- this only replaces the
+        # heuristic that picks the L-BFGS starting points.
+        try:
+            candidate, _ = optimize_acqf(
+                acqf, bounds=bounds_dev, q=1, num_restarts=10, raw_samples=512
+            )
+        except RuntimeError:
+            # Extreme-scale / hard-feasibility objectives (CEC2020_p12's finite values reach ~8e43)
+            # can make the acquisition's default Boltzmann initial-condition sampling degenerate (a nan
+            # multinomial) or its gradient non-finite (OptimizationGradientError, a RuntimeError
+            # subclass). Retry from explicit Sobol initial conditions; if the gradient is still
+            # non-finite, random-shoot -- take the best FINITE acquisition value over a Sobol candidate
+            # set (the candidate-set maximization SCBO/TuRBO use), or the first Sobol point if the
+            # acquisition is non-finite everywhere. This whole branch runs ONLY when the default
+            # optimizer cannot, so well-behaved problems take the exact same path as before; the
+            # objective/constraint evaluation is never altered.
+            try:
+                ics = draw_sobol_samples(bounds=bounds_dev, n=10, q=1)
+                candidate, _ = optimize_acqf(
+                    acqf,
+                    bounds=bounds_dev,
+                    q=1,
+                    num_restarts=10,
+                    raw_samples=512,
+                    batch_initial_conditions=ics,
+                )
+            except RuntimeError:
+                cand_set = draw_sobol_samples(bounds=bounds_dev, n=1024, q=1)
+                with torch.no_grad():
+                    vals = acqf(cand_set)
+                vals = torch.where(
+                    torch.isfinite(vals), vals, torch.full_like(vals, -float("inf"))
+                )
+                candidate = cand_set[int(vals.argmax())]
         candidate = candidate.detach().to(device="cpu", dtype=DTYPE)
         o, c = obj.evaluate_raw(candidate)
         train_X = torch.cat([train_X, candidate], dim=0)

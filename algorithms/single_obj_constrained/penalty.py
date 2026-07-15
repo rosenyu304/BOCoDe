@@ -173,8 +173,14 @@ def optimize_problem(
 
     bounds_dev = obj.bounds.to(dev)
     for it in range(start_it, iters):
-        model = fit_gp(train_X.to(dev), train_P.to(dev))
-        acqf = LogExpectedImprovement(model=model, best_f=train_P.to(dev).max())
+        # A GP cannot be fit to a non-finite target. Some benchmark objectives are non-finite on a
+        # sliver of the domain -- e.g. CEC2020_p12's -log(y4+1) -> -inf, a verbatim property of the
+        # official suite -- which makes the penalized scalar non-finite there. Fit (and take best_f)
+        # on the finite rows; the non-finite evaluations stay in the run history, they are only
+        # withheld from the surrogate.
+        fin = torch.isfinite(train_P).all(dim=1)
+        model = fit_gp(train_X[fin].to(dev), train_P[fin].to(dev))
+        acqf = LogExpectedImprovement(model=model, best_f=train_P[fin].to(dev).max())
         candidate, acq_value = optimize_acqf(
             acqf, bounds=bounds_dev, q=1, num_restarts=10, raw_samples=512
         )
