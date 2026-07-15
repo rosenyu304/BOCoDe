@@ -1,5 +1,6 @@
 {
   "name": "ReinforcedConcreteBeam",
+  "real_name": "Reinforced Concrete Beam Design",
   "module": "bocode.opt_problems.engineering.ReinforcedConcreteBeam",
   "extra": null,
   "suite": "Engineering (standalone)",

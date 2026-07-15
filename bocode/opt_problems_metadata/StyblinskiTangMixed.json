@@ -1,5 +1,6 @@
 {
   "name": "StyblinskiTangMixed",
+  "real_name": "Styblinski-Tang (5-D mixed-variable)",
   "module": "bocode.opt_problems.synthetic_mixed.StyblinskiTangMixed",
   "extra": null,
   "suite": "Mixed-variable synthetic",

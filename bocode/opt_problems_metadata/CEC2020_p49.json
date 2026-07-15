@@ -1,5 +1,6 @@
 {
   "name": "CEC2020_p49",
+  "real_name": "SOPWM for 11-Level Inverters",
   "module": "bocode.opt_problems.cec2020_rw.CEC2020_p40_57",
   "extra": null,
   "suite": "CEC2020 RW-Constrained",

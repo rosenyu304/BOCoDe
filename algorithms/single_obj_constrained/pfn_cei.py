@@ -1,16 +1,24 @@
 """PFN-CEI: Constrained Expected Improvement with a tabular foundation model.
 
 Constrained BO that replaces the GP surrogate with a frozen, pretrained PFN regressor.
-The objective and every inequality constraint are modeled by the *same* network, scored
-in **one parallel forward pass** -- the same candidate inputs are paired with the
-objective and each constraint as separate columns of the model's batch dimension -- so a
-single call returns the objective's EI and every constraint's feasibility probability
-together. That single-surrogate, single-pass design is the method's contribution (no
-per-constraint GP to fit).
+The objective and every inequality constraint are modeled by the *same* network -- the
+same candidate inputs are paired with the objective and each constraint as separate
+columns of the model's batch dimension -- so one in-context pass returns the objective's
+EI and every constraint's feasibility probability together. That single-surrogate design
+is the method's contribution (no per-constraint GP to fit).
 
-The acquisition is the classic constrained EI ``EI(f) * prod_i P(c_i <= 0)``, but *both*
-factors are read off the PFN's own **bar distribution** -- a discretized, non-Gaussian
-predictive distribution. Following the reference implementation:
+The columns are scored in CHUNKS of the batch dimension rather than all at once (see
+``MAX_COLS_PER_PASS``). A transformer's batch dimension does not mix its items, so this
+returns the same numbers; it exists because a single pass over ``1 + num_constraints``
+columns is O(num_constraints) in activation memory and OOMed on every high-constraint
+problem in the suite.
+
+The acquisition is the classic constrained EI ``EI(f) * prod_i P(c_i <= 0)``, evaluated
+as ``log EI(f) + sum_i log P(c_i <= 0)`` -- the same function (log is monotone, so the
+argmax is identical), but the product form underflows float32 to exactly 0 once there are
+enough constraints, which silently reduces the method to random search. Both factors are
+read off the PFN's own **bar distribution** -- a discretized, non-Gaussian predictive
+distribution. Following the reference implementation:
 
 * constraints are negated (``g = -c``) so that "feasible" means "large", and the
   feasibility factor is the bar distribution's ``pi`` (probability of improvement) above
@@ -61,6 +69,28 @@ from .._tfm_utils import TabPFNSurrogate
 
 N_CANDIDATES = 1000  # reference draws 1000 uniform random candidates per iteration
 
+# How many output columns (objective + constraints) to push through TabPFN per forward.
+#
+# The columns are stacked into TabPFN's BATCH dimension, and a transformer's batch
+# dimension does not mix its items: every column is an independent in-context regression
+# whose attention runs only over its own rows. Scoring them in groups is therefore an
+# EXACT reordering of the same arithmetic, not an approximation -- the returned logits are
+# the same (see _score_columns).
+#
+# It has to be chunked because the un-chunked version's activation memory is O(1 + nc):
+# CEC2020_p35 has 148 constraints -> 149 columns x (n_ctx + 1000) candidate rows, which
+# asked CUDA for 7.09 GiB in a single allocation and died. Nine CEC2020 problems and both
+# Truss72D variants OOMed this way. With chunking, peak memory depends on the chunk size
+# and NOT on the constraint count, so the method runs on any card.
+#
+# 8 is chosen on measurement, not taste. Peak memory and s/iter on CEC2020_p35 (148
+# constraints), 1000 candidates, one RTX 4090:
+#     chunk=32 -> 21.87 GiB, 15.7 s/iter      chunk=8 -> 6.46 GiB,  8.4 s/iter
+#     chunk=16 -> 12.67 GiB, 15.1 s/iter      chunk=4 -> 3.35 GiB,  7.7 s/iter
+# Wider chunks are not faster: the 1000-candidate ROW dimension already saturates the GPU,
+# so stacking columns on top of it buys no throughput and only costs memory.
+MAX_COLS_PER_PASS = 8
+
 
 def _power_transform(train: torch.Tensor, apply: torch.Tensor) -> torch.Tensor:
     """Yeo-Johnson power transform fit on ``train``, applied to ``apply`` (column-wise).
@@ -78,6 +108,35 @@ def _power_transform(train: torch.Tensor, apply: torch.Tensor) -> torch.Tensor:
         return out
     except Exception:
         return (apply - train.mean(dim=0)).to(DTYPE)
+
+
+def _score_columns(surrogate, X_all, Y_full, n_ctx, thr_full, chunk):
+    """Score the ``m`` output columns through TabPFN in groups of ``chunk``.
+
+    Returns ``(ei, pi, mean, var)``, each ``(n_cand, m)`` -- exactly what a single
+    forward over all ``m`` columns at once would have returned.
+
+    Why this is not a change to the method: the columns live in TabPFN's batch
+    dimension, and attention never crosses batch items, so column ``j``'s logits depend
+    only on column ``j``'s targets. The per-column target standardization TabPFNSurrogate
+    applies is likewise computed per column (``mean``/``std`` over the row axis), so it is
+    unchanged by how the columns are grouped. Grouping is therefore a pure memory/layout
+    choice; only peak activation memory changes.
+    """
+    m = Y_full.shape[1]
+    ei, pi, mean, var = [], [], [], []
+    for c0 in range(0, m, chunk):
+        c1 = min(c0 + chunk, m)
+        X_c = X_all.unsqueeze(1).expand(-1, c1 - c0, -1).contiguous()
+        Y_c = Y_full[:, c0:c1]
+        thr_c = thr_full[c0:c1]
+        logits = surrogate.forward(X_c, Y_c, single_eval_pos=n_ctx)
+        ei.append(surrogate.predict_ei(logits, thr_c))
+        pi.append(surrogate.predict_pi(logits, thr_c))
+        mean.append(surrogate.predict_mean(logits))
+        var.append(surrogate.predict_variance(logits))
+    cat = lambda xs: torch.cat(xs, dim=1)  # noqa: E731
+    return cat(ei), cat(pi), cat(mean), cat(var)
 
 
 def optimize_problem(
@@ -101,6 +160,9 @@ def optimize_problem(
     )
 
     surrogate = TabPFNSurrogate(device=device)
+    # Columns per TabPFN forward. Shrinks on OOM (below) and stays shrunk: a card that
+    # could not fit 32 columns this iteration will not fit them the next one either.
+    chunk = min(1 + nc, MAX_COLS_PER_PASS)
 
     def best_feasible(o, c):
         feas = (c <= 0).all(dim=1)
@@ -130,12 +192,7 @@ def optimize_problem(
         thr = _power_transform(g, torch.zeros(1, nc, dtype=DTYPE))[0]  # (nc,)
 
         # X is the same for every column; Y differs per column (objective / each con).
-        X_full = (
-            torch.cat([train_X, cand], dim=0)
-            .unsqueeze(1)
-            .expand(-1, m, -1)
-            .contiguous()
-        )
+        X_all = torch.cat([train_X, cand], dim=0)  # (n_ctx+n_cand, dim)
         Y_cols = torch.cat([y_t, g_t], dim=1)  # (n_ctx, m)
         Y_full = torch.cat(
             [Y_cols, torch.zeros(N_CANDIDATES, m, dtype=DTYPE)], dim=0
@@ -147,16 +204,41 @@ def optimize_problem(
         thr_full = torch.cat([y_t.max().reshape(1), thr])  # (m,)
 
         with torch.no_grad():
-            # forward() returns the candidate rows' logits (context rows already dropped)
-            logits = surrogate.forward(X_full, Y_full, single_eval_pos=n_ctx)
-            ei = surrogate.predict_ei(logits, thr_full)[:, 0]  # objective column
+            # Score the m columns in chunks. On OOM, halve the chunk and retry: the
+            # result is identical either way, so this only trades kernel launches for
+            # peak memory. At chunk == 1 there is nothing left to shrink -- re-raise
+            # rather than pretend the iteration succeeded.
+            while True:
+                try:
+                    ei_all, pi_all, mean, var = _score_columns(
+                        surrogate, X_all, Y_full, n_ctx, thr_full, chunk
+                    )
+                    break
+                except torch.OutOfMemoryError:
+                    if chunk == 1:
+                        raise
+                    chunk = max(1, chunk // 2)
+                    if surrogate.device.type == "cuda":
+                        torch.cuda.empty_cache()
+            ei = ei_all[:, 0]  # objective column
             # feasibility straight from the bar distribution: P(g_i > transformed 0)
-            p_feas = surrogate.predict_pi(logits, thr_full)[:, 1:]  # (n_cand, nc)
-            cei = ei * p_feas.prod(dim=1)
-            mean = surrogate.predict_mean(logits)
-            var = surrogate.predict_variance(logits)
+            p_feas = pi_all[:, 1:]  # (n_cand, nc)
+            # Score in LOG space: log CEI = log EI + sum_i log P(c_i <= 0).
+            #
+            # This is the same acquisition -- log is strictly increasing, so the argmax is
+            # unchanged -- but the product form underflows. The factors are float32 and
+            # there is one per constraint, so on a problem with many constraints their
+            # product falls below float32's smallest normal (1.2e-38) and rounds to
+            # EXACTLY 0. On CEC2020_p7 (38 constraints) that happened for all 1000
+            # candidates at once: every p_feas was fine (min 1.5e-6, none zero) yet
+            # prod() was 0.0 for every candidate, so cei was the constant 0, argmax
+            # returned index 0, and PFN-CEI silently degenerated into "return the first
+            # uniform random candidate" on every iteration -- while still reporting a
+            # successful run. The log-sum of the same numbers is a healthy -218..-161 and
+            # ranks all 1000 candidates distinctly.
+            log_cei = torch.log(ei.double()) + torch.log(p_feas.double()).sum(dim=1)
 
-        choice = int(torch.argmax(cei).item())
+        choice = int(torch.argmax(log_cei).item())
         x_new = cand[choice : choice + 1]
         o_new, c_new = obj.evaluate_raw(x_new)
         train_X = torch.cat([train_X, x_new], dim=0)
@@ -167,7 +249,10 @@ def optimize_problem(
             best,
             mean=mean[choice, 0].item(),
             variance=var[choice, 0].item(),
-            acq_value=cei[choice].item(),
+            # NB: the recorded acquisition is now log(CEI), not CEI. The linear value is
+            # not representable -- it underflows to 0 on high-constraint problems, which
+            # is the whole reason selection moved to log space.
+            acq_value=log_cei[choice].item(),
         )
         if checkpoint:
             res.set_history(train_X, train_obj, n_init, c=train_con)

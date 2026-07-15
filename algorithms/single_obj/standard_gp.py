@@ -83,11 +83,39 @@ def _standard_gp(train_X: torch.Tensor, train_Y: torch.Tensor) -> SingleTaskGP:
     implementation's ``GP_MAP_Wrapper``.
     """
     dim = train_X.shape[-1]
+    # The reference's flat box is [1e-10, 10], widened to [1e-10, 30] for dim >= 100.
+    # But the method itself *initializes* at l0 = sqrt(dim), and once dim > 900 that
+    # initialization sits OUTSIDE the reference's own box: LassoLeukemia has dim = 7129,
+    # so l0 = 84.4 > 30 and GPyTorch refused it outright ("Attempting to manually set a
+    # parameter value that is out of bounds of its current constraints"). The reference
+    # never ran a problem that large, so its two halves have never had to agree.
+    # Widen the box to contain the initialization rather than clamping l0 down to 30:
+    # clamping would silently discard the sqrt(d) Robust Initialization that IS the
+    # method (Lemma 5.1), and it would do so precisely in the high-dimensional regime the
+    # method exists for. NB this is an extrapolation beyond the published setting.
+    #
+    # l0 must land strictly INSIDE the box -- GPyTorch's Interval.inverse_transform is
+    # infinite at either endpoint, so ub = l0 exactly still raises. The reference pins
+    # ub = 3 * l0 at the dim = 100 boundary where it switches (l0 = 10, ub = 30), so
+    # reuse that same 3:1 ratio when 30 is too small to hold l0. This leaves every
+    # in-scope problem with sqrt(dim) < 30 on exactly the reference's ub = 30 -- only
+    # LassoLeukemia (dim = 7129) is affected.
     ub = 30.0 if dim >= 100 else 10.0
+    if math.sqrt(dim) >= ub:
+        ub = 3.0 * math.sqrt(dim)
+    # UniformPrior stores its bounds as plain tensor attributes, NOT registered buffers
+    # (unlike GammaPrior), so the kernel's ``.to(train_X)`` below leaves them on CPU. When
+    # a fit fails and BoTorch's fallback calls ``sample_all_priors``, the prior then samples
+    # on CPU and assigns into the CUDA lengthscale -> a device-mismatch RuntimeError that
+    # fires nondeterministically (only on the seeds whose L-BFGS fit needs the retry path).
+    # Build the bounds on ``train_X``'s device so ``torch.distributions.Uniform.rsample``
+    # (which draws with ``device=self.low.device``) lands the sample where the parameter is.
+    ls_lb = torch.tensor(1e-10, device=train_X.device, dtype=train_X.dtype)
+    ls_ub = torch.tensor(ub, device=train_X.device, dtype=train_X.dtype)
     base = MaternKernel(
         nu=2.5,
         ard_num_dims=dim,
-        lengthscale_prior=UniformPrior(1e-10, ub),
+        lengthscale_prior=UniformPrior(ls_lb, ls_ub),
         lengthscale_constraint=Interval(lower_bound=1e-10, upper_bound=ub),
     ).to(train_X)
     # *** the method: start the optimizer at l0 = sqrt(d) ***

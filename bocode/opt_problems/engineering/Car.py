@@ -67,8 +67,10 @@ class Car(BenchmarkProblem):
                 [1.98],
             ]
         )
-        X_1 = torch.cat((X, torch.tensor([[1] * n]).T), 1)
-        fx = X_1 @ test_function
+        # Follow X's dtype: the coefficient tensors default to float32, so once evaluation
+        # moved to float64 a float64 @ float32 matmul raised a dtype mismatch.
+        X_1 = torch.cat((X, torch.ones((n, 1), dtype=X.dtype)), 1)
+        fx = X_1 @ test_function.to(X.dtype)
 
         gx = torch.zeros((n, self.num_constraints))
 

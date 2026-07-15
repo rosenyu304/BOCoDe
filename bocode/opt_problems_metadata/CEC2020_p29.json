@@ -1,5 +1,6 @@
 {
   "name": "CEC2020_p29",
+  "real_name": "Gas Transmission Compressor Design (GTCD)",
   "module": "bocode.opt_problems.cec2020_rw.CEC2020_p21_33",
   "extra": null,
   "suite": "CEC2020 RW-Constrained",

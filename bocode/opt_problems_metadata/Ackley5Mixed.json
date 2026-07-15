@@ -1,5 +1,6 @@
 {
   "name": "Ackley5Mixed",
+  "real_name": "Ackley (5-D mixed-variable)",
   "module": "bocode.opt_problems.synthetic_mixed.Ackley5Mixed",
   "extra": null,
   "suite": "Mixed-variable synthetic",

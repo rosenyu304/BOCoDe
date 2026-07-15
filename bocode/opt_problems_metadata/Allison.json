@@ -1,5 +1,6 @@
 {
   "name": "Allison",
+  "real_name": "Allison Analytical-Target-Cascading Test Problem",
   "module": "bocode.opt_problems.engineering.Allison",
   "extra": null,
   "suite": "Engineering (standalone)",

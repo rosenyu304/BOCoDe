@@ -1,5 +1,6 @@
 {
   "name": "QPowerModel",
+  "real_name": "Microreactor Control \u2014 Power (Q) Model",
   "module": "bocode.opt_problems.engineering.QPowerModel",
   "extra": "neorl",
   "suite": "Engineering (standalone)",

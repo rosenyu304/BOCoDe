@@ -1,5 +1,6 @@
 {
   "name": "CEC2020_p30",
+  "real_name": "Tension/Compression Spring Design (case 2)",
   "module": "bocode.opt_problems.cec2020_rw.CEC2020_p21_33",
   "extra": null,
   "suite": "CEC2020 RW-Constrained",

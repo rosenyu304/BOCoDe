@@ -1,5 +1,6 @@
 {
   "name": "CRE51",
+  "real_name": "Water Resource Planning (constrained)",
   "module": "bocode.opt_problems.reproblems.CRE_problems",
   "extra": null,
   "suite": "CRE (Tanabe-Ishibuchi)",
@@ -28,7 +29,7 @@
   "convex": "unknown",
   "np_hard": "unknown",
   "f_opt": null,
-  "source": "CRE benchmark problems (Tanabe & Ishibuchi, 2020). 8 constrained multi-objective problems with explicit constraints. Reference: Ryoji Tanabe, Hisao Ishibuchi, \"An Easy-to-use Real-world Multi-objective Problem Suite\" Applied Soft Computing. 89: 106078 (2020) Note: Original reproblems use g >= 0 = satisfied. BOCoDe uses g <= 0 = satisfied. Constraints are negated accordingly.",
+  "source": "CRE benchmark problems (Tanabe & Ishibuchi, 2020). 8 constrained multi-objective problems with explicit constraints. Sign convention --------------- The CRE problems are defined for **minimization**. BoCoDe **maximizes**, so every ``_evaluate_implementation`` here returns ``-fx`` (the negated original objectives) and ``ref_point`` is the negated reference point. Reference points (DERIVED, not published for CRE) ------------------------------------------------- Tanabe & Ishibuchi publish approxim",
   "variable_types": [
     "continuous",
     "continuous",

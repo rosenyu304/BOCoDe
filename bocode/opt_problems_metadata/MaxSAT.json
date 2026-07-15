@@ -1,5 +1,6 @@
 {
   "name": "MaxSAT",
+  "real_name": "Weighted MaxSAT (60 variables)",
   "module": "bocode.opt_problems.combinatorial.MaxSAT",
   "extra": null,
   "suite": "TSP / NEORL",

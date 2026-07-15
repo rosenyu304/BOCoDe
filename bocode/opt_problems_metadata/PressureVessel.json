@@ -1,5 +1,6 @@
 {
   "name": "PressureVessel",
+  "real_name": "Pressure Vessel Design",
   "module": "bocode.opt_problems.engineering.PressureVessel",
   "extra": null,
   "suite": "Engineering (standalone)",

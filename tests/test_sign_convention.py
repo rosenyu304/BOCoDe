@@ -209,11 +209,30 @@ class _StubEnv:
 
     REWARD = 7.0
 
-    def reset(self):
+    def reset(self, seed=None):
+        # The rollouts seed every reset (MuJoCo perturbs the initial state, so an unseeded
+        # reset makes the objective non-deterministic). A real gym env accepts ``seed``;
+        # this stub must too, or it no longer stands in for one.
+        self._n = 0  # a real env restarts the episode here; without this, only the first
+        # row of a batch gets a full episode and the rest terminate immediately.
         return None, {}
 
+    # The problems roll out a full EPISODE under the constant action (they used to take a
+    # single env.step(), which is why InvertedPendulum's objective was constant at 1.0).
+    # So the stub must terminate, and the expected value is the EPISODE RETURN.
+    STEPS = 5
+
+    def __init__(self):
+        self._n = 0
+
     def step(self, action):
-        return None, self.REWARD, False, False, {}
+        self._n += 1
+        terminated = self._n >= self.STEPS
+        return None, self.REWARD, terminated, False, {}
+
+    @property
+    def episode_return(self):
+        return self.REWARD * self.STEPS
 
 
 @pytest.mark.parametrize(
@@ -221,13 +240,17 @@ class _StubEnv:
     ["HalfCheetahProblem", "PusherProblem", "ReacherProblem", "AntProblem"],
 )
 def test_mujoco_returns_the_reward_not_its_negation(name):
-    """The single-step MuJoCo problems must return the gym reward as-is.
+    """The MuJoCo problems must return the gym EPISODE RETURN as-is, not its negation.
 
     Gymnasium's MuJoCo rewards are *maximized*, which is already BoCoDe's convention,
     so they must not be negated. The reward is signed (Reacher's and Pusher's are
     negative), so a plain sign check would not catch an inversion; instead the env is
-    stubbed with a known reward and the returned value is pinned to it. A negated
-    reward would point every algorithm at the WORST control action.
+    stubbed with a known reward and the returned value is pinned to the episode return.
+    A negated reward would point every algorithm at the WORST control action.
+
+    The expected value is REWARD * STEPS, not REWARD: these problems roll out a full
+    episode under the constant action. They used to take a single ``env.step()``, which is
+    what made InvertedPendulum's objective constant at 1.0 (+1 per timestep alive).
     """
     pytest.importorskip("gymnasium")
 
@@ -236,11 +259,12 @@ def test_mujoco_returns_the_reward_not_its_negation(name):
 
     values, _ = problem.evaluate(torch.zeros(3, problem.dim, dtype=torch.double))
 
+    expected = _StubEnv.REWARD * _StubEnv.STEPS
     assert torch.allclose(
         values.to(torch.double),
-        torch.full_like(values.to(torch.double), _StubEnv.REWARD),
+        torch.full_like(values.to(torch.double), expected),
     ), (
-        f"{name}: must return the gym reward as-is (got {values.flatten().tolist()}, "
-        f"expected {_StubEnv.REWARD}). MuJoCo rewards are already a maximization "
+        f"{name}: must return the gym episode return as-is (got "
+        f"{values.flatten().tolist()}, expected {expected}). MuJoCo rewards are already a maximization "
         f"target, so negating them inverts the search."
     )

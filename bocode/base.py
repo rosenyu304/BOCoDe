@@ -161,16 +161,41 @@ class BenchmarkProblem:
         ``constraints`` tensor, so that ``constraints.shape[1] == num_constraints``
         for every problem.
         """
-        output = self._evaluate_implementation(X.clone().to(torch.float))
+        # Evaluate in float64. The reference implementations these benchmarks come from
+        # (CEC2020's MATLAB, modact, the Firefly/Bat papers) all compute in double, and a
+        # float32 cast here silently narrows every objective in the suite: CEC2020_p12's
+        # (x1-1)**22 reaches 8e43, which overflows float32's 3.4e38 and saturates to -inf on
+        # 43% of the domain, and MODAct can snap to a different discrete gear near a catalog
+        # boundary. BO itself is double throughout (algorithms/_bo_utils.py: DTYPE).
+        #
+        # Many problems build their coefficient tensors with a bare ``torch.tensor([...])``,
+        # which takes the *default* dtype. Passing float64 X into those would raise
+        # "Float did not match Double" on the first matmul, so raise the default dtype for
+        # the duration of the call: the constants are then created as float64 too, and no
+        # problem has to spell out a dtype. Restored in ``finally`` so nothing leaks out.
+        _prev_dtype = torch.get_default_dtype()
+        torch.set_default_dtype(torch.float64)
+        try:
+            output = self._evaluate_implementation(X.clone().to(torch.float64))
+        finally:
+            torch.set_default_dtype(_prev_dtype)
         n = X.shape[0]
+
+        def _f64(t):
+            # A few problems build their outputs in single precision (QPowerModel,
+            # ReactivityModel, PID4Acrobot, PD4CartPole, TSP_*), which would hand the
+            # optimizer a float32 objective even though it was evaluated in double.
+            # Normalize here so every problem returns the same dtype.
+            return None if t is None else t.to(torch.float64)
+
         if len(output) == 2:
             constraints, values = output
-            return values, self._normalize_constraints(constraints, n)
+            return _f64(values), _f64(self._normalize_constraints(constraints, n))
         # len(output) == 3: (equality, inequality, values) for CEC2020 functions.
         equality, inequality, values = output
         eq = self._normalize_constraints(equality, n)
         ineq = self._normalize_constraints(inequality, n)
-        return values, torch.cat([eq, ineq], dim=1)
+        return _f64(values), _f64(torch.cat([eq, ineq], dim=1))
 
     @staticmethod
     def _normalize_constraints(constraints, n: int) -> torch.Tensor:

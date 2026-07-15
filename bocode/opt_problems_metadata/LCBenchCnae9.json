@@ -1,5 +1,6 @@
 {
   "name": "LCBenchCnae9",
+  "real_name": "LCBench MLP tuning on the cnae-9 dataset (7 hyperparameters)",
   "module": "bocode.opt_problems.hpo.LCBench",
   "extra": null,
   "suite": "HPO (LassoBench / HPO-B)",

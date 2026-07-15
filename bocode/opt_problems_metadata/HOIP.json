@@ -1,5 +1,6 @@
 {
   "name": "HOIP",
+  "real_name": "Hybrid Organic-Inorganic Perovskite (HOIP) Inter-Molecular Binding Energy",
   "module": "bocode.opt_problems.materials.HOIP",
   "extra": null,
   "suite": "PV-Lab materials",

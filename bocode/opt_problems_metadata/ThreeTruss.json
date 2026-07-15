@@ -1,5 +1,6 @@
 {
   "name": "ThreeTruss",
+  "real_name": "Three-Bar Truss Design",
   "module": "bocode.opt_problems.engineering.ThreeTruss",
   "extra": null,
   "suite": "Engineering (standalone)",

@@ -1,5 +1,6 @@
 {
   "name": "CEC2020_p56",
+  "real_name": "Dairy Cattle Feed Ration Optimization (case 2)",
   "module": "bocode.opt_problems.cec2020_rw.CEC2020_p40_57",
   "extra": null,
   "suite": "CEC2020 RW-Constrained",

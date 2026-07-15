@@ -1,5 +1,6 @@
 {
   "name": "Truss200D",
+  "real_name": "200-Bar Truss Weight Minimization",
   "module": "bocode.opt_problems.engineering.Truss200D",
   "extra": "truss",
   "suite": "Engineering (standalone)",

@@ -1,5 +1,6 @@
 {
   "name": "Truss72D_FourForces",
+  "real_name": "72-Bar Truss Weight Minimization (four load cases)",
   "module": "bocode.opt_problems.engineering.Truss72D",
   "extra": "truss",
   "suite": "Engineering (standalone)",

@@ -1,5 +1,6 @@
 {
   "name": "ReactivityModel",
+  "real_name": "Microreactor Control \u2014 Reactivity Model",
   "module": "bocode.opt_problems.engineering.ReactivityModel",
   "extra": null,
   "suite": "Engineering (standalone)",

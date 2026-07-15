@@ -1,5 +1,6 @@
 {
   "name": "LassoBreastCancer",
+  "real_name": "LassoBench \u2014 Lasso Regularization Tuning on breast_cancer",
   "module": "bocode.opt_problems.hpo.LassoBreastCancer",
   "extra": "hpo",
   "suite": "HPO (LassoBench / HPO-B)",

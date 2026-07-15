@@ -1,5 +1,6 @@
 {
   "name": "AgNP",
+  "real_name": "Silver-Nanoparticle (AgNP) Flow Synthesis Optimization",
   "module": "bocode.opt_problems.materials.AgNP",
   "extra": null,
   "suite": "PV-Lab materials",

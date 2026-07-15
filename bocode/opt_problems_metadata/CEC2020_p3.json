@@ -1,5 +1,6 @@
 {
   "name": "CEC2020_p3",
+  "real_name": "Optimal Operation of Alkylation Unit",
   "module": "bocode.opt_problems.cec2020_rw.CEC2020_p1_20",
   "extra": null,
   "suite": "CEC2020 RW-Constrained",

@@ -1,5 +1,6 @@
 {
   "name": "AckleyCat",
+  "real_name": "Ackley (20-D categorical)",
   "module": "bocode.opt_problems.synthetic_mixed.AckleyCat",
   "extra": null,
   "suite": "Mixed-variable synthetic",

@@ -1,5 +1,6 @@
 {
   "name": "LassoLeukemia",
+  "real_name": "LassoBench \u2014 Lasso Regularization Tuning on leukemia",
   "module": "bocode.opt_problems.hpo.LassoLeukemia",
   "extra": "hpo",
   "suite": "HPO (LassoBench / HPO-B)",

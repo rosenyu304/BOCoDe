@@ -8,11 +8,17 @@ class WaterResources(BenchmarkProblem):
     K. Musselman and J. Talavage. A trade-off cut approach to multiple objective optimization.
     Operations Research 28(6):1424–1435, 1980
 
+    The objectives AND the seven constraints are numerically identical to ``CRE51``,
+    the constrained water-resource planning problem of Tanabe & Ishibuchi (their
+    CRE5-3-1 / RE6-3-1, eqs. S.143-S.154 of the supplementary file), negated into
+    BoCoDe's maximization frame (verified: ``WaterResources(x) == -CRE51(x)``).
+    Three constraints previously deviated from that published definition (g2 was
+    scaled by 0.1, g3 had ``- 4051.02`` instead of ``+ 4051.02``, and g6 used
+    ``0.417 / (x1 * x2) ... - 136.52`` instead of ``0.417 * x1 * x2 ... - 136.54``);
+    they now follow the published equations.
+
     Reference point (DERIVED from published RE data, not published for this exact
-    formulation): the objectives are numerically identical to ``CRE51``, the
-    constrained water-resource planning problem of Tanabe & Ishibuchi, negated
-    into BoCoDe's maximization frame (verified: ``WaterResources(x) == -CRE51(x)``
-    to machine precision). CRE51's objectives are the first five of ``RE61``, whose
+    formulation): CRE51's objectives are the first five of ``RE61``, whose
     approximated ideal/nadir points are published at
     https://github.com/ryojitanabe/reproblems/tree/master/ideal_nadir_points.
     Following the paper's convention ``r = z_ideal + 1.1 * (z_nadir - z_ideal)``
@@ -62,11 +68,11 @@ class WaterResources(BenchmarkProblem):
 
         gx = torch.zeros((n, self.num_constraints))
         gx[:, 0] = 0.00139 / (x1 * x2) + 4.94 * x3 - 0.08 - 1
-        gx[:, 1] = 0.0000306 / (x1 * x2) + 0.1082 * x3 - 0.00986 - 0.10
-        gx[:, 2] = 12.307 / (x1 * x2) + 49408.24 * x3 - 4051.02 - 50000
+        gx[:, 1] = 0.000306 / (x1 * x2) + 1.082 * x3 - 0.0986 - 1
+        gx[:, 2] = 12.307 / (x1 * x2) + 49408.24 * x3 + 4051.02 - 50000
         gx[:, 3] = 2.098 / (x1 * x2) + 8046.33 * x3 - 696.71 - 16000
         gx[:, 4] = 2.138 / (x1 * x2) + 7883.39 * x3 - 705.04 - 10000
-        gx[:, 5] = 0.417 / (x1 * x2) + 1721.26 * x3 - 136.52 - 2000
+        gx[:, 5] = 0.417 * x1 * x2 + 1721.26 * x3 - 136.54 - 2000
         gx[:, 6] = 0.164 / (x1 * x2) + 631.13 * x3 - 54.48 - 550
 
         return gx, fx

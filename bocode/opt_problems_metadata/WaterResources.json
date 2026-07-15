@@ -1,5 +1,6 @@
 {
   "name": "WaterResources",
+  "real_name": "Water Resource Planning (Musselman-Talavage)",
   "module": "bocode.opt_problems.engineering.WaterResources",
   "extra": null,
   "suite": "Engineering (standalone)",
@@ -28,7 +29,7 @@
   "convex": "unknown",
   "np_hard": "unknown",
   "f_opt": null,
-  "source": "K. Musselman and J. Talavage. A trade-off cut approach to multiple objective optimization. Operations Research 28(6):1424\u20131435, 1980",
+  "source": "K. Musselman and J. Talavage. A trade-off cut approach to multiple objective optimization. Operations Research 28(6):1424\u20131435, 1980 The objectives AND the seven constraints are numerically identical to ``CRE51``, the constrained water-resource planning problem of Tanabe & Ishibuchi (their CRE5-3-1 / RE6-3-1, eqs. S.143-S.154 of the supplementary file), negated into BoCoDe's maximization frame (verified: ``WaterResources(x) == -CRE51(x)``). Three constraints previously deviated from that publish",
   "variable_types": [
     "continuous",
     "continuous",

@@ -1,5 +1,6 @@
 {
   "name": "HeatExchanger",
+  "real_name": "Heat Exchanger Design (8-variable)",
   "module": "bocode.opt_problems.engineering.HeatExchanger",
   "extra": null,
   "suite": "Engineering (standalone)",

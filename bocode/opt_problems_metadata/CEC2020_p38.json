@@ -1,5 +1,6 @@
 {
   "name": "CEC2020_p38",
+  "real_name": "Optimal Power Flow (Minimization of Fuel Cost)",
   "module": "bocode.opt_problems.cec2020_rw.CEC2020_p38",
   "extra": null,
   "suite": "CEC2020 RW-Constrained",

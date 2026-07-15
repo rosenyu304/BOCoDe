@@ -1,5 +1,6 @@
 {
   "name": "CarSideImpact",
+  "real_name": "Car Side Impact Design (3-objective)",
   "module": "bocode.opt_problems.engineering.CarSideImpact",
   "extra": null,
   "suite": "Engineering (standalone)",
@@ -44,7 +45,7 @@
   "convex": "unknown",
   "np_hard": "unknown",
   "f_opt": null,
-  "source": "H. Jain and K. Deb. An evolutionary many-objective optimization algorithm using reference-point based nondominated sorting approach, part II: Handling constraints and extending to an adaptive approach, IEEE Transactions on Evolutionary Computation 18(4):602\u2013622, 2014",
+  "source": "H. Jain and K. Deb. An evolutionary many-objective optimization algorithm using reference-point based nondominated sorting approach, part II: Handling constraints and extending to an adaptive approach, IEEE Transactions on Evolutionary Computation 18(4):602\u2013622, 2014 Reference point (DERIVED from published RE data, not published for this exact formulation): this problem is numerically identical to ``CRE31``, the constrained car side-impact problem of Tanabe & Ishibuchi, with the objectives alrea",
   "variable_types": [
     "continuous",
     "continuous",

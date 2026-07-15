@@ -63,6 +63,19 @@ from .._bo_utils import (
 from .._tfm_utils import TabPFNSurrogate, sample_in_subspace
 
 N_CANDIDATES = 2000  # candidate pool scored per iteration ("m" in the paper)
+
+# How many candidate rows to push through TabPFN per forward pass. The pool is scored in
+# chunks rather than all 2000 at once. In TabPFN a query row attends only to the context
+# rows, never to another query row, so a candidate's predictive mean -- and its gradient
+# d mu / d x -- depends only on the context and on that row. Splitting the pool is
+# therefore an EXACT reordering of the same computation, not an approximation.
+#
+# It has to be chunked because the un-chunked cost is O(N_CANDIDATES * dim): the gradient
+# pass keeps the autograd graph over an (n_ctx + 2000) x 1 x dim activation, which on
+# AntPolicySearchProblem (dim 840) and LassoLeukemia (dim 7129) asked CUDA for 0.82 and
+# 6.82 GiB in a single allocation and OOMed. With chunking, peak memory scales with the
+# chunk size and NOT with the pool size, so the method runs on any card.
+MAX_CAND_PER_PASS = 512
 BETA = 2.33  # UCB exploration level (paper Sec. 3.3)
 DEFAULT_RANK = 10  # fixed subspace rank used for every paper experiment (Appendix G)
 
@@ -130,13 +143,42 @@ def optimize_problem(
         ).unsqueeze(1)
         return surrogate.forward(X_full, Y_full, single_eval_pos=n_ctx), X_q
 
+    chunk = [min(N_CANDIDATES, MAX_CAND_PER_PASS)]
+
+    def _chunked(fn, n):
+        """Apply ``fn(lo, hi)`` over ``[0, n)`` in slices of ``chunk[0]`` rows.
+
+        On CUDA OOM the chunk width is halved (down to 1) and the failed slice retried,
+        so a shared-GPU spike shrinks the pass instead of killing the run. The width
+        stays shrunk for the rest of the run. Results are returned in order.
+        """
+        out, i = [], 0
+        while i < n:
+            c = min(chunk[0], n - i)
+            try:
+                out.append(fn(i, i + c))
+                i += c
+            except torch.OutOfMemoryError:
+                if chunk[0] == 1:
+                    raise
+                chunk[0] = max(1, chunk[0] // 2)
+                if surrogate.device.type == "cuda":
+                    torch.cuda.empty_cache()
+        return out
+
     for it in range(start_it, iters):
-        # (1-2) Sobol pool -> TabPFN -> gradients of the predictive mean.
+        # (1-2) Sobol pool -> TabPFN -> gradients of the predictive mean, in candidate
+        # chunks. Each row's gradient is independent (queries do not cross-attend), so the
+        # concatenation equals the single-pass grad exactly.
         pool = sobol.draw(N_CANDIDATES).to(DTYPE)
-        logits, X_q = _forward(pool, grad=True)
-        mean_pool = surrogate.predict_mean(logits).reshape(-1)
-        (grad_pool,) = torch.autograd.grad(mean_pool.sum(), X_q)
-        grads = grad_pool.reshape(N_CANDIDATES, dim).detach().cpu().numpy()
+
+        def _grad_slice(lo, hi):
+            logits, X_q = _forward(pool[lo:hi], grad=True)
+            mean_sub = surrogate.predict_mean(logits).reshape(-1)
+            (g,) = torch.autograd.grad(mean_sub.sum(), X_q)
+            return g.reshape(hi - lo, dim).detach().cpu()
+
+        grads = torch.cat(_chunked(_grad_slice, N_CANDIDATES)).numpy()
 
         # (3-4) H = E[g g^T] -> top-r eigenvectors -> candidates in that subspace,
         # centered on the centroid of the observed data (x_ref = mean(X_obs)).
@@ -163,11 +205,17 @@ def optimize_problem(
         # argmax in roughly 1 iteration in 6. Since mu and sigma are already computed on the two
         # preceding lines, matching the paper costs nothing -- and "we used a different
         # acquisition than the paper" is not defensible when the fix is free.
-        with torch.no_grad():
-            logits_gi, _ = _forward(cand, grad=False)
-            mean = surrogate.predict_mean(logits_gi).reshape(-1)
-            var = surrogate.predict_variance(logits_gi).reshape(-1).clamp_min(0.0)
-            ucb = mean + BETA * var.sqrt()
+        def _acq_slice(lo, hi):
+            with torch.no_grad():
+                logits_gi, _ = _forward(cand[lo:hi], grad=False)
+                m = surrogate.predict_mean(logits_gi).reshape(-1)
+                v = surrogate.predict_variance(logits_gi).reshape(-1).clamp_min(0.0)
+            return m.cpu(), v.cpu()
+
+        parts = _chunked(_acq_slice, cand.shape[0])
+        mean = torch.cat([m for m, _ in parts])
+        var = torch.cat([v for _, v in parts])
+        ucb = mean + BETA * var.sqrt()
 
         choice = int(torch.argmax(ucb).item())
         x_new = cand[choice : choice + 1]

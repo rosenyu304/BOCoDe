@@ -1,5 +1,6 @@
 {
   "name": "HelicalSpring",
+  "real_name": "Helical (Coil) Compression Spring Design",
   "module": "bocode.opt_problems.engineering.HelicalSpring",
   "extra": null,
   "suite": "Engineering (standalone)",

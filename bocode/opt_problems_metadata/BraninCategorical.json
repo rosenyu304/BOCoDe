@@ -1,5 +1,6 @@
 {
   "name": "BraninCategorical",
+  "real_name": "Branin (categorical)",
   "module": "bocode.opt_problems.synthetic_mixed.BraninCategorical",
   "extra": null,
   "suite": "Mixed-variable synthetic",

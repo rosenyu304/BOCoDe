@@ -1,5 +1,6 @@
 {
   "name": "CEC2020_p24",
+  "real_name": "Robot Gripper Problem",
   "module": "bocode.opt_problems.cec2020_rw.CEC2020_p21_33",
   "extra": null,
   "suite": "CEC2020 RW-Constrained",

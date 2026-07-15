@@ -1,5 +1,6 @@
 {
   "name": "CEC2020_p35",
+  "real_name": "Optimal Sizing of Distributed Generation for Active Power Loss Minimization",
   "module": "bocode.opt_problems.cec2020_rw.CEC2020_p35",
   "extra": null,
   "suite": "CEC2020 RW-Constrained",

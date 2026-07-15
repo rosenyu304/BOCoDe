@@ -1,5 +1,6 @@
 {
   "name": "RE61",
+  "real_name": "Water Resource Planning",
   "module": "bocode.opt_problems.reproblems.RE_problems",
   "extra": null,
   "suite": "Engineering (standalone)",
@@ -28,7 +29,7 @@
   "convex": "unknown",
   "np_hard": "unknown",
   "f_opt": null,
-  "source": "RE benchmark problems (Tanabe & Ishibuchi, 2020). 16 unconstrained multi-objective problems where original constraints are reformulated as penalty objectives. Reference: Ryoji Tanabe, Hisao Ishibuchi, \"An Easy-to-use Real-world Multi-objective Problem Suite\" Applied Soft Computing. 89: 106078 (2020)",
+  "source": "RE benchmark problems (Tanabe & Ishibuchi, 2020). 16 unconstrained multi-objective problems where original constraints are reformulated as penalty objectives. Sign convention --------------- The RE problems are defined for **minimization**. BoCoDe **maximizes**, so every ``_evaluate_implementation`` here returns ``-fx`` (the negated original objectives) and ``ref_point`` is the negated published reference point. Reference points ---------------- Tanabe & Ishibuchi compute the hypervolume in the ",
   "variable_types": [
     "continuous",
     "continuous",

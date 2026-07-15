@@ -1,5 +1,6 @@
 {
   "name": "MiniAeroWing",
+  "real_name": "MiniAero Wing Design (geometric-programming aircraft wing)",
   "module": "bocode.opt_problems.engineering.MiniAeroWing",
   "extra": null,
   "suite": "Engineering (standalone)",

@@ -1,5 +1,6 @@
 {
   "name": "LCBenchKrVsKp",
+  "real_name": "LCBench MLP tuning on the kr-vs-kp dataset (7 hyperparameters)",
   "module": "bocode.opt_problems.hpo.LCBench",
   "extra": null,
   "suite": "HPO (LassoBench / HPO-B)",

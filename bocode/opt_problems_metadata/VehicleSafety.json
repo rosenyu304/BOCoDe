@@ -1,5 +1,6 @@
 {
   "name": "VehicleSafety",
+  "real_name": "Vehicle Crashworthiness (Crash Safety) Design",
   "module": "bocode.opt_problems.engineering.VehicleSafety",
   "extra": null,
   "suite": "Engineering (standalone)",

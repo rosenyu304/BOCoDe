@@ -92,3 +92,24 @@
 # LESSON: 'degenerate by construction' is a claim that STOPS INVESTIGATION. It needs the same
 # evidentiary bar as any other result. It was accepted here on a plausible physical story, and
 # the story was wrong.
+
+# ---------------------------------------------------------------------------
+LassoRCV1
+# EXCLUDED 2026-07-14 by Rosen's decision. This is a SCOPE call, not a defect —
+# recorded honestly so nobody "fixes" it back in.
+#
+# LassoRCV1 is a real, published LassoBench task: the RCV1 text dataset has 47,236
+# TF-IDF features and the weighted-Lasso benchmark tunes ONE regularization weight
+# per feature, so dim = 47,236 (the next largest problem in the suite is 7,129).
+#
+# Why it goes:
+#   * No GP-based method can fit it (47,236 ARD lengthscales), so it would be n/a or
+#     a timeout for nearly every column of the results table.
+#   * As a single 47k outlier it distorts every metadata distribution plot (the suite
+#     is otherwise 74% at dim <= 10).
+#
+# NOTE: it is NOT broken. It DID have a real bug (alpha hard-coded to 1.0 = 1258x
+# alpha_max, which zeroed all 47,236 coefficients so the objective ignored the design
+# vector entirely) — that bug is FIXED and it now responds to x. It is being dropped on
+# scope, not on correctness. The other LassoBench tasks (DNA, Leukemia, BreastCancer,
+# Diabetes) stay.

@@ -1,5 +1,6 @@
 {
   "name": "StyblinskiTangCat",
+  "real_name": "Styblinski-Tang (10-D categorical)",
   "module": "bocode.opt_problems.synthetic_mixed.StyblinskiTangCat",
   "extra": null,
   "suite": "Mixed-variable synthetic",

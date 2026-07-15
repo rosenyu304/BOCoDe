@@ -1,5 +1,6 @@
 {
   "name": "CrossedBarrel",
+  "real_name": "Crossed-Barrel Mechanical Structure Toughness Optimization",
   "module": "bocode.opt_problems.materials.CrossedBarrel",
   "extra": null,
   "suite": "PV-Lab materials",

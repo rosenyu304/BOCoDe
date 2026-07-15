@@ -1,5 +1,6 @@
 {
   "name": "LCBenchMiniBooNE",
+  "real_name": "LCBench MLP tuning on the MiniBooNE dataset (7 hyperparameters)",
   "module": "bocode.opt_problems.hpo.LCBench",
   "extra": null,
   "suite": "HPO (LassoBench / HPO-B)",

@@ -1,5 +1,6 @@
 {
   "name": "ColumnBuckling",
+  "real_name": "Column Buckling (Euler critical load)",
   "module": "bocode.opt_problems.engineering.ColumnBuckling",
   "extra": null,
   "suite": "Engineering (standalone)",

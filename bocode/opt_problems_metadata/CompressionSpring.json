@@ -1,5 +1,6 @@
 {
   "name": "CompressionSpring",
+  "real_name": "Tension/Compression Spring Design",
   "module": "bocode.opt_problems.engineering.CompressionSpring",
   "extra": null,
   "suite": "Engineering (standalone)",

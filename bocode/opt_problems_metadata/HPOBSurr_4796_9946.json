@@ -1,5 +1,6 @@
 {
   "name": "HPOBSurr_4796_9946",
+  "real_name": "rpart.preproc tuning (HPO-B search space 4796, dataset 9946)",
   "module": "bocode.opt_problems.hpo.HPOBSurrogate",
   "extra": "hpobsurr",
   "suite": "HPO (LassoBench / HPO-B)",

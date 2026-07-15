@@ -1,5 +1,6 @@
 {
   "name": "PestControl",
+  "real_name": "Pest Control (25 stations)",
   "module": "bocode.opt_problems.combinatorial.PestControl",
   "extra": null,
   "suite": "TSP / NEORL",

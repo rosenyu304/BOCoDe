@@ -1,5 +1,6 @@
 {
   "name": "CEC2020_p44",
+  "real_name": "Wind Farm Layout Problem",
   "module": "bocode.opt_problems.cec2020_rw.CEC2020_p40_57",
   "extra": null,
   "suite": "CEC2020 RW-Constrained",

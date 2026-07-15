@@ -1,5 +1,6 @@
 {
   "name": "CEC2020_p31",
+  "real_name": "Gear Train Design (Sandgren)",
   "module": "bocode.opt_problems.cec2020_rw.CEC2020_p21_33",
   "extra": null,
   "suite": "CEC2020 RW-Constrained",

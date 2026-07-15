@@ -1,5 +1,6 @@
 {
   "name": "CEC2020_p41",
+  "real_name": "Microgrid Power Flow (Grid-Connected Case)",
   "module": "bocode.opt_problems.cec2020_rw.CEC2020_p40_57",
   "extra": null,
   "suite": "CEC2020 RW-Constrained",

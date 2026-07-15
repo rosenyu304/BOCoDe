@@ -1,5 +1,6 @@
 {
   "name": "SatelliteDesign",
+  "real_name": "Satellite (Space Mission) Design",
   "module": "bocode.opt_problems.engineering.SatelliteDesign",
   "extra": null,
   "suite": "Engineering (standalone)",

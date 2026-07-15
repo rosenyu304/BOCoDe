@@ -1,5 +1,6 @@
 {
   "name": "GoldsteinLVGP",
+  "real_name": "Goldstein-Price (LVGP mixed quantitative/qualitative)",
   "module": "bocode.opt_problems.synthetic_mixed.GoldsteinLVGP",
   "extra": null,
   "suite": "Mixed-variable synthetic",

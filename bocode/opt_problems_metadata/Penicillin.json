@@ -1,5 +1,6 @@
 {
   "name": "Penicillin",
+  "real_name": "Penicillin Production Process Optimization",
   "module": "bocode.opt_problems.engineering.Penicillin",
   "extra": null,
   "suite": "Engineering (standalone)",

@@ -1,5 +1,6 @@
 {
   "name": "Car",
+  "real_name": "Car Side Impact Design (single-objective, 11 mixed variables)",
   "module": "bocode.opt_problems.engineering.Car",
   "extra": null,
   "suite": "Engineering (standalone)",

@@ -1,5 +1,6 @@
 {
   "name": "SpeedReducer",
+  "real_name": "Speed Reducer (Gearbox) Design",
   "module": "bocode.opt_problems.engineering.SpeedReducer",
   "extra": null,
   "suite": "Engineering (standalone)",

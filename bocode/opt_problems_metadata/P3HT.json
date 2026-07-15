@@ -1,5 +1,6 @@
 {
   "name": "P3HT",
+  "real_name": "P3HT/CNT Composite Electrical Conductivity Optimization",
   "module": "bocode.opt_problems.materials.P3HT",
   "extra": null,
   "suite": "PV-Lab materials",

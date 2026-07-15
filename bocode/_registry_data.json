@@ -1647,10 +1647,6 @@
     "opt_problems.control.mujoco.MujocoFuncs",
     "mujoco"
   ],
-  "WaterProblem": [
-    "opt_problems.engineering.WaterProblem",
-    null
-  ],
   "WaterResources": [
     "opt_problems.engineering.WaterResources",
     null

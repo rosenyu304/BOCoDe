@@ -1,5 +1,6 @@
 {
   "name": "AutoAM",
+  "real_name": "Autonomous Additive Manufacturing (3D-printer process optimization)",
   "module": "bocode.opt_problems.materials.AutoAM",
   "extra": null,
   "suite": "PV-Lab materials",

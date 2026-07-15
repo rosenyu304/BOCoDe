@@ -1,5 +1,6 @@
 {
   "name": "CEC2020_p34",
+  "real_name": "Optimal Sizing of Single-Phase Distributed Generation with Reactive Power Support for Phase Balancing at Main Transformer/Grid",
   "module": "bocode.opt_problems.cec2020_rw.CEC2020_p34",
   "extra": null,
   "suite": "CEC2020 RW-Constrained",

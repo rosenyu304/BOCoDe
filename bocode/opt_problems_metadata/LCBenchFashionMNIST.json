@@ -1,5 +1,6 @@
 {
   "name": "LCBenchFashionMNIST",
+  "real_name": "LCBench MLP tuning on the Fashion-MNIST dataset (7 hyperparameters)",
   "module": "bocode.opt_problems.hpo.LCBench",
   "extra": null,
   "suite": "HPO (LassoBench / HPO-B)",

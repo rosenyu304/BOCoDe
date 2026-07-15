@@ -1,5 +1,6 @@
 {
   "name": "AntProblem",
+  "real_name": "MuJoCo Ant-v5 \u2014 Constant-Action Control",
   "module": "bocode.opt_problems.control.mujoco.MujocoFuncs",
   "extra": "mujoco",
   "suite": "MuJoCo control",

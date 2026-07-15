@@ -1,5 +1,6 @@
 {
   "name": "LCBenchJungleChess2pcsRawEndgameComplete",
+  "real_name": "LCBench MLP tuning on the jungle_chess_2pcs_raw_endgame_complete dataset (7 hyperparameters)",
   "module": "bocode.opt_problems.hpo.LCBench",
   "extra": null,
   "suite": "HPO (LassoBench / HPO-B)",

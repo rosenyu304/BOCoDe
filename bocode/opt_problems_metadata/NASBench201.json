@@ -1,5 +1,6 @@
 {
   "name": "NASBench201",
+  "real_name": "NAS-Bench-201 Cell Architecture Search",
   "module": "bocode.opt_problems.nas.NASBench201",
   "extra": null,
   "suite": "NAS-Bench-201",

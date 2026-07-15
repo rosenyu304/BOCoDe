@@ -1,5 +1,6 @@
 {
   "name": "DiscBrake",
+  "real_name": "Disc Brake Design",
   "module": "bocode.opt_problems.engineering.DiscBrake",
   "extra": null,
   "suite": "Engineering (standalone)",

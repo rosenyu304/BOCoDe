@@ -1,5 +1,6 @@
 {
   "name": "CantileverBeam",
+  "real_name": "Stepped Cantilever Beam Design (continuous, Bat-algorithm form)",
   "module": "bocode.opt_problems.engineering.CantileverBeam",
   "extra": null,
   "suite": "Engineering (standalone)",

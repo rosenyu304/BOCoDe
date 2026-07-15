@@ -1,5 +1,6 @@
 {
   "name": "RobotPush",
+  "real_name": "14-D Robot Pushing",
   "module": "bocode.opt_problems.engineering.RobotPush",
   "extra": "box2d",
   "suite": "Engineering (standalone)",

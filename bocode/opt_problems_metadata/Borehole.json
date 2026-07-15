@@ -1,5 +1,6 @@
 {
   "name": "Borehole",
+  "real_name": "Borehole Function (water flow rate through a borehole)",
   "module": "bocode.opt_problems.engineering.Borehole",
   "extra": null,
   "suite": "Engineering (standalone)",

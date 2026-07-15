@@ -1,5 +1,6 @@
 {
   "name": "HPOB_5859_3902",
+  "real_name": "rpart tuning (HPO-B search space 5859, dataset 3902)",
   "module": "bocode.opt_problems.hpo.HPOB",
   "extra": null,
   "suite": "HPO (LassoBench / HPO-B)",

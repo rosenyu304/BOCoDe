@@ -1,5 +1,6 @@
 {
   "name": "CEC2020_p6",
+  "real_name": "Blending-Pooling-Separation Problem",
   "module": "bocode.opt_problems.cec2020_rw.CEC2020_p1_20",
   "extra": null,
   "suite": "CEC2020 RW-Constrained",

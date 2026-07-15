@@ -1,5 +1,6 @@
 {
   "name": "BotorchCarSideImpact",
+  "real_name": "Car Side Impact Design (4-objective, BoTorch formulation)",
   "module": "bocode.opt_problems.engineering.BotorchCarSideImpact",
   "extra": null,
   "suite": "Engineering (standalone)",

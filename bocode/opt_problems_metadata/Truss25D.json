@@ -1,5 +1,6 @@
 {
   "name": "Truss25D",
+  "real_name": "25-Bar Truss Weight Minimization",
   "module": "bocode.opt_problems.engineering.Truss25D",
   "extra": "truss",
   "suite": "Engineering (standalone)",

@@ -1,5 +1,6 @@
 {
   "name": "Perovskite",
+  "real_name": "Halide-Perovskite Compositional Stability Optimization",
   "module": "bocode.opt_problems.materials.Perovskite",
   "extra": null,
   "suite": "PV-Lab materials",

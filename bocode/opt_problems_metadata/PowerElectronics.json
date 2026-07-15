@@ -1,5 +1,6 @@
 {
   "name": "PowerElectronics",
+  "real_name": "EngiBench Power Electronics \u2014 DC-DC Converter Design",
   "module": "bocode.opt_problems.engibench.PowerElectronics",
   "extra": "engibench",
   "suite": "EngiBench",

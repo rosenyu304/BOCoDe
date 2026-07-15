@@ -1,5 +1,6 @@
 {
   "name": "WeldedBeam",
+  "real_name": "Welded Beam Design (2-objective)",
   "module": "bocode.opt_problems.engineering.WeldedBeam",
   "extra": null,
   "suite": "Engineering (standalone)",

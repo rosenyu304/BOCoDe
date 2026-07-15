@@ -1,5 +1,6 @@
 {
   "name": "PEARL",
+  "real_name": "PEARL Space-Platform Design",
   "module": "bocode.opt_problems.engineering.PEARL",
   "extra": null,
   "suite": "Engineering (standalone)",

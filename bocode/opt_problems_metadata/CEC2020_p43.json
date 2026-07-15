@@ -1,5 +1,6 @@
 {
   "name": "CEC2020_p43",
+  "real_name": "Optimal Setting of Droop Controller for Minimization of Reactive Power Loss in Islanded Microgrids",
   "module": "bocode.opt_problems.cec2020_rw.CEC2020_p40_57",
   "extra": null,
   "suite": "CEC2020 RW-Constrained",

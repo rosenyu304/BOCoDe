@@ -1,5 +1,6 @@
 {
   "name": "CEC2020_p5",
+  "real_name": "Haverly's Pooling Problem",
   "module": "bocode.opt_problems.cec2020_rw.CEC2020_p1_20",
   "extra": null,
   "suite": "CEC2020 RW-Constrained",

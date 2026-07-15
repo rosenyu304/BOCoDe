@@ -1,5 +1,6 @@
 {
   "name": "HalfCheetahPolicySearchProblem",
+  "real_name": "MuJoCo HalfCheetah-v5 \u2014 Linear-Policy Search",
   "module": "bocode.opt_problems.control.mujoco.MujocoFuncs",
   "extra": "mujoco",
   "suite": "MuJoCo control",

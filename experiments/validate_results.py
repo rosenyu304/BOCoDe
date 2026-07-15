@@ -51,10 +51,15 @@ RESULTS = ROOT / "Results"
 QUARANTINE = ROOT / "Results_INVALID" / "INVALID_stale_reeval"
 
 # float32 cast inside BenchmarkProblem.evaluate() means we cannot demand bit-equality.
-# WAS 1e-3/1e-5 -- too loose. The HPO-B surrogate was machine-dependent by 2-4e-3 and this
-# tolerance passed it as 'ok', hiding a real invalidation of 181 results. A re-evaluation of the
-# SAME code on the SAME X should be near-exact; anything above float noise is a genuine signal.
-RTOL, ATOL = 1e-9, 1e-12
+# Tolerance must sit BETWEEN float32 noise and the smallest real bug we must catch.
+#   base.evaluate() casts X to float32 -> relative noise ~1.2e-7 (measured: 1.17e-7 on
+#     Walker2DProblem, 1.48e-7 on CEC2020_p1). Anything at or below that is NOT a signal.
+#   The HPO-B machine-dependence bug was 2e-3..4e-3 relative.
+# 1e-3 (the original) was LOOSER than the bug -> it passed HPOBSurr as "ok" and hid the
+# invalidation of 181 results. 1e-9 was BELOW float32 epsilon -> it falsely accused 137 good
+# files, including results re-evaluating to the same printed value. 1e-6 is ~10x above the
+# noise floor and ~1000x below the bug: it catches the bug class and cannot fire on float noise.
+RTOL, ATOL = 1e-6, 1e-8
 
 
 _DETERMINISM: dict[str, bool] = {}

@@ -1,5 +1,6 @@
 {
   "name": "LCBenchAmazonEmployeeAccess",
+  "real_name": "LCBench MLP tuning on the Amazon_employee_access dataset (7 hyperparameters)",
   "module": "bocode.opt_problems.hpo.LCBench",
   "extra": null,
   "suite": "HPO (LassoBench / HPO-B)",

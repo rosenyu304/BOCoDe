@@ -17,7 +17,15 @@ from .helperFuncs import (
 
 class CEC2020_p21(BenchmarkProblem):
     """
-    CEC2020 Problem 21
+    CEC2020 Problem 21 (RC21, multiple disk clutch brake design).
+
+    Constraint count: 8, NOT the 7 that Table 3 of the technical report lists.
+    Table 3 is wrong: the report's section 2.3.7 writes out eight inequalities
+    (it labels two of them "g7"), and the official ``cec20_func.m`` (prob_k == 21)
+    computes g(:,1)..g(:,8). This implementation reproduces that MATLAB bit-for-bit.
+    The 8th, g8 = -T <= 0, is redundant (T > 0 everywhere in the box), which is
+    probably why the table counts 7 -- but dropping it would still change the
+    constraint vector the optimizer sees. Do not drop it.
     """
 
     num_objectives = 1
@@ -1238,7 +1246,16 @@ class CEC2020_p30(BenchmarkProblem):
 
 class CEC2020_p31(BenchmarkProblem):
     """
-    CEC2020 Problem 31
+    CEC2020 Problem 31 (RC31, Sandgren's compound gear train design).
+
+    Constraint count: 0. Table 3 of the technical report claims g=1, h=1, but there
+    is no such constraint anywhere in the official code: ``cec20_func.m``
+    (prob_k == 31) returns ``g = zeros(ps,1); h = zeros(ps,1)``, i.e. two identically
+    zero (always-satisfied) blocks. The report's section 2.3.17 only restates the
+    bounds 12 <= xi <= 60 as "constraints". So RC31 is genuinely bound-constrained
+    only, and this problem is numerically the same function as ``GearTrain``
+    (which additionally offers the original integer form). Do not invent constraints
+    to make the count match Table 3.
     """
 
     num_objectives = 1

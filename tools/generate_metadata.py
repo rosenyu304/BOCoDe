@@ -7,9 +7,9 @@ Run from the repo root in an environment with all extras installed::
 For each registered problem this introspects the class attributes
 (``num_objectives``, ``num_constraints``, ``available_dimensions``,
 ``input_type``) and, for problems that are cheap to construct, the instance
-``dim`` and ``bounds``. Hand-curated fields (``application``, ``convex``,
-``np_hard``, ``source``) come from ``tools/metadata_overrides.json`` and the
-class/module docstring. One JSON per problem is written to
+``dim`` and ``bounds``. Hand-curated fields (``real_name``, ``application``,
+``convex``, ``np_hard``, ``source``) come from ``tools/metadata_overrides.json``
+and the class/module docstring. One JSON per problem is written to
 ``bocode/opt_problems_metadata/``.
 
 Problems that are expensive or side-effectful to instantiate (run a simulator,
@@ -116,6 +116,38 @@ def _source(cls) -> str:
     return ""
 
 
+# Families whose problems are auto-generated (one class per benchmark task) and
+# whose class docstring already reads as a descriptive name, e.g.
+# "xgboost tuning (HPO-B search space 5970, dataset 37), 2 dims." -> the
+# ``real_name`` is derived from it rather than hand-listed in the overrides.
+_DOCSTRING_REAL_NAME_PREFIXES = (
+    "opt_problems.hpo.HPOB",
+    "opt_problems.hpo.HPOBSurrogate",
+    "opt_problems.hpo.LCBench",
+)
+
+
+def _real_name(name: str, module: str, cls, overrides: dict) -> str:
+    """The problem's actual published (or descriptive) name.
+
+    Hand-curated in ``tools/metadata_overrides.json`` for every problem whose
+    name comes from a paper. For the auto-generated HPO-B / LCBench task
+    classes the name is descriptive, not published, and is taken from the class
+    docstring so it stays in sync with the generated tables.
+    """
+    if name in overrides and "real_name" in overrides[name]:
+        return overrides[name]["real_name"]
+    if module.startswith(_DOCSTRING_REAL_NAME_PREFIXES):
+        doc = cls.__doc__
+        if doc:
+            first = " ".join(doc.split()).split(". ")[0].rstrip(".")
+            # drop the trailing ", N dims" (already carried by the ``dim`` field)
+            first = re.sub(r",\s*\d+\s*dims?$", "", first)
+            if first:
+                return first
+    return ""
+
+
 def _scalable(available_dimensions) -> bool:
     # available_dimensions given as a (min, max) tuple/list signals scalability.
     return isinstance(available_dimensions, (tuple, list, set))
@@ -135,6 +167,7 @@ def build_one(name: str, overrides: dict) -> dict:
 
     meta = {
         "name": name,
+        "real_name": _real_name(name, module, cls, overrides),
         "module": f"bocode.{module}",
         "extra": extra,
         "suite": _suite(name, module, overrides),

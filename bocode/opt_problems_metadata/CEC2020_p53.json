@@ -1,5 +1,6 @@
 {
   "name": "CEC2020_p53",
+  "real_name": "Beef Cattle Feed Ration Optimization (case 3)",
   "module": "bocode.opt_problems.cec2020_rw.CEC2020_p40_57",
   "extra": null,
   "suite": "CEC2020 RW-Constrained",

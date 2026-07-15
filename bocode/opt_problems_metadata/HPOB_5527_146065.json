@@ -1,5 +1,6 @@
 {
   "name": "HPOB_5527_146065",
+  "real_name": "svm tuning (HPO-B search space 5527, dataset 146065)",
   "module": "bocode.opt_problems.hpo.HPOB",
   "extra": null,
   "suite": "HPO (LassoBench / HPO-B)",

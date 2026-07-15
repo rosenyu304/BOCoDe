@@ -36,15 +36,39 @@ import bocode  # noqa: E402
 EXCLUDE = {
     # permutation problems mislabelled continuous; every tour collapses to city 1 (Y == 0)
     "TSP_51Cities", "TSP_100Cities",
-    # DEGENERATE objectives (found by tests/test_objective_variation.py):
-    "InvertedPendulumProblem",   # gym reward is exactly 1.0 everywhere -> nothing to optimize
-    "LassoRCV1",                 # objective constant across 47k dims
+    # NOTE: "InvertedPendulumProblem" was excluded here for "reward is exactly 1.0 everywhere".
+    # That was a BUG, not a property: all 11 MuJoCo *Problem variants took a single env.step()
+    # and never rolled out an episode. Fixed 2026-07-14 -> the problem works and is BACK IN.
+    # An exclusion whose cause gets fixed must be removed, or the fix silently does nothing.
+    #
+    # SCOPE exclusion (Rosen, 2026-07-14) -- NOT a defect:
+    "LassoRCV1",  # dim = 47,236 (one Lasso weight per RCV1 TF-IDF feature; next largest is 7,129).
+    # No GP method can fit 47k ARD lengthscales, so it would be n/a for nearly every column, and as a
+    # single 47k outlier it distorts every metadata plot (the suite is 74% at dim <= 10). It is NOT
+    # broken: its old alpha=1.0 bug (1258x alpha_max -> all coefficients zeroed -> the objective
+    # ignored x entirely) is FIXED. Dropped on scope. The other Lasso tasks stay.
     # BROKEN feasibility / bounds (pre-existing, documented):
     "TwoBarTruss",               # 0% feasible: bounds bug, documented in its docstring
     # expect unit-cube input while every other problem receives already-scaled X -> RangeException
     "Truss120D", "Truss200D",
     # non-reproducible or needs an uninstalled extra
     "MOPTA08Car",                # native binary, subprocess per eval
+    # UNBOUNDED SINGLE EVALUATION (Rosen, 2026-07-14: "ignore these two for now").
+    # A single objective evaluation can run for >30 minutes without returning, so a job that
+    # lands on such a design hangs until its wall-clock expires. A per-problem time budget
+    # cannot rescue it: the budget can only be checked BETWEEN evaluations, and the process is
+    # stuck INSIDE one. Same failure mode as SVM.
+    "Truss120D",                 # FEM solve does not converge on some geometries
+    "SwimmerPolicySearchProblem",  # MuJoCo rollout does not terminate on some policies
+    # ALIAS, not a bug (Rosen, 2026-07-14). CEC2020_p31 IS GearTrain: verified numerically
+    # identical (max|delta| = 0). The official CEC2020 MATLAB confirms RC31 is genuinely
+    # bound-constrained only (g = h = 0 identically) — the paper's Table 3, which lists
+    # g=1/h=1, is wrong; the report's own prose only restates the bounds. So there are no
+    # constraints to add that would make p31 a distinct problem.
+    # We keep GearTrain (which correctly types the gear teeth as INTEGERS) and run it; p31
+    # stays in the registry as an alias so the CEC name still resolves, but it is not run
+    # separately — doing so would double-count one function in every aggregate table.
+    "CEC2020_p31",
 }
 
 # method -> (priority, device)   lower priority number = run first

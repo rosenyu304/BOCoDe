@@ -1,5 +1,6 @@
 {
   "name": "Wing",
+  "real_name": "Wing Weight Function (light-aircraft wing)",
   "module": "bocode.opt_problems.engineering.Wing",
   "extra": null,
   "suite": "Engineering (standalone)",

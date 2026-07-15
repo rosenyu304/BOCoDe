@@ -1,5 +1,6 @@
 {
   "name": "HPOBSurr_5965_49",
+  "real_name": "ranger tuning (HPO-B search space 5965, dataset 49)",
   "module": "bocode.opt_problems.hpo.HPOBSurrogate",
   "extra": "hpobsurr",
   "suite": "HPO (LassoBench / HPO-B)",

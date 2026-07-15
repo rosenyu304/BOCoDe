@@ -1,5 +1,6 @@
 {
   "name": "Sellar",
+  "real_name": "Sellar MDO Test Problem",
   "module": "bocode.opt_problems.engineering.Sellar",
   "extra": null,
   "suite": "Engineering (standalone)",

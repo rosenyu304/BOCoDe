@@ -85,7 +85,8 @@ def main() -> None:
         classes = re.findall(r"^class\s+([A-Za-z_0-9]+)", f.read_text(), re.M)
         modpath = str(f.relative_to(ROOT / "bocode")).replace("/", ".")[:-3]
         for c in classes:
-            if c in SKIP:
+            # ``_``-prefixed classes are private bases (e.g. ``_REProblem``), not problems.
+            if c in SKIP or c.startswith("_"):
                 continue
             reg[c] = [modpath, extra_for(str(f), c)]
     OUT.write_text(json.dumps({k: reg[k] for k in sorted(reg)}, indent=2) + "\n")

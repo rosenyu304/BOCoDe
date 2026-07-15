@@ -1,5 +1,6 @@
 {
   "name": "PD4CartPole",
+  "real_name": "PD Controller Tuning for CartPole",
   "module": "bocode.opt_problems.control.PD4CartPole",
   "extra": "control",
   "suite": "Classic control",

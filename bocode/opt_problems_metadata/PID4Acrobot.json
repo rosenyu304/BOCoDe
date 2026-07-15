@@ -1,5 +1,6 @@
 {
   "name": "PID4Acrobot",
+  "real_name": "PID Controller Tuning for Acrobot",
   "module": "bocode.opt_problems.control.PID4Acrobot",
   "extra": "control",
   "suite": "Classic control",

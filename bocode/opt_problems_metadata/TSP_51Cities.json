@@ -1,5 +1,6 @@
 {
   "name": "TSP_51Cities",
+  "real_name": "Travelling Salesman Problem (51 cities, eil51)",
   "module": "bocode.opt_problems.combinatorial.TSP",
   "extra": null,
   "suite": "TSP / NEORL",

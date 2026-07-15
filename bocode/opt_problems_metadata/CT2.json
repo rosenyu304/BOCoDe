@@ -1,5 +1,6 @@
 {
   "name": "CT2",
+  "real_name": "MODAct Electro-Mechanical Actuator Design \u2014 Cost & Torque Excess (constraint level 2)",
   "module": "bocode.opt_problems.modact.MODAct",
   "extra": "modact",
   "suite": "MODAct (actuator design)",
@@ -96,7 +97,7 @@
   "convex": "unknown",
   "np_hard": "unknown",
   "f_opt": null,
-  "source": "",
+  "source": "C. Picard and J. Schiffmann. Realistic Constrained Multi-Objective Optimization Benchmark Problems from Design. IEEE Transactions on Evolutionary Computation 25(2):234-246, 2021. https://ieeexplore.ieee.org/document/9179777 https://github.com/epfl-lamd/modact Search space (continuous, but piecewise-continuous response) ----------------------------------------------------------- All 20 variables are continuous doubles, exactly as in the official pymoo adapter (``vtype=np.double``). Do NOT declare",
   "variable_types": [
     "continuous",
     "continuous",

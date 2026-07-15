@@ -1,5 +1,6 @@
 {
   "name": "HPOBSurr_5970_14951",
+  "real_name": "glmnet tuning (HPO-B search space 5970, dataset 14951)",
   "module": "bocode.opt_problems.hpo.HPOBSurrogate",
   "extra": "hpobsurr",
   "suite": "HPO (LassoBench / HPO-B)",

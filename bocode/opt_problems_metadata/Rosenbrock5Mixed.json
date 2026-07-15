@@ -1,5 +1,6 @@
 {
   "name": "Rosenbrock5Mixed",
+  "real_name": "Rosenbrock (5-D mixed-variable)",
   "module": "bocode.opt_problems.synthetic_mixed.Rosenbrock5Mixed",
   "extra": null,
   "suite": "Mixed-variable synthetic",

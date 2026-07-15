@@ -1,5 +1,6 @@
 {
   "name": "AntPolicySearchProblem",
+  "real_name": "MuJoCo Ant-v5 \u2014 Linear-Policy Search",
   "module": "bocode.opt_problems.control.mujoco.MujocoFuncs",
   "extra": "mujoco",
   "suite": "MuJoCo control",

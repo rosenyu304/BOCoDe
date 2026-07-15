@@ -1,5 +1,6 @@
 {
   "name": "HPOBSurr_5971_9970",
+  "real_name": "xgboost tuning (HPO-B search space 5971, dataset 9970)",
   "module": "bocode.opt_problems.hpo.HPOBSurrogate",
   "extra": "hpobsurr",
   "suite": "HPO (LassoBench / HPO-B)",

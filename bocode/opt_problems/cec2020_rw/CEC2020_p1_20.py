@@ -1356,7 +1356,14 @@ class CEC2020_p16(BenchmarkProblem):
 
 class CEC2020_p17(BenchmarkProblem):
     """
-    CEC2020 Problem 17
+    CEC2020 Problem 17 (RC17, tension/compression spring design, case 1).
+
+    Constraint count: 4, NOT the 3 that Table 3 of the technical report lists.
+    Table 3 is wrong: the report's own section 2.3.3 states "this problem contains
+    four constraints" and writes out g1..g4, and the official ``cec20_func.m``
+    (prob_k == 17) computes g(:,1)..g(:,4). This implementation reproduces that
+    MATLAB bit-for-bit. g4 = (x1+x2)/1.5 - 1 is inactive at the optimum, so f* is
+    unaffected either way. Do not drop g4 to match Table 3.
     """
 
     num_objectives = 1

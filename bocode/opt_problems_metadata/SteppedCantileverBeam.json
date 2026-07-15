@@ -1,5 +1,6 @@
 {
   "name": "SteppedCantileverBeam",
+  "real_name": "Stepped Cantilever Beam Design (5-segment volume minimization)",
   "module": "bocode.opt_problems.engineering.SteppedCantileverBeam",
   "extra": null,
   "suite": "Engineering (standalone)",

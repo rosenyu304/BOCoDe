@@ -1,5 +1,6 @@
 {
   "name": "HPOB_5971_34536",
+  "real_name": "xgboost tuning (HPO-B search space 5971, dataset 34536)",
   "module": "bocode.opt_problems.hpo.HPOB",
   "extra": null,
   "suite": "HPO (LassoBench / HPO-B)",

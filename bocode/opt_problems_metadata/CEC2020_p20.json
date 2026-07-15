@@ -1,5 +1,6 @@
 {
   "name": "CEC2020_p20",
+  "real_name": "Three-Bar Truss Design",
   "module": "bocode.opt_problems.cec2020_rw.CEC2020_p1_20",
   "extra": null,
   "suite": "CEC2020 RW-Constrained",

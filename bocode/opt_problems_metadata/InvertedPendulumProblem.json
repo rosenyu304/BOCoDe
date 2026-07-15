@@ -1,5 +1,6 @@
 {
   "name": "InvertedPendulumProblem",
+  "real_name": "MuJoCo InvertedPendulum-v5 \u2014 Constant-Action Control",
   "module": "bocode.opt_problems.control.mujoco.MujocoFuncs",
   "extra": "mujoco",
   "suite": "MuJoCo control",

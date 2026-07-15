@@ -1,5 +1,6 @@
 {
   "name": "EulerBeamMixed",
+  "real_name": "Euler-Bernoulli Beam Bending (mixed-variable)",
   "module": "bocode.opt_problems.engineering.EulerBeamMixed",
   "extra": null,
   "suite": "Engineering (standalone)",

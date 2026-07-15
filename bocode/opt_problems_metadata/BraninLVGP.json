@@ -1,5 +1,6 @@
 {
   "name": "BraninLVGP",
+  "real_name": "Branin (LVGP mixed quantitative/qualitative)",
   "module": "bocode.opt_problems.synthetic_mixed.BraninLVGP",
   "extra": null,
   "suite": "Mixed-variable synthetic",

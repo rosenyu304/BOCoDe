@@ -1,5 +1,6 @@
 {
   "name": "Truss72D_SingleForce",
+  "real_name": "72-Bar Truss Weight Minimization (single load case)",
   "module": "bocode.opt_problems.engineering.Truss72D",
   "extra": "truss",
   "suite": "Engineering (standalone)",

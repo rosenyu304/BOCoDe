@@ -67,6 +67,27 @@ from .._bo_utils import (
 NUM_PARETO_SAMPLES = 10
 NUM_PARETO_POINTS = 10
 
+# Entropy estimator. BoTorch's default is "LB", which moment-matches a FULL M x M
+# covariance across objectives (the Tu et al. 2022 JES estimator) and ends in
+# ``0.5 * logdet(var + 1e-6 I)``. MESMO does not do that: Eq. 6 of Belakaria et al. (2019)
+# sums an INDEPENDENT per-objective truncated-Gaussian entropy over the K objectives --
+# the objectives are modeled by independent GPs and the entropy factorizes. "LB2" is
+# BoTorch's diagonal-covariance variant of the same bound, so it is the faithful one.
+#
+# The full-covariance default is also numerically unusable here, in two ways:
+#   * NaN. The moment-matched M x M covariance is not guaranteed PSD. On RE61 (M = 6,
+#     objective ranges spanning 4e7) it came out with an eigenvalue of -1.3e11 and a
+#     condition number of 2.6e14, so ``logdet`` returned NaN; the NaN propagated into
+#     ``optimize_acqf``'s Boltzmann initial-condition sampler, which then raised
+#     "probability tensor contains inf, nan or element < 0". Same on CRE51 (M = 5).
+#     Standardizing the objectives does NOT fix this -- the indefiniteness is structural,
+#     not a scaling artifact (verified: NaNs persist on standardized objectives).
+#   * OOM. The "LB" branch builds several ``batch x S x J x M x M`` cross-moment tensors.
+#     On RE91 (M = 9, J = 452 hypercells) that asked CUDA for 19.9 GiB and died. The
+#     diagonal branch never forms them: the same call peaks at 3.4 GiB.
+# "LB2" fixes both, and is closer to the published method than the default was.
+ESTIMATION_TYPE = "LB2"
+
 
 def _sample_pareto_fronts(model, bounds):
     """Sample ``S`` Pareto fronts from the GP posterior sample paths.
@@ -162,7 +183,9 @@ def optimize_problem(
         pareto_fronts = _sample_pareto_fronts(model, bounds_dev)
         hypercell_bounds = compute_sample_box_decomposition(pareto_fronts)
         acqf = qLowerBoundMultiObjectiveMaxValueEntropySearch(
-            model=model, hypercell_bounds=hypercell_bounds
+            model=model,
+            hypercell_bounds=hypercell_bounds,
+            estimation_type=ESTIMATION_TYPE,
         )
         candidate, _ = optimize_acqf(
             acqf,

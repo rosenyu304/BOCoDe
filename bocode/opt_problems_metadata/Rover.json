@@ -1,5 +1,6 @@
 {
   "name": "Rover",
+  "real_name": "Rover Trajectory Planning (100-D)",
   "module": "bocode.opt_problems.engineering.Rover",
   "extra": null,
   "suite": "Engineering (standalone)",

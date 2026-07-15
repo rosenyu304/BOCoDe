@@ -1,5 +1,6 @@
 {
   "name": "WeldedBeamCategorical",
+  "real_name": "Welded Beam Design (categorical material/weld type)",
   "module": "bocode.opt_problems.synthetic_mixed.WeldedBeamCategorical",
   "extra": null,
   "suite": "Mixed-variable synthetic",
