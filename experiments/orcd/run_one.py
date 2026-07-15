@@ -27,6 +27,7 @@ ALGOS = {
     "turbo": "algorithms.single_obj.turbo",
     "baxus": "algorithms.single_obj.baxus",
     "git_bo": "algorithms.single_obj.git_bo",
+    "git_bo_marzouk": "algorithms.single_obj.git_bo",
     "tfm_turbo": "algorithms.single_obj.tfm_turbo",
     # multi-objective
     "mo_random_search": "algorithms.multi_obj.random_search",
@@ -91,6 +92,8 @@ def main() -> None:
     if "random_search" in a.algo:
         iters = default_n_init(problem.dim) + a.iters
 
+    if a.algo == "git_bo_marzouk" and "rank" in sig:
+        kw["rank"] = "marzouk"
     res = mod.optimize_problem(problem, iters=iters, seed=a.seed, **kw)
 
     out.parent.mkdir(parents=True, exist_ok=True)
