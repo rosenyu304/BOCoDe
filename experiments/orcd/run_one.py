@@ -22,6 +22,8 @@ ALGOS = {
     # single-objective, unconstrained
     "random_search": "algorithms.single_obj.random_search",
     "single_task_gp": "algorithms.single_obj.single_task_gp",
+    "standard_gp": "algorithms.single_obj.standard_gp",
+    "vanilla_highdim_bo": "algorithms.single_obj.vanilla_highdim_bo",
     "turbo": "algorithms.single_obj.turbo",
     "baxus": "algorithms.single_obj.baxus",
     "git_bo": "algorithms.single_obj.git_bo",
