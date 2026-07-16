@@ -96,6 +96,11 @@ EXCLUDE = {
     # drive the FEM solver into pathological geometry. Recording this so the exclusion can be
     # revisited on evidence rather than inherited as folklore. Truss120D is UNAFFECTED and stays IN.
     "Truss200D",
+    # PowerElectronics: EXCLUDED (Rosen, 2026-07-16). Needs the optional 'engibench' extra + a native
+    # ngspice (v42-v45), neither installed on the ORCD cluster, so the problem cannot even be
+    # instantiated -- EVERY method (qnehvi/qnparego/mesmo/...) fails at construction and produces 0
+    # results. A dependency gap, not a benchmark defect; re-include if engibench + ngspice get set up.
+    "PowerElectronics",
 }
 # REMOVED FROM EXCLUDE on 2026-07-14, because the bugs behind them are fixed and verified:
 #   InvertedPendulumProblem -- "gym reward is exactly 1.0 everywhere" was the SINGLE-TIMESTEP bug.
