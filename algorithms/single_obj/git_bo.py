@@ -123,6 +123,7 @@ def optimize_problem(
     scale: float = 1.0,
     anchor: float = 0.0,
     anchor_sigma: float = ANCHOR_SIGMA,
+    acq: str = "gaussian",
     device: str = "auto",
     checkpoint: str | None = None,
 ) -> Result:
@@ -136,21 +137,37 @@ def optimize_problem(
     subset of the best point's dimensions -- in place of that many gradient-subspace
     candidates. This is the "mixed anchor" variant: the incumbent-anchored local sampler
     of Vanilla BO grafted onto GIT-BO's global gradient-informed subspace pool.
+    ``acq`` selects the acquisition scored on the subspace candidates:
+    * ``gaussian`` (default) -- the paper's ``mu + beta * sigma`` with beta = 2.33;
+    * ``ts``       -- Monte-Carlo Thompson sampling: one draw from TabPFN's own bar
+                      distribution per candidate (``TabPFNSurrogate.predict_sample``);
+    * ``ucb``      -- TabPFN's built-in QUANTILE UCB (``BarDistribution.ucb``, the
+                      ``1 - rest_prob`` quantile of the non-Gaussian predictive), i.e.
+                      ``reg.predict(output_type="ucb")`` at the paper's beta = 2.33.
     """
     set_seed(seed)
     obj = ProblemObjective(problem)
     dim = obj.dim
     if n_init is None:
         n_init = default_n_init(dim)
+    acq = acq.lower()
+    assert acq in ("gaussian", "ts", "ucb"), f"unknown acq {acq!r}"
     rank_mode = "marzouk" if str(rank).lower() == "marzouk" else "fixed"
     fixed_rank = DEFAULT_RANK if rank_mode == "marzouk" else int(rank)
     base_name = rank_mode if rank_mode == "marzouk" else "rank" + str(fixed_rank)
-    res = Result(
-        f"git_bo_anchor_{base_name}" if anchor > 0.0 else f"git_bo_{base_name}",
-        type(problem).__name__,
-        seed,
-        acquisition_function=f"UCB(mu + {BETA} * sigma)  [GIT-BO Sec. 3.3]",
-    )
+    anchor_tag = "_anchor" if anchor > 0.0 else ""
+    # gaussian keeps the legacy names (git_bo_rank10 / git_bo_anchor_rank10); ts/ucb are
+    # tagged so the 2 acq x 2 rank x 2 anchor grid gives eight distinct method names.
+    if acq == "gaussian":
+        method = f"git_bo{anchor_tag}_{base_name}"
+    else:
+        method = f"git_bo_{acq}_{base_name}{anchor_tag}"
+    acq_str = {
+        "gaussian": f"UCB(mu + {BETA} * sigma)  [GIT-BO Sec. 3.3]",
+        "ts": "Thompson sampling (TabPFN bar-distribution draw)",
+        "ucb": f"quantile UCB (BarDistribution.ucb, beta={BETA})",
+    }[acq]
+    res = Result(method, type(problem).__name__, seed, acquisition_function=acq_str)
 
     surrogate = TabPFNSurrogate(device=device)
     rng = np.random.default_rng(seed)
@@ -243,29 +260,33 @@ def optimize_problem(
                 )
                 cand = torch.cat([cand[: N_CANDIDATES - n_anchor], anchor_cand], dim=0)
 
-        # (5) The PAPER's UCB on the subspace candidates: mu + beta * sigma, beta = 2.33
-        # (GIT-BO, arXiv 2505.20685, Sec. 3.3).
-        #
-        # This previously used TabPFN's built-in ``BarDistribution.ucb`` -- a QUANTILE UCB that
-        # returns the (1 - rest_prob) quantile of the model's non-Gaussian predictive
-        # distribution. That is NOT the paper's acquisition. The two agree only when the
-        # predictive is Gaussian; on TabPFN's skewed bar distribution they pick a DIFFERENT
-        # argmax in roughly 1 iteration in 6. Since mu and sigma are already computed on the two
-        # preceding lines, matching the paper costs nothing -- and "we used a different
-        # acquisition than the paper" is not defensible when the fix is free.
+        # (5) Score the subspace candidates with the selected acquisition. mu and sigma
+        # are always read off TabPFN for logging; the ranking `score` depends on `acq`:
+        #   gaussian -> mu + beta*sigma (paper Sec. 3.3);
+        #   ts       -> one bar-distribution draw per candidate (Thompson);
+        #   ucb      -> TabPFN's built-in quantile UCB (BarDistribution.ucb), the
+        #               (1 - rest_prob) quantile of its non-Gaussian predictive.
+        # The bar-distribution ``sample``/``ucb`` are read from the SAME logits as mu/sigma,
+        # so switching acquisitions costs no extra forward pass.
         def _acq_slice(lo, hi):
             with torch.no_grad():
                 logits_gi, _ = _forward(cand[lo:hi], grad=False)
                 m = surrogate.predict_mean(logits_gi).reshape(-1)
                 v = surrogate.predict_variance(logits_gi).reshape(-1).clamp_min(0.0)
-            return m.cpu(), v.cpu()
+                if acq == "ts":
+                    s = surrogate.predict_sample(logits_gi).reshape(-1)
+                elif acq == "ucb":
+                    s = surrogate.predict_ucb(logits_gi, rest_prob=REST_PROB).reshape(-1)
+                else:
+                    s = m + BETA * v.sqrt()
+            return m.cpu(), v.cpu(), s.cpu()
 
         parts = _chunked(_acq_slice, cand.shape[0])
-        mean = torch.cat([m for m, _ in parts])
-        var = torch.cat([v for _, v in parts])
-        ucb = mean + BETA * var.sqrt()
+        mean = torch.cat([m for m, _, _ in parts])
+        var = torch.cat([v for _, v, _ in parts])
+        score = torch.cat([s for _, _, s in parts])
 
-        choice = int(torch.argmax(ucb).item())
+        choice = int(torch.argmax(score).item())
         x_new = cand[choice : choice + 1]
         y_new = obj(x_new)
         train_X = torch.cat([train_X, x_new], dim=0)
@@ -275,7 +296,7 @@ def optimize_problem(
             best,
             mean=mean[choice].item(),
             variance=var[choice].item(),
-            acq_value=ucb[choice].item(),
+            acq_value=score[choice].item(),
         )
         if checkpoint:
             res.set_history(train_X, train_Y, n_init)
@@ -319,6 +340,12 @@ def main() -> None:
         help="sample_around_best Gaussian sigma (Vanilla BO default 0.1)",
     )
     parser.add_argument(
+        "--acq",
+        default="gaussian",
+        choices=("gaussian", "ts", "ucb"),
+        help="acquisition: gaussian (mu+beta*sigma), ts (Thompson), ucb (quantile UCB)",
+    )
+    parser.add_argument(
         "--checkpoint", default=None, help="resumable checkpoint .npz path"
     )
     parser.add_argument("--device", default="auto")
@@ -333,6 +360,7 @@ def main() -> None:
         scale=args.scale,
         anchor=args.anchor,
         anchor_sigma=args.anchor_sigma,
+        acq=args.acq,
         device=args.device,
         checkpoint=args.checkpoint,
     )
