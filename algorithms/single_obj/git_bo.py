@@ -86,6 +86,33 @@ DEFAULT_RANK = 10  # fixed subspace rank used for every paper experiment (Append
 # inverting it at the paper's ``beta = 2.33`` gives ``rest_prob = 1 - Phi(2.33) ~ 0.0099``.
 REST_PROB = 0.5 * math.erfc(BETA / math.sqrt(2.0))
 
+ANCHOR_SIGMA = 0.1  # Vanilla BO's sample_around_best_sigma (configs/acq_opt/highdim.yaml)
+
+
+def _sample_around_best(
+    x_best: torch.Tensor, n: int, sigma: float, prob_perturb: float
+) -> torch.Tensor:
+    """Vanilla BO's ``sample_around_best`` trick, as a discrete candidate generator.
+
+    Perturbs the best observed point with truncated-Gaussian noise on a RANDOM SUBSET of
+    the dimensions -- each dim is perturbed with probability ``prob_perturb`` (BoTorch's
+    default ``min(20/d, 1)``); dims left unperturbed keep the incumbent's value. This is
+    exactly ``botorch.utils.sampling.sample_perturbed_subset_dims`` (Regis & Shoemaker's
+    subset-perturbation idea that Hvarfner et al. 2024 rely on), reduced to the single
+    incumbent case: rows that would perturb nothing get a few forced random dims. The
+    Gaussian is truncated to ``[0, 1]`` by clamping.
+
+    ``x_best`` is ``(dim,)`` in ``[0, 1]``; returns ``(n, dim)`` in ``[0, 1]``.
+    """
+    dim = x_best.shape[0]
+    base = x_best.unsqueeze(0).expand(n, dim).clone()
+    pert = (base + sigma * torch.randn(n, dim, dtype=x_best.dtype)).clamp(0.0, 1.0)
+    mask = torch.rand(n, dim, dtype=x_best.dtype) <= prob_perturb
+    n_perturb = max(1, math.ceil(dim * prob_perturb))
+    for i in (~mask).all(dim=1).nonzero(as_tuple=True)[0].tolist():
+        mask[i, torch.randperm(dim)[:n_perturb]] = True
+    return torch.where(mask, pert, base)
+
 
 def optimize_problem(
     problem,
@@ -94,6 +121,8 @@ def optimize_problem(
     seed: int = 0,
     rank: str = str(DEFAULT_RANK),
     scale: float = 1.0,
+    anchor: float = 0.0,
+    anchor_sigma: float = ANCHOR_SIGMA,
     device: str = "auto",
     checkpoint: str | None = None,
 ) -> Result:
@@ -102,6 +131,11 @@ def optimize_problem(
     ``rank`` is an integer (fixed rank, paper default 10) or 'marzouk' (certified rank).
     ``scale`` is the half-width of the subspace sampling box: 1.0 reproduces the paper's
     ``z ~ U([-1, 1]^r)``.
+    ``anchor`` (default 0.0 = plain GIT-BO) mixes a fraction of the candidate pool from
+    Vanilla BO's ``sample_around_best`` generator -- Gaussian perturbations of a random
+    subset of the best point's dimensions -- in place of that many gradient-subspace
+    candidates. This is the "mixed anchor" variant: the incumbent-anchored local sampler
+    of Vanilla BO grafted onto GIT-BO's global gradient-informed subspace pool.
     """
     set_seed(seed)
     obj = ProblemObjective(problem)
@@ -110,8 +144,9 @@ def optimize_problem(
         n_init = default_n_init(dim)
     rank_mode = "marzouk" if str(rank).lower() == "marzouk" else "fixed"
     fixed_rank = DEFAULT_RANK if rank_mode == "marzouk" else int(rank)
+    base_name = rank_mode if rank_mode == "marzouk" else "rank" + str(fixed_rank)
     res = Result(
-        f"git_bo_{rank_mode if rank_mode == 'marzouk' else 'rank' + str(fixed_rank)}",
+        f"git_bo_anchor_{base_name}" if anchor > 0.0 else f"git_bo_{base_name}",
         type(problem).__name__,
         seed,
         acquisition_function=f"UCB(mu + {BETA} * sigma)  [GIT-BO Sec. 3.3]",
@@ -195,6 +230,19 @@ def optimize_problem(
         )
         cand = torch.from_numpy(samples).to(DTYPE)
 
+        # Mixed-anchor variant: swap a fraction of the gradient-subspace pool for
+        # sample_around_best candidates centered on the current incumbent. The subspace
+        # pool covers the globally informative directions; the anchor pool refines locally
+        # around the best point, which the pure centroid-anchored subspace can under-serve.
+        if anchor > 0.0:
+            n_anchor = int(round(anchor * N_CANDIDATES))
+            if n_anchor > 0:
+                x_best = train_X[int(train_Y.argmax())].to(DTYPE)
+                anchor_cand = _sample_around_best(
+                    x_best, n_anchor, anchor_sigma, min(20.0 / dim, 1.0)
+                )
+                cand = torch.cat([cand[: N_CANDIDATES - n_anchor], anchor_cand], dim=0)
+
         # (5) The PAPER's UCB on the subspace candidates: mu + beta * sigma, beta = 2.33
         # (GIT-BO, arXiv 2505.20685, Sec. 3.3).
         #
@@ -258,6 +306,19 @@ def main() -> None:
         help="half-width of the subspace sampling box (paper: 1.0, i.e. z ~ U([-1,1]^r))",
     )
     parser.add_argument(
+        "--anchor",
+        type=float,
+        default=0.0,
+        help="fraction of the candidate pool drawn from Vanilla BO's sample_around_best "
+        "(0.0 = plain GIT-BO; e.g. 0.5 = the mixed-anchor variant)",
+    )
+    parser.add_argument(
+        "--anchor-sigma",
+        type=float,
+        default=ANCHOR_SIGMA,
+        help="sample_around_best Gaussian sigma (Vanilla BO default 0.1)",
+    )
+    parser.add_argument(
         "--checkpoint", default=None, help="resumable checkpoint .npz path"
     )
     parser.add_argument("--device", default="auto")
@@ -270,6 +331,8 @@ def main() -> None:
         args.seed,
         rank=args.rank,
         scale=args.scale,
+        anchor=args.anchor,
+        anchor_sigma=args.anchor_sigma,
         device=args.device,
         checkpoint=args.checkpoint,
     )

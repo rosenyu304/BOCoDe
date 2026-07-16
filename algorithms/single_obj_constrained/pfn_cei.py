@@ -1,13 +1,21 @@
 """PFN-CEI: Constrained Expected Improvement with a tabular foundation model.
 
-Constrained BO that replaces the GP surrogate with a frozen, pretrained PFN regressor.
-The objective and every inequality constraint are modeled by the *same* network -- the
-same candidate inputs are paired with the objective and each constraint as separate
-columns of the model's batch dimension -- so one in-context pass returns the objective's
-EI and every constraint's feasibility probability together. That single-surrogate design
-is the method's contribution (no per-constraint GP to fit).
+Constrained BO that swaps the GP surrogate for a frozen, pretrained TabPFN regressor,
+otherwise following BoTorch's closed-loop constrained-EI recipe
+(https://botorch.org/docs/tutorials/closed_loop_botorch_only) -- q-Noisy Constrained EI
+in style: the acquisition is ``EI(f) * prod_i P(c_i <= 0)`` with the incumbent set to the
+**best feasible** observed objective (or, before any point is feasible, the best observed
+objective). The objective and every inequality constraint are each modeled by the *same*
+network as a **zero-shot in-context regression** -- one column of the model's batch
+dimension each -- so a single in-context pass returns the objective's EI and every
+constraint's feasibility probability. That single-surrogate design is the method's
+contribution (no per-constraint GP to fit).
 
-The objective and each constraint are scored as SEPARATE zero-shot in-context passes --
+Deliberately NOT following the PFN-CEI paper: there is **no power transform** on the
+objective or the constraints. TabPFN standardizes each target column internally, so raw
+targets go straight in; the objective and each constraint are simply the observed values.
+
+The objective and each constraint are scored as SEPARATE in-context passes --
 ``1 + num_constraints`` forwards per iteration, one output column each -- rather than
 stacked into the batch dimension all at once. A transformer's batch dimension does not
 mix its items, so looping returns the same numbers; it is done this way because a single
@@ -15,26 +23,17 @@ pass over ``1 + num_constraints`` columns is O(num_constraints) in activation me
 OOMed on every high-constraint problem in the suite, whereas one-at-a-time is O(1) in the
 constraint count. ICL is cheap for TabPFN, so the extra forwards cost little.
 
-The acquisition is the classic constrained EI ``EI(f) * prod_i P(c_i <= 0)``, evaluated
-as ``log EI(f) + sum_i log P(c_i <= 0)`` -- the same function (log is monotone, so the
-argmax is identical), but the product form underflows float32 to exactly 0 once there are
-enough constraints, which silently reduces the method to random search. Both factors are
-read off the PFN's own **bar distribution** -- a discretized, non-Gaussian predictive
-distribution. Following the reference implementation:
+The acquisition ``EI(f) * prod_i P(c_i <= 0)`` is evaluated as
+``log EI(f) + sum_i log P(c_i <= 0)`` -- the same function (log is monotone, so the argmax
+is identical), but the product form underflows float32 to exactly 0 once there are enough
+constraints, which silently reduces the method to random search. Both factors are read off
+the PFN's own **bar distribution** -- a discretized, non-Gaussian predictive distribution:
+constraints are negated (``g = -c``) so that "feasible" means "large", and the feasibility
+factor is the bar distribution's ``pi`` (probability of improvement) above the zero
+threshold -- *not* a Gaussian ``Phi((0 - mu)/sigma)`` read off a predictive mean/variance,
+which would throw away the non-Gaussian shape the PFN exists to model.
 
-* constraints are negated (``g = -c``) so that "feasible" means "large", and the
-  feasibility factor is the bar distribution's ``pi`` (probability of improvement) above
-  the transformed zero threshold -- *not* a Gaussian ``Phi((0 - mu)/sigma)`` read off the
-  predictive mean/variance, which would throw away the non-Gaussian shape the PFN exists
-  to model;
-* the objective and the constraints are warped with a Yeo-Johnson power transform, and
-  the zero feasibility threshold is mapped through the *same* transform;
-* the EI incumbent is ``tau = max(y_observed)`` over all observations (reference
-  ``PFN_CEI.py:313``), not the best feasible value.
-
-Reference: https://github.com/rosenyu304/BOEngineeringBenchmark (``PFN_CEI.py``,
-``Tutorial_PFN_CEI.ipynb``). BoCoDe substitutes TabPFN (>= v3) for the reference's
-PFNs4BO HEBO checkpoint; the acquisition logic is otherwise the reference's.
+BoCoDe substitutes TabPFN (>= v3) for the reference's PFNs4BO HEBO checkpoint.
 
 Needs TabPFN >= v3 (see docs/tfm_setup.md). Run::
 
@@ -52,7 +51,6 @@ import argparse
 from pathlib import Path
 
 import torch
-from sklearn.preprocessing import PowerTransformer
 
 from .._bo_utils import (
     DTYPE,
@@ -91,24 +89,6 @@ N_CANDIDATES = 1000  # reference draws 1000 uniform random candidates per iterat
 # extra forwards are cheap because the 1000-candidate ROW dimension already saturates the
 # GPU, so a wider column batch buys no throughput and only costs memory.
 MAX_COLS_PER_PASS = 1
-
-
-def _power_transform(train: torch.Tensor, apply: torch.Tensor) -> torch.Tensor:
-    """Yeo-Johnson power transform fit on ``train``, applied to ``apply`` (column-wise).
-
-    Mirrors the reference's ``general_power_transform`` with ``eps=0``; on failure it
-    falls back to mean-centering, as the reference does.
-    """
-    pt = PowerTransformer(method="yeo-johnson")
-    try:
-        pt.fit(train.cpu().double().numpy())
-        out = pt.transform(apply.cpu().double().numpy())
-        out = torch.as_tensor(out, dtype=DTYPE)
-        if not torch.isfinite(out).all():
-            raise ValueError("power transform produced non-finite values")
-        return out
-    except Exception:
-        return (apply - train.mean(dim=0)).to(DTYPE)
 
 
 def _score_columns(surrogate, X_all, Y_full, n_ctx, thr_full, chunk):
@@ -195,24 +175,23 @@ def optimize_problem(
         n_ctx = ctx_X.shape[0]
         m = 1 + nc  # objective + constraints, as batch columns
 
-        # Warp objective and (negated) constraints, and push the zero feasibility
-        # threshold through the constraints' own transform.
-        y_t = _power_transform(ctx_obj, ctx_obj)
-        g = -ctx_con  # feasible (c <= 0) now means "large"
-        g_t = _power_transform(g, g)
-        thr = _power_transform(g, torch.zeros(1, nc, dtype=DTYPE))[0]  # (nc,)
-
-        # X is the same for every column; Y differs per column (objective / each con).
+        # Raw targets -- no power transform. TabPFN standardizes each target column
+        # internally, so the objective column is the observed objective as-is and each
+        # constraint column is its negation g = -c, chosen so that "feasible" (c <= 0)
+        # means g is large. X is the same for every column; Y differs per column.
         X_all = torch.cat([ctx_X, cand], dim=0)  # (n_ctx+n_cand, dim)
-        Y_cols = torch.cat([y_t, g_t], dim=1)  # (n_ctx, m)
+        Y_cols = torch.cat([ctx_obj, -ctx_con], dim=1)  # (n_ctx, m)
         Y_full = torch.cat(
             [Y_cols, torch.zeros(N_CANDIDATES, m, dtype=DTYPE)], dim=0
         ).unsqueeze(-1)  # (n_ctx+n_cand, m, 1)
 
-        # One threshold per output column: the EI incumbent for the objective column,
-        # the transformed zero feasibility threshold for each constraint column.
-        # tau = max over ALL observed objective values (reference PFN_CEI.py:313).
-        thr_full = torch.cat([y_t.max().reshape(1), thr])  # (m,)
+        # One threshold per output column. Objective column: the constrained-EI incumbent
+        # -- the best FEASIBLE observed objective (q-Noisy Constrained EI style), or the
+        # best observed objective before any point is feasible so EI stays well-defined.
+        # Constraint columns: the zero feasibility threshold (g = -c, so P(g > 0) = P(c <= 0)).
+        feas_ctx = (ctx_con <= 0).all(dim=1)
+        incumbent = ctx_obj[feas_ctx].max() if feas_ctx.any() else ctx_obj.max()
+        thr_full = torch.cat([incumbent.reshape(1), torch.zeros(nc, dtype=DTYPE)])  # (m,)
 
         with torch.no_grad():
             # Score the m columns in chunks. On OOM, halve the chunk and retry: the
