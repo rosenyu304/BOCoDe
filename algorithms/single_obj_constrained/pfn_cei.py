@@ -182,18 +182,28 @@ def optimize_problem(
 
     for it in range(start_it, iters):
         cand = torch.rand(N_CANDIDATES, dim, dtype=DTYPE)
-        n_ctx = train_X.shape[0]
+        # TabPFN cannot ingest a non-finite target either: the _power_transform fallback
+        # (apply - train.mean()) propagates an -inf into the context and NaNs the forward. Some
+        # benchmark objectives are non-finite on a sliver of the domain -- CEC2020_p12's
+        # -log(y4+1) at y4=round(x7)=-1 is -inf, a verbatim property of the official suite -- so
+        # build the in-context set from the rows where the objective and constraints are all finite.
+        # The non-finite evaluations stay in the run history (best_feasible and the saved trace);
+        # they only sit out of the surrogate. On a well-behaved problem every row is finite, so the
+        # context is identical to before.
+        fin = torch.isfinite(train_obj).all(dim=1) & torch.isfinite(train_con).all(dim=1)
+        ctx_X, ctx_obj, ctx_con = train_X[fin], train_obj[fin], train_con[fin]
+        n_ctx = ctx_X.shape[0]
         m = 1 + nc  # objective + constraints, as batch columns
 
         # Warp objective and (negated) constraints, and push the zero feasibility
         # threshold through the constraints' own transform.
-        y_t = _power_transform(train_obj, train_obj)
-        g = -train_con  # feasible (c <= 0) now means "large"
+        y_t = _power_transform(ctx_obj, ctx_obj)
+        g = -ctx_con  # feasible (c <= 0) now means "large"
         g_t = _power_transform(g, g)
         thr = _power_transform(g, torch.zeros(1, nc, dtype=DTYPE))[0]  # (nc,)
 
         # X is the same for every column; Y differs per column (objective / each con).
-        X_all = torch.cat([train_X, cand], dim=0)  # (n_ctx+n_cand, dim)
+        X_all = torch.cat([ctx_X, cand], dim=0)  # (n_ctx+n_cand, dim)
         Y_cols = torch.cat([y_t, g_t], dim=1)  # (n_ctx, m)
         Y_full = torch.cat(
             [Y_cols, torch.zeros(N_CANDIDATES, m, dtype=DTYPE)], dim=0
