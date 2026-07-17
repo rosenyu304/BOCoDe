@@ -1,7 +1,7 @@
 {
   "name": "SchwefelCat",
   "real_name": "Schwefel (20-D categorical)",
-  "module": "bocode.opt_problems.synthetic_mixed.SchwefelCat",
+  "module": "bocode.opt_problems.synthetic.SchwefelCat",
   "extra": null,
   "suite": "Mixed-variable synthetic",
   "num_objectives": 1,

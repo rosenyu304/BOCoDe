@@ -1,7 +1,7 @@
 {
   "name": "HartmannCat",
   "real_name": "Hartmann-6 (categorical)",
-  "module": "bocode.opt_problems.synthetic_mixed.HartmannCat",
+  "module": "bocode.opt_problems.synthetic.HartmannCat",
   "extra": null,
   "suite": "Mixed-variable synthetic",
   "num_objectives": 1,

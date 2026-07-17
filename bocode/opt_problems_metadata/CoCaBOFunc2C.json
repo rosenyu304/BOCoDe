@@ -1,7 +1,7 @@
 {
   "name": "CoCaBOFunc2C",
   "real_name": "CoCaBO Func2C (2 categorical + 2 continuous)",
-  "module": "bocode.opt_problems.synthetic_mixed.CoCaBOFunc2C",
+  "module": "bocode.opt_problems.synthetic.CoCaBOFunc2C",
   "extra": null,
   "suite": "Mixed-variable synthetic",
   "num_objectives": 1,
