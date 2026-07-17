@@ -124,6 +124,7 @@ def optimize_problem(
     anchor: float = 0.0,
     anchor_sigma: float = ANCHOR_SIGMA,
     acq: str = "gaussian",
+    method_name: str | None = None,
     device: str = "auto",
     checkpoint: str | None = None,
 ) -> Result:
@@ -167,7 +168,11 @@ def optimize_problem(
         "ts": "Thompson sampling (TabPFN bar-distribution draw)",
         "ucb": f"quantile UCB (BarDistribution.ucb, beta={BETA})",
     }[acq]
-    res = Result(method, type(problem).__name__, seed, acquisition_function=acq_str)
+    # ``method_name`` overrides the auto-generated name -- the campaign deploys the ablation
+    # winner (ucb+marzouk+anchor) under the canonical name "git_bo".
+    res = Result(
+        method_name or method, type(problem).__name__, seed, acquisition_function=acq_str
+    )
 
     surrogate = TabPFNSurrogate(device=device)
     rng = np.random.default_rng(seed)
