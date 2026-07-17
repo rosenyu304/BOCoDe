@@ -27,9 +27,6 @@ from .exceptions import (  # noqa: F401  (re-exported as public API)
     RangeException,
     TypeException,
 )
-from .opt_problems import (
-    synthetic,  # noqa: F401  (bocode.synthetic.<Name> test functions)
-)
 from .registry import (  # noqa: F401  (re-exported as public API)
     PROBLEM_REGISTRY,
     filter_functions,
@@ -76,7 +73,18 @@ __all__ = sorted(_API | set(PROBLEM_REGISTRY))
 
 
 def __getattr__(name: str):
-    """Lazily resolve problem classes by name via the registry (PEP 562)."""
+    """Lazily resolve attributes (PEP 562).
+
+    ``bocode.synthetic`` and problem classes are imported ON DEMAND so that
+    ``import bocode`` stays cheap -- it must NOT pull in the synthetic test
+    functions (and their botorch dependency) for a job that only runs, say,
+    ``Borehole`` or ``random_search``. On a shared cluster filesystem the eager
+    import of those modules dominated per-job wall time.
+    """
+    if name == "synthetic":
+        import bocode.opt_problems.synthetic as _synthetic
+
+        return _synthetic
     if name in PROBLEM_REGISTRY:
         return get_problem(name)
     raise AttributeError(f"module 'bocode' has no attribute {name!r}")
