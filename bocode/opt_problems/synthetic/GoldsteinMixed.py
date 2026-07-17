@@ -2,7 +2,7 @@
 
 The standard 2-D Goldstein-Price function with the second input restricted to the
 integers ``{-2, -1, 0, 1, 2}``. This is the mixed-*integer* counterpart of
-:mod:`~bocode.opt_problems.synthetic_mixed.GoldsteinLVGP`: the objective is
+:mod:`~bocode.opt_problems.synthetic.GoldsteinLVGP`: the objective is
 numerically identical, but ``x2`` is declared as an ordered integer variable
 rather than an unordered categorical, so the two problems together isolate the
 effect of the variable-type declaration on a solver.

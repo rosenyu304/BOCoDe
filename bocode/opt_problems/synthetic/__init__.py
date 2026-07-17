@@ -84,3 +84,35 @@ SYNTHETIC_PROBLEMS = {
 }
 
 __all__ = [*SYNTHETIC_PROBLEMS.keys(), "SYNTHETIC_PROBLEMS"]
+
+
+# --- Mixed-variable synthetics (merged from the former synthetic_mixed/ package,
+# 2026-07-17). These ARE registered (appear in bocode.list_problems()), unlike the
+# plain test functions above, so they are deliberately kept OUT of SYNTHETIC_PROBLEMS
+# (the unregistered test-function fallback used by list_synthetic()). ---
+from .Ackley53 import Ackley53  # noqa: E402,F401
+from .Ackley5Mixed import Ackley5Mixed  # noqa: E402,F401
+from .AckleyCat import AckleyCat  # noqa: E402,F401
+from .BraninCategorical import BraninCategorical  # noqa: E402,F401
+from .BraninLVGP import BraninLVGP  # noqa: E402,F401
+from .CoCaBOFunc2C import CoCaBOFunc2C  # noqa: E402,F401
+from .CoCaBOFunc3C import CoCaBOFunc3C  # noqa: E402,F401
+from .GoldsteinLVGP import GoldsteinLVGP  # noqa: E402,F401
+from .GoldsteinMixed import GoldsteinMixed  # noqa: E402,F401
+from .HartmannCat import HartmannCat  # noqa: E402,F401
+from .MixedAckley import MixedAckley  # noqa: E402,F401
+from .RastriginCat import RastriginCat  # noqa: E402,F401
+from .Rosenbrock5Mixed import Rosenbrock5Mixed  # noqa: E402,F401
+from .SchwefelCat import SchwefelCat  # noqa: E402,F401
+from .ShekelMixed import ShekelMixed  # noqa: E402,F401
+from .StyblinskiTangCat import StyblinskiTangCat  # noqa: E402,F401
+from .StyblinskiTangMixed import StyblinskiTangMixed  # noqa: E402,F401
+from .WeldedBeamCategorical import WeldedBeamCategorical  # noqa: E402,F401
+
+MIXED_SYNTHETIC_PROBLEMS = [
+    "Ackley53", "Ackley5Mixed", "AckleyCat", "BraninCategorical", "BraninLVGP",
+    "CoCaBOFunc2C", "CoCaBOFunc3C", "GoldsteinLVGP", "GoldsteinMixed", "HartmannCat",
+    "MixedAckley", "RastriginCat", "Rosenbrock5Mixed", "SchwefelCat", "ShekelMixed",
+    "StyblinskiTangCat", "StyblinskiTangMixed", "WeldedBeamCategorical",
+]
+__all__ += [*MIXED_SYNTHETIC_PROBLEMS, "MIXED_SYNTHETIC_PROBLEMS"]

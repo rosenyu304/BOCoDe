@@ -6,7 +6,7 @@ strongly with the continuous search.
 
 The two continuous inputs live in ``[-1, 1]`` and are scaled by 2 internally. The
 three scaled sub-functions ``ros``, ``six`` and ``beale`` are as in
-:mod:`~bocode.opt_problems.synthetic_mixed.CoCaBOFunc2C`.
+:mod:`~bocode.opt_problems.synthetic.CoCaBOFunc2C`.
 
 Objective (minimize)::
 
