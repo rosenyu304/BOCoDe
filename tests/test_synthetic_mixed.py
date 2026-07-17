@@ -146,7 +146,7 @@ def test_registered_with_metadata(name):
     assert name in bocode.PROBLEM_REGISTRY
     meta = bocode.get_metadata(name)
     assert meta["name"] == name
-    assert meta["module"].startswith("bocode.opt_problems.synthetic_mixed")
+    assert meta["module"].startswith("bocode.opt_problems.synthetic.")
     assert meta["input_type"] in ("mixed", "discrete")
     assert meta["source"], f"{name}: empty Sources block"
 
