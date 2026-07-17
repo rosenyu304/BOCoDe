@@ -9,6 +9,7 @@ So this script just rewrites the class list from ``HPOB.py`` (which is itself ge
 ``build_hpob_tables.py`` from ``hpob_data.npz``). Re-run after ``build_hpob_tables.py`` changes,
 then ``tools/generate_registry.py`` and ``tools/generate_metadata.py``.
 """
+
 from __future__ import annotations
 
 import re
@@ -35,10 +36,15 @@ def main() -> None:
     src = (HPO / "HPOB.py").read_text()
     out = src
     out = re.sub(r'^""".*?"""', _HEADER, out, count=1, flags=re.DOTALL)
-    out = out.replace("from ._hpob_base import HPOBProblem",
-                      "from ._hpob_surrogate_base import HPOBSurrogateProblem")
-    out = re.sub(r"class HPOB_([0-9_]+)\(HPOBProblem\):",
-                 r"class HPOBSurr_\1(HPOBSurrogateProblem):", out)
+    out = out.replace(
+        "from ._hpob_base import HPOBProblem",
+        "from ._hpob_surrogate_base import HPOBSurrogateProblem",
+    )
+    out = re.sub(
+        r"class HPOB_([0-9_]+)\(HPOBProblem\):",
+        r"class HPOBSurr_\1(HPOBSurrogateProblem):",
+        out,
+    )
     (HPO / "HPOBSurrogate.py").write_text(out)
     print(f"wrote HPOBSurrogate.py with {out.count('class HPOBSurr_')} classes")
 

@@ -50,6 +50,7 @@ for _c in (_here.parent.parent, _here / "BOCoDe", _here.parent.parent / "BOCoDe"
         break
 import bocode  # noqa: E402
 
+
 def _audit_exclusions() -> set[str]:
     """Problems the PRE-FLIGHT AUDIT proved are broken (experiments/problem_audit.py).
 
@@ -63,8 +64,11 @@ def _audit_exclusions() -> set[str]:
     f = REPO / "experiments" / "EXCLUDED_PROBLEMS.txt"
     if not f.exists():
         return set()
-    return {ln.strip() for ln in f.read_text().splitlines()
-            if ln.strip() and not ln.startswith("#")}
+    return {
+        ln.strip()
+        for ln in f.read_text().splitlines()
+        if ln.strip() and not ln.startswith("#")
+    }
 
 
 # Problems that must NOT enter the campaign. Running them wastes compute and pollutes tables.
@@ -77,7 +81,8 @@ EXCLUDE = {
     # a DIFFERENT, still-valid reason, stated in TSP.py itself: the PERMUTATION CONSTRAINT that
     # defines the TSP is not enforced anywhere, so a continuous/categorical relaxation does not
     # produce valid tours. A varying objective is NOT evidence of validity here.
-    "TSP_51Cities", "TSP_100Cities",
+    "TSP_51Cities",
+    "TSP_100Cities",
     # TwoBarTruss: VERIFIED still broken, but the reason was imprecise. Dense 400x400 scan of the
     # whole unit cube: 0 / 160,000 feasible. Constraint 3 is violated at 100% of points, yet the
     # minimum violation is 1.01e-06 -- the feasible set is missed INFINITESIMALLY. Cause (already in
@@ -118,15 +123,38 @@ EXCLUDE |= _audit_exclusions()
 # needs every method, not one with hundreds of seeds. random_search/single_task_gp already have
 # 760/115 results, so they are DEMOTED to the back of the queue; the starved methods lead.
 GPU, CPU = "cuda", "cpu"
-T1 = [("git_bo", 0, GPU), ("tfm_turbo", 0, GPU), ("turbo", 1, GPU), ("baxus", 1, GPU),
-      ("single_task_gp", 8, GPU), ("random_search", 9, CPU)]
-T2 = [("qnparego", 0, GPU), ("mesmo", 0, GPU), ("tfm_qnehvi", 1, GPU),
-      ("tfm_qnparego", 1, GPU), ("qnehvi", 2, GPU), ("mo_random_search", 9, CPU)]
-T3 = [("scbo", 0, CPU), ("pfn_cei", 0, GPU), ("penalty", 0, CPU),
-      ("constrained_ei", 0, CPU), ("tfm_scbo", 1, GPU), ("con_random_search", 9, CPU)]
-T4 = [("constrained_qnehvi", 0, GPU), ("constrained_qparego", 0, GPU),
-      ("tfm_cqnehvi", 1, GPU), ("tfm_cqnparego", 1, GPU),
-      ("mocon_penalty", 2, CPU), ("mocon_random_search", 9, CPU)]
+T1 = [
+    ("git_bo", 0, GPU),
+    ("tfm_turbo", 0, GPU),
+    ("turbo", 1, GPU),
+    ("baxus", 1, GPU),
+    ("single_task_gp", 8, GPU),
+    ("random_search", 9, CPU),
+]
+T2 = [
+    ("qnparego", 0, GPU),
+    ("mesmo", 0, GPU),
+    ("tfm_qnehvi", 1, GPU),
+    ("tfm_qnparego", 1, GPU),
+    ("qnehvi", 2, GPU),
+    ("mo_random_search", 9, CPU),
+]
+T3 = [
+    ("scbo", 0, CPU),
+    ("pfn_cei", 0, GPU),
+    ("penalty", 0, CPU),
+    ("constrained_ei", 0, CPU),
+    ("tfm_scbo", 1, GPU),
+    ("con_random_search", 9, CPU),
+]
+T4 = [
+    ("constrained_qnehvi", 0, GPU),
+    ("constrained_qparego", 0, GPU),
+    ("tfm_cqnehvi", 1, GPU),
+    ("tfm_cqnparego", 1, GPU),
+    ("mocon_penalty", 2, CPU),
+    ("mocon_random_search", 9, CPU),
+]
 
 # DEVICE ROUTING is MEASURED, twice, independently (see COLLEAGUE_HANDOFF.md):
 #   CPU  — scbo, penalty, mocon_penalty, constrained_ei, every random_search. These fit ONE GP PER
@@ -140,19 +168,20 @@ T4 = [("constrained_qnehvi", 0, GPU), ("constrained_qparego", 0, GPU),
 # WITHDRAWN / PAUSED / EXCLUDED (Rosen, 2026-07-14). ~3,120 rows of the previous joblist were work
 # we had ALREADY DECIDED NOT TO DO, and the watchdog was burning its 3 retries on each of them.
 DROP_PREFIX = (
-    "HPOBSurr",   # WITHDRAWN: the surrogate extrapolates above the true pool optimum in 83% of runs
-    "SVM",        # dropped by Rosen
-    "TSP_",       # permutation constraint is not enforced -> a relaxation does not give valid tours
+    "HPOBSurr",  # WITHDRAWN: the surrogate extrapolates above the true pool optimum in 83% of runs
+    "SVM",  # dropped by Rosen
+    "TSP_",  # permutation constraint is not enforced -> a relaxation does not give valid tours
 )
 DROP_SUITE = {
-    "Mixed-variable synthetic",   # PAUSED: synthetics run at the END, after the real-world tables
+    "Mixed-variable synthetic",  # PAUSED: synthetics run at the END, after the real-world tables
 }
 DROP_NAMES = {
-    "Truss120D", "Truss200D",          # FEM does not converge on some geometries
-    "SwimmerPolicySearchProblem",      # MuJoCo rollout does not terminate on some policies
-    "LassoRCV1",                       # dim 47,236 -- no GP fits it; scope call
-    "TwoBarTruss",                     # 0% feasible (bounds bug)
-    "MOPTA08Car",                      # native binary, subprocess per eval
+    "Truss120D",
+    "Truss200D",  # FEM does not converge on some geometries
+    "SwimmerPolicySearchProblem",  # MuJoCo rollout does not terminate on some policies
+    "LassoRCV1",  # dim 47,236 -- no GP fits it; scope call
+    "TwoBarTruss",  # 0% feasible (bounds bug)
+    "MOPTA08Car",  # native binary, subprocess per eval
 }
 
 # DUPLICATE FUNCTIONS (Rosen's order). The same function under two names wastes compute AND
@@ -163,12 +192,13 @@ DROP_NAMES = {
 # unconstrained multi-objective form, CRE31 the constrained one). Collapsing them to one would
 # silently delete an entire constrained-multi-objective row from the results.
 DROP_DUPLICATE = {
-    "BotorchCarSideImpact", "CarSideImpact",   # == RE41 / CRE31
-    "VehicleSafety",        # == RE34
-    "DiscBrake",            # == CRE23
-    "ThreeTruss",           # == CEC2020_p20
-    "GoldsteinMixed",       # == GoldsteinLVGP
-    "SteppedCantileverBeam",# == CantileverBeam
+    "BotorchCarSideImpact",
+    "CarSideImpact",  # == RE41 / CRE31
+    "VehicleSafety",  # == RE34
+    "DiscBrake",  # == CRE23
+    "ThreeTruss",  # == CEC2020_p20
+    "GoldsteinMixed",  # == GoldsteinLVGP
+    "SteppedCantileverBeam",  # == CantileverBeam
     # CEC2020_p31 is an ALIAS of GearTrain, and it is p31 that goes -- NOT GearTrain (Rosen,
     # 2026-07-14). The official CEC2020 MATLAB RC31 is bit-identical to our p31 and is genuinely
     # bound-constrained only (the paper's Table 3 claiming g=1,h=1 is wrong). We keep GearTrain
@@ -180,8 +210,8 @@ DROP_DUPLICATE = {
     # once fixed, is identical to CRE51. Keep the CRE benchmark-paper name as the representative.
     # Both are excluded here explicitly so the joblist is correct even though the CLUSTER REPO
     # (6cdca29) does not yet carry those upstream fixes -- see the note in the handoff.
-    "WaterResources",       # == CRE51
-    "WaterProblem",         # removed upstream (f3 scale bug); was a duplicate of WaterResources
+    "WaterResources",  # == CRE51
+    "WaterProblem",  # removed upstream (f3 scale bug); was a duplicate of WaterResources
 }
 # KEPT ON PURPOSE (same formula, DIFFERENT boxes -> genuinely different search domains):
 #   CEC2020_p17 / CompressionSpring ; EulerBeamMixed / EulerBernoulliBeamBending
@@ -200,8 +230,16 @@ MANY_OBJ_MIN = 5
 # already sharing 18 GiB with 8 packed campaign processes). It fits in an 80 GB H100/H200.
 # So: pi_faez only (node2900 8xH100, node2435 4xH100, node4002 4xH200), and NEVER packed --
 # packing is what turned a tight fit into an OOM. Packing stays on for the small GP methods only.
-TFM_METHODS = {"git_bo", "pfn_cei", "tfm_turbo", "tfm_scbo",
-               "tfm_qnehvi", "tfm_qnparego", "tfm_cqnehvi", "tfm_cqnparego"}
+TFM_METHODS = {
+    "git_bo",
+    "pfn_cei",
+    "tfm_turbo",
+    "tfm_scbo",
+    "tfm_qnehvi",
+    "tfm_qnparego",
+    "tfm_cqnehvi",
+    "tfm_cqnparego",
+}
 
 
 def _dropped(name: str, meta: dict) -> bool:
@@ -232,7 +270,9 @@ def tables():
         key = ("T2" if no >= 2 else "T1") if nc == 0 else ("T4" if no >= 2 else "T3")
         out[key].append((n, dim, nc, no))
     for k in out:
-        out[k].sort(key=lambda t: (t[1], t[2]))          # LOW DIM FIRST, then fewest constraints
+        out[k].sort(
+            key=lambda t: (t[1], t[2])
+        )  # LOW DIM FIRST, then fewest constraints
     return out
 
 
@@ -245,14 +285,18 @@ def main() -> None:
     # SUPERSETS of a 250-iteration run and get TRUNCATED at analysis time (per_iteration_value[:n_init+250]).
     # The budget must be EQUAL across methods on a problem or the comparison is void.
     ap.add_argument("--iters", type=int, default=250)
-    ap.add_argument("--max-problems", type=int, default=None, help="dry run: only the N smallest")
+    ap.add_argument(
+        "--max-problems", type=int, default=None, help="dry run: only the N smallest"
+    )
     ap.add_argument("--tables", nargs="+", default=["T1", "T2", "T3", "T4"])
     # Every GPU row used to be hard-assigned to ONE partition, so we queued behind ourselves on
     # pi_faez (7 running / 55 pending) while mit_preemptable and mit_normal_gpu sat EMPTY. That is
     # a routing bug, not a compute shortage. Round-robin across all three; SLURM's
     # QOSMaxGRESPerUser (mit_preemptable caps gres/gpu=4, mit_normal_gpu=2) throttles each one for
     # us -- we do not have to fight it, and preemption is fine because checkpointing resumes.
-    ap.add_argument("--gpu-partitions", default="pi_faez,mit_preemptable,mit_normal_gpu")
+    ap.add_argument(
+        "--gpu-partitions", default="pi_faez,mit_preemptable,mit_normal_gpu"
+    )
     ap.add_argument("--cpu-partition", default="mit_normal")
     ap.add_argument("--out", default=str(_here / "joblist.tsv"))
     a = ap.parse_args()
@@ -279,11 +323,15 @@ def main() -> None:
                     # The `partition` column is a legacy HINT and is IGNORED by watchdog v2, which
                     # routes by ROUTING CLASS at submit time (tfm -> pi_faez H100/H200 only, unpacked;
                     # gp -> any GPU partition, packed; cpu -> mit_normal).
-                    cls = "tfm" if algo in TFM_METHODS else ("gpu" if dev == GPU else "cpu")
+                    cls = (
+                        "tfm"
+                        if algo in TFM_METHODS
+                        else ("gpu" if dev == GPU else "cpu")
+                    )
                     gres = "gpu:1" if dev == GPU else ""
                     rows.append((prio, dim, nc, prob, algo, s, cls, dev, a.iters, gres))
 
-    rows.sort(key=lambda r: (r[0], r[1], r[2]))           # priority, then dim, then #con
+    rows.sort(key=lambda r: (r[0], r[1], r[2]))  # priority, then dim, then #con
     with open(a.out, "w") as f:
         f.write("# problem\talgo\tseed\tclass\tdevice\titers\tgres\n")
         for _, _, _, prob, algo, s, cls, dev, it, gres in rows:
@@ -294,7 +342,9 @@ def main() -> None:
     print(f"wrote {len(rows)} jobs -> {a.out}")
     print(f"  GPU jobs: {n_gpu}   CPU jobs: {len(rows) - n_gpu}")
     for t in a.tables:
-        print(f"  {t}: {len(tbl[t]) if not a.max_problems else min(a.max_problems, len(tbl[t]))} problems")
+        print(
+            f"  {t}: {len(tbl[t]) if not a.max_problems else min(a.max_problems, len(tbl[t]))} problems"
+        )
 
 
 if __name__ == "__main__":

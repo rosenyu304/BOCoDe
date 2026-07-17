@@ -119,7 +119,9 @@ def _constrained_thompson_sample(
     draws = []
     with torch.no_grad():
         for j in range(m):
-            Y_j = torch.cat([Y_cols[:, j : j + 1], pad], dim=0).unsqueeze(-1)  # (N, 1, 1)
+            Y_j = torch.cat([Y_cols[:, j : j + 1], pad], dim=0).unsqueeze(
+                -1
+            )  # (N, 1, 1)
             logits = surrogate.forward(X_col, Y_j, single_eval_pos=n_ctx)
             draws.append(surrogate.predict_sample(logits).reshape(n_cand).to("cpu"))
     draw = torch.stack(draws, dim=1)  # (n_cand, m)

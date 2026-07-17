@@ -60,7 +60,9 @@ def main() -> None:
     ap.add_argument("--problem", required=True)
     ap.add_argument("--algo", required=True)
     ap.add_argument("--seed", type=int, required=True)
-    ap.add_argument("--iters", type=int, default=1000)   # BO iterations, EXCLUDING n_init
+    ap.add_argument(
+        "--iters", type=int, default=1000
+    )  # BO iterations, EXCLUDING n_init
     ap.add_argument("--device", default="cpu")
     ap.add_argument("--results", required=True)
     ap.add_argument("--checkpoint", default=None)

@@ -112,7 +112,10 @@ def check(f: Path, n_sample: int) -> tuple[str, str]:
 
     prob_name = f.parts[-3]
     if not is_deterministic(prob_name):
-        return "stochastic", "noisy objective -- re-evaluation cannot verify; check SHA instead"
+        return (
+            "stochastic",
+            "noisy objective -- re-evaluation cannot verify; check SHA instead",
+        )
     try:
         p = bocode.get_problem(prob_name)()
     except Exception as exc:  # noqa: BLE001
@@ -148,12 +151,17 @@ def check(f: Path, n_sample: int) -> tuple[str, str]:
     got = raw.ravel()[:n].detach().cpu().numpy().astype(float)
     both = np.isfinite(got) & np.isfinite(want)
     i = int(np.argmax(np.abs(got[both] - want[both])))
-    return "MISMATCH", f"stored y={want[both][i]:.6g} but re-evaluates to {got[both][i]:.6g}"
+    return (
+        "MISMATCH",
+        f"stored y={want[both][i]:.6g} but re-evaluates to {got[both][i]:.6g}",
+    )
 
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--sample", type=int, default=64, help="rows per file to re-evaluate")
+    ap.add_argument(
+        "--sample", type=int, default=64, help="rows per file to re-evaluate"
+    )
     ap.add_argument("--quarantine", action="store_true")
     a = ap.parse_args()
 
@@ -176,18 +184,29 @@ def main() -> None:
             bad.append((f, detail))
             print(f"  ❌ {f.parts[-3]:26s} {f.parts[-2]:20s} {f.name}  {detail}")
 
-    print(f"\n  ok         {verdicts['ok']:5d}   (re-evaluation reproduces the stored y)")
-    print(f"  MISMATCH   {verdicts['MISMATCH']:5d}   (the problem CHANGED under it -> INVALID)")
-    print(f"  stochastic {verdicts['stochastic']:5d}   (noisy objective -- NOT verifiable this way)")
+    print(
+        f"\n  ok         {verdicts['ok']:5d}   (re-evaluation reproduces the stored y)"
+    )
+    print(
+        f"  MISMATCH   {verdicts['MISMATCH']:5d}   (the problem CHANGED under it -> INVALID)"
+    )
+    print(
+        f"  stochastic {verdicts['stochastic']:5d}   (noisy objective -- NOT verifiable this way)"
+    )
     print(f"  skipped    {verdicts['skip']:5d}   (multi-objective / empty)")
     print(f"  errors     {verdicts['error']:5d}")
-    print(f"  (of all files, {no_sha} carry NO commit_sha and are verifiable ONLY this way)")
+    print(
+        f"  (of all files, {no_sha} carry NO commit_sha and are verifiable ONLY this way)"
+    )
 
     if bad:
         probs = Counter(f.parts[-3] for f, _ in bad)
-        print("\n  mismatching problems: " + ", ".join(f"{k}({v})" for k, v in probs.most_common()))
+        print(
+            "\n  mismatching problems: "
+            + ", ".join(f"{k}({v})" for k, v in probs.most_common())
+        )
     if a.quarantine and bad:
-        for f, detail in bad:
+        for f, _detail in bad:
             tgt = QUARANTINE / f.parts[-3] / f.parts[-2]
             tgt.mkdir(parents=True, exist_ok=True)
             shutil.move(str(f), str(tgt / f.name))

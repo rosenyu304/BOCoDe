@@ -183,7 +183,7 @@ def main() -> None:
         X, y = pools[(space, dataset)]
         X = _apply_log_fix(space, X)
         dim = X.shape[1]
-        if MAX_POOL and len(X) > MAX_POOL:          # 0 => keep the FULL pool (default)
+        if MAX_POOL and len(X) > MAX_POOL:  # 0 => keep the FULL pool (default)
             rng = np.random.RandomState(0)
             idx = rng.choice(len(X), MAX_POOL, replace=False)
             X, y = X[idx], y[idx]

@@ -213,7 +213,9 @@ class _StubEnv:
         # The rollouts seed every reset (MuJoCo perturbs the initial state, so an unseeded
         # reset makes the objective non-deterministic). A real gym env accepts ``seed``;
         # this stub must too, or it no longer stands in for one.
-        self._n = 0  # a real env restarts the episode here; without this, only the first
+        self._n = (
+            0  # a real env restarts the episode here; without this, only the first
+        )
         # row of a batch gets a full episode and the rest terminate immediately.
         return None, {}
 

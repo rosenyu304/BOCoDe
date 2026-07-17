@@ -55,8 +55,13 @@ def audit(name: str, n: int) -> dict:
     X = p.sample(n, seed=0)
     values, cons = p.evaluate(X)
 
-    r: dict = {"problem": name, "dim": p.dim, "n_con": p.num_constraints, "verdict": "ok",
-               "issues": []}
+    r: dict = {
+        "problem": name,
+        "dim": p.dim,
+        "n_con": p.num_constraints,
+        "verdict": "ok",
+        "issues": [],
+    }
 
     y = values[:, 0]
     n_uy = int(torch.unique(y).numel())
@@ -66,7 +71,9 @@ def audit(name: str, n: int) -> dict:
     if n_uy == 1:
         r["issues"].append("objective is CONSTANT — nothing to optimize")
     elif n_uy <= STEP_THRESHOLD:
-        r["issues"].append(f"objective is a STEP FUNCTION ({n_uy} distinct values) — GP cannot fit it")
+        r["issues"].append(
+            f"objective is a STEP FUNCTION ({n_uy} distinct values) — GP cannot fit it"
+        )
 
     if p.num_constraints:
         feas_each = []
@@ -76,13 +83,17 @@ def audit(name: str, n: int) -> dict:
             sat = float((cj <= 0).float().mean())
             feas_each.append(sat)
             if u == 1:
-                r["issues"].append(f"c{j} is CONSTANT ({cj[0].item():.4g}) — dead constraint")
+                r["issues"].append(
+                    f"c{j} is CONSTANT ({cj[0].item():.4g}) — dead constraint"
+                )
             elif u <= STEP_THRESHOLD:
                 # A COARSE constraint is a WARNING, not a disqualification. A problem with one
                 # low-cardinality constraint among many smooth ones, and a real feasible region,
                 # is HARD -- not broken. (Firing on this alone would have deleted all 15 MODAct
                 # problems, i.e. more than half of Table 4.)
-                r["issues"].append(f"c{j} is COARSE ({u} distinct values) — GP fit may be poor (warning only)")
+                r["issues"].append(
+                    f"c{j} is COARSE ({u} distinct values) — GP fit may be poor (warning only)"
+                )
             # CRITICAL DISTINCTION:
             #   * a STEP-FUNCTION constraint (few distinct values) that is never <= 0 can NEVER
             #     be satisfied -- that is STRUCTURAL, the feasible region is empty. Unsolvable.
@@ -103,7 +114,9 @@ def audit(name: str, n: int) -> dict:
         feasible = int((cons <= 0).all(dim=1).sum())
         r["feasible"] = f"{feasible}/{n}"
         if feasible == 0:
-            r["issues"].append(f"no feasible point in {n} LHS samples (may just be a tiny feasible region)")
+            r["issues"].append(
+                f"no feasible point in {n} LHS samples (may just be a tiny feasible region)"
+            )
 
     # verdict
     # EXCLUDE a problem ONLY on structural evidence that it cannot be optimized:
@@ -117,9 +130,9 @@ def audit(name: str, n: int) -> dict:
     elif any(i.startswith("objective is a STEP FUNCTION") for i in r["issues"]):
         r["verdict"] = "DEGENERATE"
     elif any("is CONSTANT" in i for i in r["issues"]):
-        r["verdict"] = "dead-constraint"   # warn; does not block optimization
+        r["verdict"] = "dead-constraint"  # warn; does not block optimization
     elif r["issues"]:
-        r["verdict"] = "hard"              # coarse constraint and/or tiny feasible region — KEEP
+        r["verdict"] = "hard"  # coarse constraint and/or tiny feasible region — KEEP
     return r
 
 
@@ -133,31 +146,51 @@ def main() -> None:
 
     names = a.problems or bocode.list_problems(input_type="continuous")
     if a.constrained:
-        names = [n for n in names if (bocode.get_metadata(n).get("num_constraints") or 0) > 0]
+        names = [
+            n for n in names if (bocode.get_metadata(n).get("num_constraints") or 0) > 0
+        ]
 
     bad, out = [], []
     for nm in sorted(names):
         try:
             r = audit(nm, a.n)
         except Exception as exc:  # noqa: BLE001
-            r = {"problem": nm, "verdict": "ERROR", "issues": [f"{type(exc).__name__}: {exc}"]}
+            r = {
+                "problem": nm,
+                "verdict": "ERROR",
+                "issues": [f"{type(exc).__name__}: {exc}"],
+            }
         out.append(r)
         if r["verdict"] != "ok":
             bad.append(r)
-            mark = {"UNSOLVABLE": "🔴", "DEGENERATE": "🟠", "dead-constraint": "🟡",
-                    "hard": "  ", "suspect": "🟡", "ERROR": "💥"}.get(r["verdict"], "?")
-            print(f"{mark} {r['problem']:22s} {r['verdict']:11s} {r.get('feasible',''):>9s}")
+            mark = {
+                "UNSOLVABLE": "🔴",
+                "DEGENERATE": "🟠",
+                "dead-constraint": "🟡",
+                "hard": "  ",
+                "suspect": "🟡",
+                "ERROR": "💥",
+            }.get(r["verdict"], "?")
+            print(
+                f"{mark} {r['problem']:22s} {r['verdict']:11s} {r.get('feasible', ''):>9s}"
+            )
             for i in r["issues"]:
                 print(f"      - {i}")
 
     Path(a.out).write_text(json.dumps(out, indent=1))
     from collections import Counter
+
     cnt = Counter(r["verdict"] for r in out)
     n_unsolv = cnt["UNSOLVABLE"] + cnt["DEGENERATE"] + cnt["ERROR"]
-    print(f"\naudited {len(out)}: " + ", ".join(f"{v} {k}" for k, v in sorted(cnt.items())))
+    print(
+        f"\naudited {len(out)}: "
+        + ", ".join(f"{v} {k}" for k, v in sorted(cnt.items()))
+    )
     print(f"  -> EXCLUDE {n_unsolv} (UNSOLVABLE + DEGENERATE + ERROR)")
-    print(f"  -> KEEP    {cnt['ok'] + cnt['hard'] + cnt['dead-constraint']} "
-          f"(ok + hard + dead-constraint: coarse constraints / tiny feasible regions are NOT broken)")
+    print(
+        f"  -> KEEP    {cnt['ok'] + cnt['hard'] + cnt['dead-constraint']} "
+        f"(ok + hard + dead-constraint: coarse constraints / tiny feasible regions are NOT broken)"
+    )
     print(f"wrote {a.out}")
     sys.exit(1 if n_unsolv else 0)
 

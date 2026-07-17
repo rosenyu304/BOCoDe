@@ -82,8 +82,9 @@ else:  # pragma: no cover
     raise SystemExit("cannot locate the BOCoDe repo")
 sys.path.insert(0, str(BOCODE))
 
-import bocode  # noqa: E402
 from pymoo.indicators.hv import HV  # noqa: E402
+
+import bocode  # noqa: E402
 
 RESULTS = BOCODE / "Results"
 
@@ -121,7 +122,9 @@ def reference_point(problem: str, files: list[Path]) -> tuple[np.ndarray, str]:
     except Exception:  # noqa: BLE001
         rp = None
     if rp is not None:
-        return np.asarray(rp, dtype=float).ravel(), "problem.ref_point (fixed/published)"
+        return np.asarray(
+            rp, dtype=float
+        ).ravel(), "problem.ref_point (fixed/published)"
 
     # Fallback: derive ONCE from the union of every run of this problem.
     ys = [y for y in (_load_y(f) for f in files) if y is not None]
@@ -140,7 +143,7 @@ def hv_trace(y: np.ndarray, ref: np.ndarray) -> np.ndarray:
     ind = HV(ref_point=-ref)
     n = len(y)
     trace = np.zeros(n, dtype=float)
-    front: list[np.ndarray] = []   # current non-dominated set (maximization)
+    front: list[np.ndarray] = []  # current non-dominated set (maximization)
     last = 0.0
     for i in range(n):
         p = y[i]
@@ -171,10 +174,20 @@ def process(args) -> dict:
         d["ref_point"] = ref
         d["ref_point_source"] = ref_src
         np.savez(f, **d)
-        out.append({"file": f.name, "algo": f.parent.name, "hv_final": float(tr[-1]),
-                    "secs": round(time.perf_counter() - t0, 2)})
-    return {"problem": problem, "ref_point": ref.tolist(),
-            "ref_point_source": ref_src, "runs": out}
+        out.append(
+            {
+                "file": f.name,
+                "algo": f.parent.name,
+                "hv_final": float(tr[-1]),
+                "secs": round(time.perf_counter() - t0, 2),
+            }
+        )
+    return {
+        "problem": problem,
+        "ref_point": ref.tolist(),
+        "ref_point_source": ref_src,
+        "runs": out,
+    }
 
 
 def main() -> None:
@@ -198,7 +211,9 @@ def main() -> None:
     results = []
     with ProcessPoolExecutor(max_workers=a.workers) as ex:
         for r in ex.map(process, tasks):
-            derived = "DERIVED" if r["ref_point_source"].startswith("derived") else "fixed"
+            derived = (
+                "DERIVED" if r["ref_point_source"].startswith("derived") else "fixed"
+            )
             print(f"  {r['problem']:24s} runs={len(r['runs']):3d}  ref={derived}")
             results.append(r)
     Path(a.out).write_text(json.dumps(results, indent=1))

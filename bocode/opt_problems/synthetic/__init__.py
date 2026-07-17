@@ -90,8 +90,8 @@ __all__ = [*SYNTHETIC_PROBLEMS.keys(), "SYNTHETIC_PROBLEMS"]
 # 2026-07-17). These ARE registered (appear in bocode.list_problems()), unlike the
 # plain test functions above, so they are deliberately kept OUT of SYNTHETIC_PROBLEMS
 # (the unregistered test-function fallback used by list_synthetic()). ---
-from .Ackley53 import Ackley53  # noqa: E402,F401
 from .Ackley5Mixed import Ackley5Mixed  # noqa: E402,F401
+from .Ackley53 import Ackley53  # noqa: E402,F401
 from .AckleyCat import AckleyCat  # noqa: E402,F401
 from .BraninCategorical import BraninCategorical  # noqa: E402,F401
 from .BraninLVGP import BraninLVGP  # noqa: E402,F401
@@ -110,9 +110,23 @@ from .StyblinskiTangMixed import StyblinskiTangMixed  # noqa: E402,F401
 from .WeldedBeamCategorical import WeldedBeamCategorical  # noqa: E402,F401
 
 MIXED_SYNTHETIC_PROBLEMS = [
-    "Ackley53", "Ackley5Mixed", "AckleyCat", "BraninCategorical", "BraninLVGP",
-    "CoCaBOFunc2C", "CoCaBOFunc3C", "GoldsteinLVGP", "GoldsteinMixed", "HartmannCat",
-    "MixedAckley", "RastriginCat", "Rosenbrock5Mixed", "SchwefelCat", "ShekelMixed",
-    "StyblinskiTangCat", "StyblinskiTangMixed", "WeldedBeamCategorical",
+    "Ackley53",
+    "Ackley5Mixed",
+    "AckleyCat",
+    "BraninCategorical",
+    "BraninLVGP",
+    "CoCaBOFunc2C",
+    "CoCaBOFunc3C",
+    "GoldsteinLVGP",
+    "GoldsteinMixed",
+    "HartmannCat",
+    "MixedAckley",
+    "RastriginCat",
+    "Rosenbrock5Mixed",
+    "SchwefelCat",
+    "ShekelMixed",
+    "StyblinskiTangCat",
+    "StyblinskiTangMixed",
+    "WeldedBeamCategorical",
 ]
 __all__ += [*MIXED_SYNTHETIC_PROBLEMS, "MIXED_SYNTHETIC_PROBLEMS"]

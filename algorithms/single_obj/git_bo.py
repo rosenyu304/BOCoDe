@@ -86,7 +86,9 @@ DEFAULT_RANK = 10  # fixed subspace rank used for every paper experiment (Append
 # inverting it at the paper's ``beta = 2.33`` gives ``rest_prob = 1 - Phi(2.33) ~ 0.0099``.
 REST_PROB = 0.5 * math.erfc(BETA / math.sqrt(2.0))
 
-ANCHOR_SIGMA = 0.1  # Vanilla BO's sample_around_best_sigma (configs/acq_opt/highdim.yaml)
+ANCHOR_SIGMA = (
+    0.1  # Vanilla BO's sample_around_best_sigma (configs/acq_opt/highdim.yaml)
+)
 
 
 def _sample_around_best(
@@ -171,7 +173,10 @@ def optimize_problem(
     # ``method_name`` overrides the auto-generated name -- the campaign deploys the ablation
     # winner (ucb+marzouk+anchor) under the canonical name "git_bo".
     res = Result(
-        method_name or method, type(problem).__name__, seed, acquisition_function=acq_str
+        method_name or method,
+        type(problem).__name__,
+        seed,
+        acquisition_function=acq_str,
     )
 
     surrogate = TabPFNSurrogate(device=device)
@@ -229,7 +234,7 @@ def optimize_problem(
         # concatenation equals the single-pass grad exactly.
         pool = sobol.draw(N_CANDIDATES).to(DTYPE)
 
-        def _grad_slice(lo, hi):
+        def _grad_slice(lo, hi, pool=pool):
             logits, X_q = _forward(pool[lo:hi], grad=True)
             mean_sub = surrogate.predict_mean(logits).reshape(-1)
             (g,) = torch.autograd.grad(mean_sub.sum(), X_q)
@@ -273,7 +278,7 @@ def optimize_problem(
         #               (1 - rest_prob) quantile of its non-Gaussian predictive.
         # The bar-distribution ``sample``/``ucb`` are read from the SAME logits as mu/sigma,
         # so switching acquisitions costs no extra forward pass.
-        def _acq_slice(lo, hi):
+        def _acq_slice(lo, hi, cand=cand):
             with torch.no_grad():
                 logits_gi, _ = _forward(cand[lo:hi], grad=False)
                 m = surrogate.predict_mean(logits_gi).reshape(-1)
@@ -281,7 +286,9 @@ def optimize_problem(
                 if acq == "ts":
                     s = surrogate.predict_sample(logits_gi).reshape(-1)
                 elif acq == "ucb":
-                    s = surrogate.predict_ucb(logits_gi, rest_prob=REST_PROB).reshape(-1)
+                    s = surrogate.predict_ucb(logits_gi, rest_prob=REST_PROB).reshape(
+                        -1
+                    )
                 else:
                     s = m + BETA * v.sqrt()
             return m.cpu(), v.cpu(), s.cpu()

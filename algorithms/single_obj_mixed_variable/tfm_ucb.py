@@ -51,9 +51,9 @@ from .._bo_utils import (
 from .._tfm_utils import TabPFNSurrogate
 from .single_task_gp import _discrete_grids, _snap
 
-N_CANDIDATES = 2000          # candidate pool scored per iteration
-MAX_CAND_PER_PASS = 512      # chunk width (peak memory scales with the chunk, not the pool)
-BETA = 2.33                  # UCB exploration level (matches GIT-BO Sec. 3.3)
+N_CANDIDATES = 2000  # candidate pool scored per iteration
+MAX_CAND_PER_PASS = 512  # chunk width (peak memory scales with the chunk, not the pool)
+BETA = 2.33  # UCB exploration level (matches GIT-BO Sec. 3.3)
 # BarDistribution.ucb is a QUANTILE UCB: the (1 - rest_prob) quantile of the predictive.
 # TabPFN's docstring gives the Gaussian-equivalent level beta = sqrt(2)*erfinv(2(1-rest_prob)-1);
 # inverting at beta = 2.33 gives rest_prob = 1 - Phi(2.33).
@@ -119,7 +119,7 @@ def optimize_problem(
         while i < n:
             c = min(chunk[0], n - i)
             try:
-                outs.append(_score(cand[i:i + c]))
+                outs.append(_score(cand[i : i + c]))
                 i += c
             except torch.OutOfMemoryError:
                 if chunk[0] == 1:
@@ -134,7 +134,7 @@ def optimize_problem(
         cand = _snap(sobol.draw(N_CANDIDATES).to(DTYPE), grids)
         ucb, mean, var = _chunked(cand)
         choice = int(torch.argmax(ucb).item())
-        x_new = cand[choice:choice + 1]
+        x_new = cand[choice : choice + 1]
         y_new = obj(x_new)
         train_X = torch.cat([train_X, x_new], dim=0)
         train_Y = torch.cat([train_Y, y_new], dim=0)
@@ -155,16 +155,26 @@ def optimize_problem(
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--problem", required=True)
-    parser.add_argument("--init", type=int, default=None,
-                        help="initial design size (default: dim-scaled)")
+    parser.add_argument(
+        "--init",
+        type=int,
+        default=None,
+        help="initial design size (default: dim-scaled)",
+    )
     parser.add_argument("--iters", type=int, default=50)
-    parser.add_argument("--checkpoint", default=None, help="resumable checkpoint .npz path")
+    parser.add_argument(
+        "--checkpoint", default=None, help="resumable checkpoint .npz path"
+    )
     parser.add_argument("--device", default="auto")
     add_common_args(parser)
     args = parser.parse_args()
     res = optimize_problem(
-        make_problem(args.problem, args), args.init, args.iters, args.seed,
-        device=args.device, checkpoint=args.checkpoint,
+        make_problem(args.problem, args),
+        args.init,
+        args.iters,
+        args.seed,
+        device=args.device,
+        checkpoint=args.checkpoint,
     )
     finalize(res, args)
 

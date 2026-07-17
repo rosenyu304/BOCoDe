@@ -107,7 +107,9 @@ class _Embedding:
 
     def __init__(self, problem, seed: int):
         types = problem.resolved_variable_types()
-        self.grids = _discrete_grids(problem)  # unit-cube levels of each non-continuous dim
+        self.grids = _discrete_grids(
+            problem
+        )  # unit-cube levels of each non-continuous dim
         self.dim = problem.dim
         self.cont_input = [i for i, t in enumerate(types) if t == "continuous"]
         self.disc_input = sorted(self.grids)  # integer + categorical input dims
@@ -146,9 +148,9 @@ class _Embedding:
         counts = np.bincount(self.bins, minlength=self.m_cont)
         parent = int(np.argmax(counts))
         members = np.where(self.bins == parent)[0]
-        half = members[len(members) // 2:]  # second half moves to the new bin
+        half = members[len(members) // 2 :]  # second half moves to the new bin
         self.bins[half] = self.m_cont
-        Zc = np.concatenate([Zc, Zc[:, parent:parent + 1]], axis=1)
+        Zc = np.concatenate([Zc, Zc[:, parent : parent + 1]], axis=1)
         self.m_cont += 1
         return Zc
 
@@ -172,9 +174,13 @@ class _Embedding:
             else np.zeros((n, 0))
         )
         rng = np.random.default_rng(seed + 1)
-        Zd = np.stack(
-            [rng.integers(0, k, size=n) for k in self.n_categories], axis=1
-        ).astype(float) if self.n_disc else np.zeros((n, 0))
+        Zd = (
+            np.stack(
+                [rng.integers(0, k, size=n) for k in self.n_categories], axis=1
+            ).astype(float)
+            if self.n_disc
+            else np.zeros((n, 0))
+        )
         return Zc, Zd
 
 
@@ -219,7 +225,9 @@ def optimize_problem(
 ) -> Result:
     """Bounce over the problem's mixed space: nested embedding + CoCaBO GP + TR/EI."""
     set_seed(seed)
-    resolve_device(device)  # honored for parity; the target-space GP is tiny and runs on CPU
+    resolve_device(
+        device
+    )  # honored for parity; the target-space GP is tiny and runs on CPU
     obj = ProblemObjective(problem)
     if n_init is None:
         n_init = default_n_init(obj.dim)
@@ -259,7 +267,7 @@ def optimize_problem(
         b = int(train_Y.argmax().item())
         Zc_c, Zd_c = Zc[b], Zd[b]
         with torch.no_grad():
-            mu_star = model.likelihood(model(Zt[b:b + 1])).mean
+            mu_star = model.likelihood(model(Zt[b : b + 1])).mean
 
         n_cand = min(100 * max(space.dim, 1), 2000)
         Cc, Cd = _candidates(emb, Zc_c, Zd_c, length, n_cand, rng)
@@ -267,11 +275,11 @@ def optimize_problem(
         with torch.no_grad():
             ei = _ei(model, cand, mu_star).reshape(-1)
             choice = int(torch.argmax(ei).item())
-        zc_new, zd_new = Cc[choice:choice + 1], Cd[choice:choice + 1]
+        zc_new, zd_new = Cc[choice : choice + 1], Cd[choice : choice + 1]
 
         candidate = emb.decode(zc_new, zd_new)
         with torch.no_grad():
-            post = model(cand[choice:choice + 1])
+            post = model(cand[choice : choice + 1])
             mean, var = post.mean.item(), post.variance.item()
         y = obj(candidate)
 
@@ -326,16 +334,26 @@ def optimize_problem(
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--problem", required=True)
-    parser.add_argument("--init", type=int, default=None,
-                        help="initial design size (default: dim-scaled)")
+    parser.add_argument(
+        "--init",
+        type=int,
+        default=None,
+        help="initial design size (default: dim-scaled)",
+    )
     parser.add_argument("--iters", type=int, default=50)
-    parser.add_argument("--checkpoint", default=None, help="resumable checkpoint .npz path")
+    parser.add_argument(
+        "--checkpoint", default=None, help="resumable checkpoint .npz path"
+    )
     parser.add_argument("--device", default=None, help="cuda / cpu (default: auto)")
     add_common_args(parser)
     args = parser.parse_args()
     res = optimize_problem(
-        make_problem(args.problem, args), args.init, args.iters, args.seed,
-        checkpoint=args.checkpoint, device=args.device,
+        make_problem(args.problem, args),
+        args.init,
+        args.iters,
+        args.seed,
+        checkpoint=args.checkpoint,
+        device=args.device,
     )
     finalize(res, args)
 
