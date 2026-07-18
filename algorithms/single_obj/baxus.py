@@ -47,8 +47,6 @@ import botorch
 import gpytorch
 import numpy as np
 import torch
-from botorch.exceptions import ModelFittingError
-from botorch.fit import fit_gpytorch_mll
 from botorch.generation import MaxPosteriorSampling
 from botorch.models import SingleTaskGP
 from gpytorch.constraints import Interval
@@ -66,6 +64,7 @@ from .._bo_utils import (
     load_checkpoint,
     make_problem,
     resolve_device,
+    robust_fit_mll,
     save_checkpoint,
     set_seed,
 )
@@ -264,16 +263,11 @@ def optimize_problem(
             botorch.settings.validate_input_scaling(False),
             gpytorch.settings.max_cholesky_size(2000),
         ):
-            try:
-                fit_gpytorch_mll(mll)
-            except ModelFittingError:
-                # Right after a split the covariance can be indefinite: fall back to Adam.
-                opt = torch.optim.Adam(model.parameters(), lr=0.1)
-                for _ in range(100):
-                    opt.zero_grad()
-                    loss = -mll(model(X_target), train_Y.flatten())
-                    loss.backward()
-                    opt.step()
+            # Right after a split the covariance can be indefinite (ModelFittingError) or a
+            # hyperparameter can be driven outside its prior's support (a bare ValueError); either
+            # crashes the whole run. robust_fit_mll falls back to the model's prior (un-optimised)
+            # hyperparameters -- a valid GP -- so the run continues on a fresh design.
+            robust_fit_mll(mll, label="baxus")
             X_next_target = _create_candidate(
                 state, model, X_target, train_Y, seed + it
             )

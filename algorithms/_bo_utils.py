@@ -28,6 +28,7 @@ from dataclasses import dataclass, field
 
 import numpy as np
 import torch
+from botorch.exceptions.errors import ModelFittingError
 from botorch.fit import fit_gpytorch_mll
 from botorch.models import SingleTaskGP
 from botorch.models.transforms import Normalize, Standardize
@@ -205,6 +206,44 @@ class MultiObjectiveProblem:
     infer_ref_point = hv_ref_point
 
 
+def robust_fit_mll(mll, *, label: str = "GP", **kwargs):
+    """Fit ``mll`` with :func:`fit_gpytorch_mll`, falling back to the model's prior
+    (un-optimized) hyperparameters when the marginal-likelihood optimizer fails.
+
+    On low-dimensional problems the optimizer can drive a hyperparameter outside its
+    prior's support, which BoTorch surfaces either as a ``ModelFittingError`` or as a
+    bare ``ValueError`` from the prior's support check (``Expected value ... within the
+    support (GreaterThan(0.0)) of LogNormalPrior()``). Either one loses every iteration
+    already computed and, on a cluster, looks like an infrastructure failure when it is
+    really a property of the local data (near-duplicate points, near-constant / near-
+    discrete outputs). Restoring the model's constructed (prior-mode) hyperparameters
+    yields a valid, un-optimized GP so the run can continue.
+
+    When the fit succeeds the model is left exactly as ``fit_gpytorch_mll`` leaves it --
+    behaviour is bit-identical to calling ``fit_gpytorch_mll`` directly. Works for any
+    MLL exposing ``.model`` (``ExactMarginalLogLikelihood`` and the ``ModelListGP``'s
+    ``SumMarginalLogLikelihood`` alike).
+    """
+    from copy import deepcopy
+
+    initial_state = deepcopy(mll.model.state_dict())
+    try:
+        fit_gpytorch_mll(mll, **kwargs)
+    except (ModelFittingError, ValueError) as err:
+        # A ModelFittingError is always ours to handle; a plain ValueError only when it
+        # is the prior-support check (anything else -- bad shapes, NaNs -- must surface).
+        if isinstance(err, ValueError) and "within the support" not in str(err):
+            raise
+        warnings.warn(
+            f"{label}: GP fit failed ({type(err).__name__}); falling back to prior "
+            "hyperparameters for this fit.",
+            RuntimeWarning,
+            stacklevel=2,
+        )
+        mll.model.load_state_dict(initial_state)
+    return mll.model
+
+
 def fit_gp(train_X: torch.Tensor, train_Y: torch.Tensor) -> SingleTaskGP:
     """Fit a SingleTaskGP with input normalization and output standardization."""
     model = SingleTaskGP(
@@ -214,7 +253,7 @@ def fit_gp(train_X: torch.Tensor, train_Y: torch.Tensor) -> SingleTaskGP:
         outcome_transform=Standardize(m=train_Y.shape[-1]),
     )
     mll = ExactMarginalLogLikelihood(model.likelihood, model)
-    fit_gpytorch_mll(mll)
+    robust_fit_mll(mll, label="fit_gp")
     return model
 
 

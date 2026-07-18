@@ -33,7 +33,6 @@ from botorch.acquisition.analytic import (
     LogConstrainedExpectedImprovement,
     LogProbabilityOfFeasibility,
 )
-from botorch.fit import fit_gpytorch_mll
 from botorch.models import ModelListGP, SingleTaskGP
 from botorch.models.transforms import Normalize, Standardize
 from botorch.optim import optimize_acqf
@@ -51,6 +50,7 @@ from .._bo_utils import (
     load_checkpoint,
     make_problem,
     resolve_device,
+    robust_fit_mll,
     save_checkpoint,
     set_seed,
 )
@@ -81,7 +81,7 @@ def _fit_model_list(train_X, train_obj, train_con):
     models += [_gp(train_con[:, i : i + 1]) for i in range(train_con.shape[-1])]
     model = ModelListGP(*models)
     mll = SumMarginalLogLikelihood(model.likelihood, model)
-    fit_gpytorch_mll(mll)
+    robust_fit_mll(mll, label="constrained_ei")
     return model
 
 

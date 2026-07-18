@@ -39,14 +39,11 @@ from __future__ import annotations
 
 import argparse
 import math
-import warnings
 from dataclasses import dataclass
 from pathlib import Path
 
 import gpytorch
 import torch
-from botorch.exceptions.errors import ModelFittingError
-from botorch.fit import fit_gpytorch_mll
 from botorch.generation import MaxPosteriorSampling
 from botorch.models import SingleTaskGP
 from gpytorch.constraints import Interval
@@ -67,6 +64,7 @@ from .._bo_utils import (
     load_checkpoint,
     make_problem,
     resolve_device,
+    robust_fit_mll,
     save_checkpoint,
     set_seed,
 )
@@ -129,22 +127,16 @@ def _fit_turbo_gp(train_X: torch.Tensor, train_Y: torch.Tensor) -> SingleTaskGP:
     model = SingleTaskGP(train_X, Y, covar_module=covar_module, likelihood=likelihood)
     mll = ExactMarginalLogLikelihood(model.likelihood, model)
     with gpytorch.settings.max_cholesky_size(MAX_CHOLESKY_SIZE):
-        try:
-            fit_gpytorch_mll(mll)
-        except ModelFittingError:
-            # A GP fit can genuinely fail on pathological data -- most often here when TuRBO's trust
-            # region has collapsed and the candidate points are near-duplicate, so the covariance is
-            # (near-)singular and the MLL optimisation diverges. Crashing loses every iteration already
-            # computed and, on a cluster, looks like an infrastructure failure when it is really a
-            # property of the local data. Fall back to the model's PRIOR (un-optimised) hyperparameters
-            # -- a valid GP -- so the run continues; the trust region then registers a failure and
-            # shrinks/restarts on a fresh design, which is the correct recovery. Mirrors scbo/baxus.
-            warnings.warn(
-                "turbo: GP fit failed (likely a collapsed trust region); "
-                "falling back to prior hyperparameters for this iteration.",
-                RuntimeWarning,
-                stacklevel=2,
-            )
+        # A GP fit can genuinely fail on pathological data -- most often here when TuRBO's trust
+        # region has collapsed and the candidate points are near-duplicate, so the covariance is
+        # (near-)singular and the MLL optimisation diverges (raising ModelFittingError) or a
+        # hyperparameter is driven outside its prior's support (a bare ValueError). Crashing loses
+        # every iteration already computed and, on a cluster, looks like an infrastructure failure
+        # when it is really a property of the local data. robust_fit_mll falls back to the model's
+        # PRIOR (un-optimised) hyperparameters -- a valid GP -- so the run continues; the trust
+        # region then registers a failure and shrinks/restarts on a fresh design, which is the
+        # correct recovery. Mirrors scbo/baxus.
+        robust_fit_mll(mll, label="turbo")
     return model
 
 
