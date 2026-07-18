@@ -205,3 +205,8 @@ examples/results/
 
 # Experiment matrix doc (kept outside the repo; never push)
 Experiment_problems.md
+
+# campaign results — never commit result npz to GitHub (large + data)
+Results/
+Results_campaign_250/
+*.npz
