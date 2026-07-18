@@ -20,9 +20,15 @@ below outside it, so no translation preserves the reference optimum.
 """
 
 from .Ackley import Ackley, AckleyShifted
+from .BNH import BNH
 from .Branin import Branin, BraninShifted
 from .BraninCurrin import BraninCurrin
+from .C2DTLZ2 import C2DTLZ2
+from .ConstrainedBraninCurrin import ConstrainedBraninCurrin
+from .ConstrainedGramacy import ConstrainedGramacy
 from .ConstrainedHartmann import ConstrainedHartmann
+from .ConstrainedHartmannSmooth import ConstrainedHartmannSmooth
+from .CONSTR import CONSTR
 from .DixonPrice import DixonPrice, DixonPriceShifted
 from .DTLZ1 import DTLZ1
 from .DTLZ2 import DTLZ2
@@ -35,10 +41,13 @@ from .Hartmann import Hartmann, HartmannShifted
 from .HolderTable import HolderTable
 from .KeaneBumpFunction import KeaneBumpFunction
 from .Levy import Levy, LevyShifted
+from .MW7 import MW7
+from .OSY import OSY
 from .Powell import Powell, PowellShifted
 from .Rastrigin import Rastrigin, RastriginShifted
 from .Rosenbrock import Rosenbrock, RosenbrockShifted
 from .SixHumpCamel import SixHumpCamel, SixHumpCamelShifted
+from .SRN import SRN
 from .StyblinskiTang import StyblinskiTang, StyblinskiTangShifted
 from .ZDT1 import ZDT1
 from .ZDT2 import ZDT2
@@ -72,6 +81,15 @@ SYNTHETIC_PROBLEMS = {
     "SixHumpCamelShifted": SixHumpCamelShifted,
     "KeaneBumpFunction": KeaneBumpFunction,
     "ConstrainedHartmann": ConstrainedHartmann,
+    "ConstrainedGramacy": ConstrainedGramacy,
+    "ConstrainedHartmannSmooth": ConstrainedHartmannSmooth,
+    "C2DTLZ2": C2DTLZ2,
+    "ConstrainedBraninCurrin": ConstrainedBraninCurrin,
+    "BNH": BNH,
+    "SRN": SRN,
+    "OSY": OSY,
+    "CONSTR": CONSTR,
+    "MW7": MW7,
     "BraninCurrin": BraninCurrin,
     "DTLZ1": DTLZ1,
     "DTLZ2": DTLZ2,

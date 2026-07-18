@@ -214,3 +214,44 @@ class MultiObjSyntheticProblem(BenchmarkProblem):
         if scaling:
             X = _scale_clamped(self, X)
         return None, self._fn(X.to(torch.double))
+
+
+class ConstrainedMultiObjSyntheticProblem(BenchmarkProblem):
+    """Wrap a constrained multi-objective BoTorch synthetic function.
+
+    Objectives are negated to maximize. BoTorch reports constraint *slack* that is
+    feasible when ``>= 0``; here it is negated to BoCoDe's convention (feasible when
+    ``<= 0``). Subclasses set ``num_objectives`` and ``num_constraints`` (class
+    attributes, so the algorithm harness can categorize the problem without
+    instantiating it).
+    """
+
+    num_objectives = 2
+    num_constraints = 0
+
+    botorch_cls = None
+    botorch_kwargs: dict = {}
+
+    def __init__(self, dim: int | None = None) -> None:
+        kwargs = dict(self.botorch_kwargs)
+        if dim is not None:
+            kwargs["dim"] = dim
+        self._fn = self.botorch_cls(negate=True, **kwargs)
+        bounds = list(zip(*self._fn.bounds.numpy(), strict=True))
+        ref = getattr(self._fn, "ref_point", None)
+        # ref_point is in the (negated) maximization frame already when negate=True.
+        super().__init__(
+            dim=self._fn.dim,
+            num_objectives=self._fn.num_objectives,
+            num_constraints=self.num_constraints,
+            bounds=bounds,
+            ref_point=None if ref is None else ref.tolist(),
+        )
+
+    def _evaluate_implementation(self, X: torch.Tensor, scaling: bool = False):
+        if scaling:
+            X = _scale_clamped(self, X)
+        Xd = X.to(torch.double)
+        obj = self._fn(Xd)
+        gx = -self._fn.evaluate_slack(Xd)  # BoTorch slack >= 0 feasible -> gx <= 0
+        return gx, obj
