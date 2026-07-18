@@ -52,6 +52,7 @@ ALGOS = {
     "mv_random_search": "algorithms.single_obj_mixed_variable.random_search",
     "casmopolitan": "algorithms.single_obj_mixed_variable.casmopolitan",
     "hebo": "algorithms.single_obj_mixed_variable.hebo",
+    "bodi": "algorithms.single_obj_mixed_variable.bodi",
 }
 
 

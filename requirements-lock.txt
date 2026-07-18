@@ -16,6 +16,7 @@ babel==2.18.0
 beautifulsoup4==4.15.0
 bleach==6.4.0
 botorch==0.18.1
+bounce @ file:///home/rosenyu/Mixed_Int_AutoResearch/Research_2_TFM_Mixed_Integer_BO/external/bounce
 Box2D==2.3.10
 cached-property==2.0.1
 certifi==2026.5.20
@@ -54,6 +55,7 @@ fsspec==2026.4.0
 furo==2024.4.27
 gdown==6.1.0
 glfw==2.10.0
+gin-config==0.5.0
 GPy==1.13.2
 gpytorch==1.15.2
 graphemeu==0.7.2
@@ -150,6 +152,7 @@ pexpect==4.9.0
 pillow==12.2.0
 platformdirs==4.10.0
 pluggy==1.6.0
+poetry-core==2.4.1
 prometheus_client==0.25.0
 prompt_toolkit==3.0.52
 protobuf==7.35.1
