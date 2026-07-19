@@ -1551,6 +1551,26 @@
   "opt_problems.engineering.Rover",
   null
  ],
+ "Rover_100D": [
+  "opt_problems.engineering.rover_highdim",
+  null
+ ],
+ "Rover_200D": [
+  "opt_problems.engineering.rover_highdim",
+  null
+ ],
+ "Rover_300D": [
+  "opt_problems.engineering.rover_highdim",
+  null
+ ],
+ "Rover_400D": [
+  "opt_problems.engineering.rover_highdim",
+  null
+ ],
+ "Rover_500D": [
+  "opt_problems.engineering.rover_highdim",
+  null
+ ],
  "SVM": [
   "opt_problems.hpo.SVM",
   "hpo"

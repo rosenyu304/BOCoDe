@@ -210,3 +210,8 @@ Experiment_problems.md
 Results/
 Results_campaign_250/
 *.npz
+docs/CAMPAIGN_SCOPE_*.md
+docs/INFEASIBLE_ENGINEERING_PROBLEMS.md
+docs/flatline_problems.csv
+docs/RANKING_AND_STATS_SPEC.md
+docs/NSGA_Defense.md
