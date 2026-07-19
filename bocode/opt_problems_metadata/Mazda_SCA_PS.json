@@ -1,0 +1,20 @@
+{
+  "name": "Mazda_SCA_PS",
+  "real_name": "Mazda Structural Design \u2014 Two-Car Case (SCA) (penalty-scalarized, SO-unconstrained)",
+  "module": "bocode.opt_problems.scalarized",
+  "extra": null,
+  "suite": "Engineering (standalone)",
+  "num_objectives": 1,
+  "num_constraints": 0,
+  "available_dimensions": 148,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 148,
+  "bounds": null,
+  "num_integer_variables": 0,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": null,
+  "source": "Penalty-scalarized wrapper of Mazda_SCA: equal-weight mean of all objectives minus total positive constraint violation."
+}

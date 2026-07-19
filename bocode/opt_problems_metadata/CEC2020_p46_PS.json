@@ -1,0 +1,149 @@
+{
+  "name": "CEC2020_p46_PS",
+  "real_name": "SOPWM for 5-Level Inverters (penalty-scalarized, SO-unconstrained)",
+  "module": "bocode.opt_problems.scalarized",
+  "extra": null,
+  "suite": "CEC2020 RW-Constrained",
+  "num_objectives": 1,
+  "num_constraints": 0,
+  "available_dimensions": 25,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 25,
+  "bounds": [
+    [
+      0.0,
+      90.0
+    ],
+    [
+      0.0,
+      90.0
+    ],
+    [
+      0.0,
+      90.0
+    ],
+    [
+      0.0,
+      90.0
+    ],
+    [
+      0.0,
+      90.0
+    ],
+    [
+      0.0,
+      90.0
+    ],
+    [
+      0.0,
+      90.0
+    ],
+    [
+      0.0,
+      90.0
+    ],
+    [
+      0.0,
+      90.0
+    ],
+    [
+      0.0,
+      90.0
+    ],
+    [
+      0.0,
+      90.0
+    ],
+    [
+      0.0,
+      90.0
+    ],
+    [
+      0.0,
+      90.0
+    ],
+    [
+      0.0,
+      90.0
+    ],
+    [
+      0.0,
+      90.0
+    ],
+    [
+      0.0,
+      90.0
+    ],
+    [
+      0.0,
+      90.0
+    ],
+    [
+      0.0,
+      90.0
+    ],
+    [
+      0.0,
+      90.0
+    ],
+    [
+      0.0,
+      90.0
+    ],
+    [
+      0.0,
+      90.0
+    ],
+    [
+      0.0,
+      90.0
+    ],
+    [
+      0.0,
+      90.0
+    ],
+    [
+      0.0,
+      90.0
+    ],
+    [
+      0.0,
+      90.0
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": null,
+  "source": "Penalty-scalarized wrapper of CEC2020_p46: equal-weight mean of all objectives minus total positive constraint violation.",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
+}

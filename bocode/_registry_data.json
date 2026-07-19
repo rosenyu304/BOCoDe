@@ -1686,5 +1686,173 @@
  "Wing": [
   "opt_problems.engineering.Wing",
   null
+ ],
+ "CRE21_PS": [
+  "opt_problems.scalarized",
+  null
+ ],
+ "CS3_PS": [
+  "opt_problems.scalarized",
+  null
+ ],
+ "CS4_PS": [
+  "opt_problems.scalarized",
+  null
+ ],
+ "CT3_PS": [
+  "opt_problems.scalarized",
+  null
+ ],
+ "CT4_PS": [
+  "opt_problems.scalarized",
+  null
+ ],
+ "CTS3_PS": [
+  "opt_problems.scalarized",
+  null
+ ],
+ "CTS4_PS": [
+  "opt_problems.scalarized",
+  null
+ ],
+ "CTSE4_PS": [
+  "opt_problems.scalarized",
+  null
+ ],
+ "CTSEI3_PS": [
+  "opt_problems.scalarized",
+  null
+ ],
+ "CTSEI4_PS": [
+  "opt_problems.scalarized",
+  null
+ ],
+ "Mazda_PS": [
+  "opt_problems.scalarized",
+  null
+ ],
+ "Mazda_SCA_PS": [
+  "opt_problems.scalarized",
+  null
+ ],
+ "HeatExchanger_PS": [
+  "opt_problems.scalarized",
+  null
+ ],
+ "CEC2020_p1_PS": [
+  "opt_problems.scalarized",
+  null
+ ],
+ "CEC2020_p2_PS": [
+  "opt_problems.scalarized",
+  null
+ ],
+ "CEC2020_p3_PS": [
+  "opt_problems.scalarized",
+  null
+ ],
+ "CEC2020_p4_PS": [
+  "opt_problems.scalarized",
+  null
+ ],
+ "CEC2020_p6_PS": [
+  "opt_problems.scalarized",
+  null
+ ],
+ "CEC2020_p11_PS": [
+  "opt_problems.scalarized",
+  null
+ ],
+ "CEC2020_p34_PS": [
+  "opt_problems.scalarized",
+  null
+ ],
+ "CEC2020_p35_PS": [
+  "opt_problems.scalarized",
+  null
+ ],
+ "CEC2020_p36_PS": [
+  "opt_problems.scalarized",
+  null
+ ],
+ "CEC2020_p37_PS": [
+  "opt_problems.scalarized",
+  null
+ ],
+ "CEC2020_p38_PS": [
+  "opt_problems.scalarized",
+  null
+ ],
+ "CEC2020_p39_PS": [
+  "opt_problems.scalarized",
+  null
+ ],
+ "CEC2020_p40_PS": [
+  "opt_problems.scalarized",
+  null
+ ],
+ "CEC2020_p41_PS": [
+  "opt_problems.scalarized",
+  null
+ ],
+ "CEC2020_p42_PS": [
+  "opt_problems.scalarized",
+  null
+ ],
+ "CEC2020_p43_PS": [
+  "opt_problems.scalarized",
+  null
+ ],
+ "CEC2020_p45_PS": [
+  "opt_problems.scalarized",
+  null
+ ],
+ "CEC2020_p46_PS": [
+  "opt_problems.scalarized",
+  null
+ ],
+ "CEC2020_p47_PS": [
+  "opt_problems.scalarized",
+  null
+ ],
+ "CEC2020_p48_PS": [
+  "opt_problems.scalarized",
+  null
+ ],
+ "CEC2020_p49_PS": [
+  "opt_problems.scalarized",
+  null
+ ],
+ "CEC2020_p50_PS": [
+  "opt_problems.scalarized",
+  null
+ ],
+ "CEC2020_p51_PS": [
+  "opt_problems.scalarized",
+  null
+ ],
+ "CEC2020_p52_PS": [
+  "opt_problems.scalarized",
+  null
+ ],
+ "CEC2020_p53_PS": [
+  "opt_problems.scalarized",
+  null
+ ],
+ "CEC2020_p54_PS": [
+  "opt_problems.scalarized",
+  null
+ ],
+ "CEC2020_p55_PS": [
+  "opt_problems.scalarized",
+  null
+ ],
+ "CEC2020_p56_PS": [
+  "opt_problems.scalarized",
+  null
+ ],
+ "CEC2020_p57_PS": [
+  "opt_problems.scalarized",
+  null
  ]
 }

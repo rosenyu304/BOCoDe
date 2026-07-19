@@ -1,0 +1,124 @@
+{
+  "name": "CT4_PS",
+  "real_name": "MODAct Electro-Mechanical Actuator Design \u2014 Cost & Torque Excess (constraint level 4) (penalty-scalarized, SO-unconstrained)",
+  "module": "bocode.opt_problems.scalarized",
+  "extra": null,
+  "suite": "MODAct (actuator design)",
+  "num_objectives": 1,
+  "num_constraints": 0,
+  "available_dimensions": 20,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 20,
+  "bounds": [
+    [
+      0.0,
+      4.999999
+    ],
+    [
+      0.3,
+      2.0
+    ],
+    [
+      9.0,
+      40.999999
+    ],
+    [
+      30.0,
+      80.999999
+    ],
+    [
+      0.3,
+      1.0
+    ],
+    [
+      5.0,
+      15.0
+    ],
+    [
+      -20.0,
+      20.0
+    ],
+    [
+      -3.141592653589793,
+      3.141592653589793
+    ],
+    [
+      9.0,
+      40.999999
+    ],
+    [
+      30.0,
+      80.999999
+    ],
+    [
+      0.3,
+      1.0
+    ],
+    [
+      5.0,
+      15.0
+    ],
+    [
+      -20.0,
+      20.0
+    ],
+    [
+      -3.141592653589793,
+      3.141592653589793
+    ],
+    [
+      9.0,
+      40.999999
+    ],
+    [
+      30.0,
+      80.999999
+    ],
+    [
+      0.3,
+      1.0
+    ],
+    [
+      5.0,
+      15.0
+    ],
+    [
+      -20.0,
+      20.0
+    ],
+    [
+      -3.141592653589793,
+      3.141592653589793
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": null,
+  "source": "Penalty-scalarized wrapper of CT4: equal-weight mean of all objectives minus total positive constraint violation.",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
+}

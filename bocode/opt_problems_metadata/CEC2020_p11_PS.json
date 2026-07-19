@@ -1,0 +1,59 @@
+{
+  "name": "CEC2020_p11_PS",
+  "real_name": "Two-Reactor Problem (penalty-scalarized, SO-unconstrained)",
+  "module": "bocode.opt_problems.scalarized",
+  "extra": null,
+  "suite": "CEC2020 RW-Constrained",
+  "num_objectives": 1,
+  "num_constraints": 0,
+  "available_dimensions": 7,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 7,
+  "bounds": [
+    [
+      0,
+      20
+    ],
+    [
+      0,
+      20
+    ],
+    [
+      0,
+      10
+    ],
+    [
+      0,
+      10
+    ],
+    [
+      -0.51,
+      1.49
+    ],
+    [
+      -0.51,
+      1.49
+    ],
+    [
+      0,
+      40
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": null,
+  "source": "Penalty-scalarized wrapper of CEC2020_p11: equal-weight mean of all objectives minus total positive constraint violation.",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
+}

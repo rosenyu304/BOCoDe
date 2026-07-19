@@ -1,0 +1,79 @@
+{
+  "name": "CEC2020_p2_PS",
+  "real_name": "Heat Exchanger Network Design (case 2) (penalty-scalarized, SO-unconstrained)",
+  "module": "bocode.opt_problems.scalarized",
+  "extra": null,
+  "suite": "CEC2020 RW-Constrained",
+  "num_objectives": 1,
+  "num_constraints": 0,
+  "available_dimensions": 11,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 11,
+  "bounds": [
+    [
+      10000.0,
+      819000.0
+    ],
+    [
+      10000.0,
+      1131000.0
+    ],
+    [
+      10000.0,
+      2050000.0
+    ],
+    [
+      0,
+      0.05074
+    ],
+    [
+      0,
+      0.05074
+    ],
+    [
+      0,
+      0.05074
+    ],
+    [
+      100,
+      200
+    ],
+    [
+      100,
+      300
+    ],
+    [
+      100,
+      300
+    ],
+    [
+      100,
+      300
+    ],
+    [
+      100,
+      400
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": null,
+  "source": "Penalty-scalarized wrapper of CEC2020_p2: equal-weight mean of all objectives minus total positive constraint violation.",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
+}

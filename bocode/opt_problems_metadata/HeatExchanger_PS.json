@@ -1,0 +1,64 @@
+{
+  "name": "HeatExchanger_PS",
+  "real_name": "Heat Exchanger Design (8-variable) (penalty-scalarized, SO-unconstrained)",
+  "module": "bocode.opt_problems.scalarized",
+  "extra": null,
+  "suite": "Engineering (standalone)",
+  "num_objectives": 1,
+  "num_constraints": 0,
+  "available_dimensions": 8,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 8,
+  "bounds": [
+    [
+      100,
+      100000
+    ],
+    [
+      100,
+      100000
+    ],
+    [
+      100,
+      100000
+    ],
+    [
+      10,
+      1000
+    ],
+    [
+      10,
+      1000
+    ],
+    [
+      10,
+      1000
+    ],
+    [
+      10,
+      1000
+    ],
+    [
+      10,
+      1000
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": null,
+  "source": "Penalty-scalarized wrapper of HeatExchanger: equal-weight mean of all objectives minus total positive constraint violation.",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
+}
