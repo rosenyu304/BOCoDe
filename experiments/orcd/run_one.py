@@ -29,6 +29,8 @@ ALGOS = {
     "git_bo": "algorithms.single_obj.git_bo",
     "git_bo_marzouk": "algorithms.single_obj.git_bo",
     "tfm_turbo": "algorithms.single_obj.tfm_turbo",
+    "tabicl_turbo": "algorithms.single_obj.tabicl_turbo",
+    "tabicl_baxus": "algorithms.single_obj.tabicl_baxus",
     # multi-objective
     "mo_random_search": "algorithms.multi_obj.random_search",
     "qnehvi": "algorithms.multi_obj.qnehvi",
@@ -40,6 +42,7 @@ ALGOS = {
     "scbo": "algorithms.single_obj_constrained.scbo",
     "pfn_cei": "algorithms.single_obj_constrained.pfn_cei",
     "tfm_scbo": "algorithms.single_obj_constrained.tfm_scbo",
+    "tabicl_scbo": "algorithms.single_obj_constrained.tabicl_scbo",
     "penalty": "algorithms.single_obj_constrained.penalty",
     # multi-objective, constrained
     "mocon_random_search": "algorithms.multi_obj_constrained.random_search",
@@ -51,6 +54,8 @@ ALGOS = {
     # mixed-variable
     "mv_random_search": "algorithms.single_obj_mixed_variable.random_search",
     "casmopolitan": "algorithms.single_obj_mixed_variable.casmopolitan",
+    "tabicl_ucb": "algorithms.single_obj_mixed_variable.tabicl_ucb",
+    "tabicl_ei": "algorithms.single_obj_mixed_variable.tabicl_ei",
     "hebo": "algorithms.single_obj_mixed_variable.hebo",
     "bodi": "algorithms.single_obj_mixed_variable.bodi",
 }
