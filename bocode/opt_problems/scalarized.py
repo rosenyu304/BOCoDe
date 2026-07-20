@@ -18,9 +18,35 @@ optional dependencies (modact, mazda, ...) of bases that are not used.
 
 from __future__ import annotations
 
+import torch
+
 import bocode
 
 from ..base import BenchmarkProblem
+
+
+# Fixed per-objective scales for MULTI-objective base problems, used to
+# normalize each objective before the equal-weight mean so no single
+# large-magnitude objective dominates. Each value is the per-objective std of
+# the base problem's values over a fixed sample (torch.rand, seed=0, in the
+# base's bounds; 128 points, 32 for the slow simulator problems Mazda/Mazda_SCA),
+# floored at 1e-8. These are deterministic problem constants, NOT computed from
+# the data a run observes. Single-objective (and any un-baked) problems default
+# to all-ones, leaving their scalar identical to the plain equal-weight mean.
+_OBJ_SCALE = {
+    "Mazda": [0.043776470595867735, 0.9755064854862865, 0.02844620171752701, 0.026475858114910756, 0.02404480081325757],
+    "Mazda_SCA": [0.03616851590877216, 2.462419148828268, 0.025541939770907903, 0.025417065644670056],
+    "CRE21": [148.2503457009819, 3.5849138510621255],
+    "CS3": [0.18645227828290067, 196.45089545573978],
+    "CS4": [0.18645227828290067, 196.45089545573978],
+    "CT3": [0.18645227828290067, 0.43459715481499955],
+    "CT4": [0.18645227828290067, 0.43459715481499955],
+    "CTS3": [0.18645227828290067, 0.43459715481499955, 196.45089545573978],
+    "CTS4": [0.18645227828290067, 0.43459715481499955, 196.45089545573978],
+    "CTSE4": [0.18645227828290067, 0.43459715481499955, 196.45089545573978, 0.02001292255342247],
+    "CTSEI3": [0.18645227828290067, 0.43459715481499955, 196.45089545573978, 0.02001292255342247, 23.067607251410823],
+    "CTSEI4": [0.18645227828290067, 0.43459715481499955, 196.45089545573978, 0.02001292255342247, 23.067607251410823],
+}
 
 
 class PenaltyScalarizedProblem(BenchmarkProblem):
@@ -42,6 +68,13 @@ class PenaltyScalarizedProblem(BenchmarkProblem):
     def __init__(self) -> None:
         base = bocode.get_problem(self._base_name)()
         self._base = base
+        # Fixed per-objective scale used to normalize each objective before the
+        # equal-weight mean. Defaults to all-ones (single-objective and un-baked
+        # problems are unchanged); baked MO problems get their precomputed stds.
+        self._obj_scale = torch.tensor(
+            _OBJ_SCALE.get(self._base_name, [1.0] * base.num_objectives),
+            dtype=torch.float64,
+        )
         super().__init__(
             dim=base.dim,
             num_objectives=1,
@@ -60,7 +93,10 @@ class PenaltyScalarizedProblem(BenchmarkProblem):
         # validated output: values (n, m) in the maximization frame, constraints
         # (n, k) feasible when <= 0.
         base_values, base_cons = self._base.evaluate(X)
-        scalar = base_values.mean(dim=1, keepdim=True)  # equal-weight mean
+        # Normalize each objective by its fixed per-objective scale before the
+        # equal-weight mean so no single large-magnitude objective dominates.
+        scaled = base_values / self._obj_scale.to(base_values)
+        scalar = scaled.mean(dim=1, keepdim=True)  # equal-weight mean
         if base_cons is not None and base_cons.numel() > 0:
             scalar = scalar - base_cons.clamp(min=0).sum(dim=1, keepdim=True)
         return scalar, None
