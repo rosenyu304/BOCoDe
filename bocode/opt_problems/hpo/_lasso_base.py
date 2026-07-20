@@ -158,9 +158,7 @@ class WeightedLassoHPO(BenchmarkProblem):
         # alpha = ALPHA_FRAC * alpha_max keeps the fit in the regime where coefficients survive
         # and the design vector actually matters, for every dataset.
         alpha = ALPHA_FRAC * self._alpha_max()
-        model = Lasso(alpha=alpha, max_iter=5000).fit(
-            self._rescale(X_tr, weights), y_tr
-        )
+        model = Lasso(alpha=alpha, max_iter=5000).fit(self._rescale(X_tr, weights), y_tr)
         pred = self._rescale(X_val, weights) @ model.coef_ + model.intercept_
         pred = np.asarray(pred).ravel()
         return float(np.mean((y_val - pred) ** 2))

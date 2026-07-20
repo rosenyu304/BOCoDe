@@ -1,7 +1,7 @@
 {
   "name": "RastriginCat",
   "real_name": "Rastrigin (20-D categorical)",
-  "module": "bocode.opt_problems.synthetic.RastriginCat",
+  "module": "bocode.opt_problems.synthetic_mixed.RastriginCat",
   "extra": null,
   "suite": "Mixed-variable synthetic",
   "num_objectives": 1,

@@ -170,9 +170,7 @@ def optimize_problem(
         # The non-finite evaluations stay in the run history (best_feasible and the saved trace);
         # they only sit out of the surrogate. On a well-behaved problem every row is finite, so the
         # context is identical to before.
-        fin = torch.isfinite(train_obj).all(dim=1) & torch.isfinite(train_con).all(
-            dim=1
-        )
+        fin = torch.isfinite(train_obj).all(dim=1) & torch.isfinite(train_con).all(dim=1)
         ctx_X, ctx_obj, ctx_con = train_X[fin], train_obj[fin], train_con[fin]
         n_ctx = ctx_X.shape[0]
         m = 1 + nc  # objective + constraints, as batch columns
@@ -193,9 +191,7 @@ def optimize_problem(
         # Constraint columns: the zero feasibility threshold (g = -c, so P(g > 0) = P(c <= 0)).
         feas_ctx = (ctx_con <= 0).all(dim=1)
         incumbent = ctx_obj[feas_ctx].max() if feas_ctx.any() else ctx_obj.max()
-        thr_full = torch.cat(
-            [incumbent.reshape(1), torch.zeros(nc, dtype=DTYPE)]
-        )  # (m,)
+        thr_full = torch.cat([incumbent.reshape(1), torch.zeros(nc, dtype=DTYPE)])  # (m,)
 
         with torch.no_grad():
             # Score the m columns in chunks. On OOM, halve the chunk and retry: the

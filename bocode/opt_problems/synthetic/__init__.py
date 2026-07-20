@@ -41,7 +41,6 @@ from .Hartmann import Hartmann, HartmannShifted
 from .HolderTable import HolderTable
 from .KeaneBumpFunction import KeaneBumpFunction
 from .Levy import Levy, LevyShifted
-from .Michalewicz import Michalewicz
 from .MW7 import MW7
 from .OSY import OSY
 from .Powell import Powell, PowellShifted
@@ -64,7 +63,6 @@ SYNTHETIC_PROBLEMS = {
     "Griewank": Griewank,
     "Rastrigin": Rastrigin,
     "StyblinskiTang": StyblinskiTang,
-    "Michalewicz": Michalewicz,
     "Hartmann": Hartmann,
     "Branin": Branin,
     "EggHolder": EggHolder,
@@ -102,12 +100,6 @@ SYNTHETIC_PROBLEMS = {
     "ZDT2": ZDT2,
     "ZDT3": ZDT3,
 }
-
-# GIT-BO high-dimensional scalable variants (<Func>_100D .. <Func>_500D), added as
-# unregistered test functions so the campaign can target a fixed high dim by name.
-from .gitbo_scalable import GITBO_SCALABLE_PROBLEMS  # noqa: E402
-
-SYNTHETIC_PROBLEMS.update(GITBO_SCALABLE_PROBLEMS)
 
 __all__ = [*SYNTHETIC_PROBLEMS.keys(), "SYNTHETIC_PROBLEMS"]
 

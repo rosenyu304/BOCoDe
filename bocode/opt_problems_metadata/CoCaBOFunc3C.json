@@ -1,7 +1,7 @@
 {
   "name": "CoCaBOFunc3C",
   "real_name": "CoCaBO Func3C (3 categorical + 2 continuous)",
-  "module": "bocode.opt_problems.synthetic.CoCaBOFunc3C",
+  "module": "bocode.opt_problems.synthetic_mixed.CoCaBOFunc3C",
   "extra": null,
   "suite": "Mixed-variable synthetic",
   "num_objectives": 1,

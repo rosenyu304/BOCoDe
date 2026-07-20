@@ -1,6 +1,8 @@
 import os
+import shutil
 import stat
 import subprocess
+import tempfile
 from pathlib import Path
 
 import numpy as np
@@ -9,6 +11,33 @@ import torch
 
 from ..._fetch import fetch_data_file
 from ...base import BenchmarkProblem
+
+
+def _run_mazda_binary(bin_path, src_data_dir, vars_df):
+    """Evaluate the Mazda crash-model binary in a private temp directory.
+
+    The binary communicates through fixed filenames inside the directory it is
+    given: ``pop_vars_eval.txt`` (input) and ``pop_objs_eval.txt`` /
+    ``pop_cons_eval.txt`` (output). Running each evaluation in its own temp copy
+    of ``Mazda_Data`` stops concurrent jobs from clobbering each other's I/O
+    files -- the shared fixed paths under ``Mazda_Data`` silently corrupted
+    results otherwise. The whole data dir is copied so the binary finds every
+    file it may need relative to its input directory.
+    """
+    with tempfile.TemporaryDirectory(prefix="mazda_") as work:
+        data_dir = Path(work) / "Mazda_Data"
+        shutil.copytree(src_data_dir, data_dir)
+        vars_df.to_csv(
+            data_dir / "pop_vars_eval.txt", sep="\t", header=False, index=False
+        )
+        subprocess.run(
+            [str(bin_path), str(data_dir)],
+            capture_output=True,
+            start_new_session=True,
+        )
+        objs = pd.read_csv(data_dir / "pop_objs_eval.txt", sep=r"\s+", header=None).values
+        cons = pd.read_csv(data_dir / "pop_cons_eval.txt", sep=r"\s+", header=None).values
+        return objs, cons
 
 
 class Mazda_SCA(BenchmarkProblem):
@@ -78,11 +107,6 @@ class Mazda_SCA(BenchmarkProblem):
         # Create a pandas DataFrame from the numpy array
         dataframe_back = pd.DataFrame(data_numpy_back)
 
-        # Write the DataFrame to a text file with space-separated values
-        output_file_path = Path(__file__).parent / "Mazda_Data" / "pop_vars_eval.txt"
-
-        dataframe_back.to_csv(output_file_path, sep="\t", header=False, index=False)
-
         #####################
         # Run Bash file
         #####################
@@ -94,7 +118,6 @@ class Mazda_SCA(BenchmarkProblem):
                 local_fallback=str(script_dir / "Mazda_Data" / "bin" / "mazda_mop_sca"),
             )
         )
-        input_dir = script_dir / "Mazda_Data"
 
         if not os.access(bin_path, os.X_OK):
             print(f"Adding execution permissions to: {bin_path}")
@@ -103,38 +126,13 @@ class Mazda_SCA(BenchmarkProblem):
                 os.stat(bin_path).st_mode | stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH,
             )
 
-        # MUST BE ON A LINUX/UNIX MACHINE
-        subprocess.run(
-            [str(bin_path), str(input_dir)],
-            capture_output=True,
-            start_new_session=True,
+        # MUST BE ON A LINUX/UNIX MACHINE. Isolated temp dir per eval (see
+        # _run_mazda_binary) so concurrent jobs cannot corrupt each other.
+        objs_data_numpy, cons_data_numpy = _run_mazda_binary(
+            bin_path, script_dir / "Mazda_Data", dataframe_back
         )
 
-        #####################
-        # Read in objective and constraints
-        #####################
-
-        # Read the data from the file into a pandas DataFrame
-        file_path = script_dir / "Mazda_Data" / "pop_objs_eval.txt"
-
-        objs_dataframe = pd.read_csv(file_path, sep=r"\s+", header=None)
-
-        # Convert the DataFrame to a numpy array
-        objs_data_numpy = objs_dataframe.values
-
-        # Convert the numpy array to a torch tensor
         objs_data_tensor = torch.tensor(objs_data_numpy, dtype=torch.float32)
-        # objs_data_tensor = objs_data_tensor[:,0].reshape(objs_data_tensor.shape[0],1)
-        objs_data_tensor = objs_data_tensor
-
-        # Read the data from the file into a pandas DataFrame
-        file_path = script_dir / "Mazda_Data" / "pop_cons_eval.txt"
-        cons_dataframe = pd.read_csv(file_path, sep=r"\s+", header=None)
-
-        # Convert the DataFrame to a numpy array
-        cons_data_numpy = cons_dataframe.values
-
-        # Convert the numpy array to a torch tensor
         cons_data_tensor = torch.tensor(cons_data_numpy, dtype=torch.float32)
 
         return cons_data_tensor, -objs_data_tensor
@@ -212,11 +210,6 @@ class Mazda(BenchmarkProblem):
         # Create a pandas DataFrame from the numpy array
         dataframe_back = pd.DataFrame(data_numpy_back)
 
-        # Write the DataFrame to a text file with space-separated values
-        output_file_path = Path(__file__).parent / "Mazda_Data" / "pop_vars_eval.txt"
-
-        dataframe_back.to_csv(output_file_path, sep="\t", header=False, index=False)
-
         #####################
         # Run Bash file
         #####################
@@ -228,7 +221,6 @@ class Mazda(BenchmarkProblem):
                 local_fallback=str(script_dir / "Mazda_Data" / "bin" / "mazda_mop"),
             )
         )
-        input_dir = script_dir / "Mazda_Data"
 
         if not os.access(bin_path, os.X_OK):
             print(f"Adding execution permissions to: {bin_path}")
@@ -237,37 +229,13 @@ class Mazda(BenchmarkProblem):
                 os.stat(bin_path).st_mode | stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH,
             )
 
-        # MUST BE ON A LINUX/UNIX MACHINE
-        subprocess.run(
-            [str(bin_path), str(input_dir)],
-            capture_output=True,
-            start_new_session=True,
+        # MUST BE ON A LINUX/UNIX MACHINE. Isolated temp dir per eval (see
+        # _run_mazda_binary) so concurrent jobs cannot corrupt each other.
+        objs_data_numpy, cons_data_numpy = _run_mazda_binary(
+            bin_path, script_dir / "Mazda_Data", dataframe_back
         )
 
-        #####################
-        # Read in objective and constraints
-        #####################
-
-        # Read the data from the file into a pandas DataFrame
-        file_path = script_dir / "Mazda_Data" / "pop_objs_eval.txt"
-        objs_dataframe = pd.read_csv(file_path, sep=r"\s+", header=None)
-
-        # Convert the DataFrame to a numpy array
-        objs_data_numpy = objs_dataframe.values
-
-        # Convert the numpy array to a torch tensor
         objs_data_tensor = torch.tensor(objs_data_numpy, dtype=torch.float32)
-        # objs_data_tensor = objs_data_tensor[:,0].reshape(objs_data_tensor.shape[0],1)
-        objs_data_tensor = objs_data_tensor
-
-        # Read the data from the file into a pandas DataFrame
-        file_path = script_dir / "Mazda_Data" / "pop_cons_eval.txt"
-        cons_dataframe = pd.read_csv(file_path, sep=r"\s+", header=None)
-
-        # Convert the DataFrame to a numpy array
-        cons_data_numpy = cons_dataframe.values
-
-        # Convert the numpy array to a torch tensor
         cons_data_tensor = torch.tensor(cons_data_numpy, dtype=torch.float32)
 
         return cons_data_tensor, -objs_data_tensor

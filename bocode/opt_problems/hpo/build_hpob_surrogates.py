@@ -46,7 +46,7 @@ def main() -> None:
         blobs[name] = np.frombuffer(
             bytes(bst.save_raw(raw_format="json")), dtype=np.uint8
         )
-        print(f"  [{i:3d}/{len(tasks)}] {name:28s} {blobs[name].nbytes / 1024:8.1f} KB")
+        print(f"  [{i:3d}/{len(tasks)}] {name:28s} {blobs[name].nbytes/1024:8.1f} KB")
 
     np.savez_compressed(SURROGATE_BUNDLE, **blobs)
     total = sum(v.nbytes for v in blobs.values()) / 1e6

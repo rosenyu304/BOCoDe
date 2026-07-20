@@ -57,6 +57,8 @@ def extra_for(modpath: str, cls: str):
         return "hpobsurr"  # HPO-B continuous-surrogate pools fit an xgboost surrogate
     if cls.startswith("Lasso") or cls == "SVM":
         return "hpo"  # clean-room weighted-Lasso / SVM problems use scikit-learn
+    if cls.startswith("Bayesmark"):
+        return "hpo"  # Bayesmark continuous-relaxation sklearn HPO tasks
     if cls in ("Mazda", "Mazda_SCA"):
         return "mazda"
     if cls == "QPowerModel":

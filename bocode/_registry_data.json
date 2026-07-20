@@ -1,14 +1,14 @@
 {
  "Ackley53": [
-  "opt_problems.synthetic.Ackley53",
+  "opt_problems.synthetic_mixed.Ackley53",
   null
  ],
  "Ackley5Mixed": [
-  "opt_problems.synthetic.Ackley5Mixed",
+  "opt_problems.synthetic_mixed.Ackley5Mixed",
   null
  ],
  "AckleyCat": [
-  "opt_problems.synthetic.AckleyCat",
+  "opt_problems.synthetic_mixed.AckleyCat",
   null
  ],
  "AgNP": [
@@ -31,6 +31,150 @@
   "opt_problems.materials.AutoAM",
   null
  ],
+ "Bayesmark_DT_breast": [
+  "opt_problems.hpo.Bayesmark",
+  "hpo"
+ ],
+ "Bayesmark_DT_digits": [
+  "opt_problems.hpo.Bayesmark",
+  "hpo"
+ ],
+ "Bayesmark_DT_iris": [
+  "opt_problems.hpo.Bayesmark",
+  "hpo"
+ ],
+ "Bayesmark_DT_wine": [
+  "opt_problems.hpo.Bayesmark",
+  "hpo"
+ ],
+ "Bayesmark_MLPadam_breast": [
+  "opt_problems.hpo.Bayesmark",
+  "hpo"
+ ],
+ "Bayesmark_MLPadam_digits": [
+  "opt_problems.hpo.Bayesmark",
+  "hpo"
+ ],
+ "Bayesmark_MLPadam_iris": [
+  "opt_problems.hpo.Bayesmark",
+  "hpo"
+ ],
+ "Bayesmark_MLPadam_wine": [
+  "opt_problems.hpo.Bayesmark",
+  "hpo"
+ ],
+ "Bayesmark_MLPsgd_breast": [
+  "opt_problems.hpo.Bayesmark",
+  "hpo"
+ ],
+ "Bayesmark_MLPsgd_digits": [
+  "opt_problems.hpo.Bayesmark",
+  "hpo"
+ ],
+ "Bayesmark_MLPsgd_iris": [
+  "opt_problems.hpo.Bayesmark",
+  "hpo"
+ ],
+ "Bayesmark_MLPsgd_wine": [
+  "opt_problems.hpo.Bayesmark",
+  "hpo"
+ ],
+ "Bayesmark_RF_breast": [
+  "opt_problems.hpo.Bayesmark",
+  "hpo"
+ ],
+ "Bayesmark_RF_digits": [
+  "opt_problems.hpo.Bayesmark",
+  "hpo"
+ ],
+ "Bayesmark_RF_iris": [
+  "opt_problems.hpo.Bayesmark",
+  "hpo"
+ ],
+ "Bayesmark_RF_wine": [
+  "opt_problems.hpo.Bayesmark",
+  "hpo"
+ ],
+ "Bayesmark_SVM_breast": [
+  "opt_problems.hpo.Bayesmark",
+  "hpo"
+ ],
+ "Bayesmark_SVM_digits": [
+  "opt_problems.hpo.Bayesmark",
+  "hpo"
+ ],
+ "Bayesmark_SVM_iris": [
+  "opt_problems.hpo.Bayesmark",
+  "hpo"
+ ],
+ "Bayesmark_SVM_wine": [
+  "opt_problems.hpo.Bayesmark",
+  "hpo"
+ ],
+ "Bayesmark_ada_breast": [
+  "opt_problems.hpo.Bayesmark",
+  "hpo"
+ ],
+ "Bayesmark_ada_digits": [
+  "opt_problems.hpo.Bayesmark",
+  "hpo"
+ ],
+ "Bayesmark_ada_iris": [
+  "opt_problems.hpo.Bayesmark",
+  "hpo"
+ ],
+ "Bayesmark_ada_wine": [
+  "opt_problems.hpo.Bayesmark",
+  "hpo"
+ ],
+ "Bayesmark_kNN_breast": [
+  "opt_problems.hpo.Bayesmark",
+  "hpo"
+ ],
+ "Bayesmark_kNN_digits": [
+  "opt_problems.hpo.Bayesmark",
+  "hpo"
+ ],
+ "Bayesmark_kNN_iris": [
+  "opt_problems.hpo.Bayesmark",
+  "hpo"
+ ],
+ "Bayesmark_kNN_wine": [
+  "opt_problems.hpo.Bayesmark",
+  "hpo"
+ ],
+ "Bayesmark_lasso_breast": [
+  "opt_problems.hpo.Bayesmark",
+  "hpo"
+ ],
+ "Bayesmark_lasso_digits": [
+  "opt_problems.hpo.Bayesmark",
+  "hpo"
+ ],
+ "Bayesmark_lasso_iris": [
+  "opt_problems.hpo.Bayesmark",
+  "hpo"
+ ],
+ "Bayesmark_lasso_wine": [
+  "opt_problems.hpo.Bayesmark",
+  "hpo"
+ ],
+ "Bayesmark_linear_breast": [
+  "opt_problems.hpo.Bayesmark",
+  "hpo"
+ ],
+ "Bayesmark_linear_digits": [
+  "opt_problems.hpo.Bayesmark",
+  "hpo"
+ ],
+ "Bayesmark_linear_iris": [
+  "opt_problems.hpo.Bayesmark",
+  "hpo"
+ ],
+ "Bayesmark_linear_wine": [
+  "opt_problems.hpo.Bayesmark",
+  "hpo"
+ ],
  "Borehole": [
   "opt_problems.engineering.Borehole",
   null
@@ -40,11 +184,11 @@
   null
  ],
  "BraninCategorical": [
-  "opt_problems.synthetic.BraninCategorical",
+  "opt_problems.synthetic_mixed.BraninCategorical",
   null
  ],
  "BraninLVGP": [
-  "opt_problems.synthetic.BraninLVGP",
+  "opt_problems.synthetic_mixed.BraninLVGP",
   null
  ],
  "CEC2020_p1": [
@@ -400,11 +544,11 @@
   null
  ],
  "CoCaBOFunc2C": [
-  "opt_problems.synthetic.CoCaBOFunc2C",
+  "opt_problems.synthetic_mixed.CoCaBOFunc2C",
   null
  ],
  "CoCaBOFunc3C": [
-  "opt_problems.synthetic.CoCaBOFunc3C",
+  "opt_problems.synthetic_mixed.CoCaBOFunc3C",
   null
  ],
  "ColumnBuckling": [
@@ -436,11 +580,11 @@
   null
  ],
  "GoldsteinLVGP": [
-  "opt_problems.synthetic.GoldsteinLVGP",
+  "opt_problems.synthetic_mixed.GoldsteinLVGP",
   null
  ],
  "GoldsteinMixed": [
-  "opt_problems.synthetic.GoldsteinMixed",
+  "opt_problems.synthetic_mixed.GoldsteinMixed",
   null
  ],
  "HOIP": [
@@ -1192,7 +1336,7 @@
   "mujoco"
  ],
  "HartmannCat": [
-  "opt_problems.synthetic.HartmannCat",
+  "opt_problems.synthetic_mixed.HartmannCat",
   null
  ],
  "HeatExchanger": [
@@ -1408,7 +1552,7 @@
   null
  ],
  "MixedAckley": [
-  "opt_problems.synthetic.MixedAckley",
+  "opt_problems.synthetic_mixed.MixedAckley",
   null
  ],
  "NASBench201": [
@@ -1524,7 +1668,7 @@
   null
  ],
  "RastriginCat": [
-  "opt_problems.synthetic.RastriginCat",
+  "opt_problems.synthetic_mixed.RastriginCat",
   null
  ],
  "ReacherProblem": [
@@ -1544,7 +1688,7 @@
   "box2d"
  ],
  "Rosenbrock5Mixed": [
-  "opt_problems.synthetic.Rosenbrock5Mixed",
+  "opt_problems.synthetic_mixed.Rosenbrock5Mixed",
   null
  ],
  "Rover": [
@@ -1580,7 +1724,7 @@
   null
  ],
  "SchwefelCat": [
-  "opt_problems.synthetic.SchwefelCat",
+  "opt_problems.synthetic_mixed.SchwefelCat",
   null
  ],
  "Sellar": [
@@ -1588,7 +1732,7 @@
   null
  ],
  "ShekelMixed": [
-  "opt_problems.synthetic.ShekelMixed",
+  "opt_problems.synthetic_mixed.ShekelMixed",
   null
  ],
  "SpeedReducer": [
@@ -1600,11 +1744,11 @@
   null
  ],
  "StyblinskiTangCat": [
-  "opt_problems.synthetic.StyblinskiTangCat",
+  "opt_problems.synthetic_mixed.StyblinskiTangCat",
   null
  ],
  "StyblinskiTangMixed": [
-  "opt_problems.synthetic.StyblinskiTangMixed",
+  "opt_problems.synthetic_mixed.StyblinskiTangMixed",
   null
  ],
  "SwimmerPolicySearchProblem": [
@@ -1676,7 +1820,7 @@
   null
  ],
  "WeldedBeamCategorical": [
-  "opt_problems.synthetic.WeldedBeamCategorical",
+  "opt_problems.synthetic_mixed.WeldedBeamCategorical",
   null
  ],
  "WeldedBeamSO": [

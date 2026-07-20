@@ -60,10 +60,10 @@ from .._bo_utils import (
 )
 from .single_task_gp import _discrete_grids, _snap
 
-N_MC = 128  # Monte-Carlo samples for the probabilistic-objective gradient (Eq. 7)
-N_RESTARTS = 4  # random (x, theta) starts for the inner acquisition optimization
-N_STEPS = 100  # Adam ascent steps per restart
-LR = 0.05  # Adam step size
+N_MC = 128         # Monte-Carlo samples for the probabilistic-objective gradient (Eq. 7)
+N_RESTARTS = 4     # random (x, theta) starts for the inner acquisition optimization
+N_STEPS = 100      # Adam ascent steps per restart
+LR = 0.05          # Adam step size
 
 
 class _Categorical:
@@ -195,22 +195,15 @@ def optimize_problem(
             opt = torch.optim.Adam(([x] if n_cont else []) + params, lr=LR)
             for _ in range(N_STEPS):
                 opt.zero_grad()
-                idx = [
-                    d.sample(p, n_mc)
-                    for (_, d), p in zip(discrete, params, strict=False)
-                ]
+                idx = [d.sample(p, n_mc) for (_, d), p in zip(discrete, params)]
                 cont_block = x.unsqueeze(0).expand(n_mc, -1)
                 disc_cols = {
-                    dim_i: d.values[j]
-                    for (dim_i, d), j in zip(discrete, idx, strict=False)
+                    dim_i: d.values[j] for (dim_i, d), j in zip(discrete, idx)
                 }
                 cand = _assemble(cont_block, disc_cols, n_mc)
                 acq = acqf(cand.unsqueeze(1))  # (n_mc,)
                 logp = sum(
-                    (
-                        d.log_prob(p, j)
-                        for (_, d), p, j in zip(discrete, params, idx, strict=False)
-                    ),
+                    (d.log_prob(p, j) for (_, d), p, j in zip(discrete, params, idx)),
                     torch.zeros(n_mc, dtype=DTYPE),
                 )
                 baseline = acq.detach().mean()
@@ -220,13 +213,13 @@ def optimize_problem(
                 with torch.no_grad():
                     if n_cont:
                         x.clamp_(0.0, 1.0)
-                    for (_, d), p in zip(discrete, params, strict=False):
+                    for (_, d), p in zip(discrete, params):
                         d.clamp_(p)
             # mode configuration for this restart, scored deterministically
             with torch.no_grad():
                 mode_cols = {
                     dim_i: d.values[d.mode(p)].reshape(1)
-                    for (dim_i, d), p in zip(discrete, params, strict=False)
+                    for (dim_i, d), p in zip(discrete, params)
                 }
                 mode_cand = _assemble(x.detach().reshape(1, -1), mode_cols, 1)
                 a = acqf(mode_cand.unsqueeze(1)).item()
@@ -254,26 +247,16 @@ def optimize_problem(
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--problem", required=True)
-    parser.add_argument(
-        "--init",
-        type=int,
-        default=None,
-        help="initial design size (default: dim-scaled)",
-    )
+    parser.add_argument("--init", type=int, default=None,
+                        help="initial design size (default: dim-scaled)")
     parser.add_argument("--iters", type=int, default=50)
-    parser.add_argument(
-        "--checkpoint", default=None, help="resumable checkpoint .npz path"
-    )
+    parser.add_argument("--checkpoint", default=None, help="resumable checkpoint .npz path")
     parser.add_argument("--device", default="auto")
     add_common_args(parser)
     args = parser.parse_args()
     res = optimize_problem(
-        make_problem(args.problem, args),
-        args.init,
-        args.iters,
-        args.seed,
-        device=args.device,
-        checkpoint=args.checkpoint,
+        make_problem(args.problem, args), args.init, args.iters, args.seed,
+        device=args.device, checkpoint=args.checkpoint,
     )
     finalize(res, args)
 

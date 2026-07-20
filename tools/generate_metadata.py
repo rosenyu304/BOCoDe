@@ -124,6 +124,7 @@ _DOCSTRING_REAL_NAME_PREFIXES = (
     "opt_problems.hpo.HPOB",
     "opt_problems.hpo.HPOBSurrogate",
     "opt_problems.hpo.LCBench",
+    "opt_problems.hpo.Bayesmark",
 )
 
 
