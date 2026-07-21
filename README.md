@@ -64,7 +64,11 @@ pip install "bocode[hpo]"        # SVM
 pip install "bocode[mazda]"      # Mazda car design
 pip install "bocode[neorl]"      # QPowerModel surrogate
 pip install "bocode[tabicl]"     # TabICL foundation-model surrogate (tabicl_* methods)
+pip install "bocode[tabpfn]"     # TabPFN foundation-model surrogate (tfm_* / pfn_cei methods)
+pip install "bocode[hebo]"       # HEBO optimizer (hebo method)
 pip install "bocode[all]"        # everything available on PyPI
+# bounce (bounce method) is not on PyPI: install from the official source tree with
+#   pip install --no-deps --no-build-isolation <bounce repo> && pip install gin-config
 ```
 
 | Extra | Enables | Backing dependency |

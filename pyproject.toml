@@ -61,6 +61,10 @@ hpo = ["scikit-learn"]                   # SVM + weighted-Lasso (LassoBench) pro
 hpobsurr = ["xgboost"]                   # HPO-B continuous-surrogate pools (HPOBSurr_*)
 engibench = ["engibench[electronics]"]   # EngiBench PowerElectronics (also needs native ngspice)
 tabicl = ["tabicl"]                      # TabICL tabular-foundation-model surrogate (tabicl_* methods)
+tabpfn = ["tabpfn"]                      # TabPFN tabular-foundation-model surrogate (tfm_* / pfn_cei methods)
+hebo = ["HEBO"]                          # HEBO optimizer (hebo method); PyPI sdist may need a source build
+# NOTE: `bounce` (bounce method) is NOT on PyPI under that name -- install from the official source
+#   with `pip install --no-deps --no-build-isolation <bounce repo>` plus `gin-config`. See README.
 viz = [
     "dash",
     "plotly",
