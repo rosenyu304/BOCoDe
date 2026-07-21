@@ -60,6 +60,7 @@ mazda = ["openpyxl"]                     # Mazda (reads the .xlsx design table)
 hpo = ["scikit-learn"]                   # SVM + weighted-Lasso (LassoBench) problems
 hpobsurr = ["xgboost"]                   # HPO-B continuous-surrogate pools (HPOBSurr_*)
 engibench = ["engibench[electronics]"]   # EngiBench PowerElectronics (also needs native ngspice)
+tabicl = ["tabicl"]                      # TabICL tabular-foundation-model surrogate (tabicl_* methods)
 viz = [
     "dash",
     "plotly",

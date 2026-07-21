@@ -63,6 +63,7 @@ pip install "bocode[modact]"     # MODAct suite
 pip install "bocode[hpo]"        # SVM
 pip install "bocode[mazda]"      # Mazda car design
 pip install "bocode[neorl]"      # QPowerModel surrogate
+pip install "bocode[tabicl]"     # TabICL foundation-model surrogate (tabicl_* methods)
 pip install "bocode[all]"        # everything available on PyPI
 ```
 
