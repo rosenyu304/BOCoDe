@@ -31,6 +31,9 @@ ALGOS = {
     "tfm_turbo": "algorithms.single_obj.tfm_turbo",
     "tabicl_turbo": "algorithms.single_obj.tabicl_turbo",
     "tabicl_baxus": "algorithms.single_obj.tabicl_baxus",
+    "rf_turbo": "algorithms.single_obj.rf_turbo",
+    "gp_ucb": "algorithms.single_obj.gp_ucb",
+    "rf_ucb": "algorithms.single_obj.rf_ucb",
     # multi-objective
     "mo_random_search": "algorithms.multi_obj.random_search",
     "qnehvi": "algorithms.multi_obj.qnehvi",
@@ -43,6 +46,8 @@ ALGOS = {
     "pfn_cei": "algorithms.single_obj_constrained.pfn_cei",
     "tfm_scbo": "algorithms.single_obj_constrained.tfm_scbo",
     "tabicl_scbo": "algorithms.single_obj_constrained.tabicl_scbo",
+    "rf_scbo": "algorithms.single_obj_constrained.rf_scbo",
+    "rf_cei": "algorithms.single_obj_constrained.rf_cei",
     "penalty": "algorithms.single_obj_constrained.penalty",
     # multi-objective, constrained
     "mocon_random_search": "algorithms.multi_obj_constrained.random_search",
