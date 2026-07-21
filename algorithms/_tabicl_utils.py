@@ -74,7 +74,10 @@ class TabICLSurrogate:
     Normalize/Standardize is needed.
     """
 
-    def __init__(self, device: str = "auto", seed: int = 0, n_estimators: int = 8):
+    def __init__(self, device: str = "auto", seed: int = 0, n_estimators: int = 1):
+        # n_estimators=1 (single forward, no ensemble) to match the TabPFN wrapper's
+        # single-pass cost -- the default 8-member ensemble made TabICL ~8x slower per
+        # iteration (8 model evals + context re-encoding) than tfm_* on the same problem.
         _require_tabicl()
         from tabicl import TabICLRegressor
 
