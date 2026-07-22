@@ -1,0 +1,34 @@
+{
+  "name": "ConstrainedAckley2D",
+  "real_name": "Constrained Ackley 2-D (Eriksson & Poloczek 2021) \u2014 2 constraints",
+  "module": "opt_problems.synthetic_constrained.ConstrainedAckley",
+  "extra": null,
+  "suite": "Constrained synthetic (BOEng)",
+  "num_objectives": 1,
+  "num_constraints": 2,
+  "available_dimensions": 2,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 2,
+  "bounds": [
+    [
+      -5.0,
+      10.0
+    ],
+    [
+      -5.0,
+      10.0
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Synthetic",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": "unknown",
+  "source": "Eriksson D, Poloczek M (2021) Scalable constrained Bayesian optimization. AISTATS, PMLR, pp 730-738. https://github.com/rosenyu304/BOEngineeringBenchmark",
+  "variable_types": [
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
+}

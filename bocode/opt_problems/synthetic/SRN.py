@@ -18,3 +18,13 @@ class SRN(ConstrainedMultiObjSyntheticProblem):
     num_constraints = 2
     botorch_cls = _mo.SRN
     botorch_kwargs: dict = {}
+
+    def __init__(self, dim: int | None = None) -> None:
+        super().__init__(dim=dim)
+        # BoTorch's SRN ``ref_point`` is [0, 0] (the ideal point). In the negated
+        # maximization frame the feasible front never dominates [0, 0] (objective 1
+        # is always negative), so the hypervolume is identically 0. Use the nadir of
+        # the feasible objective region instead (feasible obj mins are ~[-34.8,
+        # -4.0]), matching the working problems' convention, so HV is positive and
+        # comparable.
+        self.ref_point = [-45.0, -12.0]

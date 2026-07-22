@@ -18,3 +18,13 @@ class BNH(ConstrainedMultiObjSyntheticProblem):
     num_constraints = 2
     botorch_cls = _mo.BNH
     botorch_kwargs: dict = {}
+
+    def __init__(self, dim: int | None = None) -> None:
+        super().__init__(dim=dim)
+        # BoTorch's BNH ``ref_point`` is [0, 0] (the ideal point). In the negated
+        # maximization frame every feasible objective is <= 0, so the feasible
+        # front never dominates [0, 0] and the hypervolume is identically 0. Use
+        # the nadir of the feasible objective region instead (feasible obj mins are
+        # ~[-135.8, -49.9]), matching the working problems' convention (e.g.
+        # ConstrainedBraninCurrin's [-80, -12]), so HV is positive and comparable.
+        self.ref_point = [-140.0, -55.0]
