@@ -40,6 +40,7 @@ ALGOS = {
     "qnparego": "algorithms.multi_obj.qnparego",
     "tfm_qnehvi": "algorithms.multi_obj.tfm_qnehvi",
     "tfm_qnparego": "algorithms.multi_obj.tfm_qnparego",
+    "dgemo": "algorithms.multi_obj.dgemo",
     # single-objective, constrained
     "con_random_search": "algorithms.single_obj_constrained.random_search",
     "scbo": "algorithms.single_obj_constrained.scbo",
