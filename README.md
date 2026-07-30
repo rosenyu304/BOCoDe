@@ -69,6 +69,9 @@ pip install "bocode[hebo]"       # HEBO optimizer (hebo method)
 pip install "bocode[all]"        # everything available on PyPI
 # bounce (bounce method) is not on PyPI: install from the official source tree with
 #   pip install --no-deps --no-build-isolation <bounce repo> && pip install gin-config
+# Exact upstream versions used for the campaign runs (pinned in requirements-lock.txt):
+#   HEBO  : github.com/huawei-noah/HEBO @ ee6112d (v0.3.6, `#subdirectory=HEBO`)
+#   bounce: github.com/LeoIV/bounce      @ 738b9bd (v0.1.0) + gin-config
 ```
 
 | Extra | Enables | Backing dependency |

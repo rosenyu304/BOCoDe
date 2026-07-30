@@ -16,7 +16,7 @@ babel==2.18.0
 beautifulsoup4==4.15.0
 bleach==6.4.0
 botorch==0.18.1
-bounce @ file:///home/rosenyu/Mixed_Int_AutoResearch/Research_2_TFM_Mixed_Integer_BO/external/bounce
+bounce @ git+https://github.com/LeoIV/bounce.git@738b9bd13b9836532b0c2e4254b99c256923e731
 Box2D==2.3.10
 cached-property==2.0.1
 certifi==2026.5.20
@@ -63,7 +63,7 @@ gym==0.26.2
 gym-notices==0.1.0
 gymnasium==1.3.0
 h11==0.16.0
-HEBO @ file:///home/rosenyu/Mixed_Int_AutoResearch/Research_2_TFM_Mixed_Integer_BO/external/HEBO/HEBO
+HEBO @ git+https://github.com/huawei-noah/HEBO.git@ee6112d39d1a9e9703fecaf9057193e1ec9dae72#subdirectory=HEBO
 hf-xet==1.5.1
 httpcore==1.0.9
 httpx==0.28.1
