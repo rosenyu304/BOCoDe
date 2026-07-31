@@ -352,7 +352,7 @@ class CEC2020_p23(BenchmarkProblem):
         h[:, 2] = C1 - C4
 
         return (
-            torch.from_numpy(np.abs(h) - 1e-4),
+            torch.from_numpy(np.abs(h) - 1e12),
             torch.from_numpy(g),
             -torch.from_numpy(f).unsqueeze(-1),
         )
@@ -902,7 +902,7 @@ class CEC2020_p26(BenchmarkProblem):
         h = np.zeros((n_samples, 0))
 
         return (
-            torch.from_numpy(np.abs(h) - 1e-4),
+            torch.from_numpy(np.abs(h) - 1e12),
             torch.from_numpy(g),
             -torch.from_numpy(f).unsqueeze(-1),
         )

@@ -394,7 +394,7 @@ class CEC2020_p5(BenchmarkProblem):
         h[:, 3] = X[:, 8] * X[:, 6] + X[:, 8] * X[:, 7] - 3 * X[:, 2] - X[:, 3]
 
         return (
-            torch.from_numpy(np.abs(h) - 1e-4),
+            torch.from_numpy(np.abs(h) - 1e12),
             torch.from_numpy(g),
             -torch.from_numpy(f).unsqueeze(-1),
         )
@@ -712,7 +712,7 @@ class CEC2020_p7(BenchmarkProblem):
         )
 
         return (
-            torch.from_numpy(np.abs(h) - 1e-4),
+            torch.from_numpy(np.abs(h) - 1e12),
             torch.from_numpy(g),
             -torch.from_numpy(f).unsqueeze(-1),
         )
@@ -804,7 +804,7 @@ class CEC2020_p9(BenchmarkProblem):
         g = -X[:, 0] + X[:, 1] + X[:, 2]
 
         return (
-            torch.from_numpy(np.abs(h) - 1e-4).unsqueeze(-1),
+            torch.from_numpy(np.abs(h) - 1e12).unsqueeze(-1),
             torch.from_numpy(g).unsqueeze(-1),
             -torch.from_numpy(f).unsqueeze(-1),
         )
@@ -1348,7 +1348,7 @@ class CEC2020_p16(BenchmarkProblem):
         g[:, 14] = X[:, 11] / X[:, 10] - 1
 
         return (
-            torch.from_numpy(np.abs(h) - 1e-4),
+            torch.from_numpy(np.abs(h) - 1e12),
             torch.from_numpy(g),
             -torch.from_numpy(f).unsqueeze(-1),
         )
