@@ -72,3 +72,14 @@ class PressureVessel(BenchmarkProblem):
         gx[:, 3] = L - 240
 
         return gx, fx.reshape(n, 1)
+
+
+class PressureVesselContinuous(PressureVessel):
+    """Fully-continuous relaxation of PressureVessel: all 4 variables continuous, 4 inequality
+    constraints (feasible region ~41% by volume). A well-posed SO-constrained engineering problem
+    (unlike the equality-dominated CEC2020 chemical-process problems)."""
+
+    tags = {"single_objective", "constrained", "4D", "continuous"}
+
+    def __init__(self):
+        super().__init__(is_discrete=False)
