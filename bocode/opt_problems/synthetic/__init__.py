@@ -41,6 +41,8 @@ from .Hartmann import Hartmann, HartmannShifted
 from .HolderTable import HolderTable
 from .KeaneBumpFunction import KeaneBumpFunction
 from .Levy import Levy, LevyShifted
+from .MW1 import MW1
+from .MW3 import MW3
 from .MW7 import MW7
 from .OSY import OSY
 from .Powell import Powell, PowellShifted
@@ -89,6 +91,8 @@ SYNTHETIC_PROBLEMS = {
     "SRN": SRN,
     "OSY": OSY,
     "CONSTR": CONSTR,
+    "MW1": MW1,
+    "MW3": MW3,
     "MW7": MW7,
     "BraninCurrin": BraninCurrin,
     "DTLZ1": DTLZ1,
