@@ -60,11 +60,19 @@ mazda = ["openpyxl"]                     # Mazda (reads the .xlsx design table)
 hpo = ["scikit-learn"]                   # SVM + weighted-Lasso (LassoBench) problems
 hpobsurr = ["xgboost"]                   # HPO-B continuous-surrogate pools (HPOBSurr_*)
 engibench = ["engibench[electronics]"]   # EngiBench PowerElectronics (also needs native ngspice)
-tabicl = ["tabicl"]                      # TabICL tabular-foundation-model surrogate (tabicl_* methods)
+pandapower = ["pandapower"]              # ORPD118 (IEEE 118-bus reactive power dispatch)
+casmoattack = ["h5py"]                   # CifarAttack85 (reads the Keras/HDF5 victim CNN)
+tabicl = ["tabicl"]                    # TabICL tabular-foundation-model surrogate (tabicl_* methods)
 tabpfn = ["tabpfn"]                      # TabPFN tabular-foundation-model surrogate (tfm_* / pfn_cei methods)
 hebo = ["HEBO"]                          # HEBO optimizer (hebo method); PyPI sdist may need a source build
 # NOTE: `bounce` (bounce method) is NOT on PyPI under that name -- install from the official source
 #   with `pip install --no-deps --no-build-isolation <bounce repo>` plus `gin-config`. See README.
+# NOTE: two problem groups need dependencies that are NOT on PyPI either:
+#   * BikeBench64 -- `pip install git+https://github.com/Lyleregenwetter/BikeBench`, or point
+#     BOCODE_BIKEBENCH_SRC at a clone's src/ directory.
+#   * AIG_* (EPFL logic synthesis) -- EPFL .blif circuits, a compiled Berkeley ABC binary and an
+#     MCBO checkout, via BOCODE_EPFL_CIRCUITS / BOCODE_ABC_BIN / BOCODE_MCBO_ROOT.
+#     See bocode/opt_problems/engineering/EPFLSeqOpt.py.
 viz = [
     "dash",
     "plotly",
@@ -82,6 +90,8 @@ all = [
     "openpyxl",
     "scikit-learn",
     "xgboost",
+    "pandapower",
+    "h5py",
     "dash",
     "plotly",
     "matplotlib",

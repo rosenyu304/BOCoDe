@@ -36,6 +36,14 @@ _CHECKSUMS = {
     "mazda_mop_sca": None,
     "mazda_mop": None,
     "nasbench201_accuracy.npz": None,
+    # CifarAttack85: the Casmopolitan victim CNN (Keras/TF1 HDF5, 9.2 MB) and the
+    # standard CIFAR-10 binary test batch (30 MB).
+    "cifar_keras_weights.h5": (
+        "81c3dfe20728d189d7459a30014c37722fb63752f8e474cb110fe11035ff8343"
+    ),
+    "cifar10_test_batch.bin": (
+        "8e2eb146ae340b09e24670f29cabc6326dba54da8789dab6768acf480273f65b"
+    ),
 }
 
 

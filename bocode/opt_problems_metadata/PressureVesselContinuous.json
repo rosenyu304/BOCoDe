@@ -1,0 +1,44 @@
+{
+  "name": "PressureVesselContinuous",
+  "real_name": "",
+  "module": "bocode.opt_problems.engineering.PressureVessel",
+  "extra": null,
+  "suite": "Engineering (standalone)",
+  "num_objectives": 1,
+  "num_constraints": 4,
+  "available_dimensions": 4,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 4,
+  "bounds": [
+    [
+      0.0625,
+      6.1875
+    ],
+    [
+      0.0625,
+      6.1875
+    ],
+    [
+      10,
+      200
+    ],
+    [
+      10,
+      240
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": null,
+  "source": "Fully-continuous relaxation of PressureVessel: all 4 variables continuous, 4 inequality constraints (feasible region ~41% by volume). A well-posed SO-constrained engineering problem (unlike the equality-dominated CEC2020 chemical-process problems).",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
+}

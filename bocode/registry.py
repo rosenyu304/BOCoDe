@@ -55,6 +55,18 @@ _EXTRA_HINT = {
     "neorl": "pip install 'bocode[neorl]'",
     "box2d": "pip install 'bocode[box2d]'",
     "truss": "pip install 'bocode[truss]'",
+    "pandapower": "pip install 'bocode[pandapower]'",
+    "casmoattack": "pip install 'bocode[casmoattack]'",
+    # Not on PyPI: installed from source / pointed at by an environment variable.
+    "bikebench": (
+        "pip install git+https://github.com/Lyleregenwetter/BikeBench "
+        "(or set BOCODE_BIKEBENCH_SRC to a clone's src/ directory)"
+    ),
+    "eda": (
+        "set BOCODE_EPFL_CIRCUITS / BOCODE_ABC_BIN / BOCODE_MCBO_ROOT "
+        "(EPFL .blif circuits, a compiled Berkeley ABC binary, and an MCBO checkout) "
+        "-- see bocode/opt_problems/engineering/EPFLSeqOpt.py"
+    ),
 }
 
 

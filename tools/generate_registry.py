@@ -61,6 +61,14 @@ def extra_for(modpath: str, cls: str):
         return "hpo"  # Bayesmark continuous-relaxation sklearn HPO tasks
     if cls in ("Mazda", "Mazda_SCA"):
         return "mazda"
+    if cls == "ORPD118":
+        return "pandapower"  # IEEE 118-bus ORPD runs pandapower's AC power flow
+    if cls == "BikeBench64":
+        return "bikebench"  # BikeBench surrogates (installed from source)
+    if cls == "CifarAttack85":
+        return "casmoattack"  # h5py, to read the Casmopolitan CIFAR CNN weights
+    if cls.startswith("AIG_"):
+        return "eda"  # Berkeley ABC + EPFL circuits + MCBO's EDA utilities
     if cls == "QPowerModel":
         return "neorl"
     if cls == "RobotPush":
