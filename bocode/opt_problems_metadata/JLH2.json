@@ -1,0 +1,34 @@
+{
+  "name": "JLH2",
+  "real_name": "JLH2 (Jetton, Li, Hoyle 2023) \u2014 2-D, 1 constraint",
+  "module": "bocode.opt_problems.synthetic_constrained.JLH2",
+  "extra": null,
+  "suite": "Constrained synthetic (BOEng)",
+  "num_objectives": 1,
+  "num_constraints": 1,
+  "available_dimensions": 2,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 2,
+  "bounds": [
+    [
+      -5.0,
+      0.0
+    ],
+    [
+      -5.0,
+      5.0
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Synthetic",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": "unknown",
+  "source": "Jetton C, Li C, Hoyle C (2023) Constrained Bayesian optimization methods using regression and classification Gaussian processes as constraints. ASME IDETC/CIE, V03BT03A033. https://github.com/rosenyu304/BOEngineeringBenchmark",
+  "variable_types": [
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
+}

@@ -1,0 +1,55 @@
+{
+  "name": "HPOBSurr_4796_23",
+  "real_name": "rpart.preproc tuning (HPO-B search space 4796, dataset 23)",
+  "module": "bocode.opt_problems.hpo.HPOBSurrogate",
+  "extra": "hpobsurr",
+  "suite": "HPO (LassoBench / HPO-B)",
+  "num_objectives": 1,
+  "num_constraints": 0,
+  "available_dimensions": 3,
+  "input_type": "mixed",
+  "scalable": false,
+  "dim": 3,
+  "bounds": [
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Hyperparameter Optimization",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": null,
+  "source": "S. Pineda-Arango, H. S. Jomaa, M. Wistuba, J. Grabocka. HPO-B: A Large-Scale Reproducible Benchmark for Black-Box HPO based on OpenML. NeurIPS Datasets and Benchmarks, 2021. https://github.com/releaunifreiburg/HPO-B S. Muller, M. Feurer, N. Hollmann, F. Hutter. PFNs4BO: In-Context Learning for Bayesian Optimization. ICML 2023.",
+  "variable_types": [
+    [
+      0.0,
+      0.16666263341903687,
+      0.3333282470703125,
+      0.4999954104423523,
+      0.6666632890701294,
+      0.8333315253257751,
+      1.0
+    ],
+    [
+      0.0,
+      0.16665859520435333,
+      0.3333231806755066,
+      0.4999907910823822,
+      0.6666598916053772,
+      0.8333297371864319,
+      1.0
+    ],
+    "continuous"
+  ],
+  "num_categorical_variables": 2
+}

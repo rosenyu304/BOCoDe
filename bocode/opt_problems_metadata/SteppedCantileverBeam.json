@@ -1,0 +1,100 @@
+{
+  "name": "SteppedCantileverBeam",
+  "real_name": "Stepped Cantilever Beam Design (5-segment volume minimization)",
+  "module": "bocode.opt_problems.engineering.SteppedCantileverBeam",
+  "extra": null,
+  "suite": "Engineering (standalone)",
+  "num_objectives": 1,
+  "num_constraints": 11,
+  "available_dimensions": 10,
+  "input_type": "mixed",
+  "scalable": false,
+  "dim": 10,
+  "bounds": [
+    [
+      1.0,
+      5.0
+    ],
+    [
+      1.0,
+      5.0
+    ],
+    [
+      1.0,
+      5.0
+    ],
+    [
+      1.0,
+      5.0
+    ],
+    [
+      1.0,
+      5.0
+    ],
+    [
+      30.0,
+      65.0
+    ],
+    [
+      30.0,
+      65.0
+    ],
+    [
+      30.0,
+      65.0
+    ],
+    [
+      30.0,
+      65.0
+    ],
+    [
+      30.0,
+      65.0
+    ]
+  ],
+  "num_integer_variables": 1,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": 63893.53,
+  "source": "A. H. Gandomi, X.-S. Yang, A. H. Alavi. Mixed variable structural optimization using Firefly Algorithm. Computers & Structures 89(23-24):2325-2336, 2011. A. H. Gandomi, X.-S. Yang, A. H. Alavi, S. Talatahari. Bat algorithm for constrained optimization tasks. Neural Computing and Applications 22(6):1239-1255, 2013.",
+  "variable_types": [
+    [
+      1.0,
+      2.0,
+      3.0,
+      4.0,
+      5.0
+    ],
+    [
+      2.4,
+      2.6,
+      2.8,
+      3.1
+    ],
+    [
+      2.4,
+      2.6,
+      2.8,
+      3.1
+    ],
+    "continuous",
+    "continuous",
+    [
+      45.0,
+      50.0,
+      55.0,
+      60.0
+    ],
+    [
+      45.0,
+      50.0,
+      55.0,
+      60.0
+    ],
+    "integer",
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 5
+}

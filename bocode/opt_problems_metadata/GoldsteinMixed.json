@@ -1,0 +1,34 @@
+{
+  "name": "GoldsteinMixed",
+  "real_name": "Goldstein-Price (mixed-variable)",
+  "module": "bocode.opt_problems.synthetic_mixed.GoldsteinMixed",
+  "extra": null,
+  "suite": "Mixed-variable synthetic",
+  "num_objectives": 1,
+  "num_constraints": 0,
+  "available_dimensions": 2,
+  "input_type": "mixed",
+  "scalable": false,
+  "dim": 2,
+  "bounds": [
+    [
+      -2.0,
+      2.0
+    ],
+    [
+      -2.0,
+      2.0
+    ]
+  ],
+  "num_integer_variables": 1,
+  "application": "Synthetic",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": 3.0,
+  "source": "A. A. Goldstein, J. F. Price. On descent from local minima. Mathematics of Computation 25(115):569-574, 1971. J. Qian. Discretised mixed-variable benchmark suite, MIT MEng thesis (Fig. 3.2 benchmarks).",
+  "variable_types": [
+    "continuous",
+    "integer"
+  ],
+  "num_categorical_variables": 0
+}

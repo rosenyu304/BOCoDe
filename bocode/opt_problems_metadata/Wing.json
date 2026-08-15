@@ -1,0 +1,74 @@
+{
+  "name": "Wing",
+  "real_name": "Wing Weight Function (light-aircraft wing)",
+  "module": "bocode.opt_problems.engineering.Wing",
+  "extra": null,
+  "suite": "Engineering (standalone)",
+  "num_objectives": 1,
+  "num_constraints": 0,
+  "available_dimensions": 10,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 10,
+  "bounds": [
+    [
+      150.0,
+      200.0
+    ],
+    [
+      220.0,
+      300.0
+    ],
+    [
+      6.0,
+      10.0
+    ],
+    [
+      -10.0,
+      10.0
+    ],
+    [
+      16.0,
+      45.0
+    ],
+    [
+      0.5,
+      1.0
+    ],
+    [
+      0.08,
+      0.18
+    ],
+    [
+      2.5,
+      6.0
+    ],
+    [
+      1700.0,
+      2500.0
+    ],
+    [
+      0.025,
+      0.08
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": null,
+  "source": "A. Yousefpour, Z. Zanjani Foumani, M. Shishehbor, C. Mora, R. Bostanabad. GP+: a Python library for kernel-based learning via Gaussian processes. Advances in Engineering Software, 2024. https://github.com/Bostanabad-Research-Group/GP-Plus Wing weight function: https://www.sfu.ca/~ssurjano/wingweight.html",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
+}

@@ -1,0 +1,20 @@
+version: 2
+
+build:
+  os: ubuntu-lts-latest
+  tools:
+    python: "3.12"
+  jobs:
+    # Regenerate the interactive benchmark table from the metadata before Sphinx
+    # runs, so the published page never drifts from the registered problems.
+    pre_build:
+      - python tools/render_docs_table.py
+
+python:
+  install:
+    - method: pip
+      path: .
+    - requirements: docs/requirements.txt
+
+sphinx:
+  configuration: docs/source/conf.py

@@ -1,0 +1,59 @@
+{
+  "name": "SpeedReducerContinuous",
+  "real_name": "",
+  "module": "bocode.opt_problems.engineering.SpeedReducer",
+  "extra": null,
+  "suite": "Engineering (standalone)",
+  "num_objectives": 1,
+  "num_constraints": 9,
+  "available_dimensions": 7,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 7,
+  "bounds": [
+    [
+      3.6,
+      2.6
+    ],
+    [
+      0.8,
+      0.7
+    ],
+    [
+      28,
+      17
+    ],
+    [
+      8.3,
+      7.3
+    ],
+    [
+      8.3,
+      7.3
+    ],
+    [
+      3.9,
+      2.9
+    ],
+    [
+      5.5,
+      5
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": null,
+  "source": "Fully-continuous relaxation of SpeedReducer: all 7 variables continuous, 9 inequality constraints. A well-posed SO-constrained engineering problem.",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
+}

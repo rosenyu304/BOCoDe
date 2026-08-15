@@ -1,0 +1,74 @@
+{
+  "name": "Truss10D",
+  "real_name": "10-Bar Truss Weight Minimization",
+  "module": "bocode.opt_problems.engineering.Truss10D",
+  "extra": "truss",
+  "suite": "Engineering (standalone)",
+  "num_objectives": 1,
+  "num_constraints": 14,
+  "available_dimensions": 10,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 10,
+  "bounds": [
+    [
+      0.1,
+      35
+    ],
+    [
+      0.1,
+      35
+    ],
+    [
+      0.1,
+      35
+    ],
+    [
+      0.1,
+      35
+    ],
+    [
+      0.1,
+      35
+    ],
+    [
+      0.1,
+      35
+    ],
+    [
+      0.1,
+      35
+    ],
+    [
+      0.1,
+      35
+    ],
+    [
+      0.1,
+      35
+    ],
+    [
+      0.1,
+      35
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": null,
+  "source": "",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
+}

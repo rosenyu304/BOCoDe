@@ -1,0 +1,49 @@
+{
+  "name": "AgNP",
+  "real_name": "Silver-Nanoparticle (AgNP) Flow Synthesis Optimization",
+  "module": "bocode.opt_problems.materials.AgNP",
+  "extra": null,
+  "suite": "PV-Lab materials",
+  "num_objectives": 1,
+  "num_constraints": 0,
+  "available_dimensions": 5,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 5,
+  "bounds": [
+    [
+      4.53,
+      42.80981595
+    ],
+    [
+      9.999518096,
+      40.00101474
+    ],
+    [
+      0.5,
+      30.5
+    ],
+    [
+      0.498851653,
+      19.5
+    ],
+    [
+      200.0,
+      983.0
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Materials",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": null,
+  "source": "F. Mekki-Berrada, Z. Ren, T. Huang, et al. Two-step machine learning enables optimized nanoparticle synthesis. npj Computational Materials 7:55, 2021. Dataset via the PV-Lab benchmarking suite: https://github.com/PV-Lab/Benchmarking",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
+}

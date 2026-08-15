@@ -1,0 +1,98 @@
+{
+  "name": "HPOB_5965_9889",
+  "real_name": "ranger tuning (HPO-B search space 5965, dataset 9889)",
+  "module": "bocode.opt_problems.hpo.HPOB",
+  "extra": null,
+  "suite": "HPO (LassoBench / HPO-B)",
+  "num_objectives": 1,
+  "num_constraints": 0,
+  "available_dimensions": 10,
+  "input_type": "mixed",
+  "scalable": false,
+  "dim": 10,
+  "bounds": [
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Hyperparameter Optimization",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": null,
+  "source": "S. Pineda-Arango, H. S. Jomaa, M. Wistuba, J. Grabocka. HPO-B: A Large-Scale Reproducible Benchmark for Black-Box HPO based on OpenML. Advances in Neural Information Processing Systems Datasets and Benchmarks, 2021. https://github.com/releaunifreiburg/HPO-B S. Gabriel. Fixed HPO-B. https://github.com/SamuelGabriel/FixedHPO-B",
+  "variable_types": [
+    "continuous",
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      0.09263505041599274,
+      0.14682476222515106,
+      0.1852734386920929,
+      0.21509674191474915
+    ],
+    "continuous",
+    "continuous",
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ]
+  ],
+  "num_categorical_variables": 7
+}

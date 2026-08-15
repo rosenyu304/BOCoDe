@@ -1,0 +1,44 @@
+{
+  "name": "CEC2020_p25",
+  "real_name": "Hydro-Static Thrust Bearing Design",
+  "module": "bocode.opt_problems.cec2020_rw.CEC2020_p21_33",
+  "extra": null,
+  "suite": "CEC2020 RW-Constrained",
+  "num_objectives": 1,
+  "num_constraints": 7,
+  "available_dimensions": 4,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 4,
+  "bounds": [
+    [
+      1,
+      16
+    ],
+    [
+      1,
+      16
+    ],
+    [
+      1e-06,
+      1.6e-05
+    ],
+    [
+      1,
+      16
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": 1616.119765,
+  "source": "CEC2020 Problem 25",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
+}

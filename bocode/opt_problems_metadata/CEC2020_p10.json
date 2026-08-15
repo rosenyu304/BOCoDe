@@ -1,0 +1,39 @@
+{
+  "name": "CEC2020_p10",
+  "real_name": "Process Flow Sheeting Problem",
+  "module": "bocode.opt_problems.cec2020_rw.CEC2020_p1_20",
+  "extra": null,
+  "suite": "CEC2020 RW-Constrained",
+  "num_objectives": 1,
+  "num_constraints": 3,
+  "available_dimensions": 3,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 3,
+  "bounds": [
+    [
+      0.2,
+      1.0
+    ],
+    [
+      -2.22554,
+      -1.0
+    ],
+    [
+      -0.51,
+      1.49
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": 1.076543,
+  "source": "CEC2020 Problem 10",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
+}

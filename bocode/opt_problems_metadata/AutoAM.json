@@ -1,0 +1,44 @@
+{
+  "name": "AutoAM",
+  "real_name": "Autonomous Additive Manufacturing (3D-printer process optimization)",
+  "module": "bocode.opt_problems.materials.AutoAM",
+  "extra": null,
+  "suite": "PV-Lab materials",
+  "num_objectives": 1,
+  "num_constraints": 0,
+  "available_dimensions": 4,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 4,
+  "bounds": [
+    [
+      0.0,
+      5.0
+    ],
+    [
+      0.1,
+      10.0
+    ],
+    [
+      -1.0,
+      1.0
+    ],
+    [
+      -1.0,
+      1.0
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Materials",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": null,
+  "source": "J. R. Deneault, J. Chang, J. Myung, et al. Toward autonomous additive manufacturing: Bayesian optimization on a 3D printer. MRS Bulletin 46:566-575, 2021. Dataset via the PV-Lab benchmarking suite: https://github.com/PV-Lab/Benchmarking",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
+}

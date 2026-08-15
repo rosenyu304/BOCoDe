@@ -1,0 +1,74 @@
+{
+  "name": "CantileverBeam",
+  "real_name": "Stepped Cantilever Beam Design (continuous, Bat-algorithm form)",
+  "module": "bocode.opt_problems.engineering.CantileverBeam",
+  "extra": null,
+  "suite": "Engineering (standalone)",
+  "num_objectives": 1,
+  "num_constraints": 11,
+  "available_dimensions": 10,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 10,
+  "bounds": [
+    [
+      1.0,
+      5.0
+    ],
+    [
+      1.0,
+      5.0
+    ],
+    [
+      1.0,
+      5.0
+    ],
+    [
+      1.0,
+      5.0
+    ],
+    [
+      1.0,
+      5.0
+    ],
+    [
+      30.0,
+      65.0
+    ],
+    [
+      30.0,
+      65.0
+    ],
+    [
+      30.0,
+      65.0
+    ],
+    [
+      30.0,
+      65.0
+    ],
+    [
+      30.0,
+      65.0
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": 61914.87,
+  "source": "X.-S. Yang, A. H. Gandomi. Bat algorithm: a novel approach for global engineering optimization. Engineering Computations 29(5):464-483, 2012.",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
+}

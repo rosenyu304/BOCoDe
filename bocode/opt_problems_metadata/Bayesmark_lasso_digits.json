@@ -1,0 +1,34 @@
+{
+  "name": "Bayesmark_lasso_digits",
+  "real_name": "Bayesmark lasso tuning on the digits dataset (2 hyperparameters), CV accuracy",
+  "module": "bocode.opt_problems.hpo.Bayesmark",
+  "extra": "hpo",
+  "suite": "HPO (LassoBench / HPO-B)",
+  "num_objectives": 1,
+  "num_constraints": 0,
+  "available_dimensions": 2,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 2,
+  "bounds": [
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Hyperparameter Optimization",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": null,
+  "source": "Uber. Bayesmark: benchmark framework for Bayesian optimization. https://github.com/uber/bayesmark S. M\u00fcller, M. Feurer, N. Hollmann, F. Hutter. PFNs4BO: In-Context Learning for Bayesian Optimization. ICML 2023, arXiv:2305.17535. https://github.com/automl/PFNs4BO",
+  "variable_types": [
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
+}

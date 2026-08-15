@@ -1,0 +1,59 @@
+{
+  "name": "LCBenchHelena",
+  "real_name": "LCBench MLP tuning on the helena dataset (7 hyperparameters)",
+  "module": "bocode.opt_problems.hpo.LCBench",
+  "extra": null,
+  "suite": "HPO (LassoBench / HPO-B)",
+  "num_objectives": 1,
+  "num_constraints": 0,
+  "available_dimensions": 7,
+  "input_type": "mixed",
+  "scalable": false,
+  "dim": 7,
+  "bounds": [
+    [
+      16.0,
+      511.0
+    ],
+    [
+      0.00010010296682594344,
+      0.09902960062026978
+    ],
+    [
+      0.0005357532645575702,
+      0.9999477863311768
+    ],
+    [
+      64.0,
+      1024.0
+    ],
+    [
+      0.10000386089086533,
+      0.9822552800178528
+    ],
+    [
+      1.0,
+      4.0
+    ],
+    [
+      4.9355774535797536e-05,
+      0.09999745339155197
+    ]
+  ],
+  "num_integer_variables": 3,
+  "application": "Hyperparameter Optimization",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": null,
+  "source": "L. Zimmer, M. Lindauer, F. Hutter. Auto-PyTorch: Multi-Fidelity MetaLearning for Efficient and Robust AutoDL. IEEE Transactions on Pattern Analysis and Machine Intelligence 43(9):3079-3090, 2021. https://github.com/automl/LCBench",
+  "variable_types": [
+    "integer",
+    "continuous",
+    "continuous",
+    "integer",
+    "continuous",
+    "integer",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
+}

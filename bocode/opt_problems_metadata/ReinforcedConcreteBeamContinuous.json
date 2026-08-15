@@ -1,0 +1,39 @@
+{
+  "name": "ReinforcedConcreteBeamContinuous",
+  "real_name": "",
+  "module": "bocode.opt_problems.engineering.ReinforcedConcreteBeam",
+  "extra": null,
+  "suite": "Engineering (standalone)",
+  "num_objectives": 1,
+  "num_constraints": 2,
+  "available_dimensions": 3,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 3,
+  "bounds": [
+    [
+      0.2,
+      15.0
+    ],
+    [
+      28.0,
+      40.0
+    ],
+    [
+      5.0,
+      10.0
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": 359.208,
+  "source": "A. H. Gandomi, X.-S. Yang, A. H. Alavi. Mixed variable structural optimization using Firefly Algorithm. Computers & Structures 89(23-24):2325-2336, 2011. H. Amir, T. Hasegawa. Nonlinear mixed-discrete structural optimization. Journal of Structural Engineering 115(3):626-646, 1989.",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
+}

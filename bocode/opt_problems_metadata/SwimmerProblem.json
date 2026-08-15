@@ -1,0 +1,34 @@
+{
+  "name": "SwimmerProblem",
+  "real_name": "MuJoCo Swimmer-v5 \u2014 Constant-Action Control",
+  "module": "bocode.opt_problems.control.mujoco.MujocoFuncs",
+  "extra": "mujoco",
+  "suite": "MuJoCo control",
+  "num_objectives": 1,
+  "num_constraints": 0,
+  "available_dimensions": 2,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 2,
+  "bounds": [
+    [
+      -1.0,
+      1.0
+    ],
+    [
+      -1.0,
+      1.0
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Control",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": null,
+  "source": "",
+  "variable_types": [
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
+}

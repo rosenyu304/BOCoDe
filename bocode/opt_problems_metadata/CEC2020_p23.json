@@ -1,0 +1,49 @@
+{
+  "name": "CEC2020_p23",
+  "real_name": "Step-Cone Pulley Problem",
+  "module": "bocode.opt_problems.cec2020_rw.CEC2020_p21_33",
+  "extra": null,
+  "suite": "CEC2020 RW-Constrained",
+  "num_objectives": 1,
+  "num_constraints": 11,
+  "available_dimensions": 5,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 5,
+  "bounds": [
+    [
+      0,
+      60
+    ],
+    [
+      0,
+      60
+    ],
+    [
+      0,
+      90
+    ],
+    [
+      0,
+      90
+    ],
+    [
+      0,
+      90
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": 16.069869,
+  "source": "CEC2020 Problem 23",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
+}

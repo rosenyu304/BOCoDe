@@ -1,0 +1,69 @@
+{
+  "name": "LassoBreastCancer",
+  "real_name": "LassoBench \u2014 Lasso Regularization Tuning on breast_cancer",
+  "module": "bocode.opt_problems.hpo.LassoBreastCancer",
+  "extra": "hpo",
+  "suite": "HPO (LassoBench / HPO-B)",
+  "num_objectives": 1,
+  "num_constraints": 0,
+  "available_dimensions": 9,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 9,
+  "bounds": [
+    [
+      -1,
+      1
+    ],
+    [
+      -1,
+      1
+    ],
+    [
+      -1,
+      1
+    ],
+    [
+      -1,
+      1
+    ],
+    [
+      -1,
+      1
+    ],
+    [
+      -1,
+      1
+    ],
+    [
+      -1,
+      1
+    ],
+    [
+      -1,
+      1
+    ],
+    [
+      -1,
+      1
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Hyperparameter Optimization",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": null,
+  "source": "Kenan \u0160ehi\u0107, Alexandre Gramfort, Joseph Salmon, and Luigi Nardi. LassoBench: A High-Dimensional Hyperparameter Optimization Benchmark Suite for Lasso. Proceedings of the 1st International Conference on Automated Machine Learning (AutoML), 2022.",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
+}

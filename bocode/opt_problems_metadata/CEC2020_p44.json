@@ -1,0 +1,174 @@
+{
+  "name": "CEC2020_p44",
+  "real_name": "Wind Farm Layout Problem",
+  "module": "bocode.opt_problems.cec2020_rw.CEC2020_p40_57",
+  "extra": null,
+  "suite": "CEC2020 RW-Constrained",
+  "num_objectives": 1,
+  "num_constraints": 91,
+  "available_dimensions": 30,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 30,
+  "bounds": [
+    [
+      40.0,
+      1960.0
+    ],
+    [
+      40.0,
+      1960.0
+    ],
+    [
+      40.0,
+      1960.0
+    ],
+    [
+      40.0,
+      1960.0
+    ],
+    [
+      40.0,
+      1960.0
+    ],
+    [
+      40.0,
+      1960.0
+    ],
+    [
+      40.0,
+      1960.0
+    ],
+    [
+      40.0,
+      1960.0
+    ],
+    [
+      40.0,
+      1960.0
+    ],
+    [
+      40.0,
+      1960.0
+    ],
+    [
+      40.0,
+      1960.0
+    ],
+    [
+      40.0,
+      1960.0
+    ],
+    [
+      40.0,
+      1960.0
+    ],
+    [
+      40.0,
+      1960.0
+    ],
+    [
+      40.0,
+      1960.0
+    ],
+    [
+      40.0,
+      1960.0
+    ],
+    [
+      40.0,
+      1960.0
+    ],
+    [
+      40.0,
+      1960.0
+    ],
+    [
+      40.0,
+      1960.0
+    ],
+    [
+      40.0,
+      1960.0
+    ],
+    [
+      40.0,
+      1960.0
+    ],
+    [
+      40.0,
+      1960.0
+    ],
+    [
+      40.0,
+      1960.0
+    ],
+    [
+      40.0,
+      1960.0
+    ],
+    [
+      40.0,
+      1960.0
+    ],
+    [
+      40.0,
+      1960.0
+    ],
+    [
+      40.0,
+      1960.0
+    ],
+    [
+      40.0,
+      1960.0
+    ],
+    [
+      40.0,
+      1960.0
+    ],
+    [
+      40.0,
+      1960.0
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": -6273.1715,
+  "source": "CEC2020 Problem 44",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
+}

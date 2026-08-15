@@ -1,0 +1,34 @@
+{
+  "name": "CEC2020_p8",
+  "real_name": "Process Synthesis Problem",
+  "module": "bocode.opt_problems.cec2020_rw.CEC2020_p1_20",
+  "extra": null,
+  "suite": "CEC2020 RW-Constrained",
+  "num_objectives": 1,
+  "num_constraints": 2,
+  "available_dimensions": 2,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 2,
+  "bounds": [
+    [
+      0,
+      1.6
+    ],
+    [
+      -0.51,
+      1.49
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": 2.0,
+  "source": "CEC2020 Problem 8",
+  "variable_types": [
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
+}

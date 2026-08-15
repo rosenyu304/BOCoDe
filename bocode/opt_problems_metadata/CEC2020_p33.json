@@ -1,0 +1,174 @@
+{
+  "name": "CEC2020_p33",
+  "real_name": "Topology Optimization",
+  "module": "bocode.opt_problems.cec2020_rw.CEC2020_p21_33",
+  "extra": null,
+  "suite": "CEC2020 RW-Constrained",
+  "num_objectives": 1,
+  "num_constraints": 30,
+  "available_dimensions": 30,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 30,
+  "bounds": [
+    [
+      0.001,
+      1.0
+    ],
+    [
+      0.001,
+      1.0
+    ],
+    [
+      0.001,
+      1.0
+    ],
+    [
+      0.001,
+      1.0
+    ],
+    [
+      0.001,
+      1.0
+    ],
+    [
+      0.001,
+      1.0
+    ],
+    [
+      0.001,
+      1.0
+    ],
+    [
+      0.001,
+      1.0
+    ],
+    [
+      0.001,
+      1.0
+    ],
+    [
+      0.001,
+      1.0
+    ],
+    [
+      0.001,
+      1.0
+    ],
+    [
+      0.001,
+      1.0
+    ],
+    [
+      0.001,
+      1.0
+    ],
+    [
+      0.001,
+      1.0
+    ],
+    [
+      0.001,
+      1.0
+    ],
+    [
+      0.001,
+      1.0
+    ],
+    [
+      0.001,
+      1.0
+    ],
+    [
+      0.001,
+      1.0
+    ],
+    [
+      0.001,
+      1.0
+    ],
+    [
+      0.001,
+      1.0
+    ],
+    [
+      0.001,
+      1.0
+    ],
+    [
+      0.001,
+      1.0
+    ],
+    [
+      0.001,
+      1.0
+    ],
+    [
+      0.001,
+      1.0
+    ],
+    [
+      0.001,
+      1.0
+    ],
+    [
+      0.001,
+      1.0
+    ],
+    [
+      0.001,
+      1.0
+    ],
+    [
+      0.001,
+      1.0
+    ],
+    [
+      0.001,
+      1.0
+    ],
+    [
+      0.001,
+      1.0
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": 2.639346,
+  "source": "CEC2020 Problem 33",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
+}

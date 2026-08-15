@@ -1,0 +1,151 @@
+[build-system]
+requires = ["setuptools>=64.0", "wheel", "setuptools_scm>=8"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bocode"
+description = "BOCoDe: a Python library of optimization benchmark problems for Bayesian optimization and beyond."
+license = "MIT"
+keywords = ["engineering design", "optimization", "benchmark", "engineering", "bayesian-optimization"]
+authors = [
+      { name = "Rosen Yu" },
+      { name = "Advaith Narayanan" },
+      { name = "Cyril Picard" },
+      { name = "Faez Ahmed" },
+]
+# Core dependencies — enough to import bocode and run most problems. Problems
+# needing heavy/native libraries declare an optional extra below and import it
+# lazily with an actionable error message (see bocode/registry.py).
+dependencies = [
+    # >=0.12: SingleTaskGP's default covar module became Hvarfner's dimension-scaled
+    # LogNormal lengthscale prior. vanilla_highdim_bo's headline claim IS that prior, so
+    # an older botorch would silently turn it into the Gamma(3,6) baseline it argues against.
+    "botorch>=0.12",
+    # Deliberately PERMISSIVE. Do NOT cap torch here: this is a library dependency and a
+    # ceiling would DOWNGRADE a working environment on `pip install -e .`. The right
+    # CUDA build of torch is a per-machine choice, so pin it in your own environment.
+    "torch",
+    # exact hypervolume: pymoo's compiled WFG kernel is 10-220x faster than BoTorch's
+    # box decomposition and numerically identical (~1e-16).
+    "pymoo>=0.6",
+    "numpy",
+    "scipy",
+    "pandas",
+]
+readme = "README.md"
+requires-python = ">=3.10"
+dynamic = ["version"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Intended Audience :: Science/Research",
+]
+
+[project.optional-dependencies]
+# Per-problem-group extras. Install with e.g. pip install "bocode[mujoco,truss]".
+mujoco = ["gymnasium[mujoco]"]          # MuJoCo control problems
+control = ["gymnasium"]                  # PD4CartPole, PID4Acrobot (classic control)
+modact = ["modact"]                      # MODAct CS/CT/CTS/CTSE/CTSEI suite
+neorl = ["onnxruntime>=1.22.0"]          # QPowerModel surrogate
+box2d = ["Box2D", "pygame", "joblib"]    # RobotPush
+truss = ["slientruss3d"]                 # Truss10D..Truss200D
+mazda = ["openpyxl"]                     # Mazda (reads the .xlsx design table)
+hpo = ["scikit-learn"]                   # SVM + weighted-Lasso (LassoBench) problems
+hpobsurr = ["xgboost"]                   # HPO-B continuous-surrogate pools (HPOBSurr_*)
+engibench = ["engibench[electronics]"]   # EngiBench PowerElectronics (also needs native ngspice)
+pandapower = ["pandapower"]              # ORPD118 (IEEE 118-bus reactive power dispatch)
+casmoattack = ["h5py"]                   # CifarAttack85 (reads the Keras/HDF5 victim CNN)
+tabicl = ["tabicl"]                    # TabICL tabular-foundation-model surrogate (tabicl_* methods)
+tabpfn = ["tabpfn"]                      # TabPFN tabular-foundation-model surrogate (tfm_* / pfn_cei methods)
+hebo = ["HEBO"]                          # HEBO optimizer (hebo method); PyPI sdist may need a source build
+# NOTE: `bounce` (bounce method) is NOT on PyPI under that name -- install from the official source
+#   with `pip install --no-deps --no-build-isolation <bounce repo>` plus `gin-config`. See README.
+# NOTE: two problem groups need dependencies that are NOT on PyPI either:
+#   * BikeBench64 -- `pip install git+https://github.com/Lyleregenwetter/BikeBench`, or point
+#     BOCODE_BIKEBENCH_SRC at a clone's src/ directory.
+#   * AIG_* (EPFL logic synthesis) -- EPFL .blif circuits, a compiled Berkeley ABC binary and an
+#     MCBO checkout, via BOCODE_EPFL_CIRCUITS / BOCODE_ABC_BIN / BOCODE_MCBO_ROOT.
+#     See bocode/opt_problems/engineering/EPFLSeqOpt.py.
+viz = [
+    "dash",
+    "plotly",
+    "matplotlib",
+]
+# Everything installable from PyPI.
+all = [
+    "gymnasium[mujoco]",
+    "modact",
+    "onnxruntime>=1.22.0",
+    "Box2D",
+    "pygame",
+    "joblib",
+    "slientruss3d",
+    "openpyxl",
+    "scikit-learn",
+    "xgboost",
+    "pandapower",
+    "h5py",
+    "dash",
+    "plotly",
+    "matplotlib",
+]
+
+[dependency-groups]
+doc = [
+    "sphinx>=7.0.0,<8.0.0",
+    "furo==2024.04.27",
+    "sphinx_copybutton==0.5.2",
+]
+
+test = [
+    "pytest",
+    "pytest-cov",
+]
+
+dev = [{include-group = "test"}, {include-group = "doc"}]
+
+full = [
+    "LassoBench @ git+https://github.com/ksehic/LassoBench.git",
+]
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["bocode*"]
+
+[tool.setuptools_scm]
+local_scheme = "no-local-version"
+
+[project.urls]
+Homepage = "https://github.com/rosenyu304/BOCoDe/"
+Repository = "https://github.com/rosenyu304/BOCoDe/"
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q --cov=bocode --cov-report term"
+testpaths = [
+    "tests",
+]
+markers = [
+    "slow: marks compute-heavy tests (e.g. multi-objective BO); deselect with -m 'not slow'",
+]
+
+[tool.ruff]
+target-version = "py312"
+
+[tool.ruff.lint]
+# E/F: pyflakes+pycodestyle, I: import sorting, UP: pyupgrade, B: bugbear.
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["E741", "E501", "B008"]
+fixable = ["ALL"]
+unfixable = []
+
+[tool.ruff.lint.per-file-ignores]
+# Vendored upstream code and the metadata generator are exempt from style rules.
+"bocode/opt_problems/_vendor/**" = ["ALL"]
+"tools/**" = ["E402"]

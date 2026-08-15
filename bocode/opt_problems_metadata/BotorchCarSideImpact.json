@@ -1,0 +1,59 @@
+{
+  "name": "BotorchCarSideImpact",
+  "real_name": "Car Side Impact Design (4-objective, BoTorch formulation)",
+  "module": "bocode.opt_problems.engineering.BotorchCarSideImpact",
+  "extra": null,
+  "suite": "Engineering (standalone)",
+  "num_objectives": 4,
+  "num_constraints": 0,
+  "available_dimensions": 7,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 7,
+  "bounds": [
+    [
+      0.5,
+      1.5
+    ],
+    [
+      0.45,
+      1.35
+    ],
+    [
+      0.5,
+      1.5
+    ],
+    [
+      0.5,
+      1.5
+    ],
+    [
+      0.875,
+      2.625
+    ],
+    [
+      0.4,
+      1.2
+    ],
+    [
+      0.4,
+      1.2
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": null,
+  "source": "H. Jain and K. Deb. An evolutionary many-objective optimization algorithm using reference-point based nondominated sorting approach, part II. IEEE Transactions on Evolutionary Computation 18(4):602-622, 2014. R. Tanabe and H. Ishibuchi. An easy-to-use real-world multi-objective optimization problem suite. Applied Soft Computing 89:106078, 2020. BoTorch implementation: M. Balandat et al. BoTorch: A Framework for Efficient Monte-Carlo Bayesian Optimization. NeurIPS 33, 2020. http://arxiv.org/abs/1",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
+}

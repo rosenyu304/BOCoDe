@@ -1,0 +1,44 @@
+{
+  "name": "CEC2020_p18",
+  "real_name": "Pressure Vessel Design",
+  "module": "bocode.opt_problems.cec2020_rw.CEC2020_p1_20",
+  "extra": null,
+  "suite": "CEC2020 RW-Constrained",
+  "num_objectives": 1,
+  "num_constraints": 4,
+  "available_dimensions": 4,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 4,
+  "bounds": [
+    [
+      0.0625,
+      6.1875
+    ],
+    [
+      0.0625,
+      6.1875
+    ],
+    [
+      10,
+      200
+    ],
+    [
+      10,
+      200
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": 6059.714335,
+  "source": "CEC2020 Problem 18",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
+}

@@ -1,0 +1,49 @@
+{
+  "name": "P3HT",
+  "real_name": "P3HT/CNT Composite Electrical Conductivity Optimization",
+  "module": "bocode.opt_problems.materials.P3HT",
+  "extra": null,
+  "suite": "PV-Lab materials",
+  "num_objectives": 1,
+  "num_constraints": 0,
+  "available_dimensions": 5,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 5,
+  "bounds": [
+    [
+      15.0,
+      96.27
+    ],
+    [
+      0.0,
+      60.0
+    ],
+    [
+      0.0,
+      70.0
+    ],
+    [
+      0.0,
+      85.0
+    ],
+    [
+      0.0,
+      75.0
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Materials",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": null,
+  "source": "D. Bash, Y. Cai, V. Chellappan, et al. Multi-fidelity high-throughput optimization of electrical conductivity in P3HT-CNT composites. Advanced Functional Materials 31:2102606, 2021. Dataset via the PV-Lab benchmarking suite: https://github.com/PV-Lab/Benchmarking",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
+}

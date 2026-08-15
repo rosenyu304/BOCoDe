@@ -1,0 +1,44 @@
+{
+  "name": "CEC2020_p31",
+  "real_name": "Gear Train Design (Sandgren)",
+  "module": "bocode.opt_problems.cec2020_rw.CEC2020_p21_33",
+  "extra": null,
+  "suite": "CEC2020 RW-Constrained",
+  "num_objectives": 1,
+  "num_constraints": 0,
+  "available_dimensions": 4,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 4,
+  "bounds": [
+    [
+      12,
+      60
+    ],
+    [
+      12,
+      60
+    ],
+    [
+      12,
+      60
+    ],
+    [
+      12,
+      60
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": 0.0,
+  "source": "CEC2020 Problem 31",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
+}

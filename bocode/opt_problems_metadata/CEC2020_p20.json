@@ -1,0 +1,34 @@
+{
+  "name": "CEC2020_p20",
+  "real_name": "Three-Bar Truss Design",
+  "module": "bocode.opt_problems.cec2020_rw.CEC2020_p1_20",
+  "extra": null,
+  "suite": "CEC2020 RW-Constrained",
+  "num_objectives": 1,
+  "num_constraints": 3,
+  "available_dimensions": 2,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 2,
+  "bounds": [
+    [
+      0,
+      1
+    ],
+    [
+      0,
+      1
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": 263.895843,
+  "source": "CEC2020 Problem 20",
+  "variable_types": [
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
+}

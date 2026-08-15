@@ -1,0 +1,34 @@
+{
+  "name": "RE24",
+  "real_name": "Hatch Cover Design",
+  "module": "bocode.opt_problems.reproblems.RE_problems",
+  "extra": null,
+  "suite": "Engineering (standalone)",
+  "num_objectives": 2,
+  "num_constraints": 0,
+  "available_dimensions": 2,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 2,
+  "bounds": [
+    [
+      0.5,
+      4.0
+    ],
+    [
+      0.5,
+      50.0
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": null,
+  "source": "RE benchmark problems (Tanabe & Ishibuchi, 2020). 16 unconstrained multi-objective problems where original constraints are reformulated as penalty objectives. Sign convention --------------- The RE problems are defined for **minimization**. BoCoDe **maximizes**, so every ``_evaluate_implementation`` here returns ``-fx`` (the negated original objectives) and ``ref_point`` is the negated published reference point. Reference points ---------------- Tanabe & Ishibuchi compute the hypervolume in the ",
+  "variable_types": [
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
+}

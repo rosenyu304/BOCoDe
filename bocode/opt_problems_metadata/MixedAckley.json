@@ -1,0 +1,54 @@
+{
+  "name": "MixedAckley",
+  "real_name": "Ackley (5-D scale-categorical mixed)",
+  "module": "bocode.opt_problems.synthetic_mixed.MixedAckley",
+  "extra": null,
+  "suite": "Mixed-variable synthetic",
+  "num_objectives": 1,
+  "num_constraints": 0,
+  "available_dimensions": 5,
+  "input_type": "mixed",
+  "scalable": false,
+  "dim": 5,
+  "bounds": [
+    [
+      -32.768,
+      32.768
+    ],
+    [
+      -32.768,
+      32.768
+    ],
+    [
+      -32.768,
+      32.768
+    ],
+    [
+      -32.768,
+      32.768
+    ],
+    [
+      0.0,
+      3.0
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Synthetic",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": 0.0,
+  "source": "D. H. Ackley. A Connectionist Machine for Genetic Hillclimbing. Kluwer Academic Publishers, 1987 (the Ackley function). Mixed-variable scale-categorical construction after the CoCaBO-style synthetic suites; see B. Ru et al., ICML 2020.",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    [
+      0.0,
+      1.0,
+      2.0,
+      3.0
+    ]
+  ],
+  "num_categorical_variables": 1
+}

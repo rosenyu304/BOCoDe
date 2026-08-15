@@ -1,0 +1,105 @@
+{
+  "name": "HPOB_7607_3913",
+  "real_name": "ranger tuning (HPO-B search space 7607, dataset 3913)",
+  "module": "bocode.opt_problems.hpo.HPOB",
+  "extra": null,
+  "suite": "HPO (LassoBench / HPO-B)",
+  "num_objectives": 1,
+  "num_constraints": 0,
+  "available_dimensions": 9,
+  "input_type": "mixed",
+  "scalable": false,
+  "dim": 9,
+  "bounds": [
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Hyperparameter Optimization",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": null,
+  "source": "S. Pineda-Arango, H. S. Jomaa, M. Wistuba, J. Grabocka. HPO-B: A Large-Scale Reproducible Benchmark for Black-Box HPO based on OpenML. Advances in Neural Information Processing Systems Datasets and Benchmarks, 2021. https://github.com/releaunifreiburg/HPO-B S. Gabriel. Fixed HPO-B. https://github.com/SamuelGabriel/FixedHPO-B",
+  "variable_types": [
+    "continuous",
+    [
+      0.0
+    ],
+    [
+      0.0,
+      0.6791061758995056,
+      0.7533007860183716,
+      0.7967257499694824,
+      0.8275429010391235,
+      0.8514493107795715,
+      0.8709837198257446,
+      0.8875006437301636,
+      0.9018087387084961,
+      0.914429783821106,
+      0.9257199168205261,
+      0.9359332323074341,
+      0.9452574849128723,
+      0.9538350105285645,
+      0.961776614189148,
+      0.9691702127456665,
+      0.976086437702179,
+      0.9825833439826965,
+      0.9887087941169739,
+      0.9945030212402344,
+      1.0
+    ],
+    "continuous",
+    "continuous",
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ]
+  ],
+  "num_categorical_variables": 6
+}

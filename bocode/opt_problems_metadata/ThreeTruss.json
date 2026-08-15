@@ -1,0 +1,34 @@
+{
+  "name": "ThreeTruss",
+  "real_name": "Three-Bar Truss Design",
+  "module": "bocode.opt_problems.engineering.ThreeTruss",
+  "extra": null,
+  "suite": "Engineering (standalone)",
+  "num_objectives": 1,
+  "num_constraints": 3,
+  "available_dimensions": 2,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 2,
+  "bounds": [
+    [
+      0,
+      1
+    ],
+    [
+      0,
+      1
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": null,
+  "source": "Yang XS, Hossein Gandomi A (2012) Bat algorithm: a novel approach for global engineering optimization. Engineering computations 29(5):464\u2013483",
+  "variable_types": [
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
+}

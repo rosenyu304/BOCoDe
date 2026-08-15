@@ -1,0 +1,64 @@
+{
+  "name": "Borehole",
+  "real_name": "Borehole Function (water flow rate through a borehole)",
+  "module": "bocode.opt_problems.engineering.Borehole",
+  "extra": null,
+  "suite": "Engineering (standalone)",
+  "num_objectives": 1,
+  "num_constraints": 0,
+  "available_dimensions": 8,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 8,
+  "bounds": [
+    [
+      0.05,
+      0.15
+    ],
+    [
+      100.0,
+      50000.0
+    ],
+    [
+      63070.0,
+      115600.0
+    ],
+    [
+      990.0,
+      1110.0
+    ],
+    [
+      63.1,
+      116.0
+    ],
+    [
+      700.0,
+      820.0
+    ],
+    [
+      1120.0,
+      1680.0
+    ],
+    [
+      9855.0,
+      12045.0
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": 7.819676,
+  "source": "Surjanovic & Bingham file the borehole function under *Emulation & Prediction* test functions, not optimization test problems (https://www.sfu.ca/~ssurjano/emulat.html), and GP+ likewise uses it only as a regression testbed. The tie-breakers, in order: 1. The one use of borehole as a Bayesian-optimization *objective* that we could find in the literature MINIMIZES it: Marmin, Chevalier & Ginsbourger report a unique global minimum at ``x* = (0, 1, 0, 0, 0, 1, 1, 0)`` in the unit cube. Evaluating t",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
+}

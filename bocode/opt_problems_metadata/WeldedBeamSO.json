@@ -1,0 +1,44 @@
+{
+  "name": "WeldedBeamSO",
+  "real_name": "Welded Beam Design (single-objective)",
+  "module": "bocode.opt_problems.engineering.WeldedBeamSO",
+  "extra": null,
+  "suite": "Engineering (standalone)",
+  "num_objectives": 1,
+  "num_constraints": 7,
+  "available_dimensions": 4,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 4,
+  "bounds": [
+    [
+      0.125,
+      5.0
+    ],
+    [
+      0.1,
+      10.0
+    ],
+    [
+      0.1,
+      10.0
+    ],
+    [
+      0.1,
+      5.0
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": null,
+  "source": "C. A. Coello Coello. Use of a self-adaptive penalty approach for engineering optimization problems. Computers in Industry 41(2):113-127, 2000. A. H. Gandomi, X.-S. Yang, A. H. Alavi. Mixed variable structural optimization using Firefly Algorithm. Computers & Structures 89(23-24):2325-2336, 2011. BoTorch synthetic test functions (WeldedBeamSO): https://github.com/meta-pytorch/botorch/blob/main/botorch/test_functions/synthetic.py",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
+}

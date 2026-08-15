@@ -1,0 +1,39 @@
+{
+  "name": "Allison",
+  "real_name": "Allison Analytical-Target-Cascading Test Problem",
+  "module": "bocode.opt_problems.engineering.Allison",
+  "extra": null,
+  "suite": "Engineering (standalone)",
+  "num_objectives": 1,
+  "num_constraints": 0,
+  "available_dimensions": 3,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 3,
+  "bounds": [
+    [
+      -1.0,
+      1.0
+    ],
+    [
+      -1.0,
+      1.0
+    ],
+    [
+      -1.0,
+      1.0
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": 0.5698,
+  "source": "J. T. Allison. Complex system optimization: a review of analytical target cascading, collaborative optimization, and other formulations. M.S. thesis, University of Michigan, 2004. P. Norheim, minimdo (thesis_allison application). https://github.com/norheim/minimdo",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
+}

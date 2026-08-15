@@ -1,0 +1,44 @@
+{
+  "name": "CEC2020_p29",
+  "real_name": "Gas Transmission Compressor Design (GTCD)",
+  "module": "bocode.opt_problems.cec2020_rw.CEC2020_p21_33",
+  "extra": null,
+  "suite": "CEC2020 RW-Constrained",
+  "num_objectives": 1,
+  "num_constraints": 1,
+  "available_dimensions": 4,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 4,
+  "bounds": [
+    [
+      20,
+      50
+    ],
+    [
+      1,
+      10
+    ],
+    [
+      20,
+      50
+    ],
+    [
+      0.1,
+      60
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": 2964895.4173,
+  "source": "CEC2020 Problem 29",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
+}

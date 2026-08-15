@@ -1,0 +1,56 @@
+{
+  "name": "ColumnBuckling",
+  "real_name": "Column Buckling (Euler critical load)",
+  "module": "bocode.opt_problems.engineering.ColumnBuckling",
+  "extra": null,
+  "suite": "Engineering (standalone)",
+  "num_objectives": 1,
+  "num_constraints": 0,
+  "available_dimensions": 4,
+  "input_type": "mixed",
+  "scalable": false,
+  "dim": 4,
+  "bounds": [
+    [
+      0.5,
+      1.5
+    ],
+    [
+      73.1,
+      200.0
+    ],
+    [
+      0.5,
+      2.0
+    ],
+    [
+      9.49,
+      29.5
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": null,
+  "source": "A. Yousefpour, Z. Zanjani Foumani, M. Shishehbor, C. Mora, R. Bostanabad. GP+: a Python library for kernel-based learning via Gaussian processes. Advances in Engineering Software, 2024. https://github.com/Bostanabad-Research-Group/GP-Plus",
+  "variable_types": [
+    "continuous",
+    [
+      73.1,
+      200.0
+    ],
+    [
+      0.5,
+      0.7,
+      1.0,
+      2.0
+    ],
+    [
+      9.49,
+      12.1,
+      29.5
+    ]
+  ],
+  "num_categorical_variables": 3
+}

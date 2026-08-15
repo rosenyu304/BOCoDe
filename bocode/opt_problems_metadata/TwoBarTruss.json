@@ -1,0 +1,34 @@
+{
+  "name": "TwoBarTruss",
+  "real_name": "Two-Bar Truss Design (Rao)",
+  "module": "bocode.opt_problems.engineering.TwoBarTruss",
+  "extra": null,
+  "suite": "Engineering (standalone)",
+  "num_objectives": 2,
+  "num_constraints": 5,
+  "available_dimensions": 2,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 2,
+  "bounds": [
+    [
+      0,
+      1
+    ],
+    [
+      0,
+      1
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": null,
+  "source": "S. S. Rao. Game theory approach for multiobjective structural optimization. Computers and Structures 26(1):119\u2013127, 1987 Reference point (DERIVED, not published): no reference point or approximated ideal/nadir point is published for this formulation. Derived with the standard convention (Tanabe & Ishibuchi, Sec. 3.1; Picard & Schiffmann, Sec. V-A) ``r = z_ideal + 1.1 * (z_nadir - z_ideal)`` in the minimization frame, where ``z_ideal`` / ``z_nadir`` are the min / max over the non-dominated set of",
+  "variable_types": [
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
+}

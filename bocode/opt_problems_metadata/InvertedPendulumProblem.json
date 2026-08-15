@@ -1,0 +1,29 @@
+{
+  "name": "InvertedPendulumProblem",
+  "real_name": "MuJoCo InvertedPendulum-v5 \u2014 Constant-Action Control",
+  "module": "bocode.opt_problems.control.mujoco.MujocoFuncs",
+  "extra": "mujoco",
+  "suite": "MuJoCo control",
+  "num_objectives": 1,
+  "num_constraints": 0,
+  "available_dimensions": 1,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 1,
+  "bounds": [
+    [
+      -3.0,
+      3.0
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Control",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": null,
+  "source": "",
+  "variable_types": [
+    "continuous"
+  ],
+  "num_categorical_variables": 0
+}

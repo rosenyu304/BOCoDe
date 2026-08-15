@@ -1,0 +1,121 @@
+{
+  "name": "HPOBSurr_7609_3903",
+  "real_name": "ranger tuning (HPO-B search space 7609, dataset 3903)",
+  "module": "bocode.opt_problems.hpo.HPOBSurrogate",
+  "extra": "hpobsurr",
+  "suite": "HPO (LassoBench / HPO-B)",
+  "num_objectives": 1,
+  "num_constraints": 0,
+  "available_dimensions": 9,
+  "input_type": "mixed",
+  "scalable": false,
+  "dim": 9,
+  "bounds": [
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Hyperparameter Optimization",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": null,
+  "source": "S. Pineda-Arango, H. S. Jomaa, M. Wistuba, J. Grabocka. HPO-B: A Large-Scale Reproducible Benchmark for Black-Box HPO based on OpenML. NeurIPS Datasets and Benchmarks, 2021. https://github.com/releaunifreiburg/HPO-B S. Muller, M. Feurer, N. Hollmann, F. Hutter. PFNs4BO: In-Context Learning for Bayesian Optimization. ICML 2023.",
+  "variable_types": [
+    "continuous",
+    [
+      0.0
+    ],
+    [
+      0.0,
+      0.6388418078422546,
+      0.7086436152458191,
+      0.7494974732398987,
+      0.7784900069236755,
+      0.8009809851646423,
+      0.8193588256835938,
+      0.8348978161811829,
+      0.8483588099479675,
+      0.8602325916290283,
+      0.8708542585372925,
+      0.8804629445075989,
+      0.8892350792884827,
+      0.8973047733306885,
+      0.9047762155532837,
+      0.911732017993927,
+      0.9182388186454773,
+      0.9243510365486145,
+      0.9301137924194336,
+      0.9355649948120117,
+      0.9407364726066589,
+      0.9456556439399719,
+      0.9503459334373474,
+      0.9548277258872986,
+      0.9591187834739685,
+      0.9632346034049988,
+      0.9671890139579773,
+      0.970994234085083,
+      0.9746609926223755,
+      0.9781990647315979,
+      0.9816172122955322,
+      0.9849233031272888,
+      0.9881243705749512,
+      0.9912269711494446,
+      0.994236946105957,
+      0.9971596002578735,
+      1.0
+    ],
+    "continuous",
+    "continuous",
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ]
+  ],
+  "num_categorical_variables": 6
+}

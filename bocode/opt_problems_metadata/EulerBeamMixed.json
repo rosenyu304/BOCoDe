@@ -1,0 +1,52 @@
+{
+  "name": "EulerBeamMixed",
+  "real_name": "Euler-Bernoulli Beam Bending (mixed-variable)",
+  "module": "bocode.opt_problems.engineering.EulerBeamMixed",
+  "extra": null,
+  "suite": "Engineering (standalone)",
+  "num_objectives": 1,
+  "num_constraints": 0,
+  "available_dimensions": 3,
+  "input_type": "mixed",
+  "scalable": false,
+  "dim": 3,
+  "bounds": [
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.0,
+      1.0
+    ],
+    [
+      0.08,
+      0.38
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": 1286.97,
+  "source": "J. Cuesta-Ramirez, R. Le Riche, O. Roustant, G. Perrin, C. Durantin, A. Gliere. A comparison of mixed-variables Bayesian optimization approaches. Advances in Modeling and Simulation in Engineering Sciences, 2022. arXiv:2111.01533. O. Roustant et al. Group kernels for Gaussian process metamodels with categorical inputs. SIAM/ASA J. Uncertainty Quantification 8(2):775-806, 2020.",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    [
+      0.083,
+      0.139,
+      0.38,
+      0.08,
+      0.133,
+      0.363,
+      0.086,
+      0.136,
+      0.36,
+      0.092,
+      0.138,
+      0.369
+    ]
+  ],
+  "num_categorical_variables": 1
+}

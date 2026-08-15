@@ -1,0 +1,39 @@
+{
+  "name": "EulerBernoulliBeamBending",
+  "real_name": "Euler-Bernoulli Beam Bending",
+  "module": "bocode.opt_problems.engineering.EulerBernoulliBeamBending",
+  "extra": null,
+  "suite": "Engineering (standalone)",
+  "num_objectives": 1,
+  "num_constraints": 0,
+  "available_dimensions": 3,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 3,
+  "bounds": [
+    [
+      0,
+      1
+    ],
+    [
+      0,
+      1
+    ],
+    [
+      0,
+      1
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": 1287.385,
+  "source": "Cuesta Ramirez, J., Le Riche, R., Roustant, O. et al. (2022) A comparison of mixed-variables Bayesian optimization approaches. Adv. Model. and Simul. in Eng. Sci. 9, 6 .",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
+}

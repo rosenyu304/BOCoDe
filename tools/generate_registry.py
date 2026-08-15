@@ -1,0 +1,107 @@
+"""Regenerate ``bocode/_registry_data.json`` from the problem source files.
+
+Scans ``bocode/opt_problems`` for problem classes (top-level ``class`` defs that
+are not helpers/bases) and records, per problem name, the defining module and
+the optional-dependency extra it needs. Run from the repo root::
+
+    python tools/generate_registry.py
+
+Keep this in sync with ``bocode/registry.py`` (which loads the JSON at import
+time) and ``tools/generate_metadata.py``.
+"""
+
+from __future__ import annotations
+
+import json
+import re
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+PROBLEMS = ROOT / "bocode" / "opt_problems"
+OUT = ROOT / "bocode" / "_registry_data.json"
+
+# Classes that are bases/helpers, not standalone benchmark problems.
+SKIP = {
+    "MultiObjBotorchProblem",
+    "BaseModactProblem",
+    "MaterialsDatasetProblem",
+    "ConstantOffsetFn",
+    "NormalizedInputFn",
+    "Trajectory",
+    "PointBSpline",
+    "RoverDomain",
+    "AABoxes",
+    "NegGeom",
+    "UnionGeom",
+    "ConstObstacleCost",
+    "ConstCost",
+    "AdditiveCosts",
+    "GMCost",
+    "PushReward",
+    "guiWorld",
+    "b2WorldInterface",
+    "end_effector",
+}
+
+
+def extra_for(modpath: str, cls: str):
+    if "/control/mujoco/" in modpath:
+        return "mujoco"
+    if "/control/" in modpath:
+        return "control"
+    if "/modact/" in modpath:
+        return "modact"
+    if "/engibench/" in modpath:
+        return "engibench"
+    if cls.startswith("HPOBSurr"):
+        return "hpobsurr"  # HPO-B continuous-surrogate pools fit an xgboost surrogate
+    if cls.startswith("Lasso") or cls == "SVM":
+        return "hpo"  # clean-room weighted-Lasso / SVM problems use scikit-learn
+    if cls.startswith("Bayesmark"):
+        return "hpo"  # Bayesmark continuous-relaxation sklearn HPO tasks
+    if cls in ("Mazda", "Mazda_SCA"):
+        return "mazda"
+    if cls == "ORPD118":
+        return "pandapower"  # IEEE 118-bus ORPD runs pandapower's AC power flow
+    if cls == "BikeBench64":
+        return "bikebench"  # BikeBench surrogates (installed from source)
+    if cls == "CifarAttack85":
+        return "casmoattack"  # h5py, to read the Casmopolitan CIFAR CNN weights
+    if cls.startswith("AIG_"):
+        return "eda"  # Berkeley ABC + EPFL circuits + MCBO's EDA utilities
+    if cls == "QPowerModel":
+        return "neorl"
+    if cls == "RobotPush":
+        return "box2d"
+    if cls.startswith("Truss") and cls not in ("TwoBarTruss", "ThreeTruss"):
+        return "truss"
+    return None
+
+
+def main() -> None:
+    reg = {}
+    for f in sorted(PROBLEMS.rglob("*.py")):
+        if (
+            "_vendor" in str(f)
+            or "/synthetic/"
+            in str(f).replace(
+                "\\", "/"
+            )  # test functions: list_synthetic(), not the registry
+            or f.name == "__init__.py"
+            or f.name.startswith("_")
+            or f.name == "helperFuncs.py"
+        ):
+            continue
+        classes = re.findall(r"^class\s+([A-Za-z_0-9]+)", f.read_text(), re.M)
+        modpath = str(f.relative_to(ROOT / "bocode")).replace("/", ".")[:-3]
+        for c in classes:
+            # ``_``-prefixed classes are private bases (e.g. ``_REProblem``), not problems.
+            if c in SKIP or c.startswith("_"):
+                continue
+            reg[c] = [modpath, extra_for(str(f), c)]
+    OUT.write_text(json.dumps({k: reg[k] for k in sorted(reg)}, indent=2) + "\n")
+    print(f"wrote {len(reg)} entries to {OUT}")
+
+
+if __name__ == "__main__":
+    main()

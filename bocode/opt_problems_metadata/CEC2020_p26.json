@@ -1,0 +1,134 @@
+{
+  "name": "CEC2020_p26",
+  "real_name": "Four-Stage Gear Box Problem",
+  "module": "bocode.opt_problems.cec2020_rw.CEC2020_p21_33",
+  "extra": null,
+  "suite": "CEC2020 RW-Constrained",
+  "num_objectives": 1,
+  "num_constraints": 86,
+  "available_dimensions": 22,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 22,
+  "bounds": [
+    [
+      6.51,
+      76.49
+    ],
+    [
+      6.51,
+      76.49
+    ],
+    [
+      6.51,
+      76.49
+    ],
+    [
+      6.51,
+      76.49
+    ],
+    [
+      6.51,
+      76.49
+    ],
+    [
+      6.51,
+      76.49
+    ],
+    [
+      6.51,
+      76.49
+    ],
+    [
+      6.51,
+      76.49
+    ],
+    [
+      0.51,
+      4.49
+    ],
+    [
+      0.51,
+      4.49
+    ],
+    [
+      0.51,
+      4.49
+    ],
+    [
+      0.51,
+      4.49
+    ],
+    [
+      0.51,
+      9.49
+    ],
+    [
+      0.51,
+      9.49
+    ],
+    [
+      0.51,
+      9.49
+    ],
+    [
+      0.51,
+      9.49
+    ],
+    [
+      0.51,
+      9.49
+    ],
+    [
+      0.51,
+      9.49
+    ],
+    [
+      0.51,
+      9.49
+    ],
+    [
+      0.51,
+      9.49
+    ],
+    [
+      0.51,
+      9.49
+    ],
+    [
+      0.51,
+      9.49
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": 35.359232,
+  "source": "CEC2020 Problem 26",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
+}

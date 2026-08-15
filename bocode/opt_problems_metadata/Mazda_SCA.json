@@ -1,0 +1,20 @@
+{
+  "name": "Mazda_SCA",
+  "real_name": "Mazda Structural Design \u2014 Two-Car Case (SCA)",
+  "module": "bocode.opt_problems.engineering.Mazda",
+  "extra": "mazda",
+  "suite": "Engineering (standalone)",
+  "num_objectives": 4,
+  "num_constraints": 36,
+  "available_dimensions": 148,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 148,
+  "bounds": null,
+  "num_integer_variables": null,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": null,
+  "source": "https://ladse.eng.isas.jaxa.jp/benchmark/ Reference point (DERIVED, not published): the Mazda benchmark publishes no hypervolume reference point and no approximated ideal/nadir point. Derived with the standard convention (Tanabe & Ishibuchi, Sec. 3.1; Picard & Schiffmann, Sec. V-A) ``r = z_ideal + 1.1 * (z_nadir - z_ideal)`` in the minimization frame, where ``z_ideal`` / ``z_nadir`` are the min / max over the non-dominated set of a fixed Latin-hypercube sample (``problem.sample(2048, seed=0)``, "
+}

@@ -1,0 +1,20 @@
+{
+  "name": "RobotPush",
+  "real_name": "14-D Robot Pushing",
+  "module": "bocode.opt_problems.engineering.RobotPush",
+  "extra": "box2d",
+  "suite": "Engineering (standalone)",
+  "num_objectives": 1,
+  "num_constraints": 0,
+  "available_dimensions": 14,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 14,
+  "bounds": null,
+  "num_integer_variables": null,
+  "application": "Engineering",
+  "convex": false,
+  "np_hard": "unknown",
+  "f_opt": null,
+  "source": "https://github.com/zi-w/Ensemble-Bayesian-Optimization/tree/4e6f9ed04833cc2e21b5906b1181bc067298f914"
+}

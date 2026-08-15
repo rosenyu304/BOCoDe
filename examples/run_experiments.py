@@ -1,0 +1,286 @@
+"""Batch experiment runner — every algorithm against every compatible problem.
+
+Runs Bayesian-optimization baselines over a grid of (algorithm x problem x seed),
+saving the full per-iteration trace of each run to a ``.npz`` and writing a summary
+row (best value, and the gap to the known optimum where one is recorded). Designed
+to scale from a laptop smoke test to a full 100+-problem sweep on a cluster.
+
+Algorithm/problem compatibility is decided from each problem's metadata
+(``num_objectives``, ``num_constraints``): single/multi-objective and
+constrained/unconstrained problems are matched to the algorithms in the
+corresponding ``algorithms/`` sub-package.
+
+Examples
+--------
+Smoke test (a few problems, all compatible algorithms, one seed)::
+
+    python examples/run_experiments.py --problems Branin Sellar PressureVessel --seeds 0
+
+Full sweep over every registered problem and 5 seeds::
+
+    python examples/run_experiments.py --problems all --seeds 0 10 20 30 40 --iters 50
+
+One shard of a SLURM array job (see examples/README.md)::
+
+    python examples/run_experiments.py --problems all --seeds 0 10 20 \
+        --task-id $SLURM_ARRAY_TASK_ID --num-tasks $SLURM_ARRAY_TASK_COUNT
+
+The TFM algorithms (GIT-BO, PFN-CEI) need a separate TabPFN environment and are
+excluded unless ``--include-tfm`` is passed (see docs/tfm_setup.md).
+"""
+
+from __future__ import annotations
+
+import argparse
+import importlib
+import inspect
+import sys
+import traceback
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT))
+
+import bocode  # noqa: E402
+
+# Algorithm sub-package per (objectives, constrained) category. TFM modules
+# (git_bo, pfn_cei) are listed separately and only run with --include-tfm.
+_ALGOS = {
+    ("single", False): [
+        "random_search",
+        "single_task_gp",
+        "standard_gp",
+        "vanilla_highdim_bo",
+        "turbo",
+        "baxus",
+    ],
+    ("single", True): ["random_search", "constrained_ei", "scbo"],
+    ("multi", False): ["random_search", "qnehvi", "qnparego", "mesmo"],
+    ("multi", True): ["constrained_qnehvi", "constrained_qparego"],
+}
+_PKG = {
+    ("single", False): "algorithms.single_obj",
+    ("single", True): "algorithms.single_obj_constrained",
+    ("multi", False): "algorithms.multi_obj",
+    ("multi", True): "algorithms.multi_obj_constrained",
+}
+_TFM = {  # module name -> sub-package (need the TabPFN env)
+    "git_bo": "algorithms.single_obj",
+    "pfn_cei": "algorithms.single_obj_constrained",
+}
+# Mixed-variable algorithms (opt-in): available for any single-objective problem
+# (they fold constraints into a penalty). Distinct labels so traces don't collide.
+_MIXED = {
+    "single_task_gp_mixed": "algorithms.single_obj_mixed_variable.single_task_gp",
+    "random_search_mixed": "algorithms.single_obj_mixed_variable.random_search",
+}
+
+
+def _category(name: str):
+    """Return ('single'|'multi', constrained: bool) from the class attributes.
+
+    Uses class attributes so it works for both registered problems and the
+    synthetic test functions (which are not in the metadata registry).
+    """
+    cls = bocode.get_problem(name)
+    objs = "multi" if (getattr(cls, "num_objectives", 1) or 1) >= 2 else "single"
+    return objs, (getattr(cls, "num_constraints", 0) or 0) > 0
+
+
+def _known_optimum(name: str, problem) -> float | None:
+    """Known optimum (min sense) from metadata or the instance, else None."""
+    opt = None
+    if name in bocode.registry.PROBLEM_REGISTRY:
+        opt = bocode.get_metadata(name).get("f_opt")
+    if opt is None:
+        opt = getattr(problem, "optimum", None)
+        if isinstance(opt, (list, tuple)) and len(opt) == 1:
+            opt = opt[0]
+    return opt if isinstance(opt, (int, float)) else None
+
+
+def _dim_of(name: str) -> int | None:
+    """Problem dimension from metadata (registered) or the class attribute."""
+    if name in bocode.registry.PROBLEM_REGISTRY:
+        d = bocode.get_metadata(name).get("dim")
+        if d is not None:
+            return d
+    return (
+        getattr(bocode.get_problem(name), "available_dimensions", None)
+        if not isinstance(
+            getattr(bocode.get_problem(name), "available_dimensions", None),
+            (list, tuple),
+        )
+        else None
+    )
+
+
+def _in_dim_range(name: str, lo: int | None, hi: int | None) -> bool:
+    d = _dim_of(name)
+    if d is None:
+        return False  # unknown dim -> exclude when a dim filter is active
+    return (lo is None or d >= lo) and (hi is None or d <= hi)
+
+
+def _algos_for(name: str, include_tfm: bool, selected: list[str] | None = None):
+    """(module_path, label) pairs to run for this problem.
+
+    By default this is the standard per-category baseline set (plus the TFM methods
+    if ``include_tfm``). If ``selected`` is given, it restricts/extends to those
+    labels, drawn from everything compatible with the problem's category — including
+    the opt-in mixed-variable algorithms (single-objective only).
+    """
+    cat = _category(name)
+    available = {a: f"{_PKG[cat]}.{a}" for a in _ALGOS[cat]}
+    if cat[0] == "single":
+        available.update(_MIXED)
+    if cat == ("single", False):
+        available["git_bo"] = "algorithms.single_obj.git_bo"
+    if cat == ("single", True):
+        available["pfn_cei"] = "algorithms.single_obj_constrained.pfn_cei"
+
+    if selected is not None:
+        labels = [a for a in selected if a in available]
+    else:
+        labels = list(_ALGOS[cat])
+        if include_tfm and cat == ("single", False):
+            labels.append("git_bo")
+        if include_tfm and cat == ("single", True):
+            labels.append("pfn_cei")
+    return [(available[a], a) for a in labels]
+
+
+def _run_one(modpath, algo, problem_name, seed, n_init, iters, outdir):
+    """Run a single (algorithm, problem, seed); return a summary dict or None."""
+    mod = importlib.import_module(modpath)
+    problem = bocode.get_problem(problem_name)()
+    fn = mod.optimize_problem
+    # random_search takes (problem, iters, seed); BO methods add n_init.
+    kwargs = {"seed": seed, "iters": iters}
+    if "n_init" in inspect.signature(fn).parameters:
+        kwargs["n_init"] = n_init
+    res = fn(problem, **kwargs)
+
+    path = Path(outdir) / f"{algo}_{problem_name}_seed{seed}.npz"
+    res.to_npz(str(path))
+
+    # optimality gap for single-objective problems with a known optimum
+    gap = None
+    f_opt = _known_optimum(problem_name, problem)
+    if f_opt is not None and getattr(problem, "num_objectives", 1) == 1:
+        gap = (-res.best) - f_opt  # algorithms maximize -obj; -best is the min found
+    return {
+        "algo": algo,
+        "problem": problem_name,
+        "seed": seed,
+        "best": res.best,
+        "gap": gap,
+        "npz": path.name,
+    }
+
+
+def main() -> None:
+    p = argparse.ArgumentParser(
+        description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
+    )
+    p.add_argument(
+        "--problems", nargs="+", required=True, help="problem names, or 'all'"
+    )
+    p.add_argument(
+        "--algorithms",
+        nargs="+",
+        default=None,
+        help="restrict to these algorithm labels (e.g. single_task_gp turbo "
+        "single_task_gp_mixed); default = the standard per-category baselines",
+    )
+    # When --problems is 'all', these narrow the set via bocode.list_problems(...).
+    p.add_argument(
+        "--objectives", type=int, default=None, help="filter 'all' by #objectives"
+    )
+    mode = p.add_mutually_exclusive_group()
+    mode.add_argument(
+        "--constrained",
+        dest="constrained",
+        action="store_const",
+        const=True,
+        default=None,
+    )
+    mode.add_argument(
+        "--unconstrained", dest="constrained", action="store_const", const=False
+    )
+    p.add_argument(
+        "--input-type", choices=["continuous", "mixed", "discrete"], default=None
+    )
+    p.add_argument(
+        "--max-dim", type=int, default=None, help="keep problems with dim <= this"
+    )
+    p.add_argument(
+        "--min-dim", type=int, default=None, help="keep problems with dim >= this"
+    )
+    p.add_argument("--seeds", nargs="+", type=int, default=[0])
+    p.add_argument("--n-init", type=int, default=10)
+    p.add_argument("--iters", type=int, default=50)
+    p.add_argument("--outdir", default=str(Path(__file__).parent / "results"))
+    p.add_argument(
+        "--include-tfm",
+        action="store_true",
+        help="also run GIT-BO/PFN-CEI (needs the TabPFN env)",
+    )
+    p.add_argument(
+        "--task-id",
+        type=int,
+        default=0,
+        help="this shard's index (for cluster array jobs)",
+    )
+    p.add_argument("--num-tasks", type=int, default=1, help="total number of shards")
+    args = p.parse_args()
+
+    Path(args.outdir).mkdir(parents=True, exist_ok=True)
+    if args.problems == ["all"]:
+        problems = bocode.list_problems(
+            num_objectives=args.objectives,
+            constrained=args.constrained,
+            input_type=args.input_type,
+        )
+    else:
+        problems = args.problems
+
+    if args.max_dim is not None or args.min_dim is not None:
+        problems = [p for p in problems if _in_dim_range(p, args.min_dim, args.max_dim)]
+
+    # build the full (algorithm x problem x seed) job list, then take this shard
+    jobs = []
+    for name in problems:
+        for modpath, algo in _algos_for(name, args.include_tfm, args.algorithms):
+            for seed in args.seeds:
+                jobs.append((modpath, algo, name, seed))
+    jobs = jobs[args.task_id :: args.num_tasks]
+    print(f"shard {args.task_id}/{args.num_tasks}: {len(jobs)} runs -> {args.outdir}")
+
+    summary, failures = [], []
+    for modpath, algo, name, seed in jobs:
+        tag = f"{algo} / {name} / seed{seed}"
+        try:
+            row = _run_one(
+                modpath, algo, name, seed, args.n_init, args.iters, args.outdir
+            )
+            gap = f"  gap={row['gap']:.4g}" if row["gap"] is not None else ""
+            print(f"  OK  {tag}: best={row['best']:.6g}{gap}")
+            summary.append(row)
+        except Exception as exc:  # noqa: BLE001 - log and keep going
+            print(f"  SKIP {tag}: {type(exc).__name__}: {exc}")
+            failures.append((tag, traceback.format_exc()))
+
+    # write a summary CSV for this shard
+    csv = Path(args.outdir) / f"summary_task{args.task_id}.csv"
+    with csv.open("w") as fh:
+        fh.write("algorithm,problem,seed,best,gap,npz\n")
+        for r in summary:
+            fh.write(
+                f"{r['algo']},{r['problem']},{r['seed']},{r['best']},{r['gap']},{r['npz']}\n"
+            )
+    print(f"\n{len(summary)} ok, {len(failures)} skipped. Summary: {csv}")
+
+
+if __name__ == "__main__":
+    main()

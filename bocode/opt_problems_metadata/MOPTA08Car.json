@@ -1,0 +1,20 @@
+{
+  "name": "MOPTA08Car",
+  "real_name": "MOPTA08 Vehicle Mass Minimization",
+  "module": "bocode.opt_problems.engineering.MOPTA08Car",
+  "extra": null,
+  "suite": "Engineering (standalone)",
+  "num_objectives": 1,
+  "num_constraints": 68,
+  "available_dimensions": 124,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 124,
+  "bounds": null,
+  "num_integer_variables": null,
+  "application": "Engineering",
+  "convex": false,
+  "np_hard": "unknown",
+  "f_opt": null,
+  "source": "Minimize the mass of a vehicle design (124 vars, 68 constraints). The MOPTA08 car problem: the executable returns the vehicle *mass* (to be minimized, ``optimum`` ~ 222.74) followed by 68 constraint values that are feasible when ``<= 0``. BoCoDe maximizes, so the mass is negated. https://leonard.papenmeier.io/2023/02/09/mopta08-executables.html"
+}

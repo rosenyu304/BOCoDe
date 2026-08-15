@@ -1,0 +1,79 @@
+{
+  "name": "CarContinuous",
+  "real_name": "",
+  "module": "bocode.opt_problems.engineering.Car",
+  "extra": null,
+  "suite": "Engineering (standalone)",
+  "num_objectives": 1,
+  "num_constraints": 10,
+  "available_dimensions": 11,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 11,
+  "bounds": [
+    [
+      0.5,
+      1.5
+    ],
+    [
+      0.45,
+      1.35
+    ],
+    [
+      0.5,
+      1.5
+    ],
+    [
+      0.5,
+      1.5
+    ],
+    [
+      0.5,
+      1.5
+    ],
+    [
+      0.5,
+      1.5
+    ],
+    [
+      0.5,
+      1.5
+    ],
+    [
+      0.192,
+      0.345
+    ],
+    [
+      0.192,
+      0.345
+    ],
+    [
+      -20,
+      0
+    ],
+    [
+      -20,
+      0
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": null,
+  "source": "Fully-continuous relaxation of Car: all 11 variables continuous, 10 inequality constraints. A well-posed SO-constrained engineering problem (feasible region ~8% by volume).",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
+}

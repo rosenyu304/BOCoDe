@@ -1,0 +1,124 @@
+{
+  "name": "CTSE3",
+  "real_name": "MODAct Electro-Mechanical Actuator Design \u2014 Cost, Torque Excess, Gear Safety Factor & Efficiency (constraint level 3)",
+  "module": "bocode.opt_problems.modact.MODAct",
+  "extra": "modact",
+  "suite": "MODAct (actuator design)",
+  "num_objectives": 4,
+  "num_constraints": 10,
+  "available_dimensions": 20,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 20,
+  "bounds": [
+    [
+      0.0,
+      4.999999
+    ],
+    [
+      0.3,
+      2.0
+    ],
+    [
+      9.0,
+      40.999999
+    ],
+    [
+      30.0,
+      80.999999
+    ],
+    [
+      0.3,
+      1.0
+    ],
+    [
+      5.0,
+      15.0
+    ],
+    [
+      -20.0,
+      20.0
+    ],
+    [
+      -3.141592653589793,
+      3.141592653589793
+    ],
+    [
+      9.0,
+      40.999999
+    ],
+    [
+      30.0,
+      80.999999
+    ],
+    [
+      0.3,
+      1.0
+    ],
+    [
+      5.0,
+      15.0
+    ],
+    [
+      -20.0,
+      20.0
+    ],
+    [
+      -3.141592653589793,
+      3.141592653589793
+    ],
+    [
+      9.0,
+      40.999999
+    ],
+    [
+      30.0,
+      80.999999
+    ],
+    [
+      0.3,
+      1.0
+    ],
+    [
+      5.0,
+      15.0
+    ],
+    [
+      -20.0,
+      20.0
+    ],
+    [
+      -3.141592653589793,
+      3.141592653589793
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": null,
+  "source": "C. Picard and J. Schiffmann. Realistic Constrained Multi-Objective Optimization Benchmark Problems from Design. IEEE Transactions on Evolutionary Computation 25(2):234-246, 2021. https://ieeexplore.ieee.org/document/9179777 https://github.com/epfl-lamd/modact Search space (continuous, but piecewise-continuous response) ----------------------------------------------------------- All 20 variables are continuous doubles, exactly as in the official pymoo adapter (``vtype=np.double``). Do NOT declare",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
+}

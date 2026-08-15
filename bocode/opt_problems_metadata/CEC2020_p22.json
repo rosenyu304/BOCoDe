@@ -1,0 +1,69 @@
+{
+  "name": "CEC2020_p22",
+  "real_name": "Planetary Gear Train Design Optimization",
+  "module": "bocode.opt_problems.cec2020_rw.CEC2020_p21_33",
+  "extra": null,
+  "suite": "CEC2020 RW-Constrained",
+  "num_objectives": 1,
+  "num_constraints": 11,
+  "available_dimensions": 9,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 9,
+  "bounds": [
+    [
+      16.51,
+      96.49
+    ],
+    [
+      13.51,
+      54.49
+    ],
+    [
+      13.51,
+      51.49
+    ],
+    [
+      16.51,
+      46.49
+    ],
+    [
+      13.51,
+      51.49
+    ],
+    [
+      47.51,
+      124.49
+    ],
+    [
+      0.51,
+      3.49
+    ],
+    [
+      0.51,
+      6.49
+    ],
+    [
+      0.51,
+      6.49
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": 0.525769,
+  "source": "CEC2020 Problem 22",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
+}

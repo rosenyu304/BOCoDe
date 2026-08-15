@@ -1,0 +1,20 @@
+{
+  "name": "SVM",
+  "real_name": "Weighted-SVR Hyperparameter Tuning on UCI Slice Localization (388-D)",
+  "module": "bocode.opt_problems.hpo.SVM",
+  "extra": "hpo",
+  "suite": "HPO (LassoBench / HPO-B)",
+  "num_objectives": 1,
+  "num_constraints": 0,
+  "available_dimensions": 388,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 388,
+  "bounds": null,
+  "num_integer_variables": null,
+  "application": "Hyperparameter Optimization",
+  "convex": false,
+  "np_hard": "unknown",
+  "f_opt": null,
+  "source": ""
+}

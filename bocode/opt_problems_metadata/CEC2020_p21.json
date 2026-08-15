@@ -1,0 +1,49 @@
+{
+  "name": "CEC2020_p21",
+  "real_name": "Multiple Disk Clutch Brake Design",
+  "module": "bocode.opt_problems.cec2020_rw.CEC2020_p21_33",
+  "extra": null,
+  "suite": "CEC2020 RW-Constrained",
+  "num_objectives": 1,
+  "num_constraints": 8,
+  "available_dimensions": 5,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 5,
+  "bounds": [
+    [
+      60.0,
+      80.0
+    ],
+    [
+      90.0,
+      110.0
+    ],
+    [
+      1.0,
+      3.0
+    ],
+    [
+      0.0,
+      1000.0
+    ],
+    [
+      2.0,
+      9.0
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": 0.235242,
+  "source": "CEC2020 Problem 21",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
+}

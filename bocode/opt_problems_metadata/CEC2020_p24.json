@@ -1,0 +1,59 @@
+{
+  "name": "CEC2020_p24",
+  "real_name": "Robot Gripper Problem",
+  "module": "bocode.opt_problems.cec2020_rw.CEC2020_p21_33",
+  "extra": null,
+  "suite": "CEC2020 RW-Constrained",
+  "num_objectives": 1,
+  "num_constraints": 7,
+  "available_dimensions": 7,
+  "input_type": "continuous",
+  "scalable": false,
+  "dim": 7,
+  "bounds": [
+    [
+      10,
+      150
+    ],
+    [
+      10,
+      150
+    ],
+    [
+      100,
+      200
+    ],
+    [
+      0,
+      50
+    ],
+    [
+      10,
+      150
+    ],
+    [
+      100,
+      300
+    ],
+    [
+      1,
+      3.14
+    ]
+  ],
+  "num_integer_variables": 0,
+  "application": "Engineering",
+  "convex": "unknown",
+  "np_hard": "unknown",
+  "f_opt": 2.528792,
+  "source": "CEC2020 Problem 24",
+  "variable_types": [
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous",
+    "continuous"
+  ],
+  "num_categorical_variables": 0
+}
