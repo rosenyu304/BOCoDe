@@ -187,11 +187,11 @@ docstring convention.
 # Citing
 
 ```bibtex
-@misc{yu2025bocode,
-    author={Rosen Ting-Ying Yu, Christophe Hatterer, Advaith Narayanan, Cyril Picard, Faez Ahmed},
-    title = {{BOCoDe}: Benchmarks for Optimization and Computational Design},
-    year={2025},
-    url={https://github.com/rosenyu304/BOCoDe}
+@article{yu2026bocode,
+  title={BOCoDe: Engineering-Centered Benchmarking for Bayesian Optimization},
+  author={Yu, Rosen Ting-Ying and Hatterer, Christophe and Narayanan, Advaith and Picard, Cyril and Ahmed, Faez},
+  journal={arXiv preprint arXiv:2608.15073},
+  year={2026}
 }
 ```
 
