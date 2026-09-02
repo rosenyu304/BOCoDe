@@ -1,0 +1,26 @@
+# BOCoDe
+
+> BOCoDe (Benchmarks for Optimization and Computational Design) is a
+> PyTorch-native benchmark library of 307 black-box optimization problems —
+> 159 engineering design, 80 hyperparameter-optimization, 68 synthetic —
+> behind one API, with 31 reference Bayesian-optimization and evolutionary
+> baselines. `pip install bocode`.
+
+Key conventions: every objective is MAXIMIZED; constraints are feasible when
+`<= 0`; inputs are `torch.Tensor` of shape `(batch, dim)` inside
+`problem.bounds`. Core API: `bocode.list_problems(**filters)`,
+`bocode.get_metadata(name)`, `bocode.get_problem(name)()`,
+`problem.sample(n, seed)`, `problem.evaluate(X) -> (objectives, constraints)`.
+
+## Docs
+
+- [Getting started](https://bocode.readthedocs.io/en/latest/getting_started.html): install, first optimization loop
+- [Benchmark table](https://bocode.readthedocs.io/en/latest/benchmark_table.html): every problem with class, domain, dimension, constraints
+- [API reference](https://bocode.readthedocs.io/en/latest/api.html): registry, base problem class, transforms
+
+## Code & data
+
+- [GitHub](https://github.com/rosenyu304/BOCoDe): source; AGENTS.md has agent-facing conventions, `algorithms/` has runnable baselines
+- [PyPI](https://pypi.org/project/bocode/): `pip install bocode` (extras per problem group, e.g. `bocode[mujoco]`)
+- [Paper](https://arxiv.org/abs/2608.15073): benchmark design, ranking protocol, results
+- [HF dataset](https://huggingface.co/datasets/rosenyu/BOCoDe): problem catalog + dataset-backed benchmark tables

@@ -42,6 +42,7 @@ exclude_patterns = []
 # html_theme = 'alabaster'
 html_theme = "furo"
 html_static_path = ["_static"]
+html_extra_path = ["_extra"]  # llms.txt served at the site root
 html_logo = "_static/bocode_logo.png"
 html_favicon = "_static/bocode_logo.png"
 
