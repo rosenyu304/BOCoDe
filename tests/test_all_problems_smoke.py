@@ -47,6 +47,7 @@ def _extra_available(extra: str | None) -> bool:
         "neorl": "onnxruntime",
         "box2d": "Box2D",
         "truss": "slientruss3d",
+        "nec": "PyNEC",
     }.get(extra, extra)
     return importlib.util.find_spec(probe) is not None
 

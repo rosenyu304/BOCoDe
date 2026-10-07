@@ -2154,5 +2154,13 @@
  "Wing": [
   "opt_problems.engineering.Wing",
   null
+ ],
+ "YagiUda21": [
+  "opt_problems.engineering.YagiUda",
+  "nec"
+ ],
+ "YagiUda21_HiFi": [
+  "opt_problems.engineering.YagiUda",
+  "nec"
  ]
 }

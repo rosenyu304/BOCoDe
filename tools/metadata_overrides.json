@@ -206,6 +206,8 @@
   "PortfolioPort5": {"real_name": "Cardinality-Constrained Portfolio Optimization (OR-Library port5, Nikkei 225)", "convex": false},
   "AntennaArray200": {"real_name": "Thinned + Phased Linear Antenna Array (peak sidelobe level, Haupt 1994)", "convex": false},
   "ORPD118": {"real_name": "Optimal Reactive Power Dispatch, IEEE 118-Bus", "convex": false},
+  "YagiUda21": {"real_name": "Yagi-Uda Antenna, 2 m Band (NEC2 method of moments)", "convex": false},
+  "YagiUda21_HiFi": {"real_name": "Yagi-Uda Antenna, 2 m Band, high fidelity (NEC2 method of moments)", "convex": false},
   "CifarAttack85": {"real_name": "Sparse Targeted Adversarial Attack on CIFAR-10 (Casmopolitan)", "convex": false},
   "BikeBench64": {"real_name": "BikeBench Parametric Bicycle Design (mass + 34 constraints)", "convex": false},
   "AIG_adder": {"real_name": "EPFL AIG Logic-Synthesis Sequence Optimization (128-bit Adder, adder)", "np_hard": true, "convex": false},

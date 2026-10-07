@@ -22,6 +22,8 @@ Available Problems
 * :code:`bocode.TwoBarTruss`
 * :code:`bocode.WaterProblem`
 * :code:`bocode.WaterResources`
+* :code:`bocode.YagiUda21` (NEC2 method-of-moments Yagi-Uda antenna; needs ``pip install 'bocode[nec]'``)
+* :code:`bocode.YagiUda21_HiFi` (high-fidelity version of :code:`YagiUda21`, same search space)
 * Bayesian CHT Functions (:code:`bocode.BayesianCHT`) 
     `Source <https://link.springer.com/article/10.1007/s00158-024-03859-y>`_
 

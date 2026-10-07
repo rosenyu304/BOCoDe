@@ -57,6 +57,7 @@ _EXTRA_HINT = {
     "truss": "pip install 'bocode[truss]'",
     "pandapower": "pip install 'bocode[pandapower]'",
     "casmoattack": "pip install 'bocode[casmoattack]'",
+    "nec": "pip install 'bocode[nec]'",
     # Not on PyPI: installed from source / pointed at by an environment variable.
     "bikebench": (
         "pip install git+https://github.com/Lyleregenwetter/BikeBench "

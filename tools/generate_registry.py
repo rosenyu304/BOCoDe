@@ -63,6 +63,8 @@ def extra_for(modpath: str, cls: str):
         return "mazda"
     if cls == "ORPD118":
         return "pandapower"  # IEEE 118-bus ORPD runs pandapower's AC power flow
+    if cls.startswith("YagiUda"):
+        return "nec"  # NEC2 method of moments via PyNEC
     if cls == "BikeBench64":
         return "bikebench"  # BikeBench surrogates (installed from source)
     if cls == "CifarAttack85":

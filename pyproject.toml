@@ -58,6 +58,7 @@ hpobsurr = ["xgboost"]                   # HPO-B continuous-surrogate pools (HPO
 engibench = ["engibench[electronics]"]   # EngiBench PowerElectronics (also needs native ngspice)
 pandapower = ["pandapower"]              # ORPD118 (IEEE 118-bus reactive power dispatch)
 casmoattack = ["h5py"]                   # CifarAttack85 (reads the Keras/HDF5 victim CNN)
+nec = ["PyNEC"]                          # YagiUda21 (NEC2 method-of-moments antenna solver)
 tabicl = ["tabicl"]                    # TabICL tabular-foundation-model surrogate (tabicl_* methods)
 tabpfn = ["tabpfn"]                      # TabPFN tabular-foundation-model surrogate (tfm_* / pfn_cei methods)
 hebo = ["HEBO"]                          # HEBO optimizer (hebo method); PyPI sdist may need a source build
