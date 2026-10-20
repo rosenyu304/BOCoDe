@@ -43,7 +43,10 @@ problems across three domains**:
 By optimization class: SO-Unconstrained (150), SO-Constrained (48),
 MO-Unconstrained (26), MO-Constrained (26), SO-Mixed-Variable (57). The
 registry also ships additional problems beyond this benchmark set (e.g.
-combinatorial TSP and EPFL logic-synthesis tasks).
+combinatorial TSP and EPFL logic-synthesis tasks), and `bocode.list_synthetic()`
+adds harder multi-objective test suites: ZDT4/ZDT6, DTLZ6/DTLZ7, WFG1-9 (scalable,
+24-D by default), the full MW1-14 constrained suite, DAS-CMOP1-9 (difficulty-adjustable)
+and LIR-CMOP1-14 (large infeasible regions), the last two at the papers' 30-D.
 
 See **[CATEGORIZATION.md](CATEGORIZATION.md)** for the full per-problem table
 (dimensions, objectives, constraints, variable types, convexity, NP-hardness)

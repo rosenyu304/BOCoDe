@@ -9,7 +9,11 @@ Single-objective, unconstrained: Ackley, Rosenbrock, Levy, Powell, DixonPrice,
 Griewank, Rastrigin, StyblinskiTang (10-D); Hartmann (6-D); Branin, EggHolder,
 HolderTable, SixHumpCamel (2-D).
 Single-objective, constrained: KeaneBumpFunction (10-D, 2), ConstrainedHartmann (6-D, 1).
-Multi-objective: BraninCurrin (2 obj), ZDT1/ZDT2/ZDT3 (2 obj), DTLZ1-DTLZ5 (3 obj).
+Multi-objective: BraninCurrin (2 obj), ZDT1/ZDT2/ZDT3/ZDT4/ZDT6 (2 obj), DTLZ1-DTLZ7
+(3 obj), WFG1-WFG9 (3 obj, 24-D; scalable in M).
+Multi-objective, constrained: C2DTLZ2, ConstrainedBraninCurrin, BNH, SRN, OSY, CONSTR,
+MW1-MW14 (2-3 obj), DAS-CMOP1-9 (2-3 obj, 30-D, difficulty-adjustable) and
+LIR-CMOP1-14 (2-3 obj, 30-D, large infeasible regions).
 
 Shifted variants: ``<Name>Shifted`` (AckleyShifted, GriewankShifted, …) keep the same
 landscape and optimal value but translate the optimum away from the box center, which
@@ -29,21 +33,51 @@ from .ConstrainedBraninCurrin import ConstrainedBraninCurrin
 from .ConstrainedGramacy import ConstrainedGramacy
 from .ConstrainedHartmann import ConstrainedHartmann
 from .ConstrainedHartmannSmooth import ConstrainedHartmannSmooth
+from .DASCMOP import (
+    DASCMOP1,
+    DASCMOP2,
+    DASCMOP3,
+    DASCMOP4,
+    DASCMOP5,
+    DASCMOP6,
+    DASCMOP7,
+    DASCMOP8,
+    DASCMOP9,
+)
 from .DixonPrice import DixonPrice, DixonPriceShifted
 from .DTLZ1 import DTLZ1
 from .DTLZ2 import DTLZ2
 from .DTLZ3 import DTLZ3
 from .DTLZ4 import DTLZ4
 from .DTLZ5 import DTLZ5
+from .DTLZ6 import DTLZ6
+from .DTLZ7 import DTLZ7
 from .EggHolder import EggHolder
 from .Griewank import Griewank, GriewankShifted
 from .Hartmann import Hartmann, HartmannShifted
 from .HolderTable import HolderTable
 from .KeaneBumpFunction import KeaneBumpFunction
 from .Levy import Levy, LevyShifted
+from .LIRCMOP import (
+    LIRCMOP1,
+    LIRCMOP2,
+    LIRCMOP3,
+    LIRCMOP4,
+    LIRCMOP5,
+    LIRCMOP6,
+    LIRCMOP7,
+    LIRCMOP8,
+    LIRCMOP9,
+    LIRCMOP10,
+    LIRCMOP11,
+    LIRCMOP12,
+    LIRCMOP13,
+    LIRCMOP14,
+)
 from .MW1 import MW1
 from .MW3 import MW3
 from .MW7 import MW7
+from .MW_suite import MW2, MW4, MW5, MW6, MW8, MW9, MW10, MW11, MW12, MW13, MW14
 from .OSY import OSY
 from .Powell import Powell, PowellShifted
 from .Rastrigin import Rastrigin, RastriginShifted
@@ -51,9 +85,12 @@ from .Rosenbrock import Rosenbrock, RosenbrockShifted
 from .SixHumpCamel import SixHumpCamel, SixHumpCamelShifted
 from .SRN import SRN
 from .StyblinskiTang import StyblinskiTang, StyblinskiTangShifted
+from .WFG import WFG1, WFG2, WFG3, WFG4, WFG5, WFG6, WFG7, WFG8, WFG9
 from .ZDT1 import ZDT1
 from .ZDT2 import ZDT2
 from .ZDT3 import ZDT3
+from .ZDT4 import ZDT4
+from .ZDT6 import ZDT6
 
 #: name -> class, used by bocode.get_problem as a fallback registry.
 SYNTHETIC_PROBLEMS = {
@@ -94,15 +131,62 @@ SYNTHETIC_PROBLEMS = {
     "MW1": MW1,
     "MW3": MW3,
     "MW7": MW7,
+    "MW2": MW2,
+    "MW4": MW4,
+    "MW5": MW5,
+    "MW6": MW6,
+    "MW8": MW8,
+    "MW9": MW9,
+    "MW10": MW10,
+    "MW11": MW11,
+    "MW12": MW12,
+    "MW13": MW13,
+    "MW14": MW14,
+    "DASCMOP1": DASCMOP1,
+    "DASCMOP2": DASCMOP2,
+    "DASCMOP3": DASCMOP3,
+    "DASCMOP4": DASCMOP4,
+    "DASCMOP5": DASCMOP5,
+    "DASCMOP6": DASCMOP6,
+    "DASCMOP7": DASCMOP7,
+    "DASCMOP8": DASCMOP8,
+    "DASCMOP9": DASCMOP9,
+    "LIRCMOP1": LIRCMOP1,
+    "LIRCMOP2": LIRCMOP2,
+    "LIRCMOP3": LIRCMOP3,
+    "LIRCMOP4": LIRCMOP4,
+    "LIRCMOP5": LIRCMOP5,
+    "LIRCMOP6": LIRCMOP6,
+    "LIRCMOP7": LIRCMOP7,
+    "LIRCMOP8": LIRCMOP8,
+    "LIRCMOP9": LIRCMOP9,
+    "LIRCMOP10": LIRCMOP10,
+    "LIRCMOP11": LIRCMOP11,
+    "LIRCMOP12": LIRCMOP12,
+    "LIRCMOP13": LIRCMOP13,
+    "LIRCMOP14": LIRCMOP14,
     "BraninCurrin": BraninCurrin,
     "DTLZ1": DTLZ1,
     "DTLZ2": DTLZ2,
     "DTLZ3": DTLZ3,
     "DTLZ4": DTLZ4,
     "DTLZ5": DTLZ5,
+    "DTLZ6": DTLZ6,
+    "DTLZ7": DTLZ7,
+    "WFG1": WFG1,
+    "WFG2": WFG2,
+    "WFG3": WFG3,
+    "WFG4": WFG4,
+    "WFG5": WFG5,
+    "WFG6": WFG6,
+    "WFG7": WFG7,
+    "WFG8": WFG8,
+    "WFG9": WFG9,
     "ZDT1": ZDT1,
     "ZDT2": ZDT2,
     "ZDT3": ZDT3,
+    "ZDT4": ZDT4,
+    "ZDT6": ZDT6,
 }
 
 __all__ = [*SYNTHETIC_PROBLEMS.keys(), "SYNTHETIC_PROBLEMS"]
